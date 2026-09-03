@@ -64,6 +64,8 @@ export type QuestionType = 'q1' | 'q2' | 'q3'
 export type AnswerKind = 'correct' | 'incorrect' | 'unknown'
 
 export interface Question {
+  /** 同セッション内の再出題（誤答後）。再出題は 1 作品 1 回まで */
+  isRetry?: boolean
   type: QuestionType
   work: Work
   /** 選択肢（4件、シャッフル済み）。Q2 は era id の配列を choices として扱う */

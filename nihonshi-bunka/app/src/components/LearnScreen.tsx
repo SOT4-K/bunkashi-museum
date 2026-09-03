@@ -78,9 +78,10 @@ export function LearnScreen({
     if (result.isNewDiscovery) {
       setDiscoveries((prev) => (prev.some((w) => w.id === current.work.id) ? prev : [...prev, current.work]))
     }
-    if (!correct) {
+    if (!correct && !current.isRetry) {
+      // 誤答の同セッション内再出題は 1 作品 1 回まで（無限に伸びるセッションを防ぐ）
       const nextType = requeueType(current.type)
-      const requeued = buildQuestion(current.work, nextType, works, eras, current.isReview)
+      const requeued = { ...buildQuestion(current.work, nextType, works, eras, current.isReview), isRetry: true }
       setQueue((prev) => [...prev, requeued])
     }
   }

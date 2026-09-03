@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" role="img" aria-label="正倉院宝庫">
-  <rect width="300" height="400" fill="#5b7a63"/>
-  <rect x="8" y="8" width="284" height="384" fill="none" stroke="#f1f6ef" stroke-opacity="0.35" stroke-width="2"/>
-  <text font-family="'Hiragino Sans','Yu Gothic',sans-serif" font-size="28" font-weight="700" fill="#f1f6ef" text-anchor="middle"><tspan x="150" y="200">正倉院宝庫</tspan></text>
-  <text x="150" y="372" font-family="'Hiragino Sans','Yu Gothic',sans-serif" font-size="18" fill="#f1f6ef" fill-opacity="0.85" text-anchor="middle">建築</text>
-</svg>

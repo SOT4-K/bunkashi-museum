@@ -26,10 +26,11 @@ const outManifestPath = join(root, 'app', 'src', 'generated', 'real-images.json'
 
 function main() {
   const manifest = JSON.parse(readFileSync(manifestPath, 'utf-8'))
-  const licensedByFile = new Map(
+  // manifest は作品 id で引く（works 側の image.file は拡張子が違うことがあるため）
+  const licensedById = new Map(
     (manifest.images ?? [])
-      .filter((img) => img.file && img.license && img.sourceUrl)
-      .map((img) => [img.file, img]),
+      .filter((img) => img.id && img.file && img.license && img.sourceUrl)
+      .map((img) => [img.id, img]),
   )
 
   const workFiles = readdirSync(worksDir).filter((f) => f.endsWith('.json'))
@@ -39,9 +40,9 @@ function main() {
   for (const file of workFiles) {
     const works = JSON.parse(readFileSync(join(worksDir, file), 'utf-8'))
     for (const work of works) {
-      const imageFile = work.image?.file
-      if (!imageFile) continue
-      if (!licensedByFile.has(imageFile)) continue // ライセンス未記録
+      const entry = licensedById.get(work.id)
+      if (!entry) continue // ライセンス未記録
+      const imageFile = entry.file
       const srcPath = join(imagesDir, imageFile)
       if (!existsSync(srcPath)) continue // 参照はあるが実体が無い
 
