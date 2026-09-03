@@ -238,6 +238,34 @@
       "identified": "ファイルページで作者小田野直武(1750–1780)、作品'Sugita Genpaku et al.: Kaitai Shinsho'の扉絵(frontispiece)、1774年出版。選定表の「解体新書（扉絵）」「小田野直武 画」と完全一致",
       "retrievedAt": "2026-09-03",
       "notes": "出典欄は'Unknown source'。杉田玄白・前野良沢の名は画像自体に含まれないため、テキスト解説側で補足する必要あり"
+    },
+    {
+      "id": "shinobazu-ike",
+      "file": "shinobazu-ike.jpg",
+      "title": "不忍池図（絹本著色不忍池図）",
+      "sourceName": "Wikimedia Commons（原典情報：文化遺産オンライン経由、実物は秋田県立近代美術館蔵）",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shinobazu_Pond_by_Odano_Naotake_(Akita_Museum_of_Modern_Art).jpg",
+      "license": "PD-Art（PD-old-auto-expired。著作者小田野直武、1780年没）",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/File:Shinobazu_Pond_by_Odano_Naotake_(Akita_Museum_of_Modern_Art).jpg",
+      "credit": "小田野直武、1770年代。秋田県立近代美術館蔵（重要文化財）",
+      "attributionText": "「不忍池図」 小田野直武筆、秋田県立近代美術館蔵（Public Domain）",
+      "identified": "Commonsファイルページで作者Odano Naotake(1750–1780)、所蔵Akita Museum of Modern Art、作品名'Shinobazu Pond'（絹本著色不忍池図）を確認。WebSearch（文化遺産オンライン online.bunka.go.jp/heritages/detail/151921、絹本著色98.5×132.5cm、1968年重要文化財指定）と作者・所蔵先・作品内容が一致。前回ログでは司馬江漢作として探索していたが誤りで、正しくは小田野直武・秋田蘭画の代表作",
+      "retrievedAt": "2026-09-03",
+      "notes": "原寸2432x1817。Special:FilePath ?width=1600 指定で1920x1434に縮小取得（Commonsのサムネイル固定バケット仕様のため要求値通りにはならない）"
+    },
+    {
+      "id": "mimeguri-no-kei",
+      "file": "mimeguri-no-kei.jpg",
+      "title": "三囲景（Mimegurinokei／三囲之景、司馬江漢の日本初の銅版画）",
+      "sourceName": "Wikimedia Commons（原典：国立国会図書館）",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shiba_K%C5%8Dkan_-_Mimegurinokei.jpg",
+      "license": "PD（PD-Japan、著作者没後50年超経過／PD-Art）",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/File:Shiba_K%C5%8Dkan_-_Mimegurinokei.jpg",
+      "credit": "司馬江漢、1783年。国立国会図書館蔵",
+      "attributionText": "「三囲景」 司馬江漢筆、国立国会図書館蔵（Public Domain）",
+      "identified": "Commonsファイルページで作者Shiba Kōkan(1747–1818)、作品名'Mimegurinokei'（三囲景）、制作年1783年、日本人による最初の銅版腐食エッチングと明記。WebSearch（神戸市立博物館collection detail heritage=365107「三囲之景」、東文研アーカイブ「三囲景（神戸市立博物館）」）で同一主題の作品が神戸市立博物館にも所蔵されていることを確認したが、Commons上で画像が見つかったのは国立国会図書館蔵の版（同一画像がWorld Digital Library経由でもFile:A_View_of_Mimeguri_Shrine_from_the_Sumida_River_WDL2928.pngとして別途Commonsに存在、1310x1024・こちらは今回未採用）",
+      "retrievedAt": "2026-09-03",
+      "notes": "原寸2456x1587。Special:FilePath ?width=1600 指定で1920x1241に縮小取得。眼鏡絵（覗き絵）用に左右反転して制作された図なので、実景とは左右逆である旨をテキスト解説側で補足するとよい"
     }
   ]
 }
