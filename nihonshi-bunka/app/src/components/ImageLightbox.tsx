@@ -85,7 +85,14 @@ export function ImageLightbox({
   }
 
   function handlePointerDown(e: React.PointerEvent) {
-    ;(e.target as Element).setPointerCapture?.(e.pointerId)
+    // setPointerCapture は実ポインタでなければ例外を投げるブラウザがある
+    // （テストでの合成イベント dispatch など）。取れなくてもジェスチャー自体は
+    // pointersRef の管理だけで成立するので、失敗しても処理を続ける。
+    try {
+      ;(e.target as Element).setPointerCapture?.(e.pointerId)
+    } catch {
+      // no-op
+    }
     pointersRef.current.set(e.pointerId, { x: e.clientX, y: e.clientY })
     setGesturing(true)
 

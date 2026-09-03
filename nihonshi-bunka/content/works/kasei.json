@@ -1,6 +1,28 @@
 [
   {
     "id": "kanagawa-oki-namiura",
+    "artist": "葛飾北斎",
+    "patron": null,
+    "style": "浮世絵（錦絵・風景画）",
+    "religion": null,
+    "periodLabel": "江戸時代後期（19世紀前半、天保年間）",
+    "eraNote": "江戸時代後期（19世紀前半）、11代将軍徳川家斉の大御所時代を中心に江戸で栄えた化政文化の浮世絵。化政文化では出版と交通の発達を背景に旅や名所への関心が高まり、人物中心だった浮世絵に風景画の分野が確立した。「富嶽三十六景」は天保年間初め（1830年代初め）に刊行された北斎の連作で、本図はその代表作である。",
+    "facts": [
+      {"slot": "artist", "text": "葛飾北斎の作"},
+      {"slot": "era", "text": "化政文化の作品", "shared": ["gaifu-kaisei", "hokusai-manga", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "takami-senseki", "ino-map"]},
+      {"slot": "period", "text": "江戸時代後期の作", "shared": ["gaifu-kaisei", "hokusai-manga", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "takami-senseki", "ino-map"]},
+      {"slot": "style", "text": "「富嶽三十六景」の一図", "shared": ["gaifu-kaisei"]},
+      {"slot": "technique", "text": "錦絵（木版多色刷）である", "shared": ["gaifu-kaisei", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin"]},
+      {"slot": "other", "text": "浮世絵に風景画の分野を確立した連作の一図", "shared": ["gaifu-kaisei"]},
+      {"slot": "other", "text": "大波の谷間に富士山を小さく描く"}
+    ],
+    "falseStatements": [
+      {"text": "歌川広重の作", "why": "広重は「東海道五十三次」の作者。北斎との人物ずらし", "verifiedFalse": true},
+      {"text": "「東海道五十三次」の一図", "why": "東海道五十三次は広重の連作。シリーズずらし", "verifiedFalse": true},
+      {"text": "宝暦・天明期の文化の作品", "why": "天保年間の刊行で化政文化に属する。時代ずらし", "verifiedFalse": true},
+      {"text": "肉筆の絹本着色である", "why": "木版多色刷の錦絵。技法ずらし", "verifiedFalse": true},
+      {"text": "美人画の大首絵である", "why": "風景画。歌麿・写楽の大首絵との分野ずらし", "verifiedFalse": true}
+    ],
     "title": "富嶽三十六景「神奈川沖浪裏」",
     "reading": "ふがくさんじゅうろっけい かながわおきなみうら",
     "era": "kasei",
@@ -44,6 +66,28 @@
   },
   {
     "id": "gaifu-kaisei",
+    "artist": "葛飾北斎",
+    "patron": null,
+    "style": "浮世絵（錦絵・風景画）",
+    "religion": null,
+    "periodLabel": "江戸時代後期（19世紀前半、天保年間）",
+    "eraNote": "江戸時代後期（19世紀前半）、化政文化の浮世絵風景画。化政文化では庶民の旅や名所への関心の高まりを受けて風景版画が流行し、北斎と広重がその二大絵師となった。本図は天保年間初め（1830年代初め）に刊行された「富嶽三十六景」の一図で、神奈川沖浪裏と並ぶ北斎の代表作である。",
+    "facts": [
+      {"slot": "artist", "text": "葛飾北斎の作"},
+      {"slot": "era", "text": "化政文化の作品", "shared": ["kanagawa-oki-namiura", "hokusai-manga", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "takami-senseki", "ino-map"]},
+      {"slot": "period", "text": "江戸時代後期の作", "shared": ["kanagawa-oki-namiura", "hokusai-manga", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "takami-senseki", "ino-map"]},
+      {"slot": "style", "text": "「富嶽三十六景」の一図", "shared": ["kanagawa-oki-namiura"]},
+      {"slot": "technique", "text": "錦絵（木版多色刷）である", "shared": ["kanagawa-oki-namiura", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin"]},
+      {"slot": "other", "text": "通称「赤富士」と呼ばれる"},
+      {"slot": "other", "text": "富士山だけを画面いっぱいに描く"}
+    ],
+    "falseStatements": [
+      {"text": "歌川広重の作", "why": "広重は東海道五十三次・名所江戸百景の作者。人物ずらし", "verifiedFalse": true},
+      {"text": "「名所江戸百景」の一図", "why": "名所江戸百景は広重の連作。シリーズずらし", "verifiedFalse": true},
+      {"text": "元禄文化の作品", "why": "天保年間の刊行で化政文化。菱川師宣の時代との時代ずらし", "verifiedFalse": true},
+      {"text": "肉筆画の屏風である", "why": "木版多色刷の錦絵。技法・形式ずらし", "verifiedFalse": true},
+      {"text": "渡辺崋山の作", "why": "崋山は同じ化政期でも肖像画（鷹見泉石像）。人物ずらし", "verifiedFalse": true}
+    ],
     "title": "富嶽三十六景「凱風快晴」",
     "reading": "ふがくさんじゅうろっけい がいふうかいせい",
     "era": "kasei",
@@ -87,6 +131,28 @@
   },
   {
     "id": "hokusai-manga",
+    "artist": "葛飾北斎",
+    "patron": null,
+    "style": "版本（絵手本）",
+    "religion": null,
+    "periodLabel": "江戸時代後期（19世紀前半、文化11年＝1814年初編）",
+    "eraNote": "江戸時代後期（19世紀前半）、化政文化の版本。化政文化では出版業が発達し、錦絵の一枚絵だけでなく絵入りの版本が広く流通して、江戸の文化が地方や庶民にも届くようになった。北斎漫画は文化11年（1814年）に初編が出た絵手本で、絵を学ぶ人の手本として広く用いられた。",
+    "facts": [
+      {"slot": "artist", "text": "葛飾北斎の作"},
+      {"slot": "era", "text": "化政文化の作品", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "takami-senseki", "ino-map"]},
+      {"slot": "period", "text": "江戸時代後期の作", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "takami-senseki", "ino-map"]},
+      {"slot": "technique", "text": "木版の絵手本（版本）である"},
+      {"slot": "period", "text": "文化11年（1814年）に初編が刊行された"},
+      {"slot": "other", "text": "全15編からなる"},
+      {"slot": "other", "text": "墨を主とした人物や動物のスケッチを収める"}
+    ],
+    "falseStatements": [
+      {"text": "歌川国芳の作", "why": "国芳は武者絵（相馬の古内裏）。人物ずらし", "verifiedFalse": true},
+      {"text": "一枚絵の錦絵である", "why": "冊子の版本。形式ずらし（富嶽三十六景との対比）", "verifiedFalse": true},
+      {"text": "宝暦・天明期の文化の作品", "why": "1814年刊で化政文化。時代ずらし", "verifiedFalse": true},
+      {"text": "銅版画である", "why": "木版。司馬江漢の三囲景との技法ずらし", "verifiedFalse": true},
+      {"text": "解剖図を収めた医学書である", "why": "絵手本。解体新書との内容ずらし", "verifiedFalse": true}
+    ],
     "title": "北斎漫画",
     "reading": "ほくさいまんが",
     "era": "kasei",
@@ -128,6 +194,28 @@
   },
   {
     "id": "shono-hakuu",
+    "artist": "歌川広重",
+    "patron": null,
+    "style": "浮世絵（錦絵・風景画）",
+    "religion": null,
+    "periodLabel": "江戸時代後期（19世紀前半、天保年間）",
+    "eraNote": "江戸時代後期（19世紀前半）、化政文化の浮世絵風景画。化政文化の時期には街道と宿場の発達、伊勢参りなど旅の流行を背景に、街道の風景を描く版画が人気を集めた。「東海道五十三次」は天保年間（1830年代）に刊行された広重の代表作で、北斎の「富嶽三十六景」と並ぶ化政期の風景版画である。",
+    "facts": [
+      {"slot": "artist", "text": "歌川広重の作"},
+      {"slot": "era", "text": "化政文化の作品", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "hokusai-manga", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "takami-senseki", "ino-map"]},
+      {"slot": "period", "text": "江戸時代後期の作", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "hokusai-manga", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "takami-senseki", "ino-map"]},
+      {"slot": "style", "text": "「東海道五十三次」の一図", "shared": ["kanbara-yoru-no-yuki"]},
+      {"slot": "technique", "text": "錦絵（木版多色刷）である", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin"]},
+      {"slot": "other", "text": "宿場を襲うにわか雨（白雨）を描く"},
+      {"slot": "other", "text": "斜めの雨脚と傾く竹林を描く"}
+    ],
+    "falseStatements": [
+      {"text": "葛飾北斎の作", "why": "北斎は富嶽三十六景。人物ずらし", "verifiedFalse": true},
+      {"text": "「富嶽三十六景」の一図", "why": "富嶽三十六景は北斎の連作。シリーズずらし", "verifiedFalse": true},
+      {"text": "宝暦・天明期の文化の作品", "why": "天保年間の刊行で化政文化。時代ずらし", "verifiedFalse": true},
+      {"text": "秋田蘭画の作品である", "why": "秋田蘭画は小田野直武らの洋風画。様式ずらし", "verifiedFalse": true},
+      {"text": "肉筆の絹本着色である", "why": "木版多色刷の錦絵。技法ずらし", "verifiedFalse": true}
+    ],
     "title": "東海道五十三次「庄野 白雨」",
     "reading": "とうかいどうごじゅうさんつぎ しょうの はくう",
     "era": "kasei",

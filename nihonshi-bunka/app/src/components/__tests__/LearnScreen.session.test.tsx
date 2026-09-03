@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest'
-import { render, screen, fireEvent, within } from '@testing-library/react'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { render, screen, fireEvent, within, act } from '@testing-library/react'
 import { LearnScreen } from '../LearnScreen'
 import { works, eras } from '../../content'
 import { createInitialProgress, dailyNewRemaining as calcDailyNewRemaining, recordAnswer } from '../../engine/progress'
@@ -20,6 +20,15 @@ function buildSeedProgress(): ProgressState {
 }
 
 describe('LearnScreen: 実データで1セッションを最後まで進める', () => {
+  beforeEach(() => {
+    // 解説シートは回答から少し遅れて出す（フィードバック改善3・4: 選択肢自体の判定演出を
+    // 見せてから解説に進む）。setTimeout だけ fake にして進める。
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] })
+  })
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
   it('セッションが完了し、結果画面（正答数・XP・新発見）が表示される', () => {
     let progress = buildSeedProgress()
 
@@ -64,10 +73,16 @@ describe('LearnScreen: 実データで1セッションを最後まで進める',
       const choices = screen.getAllByTestId('choice-button')
       fireEvent.click(choices[0])
 
-      // 解説シートが開く。判定文言のどれかが必ず出る。
+      // 解説シートは回答直後ではなく少し遅れて出る
+      act(() => {
+        vi.advanceTimersByTime(500)
+      })
+
+      // 解説シートが開く。判定文言のどれかが必ず出る
+      // （不正解のときは「✗ 不正解 — 正解は「〈作品名〉」」と1行で正解も明示する）。
       const dialog = screen.getByRole('dialog')
       expect(
-        within(dialog).getByText(/^(正解|不正解)$/),
+        within(dialog).getByText(/^(◎ 正解|✗ 不正解|未回答)/),
       ).toBeInTheDocument()
 
       fireEvent.click(within(dialog).getByTestId('next-button'))

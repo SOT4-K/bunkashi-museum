@@ -58,7 +58,7 @@ export function QuestionCard({
             return (
               <div className={styles.imageChoiceWrap} key={w.id}>
                 {answered && isCorrectOption && (
-                  <span className={styles.correctLabel}>正解</span>
+                  <span className={styles.imageCorrectLabel}>正解</span>
                 )}
                 <button
                   type="button"

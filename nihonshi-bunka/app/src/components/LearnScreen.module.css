@@ -137,6 +137,22 @@
   }
 }
 
+/* Q3（画像グリッド）用の「正解」ラベル。2×2グリッドでは行の外（上）に置くと
+   隣の行と紛らわしいため、画像自身の左上に重ねるバッジにする */
+.imageCorrectLabel {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--sumi);
+  background: var(--rokusho);
+  padding: 2px 8px;
+  border-radius: 999px;
+  z-index: 1;
+  animation: reveal-label 0.4s ease-out both;
+}
+
 .choiceGlyph {
   font-size: 22px;
   font-weight: 700;

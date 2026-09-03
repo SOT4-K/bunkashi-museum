@@ -44,6 +44,10 @@ export function LearnScreen({
   const [queue, setQueue] = useState<Question[]>([])
   const [index, setIndex] = useState(0)
   const [answered, setAnswered] = useState<AnsweredState | null>(null)
+  // 解説シートは回答直後ではなく少し遅らせて出す。選択肢自体の判定演出（金/朱の枠・✓✗・
+  // 「正解」ラベル）をユーザーが見てから解説に進めるようにするため（フィードバック改善 3・4）。
+  const [showSheet, setShowSheet] = useState(false)
+  const sheetTimerRef = useRef<number | null>(null)
   const [correctCount, setCorrectCount] = useState(0)
   const [xpTotal, setXpTotal] = useState(0)
   const [discoveries, setDiscoveries] = useState<Work[]>([])
@@ -74,7 +78,14 @@ export function LearnScreen({
       isNewlyMastered: result.isNewlyMastered,
     })
     setXpTotal((prev) => prev + result.xpGained)
-    if (correct) setCorrectCount((prev) => prev + 1)
+    if (correct) {
+      setCorrectCount((prev) => prev + 1)
+      // 正解の演出（UI-DESIGN.md の「動きは1か所」の対象外＝回答という操作への直接の応答）。
+      // Vibration API が無い環境（iOS Safari 等）では何もしない。
+      if (typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function') {
+        navigator.vibrate(15)
+      }
+    }
     if (result.isNewDiscovery) {
       setDiscoveries((prev) => (prev.some((w) => w.id === current.work.id) ? prev : [...prev, current.work]))
     }
@@ -83,6 +94,16 @@ export function LearnScreen({
       const nextType = requeueType(current.type)
       const requeued = { ...buildQuestion(current.work, nextType, works, eras, current.isReview), isRetry: true }
       setQueue((prev) => [...prev, requeued])
+    }
+
+    const reduceMotion =
+      typeof window !== 'undefined' &&
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduceMotion) {
+      setShowSheet(true)
+    } else {
+      sheetTimerRef.current = window.setTimeout(() => setShowSheet(true), 450)
     }
   }
 
@@ -98,9 +119,20 @@ export function LearnScreen({
   }
 
   function handleNext() {
+    if (sheetTimerRef.current) {
+      window.clearTimeout(sheetTimerRef.current)
+      sheetTimerRef.current = null
+    }
     setAnswered(null)
+    setShowSheet(false)
     setIndex((prev) => prev + 1)
   }
+
+  useEffect(() => {
+    return () => {
+      if (sheetTimerRef.current) window.clearTimeout(sheetTimerRef.current)
+    }
+  }, [])
 
   if (total === 0) {
     return (
@@ -159,7 +191,7 @@ export function LearnScreen({
 
       <QuestionCard question={current} answered={answered} onChoice={handleChoice} onUnknown={handleUnknown} />
 
-      {answered && (
+      {answered && showSheet && (
         <AnswerSheet
           question={current}
           selection={answered.selection}
