@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" role="img" aria-label="夜色楼台図">
+  <rect width="300" height="400" fill="#3c5a8a"/>
+  <rect x="8" y="8" width="284" height="384" fill="none" stroke="#eaf1fb" stroke-opacity="0.35" stroke-width="2"/>
+  <text font-family="'Hiragino Sans','Yu Gothic',sans-serif" font-size="28" font-weight="700" fill="#eaf1fb" text-anchor="middle"><tspan x="150" y="200">夜色楼台図</tspan></text>
+  <text x="150" y="372" font-family="'Hiragino Sans','Yu Gothic',sans-serif" font-size="18" fill="#eaf1fb" fill-opacity="0.85" text-anchor="middle">絵画</text>
+</svg>

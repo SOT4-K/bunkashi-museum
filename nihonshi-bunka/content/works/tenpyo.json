@@ -1,0 +1,206 @@
+[
+  {
+    "id": "ashura-kofukuji",
+    "title": "阿修羅像",
+    "reading": "あしゅらぞう",
+    "era": "tenpyo",
+    "category": "sculpture",
+    "location": "興福寺（奈良）",
+    "author": null,
+    "technique": "脱活乾漆像",
+    "keyPoints": ["天平文化", "興福寺八部衆のひとつ", "三面六臂（顔が3つ、腕が6本）", "脱活乾漆（麻布を漆で固めて中を空洞にする技法）"],
+    "explanation": "興福寺の八部衆像のひとつで、天平文化を代表する乾漆像。三つの顔と六本の腕をもち、少年のような細身の体と憂いを帯びた表情で知られる。光明皇后が母・橘三千代の一周忌に建立した西金堂に安置されていた。乾漆像は麻布を漆で貼り重ねて形をつくる技法で、塑像とともに天平彫刻の二大技法。",
+    "examNote": "「乾漆像」と「塑像」の区別が問われやすい。阿修羅像は乾漆像。同じ興福寺の十大弟子像も乾漆像。",
+    "confusables": [
+      {"id": "judai-deshi-kofukuji", "howToTell": "十大弟子像は僧の姿（一面二臂・剃髪・袈裟）。阿修羅像は三面六臂で上半身裸。"},
+      {"id": "shukongoshin-todaiji", "howToTell": "執金剛神像は塑像で、怒りの表情と甲冑姿。阿修羅は乾漆で静かな表情。"}
+    ],
+    "image": {"file": "ashura-kofukuji.webp", "credit": "", "license": "", "sourceUrl": "", "sourceName": ""},
+    "sources": ["高校教科書（山川『詳説日本史』）天平文化の項", "興福寺公式サイト（国宝館）"],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "judai-deshi-kofukuji",
+    "title": "十大弟子像",
+    "reading": "じゅうだいでしぞう",
+    "era": "tenpyo",
+    "category": "sculpture",
+    "location": "興福寺（奈良）",
+    "author": null,
+    "technique": "脱活乾漆像",
+    "keyPoints": ["天平文化", "釈迦の十人の高弟の像（現存6体）", "乾漆像", "阿修羅像と同じ西金堂に安置されていた"],
+    "explanation": "釈迦の十人の弟子を表した像で、興福寺西金堂に八部衆像とともに安置されていた。現存するのは6体。乾漆像ならではの柔らかな衣の表現と、個性豊かな老若の表情が特徴。",
+    "examNote": "八部衆（阿修羅を含む）と十大弟子はセットで覚える。どちらも興福寺・乾漆像。",
+    "confusables": [
+      {"id": "ashura-kofukuji", "howToTell": "阿修羅像は三面六臂。十大弟子は一面二臂の僧形。"},
+      {"id": "ganjin-toshodaiji", "howToTell": "鑑真和上像は目を閉じた坐像で単独の肖像。十大弟子は立像。"}
+    ],
+    "image": {"file": "judai-deshi-kofukuji.webp", "credit": "", "license": "", "sourceUrl": "", "sourceName": ""},
+    "sources": ["高校教科書（山川『詳説日本史』）天平文化の項", "興福寺公式サイト（国宝館）"],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "shukongoshin-todaiji",
+    "title": "執金剛神像",
+    "reading": "しゅこんごうしんぞう",
+    "era": "tenpyo",
+    "category": "sculpture",
+    "location": "東大寺法華堂（奈良）",
+    "author": null,
+    "technique": "塑像",
+    "keyPoints": ["天平文化", "塑像（粘土で作る）", "東大寺法華堂の秘仏", "甲冑を着け金剛杵を振り上げる憤怒の姿"],
+    "explanation": "東大寺法華堂（三月堂）の秘仏で、粘土で形づくる塑像。甲冑を身につけ、金剛杵を振り上げて怒る姿は、天平彫刻の写実性と迫力を示す。彩色がよく残っている。",
+    "examNote": "「乾漆像」の代表＝阿修羅像・不空羂索観音像・鑑真和上像、「塑像」の代表＝執金剛神像・戒壇堂四天王像・日光月光菩薩像、と技法で分けて覚える。",
+    "confusables": [
+      {"id": "shitenno-kaidando", "howToTell": "戒壇堂四天王像は4体組で邪鬼を踏む。執金剛神は1体で邪鬼を踏まない。"},
+      {"id": "fukukensaku-todaiji", "howToTell": "不空羂索観音像は同じ法華堂の本尊で、三目八臂の穏やかな顔。執金剛神は憤怒相。"}
+    ],
+    "image": {"file": "shukongoshin-todaiji.webp", "credit": "", "license": "", "sourceUrl": "", "sourceName": ""},
+    "sources": ["高校教科書（山川『詳説日本史』）天平文化の項", "東大寺公式サイト"],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "shitenno-kaidando",
+    "title": "四天王像（戒壇堂）",
+    "reading": "してんのうぞう（かいだんどう）",
+    "era": "tenpyo",
+    "category": "sculpture",
+    "location": "東大寺戒壇堂（奈良）",
+    "author": null,
+    "technique": "塑像",
+    "keyPoints": ["天平文化", "塑像", "持国天・増長天・広目天・多聞天の4体", "広目天の静かな怒りの表情が有名"],
+    "explanation": "東大寺戒壇堂に安置される4体の塑像。持国天・増長天は口を開いて怒り、広目天・多聞天は静かな表情で遠くを見つめる。動と静の対比が天平彫刻の写実の頂点とされる。",
+    "examNote": "「戒壇堂」の四天王像は天平の塑像。同じ東大寺でも大仏殿や法華堂の像と混同しない。",
+    "confusables": [
+      {"id": "shukongoshin-todaiji", "howToTell": "執金剛神像は1体で法華堂の秘仏。四天王像は4体組で戒壇堂。"}
+    ],
+    "image": {"file": "shitenno-kaidando.webp", "credit": "", "license": "", "sourceUrl": "", "sourceName": ""},
+    "sources": ["高校教科書（山川『詳説日本史』）天平文化の項", "東大寺公式サイト"],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "fukukensaku-todaiji",
+    "title": "不空羂索観音像",
+    "reading": "ふくうけんさくかんのんぞう",
+    "era": "tenpyo",
+    "category": "sculpture",
+    "location": "東大寺法華堂（奈良）",
+    "author": null,
+    "technique": "脱活乾漆像",
+    "keyPoints": ["天平文化", "乾漆像", "東大寺法華堂（三月堂）の本尊", "三目八臂・銀製の宝冠"],
+    "explanation": "東大寺法華堂の本尊。額に第三の目をもち、八本の腕で羂索（投げ縄）などを持つ。乾漆像で高さ3.6mを超える大作。宝石で飾られた銀製の宝冠も名高い。",
+    "examNote": "法華堂の像は「本尊＝不空羂索観音（乾漆）」「秘仏＝執金剛神（塑像）」「脇侍＝日光・月光菩薩（塑像）」と技法ごとに整理する。",
+    "confusables": [
+      {"id": "shukongoshin-todaiji", "howToTell": "執金剛神像は甲冑姿の憤怒相。不空羂索観音は宝冠をつけた穏やかな菩薩形。"},
+      {"id": "ashura-kofukuji", "howToTell": "阿修羅像は細身の少年のような姿で興福寺。不空羂索観音は巨像で東大寺法華堂。"}
+    ],
+    "image": {"file": "fukukensaku-todaiji.webp", "credit": "", "license": "", "sourceUrl": "", "sourceName": ""},
+    "sources": ["高校教科書（山川『詳説日本史』）天平文化の項", "東大寺公式サイト"],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "ganjin-toshodaiji",
+    "title": "鑑真和上像",
+    "reading": "がんじんわじょうぞう",
+    "era": "tenpyo",
+    "category": "sculpture",
+    "location": "唐招提寺（奈良）",
+    "author": null,
+    "technique": "脱活乾漆像",
+    "keyPoints": ["天平文化", "日本最古の肖像彫刻", "乾漆像", "目を閉じ坐禅を組む姿（鑑真は失明していた）"],
+    "explanation": "唐から来日して戒律を伝えた鑑真の肖像。日本最古の肖像彫刻とされ、乾漆像。渡航の苦難で失明した鑑真が静かに目を閉じて坐る姿を写実的に表す。唐招提寺御影堂に安置され、毎年6月に開扉される。",
+    "examNote": "鑑真＝唐招提寺＝戒律（律宗）＝東大寺に戒壇を設けた、をセットで。「肖像彫刻」といえば鑑真和上像。",
+    "confusables": [
+      {"id": "judai-deshi-kofukuji", "howToTell": "十大弟子像は立像で興福寺。鑑真和上像は坐像で唐招提寺、実在の人物の肖像。"}
+    ],
+    "image": {"file": "ganjin-toshodaiji.webp", "credit": "", "license": "", "sourceUrl": "", "sourceName": ""},
+    "sources": ["高校教科書（山川『詳説日本史』）天平文化の項", "唐招提寺公式サイト"],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "torige-ritsujo-byobu",
+    "title": "鳥毛立女屏風",
+    "reading": "とりげりつじょのびょうぶ",
+    "era": "tenpyo",
+    "category": "painting",
+    "location": "正倉院（奈良）",
+    "author": null,
+    "technique": "紙本着色（もとは鳥の羽毛を貼っていた）",
+    "keyPoints": ["天平文化", "正倉院宝物", "樹下美人図（唐の影響）", "もとは羽毛が貼られていた"],
+    "explanation": "正倉院に伝わる六扇の屏風。木の下に立つふくよかな女性（樹下美人）を描き、唐の美人画の影響が濃い。かつては女性の衣や髪に鳥（ヤマドリ）の羽毛が貼られていたため「鳥毛立女」と呼ばれる。",
+    "examNote": "「正倉院宝物」の代表として、螺鈿紫檀五絃琵琶・漆胡瓶などと並んで出る。「樹下美人」という語もヒント。",
+    "confusables": [
+      {"id": "kichijoten-yakushiji", "howToTell": "吉祥天像は薬師寺の麻布に描かれた一枚の女神像で、豊満な唐風の女性像。鳥毛立女は屏風で樹木の下に立つ。"}
+    ],
+    "image": {"file": "torige-ritsujo-byobu.webp", "credit": "", "license": "", "sourceUrl": "", "sourceName": ""},
+    "sources": ["高校教科書（山川『詳説日本史』）天平文化の項", "宮内庁正倉院宝物検索"],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "kichijoten-yakushiji",
+    "title": "吉祥天像",
+    "reading": "きちじょうてんぞう",
+    "era": "tenpyo",
+    "category": "painting",
+    "location": "薬師寺（奈良）",
+    "author": null,
+    "technique": "麻布着色",
+    "keyPoints": ["天平文化", "麻布に描かれた独立した仏画", "唐風の豊満な女性像", "薬師寺"],
+    "explanation": "薬師寺に伝わる麻布に描かれた吉祥天の画像。ふくよかな頬と華やかな衣装は、唐の美人画の様式を伝える。天平絵画の数少ない現存作例のひとつ。",
+    "examNote": "「薬師寺」は白鳳文化の薬師三尊像でも出るが、吉祥天像は天平文化。寺名だけで時代を決めない。",
+    "confusables": [
+      {"id": "torige-ritsujo-byobu", "howToTell": "鳥毛立女屏風は正倉院の屏風で樹木の下に女性が立つ。吉祥天像は薬師寺の一枚絵で女神が単独。"}
+    ],
+    "image": {"file": "kichijoten-yakushiji.webp", "credit": "", "license": "", "sourceUrl": "", "sourceName": ""},
+    "sources": ["高校教科書（山川『詳説日本史』）天平文化の項", "薬師寺公式サイト"],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "shosoin-hoko",
+    "title": "正倉院宝庫",
+    "reading": "しょうそういんほうこ",
+    "era": "tenpyo",
+    "category": "architecture",
+    "location": "東大寺（奈良）",
+    "author": null,
+    "technique": "校倉造・高床式",
+    "keyPoints": ["天平文化", "校倉造（三角形の木材を井桁に組む）", "聖武天皇の遺品などを収める", "高床式"],
+    "explanation": "東大寺の倉で、聖武天皇の遺品を光明皇后が納めたことに始まる。三角形の断面の木材を井桁に組み上げる校倉造の高床式倉庫。正倉院宝物には唐や西域からの品も多く、天平文化の国際性を示す。",
+    "examNote": "「校倉造」と「正倉院」は必ずセット。建築様式を問う問題で出る。",
+    "confusables": [
+      {"id": "toshodaiji-kondo", "howToTell": "唐招提寺金堂は屋根に鴟尾をのせた寺院本堂で列柱が並ぶ。正倉院は壁が三角材の校倉で窓がない倉。"}
+    ],
+    "image": {"file": "shosoin-hoko.webp", "credit": "", "license": "", "sourceUrl": "", "sourceName": ""},
+    "sources": ["高校教科書（山川『詳説日本史』）天平文化の項", "宮内庁正倉院公式サイト"],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "toshodaiji-kondo",
+    "title": "唐招提寺金堂",
+    "reading": "とうしょうだいじこんどう",
+    "era": "tenpyo",
+    "category": "architecture",
+    "location": "唐招提寺（奈良）",
+    "author": null,
+    "technique": "寄棟造・本瓦葺",
+    "keyPoints": ["天平文化", "奈良時代の金堂で唯一現存", "正面に8本の円柱が並ぶ吹き放しの列柱", "鑑真が創建した寺"],
+    "explanation": "鑑真が開いた唐招提寺の本堂。奈良時代に建てられた金堂として現存する唯一の例。正面の8本の円柱がつくる吹き放しの空間と、大屋根の両端の鴟尾が特徴。天平建築の落ち着いた美しさを伝える。",
+    "examNote": "「奈良時代の金堂で現存唯一」がキーワード。法隆寺金堂（飛鳥）と混同しない。",
+    "confusables": [
+      {"id": "shosoin-hoko", "howToTell": "正倉院は校倉造の倉で窓がない。唐招提寺金堂は列柱と鴟尾のある本堂。"}
+    ],
+    "image": {"file": "toshodaiji-kondo.webp", "credit": "", "license": "", "sourceUrl": "", "sourceName": ""},
+    "sources": ["高校教科書（山川『詳説日本史』）天平文化の項", "唐招提寺公式サイト"],
+    "examTags": ["frequent"],
+    "status": "draft"
+  }
+]

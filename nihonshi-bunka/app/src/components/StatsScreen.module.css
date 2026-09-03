@@ -1,0 +1,102 @@
+.screen {
+  flex: 1;
+  overflow-y: auto;
+  padding: calc(env(safe-area-inset-top) + 20px) 20px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sectionLabel {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.eraRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.eraRowTop {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+}
+
+.bar {
+  height: 3px;
+  background: var(--border-quiet);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  background: var(--kin);
+}
+
+.weakList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.weakRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+}
+
+.weakCount {
+  color: var(--shu);
+}
+
+.empty {
+  font-size: 15px;
+  color: var(--text-dim);
+}
+
+.textarea {
+  width: 100%;
+  min-height: 140px;
+  border-radius: var(--radius-button);
+  background: var(--surface);
+  border: 1px solid var(--border-quiet);
+  padding: 12px;
+  font-size: 13px;
+  font-family: monospace;
+  color: var(--text);
+  resize: vertical;
+}
+
+.buttonRow {
+  display: flex;
+  gap: 8px;
+}
+
+.button {
+  flex: 1;
+  min-height: 44px;
+  border-radius: var(--radius-button);
+  background: var(--surface);
+  border: 1px solid var(--border-quiet);
+  font-size: 15px;
+}
+
+.buttonPrimary {
+  background: var(--gunjo);
+  color: #fff;
+  border-color: transparent;
+}
+
+.message {
+  font-size: 13px;
+  color: var(--text-dim);
+}

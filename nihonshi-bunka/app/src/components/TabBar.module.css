@@ -1,0 +1,26 @@
+.bar {
+  display: flex;
+  border-top: 1px solid var(--border-quiet);
+  background: var(--surface);
+  padding-bottom: env(safe-area-inset-bottom);
+  flex-shrink: 0;
+}
+
+.item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 0 6px;
+  min-height: 44px;
+  color: var(--text-dim);
+}
+
+.item.active {
+  color: var(--gunjo);
+}
+
+.label {
+  font-size: 11px;
+}

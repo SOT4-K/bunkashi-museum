@@ -1,0 +1,115 @@
+/* デザイントークンは UI-DESIGN.md 準拠。既定はダーク（展示室）、
+   prefers-color-scheme: light でライト（胡粉地）に切り替わる。 */
+:root {
+  --sumi: #15171c;
+  --sumi-surface: #22252d;
+  --gofun: #f1eee6;
+  --gunjo: #3a5bc7;
+  --kin: #c9a24c;
+  --rokusho: #4e9e88;
+  --shu: #c8553b;
+
+  --bg: var(--sumi);
+  --surface: var(--sumi-surface);
+  --text: var(--gofun);
+  --text-dim: rgb(241 238 230 / 62%);
+  --border-quiet: rgb(241 238 230 / 14%);
+
+  --radius-image: 16px;
+  --radius-button: 12px;
+  --radius-sheet: 20px;
+
+  --font-ui: system-ui, -apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+  --font-caption: 'Shippori Mincho B1', 'Hiragino Mincho ProN', serif;
+
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: var(--gofun);
+    --surface: #ffffff;
+    --text: var(--sumi);
+    --text-dim: rgb(21 23 28 / 62%);
+    --border-quiet: rgb(21 23 28 / 12%);
+    color-scheme: light;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overscroll-behavior: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+button,
+input,
+textarea {
+  font-family: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--gunjo);
+  outline-offset: 2px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* 表示用: 作品名・文化名・数字見出し（展示キャプションの明朝） */
+.caption {
+  font-family: var(--font-caption);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.caption-bold {
+  font-family: var(--font-caption);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

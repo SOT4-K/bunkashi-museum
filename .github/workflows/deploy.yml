@@ -1,0 +1,58 @@
+name: Deploy nihonshi-bunka to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "nihonshi-bunka/**"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: nihonshi-bunka/app
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 26
+          cache: npm
+          cache-dependency-path: nihonshi-bunka/app/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        env:
+          # GitHub Pages はリポジトリ名のサブパスに配信されるため base を合わせる
+          VITE_BASE: /${{ github.event.repository.name }}/
+          # M1 の間はサンプルが全部 draft のため、draft も本番ビルドに含める
+          VITE_INCLUDE_DRAFT: "1"
+        run: npm run build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: nihonshi-bunka/app/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

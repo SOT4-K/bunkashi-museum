@@ -1,0 +1,4 @@
+{
+  "note": "全画像のライセンスを記録する。ここに無い画像は本番ビルドに含めない。file / sourceName / sourceUrl / license / credit / retrievedAt は必須。",
+  "images": []
+}

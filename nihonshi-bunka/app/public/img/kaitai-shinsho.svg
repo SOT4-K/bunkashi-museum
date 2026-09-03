@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" role="img" aria-label="解体新書（扉絵）">
+  <rect width="300" height="400" fill="#6b6b6b"/>
+  <rect x="8" y="8" width="284" height="384" fill="none" stroke="#f2f2f2" stroke-opacity="0.35" stroke-width="2"/>
+  <text font-family="'Hiragino Sans','Yu Gothic',sans-serif" font-size="28" font-weight="700" fill="#f2f2f2" text-anchor="middle"><tspan x="150" y="183">解体新書（扉絵</tspan><tspan x="150" y="217">）</tspan></text>
+  <text x="150" y="372" font-family="'Hiragino Sans','Yu Gothic',sans-serif" font-size="18" fill="#f2f2f2" fill-opacity="0.85" text-anchor="middle">その他</text>
+</svg>

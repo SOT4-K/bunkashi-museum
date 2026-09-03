@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" role="img" aria-label="四天王像（戒壇堂）">
+  <rect width="300" height="400" fill="#8a5a3c"/>
+  <rect x="8" y="8" width="284" height="384" fill="none" stroke="#f8efe6" stroke-opacity="0.35" stroke-width="2"/>
+  <text font-family="'Hiragino Sans','Yu Gothic',sans-serif" font-size="28" font-weight="700" fill="#f8efe6" text-anchor="middle"><tspan x="150" y="183">四天王像（戒壇</tspan><tspan x="150" y="217">堂）</tspan></text>
+  <text x="150" y="372" font-family="'Hiragino Sans','Yu Gothic',sans-serif" font-size="18" fill="#f8efe6" fill-opacity="0.85" text-anchor="middle">彫刻</text>
+</svg>
