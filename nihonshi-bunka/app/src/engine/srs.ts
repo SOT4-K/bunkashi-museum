@@ -74,7 +74,8 @@ export function createItemProgress(today: string): ItemProgress {
   }
 }
 
-/** ある作品の1方向分の回答結果を反映し、discoveredAt/masteredAt も更新する。 */
+/** ある作品の1方向分の回答結果を反映し、discoveredAt/masteredAt も更新する。
+ *  q4/q6/q8 はまだセルが無いことがある（その型が初めて出題された時点で作る）。 */
 export function applyItemAnswer(
   item: ItemProgress,
   type: QuestionType,
@@ -82,7 +83,8 @@ export function applyItemAnswer(
   today: string,
 ): ItemProgress {
   const correct = answer === 'correct'
-  const updatedCell = applyAnswer(item[type], answer, today)
+  const baseCell = item[type] ?? createCell(today)
+  const updatedCell = applyAnswer(baseCell, answer, today)
   const next: ItemProgress = {
     ...item,
     [type]: updatedCell,
@@ -94,7 +96,12 @@ export function applyItemAnswer(
   return next
 }
 
-/** 復習期日が来ている方向のうち、いずれかがあるか（セッション組み立て用）。 */
+/**
+ * 復習期日が来ている方向のうち、いずれかがあるか（セッション組み立て用）。
+ * q1/q2/q3 は常にセルがあるためそのまま判定する。q4/q6/q8 はセルが無ければ
+ * （＝まだその型で出題したことがない）ここでは対象外にする。その型を新しく
+ * 導入するかどうかは session.ts 側（作品がその型を生成できるかを見て判断する）に委ねる。
+ */
 export function dueTypes(item: ItemProgress, today: string): QuestionType[] {
   const types: QuestionType[] = ['q1', 'q2', 'q3']
   return types.filter((t) => isDue(item[t], today))

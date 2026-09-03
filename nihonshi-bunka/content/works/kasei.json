@@ -848,6 +848,29 @@
   },
   {
     "id": "doshoku-saie",
+    "artist": "伊藤若冲",
+    "patron": null,
+    "style": "花鳥画（絹本着色）",
+    "religion": null,
+    "periodLabel": "江戸時代中後期（18世紀後半）",
+    "eraNote": "江戸時代中後期（18世紀後半）、宝暦・天明期の文化に属する京都の絵画。この時期の京都では応挙の写生画、大雅・蕪村の文人画など多様な画風が並び立ち、若冲もその一人として独自の花鳥画を描いた。本作は京都の相国寺に寄進された三十幅の連作で、教科書本文には出ないことが多いが、宝暦・天明期の京都画壇の多様さを示す作品である。",
+    "facts": [
+      {"slot": "artist", "text": "伊藤若冲の作"},
+      {"slot": "era", "text": "宝暦・天明期の文化の作品", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin", "juben-jugi", "sessho-zu", "shinobazu-ike", "kaitai-shinsho", "mimeguri-no-kei"]},
+      {"slot": "period", "text": "18世紀後半の作", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin", "juben-jugi", "sessho-zu", "shinobazu-ike", "kaitai-shinsho", "mimeguri-no-kei"]},
+      {"slot": "technique", "text": "三十幅の連作である"},
+      {"slot": "technique", "text": "絹本着色である", "shared": ["takami-senseki", "shinobazu-ike"]},
+      {"slot": "location", "text": "相国寺に寄進された"},
+      {"slot": "location", "text": "現在は皇室に伝わる"},
+      {"slot": "other", "text": "国宝に指定されている", "shared": ["juben-jugi", "sessho-zu", "takami-senseki"]}
+    ],
+    "falseStatements": [
+      {"text": "円山応挙の作", "why": "応挙は墨主体の屏風（雪松図屏風）。人物ずらし", "verifiedFalse": true},
+      {"text": "文人画（南画）である", "why": "極彩色の花鳥画。様式ずらし", "verifiedFalse": true},
+      {"text": "化政文化の作品", "why": "18世紀後半の作で宝暦・天明期。時代ずらし", "verifiedFalse": true},
+      {"text": "錦絵（木版画）である", "why": "絹本着色の肉筆画。技法ずらし", "verifiedFalse": true},
+      {"text": "屏風である", "why": "縦長の掛幅。形式ずらし", "verifiedFalse": true}
+    ],
     "title": "動植綵絵",
     "reading": "どうしょくさいえ",
     "era": "horeki-tenmei",
@@ -890,6 +913,29 @@
   },
   {
     "id": "takami-senseki",
+    "artist": "渡辺崋山",
+    "patron": null,
+    "style": "肖像画（西洋の陰影法を取り入れた）",
+    "religion": "蘭学",
+    "periodLabel": "江戸時代後期（19世紀前半、天保8年＝1837年）",
+    "eraNote": "江戸時代後期（19世紀前半）、化政文化に属する絵画。化政文化の時期には蘭学が広まり、西洋の陰影法や遠近法を取り入れた絵画が描かれる一方、幕府の対外政策を批判した蘭学者が蛮社の獄（1839年）で処罰された。本図は蛮社の獄で処罰された崋山が、同じく蘭学者であった古河藩家老の鷹見泉石を描いた肖像で、この時代の絵画と洋学の結びつきを示す。",
+    "facts": [
+      {"slot": "artist", "text": "渡辺崋山の作"},
+      {"slot": "era", "text": "化政文化の作品", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "hokusai-manga", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "ino-map"]},
+      {"slot": "period", "text": "江戸時代後期の作", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "hokusai-manga", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "ino-map"]},
+      {"slot": "style", "text": "西洋の陰影法を取り入れた肖像画"},
+      {"slot": "other", "text": "古河藩家老の鷹見泉石を描く"},
+      {"slot": "technique", "text": "絹本着色である", "shared": ["doshoku-saie", "shinobazu-ike"]},
+      {"slot": "other", "text": "国宝に指定されている", "shared": ["juben-jugi", "sessho-zu", "doshoku-saie"]},
+      {"slot": "artist", "text": "作者は蛮社の獄で処罰された"}
+    ],
+    "falseStatements": [
+      {"text": "小田野直武の作", "why": "直武は宝暦・天明期の秋田蘭画（不忍池図）。人物ずらし", "verifiedFalse": true},
+      {"text": "秋田蘭画の作品である", "why": "秋田蘭画は直武ら秋田藩の洋風画。様式ずらし", "verifiedFalse": true},
+      {"text": "宝暦・天明期の文化の作品", "why": "天保年間の作で化政文化。時代ずらし", "verifiedFalse": true},
+      {"text": "銅版画である", "why": "絹本着色の肉筆画。司馬江漢との技法ずらし", "verifiedFalse": true},
+      {"text": "司馬江漢の作", "why": "江漢は宝暦・天明期の銅版画・油彩。人物ずらし", "verifiedFalse": true}
+    ],
     "title": "鷹見泉石像",
     "reading": "たかみせんせきぞう",
     "era": "kasei",
@@ -933,6 +979,29 @@
   },
   {
     "id": "shinobazu-ike",
+    "artist": "小田野直武",
+    "patron": null,
+    "style": "洋風画（秋田蘭画）",
+    "religion": "蘭学",
+    "periodLabel": "江戸時代中後期（18世紀後半、安永年間）",
+    "eraNote": "江戸時代中後期（18世紀後半）、宝暦・天明期の文化の洋風画。この時期には蘭学の広まりとともに西洋の遠近法・陰影法が知られ、平賀源内が秋田藩に伝えた西洋画法から秋田蘭画が生まれた。本図は秋田藩士の直武が絹本着色で西洋画法を試みた代表作で、直武が『解体新書』の図を描いたことともあわせ、洋学と絵画の結びつきを示す。",
+    "facts": [
+      {"slot": "artist", "text": "小田野直武の作"},
+      {"slot": "era", "text": "宝暦・天明期の文化の作品", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin", "juben-jugi", "sessho-zu", "doshoku-saie", "kaitai-shinsho", "mimeguri-no-kei"]},
+      {"slot": "period", "text": "18世紀後半の作", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin", "juben-jugi", "sessho-zu", "doshoku-saie", "kaitai-shinsho", "mimeguri-no-kei"]},
+      {"slot": "style", "text": "秋田蘭画の代表作である"},
+      {"slot": "technique", "text": "西洋の遠近法で池と弁天堂を描く"},
+      {"slot": "technique", "text": "絹本着色である", "shared": ["takami-senseki", "doshoku-saie"]},
+      {"slot": "artist", "text": "作者は『解体新書』の図も描いた"},
+      {"slot": "other", "text": "重要文化財に指定されている", "shared": ["dankin-bijin"]}
+    ],
+    "falseStatements": [
+      {"text": "司馬江漢の作", "why": "江漢は銅版画・油彩（三囲景）。人物ずらし", "verifiedFalse": true},
+      {"text": "銅版画である", "why": "絹本着色の肉筆画。技法ずらし", "verifiedFalse": true},
+      {"text": "化政文化の作品", "why": "18世紀後半の作で宝暦・天明期の文化。時代ずらし", "verifiedFalse": true},
+      {"text": "渡辺崋山の作", "why": "崋山は化政期の肖像画。人物・時代ずらし", "verifiedFalse": true},
+      {"text": "浮世絵（錦絵）である", "why": "洋風画の肉筆画。様式・技法ずらし", "verifiedFalse": true}
+    ],
     "title": "不忍池図",
     "reading": "しのばずのいけず",
     "era": "horeki-tenmei",
@@ -974,6 +1043,28 @@
   },
   {
     "id": "ino-map",
+    "artist": "伊能忠敬",
+    "patron": "江戸幕府",
+    "style": null,
+    "religion": "洋学（蘭学・天文学）",
+    "periodLabel": "江戸時代後期（19世紀前半、文政4年＝1821年完成）",
+    "eraNote": "江戸時代後期（19世紀前半）、化政文化の時期の洋学の成果。化政文化では蘭学が医学から天文・測量・地理へと広がり、幕府も天文方を中心に西洋の学問を実用に取り入れた。本図は天文方の高橋至時に学んだ忠敬が幕府の命で全国を測量した成果で、忠敬の死後、文政4年（1821年）に完成した。",
+    "facts": [
+      {"slot": "artist", "text": "伊能忠敬の測量にもとづく"},
+      {"slot": "era", "text": "化政文化の作品", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "hokusai-manga", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "takami-senseki"]},
+      {"slot": "period", "text": "江戸時代後期の作", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "hokusai-manga", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "takami-senseki"]},
+      {"slot": "period", "text": "文政4年（1821年）に完成した"},
+      {"slot": "technique", "text": "実測にもとづく日本地図である"},
+      {"slot": "artist", "text": "作者は幕府天文方の高橋至時に学んだ"},
+      {"slot": "other", "text": "忠敬の死後に弟子たちが完成させた"}
+    ],
+    "falseStatements": [
+      {"text": "杉田玄白の作", "why": "玄白は解体新書の訳者。同じ洋学での人物ずらし", "verifiedFalse": true},
+      {"text": "宝暦・天明期の文化の成果", "why": "1821年完成で化政文化。時代ずらし", "verifiedFalse": true},
+      {"text": "解剖図を収めた医学書である", "why": "日本地図。解体新書との分野ずらし", "verifiedFalse": true},
+      {"text": "想像にもとづいて描かれた絵図である", "why": "全国を歩いた実測図。内容ずらし", "verifiedFalse": true},
+      {"text": "司馬江漢の作", "why": "江漢は洋風画（銅版画）。人物ずらし", "verifiedFalse": true}
+    ],
     "title": "大日本沿海輿地全図",
     "reading": "だいにほんえんかいよちぜんず",
     "era": "kasei",
@@ -1017,6 +1108,28 @@
   },
   {
     "id": "kaitai-shinsho",
+    "artist": "杉田玄白",
+    "patron": null,
+    "style": null,
+    "religion": "蘭学",
+    "periodLabel": "江戸時代中後期（18世紀後半、安永3年＝1774年刊）",
+    "eraNote": "江戸時代中後期（18世紀後半）、宝暦・天明期の文化の洋学の成果。8代将軍徳川吉宗が漢訳洋書の輸入制限を緩め、青木昆陽らにオランダ語を学ばせたことを受けて、この時期に蘭学が本格化した。本書は安永3年（1774年）に玄白・良沢らがオランダ語の解剖書を翻訳して刊行したもので、以後の蘭学の発展の出発点となった。",
+    "facts": [
+      {"slot": "artist", "text": "杉田玄白・前野良沢らが翻訳した"},
+      {"slot": "era", "text": "宝暦・天明期の文化の作品", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin", "juben-jugi", "sessho-zu", "doshoku-saie", "shinobazu-ike", "mimeguri-no-kei"]},
+      {"slot": "period", "text": "18世紀後半の作", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin", "juben-jugi", "sessho-zu", "doshoku-saie", "shinobazu-ike", "mimeguri-no-kei"]},
+      {"slot": "period", "text": "安永3年（1774年）に刊行された"},
+      {"slot": "other", "text": "オランダ語の解剖書『ターヘル＝アナトミア』の翻訳"},
+      {"slot": "artist", "text": "図は小田野直武が描いた"},
+      {"slot": "technique", "text": "木版の版本である", "shared": ["hokusai-manga"]}
+    ],
+    "falseStatements": [
+      {"text": "伊能忠敬の作", "why": "忠敬は実測日本地図。同じ洋学での人物ずらし", "verifiedFalse": true},
+      {"text": "化政文化の成果", "why": "1774年刊で宝暦・天明期の文化。時代ずらし", "verifiedFalse": true},
+      {"text": "実測にもとづく日本地図である", "why": "翻訳医学書。伊能図との分野ずらし", "verifiedFalse": true},
+      {"text": "図は司馬江漢が描いた", "why": "図は小田野直武。同じ洋風画家での人物ずらし", "verifiedFalse": true},
+      {"text": "銅版画の風景画である", "why": "木版の医学書。三囲景との技法・分野ずらし", "verifiedFalse": true}
+    ],
     "title": "解体新書（扉絵）",
     "reading": "かいたいしんしょ",
     "era": "horeki-tenmei",
@@ -1060,6 +1173,28 @@
   },
   {
     "id": "mimeguri-no-kei",
+    "artist": "司馬江漢",
+    "patron": null,
+    "style": "洋風画（銅版画）",
+    "religion": "蘭学",
+    "periodLabel": "江戸時代中後期（18世紀後半、天明3年＝1783年）",
+    "eraNote": "江戸時代中後期（18世紀後半）、宝暦・天明期の文化の洋風画。この時期には蘭学の発達とともに西洋の画法が知られ、平賀源内に学んだ江漢は天明3年（1783年）に日本で初めて銅版画を制作した。本図は日本最初の銅版画とされ、木版の浮世絵とは異なる腐食銅版の技法と西洋の遠近法を示す。",
+    "facts": [
+      {"slot": "artist", "text": "司馬江漢の作"},
+      {"slot": "era", "text": "宝暦・天明期の文化の作品", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin", "juben-jugi", "sessho-zu", "doshoku-saie", "shinobazu-ike", "kaitai-shinsho"]},
+      {"slot": "period", "text": "18世紀後半の作", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin", "juben-jugi", "sessho-zu", "doshoku-saie", "shinobazu-ike", "kaitai-shinsho"]},
+      {"slot": "technique", "text": "腐食銅版（エッチング）である"},
+      {"slot": "other", "text": "日本人による最初の銅版画とされる"},
+      {"slot": "other", "text": "隅田川べりの三囲神社付近を描く"},
+      {"slot": "technique", "text": "西洋の遠近法を用いる", "shared": ["shinobazu-ike"]}
+    ],
+    "falseStatements": [
+      {"text": "小田野直武の作", "why": "直武は秋田蘭画の絹本着色（不忍池図）。人物ずらし", "verifiedFalse": true},
+      {"text": "木版多色刷の錦絵である", "why": "銅版画。技法ずらし", "verifiedFalse": true},
+      {"text": "化政文化の作品", "why": "1783年の作で宝暦・天明期の文化。時代ずらし", "verifiedFalse": true},
+      {"text": "秋田蘭画の作品である", "why": "江漢は江戸の洋風画家で秋田蘭画ではない。様式ずらし", "verifiedFalse": true},
+      {"text": "渡辺崋山の作", "why": "崋山は化政期の肖像画。人物・時代ずらし", "verifiedFalse": true}
+    ],
     "title": "三囲景",
     "reading": "みめぐりのけい",
     "era": "horeki-tenmei",

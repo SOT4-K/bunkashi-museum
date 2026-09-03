@@ -4,7 +4,7 @@ import { QuestionCard } from './QuestionCard'
 import { AnswerSheet } from './AnswerSheet'
 import { WorkImage } from './WorkImage'
 import { imageSrc } from '../utils/image'
-import { buildQuestion, buildSession, requeueType } from '../engine/session'
+import { buildQuestionOrFallback, buildSession, requeueType } from '../engine/session'
 import { todayIso } from '../engine/srs'
 import type { MissSelection } from '../engine/explain'
 import type { AnswerKind, Era, ProgressState, Question, Work } from '../types'
@@ -92,7 +92,7 @@ export function LearnScreen({
     if (!correct && !current.isRetry) {
       // 誤答の同セッション内再出題は 1 作品 1 回まで（無限に伸びるセッションを防ぐ）
       const nextType = requeueType(current.type)
-      const requeued = { ...buildQuestion(current.work, nextType, works, eras, current.isReview), isRetry: true }
+      const requeued = { ...buildQuestionOrFallback(current.work, nextType, works, eras, current.isReview), isRetry: true }
       setQueue((prev) => [...prev, requeued])
     }
 

@@ -1,6 +1,28 @@
 [
   {
     "id": "ashura-kofukuji",
+    "artist": null,
+    "patron": "光明皇后",
+    "style": "乾漆像（天平彫刻）",
+    "religion": "仏教（法相宗・藤原氏の氏寺興福寺）",
+    "periodLabel": "奈良時代（8世紀前半、天平6年＝734年）",
+    "eraNote": "奈良時代（8世紀）、聖武天皇のころに栄えた天平文化の彫刻。天平文化は遣唐使がもたらした唐の様式を受け、鎮護国家の思想のもとで大寺院の造営と仏像制作が盛んになった。阿修羅像は光明皇后が母・橘三千代の一周忌に建立した興福寺西金堂の像で、天平彫刻を代表する乾漆像である。",
+    "facts": [
+      {"slot": "patron", "text": "光明皇后が建立した西金堂に安置された", "shared": ["judai-deshi-kofukuji"]},
+      {"slot": "era", "text": "天平文化の作品", "shared": ["judai-deshi-kofukuji", "shukongoshin-todaiji", "shitenno-kaidando", "fukukensaku-todaiji", "ganjin-toshodaiji", "torige-ritsujo-byobu", "kichijoten-yakushiji", "shosoin-hoko", "toshodaiji-kondo"]},
+      {"slot": "period", "text": "奈良時代（8世紀）の作", "shared": ["judai-deshi-kofukuji", "shukongoshin-todaiji", "shitenno-kaidando", "fukukensaku-todaiji", "ganjin-toshodaiji", "torige-ritsujo-byobu", "kichijoten-yakushiji", "shosoin-hoko", "toshodaiji-kondo"]},
+      {"slot": "technique", "text": "脱活乾漆像である", "shared": ["judai-deshi-kofukuji", "fukukensaku-todaiji", "ganjin-toshodaiji"]},
+      {"slot": "other", "text": "興福寺八部衆の一体"},
+      {"slot": "other", "text": "三面六臂の姿である"},
+      {"slot": "location", "text": "興福寺にある", "shared": ["judai-deshi-kofukuji"]}
+    ],
+    "falseStatements": [
+      {"text": "東大寺法華堂に安置されている", "why": "法華堂は不空羂索観音・執金剛神。所在ずらし", "verifiedFalse": true},
+      {"text": "塑像である", "why": "脱活乾漆像。技法ずらし", "verifiedFalse": true},
+      {"text": "白鳳文化の作品", "why": "734年の西金堂造立にともなう天平文化の像。時代ずらし", "verifiedFalse": true},
+      {"text": "一木造である", "why": "一木造は弘仁・貞観文化の技法。技法・時代ずらし", "verifiedFalse": true},
+      {"text": "唐招提寺にある", "why": "興福寺。鑑真和上像との所在ずらし", "verifiedFalse": true}
+    ],
     "title": "阿修羅像",
     "reading": "あしゅらぞう",
     "era": "tenpyo",
@@ -22,6 +44,28 @@
   },
   {
     "id": "judai-deshi-kofukuji",
+    "artist": null,
+    "patron": "光明皇后",
+    "style": "乾漆像（天平彫刻）",
+    "religion": "仏教（法相宗・藤原氏の氏寺興福寺）",
+    "periodLabel": "奈良時代（8世紀前半、天平6年＝734年）",
+    "eraNote": "奈良時代（8世紀）、聖武天皇のころに栄えた天平文化の彫刻。天平文化では遣唐使がもたらした唐の様式を受けて、乾漆・塑像の技法による写実的な仏像が多く作られた。十大弟子像は光明皇后が建立した興福寺西金堂に八部衆像とともに安置された乾漆像で、釈迦の弟子たちの個性を描き分けた天平彫刻の代表作である。",
+    "facts": [
+      {"slot": "patron", "text": "光明皇后が建立した西金堂に安置された", "shared": ["ashura-kofukuji"]},
+      {"slot": "era", "text": "天平文化の作品", "shared": ["ashura-kofukuji", "shukongoshin-todaiji", "shitenno-kaidando", "fukukensaku-todaiji", "ganjin-toshodaiji", "torige-ritsujo-byobu", "kichijoten-yakushiji", "shosoin-hoko", "toshodaiji-kondo"]},
+      {"slot": "period", "text": "奈良時代（8世紀）の作", "shared": ["ashura-kofukuji", "shukongoshin-todaiji", "shitenno-kaidando", "fukukensaku-todaiji", "ganjin-toshodaiji", "torige-ritsujo-byobu", "kichijoten-yakushiji", "shosoin-hoko", "toshodaiji-kondo"]},
+      {"slot": "technique", "text": "脱活乾漆像である", "shared": ["ashura-kofukuji", "fukukensaku-todaiji", "ganjin-toshodaiji"]},
+      {"slot": "other", "text": "釈迦の十人の弟子を表す"},
+      {"slot": "other", "text": "現存するのは6体"},
+      {"slot": "location", "text": "興福寺にある", "shared": ["ashura-kofukuji"]}
+    ],
+    "falseStatements": [
+      {"text": "塑像である", "why": "脱活乾漆像。技法ずらし", "verifiedFalse": true},
+      {"text": "東大寺戒壇堂にある", "why": "興福寺。四天王像との所在ずらし", "verifiedFalse": true},
+      {"text": "白鳳文化の作品", "why": "天平文化。時代ずらし", "verifiedFalse": true},
+      {"text": "運慶の作", "why": "運慶は鎌倉時代の慶派。時代・人物ずらし", "verifiedFalse": true},
+      {"text": "八部衆の像である", "why": "同じ西金堂でも別の群像。八部衆は阿修羅像を含む群。内容ずらし", "verifiedFalse": true}
+    ],
     "title": "十大弟子像",
     "reading": "じゅうだいでしぞう",
     "era": "tenpyo",
@@ -43,6 +87,28 @@
   },
   {
     "id": "shukongoshin-todaiji",
+    "artist": null,
+    "patron": null,
+    "style": "塑像（天平彫刻）",
+    "religion": "鎮護国家（華厳宗・東大寺）",
+    "periodLabel": "奈良時代（8世紀）",
+    "eraNote": "奈良時代（8世紀）、聖武天皇のころに栄えた天平文化の彫刻。天平文化では鎮護国家の思想のもとで東大寺が国家の中心寺院として造営され、唐から伝わった乾漆と塑像の技法で写実的な仏像が多く作られた。本像は東大寺法華堂（三月堂）の秘仏で、粘土で細部まで作りこんだ塑像の代表作である。",
+    "facts": [
+      {"slot": "era", "text": "天平文化の作品", "shared": ["ashura-kofukuji", "judai-deshi-kofukuji", "shitenno-kaidando", "fukukensaku-todaiji", "ganjin-toshodaiji", "torige-ritsujo-byobu", "kichijoten-yakushiji", "shosoin-hoko", "toshodaiji-kondo"]},
+      {"slot": "period", "text": "奈良時代（8世紀）の作", "shared": ["ashura-kofukuji", "judai-deshi-kofukuji", "shitenno-kaidando", "fukukensaku-todaiji", "ganjin-toshodaiji", "torige-ritsujo-byobu", "kichijoten-yakushiji", "shosoin-hoko", "toshodaiji-kondo"]},
+      {"slot": "technique", "text": "塑像である", "shared": ["shitenno-kaidando"]},
+      {"slot": "location", "text": "東大寺法華堂にある", "shared": ["fukukensaku-todaiji"]},
+      {"slot": "other", "text": "秘仏として伝えられる"},
+      {"slot": "other", "text": "甲冑を着け金剛杵を振り上げる姿"},
+      {"slot": "other", "text": "彩色がよく残る"}
+    ],
+    "falseStatements": [
+      {"text": "脱活乾漆像である", "why": "塑像。技法ずらし", "verifiedFalse": true},
+      {"text": "興福寺にある", "why": "東大寺法華堂。所在ずらし", "verifiedFalse": true},
+      {"text": "弘仁・貞観文化の作品", "why": "天平文化。時代ずらし", "verifiedFalse": true},
+      {"text": "法華堂の本尊である", "why": "本尊は不空羂索観音像。本像は秘仏。役割ずらし", "verifiedFalse": true},
+      {"text": "四天王のうちの一体である", "why": "執金剛神は単独の像。戒壇堂四天王像との内容ずらし", "verifiedFalse": true}
+    ],
     "title": "執金剛神像",
     "reading": "しゅこんごうしんぞう",
     "era": "tenpyo",
@@ -64,6 +130,28 @@
   },
   {
     "id": "shitenno-kaidando",
+    "artist": null,
+    "patron": null,
+    "style": "塑像（天平彫刻）",
+    "religion": "鎮護国家（華厳宗・東大寺）",
+    "periodLabel": "奈良時代（8世紀）",
+    "eraNote": "奈良時代（8世紀）、聖武天皇のころに栄えた天平文化の彫刻。天平文化では鎮護国家の思想のもとで聖武天皇が東大寺を建立し、鑑真の来日によって東大寺に戒壇が設けられ、僧に戒を授ける制度が整った。本像はその戒壇堂に安置される四体の塑像で、動と静を描き分けた天平彫刻の写実の頂点とされる。",
+    "facts": [
+      {"slot": "era", "text": "天平文化の作品", "shared": ["ashura-kofukuji", "judai-deshi-kofukuji", "shukongoshin-todaiji", "fukukensaku-todaiji", "ganjin-toshodaiji", "torige-ritsujo-byobu", "kichijoten-yakushiji", "shosoin-hoko", "toshodaiji-kondo"]},
+      {"slot": "period", "text": "奈良時代（8世紀）の作", "shared": ["ashura-kofukuji", "judai-deshi-kofukuji", "shukongoshin-todaiji", "fukukensaku-todaiji", "ganjin-toshodaiji", "torige-ritsujo-byobu", "kichijoten-yakushiji", "shosoin-hoko", "toshodaiji-kondo"]},
+      {"slot": "technique", "text": "塑像である", "shared": ["shukongoshin-todaiji"]},
+      {"slot": "location", "text": "東大寺戒壇堂にある"},
+      {"slot": "other", "text": "持国天・増長天・広目天・多聞天の四体"},
+      {"slot": "other", "text": "広目天の静かな表情で知られる"},
+      {"slot": "other", "text": "動と静の対比が写実の頂点とされる"}
+    ],
+    "falseStatements": [
+      {"text": "乾漆像である", "why": "塑像。技法ずらし", "verifiedFalse": true},
+      {"text": "東大寺法華堂の像である", "why": "戒壇堂。同じ東大寺内での所在ずらし", "verifiedFalse": true},
+      {"text": "興福寺の八部衆である", "why": "東大寺の四天王。所在・内容ずらし", "verifiedFalse": true},
+      {"text": "白鳳文化の作品", "why": "天平文化。時代ずらし", "verifiedFalse": true},
+      {"text": "運慶・快慶の作", "why": "鎌倉時代の慶派。時代・人物ずらし", "verifiedFalse": true}
+    ],
     "title": "四天王像（戒壇堂）",
     "reading": "してんのうぞう（かいだんどう）",
     "era": "tenpyo",
@@ -84,6 +172,28 @@
   },
   {
     "id": "fukukensaku-todaiji",
+    "artist": null,
+    "patron": null,
+    "style": "乾漆像（天平彫刻）",
+    "religion": "鎮護国家（華厳宗・東大寺）",
+    "periodLabel": "奈良時代（8世紀）",
+    "eraNote": "奈良時代（8世紀）、聖武天皇のころに栄えた天平文化の彫刻。天平文化では鎮護国家の思想のもとで東大寺の造営が進み、遣唐使がもたらした唐の様式を受けて乾漆・塑像の大作が作られた。本像は東大寺法華堂（三月堂）の本尊で、高さ3.6mを超える乾漆像の代表作である。",
+    "facts": [
+      {"slot": "era", "text": "天平文化の作品", "shared": ["ashura-kofukuji", "judai-deshi-kofukuji", "shukongoshin-todaiji", "shitenno-kaidando", "ganjin-toshodaiji", "torige-ritsujo-byobu", "kichijoten-yakushiji", "shosoin-hoko", "toshodaiji-kondo"]},
+      {"slot": "period", "text": "奈良時代（8世紀）の作", "shared": ["ashura-kofukuji", "judai-deshi-kofukuji", "shukongoshin-todaiji", "shitenno-kaidando", "ganjin-toshodaiji", "torige-ritsujo-byobu", "kichijoten-yakushiji", "shosoin-hoko", "toshodaiji-kondo"]},
+      {"slot": "technique", "text": "脱活乾漆像である", "shared": ["ashura-kofukuji", "judai-deshi-kofukuji", "ganjin-toshodaiji"]},
+      {"slot": "other", "text": "東大寺法華堂の本尊である"},
+      {"slot": "other", "text": "三目八臂の姿である"},
+      {"slot": "other", "text": "銀製の宝冠をもつ"},
+      {"slot": "location", "text": "東大寺法華堂にある", "shared": ["shukongoshin-todaiji"]}
+    ],
+    "falseStatements": [
+      {"text": "塑像である", "why": "脱活乾漆像。技法ずらし", "verifiedFalse": true},
+      {"text": "興福寺にある", "why": "東大寺法華堂。所在ずらし", "verifiedFalse": true},
+      {"text": "法華堂の秘仏である", "why": "秘仏は執金剛神像。本像は本尊。役割ずらし", "verifiedFalse": true},
+      {"text": "白鳳文化の作品", "why": "天平文化。時代ずらし", "verifiedFalse": true},
+      {"text": "定朝の作", "why": "定朝は平安中期の寄木造の仏師。時代・人物ずらし", "verifiedFalse": true}
+    ],
     "title": "不空羂索観音像",
     "reading": "ふくうけんさくかんのんぞう（ふくうけんじゃくかんのんぞう）",
     "era": "tenpyo",
@@ -105,6 +215,28 @@
   },
   {
     "id": "ganjin-toshodaiji",
+    "artist": null,
+    "patron": null,
+    "style": "乾漆像（肖像彫刻）",
+    "religion": "律宗（戒律）",
+    "periodLabel": "奈良時代（8世紀後半）",
+    "eraNote": "奈良時代（8世紀）、天平文化の彫刻。天平文化では遣唐使の往来によって唐の文化が直接もたらされ、唐僧の鑑真は苦難の渡航の末に来日して戒律を伝え、東大寺に戒壇を設け、唐招提寺を開いた。本像は鑑真の姿を写した乾漆像で、日本最古の肖像彫刻とされ、天平文化の国際性と写実性を示す。",
+    "facts": [
+      {"slot": "era", "text": "天平文化の作品", "shared": ["ashura-kofukuji", "judai-deshi-kofukuji", "shukongoshin-todaiji", "shitenno-kaidando", "fukukensaku-todaiji", "torige-ritsujo-byobu", "kichijoten-yakushiji", "shosoin-hoko", "toshodaiji-kondo"]},
+      {"slot": "period", "text": "奈良時代（8世紀）の作", "shared": ["ashura-kofukuji", "judai-deshi-kofukuji", "shukongoshin-todaiji", "shitenno-kaidando", "fukukensaku-todaiji", "torige-ritsujo-byobu", "kichijoten-yakushiji", "shosoin-hoko", "toshodaiji-kondo"]},
+      {"slot": "technique", "text": "脱活乾漆像である", "shared": ["ashura-kofukuji", "judai-deshi-kofukuji", "fukukensaku-todaiji"]},
+      {"slot": "other", "text": "日本最古の肖像彫刻とされる"},
+      {"slot": "location", "text": "唐招提寺にある", "shared": ["toshodaiji-kondo"]},
+      {"slot": "other", "text": "唐から来日した鑑真を表す"},
+      {"slot": "other", "text": "目を閉じた坐像である"}
+    ],
+    "falseStatements": [
+      {"text": "塑像である", "why": "脱活乾漆像。技法ずらし", "verifiedFalse": true},
+      {"text": "東大寺法華堂にある", "why": "唐招提寺。所在ずらし", "verifiedFalse": true},
+      {"text": "鎌倉時代の肖像彫刻である", "why": "奈良時代。鎌倉の肖像彫刻との時代ずらし", "verifiedFalse": true},
+      {"text": "空海の像である", "why": "鑑真。空海は平安初期の真言宗開祖。人物ずらし", "verifiedFalse": true},
+      {"text": "白鳳文化の作品", "why": "天平文化。時代ずらし", "verifiedFalse": true}
+    ],
     "title": "鑑真和上像",
     "reading": "がんじんわじょうぞう",
     "era": "tenpyo",
@@ -125,6 +257,28 @@
   },
   {
     "id": "torige-ritsujo-byobu",
+    "artist": null,
+    "patron": null,
+    "style": "唐風の樹下美人図",
+    "religion": null,
+    "periodLabel": "奈良時代（8世紀）",
+    "eraNote": "奈良時代（8世紀）、天平文化の絵画。天平文化では遣唐使によって盛唐の文化が伝えられ、聖武天皇の遺品を光明皇后が東大寺に納めたことに始まる正倉院宝物には、唐や西域の影響を受けた品が多い。本図はその正倉院宝物の一つで、唐の美人画の様式を受けた樹下美人図である。",
+    "facts": [
+      {"slot": "era", "text": "天平文化の作品", "shared": ["ashura-kofukuji", "judai-deshi-kofukuji", "shukongoshin-todaiji", "shitenno-kaidando", "fukukensaku-todaiji", "ganjin-toshodaiji", "kichijoten-yakushiji", "shosoin-hoko", "toshodaiji-kondo"]},
+      {"slot": "period", "text": "奈良時代（8世紀）の作", "shared": ["ashura-kofukuji", "judai-deshi-kofukuji", "shukongoshin-todaiji", "shitenno-kaidando", "fukukensaku-todaiji", "ganjin-toshodaiji", "kichijoten-yakushiji", "shosoin-hoko", "toshodaiji-kondo"]},
+      {"slot": "location", "text": "正倉院宝物である"},
+      {"slot": "style", "text": "樹下美人図の形式である"},
+      {"slot": "style", "text": "唐の美人画の影響を受ける", "shared": ["kichijoten-yakushiji"]},
+      {"slot": "technique", "text": "もとは鳥の羽毛が貼られていた"},
+      {"slot": "technique", "text": "六扇の屏風である"}
+    ],
+    "falseStatements": [
+      {"text": "薬師寺にある", "why": "正倉院。吉祥天像との所在ずらし", "verifiedFalse": true},
+      {"text": "麻布に描かれた仏画である", "why": "紙本の屏風で仏画ではない。吉祥天像との技法・内容ずらし", "verifiedFalse": true},
+      {"text": "平安時代の大和絵である", "why": "奈良時代の唐風絵画。時代・様式ずらし", "verifiedFalse": true},
+      {"text": "白鳳文化の作品", "why": "天平文化。時代ずらし", "verifiedFalse": true},
+      {"text": "高松塚古墳の壁画である", "why": "正倉院の屏風。白鳳文化の壁画との内容ずらし", "verifiedFalse": true}
+    ],
     "title": "鳥毛立女屏風",
     "reading": "とりげりつじょのびょうぶ",
     "era": "tenpyo",
@@ -145,6 +299,27 @@
   },
   {
     "id": "kichijoten-yakushiji",
+    "artist": null,
+    "patron": null,
+    "style": "唐風の仏画",
+    "religion": null,
+    "periodLabel": "奈良時代（8世紀後半）",
+    "eraNote": "奈良時代（8世紀）、天平文化の絵画。天平文化の絵画は現存例が少ないが、遣唐使が伝えた唐の様式を受け、豊満な女性像がふくよかな線と華やかな色で描かれた。本図は薬師寺に伝わる麻布に描かれた独立した仏画で、正倉院の鳥毛立女屏風と並ぶ天平絵画の代表作である。",
+    "facts": [
+      {"slot": "era", "text": "天平文化の作品", "shared": ["ashura-kofukuji", "judai-deshi-kofukuji", "shukongoshin-todaiji", "shitenno-kaidando", "fukukensaku-todaiji", "ganjin-toshodaiji", "torige-ritsujo-byobu", "shosoin-hoko", "toshodaiji-kondo"]},
+      {"slot": "period", "text": "奈良時代（8世紀）の作", "shared": ["ashura-kofukuji", "judai-deshi-kofukuji", "shukongoshin-todaiji", "shitenno-kaidando", "fukukensaku-todaiji", "ganjin-toshodaiji", "torige-ritsujo-byobu", "shosoin-hoko", "toshodaiji-kondo"]},
+      {"slot": "technique", "text": "麻布に描かれた仏画である"},
+      {"slot": "location", "text": "薬師寺にある"},
+      {"slot": "style", "text": "唐の美人画の影響を受ける", "shared": ["torige-ritsujo-byobu"]},
+      {"slot": "other", "text": "吉祥天を描く"}
+    ],
+    "falseStatements": [
+      {"text": "正倉院宝物である", "why": "薬師寺の所蔵。鳥毛立女屏風との所在ずらし", "verifiedFalse": true},
+      {"text": "白鳳文化の作品", "why": "薬師寺は白鳳の薬師三尊像で出るが本図は天平文化。寺名からの時代ずらし", "verifiedFalse": true},
+      {"text": "屏風である", "why": "一枚の独立した画像。形式ずらし", "verifiedFalse": true},
+      {"text": "密教の曼荼羅である", "why": "曼荼羅は弘仁・貞観文化の密教美術。様式・時代ずらし", "verifiedFalse": true},
+      {"text": "興福寺にある", "why": "薬師寺。所在ずらし", "verifiedFalse": true}
+    ],
     "title": "吉祥天像",
     "reading": "きちじょうてんぞう",
     "era": "tenpyo",
@@ -165,6 +340,28 @@
   },
   {
     "id": "shosoin-hoko",
+    "artist": null,
+    "patron": null,
+    "style": "校倉造",
+    "religion": null,
+    "periodLabel": "奈良時代（8世紀中頃）",
+    "eraNote": "奈良時代（8世紀）、天平文化の建築。天平文化では聖武天皇が鎮護国家の思想のもとで東大寺を建立し、その遺品を光明皇后が東大寺に納めたことから正倉院宝物が伝わった。本建物はその宝物を収めてきた校倉造の高床倉庫で、唐や西域の品を含む宝物とともに天平文化の国際性を伝える。",
+    "facts": [
+      {"slot": "era", "text": "天平文化の作品", "shared": ["ashura-kofukuji", "judai-deshi-kofukuji", "shukongoshin-todaiji", "shitenno-kaidando", "fukukensaku-todaiji", "ganjin-toshodaiji", "torige-ritsujo-byobu", "kichijoten-yakushiji", "toshodaiji-kondo"]},
+      {"slot": "period", "text": "奈良時代（8世紀）の作", "shared": ["ashura-kofukuji", "judai-deshi-kofukuji", "shukongoshin-todaiji", "shitenno-kaidando", "fukukensaku-todaiji", "ganjin-toshodaiji", "torige-ritsujo-byobu", "kichijoten-yakushiji", "toshodaiji-kondo"]},
+      {"slot": "style", "text": "校倉造である"},
+      {"slot": "style", "text": "高床式の倉庫である"},
+      {"slot": "location", "text": "東大寺の境内にある"},
+      {"slot": "other", "text": "聖武天皇の遺品が納められた"},
+      {"slot": "other", "text": "宮内庁が管理する"}
+    ],
+    "falseStatements": [
+      {"text": "唐招提寺にある", "why": "東大寺境内。所在ずらし", "verifiedFalse": true},
+      {"text": "寄棟造の金堂である", "why": "校倉造の倉庫。唐招提寺金堂との様式・用途ずらし", "verifiedFalse": true},
+      {"text": "鑑真が建てた", "why": "東大寺の倉で鑑真とは無関係。人物ずらし", "verifiedFalse": true},
+      {"text": "平安時代の建築である", "why": "奈良時代。時代ずらし", "verifiedFalse": true},
+      {"text": "書院造である", "why": "校倉造。書院造は室町時代の住宅様式。様式・時代ずらし", "verifiedFalse": true}
+    ],
     "title": "正倉院宝庫",
     "reading": "しょうそういんほうこ",
     "era": "tenpyo",
@@ -185,6 +382,28 @@
   },
   {
     "id": "toshodaiji-kondo",
+    "artist": null,
+    "patron": null,
+    "style": "天平建築（寄棟造・本瓦葺）",
+    "religion": "律宗（戒律）",
+    "periodLabel": "奈良時代（8世紀後半）",
+    "eraNote": "奈良時代（8世紀）、天平文化の建築。天平文化では鎮護国家の思想のもとで国家が仏教を保護し、唐から来日した鑑真は戒律を伝えて唐招提寺を開いた。本建物はその唐招提寺の金堂で、奈良時代の金堂として唯一現存し、天平建築の様式を伝える。",
+    "facts": [
+      {"slot": "era", "text": "天平文化の作品", "shared": ["ashura-kofukuji", "judai-deshi-kofukuji", "shukongoshin-todaiji", "shitenno-kaidando", "fukukensaku-todaiji", "ganjin-toshodaiji", "torige-ritsujo-byobu", "kichijoten-yakushiji", "shosoin-hoko"]},
+      {"slot": "period", "text": "奈良時代（8世紀）の作", "shared": ["ashura-kofukuji", "judai-deshi-kofukuji", "shukongoshin-todaiji", "shitenno-kaidando", "fukukensaku-todaiji", "ganjin-toshodaiji", "torige-ritsujo-byobu", "kichijoten-yakushiji", "shosoin-hoko"]},
+      {"slot": "location", "text": "唐招提寺にある", "shared": ["ganjin-toshodaiji"]},
+      {"slot": "patron", "text": "鑑真が開いた寺の金堂である"},
+      {"slot": "other", "text": "奈良時代の金堂で唯一現存する"},
+      {"slot": "style", "text": "寄棟造・本瓦葺である"},
+      {"slot": "other", "text": "正面に8本の円柱が並ぶ"}
+    ],
+    "falseStatements": [
+      {"text": "校倉造である", "why": "寄棟造の金堂。正倉院との様式ずらし", "verifiedFalse": true},
+      {"text": "東大寺の建物である", "why": "唐招提寺。所在ずらし", "verifiedFalse": true},
+      {"text": "飛鳥文化の建築である", "why": "奈良時代の天平建築。法隆寺金堂との時代ずらし", "verifiedFalse": true},
+      {"text": "禅宗様の建築である", "why": "禅宗様は鎌倉時代以降の様式。様式・時代ずらし", "verifiedFalse": true},
+      {"text": "聖武天皇が建立した", "why": "唐招提寺は鑑真が759年に開いた寺で、聖武天皇（756年没）の没後。人物ずらし", "verifiedFalse": true}
+    ],
     "title": "唐招提寺金堂",
     "reading": "とうしょうだいじこんどう",
     "era": "tenpyo",

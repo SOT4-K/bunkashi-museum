@@ -12,7 +12,7 @@ import {
 describe('createInitialProgress / migrate', () => {
   it('壊れたデータは初期状態にフォールバックする', () => {
     const result = migrate({ nonsense: true }, '2026-09-03')
-    expect(result.version).toBe(1)
+    expect(result.version).toBe(2)
     expect(result.items).toEqual({})
   })
 
@@ -25,6 +25,31 @@ describe('createInitialProgress / migrate', () => {
     const state = createInitialProgress('2026-09-03')
     const result = migrate(state, '2026-09-03')
     expect(result).toEqual(state)
+  })
+
+  it('version 1（q4/q6/q8 が無い ItemProgress）を version 2 に上げても既存の進捗は消えない', () => {
+    const v1State = {
+      version: 1 as const,
+      xp: 120,
+      level: 2,
+      streak: { count: 3, lastDate: '2026-09-02' },
+      items: {
+        'ashura-kofukuji': {
+          q1: { box: 2, due: '2026-09-05', correct: 2, wrong: 0 },
+          q2: { box: 0, due: '2026-09-03', correct: 0, wrong: 1 },
+          q3: { box: 0, due: '2026-09-03', correct: 0, wrong: 0 },
+          discoveredAt: '2026-09-01',
+          masteredAt: null,
+        },
+      },
+      bosses: {},
+      newToday: { date: '2026-09-03', count: 1 },
+    }
+    const result = migrate(v1State, '2026-09-03')
+    expect(result.version).toBe(2)
+    expect(result.xp).toBe(120)
+    expect(result.items['ashura-kofukuji'].q1).toEqual(v1State.items['ashura-kofukuji'].q1)
+    expect(result.items['ashura-kofukuji'].q4).toBeUndefined() // q4 は初出題まで作らない
   })
 })
 

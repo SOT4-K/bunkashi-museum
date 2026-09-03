@@ -4,7 +4,9 @@ import { applyItemAnswer, createItemProgress, todayIso } from './srs'
 import type { AnswerKind, ItemProgress, ProgressState, QuestionType } from '../types'
 
 export const STORAGE_KEY = 'bunkashi.v1'
-export const STORAGE_VERSION = 1 as const
+// v2: ItemProgress に q4/q6/q8（DESIGN.md 10章）を追加。フィールドは optional なので
+// 既存データはそのまま読める。version の値だけ更新し、items は変換不要（migrate で拾う）。
+export const STORAGE_VERSION = 2 as const
 
 export const XP_CORRECT = 10
 export const XP_REVIEW_CORRECT = 15

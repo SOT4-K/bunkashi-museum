@@ -56,7 +56,7 @@ export function HomeScreen({
   const discoveryRatio = stats.total > 0 ? stats.discovered / stats.total : 0
   const bossReady = discoveryRatio >= 0.6
 
-  const composition = previewSessionComposition(works, progress, today, dailyNewRemaining)
+  const composition = previewSessionComposition(works, eras, progress, today, dailyNewRemaining)
   const canStart = composition.reviewCount + composition.newCount > 0
   // works が0件（本番ビルドで reviewed が無い等）と、単に今日の分をやり終えたのを区別する。
   // 前者を「また明日」と言うのは誤り（明日になっても出題できる作品は増えない）。

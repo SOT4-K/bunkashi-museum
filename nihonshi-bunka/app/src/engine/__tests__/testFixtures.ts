@@ -16,15 +16,26 @@ export function makeWork(overrides: Partial<Work> & { id: string }): Work {
     sources: [],
     examTags: [],
     status: 'draft',
+    // DESIGN.md 10章の追加フィールド。既定値は「Q4/Q6/Q8 を生成できない」状態
+    // （facts/falseStatements が空、artist/patron/style/religion が null）。
+    // Q4/Q6/Q8 を作りたいテストは makeWork の呼び出し側で上書きする。
+    artist: null,
+    patron: null,
+    style: null,
+    religion: null,
+    periodLabel: '',
+    eraNote: '',
+    facts: [],
+    falseStatements: [],
     ...overrides,
   }
 }
 
 export const testEras: Era[] = [
-  { id: 'asuka', name: '飛鳥文化', period: '', order: 1, summary: '' },
-  { id: 'hakuho', name: '白鳳文化', period: '', order: 2, summary: '' },
-  { id: 'tenpyo', name: '天平文化', period: '', order: 3, summary: '' },
-  { id: 'konin-jogan', name: '弘仁・貞観文化', period: '', order: 4, summary: '' },
+  { id: 'asuka', name: '飛鳥文化', period: '', order: 1, summary: '', detail: '', items: [] },
+  { id: 'hakuho', name: '白鳳文化', period: '', order: 2, summary: '', detail: '', items: [] },
+  { id: 'tenpyo', name: '天平文化', period: '', order: 3, summary: '', detail: '', items: [] },
+  { id: 'konin-jogan', name: '弘仁・貞観文化', period: '', order: 4, summary: '', detail: '', items: [] },
 ]
 
 export const testWorks: Work[] = [
