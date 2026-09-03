@@ -40,9 +40,15 @@ export function AnswerSheet({
   const whyWrong = correct ? '' : explainMiss(question, selection, eras)
   const isUnknown = selection.kind === 'unknown'
 
-  const otherWorks = question.type === 'q2' ? [] : question.choiceWorks.filter((w) => w.id !== work.id)
+  const otherWorks =
+    question.type === 'q1' || question.type === 'q3' ? question.choiceWorks.filter((w) => w.id !== work.id) : []
   const otherEras =
     question.type === 'q2' ? (question.choiceEras ?? []).filter((e) => e.id !== work.era) : []
+
+  const targetEra = eras.find((e) => e.id === work.era)
+  // Q6 の「正解の文化」の detail を1〜2文だけ添える（DESIGN.md 10章「解説の拡張」）
+  const correctEraDetailExcerpt =
+    question.type === 'q6' && targetEra?.detail ? excerpt(targetEra.detail, 2) : ''
 
   const [lightboxWork, setLightboxWork] = useState<Work | null>(null)
 
@@ -70,6 +76,17 @@ export function AnswerSheet({
         )}
       </div>
       {whyWrong && <p className={styles.whyWrong}>{whyWrong}</p>}
+
+      {(work.periodLabel || targetEra) && (
+        <div className={styles.periodBlock}>
+          <div className={`${styles.periodLabel} caption-bold`}>
+            {work.periodLabel}
+            {work.periodLabel && targetEra ? '・' : ''}
+            {targetEra?.name ?? ''}
+          </div>
+          {work.eraNote && <p className={styles.eraNote}>{work.eraNote}</p>}
+        </div>
+      )}
 
       <div className={styles.correctBlock}>
         <button
@@ -134,6 +151,56 @@ export function AnswerSheet({
                   <div className={`${styles.otherTitle} caption`}>{e.name}</div>
                   <div>{e.summary}</div>
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {question.type === 'q4' && question.choiceStatements && question.choiceStatements.length > 0 && (
+        <div>
+          <div className={styles.sectionLabel}>4つの記述</div>
+          <div className={styles.statementList}>
+            {question.choiceStatements.map((s, i) => (
+              <div className={styles.statementItem} key={i}>
+                <span className={s.correct ? styles.statementCorrect : styles.statementWrong}>
+                  {s.correct ? '○ 正しい' : '× 誤り'}
+                </span>
+                <span className={styles.statementText}>{s.text}</span>
+                {!s.correct && s.why && <div className={styles.statementWhy}>{s.why}</div>}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {question.type === 'q6' && question.choiceEraItems && question.choiceEraItems.length > 0 && (
+        <div>
+          <div className={styles.sectionLabel}>4つの事項</div>
+          <div className={styles.statementList}>
+            {question.choiceEraItems.map((it, i) => (
+              <div className={styles.statementItem} key={i}>
+                <span className={it.correct ? styles.statementCorrect : styles.statementWrong}>
+                  {it.correct ? '○' : '×'} {it.eraName}
+                </span>
+                <span className={styles.statementText}>{it.text}</span>
+              </div>
+            ))}
+          </div>
+          {correctEraDetailExcerpt && <p className={styles.explanation}>{correctEraDetailExcerpt}</p>}
+        </div>
+      )}
+
+      {question.type === 'q8' && question.choiceCombos && question.choiceCombos.length > 0 && (
+        <div>
+          <div className={styles.sectionLabel}>4つの組合せ</div>
+          <div className={styles.statementList}>
+            {question.choiceCombos.map((c, i) => (
+              <div className={styles.statementItem} key={i}>
+                <span className={c.correct ? styles.statementCorrect : styles.statementWrong}>
+                  {c.correct ? '○' : '×'}
+                </span>
+                <span className={styles.statementText}>{c.text}</span>
               </div>
             ))}
           </div>

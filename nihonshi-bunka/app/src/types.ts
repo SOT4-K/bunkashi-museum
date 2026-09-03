@@ -43,6 +43,9 @@ export interface WorkFalseStatement {
 }
 
 export interface Work {
+  /** この作品では出さない設問型（reviewer 指摘で個別に無効化したもの。content 側で指定） */
+  skipTypes?: QuestionType[]
+
   id: string
   title: string
   reading: string

@@ -11,6 +11,9 @@ const PROMPTS: Record<Question['type'], string> = {
   q1: 'この作品は？',
   q2: 'この作品の文化は？',
   q3: 'この作品の画像は？',
+  q4: 'この作品に関する記述として正しいものは？',
+  q6: 'この作品と同じ文化に属する事項は？',
+  q8: '作者（建立者）と様式（宗教背景）の組合せとして正しいものは？',
 }
 
 export function QuestionCard({
@@ -123,7 +126,13 @@ export function QuestionCard({
   const choiceLabels =
     question.type === 'q2'
       ? (question.choiceEras ?? []).map((e) => e.name)
-      : question.choiceWorks.map((w) => w.title)
+      : question.type === 'q4'
+        ? (question.choiceStatements ?? []).map((s) => s.text)
+        : question.type === 'q6'
+          ? (question.choiceEraItems ?? []).map((it) => it.text)
+          : question.type === 'q8'
+            ? (question.choiceCombos ?? []).map((c) => c.text)
+            : question.choiceWorks.map((w) => w.title)
 
   return (
     <div>

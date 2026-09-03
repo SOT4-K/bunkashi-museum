@@ -91,7 +91,7 @@ export function LearnScreen({
     }
     if (!correct && !current.isRetry) {
       // 誤答の同セッション内再出題は 1 作品 1 回まで（無限に伸びるセッションを防ぐ）
-      const nextType = requeueType(current.type)
+      const nextType = requeueType(current.type, current.work, works, eras)
       const requeued = { ...buildQuestionOrFallback(current.work, nextType, works, eras, current.isReview), isRetry: true }
       setQueue((prev) => [...prev, requeued])
     }

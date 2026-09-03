@@ -5,10 +5,10 @@
 // DESIGN.md 10章（設問型の拡張）:
 //  Q4/Q6/Q8 は作品によって生成できないことがある（facts/falseStatements が3件未満、
 //  era.items が足りない、artist/patron と style/religion/technique の両方が無い等）。
-//  型の出現比は QUESTION_TYPE_WEIGHTS で持ち、復習でどの方向を選ぶかに重みづけする。
-//  「新規」出題は既存どおり必ず q1 から始める（初出題は易しい方向からという既存設計を維持）。
-//  q4/q6/q8 は、すでに一度でも出題した作品が復習対象になったときに初めて導入される
-//  （selectReviewCandidates が生成可能性を都度チェックする）。
+//  型の出現比は QUESTION_TYPE_WEIGHTS で持ち、新規・復習どちらの型選びにも使う
+//  （オーナー方針: Q4 が中心のアプリなので、新規出題も q1 固定にしない。2026-09-04）。
+//  ただし Q3「作品名→画像」は、まだ作品名を知らない新規出題では出さない（重み対象から除外）。
+//  再出題（requeueType）は誤答した型と違う、その作品で生成可能な型から選ぶ。
 import { buildChoices, pickEraDistractors, pickWorkDistractors, shuffle, type RandomFn } from './distractors'
 import { generateComboQuestion } from './combos'
 import { generateEraItemQuestion } from './eraItems'
@@ -43,6 +43,8 @@ export interface SessionPick {
 
 /** その型の問題を work に対して生成できるか（データ不足で null になるものを事前に弾く）。 */
 export function canGenerateType(type: QuestionType, work: Work, pool: Work[], eras: Era[]): boolean {
+  // content 側で明示的に外した型は出さない（reviewer 指摘で個別に無効化した作品がある。DESIGN.md 10章）
+  if (work.skipTypes?.includes(type)) return false
   switch (type) {
     case 'q4':
       return generateStatementQuestion(work, pool, PROBE_RANDOM) !== null
@@ -54,6 +56,10 @@ export function canGenerateType(type: QuestionType, work: Work, pool: Work[], er
       return true
   }
 }
+
+/** 新規出題（まだ一度も見せていない作品）で候補になりうる型。q3（作品名→画像）は
+ *  名前をまだ知らないので出さない。q5/q7/⑨ は実装しない（DESIGN.md 10章）。 */
+const NEW_CANDIDATE_TYPES: QuestionType[] = ['q1', 'q2', 'q4', 'q6', 'q8']
 
 /** types から QUESTION_TYPE_WEIGHTS に従って重み付きで1つ選ぶ。重みが無ければ一様分布にフォールバック。 */
 function weightedTypePick(types: QuestionType[], rng: RandomFn): QuestionType {
@@ -101,9 +107,16 @@ export function selectReviewCandidates(
   return shuffle(candidates, rng).slice(0, REVIEW_MAX)
 }
 
-/** まだ一度も出題していない作品を新規候補として返す（日次上限を考慮）。 */
+/**
+ * まだ一度も出題していない作品を新規候補として返す（日次上限を考慮）。
+ * 型は QUESTION_TYPE_WEIGHTS で重み付きに選ぶ（オーナー方針: Q4 中心のアプリなので
+ * 新規出題を q1 固定にしない。2026-09-04）。q3 は名前をまだ知らないため対象外。
+ * work がその型を生成できないとき（facts 不足等）は候補から外し、生成できる型の中で選ぶ
+ * （q1/q2 は常に生成できるため候補が空になることはない）。
+ */
 export function selectNewCandidates(
   works: Work[],
+  eras: Era[],
   progress: ProgressState,
   dailyNewRemaining: number,
   sessionRemaining: number,
@@ -113,7 +126,10 @@ export function selectNewCandidates(
   const limit = Math.max(0, Math.min(NEW_MAX_PER_SESSION, sessionRemaining, dailyNewRemaining))
   return shuffle(unseen, rng)
     .slice(0, limit)
-    .map((work) => ({ work, type: 'q1' as QuestionType })) // 初出題は画像→作品名から
+    .map((work) => {
+      const candidates = NEW_CANDIDATE_TYPES.filter((t) => canGenerateType(t, work, works, eras))
+      return { work, type: weightedTypePick(candidates, rng) }
+    })
 }
 
 /** 同じ時代の問題を連続させない並び替え（できる限り）。 */
@@ -234,7 +250,7 @@ export function previewSessionComposition(
 ): SessionComposition {
   const review = selectReviewCandidates(works, progress, today, rng, eras)
   const sessionRemaining = SESSION_SIZE - review.length
-  const fresh = selectNewCandidates(works, progress, dailyNewRemaining, sessionRemaining, rng)
+  const fresh = selectNewCandidates(works, eras, progress, dailyNewRemaining, sessionRemaining, rng)
   return { reviewCount: review.length, newCount: fresh.length }
 }
 
@@ -252,14 +268,26 @@ export function buildSession(
 ): Question[] {
   const review = selectReviewCandidates(works, progress, today, rng, eras)
   const sessionRemaining = SESSION_SIZE - review.length
-  const fresh = selectNewCandidates(works, progress, dailyNewRemaining, sessionRemaining, rng)
+  const fresh = selectNewCandidates(works, eras, progress, dailyNewRemaining, sessionRemaining, rng)
   const reviewIds = new Set(review.map((p) => p.work.id))
   const picks = interleaveByEra([...review, ...fresh], rng)
   return picks.map(({ work, type }) => buildQuestionOrFallback(work, type, works, eras, reviewIds.has(work.id), rng))
 }
 
-/** 誤答したときの同セッション内再出題用に、出題済みと違う型を選ぶ（q1/q2/q3 の範囲。既存動作を維持）。 */
-export function requeueType(originalType: QuestionType, rng: RandomFn = defaultRandom): QuestionType {
-  const others: QuestionType[] = (['q1', 'q2', 'q3'] as QuestionType[]).filter((t) => t !== originalType)
-  return others[Math.floor(rng() * others.length)]
+/**
+ * 誤答したときの同セッション内再出題用に、出題済みと違う型を選ぶ。
+ * その作品で生成可能な型（q1〜q8、originalType を除く）から QUESTION_TYPE_WEIGHTS で重み付けして選ぶ
+ * （2026-09-04 拡張。以前は q1/q2/q3 の範囲のみだった）。q1/q2 のどちらかは常に生成できるため、
+ * candidates が空になることはない。
+ */
+export function requeueType(
+  originalType: QuestionType,
+  work: Work,
+  pool: Work[],
+  eras: Era[],
+  rng: RandomFn = defaultRandom,
+): QuestionType {
+  const allTypes: QuestionType[] = ['q1', 'q2', 'q3', 'q4', 'q6', 'q8']
+  const candidates = allTypes.filter((t) => t !== originalType && canGenerateType(t, work, pool, eras))
+  return weightedTypePick(candidates, rng)
 }

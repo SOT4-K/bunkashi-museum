@@ -6,22 +6,102 @@
     "style": "浮世絵（錦絵・風景画）",
     "religion": null,
     "periodLabel": "江戸時代後期（19世紀前半、天保年間）",
-    "eraNote": "江戸時代後期（19世紀前半）、11代将軍徳川家斉の大御所時代を中心に江戸で栄えた化政文化の浮世絵。化政文化では出版と交通の発達を背景に旅や名所への関心が高まり、人物中心だった浮世絵に風景画の分野が確立した。「富嶽三十六景」は天保年間初め（1830年代初め）に刊行された北斎の連作で、本図はその代表作である。",
+    "eraNote": "江戸時代後期（19世紀前半）、11代将軍徳川家斉の時代（いわゆる大御所時代）を中心に江戸で栄えた化政文化の浮世絵。化政文化では出版と交通の発達を背景に旅や名所への関心が高まり、人物中心だった浮世絵に風景画の分野が確立した。「富嶽三十六景」は天保年間初め（1830年代初め）に刊行された北斎の連作で、本図はその代表作である。",
     "facts": [
-      {"slot": "artist", "text": "葛飾北斎の作"},
-      {"slot": "era", "text": "化政文化の作品", "shared": ["gaifu-kaisei", "hokusai-manga", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "takami-senseki", "ino-map"]},
-      {"slot": "period", "text": "江戸時代後期の作", "shared": ["gaifu-kaisei", "hokusai-manga", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "takami-senseki", "ino-map"]},
-      {"slot": "style", "text": "「富嶽三十六景」の一図", "shared": ["gaifu-kaisei"]},
-      {"slot": "technique", "text": "錦絵（木版多色刷）である", "shared": ["gaifu-kaisei", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin"]},
-      {"slot": "other", "text": "浮世絵に風景画の分野を確立した連作の一図", "shared": ["gaifu-kaisei"]},
-      {"slot": "other", "text": "大波の谷間に富士山を小さく描く"}
+      {
+        "slot": "artist",
+        "text": "葛飾北斎の作"
+      },
+      {
+        "slot": "era",
+        "text": "化政文化の作品",
+        "shared": [
+          "gaifu-kaisei",
+          "hokusai-manga",
+          "shono-hakuu",
+          "kanbara-yoru-no-yuki",
+          "ohashi-atake-yudachi",
+          "soma-no-furudairi",
+          "takami-senseki",
+          "ino-map"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "19世紀前半の作",
+        "shared": [
+          "gaifu-kaisei",
+          "hokusai-manga",
+          "shono-hakuu",
+          "kanbara-yoru-no-yuki",
+          "ohashi-atake-yudachi",
+          "soma-no-furudairi",
+          "takami-senseki",
+          "ino-map"
+        ]
+      },
+      {
+        "slot": "style",
+        "text": "「富嶽三十六景」の一図",
+        "shared": [
+          "gaifu-kaisei"
+        ]
+      },
+      {
+        "slot": "technique",
+        "text": "錦絵（木版多色刷）である",
+        "shared": [
+          "gaifu-kaisei",
+          "shono-hakuu",
+          "kanbara-yoru-no-yuki",
+          "ohashi-atake-yudachi",
+          "soma-no-furudairi",
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin",
+          "otani-oniji",
+          "dankin-bijin"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "浮世絵に風景画の分野を確立した連作の一図",
+        "shared": [
+          "gaifu-kaisei",
+          "kanbara-yoru-no-yuki",
+          "shono-hakuu"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "大波の谷間に富士山を小さく描く"
+      }
     ],
     "falseStatements": [
-      {"text": "歌川広重の作", "why": "広重は「東海道五十三次」の作者。北斎との人物ずらし", "verifiedFalse": true},
-      {"text": "「東海道五十三次」の一図", "why": "東海道五十三次は広重の連作。シリーズずらし", "verifiedFalse": true},
-      {"text": "宝暦・天明期の文化の作品", "why": "天保年間の刊行で化政文化に属する。時代ずらし", "verifiedFalse": true},
-      {"text": "肉筆の絹本着色である", "why": "木版多色刷の錦絵。技法ずらし", "verifiedFalse": true},
-      {"text": "美人画の大首絵である", "why": "風景画。歌麿・写楽の大首絵との分野ずらし", "verifiedFalse": true}
+      {
+        "text": "歌川広重の作",
+        "why": "広重は「東海道五十三次」の作者。北斎との人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "「東海道五十三次」の一図",
+        "why": "東海道五十三次は広重の連作。シリーズずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "宝暦・天明期の文化の作品",
+        "why": "天保年間の刊行で化政文化に属する。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "肉筆の絹本着色である",
+        "why": "木版多色刷の錦絵。技法ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "美人画の大首絵である",
+        "why": "風景画。歌麿・写楽の大首絵との分野ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "富嶽三十六景「神奈川沖浪裏」",
     "reading": "ふがくさんじゅうろっけい かながわおきなみうら",
@@ -73,20 +153,95 @@
     "periodLabel": "江戸時代後期（19世紀前半、天保年間）",
     "eraNote": "江戸時代後期（19世紀前半）、化政文化の浮世絵風景画。化政文化では庶民の旅や名所への関心の高まりを受けて風景版画が流行し、北斎と広重がその二大絵師となった。本図は天保年間初め（1830年代初め）に刊行された「富嶽三十六景」の一図で、神奈川沖浪裏と並ぶ北斎の代表作である。",
     "facts": [
-      {"slot": "artist", "text": "葛飾北斎の作"},
-      {"slot": "era", "text": "化政文化の作品", "shared": ["kanagawa-oki-namiura", "hokusai-manga", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "takami-senseki", "ino-map"]},
-      {"slot": "period", "text": "江戸時代後期の作", "shared": ["kanagawa-oki-namiura", "hokusai-manga", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "takami-senseki", "ino-map"]},
-      {"slot": "style", "text": "「富嶽三十六景」の一図", "shared": ["kanagawa-oki-namiura"]},
-      {"slot": "technique", "text": "錦絵（木版多色刷）である", "shared": ["kanagawa-oki-namiura", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin"]},
-      {"slot": "other", "text": "通称「赤富士」と呼ばれる"},
-      {"slot": "other", "text": "富士山だけを画面いっぱいに描く"}
+      {
+        "slot": "artist",
+        "text": "葛飾北斎の作"
+      },
+      {
+        "slot": "era",
+        "text": "化政文化の作品",
+        "shared": [
+          "kanagawa-oki-namiura",
+          "hokusai-manga",
+          "shono-hakuu",
+          "kanbara-yoru-no-yuki",
+          "ohashi-atake-yudachi",
+          "soma-no-furudairi",
+          "takami-senseki",
+          "ino-map"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "19世紀前半の作",
+        "shared": [
+          "kanagawa-oki-namiura",
+          "hokusai-manga",
+          "shono-hakuu",
+          "kanbara-yoru-no-yuki",
+          "ohashi-atake-yudachi",
+          "soma-no-furudairi",
+          "takami-senseki",
+          "ino-map"
+        ]
+      },
+      {
+        "slot": "style",
+        "text": "「富嶽三十六景」の一図",
+        "shared": [
+          "kanagawa-oki-namiura"
+        ]
+      },
+      {
+        "slot": "technique",
+        "text": "錦絵（木版多色刷）である",
+        "shared": [
+          "kanagawa-oki-namiura",
+          "shono-hakuu",
+          "kanbara-yoru-no-yuki",
+          "ohashi-atake-yudachi",
+          "soma-no-furudairi",
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin",
+          "otani-oniji",
+          "dankin-bijin"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "通称「赤富士」と呼ばれる"
+      },
+      {
+        "slot": "other",
+        "text": "富士山だけを画面いっぱいに描く"
+      }
     ],
     "falseStatements": [
-      {"text": "歌川広重の作", "why": "広重は東海道五十三次・名所江戸百景の作者。人物ずらし", "verifiedFalse": true},
-      {"text": "「名所江戸百景」の一図", "why": "名所江戸百景は広重の連作。シリーズずらし", "verifiedFalse": true},
-      {"text": "元禄文化の作品", "why": "天保年間の刊行で化政文化。菱川師宣の時代との時代ずらし", "verifiedFalse": true},
-      {"text": "肉筆画の屏風である", "why": "木版多色刷の錦絵。技法・形式ずらし", "verifiedFalse": true},
-      {"text": "渡辺崋山の作", "why": "崋山は同じ化政期でも肖像画（鷹見泉石像）。人物ずらし", "verifiedFalse": true}
+      {
+        "text": "歌川広重の作",
+        "why": "広重は東海道五十三次・名所江戸百景の作者。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "「名所江戸百景」の一図",
+        "why": "名所江戸百景は広重の連作。シリーズずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "元禄文化の作品",
+        "why": "天保年間の刊行で化政文化。菱川師宣の時代との時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "肉筆画の屏風である",
+        "why": "木版多色刷の錦絵。技法・形式ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "渡辺崋山の作",
+        "why": "崋山は同じ化政期でも肖像画（鷹見泉石像）。人物ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "富嶽三十六景「凱風快晴」",
     "reading": "ふがくさんじゅうろっけい がいふうかいせい",
@@ -138,20 +293,81 @@
     "periodLabel": "江戸時代後期（19世紀前半、文化11年＝1814年初編）",
     "eraNote": "江戸時代後期（19世紀前半）、化政文化の版本。化政文化では出版業が発達し、錦絵の一枚絵だけでなく絵入りの版本が広く流通して、江戸の文化が地方や庶民にも届くようになった。北斎漫画は文化11年（1814年）に初編が出た絵手本で、絵を学ぶ人の手本として広く用いられた。",
     "facts": [
-      {"slot": "artist", "text": "葛飾北斎の作"},
-      {"slot": "era", "text": "化政文化の作品", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "takami-senseki", "ino-map"]},
-      {"slot": "period", "text": "江戸時代後期の作", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "takami-senseki", "ino-map"]},
-      {"slot": "technique", "text": "木版の絵手本（版本）である"},
-      {"slot": "period", "text": "文化11年（1814年）に初編が刊行された"},
-      {"slot": "other", "text": "全15編からなる"},
-      {"slot": "other", "text": "墨を主とした人物や動物のスケッチを収める"}
+      {
+        "slot": "artist",
+        "text": "葛飾北斎の作"
+      },
+      {
+        "slot": "era",
+        "text": "化政文化の作品",
+        "shared": [
+          "kanagawa-oki-namiura",
+          "gaifu-kaisei",
+          "shono-hakuu",
+          "kanbara-yoru-no-yuki",
+          "ohashi-atake-yudachi",
+          "soma-no-furudairi",
+          "takami-senseki",
+          "ino-map"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "19世紀前半の作",
+        "shared": [
+          "kanagawa-oki-namiura",
+          "gaifu-kaisei",
+          "shono-hakuu",
+          "kanbara-yoru-no-yuki",
+          "ohashi-atake-yudachi",
+          "soma-no-furudairi",
+          "takami-senseki",
+          "ino-map"
+        ]
+      },
+      {
+        "slot": "technique",
+        "text": "木版の絵手本（版本）である"
+      },
+      {
+        "slot": "period",
+        "text": "文化11年（1814年）に初編が刊行された"
+      },
+      {
+        "slot": "other",
+        "text": "全15編からなる"
+      },
+      {
+        "slot": "other",
+        "text": "墨を主とした人物や動物のスケッチを収める"
+      }
     ],
     "falseStatements": [
-      {"text": "歌川国芳の作", "why": "国芳は武者絵（相馬の古内裏）。人物ずらし", "verifiedFalse": true},
-      {"text": "一枚絵の錦絵である", "why": "冊子の版本。形式ずらし（富嶽三十六景との対比）", "verifiedFalse": true},
-      {"text": "宝暦・天明期の文化の作品", "why": "1814年刊で化政文化。時代ずらし", "verifiedFalse": true},
-      {"text": "銅版画である", "why": "木版。司馬江漢の三囲景との技法ずらし", "verifiedFalse": true},
-      {"text": "解剖図を収めた医学書である", "why": "絵手本。解体新書との内容ずらし", "verifiedFalse": true}
+      {
+        "text": "歌川国芳の作",
+        "why": "国芳は武者絵（相馬の古内裏）。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "一枚絵の錦絵である",
+        "why": "冊子の版本。形式ずらし（富嶽三十六景との対比）",
+        "verifiedFalse": true
+      },
+      {
+        "text": "宝暦・天明期の文化の作品",
+        "why": "1814年刊で化政文化。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "銅版画である",
+        "why": "木版。司馬江漢の三囲景との技法ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "解剖図を収めた医学書である",
+        "why": "絵手本。解体新書との内容ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "北斎漫画",
     "reading": "ほくさいまんが",
@@ -201,20 +417,95 @@
     "periodLabel": "江戸時代後期（19世紀前半、天保年間）",
     "eraNote": "江戸時代後期（19世紀前半）、化政文化の浮世絵風景画。化政文化の時期には街道と宿場の発達、伊勢参りなど旅の流行を背景に、街道の風景を描く版画が人気を集めた。「東海道五十三次」は天保年間（1830年代）に刊行された広重の代表作で、北斎の「富嶽三十六景」と並ぶ化政期の風景版画である。",
     "facts": [
-      {"slot": "artist", "text": "歌川広重の作"},
-      {"slot": "era", "text": "化政文化の作品", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "hokusai-manga", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "takami-senseki", "ino-map"]},
-      {"slot": "period", "text": "江戸時代後期の作", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "hokusai-manga", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "takami-senseki", "ino-map"]},
-      {"slot": "style", "text": "「東海道五十三次」の一図", "shared": ["kanbara-yoru-no-yuki"]},
-      {"slot": "technique", "text": "錦絵（木版多色刷）である", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin"]},
-      {"slot": "other", "text": "宿場を襲うにわか雨（白雨）を描く"},
-      {"slot": "other", "text": "斜めの雨脚と傾く竹林を描く"}
+      {
+        "slot": "artist",
+        "text": "歌川広重の作"
+      },
+      {
+        "slot": "era",
+        "text": "化政文化の作品",
+        "shared": [
+          "kanagawa-oki-namiura",
+          "gaifu-kaisei",
+          "hokusai-manga",
+          "kanbara-yoru-no-yuki",
+          "ohashi-atake-yudachi",
+          "soma-no-furudairi",
+          "takami-senseki",
+          "ino-map"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "19世紀前半の作",
+        "shared": [
+          "kanagawa-oki-namiura",
+          "gaifu-kaisei",
+          "hokusai-manga",
+          "kanbara-yoru-no-yuki",
+          "ohashi-atake-yudachi",
+          "soma-no-furudairi",
+          "takami-senseki",
+          "ino-map"
+        ]
+      },
+      {
+        "slot": "style",
+        "text": "「東海道五十三次」の一図",
+        "shared": [
+          "kanbara-yoru-no-yuki"
+        ]
+      },
+      {
+        "slot": "technique",
+        "text": "錦絵（木版多色刷）である",
+        "shared": [
+          "kanagawa-oki-namiura",
+          "gaifu-kaisei",
+          "kanbara-yoru-no-yuki",
+          "ohashi-atake-yudachi",
+          "soma-no-furudairi",
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin",
+          "otani-oniji",
+          "dankin-bijin"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "宿場を襲うにわか雨（白雨）を描く"
+      },
+      {
+        "slot": "other",
+        "text": "斜めの雨脚と傾く竹林を描く"
+      }
     ],
     "falseStatements": [
-      {"text": "葛飾北斎の作", "why": "北斎は富嶽三十六景。人物ずらし", "verifiedFalse": true},
-      {"text": "「富嶽三十六景」の一図", "why": "富嶽三十六景は北斎の連作。シリーズずらし", "verifiedFalse": true},
-      {"text": "宝暦・天明期の文化の作品", "why": "天保年間の刊行で化政文化。時代ずらし", "verifiedFalse": true},
-      {"text": "秋田蘭画の作品である", "why": "秋田蘭画は小田野直武らの洋風画。様式ずらし", "verifiedFalse": true},
-      {"text": "肉筆の絹本着色である", "why": "木版多色刷の錦絵。技法ずらし", "verifiedFalse": true}
+      {
+        "text": "葛飾北斎の作",
+        "why": "北斎は富嶽三十六景。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "「富嶽三十六景」の一図",
+        "why": "富嶽三十六景は北斎の連作。シリーズずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "宝暦・天明期の文化の作品",
+        "why": "天保年間の刊行で化政文化。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "秋田蘭画の作品である",
+        "why": "秋田蘭画は小田野直武らの洋風画。様式ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "肉筆の絹本着色である",
+        "why": "木版多色刷の錦絵。技法ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "東海道五十三次「庄野 白雨」",
     "reading": "とうかいどうごじゅうさんつぎ しょうの はくう",
@@ -270,20 +561,95 @@
     "periodLabel": "江戸時代後期（19世紀前半、天保年間）",
     "eraNote": "江戸時代後期（19世紀前半）、化政文化の浮世絵風景画。化政文化では旅の流行と出版の発達を背景に風景版画が確立し、広重は街道の宿場を天候や季節とともに描いて人気を得た。本図は天保年間（1830年代）に刊行された「東海道五十三次」の一図で、雪の夜の宿場を描く。",
     "facts": [
-      {"slot": "artist", "text": "歌川広重の作"},
-      {"slot": "era", "text": "化政文化の作品", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "hokusai-manga", "shono-hakuu", "ohashi-atake-yudachi", "soma-no-furudairi", "takami-senseki", "ino-map"]},
-      {"slot": "period", "text": "江戸時代後期の作", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "hokusai-manga", "shono-hakuu", "ohashi-atake-yudachi", "soma-no-furudairi", "takami-senseki", "ino-map"]},
-      {"slot": "style", "text": "「東海道五十三次」の一図", "shared": ["shono-hakuu"]},
-      {"slot": "technique", "text": "錦絵（木版多色刷）である", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "shono-hakuu", "ohashi-atake-yudachi", "soma-no-furudairi", "poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin"]},
-      {"slot": "other", "text": "雪の降る夜の宿場を描く"},
-      {"slot": "other", "text": "蓑と笠の三人が坂を行く姿を描く"}
+      {
+        "slot": "artist",
+        "text": "歌川広重の作"
+      },
+      {
+        "slot": "era",
+        "text": "化政文化の作品",
+        "shared": [
+          "kanagawa-oki-namiura",
+          "gaifu-kaisei",
+          "hokusai-manga",
+          "shono-hakuu",
+          "ohashi-atake-yudachi",
+          "soma-no-furudairi",
+          "takami-senseki",
+          "ino-map"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "19世紀前半の作",
+        "shared": [
+          "kanagawa-oki-namiura",
+          "gaifu-kaisei",
+          "hokusai-manga",
+          "shono-hakuu",
+          "ohashi-atake-yudachi",
+          "soma-no-furudairi",
+          "takami-senseki",
+          "ino-map"
+        ]
+      },
+      {
+        "slot": "style",
+        "text": "「東海道五十三次」の一図",
+        "shared": [
+          "shono-hakuu"
+        ]
+      },
+      {
+        "slot": "technique",
+        "text": "錦絵（木版多色刷）である",
+        "shared": [
+          "kanagawa-oki-namiura",
+          "gaifu-kaisei",
+          "shono-hakuu",
+          "ohashi-atake-yudachi",
+          "soma-no-furudairi",
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin",
+          "otani-oniji",
+          "dankin-bijin"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "雪の降る夜の宿場を描く"
+      },
+      {
+        "slot": "other",
+        "text": "雪の中を行く三人の旅人を描く"
+      }
     ],
     "falseStatements": [
-      {"text": "葛飾北斎の作", "why": "北斎は富嶽三十六景。人物ずらし", "verifiedFalse": true},
-      {"text": "「名所江戸百景」の一図", "why": "同じ広重でも別の連作。本図は東海道五十三次。シリーズずらし", "verifiedFalse": true},
-      {"text": "元禄文化の作品", "why": "天保年間の刊行で化政文化。時代ずらし", "verifiedFalse": true},
-      {"text": "円山応挙の写生画である", "why": "応挙は宝暦・天明期の肉筆画。人物・様式ずらし", "verifiedFalse": true},
-      {"text": "銅版画である", "why": "木版多色刷。司馬江漢との技法ずらし", "verifiedFalse": true}
+      {
+        "text": "葛飾北斎の作",
+        "why": "北斎は富嶽三十六景。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "「名所江戸百景」の一図",
+        "why": "同じ広重でも別の連作。本図は東海道五十三次。シリーズずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "元禄文化の作品",
+        "why": "天保年間の刊行で化政文化。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "円山応挙の写生画である",
+        "why": "応挙は宝暦・天明期の肉筆画。人物・様式ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "銅版画である",
+        "why": "木版多色刷。司馬江漢との技法ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "東海道五十三次「蒲原 夜之雪」",
     "reading": "とうかいどうごじゅうさんつぎ かんばら よるのゆき",
@@ -333,20 +699,72 @@
     "periodLabel": "江戸時代後期（19世紀半ば、安政年間）",
     "eraNote": "江戸時代後期、安政年間（1850年代）の浮世絵風景画。文化・文政期を中心とする化政文化で確立した風景版画の流れを引く、広重晩年の連作「名所江戸百景」の一図で、幕末の江戸の名所を描く。江戸の風景版画はこの頃まで町人に広く親しまれ、のちにヨーロッパの画家にも影響を与えて、ゴッホが本図を油彩で模写した。",
     "facts": [
-      {"slot": "artist", "text": "歌川広重の作"},
-      {"slot": "style", "text": "「名所江戸百景」の一図"},
-      {"slot": "period", "text": "江戸時代後期（安政年間）の作"},
-      {"slot": "technique", "text": "錦絵（木版多色刷）である", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "shono-hakuu", "kanbara-yoru-no-yuki", "soma-no-furudairi", "poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin"]},
-      {"slot": "other", "text": "ゴッホが油彩で模写した"},
-      {"slot": "other", "text": "隅田川の橋を襲う夕立を描く"},
-      {"slot": "other", "text": "広重晩年の連作の一図"}
+      {
+        "slot": "artist",
+        "text": "歌川広重の作"
+      },
+      {
+        "slot": "style",
+        "text": "「名所江戸百景」の一図"
+      },
+      {
+        "slot": "period",
+        "text": "江戸時代後期（安政年間）の作"
+      },
+      {
+        "slot": "technique",
+        "text": "錦絵（木版多色刷）である",
+        "shared": [
+          "kanagawa-oki-namiura",
+          "gaifu-kaisei",
+          "shono-hakuu",
+          "kanbara-yoru-no-yuki",
+          "soma-no-furudairi",
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin",
+          "otani-oniji",
+          "dankin-bijin"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "ゴッホが油彩で模写した"
+      },
+      {
+        "slot": "other",
+        "text": "隅田川の橋を襲う夕立を描く"
+      },
+      {
+        "slot": "other",
+        "text": "広重晩年の連作の一図"
+      }
     ],
     "falseStatements": [
-      {"text": "葛飾北斎の作", "why": "北斎は富嶽三十六景。人物ずらし", "verifiedFalse": true},
-      {"text": "「東海道五十三次」の一図", "why": "同じ広重でも別の連作。本図は名所江戸百景。シリーズずらし", "verifiedFalse": true},
-      {"text": "宝暦・天明期の文化の作品", "why": "安政年間の作。時代ずらし", "verifiedFalse": true},
-      {"text": "歌川国芳の作", "why": "国芳は武者絵。同じ歌川派での人物ずらし", "verifiedFalse": true},
-      {"text": "銅版画である", "why": "木版多色刷。技法ずらし", "verifiedFalse": true}
+      {
+        "text": "葛飾北斎の作",
+        "why": "北斎は富嶽三十六景。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "「東海道五十三次」の一図",
+        "why": "同じ広重でも別の連作。本図は名所江戸百景。シリーズずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "宝暦・天明期の文化の作品",
+        "why": "安政年間の作。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "歌川国芳の作",
+        "why": "国芳は武者絵。同じ歌川派での人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "銅版画である",
+        "why": "木版多色刷。技法ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "名所江戸百景「大はしあたけの夕立」",
     "reading": "めいしょえどひゃっけい おおはしあたけのゆうだち",
@@ -362,7 +780,7 @@
       "ゴッホが油彩で模写したことで知られる"
     ],
     "explanation": "名所江戸百景のうち、隅田川にかかる橋を突然の夕立が襲う場面を描く。画面を上から下へ貫く無数の細い線で雨を表し、橋の上で身をかがめて走る人々と、対岸の暗く沈んだ岸辺が目印。縦長の画面を橋が斜めに横切る大胆な構図で、のちにゴッホがこの図を油彩で模写している。東海道五十三次のあと、広重が晩年に江戸の名所を描いた連作の一図である。",
-    "examNote": "作者（広重）とシリーズ名を答える形で出る。東海道五十三次より後の晩年の作なので、代表作を問われたら東海道五十三次を選ぶ。",
+    "examNote": "作者（広重）とシリーズ名を答える形で出る。東海道五十三次より後の晩年の作なので、代表作を問われたら東海道五十三次を選ぶ。資料集では広重は化政文化の絵師として整理されるが、この図は安政年間（1857年）の作。",
     "confusables": [
       {
         "id": "shono-hakuu",
@@ -385,32 +803,123 @@
       "The Metropolitan Museum of Art コレクション"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "draft",
+    "skipTypes": [
+      "q2"
+    ]
   },
   {
     "id": "poppin-wo-fuku-onna",
     "artist": "喜多川歌麿",
     "patron": null,
-    "style": "浮世絵（錦絵・美人画の大首絵）",
+    "style": "美人大首絵",
     "religion": null,
     "periodLabel": "江戸時代中後期（18世紀末、寛政年間）",
     "eraNote": "江戸時代中後期（18世紀末）、宝暦・天明期の文化に属する浮世絵の美人画。宝暦・天明期には田沼時代の都市の繁栄を背景に、鈴木春信の錦絵創始以降、浮世絵が多色刷で華やかに発展し、版元の蔦屋重三郎が歌麿・写楽らを世に出した。本図は寛政年間（1790年代）の作で、上半身を大きく描く大首絵の形式を美人画に用いた歌麿の代表作である。",
     "facts": [
-      {"slot": "artist", "text": "喜多川歌麿の作"},
-      {"slot": "era", "text": "宝暦・天明期の文化の作品", "shared": ["kansei-san-bijin", "otani-oniji", "dankin-bijin", "juben-jugi", "sessho-zu", "doshoku-saie", "shinobazu-ike", "kaitai-shinsho", "mimeguri-no-kei"]},
-      {"slot": "period", "text": "18世紀後半の作", "shared": ["kansei-san-bijin", "otani-oniji", "dankin-bijin", "juben-jugi", "sessho-zu", "doshoku-saie", "shinobazu-ike", "kaitai-shinsho", "mimeguri-no-kei"]},
-      {"slot": "style", "text": "美人画の大首絵である", "shared": ["kansei-san-bijin"]},
-      {"slot": "other", "text": "版元は蔦屋重三郎", "shared": ["otani-oniji", "kansei-san-bijin"]},
-      {"slot": "technique", "text": "錦絵（木版多色刷）である", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "kansei-san-bijin", "otani-oniji", "dankin-bijin"]},
-      {"slot": "other", "text": "「婦女人相十品」の一図"},
-      {"slot": "technique", "text": "背景は雲母摺である", "shared": ["kansei-san-bijin", "otani-oniji"]}
+      {
+        "slot": "artist",
+        "text": "喜多川歌麿の作"
+      },
+      {
+        "slot": "era",
+        "text": "宝暦・天明期の文化の作品",
+        "shared": [
+          "kansei-san-bijin",
+          "otani-oniji",
+          "dankin-bijin",
+          "juben-jugi",
+          "sessho-zu",
+          "doshoku-saie",
+          "shinobazu-ike",
+          "kaitai-shinsho",
+          "mimeguri-no-kei"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "18世紀後半の作",
+        "shared": [
+          "kansei-san-bijin",
+          "otani-oniji",
+          "dankin-bijin",
+          "juben-jugi",
+          "sessho-zu",
+          "doshoku-saie",
+          "shinobazu-ike",
+          "kaitai-shinsho",
+          "mimeguri-no-kei"
+        ]
+      },
+      {
+        "slot": "style",
+        "text": "美人画の大首絵である",
+        "shared": [
+          "kansei-san-bijin"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "版元は蔦屋重三郎",
+        "shared": [
+          "otani-oniji",
+          "kansei-san-bijin"
+        ]
+      },
+      {
+        "slot": "technique",
+        "text": "錦絵（木版多色刷）である",
+        "shared": [
+          "kanagawa-oki-namiura",
+          "gaifu-kaisei",
+          "shono-hakuu",
+          "kanbara-yoru-no-yuki",
+          "ohashi-atake-yudachi",
+          "soma-no-furudairi",
+          "kansei-san-bijin",
+          "otani-oniji",
+          "dankin-bijin"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "「婦女人相十品」の一図"
+      },
+      {
+        "slot": "technique",
+        "text": "背景は雲母摺である",
+        "shared": [
+          "kansei-san-bijin",
+          "otani-oniji"
+        ]
+      }
     ],
     "falseStatements": [
-      {"text": "東洲斎写楽の作", "why": "写楽は役者絵。同じ蔦屋の絵師での人物ずらし", "verifiedFalse": true},
-      {"text": "化政文化の作品", "why": "寛政年間の作で、教科書では宝暦・天明期の文化に分類。時代ずらし", "verifiedFalse": true},
-      {"text": "歌舞伎役者を描いた役者絵である", "why": "町の女性を描いた美人画。分野ずらし", "verifiedFalse": true},
-      {"text": "鈴木春信の作", "why": "春信は明和年間の錦絵創始者で全身像。人物ずらし", "verifiedFalse": true},
-      {"text": "肉筆の絹本着色である", "why": "木版多色刷の錦絵。技法ずらし", "verifiedFalse": true}
+      {
+        "text": "東洲斎写楽の作",
+        "why": "写楽は役者絵。同じ蔦屋の絵師での人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "元禄文化の作品",
+        "why": "元禄期（17世紀末〜18世紀初め）は菱川師宣の肉筆・墨摺絵の時代。寛政年間の大首絵より約100年前。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "歌舞伎役者を描いた役者絵である",
+        "why": "町の女性を描いた美人画。分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "鈴木春信の作",
+        "why": "春信は明和年間の錦絵創始者で全身像。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "肉筆の絹本着色である",
+        "why": "木版多色刷の錦絵。技法ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "婦女人相十品「ポッピンを吹く女」",
     "reading": "ふじょにんそうじっぴん ポッピンをふくおんな",
@@ -461,26 +970,110 @@
     "id": "kansei-san-bijin",
     "artist": "喜多川歌麿",
     "patron": null,
-    "style": "浮世絵（錦絵・美人画の大首絵）",
+    "style": "美人大首絵",
     "religion": null,
     "periodLabel": "江戸時代中後期（18世紀末、寛政年間）",
     "eraNote": "江戸時代中後期（18世紀末）、宝暦・天明期の文化に属する浮世絵の美人画。この時期には都市の繁栄と出版の発達を背景に、鈴木春信が始めた錦絵が華やかに発展し、歌麿は上半身を大きく描く大首絵で美人画に新しい表現をもたらした。本図は寛政年間（1790年代）の作で、実在の評判の女性を描いた点にも当時の江戸の町人文化の性格が表れている。",
     "facts": [
-      {"slot": "artist", "text": "喜多川歌麿の作"},
-      {"slot": "era", "text": "宝暦・天明期の文化の作品", "shared": ["poppin-wo-fuku-onna", "otani-oniji", "dankin-bijin", "juben-jugi", "sessho-zu", "doshoku-saie", "shinobazu-ike", "kaitai-shinsho", "mimeguri-no-kei"]},
-      {"slot": "period", "text": "18世紀後半の作", "shared": ["poppin-wo-fuku-onna", "otani-oniji", "dankin-bijin", "juben-jugi", "sessho-zu", "doshoku-saie", "shinobazu-ike", "kaitai-shinsho", "mimeguri-no-kei"]},
-      {"slot": "style", "text": "美人画の大首絵である", "shared": ["poppin-wo-fuku-onna"]},
-      {"slot": "technique", "text": "錦絵（木版多色刷）である", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "poppin-wo-fuku-onna", "otani-oniji", "dankin-bijin"]},
-      {"slot": "other", "text": "実在の評判の女性三人を描く"},
-      {"slot": "technique", "text": "背景は雲母摺である", "shared": ["poppin-wo-fuku-onna", "otani-oniji"]},
-      {"slot": "other", "text": "「当時三美人」とも呼ばれる"}
+      {
+        "slot": "artist",
+        "text": "喜多川歌麿の作"
+      },
+      {
+        "slot": "era",
+        "text": "宝暦・天明期の文化の作品",
+        "shared": [
+          "poppin-wo-fuku-onna",
+          "otani-oniji",
+          "dankin-bijin",
+          "juben-jugi",
+          "sessho-zu",
+          "doshoku-saie",
+          "shinobazu-ike",
+          "kaitai-shinsho",
+          "mimeguri-no-kei"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "18世紀後半の作",
+        "shared": [
+          "poppin-wo-fuku-onna",
+          "otani-oniji",
+          "dankin-bijin",
+          "juben-jugi",
+          "sessho-zu",
+          "doshoku-saie",
+          "shinobazu-ike",
+          "kaitai-shinsho",
+          "mimeguri-no-kei"
+        ]
+      },
+      {
+        "slot": "style",
+        "text": "美人画の大首絵である",
+        "shared": [
+          "poppin-wo-fuku-onna"
+        ]
+      },
+      {
+        "slot": "technique",
+        "text": "錦絵（木版多色刷）である",
+        "shared": [
+          "kanagawa-oki-namiura",
+          "gaifu-kaisei",
+          "shono-hakuu",
+          "kanbara-yoru-no-yuki",
+          "ohashi-atake-yudachi",
+          "soma-no-furudairi",
+          "poppin-wo-fuku-onna",
+          "otani-oniji",
+          "dankin-bijin"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "実在の評判の女性三人を描く"
+      },
+      {
+        "slot": "technique",
+        "text": "背景は雲母摺である",
+        "shared": [
+          "poppin-wo-fuku-onna",
+          "otani-oniji"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "「当時三美人」とも呼ばれる"
+      }
     ],
     "falseStatements": [
-      {"text": "東洲斎写楽の作", "why": "写楽は役者絵。人物ずらし", "verifiedFalse": true},
-      {"text": "化政文化の作品", "why": "寛政年間の作で宝暦・天明期の文化に分類。時代ずらし", "verifiedFalse": true},
-      {"text": "歌舞伎役者を描いた役者絵である", "why": "女性三人の美人画。分野ずらし", "verifiedFalse": true},
-      {"text": "鈴木春信の作", "why": "春信は明和年間の全身像の美人画。人物ずらし", "verifiedFalse": true},
-      {"text": "文人画（南画）である", "why": "浮世絵の錦絵。大雅・蕪村との様式ずらし", "verifiedFalse": true}
+      {
+        "text": "東洲斎写楽の作",
+        "why": "写楽は役者絵。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "元禄文化の作品",
+        "why": "元禄期（17世紀末〜18世紀初め）は菱川師宣の肉筆・墨摺絵の時代。寛政年間の大首絵より約100年前。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "歌舞伎役者を描いた役者絵である",
+        "why": "女性三人の美人画。分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "鈴木春信の作",
+        "why": "春信は明和年間の全身像の美人画。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "文人画（南画）である",
+        "why": "浮世絵の錦絵。大雅・蕪村との様式ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "寛政三美人",
     "reading": "かんせいさんびじん",
@@ -525,26 +1118,107 @@
     "id": "otani-oniji",
     "artist": "東洲斎写楽",
     "patron": null,
-    "style": "浮世絵（錦絵・役者絵の大首絵）",
+    "style": "役者大首絵",
     "religion": null,
     "periodLabel": "江戸時代中後期（18世紀末、寛政6年＝1794年）",
     "eraNote": "江戸時代中後期（18世紀末）、宝暦・天明期の文化に属する浮世絵の役者絵。宝暦・天明期には歌舞伎が江戸の町人の娯楽として定着し、役者の似顔を描く役者絵が浮世絵の主要な分野となった。本図は寛政6年（1794年）に版元の蔦屋重三郎から出され、大首絵の手法で役者の個性を誇張して描いた写楽の代表作である。",
     "facts": [
-      {"slot": "artist", "text": "東洲斎写楽の作"},
-      {"slot": "era", "text": "宝暦・天明期の文化の作品", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin", "dankin-bijin", "juben-jugi", "sessho-zu", "doshoku-saie", "shinobazu-ike", "kaitai-shinsho", "mimeguri-no-kei"]},
-      {"slot": "period", "text": "18世紀後半の作", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin", "dankin-bijin", "juben-jugi", "sessho-zu", "doshoku-saie", "shinobazu-ike", "kaitai-shinsho", "mimeguri-no-kei"]},
-      {"slot": "period", "text": "寛政6年（1794年）に出版された"},
-      {"slot": "style", "text": "役者絵の大首絵である"},
-      {"slot": "other", "text": "版元は蔦屋重三郎", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin"]},
-      {"slot": "technique", "text": "錦絵（木版多色刷）である", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "poppin-wo-fuku-onna", "kansei-san-bijin", "dankin-bijin"]},
-      {"slot": "other", "text": "歌舞伎役者の三代目大谷鬼次を描く"}
+      {
+        "slot": "artist",
+        "text": "東洲斎写楽の作"
+      },
+      {
+        "slot": "era",
+        "text": "宝暦・天明期の文化の作品",
+        "shared": [
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin",
+          "dankin-bijin",
+          "juben-jugi",
+          "sessho-zu",
+          "doshoku-saie",
+          "shinobazu-ike",
+          "kaitai-shinsho",
+          "mimeguri-no-kei"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "18世紀後半の作",
+        "shared": [
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin",
+          "dankin-bijin",
+          "juben-jugi",
+          "sessho-zu",
+          "doshoku-saie",
+          "shinobazu-ike",
+          "kaitai-shinsho",
+          "mimeguri-no-kei"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "寛政6年（1794年）に出版された"
+      },
+      {
+        "slot": "style",
+        "text": "役者絵の大首絵である"
+      },
+      {
+        "slot": "other",
+        "text": "版元は蔦屋重三郎",
+        "shared": [
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin"
+        ]
+      },
+      {
+        "slot": "technique",
+        "text": "錦絵（木版多色刷）である",
+        "shared": [
+          "kanagawa-oki-namiura",
+          "gaifu-kaisei",
+          "shono-hakuu",
+          "kanbara-yoru-no-yuki",
+          "ohashi-atake-yudachi",
+          "soma-no-furudairi",
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin",
+          "dankin-bijin"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "歌舞伎役者の三代目大谷鬼次を描く"
+      }
     ],
     "falseStatements": [
-      {"text": "喜多川歌麿の作", "why": "歌麿は美人画。同じ蔦屋の絵師での人物ずらし", "verifiedFalse": true},
-      {"text": "美人画である", "why": "男性の歌舞伎役者を描いた役者絵。分野ずらし", "verifiedFalse": true},
-      {"text": "化政文化の作品", "why": "寛政6年の作で宝暦・天明期の文化に分類。時代ずらし", "verifiedFalse": true},
-      {"text": "歌川国芳の作", "why": "国芳は化政期以後の武者絵。人物ずらし", "verifiedFalse": true},
-      {"text": "肉筆画である", "why": "木版多色刷の錦絵。技法ずらし", "verifiedFalse": true}
+      {
+        "text": "喜多川歌麿の作",
+        "why": "歌麿は美人画。同じ蔦屋の絵師での人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "美人画である",
+        "why": "男性の歌舞伎役者を描いた役者絵。分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "元禄文化の作品",
+        "why": "元禄期（17世紀末〜18世紀初め）は菱川師宣の肉筆・墨摺絵の時代。寛政年間の大首絵より約100年前。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "歌川国芳の作",
+        "why": "国芳は化政期以後の武者絵。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "肉筆画である",
+        "why": "木版多色刷の錦絵。技法ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "三代目大谷鬼次の奴江戸兵衛",
     "reading": "さんだいめおおたにおにじの やっこえどべえ",
@@ -591,32 +1265,105 @@
     "id": "dankin-bijin",
     "artist": "鈴木春信",
     "patron": null,
-    "style": "浮世絵（錦絵・美人画）",
+    "style": "錦絵（美人画）",
     "religion": null,
     "periodLabel": "江戸時代中期（18世紀後半、明和年間）",
     "eraNote": "江戸時代中期（18世紀後半）、宝暦・天明期の文化の浮世絵。明和2年（1765年）頃、俳人や趣味人のあいだで絵暦を交換する流行を機に、多色刷の木版画である錦絵が完成し、春信がその中心となった。宝暦・天明期の浮世絵の発展はこの錦絵の創始から始まり、のちの歌麿・写楽、さらに化政期の北斎・広重へと受け継がれた。",
     "facts": [
-      {"slot": "artist", "text": "鈴木春信の作"},
-      {"slot": "era", "text": "宝暦・天明期の文化の作品", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "juben-jugi", "sessho-zu", "doshoku-saie", "shinobazu-ike", "kaitai-shinsho", "mimeguri-no-kei"]},
-      {"slot": "period", "text": "18世紀後半の作", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "juben-jugi", "sessho-zu", "doshoku-saie", "shinobazu-ike", "kaitai-shinsho", "mimeguri-no-kei"]},
-      {"slot": "period", "text": "明和年間（1760年代）の作"},
-      {"slot": "technique", "text": "錦絵（木版多色刷）である", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji"]},
-      {"slot": "style", "text": "全身を小さく描く美人画である"},
-      {"slot": "artist", "text": "錦絵を創始した絵師の作"},
-      {"slot": "other", "text": "重要文化財に指定されている", "shared": ["shinobazu-ike"]}
+      {
+        "slot": "artist",
+        "text": "鈴木春信の作"
+      },
+      {
+        "slot": "era",
+        "text": "宝暦・天明期の文化の作品",
+        "shared": [
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin",
+          "otani-oniji",
+          "juben-jugi",
+          "sessho-zu",
+          "doshoku-saie",
+          "shinobazu-ike",
+          "kaitai-shinsho",
+          "mimeguri-no-kei"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "18世紀後半の作",
+        "shared": [
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin",
+          "otani-oniji",
+          "juben-jugi",
+          "sessho-zu",
+          "doshoku-saie",
+          "shinobazu-ike",
+          "kaitai-shinsho",
+          "mimeguri-no-kei"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "明和年間（1760年代）の作"
+      },
+      {
+        "slot": "technique",
+        "text": "錦絵（木版多色刷）である",
+        "shared": [
+          "kanagawa-oki-namiura",
+          "gaifu-kaisei",
+          "shono-hakuu",
+          "kanbara-yoru-no-yuki",
+          "ohashi-atake-yudachi",
+          "soma-no-furudairi",
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin",
+          "otani-oniji"
+        ]
+      },
+      {
+        "slot": "style",
+        "text": "全身を小さく描く美人画である"
+      },
+      {
+        "slot": "artist",
+        "text": "錦絵を創始した絵師の作"
+      }
     ],
     "falseStatements": [
-      {"text": "喜多川歌麿の作", "why": "歌麿は寛政年間の大首絵。人物ずらし", "verifiedFalse": true},
-      {"text": "上半身を大きく描く大首絵である", "why": "全身を小さく描く。形式ずらし", "verifiedFalse": true},
-      {"text": "化政文化の作品", "why": "明和年間の作で宝暦・天明期の文化。時代ずらし", "verifiedFalse": true},
-      {"text": "菱川師宣の作", "why": "師宣は元禄期の浮世絵の祖（墨摺絵）。人物・時代ずらし", "verifiedFalse": true},
-      {"text": "銅版画である", "why": "木版多色刷。技法ずらし", "verifiedFalse": true}
+      {
+        "text": "喜多川歌麿の作",
+        "why": "歌麿は寛政年間の大首絵。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "上半身を大きく描く大首絵である",
+        "why": "全身を小さく描く。形式ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "化政文化の作品",
+        "why": "明和年間の作で宝暦・天明期の文化。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "菱川師宣の作",
+        "why": "師宣は元禄期の浮世絵の祖（墨摺絵）。人物・時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "銅版画である",
+        "why": "木版多色刷。技法ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "弾琴美人",
     "reading": "だんきんびじん",
     "era": "horeki-tenmei",
     "category": "painting",
-    "location": "東京国立博物館（重要文化財）",
+    "location": "東京国立博物館",
     "author": "鈴木春信",
     "technique": "錦絵（木版多色刷の浮世絵版画）",
     "keyPoints": [
@@ -658,23 +1405,98 @@
     "style": "浮世絵（錦絵・武者絵、三枚続）",
     "religion": null,
     "periodLabel": "江戸時代後期（19世紀半ば）",
-    "eraNote": "江戸時代後期（19世紀半ば）、化政文化の流れを引く浮世絵。化政文化では曲亭馬琴らの読本など物語の出版が盛んになり、浮世絵も歌舞伎や読本の場面を題材にした武者絵が人気を集めた。本図は山東京伝の読本『善知安方忠義伝』に取材した国芳の代表作で、三枚続の大画面という錦絵の形式を示す。",
+    "eraNote": "江戸時代後期（19世紀半ば）、化政文化の流れを引く浮世絵。化政文化では曲亭馬琴らの読本など物語の出版が盛んになり、浮世絵も歌舞伎や読本の場面を題材にした武者絵が人気を集めた。本図は山東京伝の読本『善知鳥安方忠義伝』に取材した国芳の代表作で、三枚続の大画面という錦絵の形式を示す。",
     "facts": [
-      {"slot": "artist", "text": "歌川国芳の作"},
-      {"slot": "era", "text": "化政文化の作品", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "hokusai-manga", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "takami-senseki", "ino-map"]},
-      {"slot": "period", "text": "江戸時代後期の作", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "hokusai-manga", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "takami-senseki", "ino-map"]},
-      {"slot": "technique", "text": "三枚続の錦絵である"},
-      {"slot": "style", "text": "武者絵である"},
-      {"slot": "other", "text": "滝夜叉姫と巨大な骸骨を描く"},
-      {"slot": "other", "text": "山東京伝の読本に取材した"},
-      {"slot": "technique", "text": "錦絵（木版多色刷）である", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin"]}
+      {
+        "slot": "artist",
+        "text": "歌川国芳の作"
+      },
+      {
+        "slot": "era",
+        "text": "化政文化の作品",
+        "shared": [
+          "kanagawa-oki-namiura",
+          "gaifu-kaisei",
+          "hokusai-manga",
+          "shono-hakuu",
+          "kanbara-yoru-no-yuki",
+          "ohashi-atake-yudachi",
+          "takami-senseki",
+          "ino-map"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "19世紀前半の作",
+        "shared": [
+          "kanagawa-oki-namiura",
+          "gaifu-kaisei",
+          "hokusai-manga",
+          "shono-hakuu",
+          "kanbara-yoru-no-yuki",
+          "ohashi-atake-yudachi",
+          "takami-senseki",
+          "ino-map"
+        ]
+      },
+      {
+        "slot": "technique",
+        "text": "三枚続の錦絵である"
+      },
+      {
+        "slot": "style",
+        "text": "武者絵である"
+      },
+      {
+        "slot": "other",
+        "text": "滝夜叉姫と巨大な骸骨を描く"
+      },
+      {
+        "slot": "other",
+        "text": "山東京伝の読本に取材した"
+      },
+      {
+        "slot": "technique",
+        "text": "錦絵（木版多色刷）である",
+        "shared": [
+          "kanagawa-oki-namiura",
+          "gaifu-kaisei",
+          "shono-hakuu",
+          "kanbara-yoru-no-yuki",
+          "ohashi-atake-yudachi",
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin",
+          "otani-oniji",
+          "dankin-bijin"
+        ]
+      }
     ],
     "falseStatements": [
-      {"text": "歌川広重の作", "why": "広重は風景画。同じ歌川派での人物ずらし", "verifiedFalse": true},
-      {"text": "実在の風景を描いた風景画である", "why": "読本の物語場面を描く武者絵。分野ずらし", "verifiedFalse": true},
-      {"text": "宝暦・天明期の文化の作品", "why": "19世紀半ばの作。時代ずらし", "verifiedFalse": true},
-      {"text": "一枚で完結する画面である", "why": "三枚続。形式ずらし", "verifiedFalse": true},
-      {"text": "葛飾北斎の作", "why": "北斎は富嶽三十六景・北斎漫画。人物ずらし", "verifiedFalse": true}
+      {
+        "text": "歌川広重の作",
+        "why": "広重は風景画。同じ歌川派での人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "実在の風景を描いた風景画である",
+        "why": "読本の物語場面を描く武者絵。分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "宝暦・天明期の文化の作品",
+        "why": "19世紀半ばの作。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "一枚で完結する画面である",
+        "why": "三枚続。形式ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "葛飾北斎の作",
+        "why": "北斎は富嶽三十六景・北斎漫画。人物ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "相馬の古内裏",
     "reading": "そうまのふるだいり",
@@ -717,28 +1539,90 @@
   },
   {
     "id": "juben-jugi",
-    "artist": "池大雅",
+    "artist": "池大雅・与謝蕪村",
     "patron": null,
     "style": "文人画（南画）",
     "religion": null,
     "periodLabel": "江戸時代中後期（18世紀後半、明和8年＝1771年）",
     "eraNote": "江戸時代中後期（18世紀後半）、宝暦・天明期の文化の絵画。宝暦・天明期には儒学以外の学問や教養が広がり、中国の文人にならって職業画家でない教養人が詩書とともに描く文人画（南画）が、池大雅・与謝蕪村によって大成された。本図は明和8年（1771年）に二人が合作した画帖で、同時期の円山応挙の写生画とともに、多様な様式が並び立つこの時代の絵画を代表する。",
     "facts": [
-      {"slot": "artist", "text": "池大雅と与謝蕪村の合作"},
-      {"slot": "era", "text": "宝暦・天明期の文化の作品", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin", "sessho-zu", "doshoku-saie", "shinobazu-ike", "kaitai-shinsho", "mimeguri-no-kei"]},
-      {"slot": "period", "text": "18世紀後半の作", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin", "sessho-zu", "doshoku-saie", "shinobazu-ike", "kaitai-shinsho", "mimeguri-no-kei"]},
-      {"slot": "style", "text": "文人画（南画）である"},
-      {"slot": "technique", "text": "画帖の形式である"},
-      {"slot": "other", "text": "国宝に指定されている", "shared": ["sessho-zu", "doshoku-saie", "takami-senseki"]},
-      {"slot": "other", "text": "中国の詩に取材している"},
-      {"slot": "period", "text": "明和8年（1771年）の作"}
+      {
+        "slot": "artist",
+        "text": "池大雅と与謝蕪村の合作"
+      },
+      {
+        "slot": "era",
+        "text": "宝暦・天明期の文化の作品",
+        "shared": [
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin",
+          "otani-oniji",
+          "dankin-bijin",
+          "sessho-zu",
+          "doshoku-saie",
+          "shinobazu-ike",
+          "kaitai-shinsho",
+          "mimeguri-no-kei"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "18世紀後半の作",
+        "shared": [
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin",
+          "otani-oniji",
+          "dankin-bijin",
+          "sessho-zu",
+          "doshoku-saie",
+          "shinobazu-ike",
+          "kaitai-shinsho",
+          "mimeguri-no-kei"
+        ]
+      },
+      {
+        "slot": "style",
+        "text": "文人画（南画）である"
+      },
+      {
+        "slot": "technique",
+        "text": "画帖の形式である"
+      },
+      {
+        "slot": "other",
+        "text": "中国の詩に取材している"
+      },
+      {
+        "slot": "period",
+        "text": "明和8年（1771年）の作"
+      }
     ],
     "falseStatements": [
-      {"text": "円山応挙の作", "why": "応挙は写生画（雪松図屏風）。人物ずらし", "verifiedFalse": true},
-      {"text": "写生画（円山派）である", "why": "文人画（南画）。様式ずらし", "verifiedFalse": true},
-      {"text": "化政文化の作品", "why": "1771年の作で宝暦・天明期の文化。時代ずらし", "verifiedFalse": true},
-      {"text": "錦絵（木版画）である", "why": "肉筆の画帖。技法ずらし", "verifiedFalse": true},
-      {"text": "狩野派の障壁画である", "why": "文人画の画帖。様式・形式ずらし", "verifiedFalse": true}
+      {
+        "text": "円山応挙の作",
+        "why": "応挙は写生画（雪松図屏風）。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "写生画（円山派）である",
+        "why": "文人画（南画）。様式ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "化政文化の作品",
+        "why": "1771年の作で宝暦・天明期の文化。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "錦絵（木版画）である",
+        "why": "肉筆の画帖。技法ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "狩野派の障壁画である",
+        "why": "文人画の画帖。様式・形式ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "十便十宜図",
     "reading": "じゅうべんじゅうぎず",
@@ -790,20 +1674,79 @@
     "periodLabel": "江戸時代中後期（18世紀後半）",
     "eraNote": "江戸時代中後期（18世紀後半）、宝暦・天明期の文化の絵画。この時期の京都では、対象を観察して描く写生を重んじる円山応挙が円山派を開き、文人画・浮世絵・洋風画と並んで多様な絵画様式が生まれた。本図は応挙の代表作で、写生の技法と装飾性を兼ね備えた屏風として、近代の日本画にまで続く円山派の画風を示す。",
     "facts": [
-      {"slot": "artist", "text": "円山応挙の作"},
-      {"slot": "era", "text": "宝暦・天明期の文化の作品", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin", "juben-jugi", "doshoku-saie", "shinobazu-ike", "kaitai-shinsho", "mimeguri-no-kei"]},
-      {"slot": "period", "text": "18世紀後半の作", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin", "juben-jugi", "doshoku-saie", "shinobazu-ike", "kaitai-shinsho", "mimeguri-no-kei"]},
-      {"slot": "style", "text": "写生画（円山派）である"},
-      {"slot": "technique", "text": "六曲一双の屏風である"},
-      {"slot": "other", "text": "国宝に指定されている", "shared": ["juben-jugi", "doshoku-saie", "takami-senseki"]},
-      {"slot": "technique", "text": "雪の白は紙の地を残して表す"}
+      {
+        "slot": "artist",
+        "text": "円山応挙の作"
+      },
+      {
+        "slot": "era",
+        "text": "宝暦・天明期の文化の作品",
+        "shared": [
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin",
+          "otani-oniji",
+          "dankin-bijin",
+          "juben-jugi",
+          "doshoku-saie",
+          "shinobazu-ike",
+          "kaitai-shinsho",
+          "mimeguri-no-kei"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "18世紀後半の作",
+        "shared": [
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin",
+          "otani-oniji",
+          "dankin-bijin",
+          "juben-jugi",
+          "doshoku-saie",
+          "shinobazu-ike",
+          "kaitai-shinsho",
+          "mimeguri-no-kei"
+        ]
+      },
+      {
+        "slot": "style",
+        "text": "写生画（円山派）である"
+      },
+      {
+        "slot": "technique",
+        "text": "六曲一双の屏風である"
+      },
+      {
+        "slot": "technique",
+        "text": "雪の白は紙の地を残して表す"
+      }
     ],
     "falseStatements": [
-      {"text": "池大雅の作", "why": "大雅は文人画（十便十宜図）。人物ずらし", "verifiedFalse": true},
-      {"text": "文人画（南画）である", "why": "写生画（円山派）。様式ずらし", "verifiedFalse": true},
-      {"text": "化政文化の作品", "why": "18世紀後半の作で宝暦・天明期の文化。時代ずらし", "verifiedFalse": true},
-      {"text": "錦絵（木版画）である", "why": "肉筆の屏風。技法ずらし", "verifiedFalse": true},
-      {"text": "狩野永徳の作", "why": "永徳は桃山文化の障壁画。人物・時代ずらし", "verifiedFalse": true}
+      {
+        "text": "池大雅の作",
+        "why": "大雅は文人画（十便十宜図）。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "文人画（南画）である",
+        "why": "写生画（円山派）。様式ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "化政文化の作品",
+        "why": "18世紀後半の作で宝暦・天明期の文化。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "錦絵（木版画）である",
+        "why": "肉筆の屏風。技法ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "狩野永徳の作",
+        "why": "永徳は桃山文化の障壁画。人物・時代ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "雪松図屏風",
     "reading": "ゆきまつずびょうぶ",
@@ -853,23 +1796,89 @@
     "style": "花鳥画（絹本着色）",
     "religion": null,
     "periodLabel": "江戸時代中後期（18世紀後半）",
-    "eraNote": "江戸時代中後期（18世紀後半）、宝暦・天明期の文化に属する京都の絵画。この時期の京都では応挙の写生画、大雅・蕪村の文人画など多様な画風が並び立ち、若冲もその一人として独自の花鳥画を描いた。本作は京都の相国寺に寄進された三十幅の連作で、教科書本文には出ないことが多いが、宝暦・天明期の京都画壇の多様さを示す作品である。",
+    "eraNote": "江戸時代中後期（18世紀後半）、宝暦・天明期の文化に属する京都の絵画。この時期の京都では応挙の写生画、大雅・蕪村の文人画など多様な画風が並び立ち、若冲もその一人として独自の花鳥画を描いた。本作は京都の相国寺に寄進された三十幅の連作で、宝暦・天明期の京都画壇の多様さを示す作品である。",
     "facts": [
-      {"slot": "artist", "text": "伊藤若冲の作"},
-      {"slot": "era", "text": "宝暦・天明期の文化の作品", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin", "juben-jugi", "sessho-zu", "shinobazu-ike", "kaitai-shinsho", "mimeguri-no-kei"]},
-      {"slot": "period", "text": "18世紀後半の作", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin", "juben-jugi", "sessho-zu", "shinobazu-ike", "kaitai-shinsho", "mimeguri-no-kei"]},
-      {"slot": "technique", "text": "三十幅の連作である"},
-      {"slot": "technique", "text": "絹本着色である", "shared": ["takami-senseki", "shinobazu-ike"]},
-      {"slot": "location", "text": "相国寺に寄進された"},
-      {"slot": "location", "text": "現在は皇室に伝わる"},
-      {"slot": "other", "text": "国宝に指定されている", "shared": ["juben-jugi", "sessho-zu", "takami-senseki"]}
+      {
+        "slot": "artist",
+        "text": "伊藤若冲の作"
+      },
+      {
+        "slot": "era",
+        "text": "宝暦・天明期の文化の作品",
+        "shared": [
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin",
+          "otani-oniji",
+          "dankin-bijin",
+          "juben-jugi",
+          "sessho-zu",
+          "shinobazu-ike",
+          "kaitai-shinsho",
+          "mimeguri-no-kei"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "18世紀後半の作",
+        "shared": [
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin",
+          "otani-oniji",
+          "dankin-bijin",
+          "juben-jugi",
+          "sessho-zu",
+          "shinobazu-ike",
+          "kaitai-shinsho",
+          "mimeguri-no-kei"
+        ]
+      },
+      {
+        "slot": "technique",
+        "text": "三十幅の連作である"
+      },
+      {
+        "slot": "technique",
+        "text": "絹本着色である",
+        "shared": [
+          "takami-senseki",
+          "shinobazu-ike"
+        ]
+      },
+      {
+        "slot": "location",
+        "text": "相国寺に寄進された"
+      },
+      {
+        "slot": "location",
+        "text": "皇居三の丸尚蔵館が所蔵する"
+      }
     ],
     "falseStatements": [
-      {"text": "円山応挙の作", "why": "応挙は墨主体の屏風（雪松図屏風）。人物ずらし", "verifiedFalse": true},
-      {"text": "文人画（南画）である", "why": "極彩色の花鳥画。様式ずらし", "verifiedFalse": true},
-      {"text": "化政文化の作品", "why": "18世紀後半の作で宝暦・天明期。時代ずらし", "verifiedFalse": true},
-      {"text": "錦絵（木版画）である", "why": "絹本着色の肉筆画。技法ずらし", "verifiedFalse": true},
-      {"text": "屏風である", "why": "縦長の掛幅。形式ずらし", "verifiedFalse": true}
+      {
+        "text": "円山応挙の作",
+        "why": "応挙は墨主体の屏風（雪松図屏風）。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "文人画（南画）である",
+        "why": "極彩色の花鳥画。様式ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "化政文化の作品",
+        "why": "18世紀後半の作で宝暦・天明期。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "錦絵（木版画）である",
+        "why": "絹本着色の肉筆画。技法ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "屏風である",
+        "why": "縦長の掛幅。形式ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "動植綵絵",
     "reading": "どうしょくさいえ",
@@ -920,21 +1929,81 @@
     "periodLabel": "江戸時代後期（19世紀前半、天保8年＝1837年）",
     "eraNote": "江戸時代後期（19世紀前半）、化政文化に属する絵画。化政文化の時期には蘭学が広まり、西洋の陰影法や遠近法を取り入れた絵画が描かれる一方、幕府の対外政策を批判した蘭学者が蛮社の獄（1839年）で処罰された。本図は蛮社の獄で処罰された崋山が、同じく蘭学者であった古河藩家老の鷹見泉石を描いた肖像で、この時代の絵画と洋学の結びつきを示す。",
     "facts": [
-      {"slot": "artist", "text": "渡辺崋山の作"},
-      {"slot": "era", "text": "化政文化の作品", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "hokusai-manga", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "ino-map"]},
-      {"slot": "period", "text": "江戸時代後期の作", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "hokusai-manga", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "ino-map"]},
-      {"slot": "style", "text": "西洋の陰影法を取り入れた肖像画"},
-      {"slot": "other", "text": "古河藩家老の鷹見泉石を描く"},
-      {"slot": "technique", "text": "絹本着色である", "shared": ["doshoku-saie", "shinobazu-ike"]},
-      {"slot": "other", "text": "国宝に指定されている", "shared": ["juben-jugi", "sessho-zu", "doshoku-saie"]},
-      {"slot": "artist", "text": "作者は蛮社の獄で処罰された"}
+      {
+        "slot": "artist",
+        "text": "渡辺崋山の作"
+      },
+      {
+        "slot": "era",
+        "text": "化政文化の作品",
+        "shared": [
+          "kanagawa-oki-namiura",
+          "gaifu-kaisei",
+          "hokusai-manga",
+          "shono-hakuu",
+          "kanbara-yoru-no-yuki",
+          "ohashi-atake-yudachi",
+          "soma-no-furudairi",
+          "ino-map"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "19世紀前半の作",
+        "shared": [
+          "kanagawa-oki-namiura",
+          "gaifu-kaisei",
+          "hokusai-manga",
+          "shono-hakuu",
+          "kanbara-yoru-no-yuki",
+          "ohashi-atake-yudachi",
+          "soma-no-furudairi",
+          "ino-map"
+        ]
+      },
+      {
+        "slot": "style",
+        "text": "西洋の陰影法を取り入れた肖像画"
+      },
+      {
+        "slot": "other",
+        "text": "古河藩家老の鷹見泉石を描く"
+      },
+      {
+        "slot": "technique",
+        "text": "絹本淡彩である"
+      },
+      {
+        "slot": "artist",
+        "text": "作者は蛮社の獄で処罰された"
+      }
     ],
     "falseStatements": [
-      {"text": "小田野直武の作", "why": "直武は宝暦・天明期の秋田蘭画（不忍池図）。人物ずらし", "verifiedFalse": true},
-      {"text": "秋田蘭画の作品である", "why": "秋田蘭画は直武ら秋田藩の洋風画。様式ずらし", "verifiedFalse": true},
-      {"text": "宝暦・天明期の文化の作品", "why": "天保年間の作で化政文化。時代ずらし", "verifiedFalse": true},
-      {"text": "銅版画である", "why": "絹本着色の肉筆画。司馬江漢との技法ずらし", "verifiedFalse": true},
-      {"text": "司馬江漢の作", "why": "江漢は宝暦・天明期の銅版画・油彩。人物ずらし", "verifiedFalse": true}
+      {
+        "text": "小田野直武の作",
+        "why": "直武は宝暦・天明期の秋田蘭画（不忍池図）。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "秋田蘭画の作品である",
+        "why": "秋田蘭画は直武ら秋田藩の洋風画。様式ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "宝暦・天明期の文化の作品",
+        "why": "天保年間の作で化政文化。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "銅版画である",
+        "why": "絹本着色の肉筆画。司馬江漢との技法ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "司馬江漢の作",
+        "why": "江漢は宝暦・天明期の銅版画・油彩。人物ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "鷹見泉石像",
     "reading": "たかみせんせきぞう",
@@ -942,7 +2011,7 @@
     "category": "painting",
     "location": "東京国立博物館",
     "author": "渡辺崋山",
-    "technique": "絹本着色（西洋の陰影法を取り入れた肖像画）",
+    "technique": "絹本淡彩（西洋の陰影法を取り入れた肖像画）",
     "keyPoints": [
       "江戸後期（化政文化・19世紀前半）",
       "渡辺崋山＝洋風画法を取り入れた肖像画",
@@ -986,21 +2055,87 @@
     "periodLabel": "江戸時代中後期（18世紀後半、安永年間）",
     "eraNote": "江戸時代中後期（18世紀後半）、宝暦・天明期の文化の洋風画。この時期には蘭学の広まりとともに西洋の遠近法・陰影法が知られ、平賀源内が秋田藩に伝えた西洋画法から秋田蘭画が生まれた。本図は秋田藩士の直武が絹本着色で西洋画法を試みた代表作で、直武が『解体新書』の図を描いたことともあわせ、洋学と絵画の結びつきを示す。",
     "facts": [
-      {"slot": "artist", "text": "小田野直武の作"},
-      {"slot": "era", "text": "宝暦・天明期の文化の作品", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin", "juben-jugi", "sessho-zu", "doshoku-saie", "kaitai-shinsho", "mimeguri-no-kei"]},
-      {"slot": "period", "text": "18世紀後半の作", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin", "juben-jugi", "sessho-zu", "doshoku-saie", "kaitai-shinsho", "mimeguri-no-kei"]},
-      {"slot": "style", "text": "秋田蘭画の代表作である"},
-      {"slot": "technique", "text": "西洋の遠近法で池と弁天堂を描く"},
-      {"slot": "technique", "text": "絹本着色である", "shared": ["takami-senseki", "doshoku-saie"]},
-      {"slot": "artist", "text": "作者は『解体新書』の図も描いた"},
-      {"slot": "other", "text": "重要文化財に指定されている", "shared": ["dankin-bijin"]}
+      {
+        "slot": "artist",
+        "text": "小田野直武の作"
+      },
+      {
+        "slot": "era",
+        "text": "宝暦・天明期の文化の作品",
+        "shared": [
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin",
+          "otani-oniji",
+          "dankin-bijin",
+          "juben-jugi",
+          "sessho-zu",
+          "doshoku-saie",
+          "kaitai-shinsho",
+          "mimeguri-no-kei"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "18世紀後半の作",
+        "shared": [
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin",
+          "otani-oniji",
+          "dankin-bijin",
+          "juben-jugi",
+          "sessho-zu",
+          "doshoku-saie",
+          "kaitai-shinsho",
+          "mimeguri-no-kei"
+        ]
+      },
+      {
+        "slot": "style",
+        "text": "秋田蘭画の代表作である"
+      },
+      {
+        "slot": "technique",
+        "text": "西洋の遠近法で池と弁天堂を描く"
+      },
+      {
+        "slot": "technique",
+        "text": "絹本着色である",
+        "shared": [
+          "takami-senseki",
+          "doshoku-saie"
+        ]
+      },
+      {
+        "slot": "artist",
+        "text": "作者は『解体新書』の図も描いた"
+      }
     ],
     "falseStatements": [
-      {"text": "司馬江漢の作", "why": "江漢は銅版画・油彩（三囲景）。人物ずらし", "verifiedFalse": true},
-      {"text": "銅版画である", "why": "絹本着色の肉筆画。技法ずらし", "verifiedFalse": true},
-      {"text": "化政文化の作品", "why": "18世紀後半の作で宝暦・天明期の文化。時代ずらし", "verifiedFalse": true},
-      {"text": "渡辺崋山の作", "why": "崋山は化政期の肖像画。人物・時代ずらし", "verifiedFalse": true},
-      {"text": "浮世絵（錦絵）である", "why": "洋風画の肉筆画。様式・技法ずらし", "verifiedFalse": true}
+      {
+        "text": "司馬江漢の作",
+        "why": "江漢は銅版画・油彩（三囲景）。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "銅版画である",
+        "why": "絹本着色の肉筆画。技法ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "化政文化の作品",
+        "why": "18世紀後半の作で宝暦・天明期の文化。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "渡辺崋山の作",
+        "why": "崋山は化政期の肖像画。人物・時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "浮世絵（錦絵）である",
+        "why": "洋風画の肉筆画。様式・技法ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "不忍池図",
     "reading": "しのばずのいけず",
@@ -1046,24 +2181,85 @@
     "artist": "伊能忠敬",
     "patron": "江戸幕府",
     "style": null,
-    "religion": "洋学（蘭学・天文学）",
+    "religion": null,
     "periodLabel": "江戸時代後期（19世紀前半、文政4年＝1821年完成）",
     "eraNote": "江戸時代後期（19世紀前半）、化政文化の時期の洋学の成果。化政文化では蘭学が医学から天文・測量・地理へと広がり、幕府も天文方を中心に西洋の学問を実用に取り入れた。本図は天文方の高橋至時に学んだ忠敬が幕府の命で全国を測量した成果で、忠敬の死後、文政4年（1821年）に完成した。",
     "facts": [
-      {"slot": "artist", "text": "伊能忠敬の測量にもとづく"},
-      {"slot": "era", "text": "化政文化の作品", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "hokusai-manga", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "takami-senseki"]},
-      {"slot": "period", "text": "江戸時代後期の作", "shared": ["kanagawa-oki-namiura", "gaifu-kaisei", "hokusai-manga", "shono-hakuu", "kanbara-yoru-no-yuki", "ohashi-atake-yudachi", "soma-no-furudairi", "takami-senseki"]},
-      {"slot": "period", "text": "文政4年（1821年）に完成した"},
-      {"slot": "technique", "text": "実測にもとづく日本地図である"},
-      {"slot": "artist", "text": "作者は幕府天文方の高橋至時に学んだ"},
-      {"slot": "other", "text": "忠敬の死後に弟子たちが完成させた"}
+      {
+        "slot": "artist",
+        "text": "伊能忠敬の測量にもとづく"
+      },
+      {
+        "slot": "era",
+        "text": "化政文化の作品",
+        "shared": [
+          "kanagawa-oki-namiura",
+          "gaifu-kaisei",
+          "hokusai-manga",
+          "shono-hakuu",
+          "kanbara-yoru-no-yuki",
+          "ohashi-atake-yudachi",
+          "soma-no-furudairi",
+          "takami-senseki"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "19世紀前半の作",
+        "shared": [
+          "kanagawa-oki-namiura",
+          "gaifu-kaisei",
+          "hokusai-manga",
+          "shono-hakuu",
+          "kanbara-yoru-no-yuki",
+          "ohashi-atake-yudachi",
+          "soma-no-furudairi",
+          "takami-senseki"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "文政4年（1821年）に完成した"
+      },
+      {
+        "slot": "technique",
+        "text": "実測にもとづく日本地図である"
+      },
+      {
+        "slot": "artist",
+        "text": "作者は幕府天文方の高橋至時に学んだ"
+      },
+      {
+        "slot": "other",
+        "text": "忠敬の死後に弟子たちが完成させた"
+      }
     ],
     "falseStatements": [
-      {"text": "杉田玄白の作", "why": "玄白は解体新書の訳者。同じ洋学での人物ずらし", "verifiedFalse": true},
-      {"text": "宝暦・天明期の文化の成果", "why": "1821年完成で化政文化。時代ずらし", "verifiedFalse": true},
-      {"text": "解剖図を収めた医学書である", "why": "日本地図。解体新書との分野ずらし", "verifiedFalse": true},
-      {"text": "想像にもとづいて描かれた絵図である", "why": "全国を歩いた実測図。内容ずらし", "verifiedFalse": true},
-      {"text": "司馬江漢の作", "why": "江漢は洋風画（銅版画）。人物ずらし", "verifiedFalse": true}
+      {
+        "text": "杉田玄白の作",
+        "why": "玄白は解体新書の訳者。同じ洋学での人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "宝暦・天明期の文化の成果",
+        "why": "1821年完成で化政文化。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "解剖図を収めた医学書である",
+        "why": "日本地図。解体新書との分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "想像にもとづいて描かれた絵図である",
+        "why": "全国を歩いた実測図。内容ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "司馬江漢の作",
+        "why": "江漢は洋風画（銅版画）。人物ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "大日本沿海輿地全図",
     "reading": "だいにほんえんかいよちぜんず",
@@ -1104,31 +2300,100 @@
     "examTags": [
       "frequent"
     ],
-    "status": "draft"
+    "status": "draft",
+    "skipTypes": [
+      "q8"
+    ]
   },
   {
     "id": "kaitai-shinsho",
-    "artist": "杉田玄白",
+    "artist": "杉田玄白・前野良沢",
     "patron": null,
     "style": null,
-    "religion": "蘭学",
+    "religion": null,
     "periodLabel": "江戸時代中後期（18世紀後半、安永3年＝1774年刊）",
     "eraNote": "江戸時代中後期（18世紀後半）、宝暦・天明期の文化の洋学の成果。8代将軍徳川吉宗が漢訳洋書の輸入制限を緩め、青木昆陽らにオランダ語を学ばせたことを受けて、この時期に蘭学が本格化した。本書は安永3年（1774年）に玄白・良沢らがオランダ語の解剖書を翻訳して刊行したもので、以後の蘭学の発展の出発点となった。",
     "facts": [
-      {"slot": "artist", "text": "杉田玄白・前野良沢らが翻訳した"},
-      {"slot": "era", "text": "宝暦・天明期の文化の作品", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin", "juben-jugi", "sessho-zu", "doshoku-saie", "shinobazu-ike", "mimeguri-no-kei"]},
-      {"slot": "period", "text": "18世紀後半の作", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin", "juben-jugi", "sessho-zu", "doshoku-saie", "shinobazu-ike", "mimeguri-no-kei"]},
-      {"slot": "period", "text": "安永3年（1774年）に刊行された"},
-      {"slot": "other", "text": "オランダ語の解剖書『ターヘル＝アナトミア』の翻訳"},
-      {"slot": "artist", "text": "図は小田野直武が描いた"},
-      {"slot": "technique", "text": "木版の版本である", "shared": ["hokusai-manga"]}
+      {
+        "slot": "artist",
+        "text": "杉田玄白・前野良沢らが翻訳した"
+      },
+      {
+        "slot": "era",
+        "text": "宝暦・天明期の文化の作品",
+        "shared": [
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin",
+          "otani-oniji",
+          "dankin-bijin",
+          "juben-jugi",
+          "sessho-zu",
+          "doshoku-saie",
+          "shinobazu-ike",
+          "mimeguri-no-kei"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "18世紀後半の作",
+        "shared": [
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin",
+          "otani-oniji",
+          "dankin-bijin",
+          "juben-jugi",
+          "sessho-zu",
+          "doshoku-saie",
+          "shinobazu-ike",
+          "mimeguri-no-kei"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "安永3年（1774年）に刊行された"
+      },
+      {
+        "slot": "other",
+        "text": "オランダ語の解剖書『ターヘル＝アナトミア』の翻訳"
+      },
+      {
+        "slot": "artist",
+        "text": "図は小田野直武が描いた"
+      },
+      {
+        "slot": "technique",
+        "text": "木版の版本である",
+        "shared": [
+          "hokusai-manga"
+        ]
+      }
     ],
     "falseStatements": [
-      {"text": "伊能忠敬の作", "why": "忠敬は実測日本地図。同じ洋学での人物ずらし", "verifiedFalse": true},
-      {"text": "化政文化の成果", "why": "1774年刊で宝暦・天明期の文化。時代ずらし", "verifiedFalse": true},
-      {"text": "実測にもとづく日本地図である", "why": "翻訳医学書。伊能図との分野ずらし", "verifiedFalse": true},
-      {"text": "図は司馬江漢が描いた", "why": "図は小田野直武。同じ洋風画家での人物ずらし", "verifiedFalse": true},
-      {"text": "銅版画の風景画である", "why": "木版の医学書。三囲景との技法・分野ずらし", "verifiedFalse": true}
+      {
+        "text": "伊能忠敬の作",
+        "why": "忠敬は実測日本地図。同じ洋学での人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "化政文化の成果",
+        "why": "1774年刊で宝暦・天明期の文化。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "実測にもとづく日本地図である",
+        "why": "翻訳医学書。伊能図との分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "図は司馬江漢が描いた",
+        "why": "図は小田野直武。同じ洋風画家での人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "銅版画の風景画である",
+        "why": "木版の医学書。三囲景との技法・分野ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "解体新書（扉絵）",
     "reading": "かいたいしんしょ",
@@ -1169,7 +2434,10 @@
     "examTags": [
       "frequent"
     ],
-    "status": "draft"
+    "status": "draft",
+    "skipTypes": [
+      "q8"
+    ]
   },
   {
     "id": "mimeguri-no-kei",
@@ -1180,20 +2448,86 @@
     "periodLabel": "江戸時代中後期（18世紀後半、天明3年＝1783年）",
     "eraNote": "江戸時代中後期（18世紀後半）、宝暦・天明期の文化の洋風画。この時期には蘭学の発達とともに西洋の画法が知られ、平賀源内に学んだ江漢は天明3年（1783年）に日本で初めて銅版画を制作した。本図は日本最初の銅版画とされ、木版の浮世絵とは異なる腐食銅版の技法と西洋の遠近法を示す。",
     "facts": [
-      {"slot": "artist", "text": "司馬江漢の作"},
-      {"slot": "era", "text": "宝暦・天明期の文化の作品", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin", "juben-jugi", "sessho-zu", "doshoku-saie", "shinobazu-ike", "kaitai-shinsho"]},
-      {"slot": "period", "text": "18世紀後半の作", "shared": ["poppin-wo-fuku-onna", "kansei-san-bijin", "otani-oniji", "dankin-bijin", "juben-jugi", "sessho-zu", "doshoku-saie", "shinobazu-ike", "kaitai-shinsho"]},
-      {"slot": "technique", "text": "腐食銅版（エッチング）である"},
-      {"slot": "other", "text": "日本人による最初の銅版画とされる"},
-      {"slot": "other", "text": "隅田川べりの三囲神社付近を描く"},
-      {"slot": "technique", "text": "西洋の遠近法を用いる", "shared": ["shinobazu-ike"]}
+      {
+        "slot": "artist",
+        "text": "司馬江漢の作"
+      },
+      {
+        "slot": "era",
+        "text": "宝暦・天明期の文化の作品",
+        "shared": [
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin",
+          "otani-oniji",
+          "dankin-bijin",
+          "juben-jugi",
+          "sessho-zu",
+          "doshoku-saie",
+          "shinobazu-ike",
+          "kaitai-shinsho"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "18世紀後半の作",
+        "shared": [
+          "poppin-wo-fuku-onna",
+          "kansei-san-bijin",
+          "otani-oniji",
+          "dankin-bijin",
+          "juben-jugi",
+          "sessho-zu",
+          "doshoku-saie",
+          "shinobazu-ike",
+          "kaitai-shinsho"
+        ]
+      },
+      {
+        "slot": "technique",
+        "text": "腐食銅版（エッチング）である"
+      },
+      {
+        "slot": "other",
+        "text": "日本人による最初の銅版画とされる"
+      },
+      {
+        "slot": "other",
+        "text": "隅田川べりの三囲神社付近を描く"
+      },
+      {
+        "slot": "technique",
+        "text": "西洋の遠近法を用いる",
+        "shared": [
+          "shinobazu-ike"
+        ]
+      }
     ],
     "falseStatements": [
-      {"text": "小田野直武の作", "why": "直武は秋田蘭画の絹本着色（不忍池図）。人物ずらし", "verifiedFalse": true},
-      {"text": "木版多色刷の錦絵である", "why": "銅版画。技法ずらし", "verifiedFalse": true},
-      {"text": "化政文化の作品", "why": "1783年の作で宝暦・天明期の文化。時代ずらし", "verifiedFalse": true},
-      {"text": "秋田蘭画の作品である", "why": "江漢は江戸の洋風画家で秋田蘭画ではない。様式ずらし", "verifiedFalse": true},
-      {"text": "渡辺崋山の作", "why": "崋山は化政期の肖像画。人物・時代ずらし", "verifiedFalse": true}
+      {
+        "text": "小田野直武の作",
+        "why": "直武は秋田蘭画の絹本着色（不忍池図）。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "木版多色刷の錦絵である",
+        "why": "銅版画。技法ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "化政文化の作品",
+        "why": "1783年の作で宝暦・天明期の文化。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "秋田蘭画の作品である",
+        "why": "江漢は江戸の洋風画家で秋田蘭画ではない。様式ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "渡辺崋山の作",
+        "why": "崋山は化政期の肖像画。人物・時代ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "三囲景",
     "reading": "みめぐりのけい",

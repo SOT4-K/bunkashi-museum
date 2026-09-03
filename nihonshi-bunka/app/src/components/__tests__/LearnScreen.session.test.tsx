@@ -4,7 +4,7 @@ import { LearnScreen } from '../LearnScreen'
 import { works, eras } from '../../content'
 import { createInitialProgress, dailyNewRemaining as calcDailyNewRemaining, recordAnswer } from '../../engine/progress'
 import { createItemProgress, todayIso, addDays } from '../../engine/srs'
-import type { ProgressState } from '../../types'
+import type { ProgressState, QuestionType } from '../../types'
 
 function buildSeedProgress(): ProgressState {
   const today = todayIso()
@@ -34,7 +34,7 @@ describe('LearnScreen: 実データで1セッションを最後まで進める',
 
     const onAnswer = (
       workId: string,
-      type: 'q1' | 'q2' | 'q3',
+      type: QuestionType,
       answer: 'correct' | 'incorrect' | 'unknown',
       isReview: boolean,
       day: string,

@@ -45,6 +45,48 @@
   margin: 0;
 }
 
+/* AnswerSheet.module.css の periodBlock と同じ役割（DESIGN.md 10章「解説の拡張」）。
+   図鑑の作品詳細でも同じ見え方にする。 */
+.periodBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: var(--radius-button);
+  background: var(--surface);
+}
+
+.periodLabel {
+  font-size: 15px;
+  color: var(--kin);
+}
+
+.eraNote {
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0;
+  color: var(--text-dim);
+}
+
+/* 文化の detail（3〜5文）は折りたたみにして、作品そのものの解説を優先する */
+.eraDetails {
+  font-size: 15px;
+}
+
+.eraDetailsSummary {
+  color: var(--gunjo);
+  cursor: pointer;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.eraDetailsText {
+  margin: 8px 0 0;
+  line-height: 1.7;
+  color: var(--text-dim);
+}
+
 .sectionLabel {
   font-size: 13px;
   color: var(--text-dim);

@@ -103,6 +103,6 @@ export function applyItemAnswer(
  * 導入するかどうかは session.ts 側（作品がその型を生成できるかを見て判断する）に委ねる。
  */
 export function dueTypes(item: ItemProgress, today: string): QuestionType[] {
-  const types: QuestionType[] = ['q1', 'q2', 'q3']
+  const types: ('q1' | 'q2' | 'q3')[] = ['q1', 'q2', 'q3']
   return types.filter((t) => isDue(item[t], today))
 }

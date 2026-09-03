@@ -19,7 +19,8 @@ export function WorkDetailSheet({
   onSelectConfusable: (workId: string) => void
   onClose: () => void
 }) {
-  const eraName = eras.find((e) => e.id === work.era)?.name ?? work.era
+  const era = eras.find((e) => e.id === work.era)
+  const eraName = era?.name ?? work.era
   const [lightboxOpen, setLightboxOpen] = useState(false)
 
   return (
@@ -53,7 +54,26 @@ export function WorkDetailSheet({
         {eraName}・{work.location}
         {work.technique ? `・${work.technique}` : ''}
       </div>
+
+      {(work.periodLabel || eraName) && (
+        <div className={styles.periodBlock}>
+          <div className={`${styles.periodLabel} caption-bold`}>
+            {work.periodLabel}
+            {work.periodLabel && eraName ? '・' : ''}
+            {eraName}
+          </div>
+          {work.eraNote && <p className={styles.eraNote}>{work.eraNote}</p>}
+        </div>
+      )}
+
       <p className={styles.explanation}>{work.explanation}</p>
+
+      {era?.detail && (
+        <details className={styles.eraDetails}>
+          <summary className={styles.eraDetailsSummary}>{era.name}について</summary>
+          <p className={styles.eraDetailsText}>{era.detail}</p>
+        </details>
+      )}
 
       {work.confusables.length > 0 && (
         <div>

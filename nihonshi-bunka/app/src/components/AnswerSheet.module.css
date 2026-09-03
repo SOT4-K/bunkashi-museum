@@ -22,6 +22,63 @@
   margin: 0;
 }
 
+/* 時代説明ブロック（DESIGN.md 10章「解説の拡張」）。periodLabel は展示キャプションの明朝、
+   eraNote は本文と同じシステムフォント。判定行のすぐ下、正解の作品ブロックの前に置く。 */
+.periodBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: var(--radius-button);
+  background: var(--surface);
+}
+
+.periodLabel {
+  font-size: 15px;
+  color: var(--kin);
+}
+
+.eraNote {
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0;
+  color: var(--text-dim);
+}
+
+/* Q4/Q6/Q8: 4つの選択肢すべてを正誤つきで並べる（DESIGN.md 10章）。他の選択肢欄と同じ密度。 */
+.statementList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.statementItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 15px;
+}
+
+.statementCorrect {
+  color: var(--rokusho);
+  font-weight: 700;
+}
+
+.statementWrong {
+  color: var(--shu);
+  font-weight: 700;
+}
+
+.statementText {
+  color: var(--text);
+}
+
+.statementWhy {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
 .correctBlock {
   display: flex;
   gap: 14px;

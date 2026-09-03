@@ -28,4 +28,17 @@ describe('WorkDetailSheet（作品詳細）', () => {
     // ライトボックスにも同じ作品名が alt に出る
     expect(screen.getAllByAltText(ashura.title).length).toBeGreaterThanOrEqual(2)
   })
+
+  it('periodLabel・文化名・eraNote と、文化の detail の折りたたみが出る（DESIGN.md 10章）', () => {
+    render(
+      <WorkDetailSheet work={ashura} eras={eras} worksById={worksById} onSelectConfusable={() => {}} onClose={() => {}} />,
+    )
+    const tenpyoEra = eras.find((e) => e.id === 'tenpyo')!
+    expect(screen.getByText(new RegExp(ashura.periodLabel.replace(/[()（）]/g, '.')))).toBeInTheDocument()
+    expect(screen.getByText(ashura.eraNote)).toBeInTheDocument()
+    // detail は <details> に隠れているが DOM 上には存在する（折りたたみなので視覚的に隠れるだけ）
+    const summary = screen.getByText(`${tenpyoEra.name}について`)
+    expect(summary.closest('details')).toBeInTheDocument()
+    expect(screen.getByText(tenpyoEra.detail)).toBeInTheDocument()
+  })
 })
