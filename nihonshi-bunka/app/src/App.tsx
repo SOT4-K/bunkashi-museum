@@ -6,7 +6,7 @@ import { LearnScreen } from './components/LearnScreen'
 import { MuseumScreen } from './components/MuseumScreen'
 import { StatsScreen } from './components/StatsScreen'
 import { useProgressStore } from './store/useProgressStore'
-import { eras, works } from './content'
+import { eras, works, playableWorks } from './content'
 import { todayIso } from './engine/srs'
 
 // タブ遷移は React state のみで行い、history.pushState は使わない。
@@ -27,7 +27,7 @@ export default function App() {
       <main className={styles.main}>
         {tab === 'home' && (
           <HomeScreen
-            works={works}
+            works={playableWorks}
             eras={eras}
             progress={progress}
             today={todayIso()}
@@ -37,7 +37,7 @@ export default function App() {
         )}
         {tab === 'learn' && (
           <LearnScreen
-            works={works}
+            works={playableWorks}
             eras={eras}
             progress={progress}
             onAnswer={(workId, type, ans, isReview, today) => {

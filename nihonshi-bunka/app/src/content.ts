@@ -2,6 +2,7 @@
 // このファイル（app/src/content.ts）から見ると content/ は2階層上（app/src → app → nihonshi-bunka → content）。
 // vite.config.ts の server.fs.allow に '..' を追加してある。
 import type { Era, Work } from './types'
+import { hasRealImage } from './utils/image'
 
 const eraModules = import.meta.glob('../../content/eras.json', {
   eager: true,
@@ -31,6 +32,13 @@ export const eras: Era[] = [...rawEras].sort((a, b) => a.order - b.order)
 export const works: Work[] = shouldIncludeDraft()
   ? rawWorks
   : rawWorks.filter((w) => w.status === 'reviewed')
+
+/**
+ * 出題に使える作品＝ライセンス記録済みの実画像がある作品だけ。
+ * プレースホルダ SVG は作品名を描いているため出題に使うと答えが見える（reviewer 指摘 R1, 2026-09-03）。
+ * 図鑑・成績は全作品（未収集として表示）、学習は playableWorks のみ。
+ */
+export const playableWorks: Work[] = works.filter(hasRealImage)
 
 export const worksById: Record<string, Work> = Object.fromEntries(works.map((w) => [w.id, w]))
 
