@@ -2,6 +2,8 @@ import { useState } from 'react'
 import styles from './MuseumScreen.module.css'
 import { WorkDetailSheet } from './WorkDetailSheet'
 import { WorkImage } from './WorkImage'
+import { ImageLightbox } from './ImageLightbox'
+import { ExpandIcon } from './icons'
 import { imageSrc } from '../utils/image'
 import { isItemMastered } from '../engine/srs'
 import type { Era, ProgressState, Work } from '../types'
@@ -18,6 +20,7 @@ export function MuseumScreen({
   onStart: () => void
 }) {
   const [openWorkId, setOpenWorkId] = useState<string | null>(null)
+  const [lightboxWorkId, setLightboxWorkId] = useState<string | null>(null)
   const worksById = Object.fromEntries(works.map((w) => [w.id, w]))
 
   const anyDiscovered = works.some((w) => Boolean(progress.items[w.id]?.discoveredAt))
@@ -37,6 +40,7 @@ export function MuseumScreen({
 
   const sortedEras = [...eras].sort((a, b) => a.order - b.order).filter((e) => works.some((w) => w.era === e.id))
   const openWork = openWorkId ? worksById[openWorkId] : null
+  const lightboxWork = lightboxWorkId ? worksById[lightboxWorkId] : null
 
   return (
     <div className={styles.screen}>
@@ -69,7 +73,28 @@ export function MuseumScreen({
                     aria-label={discovered ? work.title : '未発見'}
                   >
                     {discovered ? (
-                      <WorkImage className={styles.tileImage} src={imageSrc(work)} alt={work.title} />
+                      <>
+                        <WorkImage className={styles.tileImage} src={imageSrc(work)} alt={work.title} />
+                        <span
+                          role="button"
+                          tabIndex={0}
+                          className={styles.expandButton}
+                          aria-label={`${work.title}を拡大表示`}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setLightboxWorkId(work.id)
+                          }}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.stopPropagation()
+                              e.preventDefault()
+                              setLightboxWorkId(work.id)
+                            }
+                          }}
+                        >
+                          <ExpandIcon width={16} height={16} />
+                        </span>
+                      </>
                     ) : (
                       <span className={styles.tileHiddenLabel}>{work.title}</span>
                     )}
@@ -90,6 +115,15 @@ export function MuseumScreen({
             if (worksById[id] && progress.items[id]?.discoveredAt) setOpenWorkId(id)
           }}
           onClose={() => setOpenWorkId(null)}
+        />
+      )}
+
+      {lightboxWork && (
+        <ImageLightbox
+          src={imageSrc(lightboxWork)}
+          alt={lightboxWork.title}
+          title={lightboxWork.title}
+          onClose={() => setLightboxWorkId(null)}
         />
       )}
     </div>

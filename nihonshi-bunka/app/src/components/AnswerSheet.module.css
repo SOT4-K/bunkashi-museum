@@ -1,5 +1,6 @@
 .judgement {
   font-size: 17px;
+  line-height: 1.4;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -7,10 +8,12 @@
 
 .judgementCorrect {
   color: var(--rokusho);
+  font-size: 22px;
 }
 
 .judgementWrong {
   color: var(--shu);
+  font-size: 17px;
 }
 
 .whyWrong {
@@ -25,6 +28,8 @@
 }
 
 .correctImage {
+  display: block;
+  padding: 0;
   width: 96px;
   aspect-ratio: 3 / 4;
   border-radius: var(--radius-image);
@@ -96,6 +101,8 @@
 }
 
 .otherImage {
+  display: block;
+  padding: 0;
   width: 56px;
   aspect-ratio: 3 / 4;
   border-radius: var(--radius-image);

@@ -55,3 +55,24 @@ export function StatsIcon(props: SVGProps<SVGSVGElement>) {
     </Base>
   )
 }
+
+/** ライトボックスの閉じるボタン（×） */
+export function CloseIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Base {...props}>
+      <path d="M6 6l12 12M18 6L6 18" />
+    </Base>
+  )
+}
+
+/** 画像をライトボックスで拡大表示するトリガー（虫眼鏡）。選択・遷移の
+    タップ領域と衝突する画像（Q3の選択肢、図鑑のタイル）に重ねて使う。 */
+export function ExpandIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Base {...props}>
+      <circle cx="10.5" cy="10.5" r="6" />
+      <path d="M15 15l4.5 4.5" />
+      <path d="M10.5 8v5M8 10.5h5" />
+    </Base>
+  )
+}

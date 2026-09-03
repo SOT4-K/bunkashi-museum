@@ -1,4 +1,6 @@
 .image {
+  display: block;
+  padding: 0;
   width: 100%;
   aspect-ratio: 3 / 4;
   border-radius: var(--radius-image);
@@ -6,6 +8,14 @@
   background: var(--sumi-surface);
   outline: 2px solid var(--kin);
   outline-offset: 3px;
+  /* バグ修正（2026-09-03）: .body は display:flex; flex-direction:column の
+     スクロール可能なコンテナ。overflow:hidden を持つ flex item は「自動最小サイズ」
+     が 0 になり（overflow!=visible の item は min-height:auto が 0 に解決される仕様）、
+     本文（タイトル・解説・紛らわしい作品リスト）が長い作品ではこの画像枠が
+     aspect-ratio を無視して押し潰されていた（実測で高さが 466px 相当のところ
+     117px 程度まで縮む）。flex-shrink:0 で main axis（縦）の縮小を止め、
+     はみ出す分は .body の overflow-y:auto でスクロールさせる。 */
+  flex-shrink: 0;
 }
 
 .image img {
