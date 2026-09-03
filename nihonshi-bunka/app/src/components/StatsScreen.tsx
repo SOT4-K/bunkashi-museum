@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import styles from './StatsScreen.module.css'
+import { CreditsSheet } from './CreditsSheet'
 import { isItemMastered } from '../engine/srs'
 import { migrate } from '../engine/progress'
 import type { Era, ProgressState, Work } from '../types'
@@ -23,6 +24,7 @@ export function StatsScreen({
 }) {
   const [text, setText] = useState('')
   const [message, setMessage] = useState('')
+  const [showCredits, setShowCredits] = useState(false)
 
   const sortedEras = [...eras].sort((a, b) => a.order - b.order).filter((e) => works.some((w) => w.era === e.id))
 
@@ -109,6 +111,14 @@ export function StatsScreen({
         </div>
         {message && <p className={styles.message}>{message}</p>}
       </div>
+
+      <div className={styles.section}>
+        <button type="button" className={styles.creditsLink} onClick={() => setShowCredits(true)}>
+          画像の出典
+        </button>
+      </div>
+
+      {showCredits && <CreditsSheet onClose={() => setShowCredits(false)} />}
     </div>
   )
 }

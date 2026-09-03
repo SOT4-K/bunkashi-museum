@@ -5,4 +5,5 @@ dist/
 *.log
 .env
 nihonshi-bunka/app/public/img/
+nihonshi-bunka/app/public/icons/
 nihonshi-bunka/app/src/generated/

@@ -65,6 +65,22 @@ body {
   flex-direction: column;
 }
 
+/* デスクトップ幅（480px 超）: 家族が PC で開いても iPhone と同じ見え方にする。
+   アプリは幅 430px の中央カラムに収め、周囲は常に墨色の面（ライトモードでも）。
+   これは color-scheme に依らず固定の「展示室の壁」なので --sumi を直接使う。 */
+@media (min-width: 481px) {
+  html,
+  body {
+    background: var(--sumi);
+  }
+
+  #root {
+    max-width: 430px;
+    margin: 0 auto;
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 40%);
+  }
+}
+
 button,
 input,
 textarea {

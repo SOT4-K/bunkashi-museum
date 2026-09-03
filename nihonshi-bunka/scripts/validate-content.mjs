@@ -1,9 +1,16 @@
 #!/usr/bin/env node
 // content/ の整合性チェック。DESIGN.md 6章・7章:
 //  必須項目・era の存在・confusables[].id の参照先の存在・id の重複・status の値。
-// npm run build の prebuild で必ず走る。エラーがあれば exit code 1 で失敗させる。
+//  status: reviewed の作品は manifest.json に同じ id のエントリ（file・license・
+//  sourceUrl・attributionText 必須）と画像実体が無ければエラー（本番ビルドに含まれる
+//  のに出典を欠くのを防ぐ）。draft はエントリ無しでも警告のみ（M1 は全件 draft）。
+//  confusables が1件以下の作品は警告（DESIGN.md 3章: ディストラクタの質に関わる）。
+// npm run build の prebuild で必ず走る。エラーがあれば exit code 1 で失敗させる
+// （警告のみなら exit 0）。
+//
+// 実行: node scripts/validate-content.mjs
 
-import { readFileSync, readdirSync } from 'node:fs'
+import { readFileSync, readdirSync, existsSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -11,6 +18,11 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = join(__dirname, '..')
 const worksDir = join(root, 'content', 'works')
 const erasPath = join(root, 'content', 'eras.json')
+const imagesDir = join(root, 'content', 'images')
+const manifestPath = join(imagesDir, 'manifest.json')
+
+// status: reviewed で必須の manifest フィールド
+const REQUIRED_MANIFEST_FIELDS = ['file', 'license', 'sourceUrl', 'attributionText']
 
 const REQUIRED_FIELDS = [
   'id',
@@ -47,6 +59,15 @@ function loadJson(path) {
 
 function main() {
   const errors = []
+  const warnings = []
+
+  let manifest = { images: [] }
+  try {
+    manifest = loadJson(manifestPath)
+  } catch (e) {
+    errors.push(`content/images/manifest.json が読めない（${e.message}）`)
+  }
+  const manifestById = new Map((manifest.images ?? []).filter((img) => img.id).map((img) => [img.id, img]))
 
   const eras = loadJson(erasPath)
   if (!Array.isArray(eras)) {
@@ -122,6 +143,35 @@ function main() {
             errors.push(`${label}: confusables["${c.id}"] に howToTell が無い`)
           }
         }
+        // ディストラクタの質: confusable が1件以下だと選択肢生成が同カテゴリ・
+        // 全体ランダムに頼りがちになる（DESIGN.md 3章）。警告のみ（ブロックしない）。
+        if (work.confusables.length <= 1) {
+          warnings.push(`${label}: confusables が ${work.confusables.length} 件しかない（2件以上を推奨）`)
+        }
+      }
+
+      // manifest.json との照合（画像のライセンス記録）。id で引く
+      // （works 側の image.file は拡張子が違うことがあるため file 名では引かない）。
+      if (work.id) {
+        const entry = manifestById.get(work.id)
+        if (work.status === 'reviewed') {
+          if (!entry) {
+            errors.push(
+              `${label}: status が reviewed だが content/images/manifest.json に id "${work.id}" のエントリが無い`,
+            )
+          } else {
+            for (const field of REQUIRED_MANIFEST_FIELDS) {
+              if (!entry[field]) {
+                errors.push(`${label}: manifest["${work.id}"] に "${field}" が無い（reviewed には必須）`)
+              }
+            }
+            if (entry.file && !existsSync(join(imagesDir, entry.file))) {
+              errors.push(`${label}: manifest["${work.id}"].file "${entry.file}" の画像実体が content/images/ に無い`)
+            }
+          }
+        } else if (!entry) {
+          warnings.push(`${label}: manifest.json に id "${work.id}" のエントリが無い（draft のため警告のみ）`)
+        }
       }
     }
   }
@@ -137,13 +187,18 @@ function main() {
     }
   }
 
+  if (warnings.length > 0) {
+    console.warn(`content の警告 ${warnings.length} 件:`)
+    for (const w of warnings) console.warn(`  - ${w}`)
+  }
+
   if (errors.length > 0) {
     console.error(`content の検証エラー ${errors.length} 件:`)
     for (const e of errors) console.error(`  - ${e}`)
     process.exit(1)
   }
 
-  console.log(`content OK: ${allWorks.length} 作品 / ${eras.length} 時代`)
+  console.log(`content OK: ${allWorks.length} 作品 / ${eras.length} 時代（警告 ${warnings.length} 件）`)
 }
 
 main()

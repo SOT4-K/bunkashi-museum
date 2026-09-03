@@ -1,9 +1,14 @@
 #!/usr/bin/env node
 // content/works/*.json の各作品に対して、実画像が無いときのフォールバックとなる
 // プレースホルダ SVG（3:4、作品名＋種別を表示、種別ごとに色分け）を app/public/img/<id>.svg に生成する。
+// prebuild では make-placeholders → sync-real-images の順に走るため、ここで
+// app/public/img/ を一旦空にする（古い作品構成の残骸や、以前のバージョンの
+// sync-real-images.mjs がコピーした未圧縮画像がそのまま public/ に残って
+// dist に混入するのを防ぐ。public/ 配下は Vite がビルド時に無条件で dist に
+// コピーするため、参照されない残骸ファイルでもサイズが膨らむ）。
 // 実行: node scripts/make-placeholders.mjs
 
-import { readFileSync, readdirSync, mkdirSync, writeFileSync } from 'node:fs'
+import { readFileSync, readdirSync, mkdirSync, writeFileSync, rmSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -65,6 +70,7 @@ function makeSvg(work) {
 }
 
 function main() {
+  rmSync(outDir, { recursive: true, force: true })
   mkdirSync(outDir, { recursive: true })
   const files = readdirSync(worksDir).filter((f) => f.endsWith('.json'))
   let count = 0

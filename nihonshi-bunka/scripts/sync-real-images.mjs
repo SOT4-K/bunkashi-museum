@@ -14,22 +14,32 @@
 // app/public/img/ はこのスクリプトと make-placeholders.mjs の生成物なので
 // work/.gitignore で除外している（コミットしない）。
 //
+// このファイルは app/ の外（nihonshi-bunka/scripts/）にあり app/node_modules を
+// 通常のバレ import では解決できないため、createRequire で app/package.json を
+// 起点に 'sharp' を明示的に解決する。
+//
 // 実行: node scripts/sync-real-images.mjs
 
 import { readFileSync, readdirSync, existsSync, mkdirSync, writeFileSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import sharp from 'sharp'
+import { createRequire } from 'node:module'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = join(__dirname, '..')
+const requireFromApp = createRequire(join(root, 'app', 'package.json'))
+const sharp = requireFromApp('sharp')
 const worksDir = join(root, 'content', 'works')
 const imagesDir = join(root, 'content', 'images')
 const manifestPath = join(imagesDir, 'manifest.json')
 const outImgDir = join(root, 'app', 'public', 'img')
 const outManifestPath = join(root, 'app', 'src', 'generated', 'real-images.json')
 
-const MAX_DIMENSION = 1200
+// DESIGN.md 6章は「長辺1200px以下、100KB目安」。品質80のまま1200pxで書き出すと
+// 高精細スキャンの作品（例: 2300px超級の原寸）で1枚200KB超になり、dist/img 合計が
+// 2MB を超えた（実測）。目安の100KBに近づけるため長辺は1000pxに抑える
+// （ticket の「1200px以下」の範囲内。品質は指示どおり80のまま変えない）。
+const MAX_DIMENSION = 1000
 const WEBP_QUALITY = 80
 
 async function main() {

@@ -38,6 +38,18 @@ export const testWorks: Work[] = [
   makeWork({ id: 'a8', era: 'konin-jogan', category: 'sculpture' }),
 ]
 
+// category: other のように母数が少ないカテゴリ（実データで3件）でも、同カテゴリの
+// 候補が尽きた後は「同じ時代・別カテゴリ」を優先し、いきなり他時代に飛ばないことを
+// 確認するための固定セット。b1 が出題対象。
+export const scarceCategoryWorks: Work[] = [
+  makeWork({ id: 'b1', era: 'tenpyo', category: 'other' }), // 出題対象
+  makeWork({ id: 'b2', era: 'asuka', category: 'other' }), // 同カテゴリだが遠い時代（唯一の同カテゴリ候補）
+  makeWork({ id: 'b3', era: 'tenpyo', category: 'sculpture' }), // 同じ時代・別カテゴリ
+  makeWork({ id: 'b4', era: 'tenpyo', category: 'painting' }), // 同じ時代・別カテゴリ
+  makeWork({ id: 'b5', era: 'tenpyo', category: 'architecture' }), // 同じ時代・別カテゴリ
+  makeWork({ id: 'b6', era: 'hakuho', category: 'craft' }), // 別の時代・別カテゴリ（最後の手段でのみ選ばれるべき）
+]
+
 /** テスト用の決定的な疑似乱数（mulberry32）。同じ seed なら同じ列を返す。 */
 export function seededRandom(seed: number): () => number {
   let a = seed

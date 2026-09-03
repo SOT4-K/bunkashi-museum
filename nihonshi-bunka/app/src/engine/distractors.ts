@@ -1,8 +1,13 @@
 // 出題の選択肢（ディストラクタ）生成。DESIGN.md 3章のルール:
 //  1. confusables を最優先
 //  2. 残りは同じカテゴリ・近い時代からランダム
-//  3. それでも足りなければ全体からランダム
+//  3. それでも足りなければ同じ時代・別カテゴリからランダム
+//  4. それでも足りなければ全体からランダム
 // 重複なし・シャッフル・正解位置の偏りなし。純関数（乱数源は注入可能でテストしやすくする）。
+//
+// 3番目のステップ（同時代・別カテゴリ）が無いと、category: other のように
+// 母数が少ないカテゴリ（実データで3件）は同カテゴリだけでは埋まらず、いきなり
+// 全体ランダムに落ちて時代の近さを失っていた（reviewer 指摘）。
 
 import type { Era, Work } from '../types'
 
@@ -74,7 +79,20 @@ export function pickWorkDistractors(
     }
   }
 
-  // 3. 残りは全体からランダム
+  // 3. 同じ時代・別カテゴリからランダム（同カテゴリの候補が尽きたとき、
+  //    全体ランダムに落ちる前に時代の近さだけは保つ）
+  if (chosen.length < count) {
+    let sameEraPool = pool.filter((w) => w.era === target.era && !chosenIds.has(w.id))
+    while (chosen.length < count && sameEraPool.length > 0) {
+      const picked = pickRandom(sameEraPool, rng)
+      if (!picked) break
+      chosen.push(picked)
+      chosenIds.add(picked.id)
+      sameEraPool = sameEraPool.filter((w) => w.id !== picked.id)
+    }
+  }
+
+  // 4. 残りは全体からランダム
   if (chosen.length < count) {
     let restPool = pool.filter((w) => !chosenIds.has(w.id))
     while (chosen.length < count && restPool.length > 0) {

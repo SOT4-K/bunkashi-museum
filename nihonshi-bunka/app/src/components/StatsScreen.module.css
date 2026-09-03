@@ -100,3 +100,10 @@
   font-size: 13px;
   color: var(--text-dim);
 }
+
+.creditsLink {
+  min-height: 44px;
+  text-align: left;
+  font-size: 15px;
+  color: var(--gunjo);
+}

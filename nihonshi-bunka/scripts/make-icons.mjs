@@ -4,15 +4,21 @@
 // PNG が必須（実機 https://sot4-k.github.io/bunkashi-museum/ で確認された不備の修正）。
 // 出力先 app/public/icons/ は生成物なので work/.gitignore で除外している。
 //
+// このファイルは app/ の外（nihonshi-bunka/scripts/）にあり app/node_modules を
+// 通常のバレ import では解決できないため、createRequire で app/package.json を
+// 起点に 'sharp' を明示的に解決する（sync-real-images.mjs と同じ理由）。
+//
 // 実行: node scripts/make-icons.mjs
 
 import { readFileSync, mkdirSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import sharp from 'sharp'
+import { createRequire } from 'node:module'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = join(__dirname, '..')
+const requireFromApp = createRequire(join(root, 'app', 'package.json'))
+const sharp = requireFromApp('sharp')
 const publicDir = join(root, 'app', 'public')
 const svgPath = join(publicDir, 'icon.svg')
 const outDir = join(publicDir, 'icons')

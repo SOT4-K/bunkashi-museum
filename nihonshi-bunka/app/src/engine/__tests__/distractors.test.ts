@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { buildChoices, pickEraDistractors, pickWorkDistractors, shuffle } from '../distractors'
-import { seededRandom, testEras, testWorks } from './testFixtures'
+import { scarceCategoryWorks, seededRandom, testEras, testWorks } from './testFixtures'
 
 const eraOrderIndex = Object.fromEntries(testEras.map((e) => [e.id, e.order]))
 
@@ -38,6 +38,40 @@ describe('pickWorkDistractors', () => {
     const distractors = pickWorkDistractors(target, smallPool, eraOrderIndex, 3, rng)
     expect(distractors.length).toBeLessThanOrEqual(3)
     expect(distractors.map((w) => w.id)).not.toContain('a1')
+  })
+
+  it('同カテゴリの候補が尽きたら、全体ランダムより先に同じ時代・別カテゴリを使う', () => {
+    // category: other は実データで3件しかなく、同カテゴリだけでは4択が埋まらない。
+    // このとき「同じ時代・別カテゴリ」（b3/b4/b5）を使い切ってから、最後の手段として
+    // 別の時代（b6）に落ちるはず。b3〜b5 で count(3) 分（confusable無し + 同カテゴリ1件 + 同時代2件）
+    // 埋まるため、複数シードで回しても b6 は選ばれない。
+    const scarceEraOrderIndex = Object.fromEntries(testEras.map((e) => [e.id, e.order]))
+    const target = scarceCategoryWorks.find((w) => w.id === 'b1')!
+    for (let seed = 0; seed < 30; seed++) {
+      const rng = seededRandom(seed * 13 + 5)
+      const distractors = pickWorkDistractors(target, scarceCategoryWorks, scarceEraOrderIndex, 3, rng)
+      const ids = distractors.map((w) => w.id)
+      expect(ids).toHaveLength(3)
+      expect(ids).toContain('b2') // 唯一の同カテゴリ候補は必ず入る
+      expect(ids).not.toContain('b6') // 他時代・他カテゴリは同時代の候補が尽きるまで使わない
+      // 残り2枠は同じ時代・別カテゴリ（b3/b4/b5）から埋まる
+      const sameEraFillers = ids.filter((id) => ['b3', 'b4', 'b5'].includes(id))
+      expect(sameEraFillers).toHaveLength(2)
+    }
+  })
+
+  it('同じ時代・別カテゴリも尽きたときだけ全体ランダム（他時代）を使う', () => {
+    // b2（同カテゴリ）と b3（同時代・別カテゴリ）だけの小さいプールでは
+    // count=3 を満たせないので b6（他時代・他カテゴリ）まで使う必要がある。
+    const smallPool = scarceCategoryWorks.filter((w) => ['b1', 'b2', 'b3', 'b6'].includes(w.id))
+    const scarceEraOrderIndex = Object.fromEntries(testEras.map((e) => [e.id, e.order]))
+    const target = smallPool.find((w) => w.id === 'b1')!
+    for (let seed = 0; seed < 10; seed++) {
+      const rng = seededRandom(seed * 7 + 2)
+      const distractors = pickWorkDistractors(target, smallPool, scarceEraOrderIndex, 3, rng)
+      const ids = distractors.map((w) => w.id)
+      expect(ids.sort()).toEqual(['b2', 'b3', 'b6'])
+    }
   })
 })
 

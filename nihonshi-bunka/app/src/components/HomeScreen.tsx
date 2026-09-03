@@ -58,6 +58,9 @@ export function HomeScreen({
 
   const composition = previewSessionComposition(works, progress, today, dailyNewRemaining)
   const canStart = composition.reviewCount + composition.newCount > 0
+  // works が0件（本番ビルドで reviewed が無い等）と、単に今日の分をやり終えたのを区別する。
+  // 前者を「また明日」と言うのは誤り（明日になっても出題できる作品は増えない）。
+  const noWorksAvailable = works.length === 0
 
   function dismissBanner() {
     setBannerDismissed(true)
@@ -93,7 +96,11 @@ export function HomeScreen({
             復習 {composition.reviewCount}・新規 {composition.newCount}
           </span>
         </button>
-        {!canStart && <div className={styles.bossLine}>今日の分は学習し終えた。また明日。</div>}
+        {!canStart && (
+          <div className={styles.bossLine}>
+            {noWorksAvailable ? '出題できる作品がまだない。' : '今日の分は学習し終えた。また明日。'}
+          </div>
+        )}
       </div>
 
       {currentEra && (

@@ -85,7 +85,7 @@
   {
     "id": "fukukensaku-todaiji",
     "title": "不空羂索観音像",
-    "reading": "ふくうけんさくかんのんぞう",
+    "reading": "ふくうけんさくかんのんぞう（ふくうけんじゃくかんのんぞう）",
     "era": "tenpyo",
     "category": "sculpture",
     "location": "東大寺法華堂（奈良）",
@@ -169,14 +169,14 @@
     "reading": "しょうそういんほうこ",
     "era": "tenpyo",
     "category": "architecture",
-    "location": "東大寺（奈良）",
+    "location": "東大寺境内（宮内庁管理）",
     "author": null,
     "technique": "校倉造・高床式",
     "keyPoints": ["天平文化", "校倉造（三角形の木材を井桁に組む）", "聖武天皇の遺品などを収める", "高床式"],
     "explanation": "東大寺の倉で、聖武天皇の遺品を光明皇后が納めたことに始まる。三角形の断面の木材を井桁に組み上げる校倉造の高床式倉庫。正倉院宝物には唐や西域からの品も多く、天平文化の国際性を示す。",
     "examNote": "「校倉造」と「正倉院」は必ずセット。建築様式を問う問題で出る。",
     "confusables": [
-      {"id": "toshodaiji-kondo", "howToTell": "唐招提寺金堂は屋根に鴟尾をのせた寺院本堂で列柱が並ぶ。正倉院は壁が三角材の校倉で窓がない倉。"}
+      {"id": "toshodaiji-kondo", "howToTell": "唐招提寺金堂は屋根に鴟尾をのせた寺院本堂で列柱が並ぶ。正倉院は三角材を井桁に組んだ壁の高床倉。"}
     ],
     "image": {"file": "shosoin-hoko.webp", "credit": "", "license": "", "sourceUrl": "", "sourceName": ""},
     "sources": ["高校教科書（山川『詳説日本史』）天平文化の項", "宮内庁正倉院公式サイト"],
@@ -196,7 +196,7 @@
     "explanation": "鑑真が開いた唐招提寺の本堂。奈良時代に建てられた金堂として現存する唯一の例。正面の8本の円柱がつくる吹き放しの空間と、大屋根の両端の鴟尾が特徴。天平建築の落ち着いた美しさを伝える。",
     "examNote": "「奈良時代の金堂で現存唯一」がキーワード。法隆寺金堂（飛鳥）と混同しない。",
     "confusables": [
-      {"id": "shosoin-hoko", "howToTell": "正倉院は校倉造の倉で窓がない。唐招提寺金堂は列柱と鴟尾のある本堂。"}
+      {"id": "shosoin-hoko", "howToTell": "正倉院は三角材を井桁に組んだ校倉造の高床倉。唐招提寺金堂は列柱と鴟尾のある本堂。"}
     ],
     "image": {"file": "toshodaiji-kondo.webp", "credit": "", "license": "", "sourceUrl": "", "sourceName": ""},
     "sources": ["高校教科書（山川『詳説日本史』）天平文化の項", "唐招提寺公式サイト"],
