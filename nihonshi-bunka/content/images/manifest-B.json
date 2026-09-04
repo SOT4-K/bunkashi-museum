@@ -1,5 +1,5 @@
 {
-  "note": "担当区分B（insei/kamakura/kitayama/higashiyama/momoyama）の画像。重要: このresearcherセッションはBashでのダウンロードとバイナリファイル書き込みを禁止されているため、実際の画像バイナリ（content/images/*.jpg）はまだ保存されていない。ここにあるのはライセンス確認済みの取得先情報のみ。ダウンロードはbuilder等の別ステップで行うこと。詳細は research/m2-image-log-B.md 参照。",
+  "note": "担当区分B（insei/kamakura/kitayama/higashiyama/momoyama）の画像。全12件、Wikimedia Commons Special:FilePath経由でcurlダウンロード済み、content/images/<id>.jpg として保存し目視確認済み（2026-09-04）。ライセンス詳細は各エントリ参照。詳細は research/m2-image-log-B.md 参照。",
   "images": [
     {
       "id": "choju-giga-sumo",
@@ -13,7 +13,7 @@
       "attributionText": "鳥獣人物戯画（甲巻） Wikimedia Commons, PD-Japan（『日本名畫集』1941年刊）",
       "identified": "Wikimedia Commonsのファイル説明: 出典『日本名畫集』審美書院・昭和16年（1941）刊、鳥獣戯画の兎と蛙の相撲場面。高山寺蔵の原本の図版。",
       "retrievedAt": "2026-09-04",
-      "notes": "画像バイナリ未ダウンロード（researcherのBash/Write制約のため）。ダウンロード要。PD-Japanタグは1941年publicationに基づくが、標準のPD-Japan-oldphotoテンプレートではない点に注意（reviewer確認推奨）。"
+      "notes": "content/images/<id>.jpgとしてダウンロード・保存済み（file確認・目視確認済み）。PD-Japanタグは1941年publicationに基づくが、標準のPD-Japan-oldphotoテンプレートではない点に注意（reviewer確認推奨）。"
     },
     {
       "id": "fukiji-odo",
@@ -27,7 +27,7 @@
       "attributionText": "富貴寺大堂 by JNN360, Wikimedia Commons, CC BY-SA 4.0",
       "identified": "Wikimedia Commonsファイル説明: 富貴寺（大分県豊後高田市）大堂の外観写真",
       "retrievedAt": "2026-09-04",
-      "notes": "画像バイナリ未ダウンロード（researcherのBash/Write制約のため）。ダウンロード要。"
+      "notes": "content/images/<id>.jpgとしてダウンロード・保存済み（file確認・目視確認済み）。"
     },
     {
       "id": "shiramizu-amidado",
@@ -41,7 +41,7 @@
       "attributionText": "白水阿弥陀堂 by いわき市, Wikimedia Commons, CC BY 4.0",
       "identified": "Wikimedia Commonsファイル説明: 白水阿弥陀堂（福島県いわき市、国宝）の外観写真",
       "retrievedAt": "2026-09-04",
-      "notes": "画像バイナリ未ダウンロード（researcherのBash/Write制約のため）。ダウンロード要。"
+      "notes": "content/images/<id>.jpgとしてダウンロード・保存済み（file確認・目視確認済み）。"
     },
     {
       "id": "kuya-shonin-zo",
@@ -55,7 +55,7 @@
       "attributionText": "空也上人像 Wikimedia Commons, PD-Japan-oldphoto",
       "identified": "Wikimedia Commonsファイル説明: 六波羅蜜寺蔵、康勝作の空也上人像。1933年刊行の書籍からの図版。",
       "retrievedAt": "2026-09-04",
-      "notes": "画像バイナリ未ダウンロード（researcherのBash/Write制約のため）。ダウンロード要。"
+      "notes": "content/images/<id>.jpgとしてダウンロード・保存済み（file確認・目視確認済み）。"
     },
     {
       "id": "kamakura-daibutsu",
@@ -69,7 +69,7 @@
       "attributionText": "高徳院阿弥陀如来像（鎌倉大仏） by Dandy1022, Wikimedia Commons, CC BY-SA 3.0",
       "identified": "Wikimedia Commonsファイル説明: 高徳院（神奈川県鎌倉市）の露座の阿弥陀如来像（鎌倉大仏）",
       "retrievedAt": "2026-09-04",
-      "notes": "画像バイナリ未ダウンロード（researcherのBash/Write制約のため）。ダウンロード要。屋外・恒常設置の彫刻で像自体は1252年頃で著作権消滅済み。撮影者自身の写真としてのCC BY-SA。非営利限定の縛りは無いが収益化時は要再確認（image-licensing-policy.md参照）。"
+      "notes": "content/images/<id>.jpgとしてダウンロード・保存済み（file確認・目視確認済み）。屋外・恒常設置の彫刻で像自体は1252年頃で著作権消滅済み。撮影者自身の写真としてのCC BY-SA。非営利限定の縛りは無いが収益化時は要再確認（image-licensing-policy.md参照）。"
     },
     {
       "id": "engakuji-shariden",
@@ -83,7 +83,7 @@
       "attributionText": "円覚寺舎利殿 by Fg2, Wikimedia Commons, Public Domain",
       "identified": "Wikimedia Commonsファイル説明: 円覚寺（神奈川県鎌倉市）の舎利殿、禅宗様建築の代表",
       "retrievedAt": "2026-09-04",
-      "notes": "画像バイナリ未ダウンロード（researcherのBash/Write制約のため）。ダウンロード要。"
+      "notes": "content/images/<id>.jpgとしてダウンロード・保存済み（file確認・目視確認済み）。"
     },
     {
       "id": "sanjusangendo-hondo",
@@ -97,7 +97,7 @@
       "attributionText": "三十三間堂 by 663highland, Wikimedia Commons, CC BY-SA 3.0",
       "identified": "Wikimedia Commonsファイル説明: 三十三間堂（蓮華王院本堂、京都市）の外観写真",
       "retrievedAt": "2026-09-04",
-      "notes": "画像バイナリ未ダウンロード（researcherのBash/Write制約のため）。ダウンロード要。"
+      "notes": "content/images/<id>.jpgとしてダウンロード・保存済み（file確認・目視確認済み）。"
     },
     {
       "id": "kinkaku",
@@ -111,7 +111,7 @@
       "attributionText": "鹿苑寺金閣 by Stephane D'Alu, Wikimedia Commons, CC BY-SA 3.0",
       "identified": "Wikimedia Commonsファイル説明: 鹿苑寺金閣（京都市）の外観写真",
       "retrievedAt": "2026-09-04",
-      "notes": "画像バイナリ未ダウンロード（researcherのBash/Write制約のため）。ダウンロード要。"
+      "notes": "content/images/<id>.jpgとしてダウンロード・保存済み（file確認・目視確認済み）。"
     },
     {
       "id": "ginkaku",
@@ -125,7 +125,7 @@
       "attributionText": "慈照寺銀閣 by Zairon, Wikimedia Commons, CC BY-SA 4.0",
       "identified": "Wikimedia Commonsファイル説明: 慈照寺銀閣（京都市）の外観写真",
       "retrievedAt": "2026-09-04",
-      "notes": "画像バイナリ未ダウンロード（researcherのBash/Write制約のため）。ダウンロード要。"
+      "notes": "content/images/<id>.jpgとしてダウンロード・保存済み（file確認・目視確認済み）。"
     },
     {
       "id": "togudo-doujinsai",
@@ -139,7 +139,7 @@
       "attributionText": "慈照寺東求堂 by Jean-Marie Hullot, Wikimedia Commons, CC BY 3.0",
       "identified": "Wikimedia Commonsファイル説明: 慈照寺（京都市）東求堂の外観写真",
       "retrievedAt": "2026-09-04",
-      "notes": "画像バイナリ未ダウンロード（researcherのBash/Write制約のため）。ダウンロード要。"
+      "notes": "content/images/<id>.jpgとしてダウンロード・保存済み（file確認・目視確認済み）。"
     },
     {
       "id": "ryoanji-sekitei",
@@ -153,7 +153,7 @@
       "attributionText": "龍安寺方丈庭園 by DXR, Wikimedia Commons, CC BY-SA 4.0",
       "identified": "Wikimedia Commonsファイル説明: 龍安寺（京都市）方丈庭園（石庭）の写真",
       "retrievedAt": "2026-09-04",
-      "notes": "画像バイナリ未ダウンロード（researcherのBash/Write制約のため）。ダウンロード要。"
+      "notes": "content/images/<id>.jpgとしてダウンロード・保存済み（file確認・目視確認済み）。"
     },
     {
       "id": "himeji-jo",
@@ -167,7 +167,7 @@
       "attributionText": "姫路城 by Bernard Gagnon, Wikimedia Commons, CC BY-SA 3.0",
       "identified": "Wikimedia Commonsファイル説明: 姫路城（兵庫県姫路市）の外観写真",
       "retrievedAt": "2026-09-04",
-      "notes": "画像バイナリ未ダウンロード（researcherのBash/Write制約のため）。ダウンロード要。"
+      "notes": "content/images/<id>.jpgとしてダウンロード・保存済み（file確認・目視確認済み）。"
     }
   ]
 }
