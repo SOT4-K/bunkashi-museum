@@ -1,0 +1,66 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgb(21 23 28 / 55%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 30;
+}
+
+.box {
+  width: 100%;
+  max-width: 340px;
+  background: var(--surface);
+  border-radius: var(--radius-sheet);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.message {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.detail {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.buttonRow {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.cancelButton {
+  flex: 1;
+  min-height: 48px;
+  border-radius: var(--radius-button);
+  border: 1px solid var(--border-quiet);
+  font-size: 15px;
+}
+
+.confirmButton {
+  flex: 1;
+  min-height: 48px;
+  border-radius: var(--radius-button);
+  background: var(--gunjo);
+  color: #fff;
+  font-size: 15px;
+}
+
+.destructiveButton {
+  flex: 1;
+  min-height: 48px;
+  border-radius: var(--radius-button);
+  background: var(--shu);
+  color: #fff;
+  font-size: 15px;
+}

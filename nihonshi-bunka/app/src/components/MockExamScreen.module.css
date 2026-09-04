@@ -28,3 +28,27 @@
   border-bottom: 1px solid var(--border-quiet);
   padding-bottom: 4px;
 }
+
+/* M2-45: 開始画面の「時間を計る」トグル（既定オフ）。 */
+.timedToggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  min-height: 44px;
+}
+
+/* 下線抜粋（「下線部を含む1〜2文」。旧 RandomLearnScreen と同じ見え方）。 */
+.excerptPanel {
+  border: 1px solid var(--border-quiet);
+  border-radius: var(--radius-image);
+  padding: 16px;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.underlineCurrent {
+  background: rgba(200, 16, 46, 0.15);
+  color: inherit;
+  border-bottom: 2px solid var(--shu, #c8102e);
+}

@@ -1,32 +1,45 @@
+// M2-20 → M2-45: 本番モード（全15文化・重み付き抽選に統合）。
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { render, screen, fireEvent, within, act } from '@testing-library/react'
 import { MockExamScreen } from '../MockExamScreen'
 import { makeWork, testEras } from '../../engine/__tests__/testFixtures'
-import type { MockExamSection } from '../../engine/mockExam'
+import type { MockExamItem } from '../../engine/mockExam'
+import type { Passage } from '../../types'
 
 const w1 = makeWork({ id: 'me1', era: 'tenpyo', category: 'sculpture' })
 const w2 = makeWork({ id: 'me2', era: 'hakuho', category: 'sculpture' })
 
-const sections: MockExamSection[] = [
+const passageA: Passage = {
+  id: 'sec-a',
+  era: 'tenpyo',
+  title: 'リード文A',
+  text: '本文。[[a|下線A]]。',
+  sources: [],
+  underlines: [{ key: 'a', workIds: ['me1'] }],
+}
+const passageB: Passage = {
+  id: 'sec-b',
+  era: 'hakuho',
+  title: 'リード文B',
+  text: '本文。[[a|下線B]]。',
+  sources: [],
+  underlines: [{ key: 'a', workIds: ['me2'] }],
+}
+
+const items: MockExamItem[] = [
   {
-    label: 'A',
-    passage: { id: 'sec-a', era: 'tenpyo', title: 'リード文A', text: '本文。[[a|下線A]]。', sources: [], underlines: [{ key: 'a', workIds: ['me1'] }] },
-    questions: [
-      {
-        underlineKey: 'a',
-        question: { type: 'q1', work: w1, choiceWorks: [w1, w2], correctIndex: 0, isReview: false },
-      },
-    ],
+    passage: passageA,
+    eraId: 'tenpyo',
+    underlineKey: 'a',
+    excerpt: [{ type: 'underline', key: 'a', value: '下線A' }],
+    question: { type: 'q1', work: w1, choiceWorks: [w1, w2], correctIndex: 0, isReview: false },
   },
   {
-    label: 'B',
-    passage: { id: 'sec-b', era: 'hakuho', title: 'リード文B', text: '本文。[[a|下線B]]。', sources: [], underlines: [{ key: 'a', workIds: ['me2'] }] },
-    questions: [
-      {
-        underlineKey: 'a',
-        question: { type: 'q1', work: w2, choiceWorks: [w1, w2], correctIndex: 1, isReview: false },
-      },
-    ],
+    passage: passageB,
+    eraId: 'hakuho',
+    underlineKey: 'a',
+    excerpt: [{ type: 'underline', key: 'a', value: '下線B' }],
+    question: { type: 'q1', work: w2, choiceWorks: [w1, w2], correctIndex: 1, isReview: false },
   },
 ]
 
@@ -43,66 +56,35 @@ describe('MockExamScreen', () => {
   })
 
   it('0問なら「作れなかった」メッセージ', () => {
-    render(<MockExamScreen sections={[]} eras={testEras} onAnswer={noopAnswer} onFinish={() => {}} />)
+    render(<MockExamScreen items={[]} pool={[w1, w2]} eras={testEras} onAnswer={noopAnswer} onFinish={() => {}} />)
     expect(screen.getByText(/作れなかった/)).toBeInTheDocument()
   })
 
-  it('セクションごとに全文リード表示→問題へ→回答→次セクションのリード表示、と進む', () => {
-    render(<MockExamScreen sections={sections} eras={testEras} onAnswer={noopAnswer} onFinish={() => {}} />)
+  it('開始画面→「時間を計る」オフの既定では時間制限UIを出さない→1問ずつ→結果', () => {
+    render(<MockExamScreen items={items} pool={[w1, w2]} eras={testEras} onAnswer={noopAnswer} onFinish={() => {}} />)
 
-    expect(screen.getByTestId('mock-exam-read-panel')).toBeInTheDocument()
-    expect(screen.getByText('下線A')).toBeInTheDocument()
-    expect(screen.getByTestId('mock-exam-timer')).toHaveTextContent('10:00')
+    expect(screen.getByTestId('mock-exam-timed-toggle')).not.toBeChecked()
+    fireEvent.click(screen.getByTestId('mock-exam-start'))
 
-    fireEvent.click(screen.getByTestId('mock-exam-start-quiz'))
+    // 既定（時間を計るオフ）では残り時間の表示を出さない
+    expect(screen.queryByTestId('mock-exam-timer')).not.toBeInTheDocument()
+    expect(screen.getByTestId('mock-exam-excerpt-panel')).toHaveTextContent('下線A')
+
     fireEvent.click(screen.getAllByTestId('choice-button')[0])
     act(() => {
       vi.advanceTimersByTime(500)
     })
-    const dialog = screen.getByRole('dialog')
+    let dialog = screen.getByRole('dialog')
     fireEvent.click(within(dialog).getByTestId('next-button'))
 
-    // 2セクション目のリード表示に移る
-    expect(screen.getByTestId('mock-exam-read-panel')).toBeInTheDocument()
-    expect(screen.getByText('下線B')).toBeInTheDocument()
-  })
+    expect(screen.getByTestId('mock-exam-excerpt-panel')).toHaveTextContent('下線B')
 
-  it(
-    'M2-99reviewer指摘（重大1）の回帰テスト: quizフェーズで「下線部○に関して」が出て、' +
-      '「リード文を見返す」からリード文を再表示できる',
-    () => {
-      render(<MockExamScreen sections={sections} eras={testEras} onAnswer={noopAnswer} onFinish={() => {}} />)
-
-      fireEvent.click(screen.getByTestId('mock-exam-start-quiz'))
-
-      // 下線部プロンプトが出る（ThemeSetScreenと同じ挙動）
-      expect(screen.getByTestId('mock-exam-underline-prompt')).toHaveTextContent('下線部aに関して: 下線A')
-
-      // リード文パネルは既定で閉じている
-      expect(screen.queryByTestId('mock-exam-context-panel')).not.toBeInTheDocument()
-
-      // トグルで開閉できる
-      fireEvent.click(screen.getByTestId('mock-exam-context-toggle'))
-      expect(screen.getByTestId('mock-exam-context-panel')).toBeInTheDocument()
-      expect(within(screen.getByTestId('mock-exam-context-panel')).getByText('下線A')).toBeInTheDocument()
-
-      fireEvent.click(screen.getByTestId('mock-exam-context-toggle'))
-      expect(screen.queryByTestId('mock-exam-context-panel')).not.toBeInTheDocument()
-    },
-  )
-
-  it('全問終了で結果画面に型別正答率と20点満点のスコアを表示する', () => {
-    render(<MockExamScreen sections={sections} eras={testEras} onAnswer={noopAnswer} onFinish={() => {}} />)
-
-    for (let i = 0; i < sections.length; i++) {
-      fireEvent.click(screen.getByTestId('mock-exam-start-quiz'))
-      fireEvent.click(screen.getAllByTestId('choice-button')[sections[i].questions[0].question.correctIndex])
-      act(() => {
-        vi.advanceTimersByTime(500)
-      })
-      const dialog = screen.getByRole('dialog')
-      fireEvent.click(within(dialog).getByTestId('next-button'))
-    }
+    fireEvent.click(screen.getAllByTestId('choice-button')[1])
+    act(() => {
+      vi.advanceTimersByTime(500)
+    })
+    dialog = screen.getByRole('dialog')
+    fireEvent.click(within(dialog).getByTestId('next-button'))
 
     const summary = screen.getByTestId('mock-exam-summary')
     expect(within(summary).getByText('4 / 4点')).toBeInTheDocument()
@@ -110,5 +92,68 @@ describe('MockExamScreen', () => {
     const breakdown = screen.getByTestId('type-breakdown')
     expect(within(breakdown).getByText('画像→作品名')).toBeInTheDocument()
     expect(within(breakdown).getByText('2 / 2')).toBeInTheDocument()
+  })
+
+  it('「時間を計る」をオンにすると残り時間表示が出る', () => {
+    render(<MockExamScreen items={items} pool={[w1, w2]} eras={testEras} onAnswer={noopAnswer} onFinish={() => {}} />)
+    fireEvent.click(screen.getByTestId('mock-exam-timed-toggle'))
+    fireEvent.click(screen.getByTestId('mock-exam-start'))
+    expect(screen.getByTestId('mock-exam-timer')).toHaveTextContent('10:00')
+  })
+
+  it('M2-42: 固定の「リード文」ボタンから全文と現在の下線ラベルを見られる', () => {
+    render(<MockExamScreen items={items} pool={[w1, w2]} eras={testEras} onAnswer={noopAnswer} onFinish={() => {}} />)
+    fireEvent.click(screen.getByTestId('mock-exam-start'))
+
+    fireEvent.click(screen.getByTestId('lead-button'))
+    const text = screen.getByTestId('lead-sheet-text')
+    expect(within(text).getByText('下線A')).toBeInTheDocument()
+    expect(within(text).getByText('a')).toBeInTheDocument()
+    fireEvent.click(screen.getByTestId('lead-sheet-close'))
+    expect(screen.queryByTestId('lead-sheet-text')).not.toBeInTheDocument()
+  })
+})
+
+describe('MockExamScreen（M2-52: 画像リード型のリード画像を常時表示）', () => {
+  beforeEach(() => {
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] })
+  })
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
+  it('kind: "image" のセットは問題画面にリード画像を常に表示する（折りたたみ既定は開く）', () => {
+    const imageWork = makeWork({ id: 'me-img', era: 'kasei' })
+    const imagePassage: Passage = {
+      id: 'sec-image',
+      era: 'kasei',
+      kind: 'image',
+      title: '画像リード',
+      leadWorkIds: ['me-img'],
+      text: '(1)は[[a|作者不明の作]]である。',
+      sources: [],
+      underlines: [{ key: 'a' }],
+    }
+    const imageItems: MockExamItem[] = [
+      {
+        passage: imagePassage,
+        eraId: 'kasei',
+        underlineKey: 'a',
+        excerpt: [{ type: 'text', value: '(1)は作者不明の作である。' }],
+        question: { type: 'q4', work: imageWork, choiceWorks: [], choiceStatements: [], correctIndex: 0, isReview: false },
+      },
+    ]
+
+    render(
+      <MockExamScreen items={imageItems} pool={[imageWork]} eras={testEras} onAnswer={noopAnswer} onFinish={() => {}} />,
+    )
+    fireEvent.click(screen.getByTestId('mock-exam-start'))
+
+    // トグル操作なしで、既定で開いた状態のリード画像が問題画面に出ている
+    expect(screen.getByTestId('lead-image-grid')).toBeInTheDocument()
+
+    // 折りたたみは残す（既定は開いているが、隠す操作はできる）
+    fireEvent.click(screen.getByTestId('lead-image-toggle'))
+    expect(screen.queryByTestId('lead-image-grid')).not.toBeInTheDocument()
   })
 })

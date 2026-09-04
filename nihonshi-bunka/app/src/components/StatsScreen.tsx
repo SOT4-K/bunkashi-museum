@@ -2,10 +2,14 @@ import { useState } from 'react'
 import styles from './StatsScreen.module.css'
 import { CreditsSheet } from './CreditsSheet'
 import { WorkDetailSheet } from './WorkDetailSheet'
+import { ConfirmDialog } from './ConfirmDialog'
 import { isItemMastered } from '../engine/srs'
 import { migrate } from '../engine/progress'
 import { sortMissLogByCulture } from '../engine/missLog'
 import type { Era, ProgressState, Work } from '../types'
+
+/** 進捗リセットの確認段階（M2-46）。0: 未着手 / 1: 1回目の警告 / 2: 2回目（最終）の警告。 */
+type ResetStage = 0 | 1 | 2
 
 const TYPE_LABELS_SHORT: Record<string, string> = {
   q1: '画像→作品名',
@@ -32,16 +36,20 @@ export function StatsScreen({
   eras,
   progress,
   onImport,
+  onReset,
 }: {
   works: Work[]
   eras: Era[]
   progress: ProgressState
   onImport: (next: ProgressState) => void
+  /** 進捗リセット（M2-46）。省略時はリセットボタンを出さない（既存呼び出し元互換）。 */
+  onReset?: () => void
 }) {
   const [text, setText] = useState('')
   const [message, setMessage] = useState('')
   const [showCredits, setShowCredits] = useState(false)
   const [openWorkId, setOpenWorkId] = useState<string | null>(null)
+  const [resetStage, setResetStage] = useState<ResetStage>(0)
 
   const worksById = Object.fromEntries(works.map((w) => [w.id, w]))
   const missLog = sortMissLogByCulture(progress.missLog ?? [], worksById, eras)
@@ -169,6 +177,50 @@ export function StatsScreen({
           画像の出典
         </button>
       </div>
+
+      {/* M2-46: 進捗リセット。警告を2回出す（1回目に「先に進捗を書き出す」導線）。 */}
+      {onReset && (
+        <div className={styles.section}>
+          <button
+            type="button"
+            className={styles.resetButton}
+            data-testid="reset-progress-button"
+            onClick={() => setResetStage(1)}
+          >
+            進捗をリセット
+          </button>
+        </div>
+      )}
+
+      {resetStage === 1 && (
+        <ConfirmDialog
+          message="経験値・図鑑・復習・間違いノートがすべて消え、元に戻せません。"
+          detail="続ける前に、進捗を書き出しておくことをおすすめする。"
+          cancelLabel="キャンセル"
+          confirmLabel="続ける"
+          onCancel={() => setResetStage(0)}
+          onConfirm={() => setResetStage(2)}
+          extra={
+            <button type="button" className={styles.exportLink} data-testid="reset-export-link" onClick={handleExport}>
+              先に進捗を書き出す
+            </button>
+          }
+        />
+      )}
+
+      {resetStage === 2 && (
+        <ConfirmDialog
+          message="本当にリセットしますか？"
+          cancelLabel="キャンセル"
+          confirmLabel="リセットする"
+          destructive
+          onCancel={() => setResetStage(0)}
+          onConfirm={() => {
+            setResetStage(0)
+            onReset?.()
+          }}
+        />
+      )}
 
       {showCredits && <CreditsSheet onClose={() => setShowCredits(false)} />}
 

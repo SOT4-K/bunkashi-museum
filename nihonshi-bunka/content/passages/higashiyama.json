@@ -11,7 +11,11 @@
       "4文目（村田珠光の侘び茶）: content/works/higashiyama.json の murata-juko（facts・explanation）",
       "5文目（雪舟・宗祇・御伽草子）: content/works/higashiyama.json の sesshu / otogizoshi（facts）、content/eras.json の higashiyama（detail・items）",
       "6文目（文化の地方・庶民への広がり）: content/eras.json の higashiyama（detail）",
-      "高校教科書（山川『詳説日本史』）東山文化の項"
+      "高校教科書（山川『詳説日本史』）東山文化の項",
+      "図版の同定URL（下線a・d、慈照寺銀閣）: https://commons.wikimedia.org/wiki/File:Kyoto_Ginkaku-ji_Ginkaku_02.jpg",
+      "図版の同定URL（下線b、龍安寺方丈庭園）: https://commons.wikimedia.org/wiki/File:Kare-sansui_zen_garden,_Ry%C5%8Dan-ji,_Kyoto_20190416_1.jpg",
+      "図版の同定URL（下線c、慈照寺東求堂）: https://commons.wikimedia.org/wiki/File:Ginkakuji_Togudo.jpg",
+      "リード文の歴史記述そのものは教科書水準の通説で、一次資料・公的機関の公開ページは未参照（追検証URL未取得）"
     ],
     "underlines": [
       {
@@ -75,7 +79,7 @@
           "answerId": "ginkaku",
           "reversed": true
         },
-        "note": "画像を出す型。aで画像を伏せて選ばせたあとに置く。falseStatements に『足利義満が建てた』『北山文化の代表建築である』『外壁全体が金箔で覆われている』がそろう"
+        "note": "画像を出す型。aで画像を伏せて選ばせたあとに置く。falseStatements に『足利義満が建てた』『北山文化の代表建築である』『応仁の乱の前に造営された』がそろう（M2-41 で『外壁全体が金箔で覆われている』＝写真を見れば真偽が分かる文を差し替えた）"
       }
     ]
   },
@@ -93,7 +97,11 @@
       "Ｅ（侘び茶の創始）: content/works/higashiyama.json の murata-juko（facts・explanation）",
       "Ｆ（文化の名の由来）: content/works/higashiyama.json の ginkaku（eraNote）",
       "高校教科書（山川『詳説日本史』）東山文化の項",
-      "形式: research/nichidai-past-exams-analysis.md 1章「文化伏せ型（2016・2025）」・2章 T7（年代順並べ替え）"
+      "形式: research/nichidai-past-exams-analysis.md 1章「文化伏せ型（2016・2025）」・2章 T7（年代順並べ替え）",
+      "図版の同定URL（下線e、慈照寺銀閣）: https://commons.wikimedia.org/wiki/File:Kyoto_Ginkaku-ji_Ginkaku_02.jpg",
+      "図版の同定URL（下線b、慈照寺東求堂）: https://commons.wikimedia.org/wiki/File:Ginkakuji_Togudo.jpg",
+      "図版の同定URL（下線c、龍安寺方丈庭園）: https://commons.wikimedia.org/wiki/File:Kare-sansui_zen_garden,_Ry%C5%8Dan-ji,_Kyoto_20190416_1.jpg",
+      "Ａ〜Ｆの歴史記述そのものは教科書水準の通説で、一次資料・公的機関の公開ページは未参照（追検証URL未取得）"
     ],
     "underlines": [
       {
@@ -135,7 +143,7 @@
         ],
         "ask": {
           "type": "q9",
-          "stem": "下線部cのうち、白砂の上に15個の石を大小5群に配した構成で知られる庭園はどれか。",
+          "stem": "下線部cのうち、京都の龍安寺の方丈の前に営まれ、作庭者も正確な年代も確定していないものはどれか。",
           "answerId": "ryoanji-sekitei",
           "distractorIds": [
             "kinkaku",
@@ -143,7 +151,7 @@
             "shokintei-katsura"
           ]
         },
-        "note": "二段構え: A=枯山水（様式）／B=15個の石を大小5群に配した構成。1本目は同じ作品を q10（画像を出す型）で出しているので、こちらは画像を伏せる型にした。誤答にはこのセットで先に画像が出ていない建築だけを並べている（aで ginkaku、bで togudo-doujinsai の画像が出るため両者を除いた）"
+        "note": "二段構え: A=枯山水（様式）／B=龍安寺の方丈前庭・作庭者と年代が未確定。M2-41 で『白砂の上に15個の石を大小5群に配した構成』（写真で数えれば選べる条件）を、知識でしか判定できない所在・来歴の条件に差し替えた。1本目は同じ作品を q10（画像を出す型）で出しているので、こちらは画像を伏せる型にしている。誤答にはこのセットで先に画像が出ていない建築だけを並べた（aで ginkaku、bで togudo-doujinsai の画像が出るため両者を除いた）。**残る構造的な穴**: 誤答3件がいずれも建築で、正解だけが庭園のため、庭園を選ぶだけで当たってしまう。同カテゴリ（庭園）の画像あり作品がコーパスに1件も無いことが原因で、writer 側では解消できない（M2-49/M2-50 で庭園の画像が増えたら誤答を差し替えること）"
       },
       {
         "key": "d",

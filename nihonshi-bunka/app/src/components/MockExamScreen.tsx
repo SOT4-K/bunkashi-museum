@@ -1,35 +1,17 @@
-// 本番モード（大問IV形式の模試）。M2-20。リード文A〜D→各リード文の下線から出題→
-// 全10問終了で結果（20点満点・型別正答率）。engine/mockExam.ts が組み立てた
-// MockExamSection[]（リード文ごとに束ねた ThemeQuestion）を、リード文が変わるたびに
-// 全文表示（ThemeSetScreen と同じ「読解フェーズ」）→設問、という流れで消化する。
-import { useEffect, useMemo, useRef, useState } from 'react'
+// 本番モード（大問IV形式の模試）。M2-20 → M2-45 で「学習を始める」（旧 RandomLearnScreen）を
+// 統合した。全15文化・本番配分の重み付き抽選で10問を組み立て（engine/mockExam.ts）、
+// 開始画面の「時間を計る」トグル（既定オフ）→ 1問ずつ（下線抜粋＋設問。リード全文は
+// LeadPanel の固定ボタンから見る。M2-42）→ 全問終了で結果（20点満点・型別正答率）。
+import { useEffect, useRef, useState } from 'react'
 import learnStyles from './LearnScreen.module.css'
-import themeStyles from './ThemeSetScreen.module.css'
 import styles from './MockExamScreen.module.css'
 import { QuestionCard } from './QuestionCard'
 import { AnswerSheet } from './AnswerSheet'
-import { splitPassageText } from '../engine/passage'
+import { LeadPanel } from './LeadPanel'
 import { todayIso } from '../engine/srs'
-import { formatCountdown, MOCK_EXAM_POINTS_PER_QUESTION, MOCK_EXAM_TIME_SECONDS, type MockExamSection } from '../engine/mockExam'
+import { formatCountdown, MOCK_EXAM_POINTS_PER_QUESTION, MOCK_EXAM_TIME_SECONDS, type MockExamItem } from '../engine/mockExam'
 import type { MissSelection } from '../engine/explain'
-import type { AnswerKind, Era, Passage, Question, QuestionType } from '../types'
-
-interface FlatItem {
-  sectionLabel: string
-  passage: Passage
-  underlineKey: string
-  question: Question
-}
-
-function flatten(sections: MockExamSection[]): FlatItem[] {
-  const out: FlatItem[] = []
-  for (const section of sections) {
-    for (const q of section.questions) {
-      out.push({ sectionLabel: section.label, passage: section.passage, underlineKey: q.underlineKey, question: q.question })
-    }
-  }
-  return out
-}
+import type { AnswerKind, Era, Question, QuestionType, Work } from '../types'
 
 const TYPE_LABELS: Record<QuestionType, string> = {
   q1: '画像→作品名',
@@ -52,16 +34,19 @@ interface AnsweredState {
   isNewlyMastered: boolean
 }
 
-type Phase = 'read' | 'quiz' | 'done'
+type Phase = 'start' | 'quiz' | 'done'
 
 export function MockExamScreen({
-  sections,
+  items,
+  pool,
   eras,
   onAnswer,
   onMiss,
   onFinish,
 }: {
-  sections: MockExamSection[]
+  items: MockExamItem[]
+  /** LeadPanel の画像リード型解決用（content.ts の themeSetPool）。 */
+  pool: Work[]
   eras: Era[]
   onAnswer: (
     workId: string,
@@ -75,23 +60,22 @@ export function MockExamScreen({
   onFinish: () => void
 }) {
   const today = todayIso()
-  const flat = useMemo(() => flatten(sections), [sections])
-  const total = flat.length
+  const total = items.length
+  const [phase, setPhase] = useState<Phase>(total > 0 ? 'start' : 'done')
+  const [timed, setTimed] = useState(false)
   const [index, setIndex] = useState(0)
-  const [phase, setPhase] = useState<Phase>(total > 0 ? 'read' : 'done')
   const [answered, setAnswered] = useState<AnsweredState | null>(null)
   const [showSheet, setShowSheet] = useState(false)
-  const [contextOpen, setContextOpen] = useState(false)
   const [correctCount, setCorrectCount] = useState(0)
   const [typeStats, setTypeStats] = useState<Partial<Record<QuestionType, { correct: number; total: number }>>>({})
   const [secondsLeft, setSecondsLeft] = useState(MOCK_EXAM_TIME_SECONDS)
   const sheetTimerRef = useRef<number | null>(null)
 
   useEffect(() => {
-    if (phase === 'done') return
+    if (phase !== 'quiz' || !timed) return
     const timerId = window.setInterval(() => setSecondsLeft((s) => Math.max(0, s - 1)), 1000)
     return () => window.clearInterval(timerId)
-  }, [phase])
+  }, [phase, timed])
 
   useEffect(() => {
     return () => {
@@ -99,22 +83,10 @@ export function MockExamScreen({
     }
   }, [])
 
-  const current = flat[index]
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const segments = useMemo(() => (current ? splitPassageText(current.passage.text) : []), [current?.passage.id])
-  // M2-99 reviewer指摘（2026-09-04 再検証・重大1）: quizフェーズにリード文を見返す手段が
-  // 無く「下線部aに関して」の下線部の文言も出ていなかった（ThemeSetScreenでオーナーが
-  // 9/4に指摘し直した欠陥がMockExamScreenで再発）。ThemeSetScreenと同じcontextPanel/
-  // underlinePromptを移植する。
-  const underlineTextByKey = useMemo(() => {
-    const map = new Map<string, string>()
-    for (const seg of segments) {
-      if (seg.type === 'underline') map.set(seg.key, seg.value)
-    }
-    return map
-  }, [segments])
+  const current = items[index]
+  const eraName = current ? (eras.find((e) => e.id === current.eraId)?.name ?? current.eraId) : ''
 
-  function handleStartQuiz() {
+  function handleStart() {
     setPhase('quiz')
   }
 
@@ -157,17 +129,13 @@ export function MockExamScreen({
     }
     setAnswered(null)
     setShowSheet(false)
-    setContextOpen(false)
     const nextIndex = index + 1
-    if (nextIndex >= total) {
-      setIndex(nextIndex)
-      setPhase('done')
-      return
-    }
-    const isNewSection = flat[nextIndex].sectionLabel !== flat[index].sectionLabel
     setIndex(nextIndex)
-    setPhase(isNewSection ? 'read' : 'quiz')
+    if (nextIndex >= total) setPhase('done')
   }
+
+  const scorePoints = correctCount * MOCK_EXAM_POINTS_PER_QUESTION
+  const fullPoints = total * MOCK_EXAM_POINTS_PER_QUESTION
 
   if (total === 0) {
     return (
@@ -180,9 +148,30 @@ export function MockExamScreen({
     )
   }
 
+  if (phase === 'start') {
+    return (
+      <div className={learnStyles.screen}>
+        <div className={styles.examHeader}>
+          <span className={styles.examLabel}>本番モード（大問IV形式・全15文化）</span>
+        </div>
+        <p>{total}問・{fullPoints}点満点。型の配分は本番どおり。</p>
+        <label className={styles.timedToggle}>
+          <input
+            type="checkbox"
+            checked={timed}
+            onChange={(e) => setTimed(e.target.checked)}
+            data-testid="mock-exam-timed-toggle"
+          />
+          時間を計る（目安 {formatCountdown(MOCK_EXAM_TIME_SECONDS)}）
+        </label>
+        <button type="button" className={learnStyles.doneButton} data-testid="mock-exam-start" onClick={handleStart}>
+          始める
+        </button>
+      </div>
+    )
+  }
+
   if (phase === 'done') {
-    const scorePoints = correctCount * MOCK_EXAM_POINTS_PER_QUESTION
-    const fullPoints = total * MOCK_EXAM_POINTS_PER_QUESTION
     return (
       <div className={learnStyles.summaryScreen} data-testid="mock-exam-summary">
         <div>
@@ -215,92 +204,43 @@ export function MockExamScreen({
     )
   }
 
-  if (phase === 'read') {
-    return (
-      <div className={learnStyles.screen}>
-        <div className={styles.examHeader}>
-          <span className={styles.examLabel}>本番モード（大問IV形式）</span>
-          <span className={styles.timer} data-testid="mock-exam-timer">
-            残り目安 {formatCountdown(secondsLeft)}
-          </span>
-        </div>
-        <div className={themeStyles.header}>
-          <div className={`${themeStyles.title} caption-bold`}>
-            {current.sectionLabel}. {current.passage.title}
-          </div>
-        </div>
-        <div className={themeStyles.readPanel} data-testid="mock-exam-read-panel">
-          {segments.map((seg, i) =>
-            seg.type === 'underline' ? (
-              <mark key={i} className={themeStyles.underline}>
-                {seg.value}
-              </mark>
-            ) : (
-              <span key={i}>{seg.value}</span>
-            ),
-          )}
-        </div>
-        <button type="button" className={learnStyles.doneButton} data-testid="mock-exam-start-quiz" onClick={handleStartQuiz}>
-          問題へ
-        </button>
-      </div>
-    )
-  }
-
   // phase === 'quiz'
   const isLast = index === total - 1
-  const isRealUnderline = Boolean(current && underlineTextByKey.has(current.underlineKey))
-  const underlineLabel = current ? (underlineTextByKey.get(current.underlineKey) ?? '') : ''
 
   return (
     <div className={learnStyles.screen}>
       <div className={styles.examHeader}>
-        <span className={styles.examLabel}>
-          {current.sectionLabel}. {current.passage.title}
-        </span>
-        <span className={styles.timer} data-testid="mock-exam-timer">
-          残り目安 {formatCountdown(secondsLeft)}
-        </span>
+        <span className={`${styles.examLabel} caption`}>{eraName}</span>
+        {timed && (
+          <span className={styles.timer} data-testid="mock-exam-timer">
+            残り目安 {formatCountdown(secondsLeft)}
+          </span>
+        )}
       </div>
       <div className={learnStyles.progressRow}>
         <span>
           {index + 1}/{total}
         </span>
         <span className={learnStyles.dots}>
-          {flat.map((_, i) => (
+          {items.map((_, i) => (
             <span key={i} className={`${learnStyles.dot} ${i <= index ? learnStyles.dotFilled : ''}`} />
           ))}
         </span>
       </div>
 
-      <button
-        type="button"
-        className={themeStyles.contextToggle}
-        onClick={() => setContextOpen((v) => !v)}
-        data-testid="mock-exam-context-toggle"
-      >
-        {contextOpen ? 'リード文を閉じる' : 'リード文を見返す'}
-      </button>
+      <div className={styles.excerptPanel} data-testid="mock-exam-excerpt-panel">
+        {current.excerpt.map((seg, i) =>
+          seg.type === 'underline' ? (
+            <mark key={i} className={styles.underlineCurrent}>
+              {seg.value}
+            </mark>
+          ) : (
+            <span key={i}>{seg.value}</span>
+          ),
+        )}
+      </div>
 
-      {contextOpen && (
-        <div className={themeStyles.contextPanel} data-testid="mock-exam-context-panel">
-          {segments.map((seg, i) =>
-            seg.type === 'underline' ? (
-              <mark key={i} className={seg.key === current.underlineKey ? themeStyles.underlineCurrent : themeStyles.underline}>
-                {seg.value}
-              </mark>
-            ) : (
-              <span key={i}>{seg.value}</span>
-            ),
-          )}
-        </div>
-      )}
-
-      {isRealUnderline && (
-        <p className={themeStyles.underlinePrompt} data-testid="mock-exam-underline-prompt">
-          下線部{current.underlineKey}に関して: {underlineLabel}
-        </p>
-      )}
+      <LeadPanel passage={current.passage} underlineKey={current.underlineKey} pool={pool} />
 
       <QuestionCard question={current.question} answered={answered} onChoice={handleChoice} onUnknown={handleUnknown} />
 

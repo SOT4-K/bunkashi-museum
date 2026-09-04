@@ -92,12 +92,6 @@
   color: var(--text-dim);
 }
 
-.themeSetList {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
 .themeSetItem {
   min-height: 44px;
   padding: 10px 14px;

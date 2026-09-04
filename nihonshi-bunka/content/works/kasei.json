@@ -1118,7 +1118,7 @@
       },
       {
         "text": "歌舞伎役者を描いた役者絵である",
-        "why": "女性三人の美人画。分野ずらし",
+        "why": "実在の女性を題材とする美人画。写楽の役者絵との分野ずらし",
         "verifiedFalse": true
       },
       {
@@ -1166,7 +1166,7 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項",
-      "The Metropolitan Museum of Art コレクション"
+      "The Metropolitan Museum of Art コレクション（喜多川歌麿「寛政三美人」）: https://www.metmuseum.org/art/collection/search/55639"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -1311,7 +1311,8 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項",
-      "東京国立博物館（ColBase 収蔵品）"
+      "東京国立博物館（ColBase 収蔵品）",
+      "The Metropolitan Museum of Art コレクション（東洲斎写楽「三代目大谷鬼次の奴江戸兵衛」）: https://www.metmuseum.org/art/collection/search/37358"
     ],
     "examTags": [
       "frequent"
@@ -1392,7 +1393,7 @@
       },
       {
         "slot": "style",
-        "text": "全身を小さく描く美人画である"
+        "text": "明和期の錦絵の美人画である"
       },
       {
         "slot": "artist",
@@ -1406,8 +1407,8 @@
         "verifiedFalse": true
       },
       {
-        "text": "上半身を大きく描く大首絵である",
-        "why": "全身を小さく描く。形式ずらし",
+        "text": "寛政年間の作である",
+        "why": "明和年間（1760年代）の作。歌麿・写楽の寛政年間より前。時代ずらし",
         "verifiedFalse": true
       },
       {
@@ -1460,7 +1461,7 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項",
-      "東京国立博物館（ColBase 収蔵品。画像は Wikimedia Commons 経由）"
+      "東京国立博物館（ColBase 収蔵品、目録番号 A-10569-84。画像は Wikimedia Commons 経由）: https://commons.wikimedia.org/wiki/File:Beauty_Playing_the_Koto_Zither-by_Suzuki_Harunobu-Tokyo_National_Museum.jpg"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -1531,7 +1532,7 @@
       },
       {
         "slot": "other",
-        "text": "滝夜叉姫と巨大な骸骨を描く"
+        "text": "平将門の娘とされる滝夜叉姫の物語を題材とする"
       },
       {
         "slot": "other",
@@ -1614,7 +1615,7 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）化政文化の項",
-      "Victoria and Albert Museum 蔵（画像は Wikimedia Commons 経由）"
+      "Victoria and Albert Museum 蔵（E.1333:1 to 3-1922。画像は Wikimedia Commons 経由）: https://commons.wikimedia.org/wiki/File:Takiyasha_the_Witch_and_the_Skeleton_Spectre.jpg"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -1750,7 +1751,8 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項",
-      "文化庁 国指定文化財等データベース（国宝・絵画）"
+      "文化庁 国指定文化財等データベース（国宝・絵画）",
+      "画像（池大雅筆「十便図」のうち釣便図、川端康成記念会蔵）: Wikimedia Commons https://commons.wikimedia.org/wiki/File:The_Chobenzu_by_Ike_Taiga.jpg"
     ],
     "examTags": [
       "frequent"
@@ -1884,7 +1886,8 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項",
-      "三井記念美術館 収蔵品紹介"
+      "三井記念美術館 収蔵品紹介",
+      "画像（円山応挙「雪松図屏風」、三井記念美術館蔵）: Wikimedia Commons https://commons.wikimedia.org/wiki/File:Okyo_Pine_Trees.jpg"
     ],
     "examTags": [
       "frequent"
@@ -2027,7 +2030,8 @@
     },
     "sources": [
       "皇居三の丸尚蔵館 収蔵品紹介",
-      "高校日本史の資料集（図版）"
+      "高校日本史の資料集（図版）",
+      "画像（伊藤若冲「動植綵絵」老松孔雀図、宮内庁三の丸尚蔵館蔵）: Wikimedia Commons https://commons.wikimedia.org/wiki/File:%27Old_Pine_Tree_and_Peacock%27_from_the_%27Colorful_Realm_of_Living_Beings%27_by_Ito_Jakuchu.jpg"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -2166,7 +2170,8 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）化政文化の項",
-      "東京国立博物館（ColBase 収蔵品）"
+      "東京国立博物館（ColBase 収蔵品、A-9972）",
+      "画像（渡辺崋山「鷹見泉石像」、東京国立博物館蔵・国宝）: Wikimedia Commons https://commons.wikimedia.org/wiki/File:A_portrait_of_Takami_Senseki_by_Watanabe_Kazan.jpg"
     ],
     "examTags": [
       "frequent"
@@ -2232,7 +2237,7 @@
       },
       {
         "slot": "technique",
-        "text": "西洋の遠近法で池と弁天堂を描く"
+        "text": "西洋の遠近法・陰影法を取り入れている"
       },
       {
         "slot": "technique",
@@ -2308,7 +2313,8 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項",
-      "秋田県立近代美術館"
+      "秋田県立近代美術館",
+      "画像（小田野直武「不忍池図」、秋田県立近代美術館蔵・重要文化財）: Wikimedia Commons https://commons.wikimedia.org/wiki/File:Shinobazu_Pond_by_Odano_Naotake_(Akita_Museum_of_Modern_Art).jpg"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -2447,7 +2453,8 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）化政文化・洋学の項",
-      "国立国会図書館デジタルコレクション"
+      "国立国会図書館デジタルコレクション",
+      "画像（「大日本沿海輿地全図」の一図幅、Library of Congress 蔵）: Wikimedia Commons https://commons.wikimedia.org/wiki/File:Dai_Nihon_enkai_yochi_zenzu_LOC_2001620020-17.jpg"
     ],
     "examTags": [
       "frequent"
@@ -2596,7 +2603,8 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）宝暦・天明期の文化・洋学の項",
-      "国立国会図書館デジタルコレクション"
+      "国立国会図書館デジタルコレクション",
+      "画像（『解体新書』扉絵、安永3年＝1774年刊）: Wikimedia Commons https://commons.wikimedia.org/wiki/File:KaitaiShinsho-Frontispiece.jpg"
     ],
     "examTags": [
       "frequent"
@@ -2743,7 +2751,8 @@
       "sourceName": ""
     },
     "sources": [
-      "高校教科書（山川『詳説日本史』）宝暦・天明期の文化・洋学の項"
+      "高校教科書（山川『詳説日本史』）宝暦・天明期の文化・洋学の項",
+      "画像（司馬江漢「三囲景」、国立国会図書館蔵）: Wikimedia Commons https://commons.wikimedia.org/wiki/File:Shiba_K%C5%8Dkan_-_Mimegurinokei.jpg"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -2758,7 +2767,7 @@
         "kind": "person-text"
       }
     ],
-    "artist": null,
+    "artist": "本居宣長",
     "patron": null,
     "style": "国学",
     "religion": null,
@@ -2830,7 +2839,8 @@
     "examNote": "国学は「契沖→荷田春満→賀茂真淵→本居宣長→平田篤胤」の系譜と著書の対応で問われる。「本居宣長＝『古事記伝』」は必出。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項"
+      "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項",
+      "※画像を持たない項目のため所蔵機関の作品ページがない。記述は教科書水準の通説にもとづくもので、URL による追検証手段は未取得（M2-51）"
     ],
     "examTags": [
       "frequent"
@@ -2847,7 +2857,7 @@
         "kind": "person-text"
       }
     ],
-    "artist": null,
+    "artist": "塙保己一",
     "patron": null,
     "style": "国学",
     "religion": null,
@@ -2913,7 +2923,8 @@
     "examNote": "「本居宣長＝『古事記伝』」「塙保己一＝『群書類従』・和学講談所」と、国学者と著作・学問所の組合せで問われる。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項"
+      "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項",
+      "※画像を持たない項目のため所蔵機関の作品ページがない。記述は教科書水準の通説にもとづくもので、URL による追検証手段は未取得（M2-51）"
     ],
     "examTags": [],
     "status": "draft"
@@ -2928,7 +2939,7 @@
         "kind": "person-field"
       }
     ],
-    "artist": null,
+    "artist": "平賀源内",
     "patron": null,
     "style": "本草学・洋風画",
     "religion": "蘭学",
@@ -2991,7 +3002,8 @@
     "confusables": [],
     "sources": [
       "高校教科書（山川『詳説日本史』）宝暦・天明期の文化・洋学の項",
-      "秋田県立近代美術館"
+      "秋田県立近代美術館",
+      "※画像を持たない項目のため所蔵機関の作品ページがない。記述は教科書水準の通説にもとづくもので、URL による追検証手段は未取得（M2-51）"
     ],
     "examTags": [],
     "status": "draft"
@@ -3072,7 +3084,8 @@
     "examNote": "「洒落本・黄表紙＝寛政の改革で弾圧（山東京伝・恋川春町）」「人情本＝天保の改革で弾圧（為永春水）」と、文学の種類・作者・改革の対応が頻出。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項"
+      "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項",
+      "※画像を持たない項目のため所蔵機関の作品ページがない。記述は教科書水準の通説にもとづくもので、URL による追検証手段は未取得（M2-51）"
     ],
     "examTags": [
       "frequent"
@@ -3155,7 +3168,8 @@
     "examNote": "草双紙の種類（黄表紙・合巻）と時代、弾圧した改革の対応が問われる。「黄表紙＝恋川春町＝寛政の改革」。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項"
+      "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項",
+      "※画像を持たない項目のため所蔵機関の作品ページがない。記述は教科書水準の通説にもとづくもので、URL による追検証手段は未取得（M2-51）"
     ],
     "examTags": [],
     "status": "draft"
@@ -3240,7 +3254,8 @@
     "examNote": "「川柳＝柄井川柳」「狂歌＝大田南畝（蜀山人）」の対応で問われる。俳諧（芭蕉・蕪村・一茶）と混同しないこと。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項"
+      "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項",
+      "※画像を持たない項目のため所蔵機関の作品ページがない。記述は教科書水準の通説にもとづくもので、URL による追検証手段は未取得（M2-51）"
     ],
     "examTags": [],
     "status": "draft"
@@ -3319,7 +3334,8 @@
     "examNote": "教育機関は「藩校＝藩士の子弟」「寺子屋＝庶民の子ども」「昌平坂学問所＝幕府直轄」「郷校＝藩士と庶民」の対応で問われる。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項"
+      "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項",
+      "※画像を持たない項目のため所蔵機関の作品ページがない。記述は教科書水準の通説にもとづくもので、URL による追検証手段は未取得（M2-51）"
     ],
     "examTags": [],
     "status": "draft"
@@ -3334,7 +3350,7 @@
         "kind": "person-text"
       }
     ],
-    "artist": null,
+    "artist": "安藤昌益",
     "patron": null,
     "style": "社会思想",
     "religion": null,
@@ -3400,7 +3416,8 @@
     "examNote": "「安藤昌益＝『自然真営道』＝身分社会の批判」。化政期の経世家（本多利明・海保青陵）と時代・主張を混同しないこと。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項"
+      "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項",
+      "※画像を持たない項目のため所蔵機関の作品ページがない。記述は教科書水準の通説にもとづくもので、URL による追検証手段は未取得（M2-51）"
     ],
     "examTags": [],
     "status": "draft"
@@ -3488,7 +3505,8 @@
     "examNote": "化政期の文学は「読本＝曲亭馬琴」「滑稽本＝十返舎一九・式亭三馬」「人情本＝為永春水」の分野と作者の組合せが頻出。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）化政文化の項"
+      "高校教科書（山川『詳説日本史』）化政文化の項",
+      "※画像を持たない項目のため所蔵機関の作品ページがない。記述は教科書水準の通説にもとづくもので、URL による追検証手段は未取得（M2-51）"
     ],
     "examTags": [
       "frequent"
@@ -3569,7 +3587,8 @@
     "examNote": "「滑稽本＝十返舎一九『東海道中膝栗毛』・式亭三馬『浮世風呂』」。読本（曲亭馬琴）と分野を混同しないこと。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）化政文化の項"
+      "高校教科書（山川『詳説日本史』）化政文化の項",
+      "※画像を持たない項目のため所蔵機関の作品ページがない。記述は教科書水準の通説にもとづくもので、URL による追検証手段は未取得（M2-51）"
     ],
     "examTags": [
       "frequent"
@@ -3650,7 +3669,8 @@
     "examNote": "「洒落本・黄表紙＝寛政の改革」「人情本＝天保の改革」と、弾圧された文学と改革の対応を取り違えない。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）化政文化の項"
+      "高校教科書（山川『詳説日本史』）化政文化の項",
+      "※画像を持たない項目のため所蔵機関の作品ページがない。記述は教科書水準の通説にもとづくもので、URL による追検証手段は未取得（M2-51）"
     ],
     "examTags": [
       "frequent"
@@ -3731,7 +3751,8 @@
     "examNote": "「寺子屋＝庶民」「藩校＝藩士の子弟」「昌平坂学問所＝幕府直轄」。化政文化が地方・庶民へ広がった理由として問われる。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）化政文化の項"
+      "高校教科書（山川『詳説日本史』）化政文化の項",
+      "※画像を持たない項目のため所蔵機関の作品ページがない。記述は教科書水準の通説にもとづくもので、URL による追検証手段は未取得（M2-51）"
     ],
     "examTags": [
       "frequent"
@@ -3748,7 +3769,7 @@
         "kind": "person-text"
       }
     ],
-    "artist": null,
+    "artist": "本多利明",
     "patron": null,
     "style": "経世論",
     "religion": null,
@@ -3816,7 +3837,8 @@
     "examNote": "化政期の経世家は「本多利明＝『経世秘策』（開国・貿易）」「佐藤信淵」「海保青陵」と、人物と主張・著書の組合せで問われる。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）化政文化の項"
+      "高校教科書（山川『詳説日本史』）化政文化の項",
+      "※画像を持たない項目のため所蔵機関の作品ページがない。記述は教科書水準の通説にもとづくもので、URL による追検証手段は未取得（M2-51）"
     ],
     "examTags": [],
     "status": "draft"
@@ -3831,7 +3853,7 @@
         "kind": "person-school"
       }
     ],
-    "artist": null,
+    "artist": "平田篤胤",
     "patron": null,
     "style": "国学",
     "religion": "復古神道",
@@ -3900,7 +3922,8 @@
     "examNote": "神道は「伊勢神道＝度会家行」「吉田神道＝吉田兼倶」「垂加神道＝山崎闇斎」「復古神道＝平田篤胤」の対応で問われる。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）化政文化の項"
+      "高校教科書（山川『詳説日本史』）化政文化の項",
+      "※画像を持たない項目のため所蔵機関の作品ページがない。記述は教科書水準の通説にもとづくもので、URL による追検証手段は未取得（M2-51）"
     ],
     "examTags": [
       "frequent"
@@ -3917,7 +3940,7 @@
         "kind": "person-institution"
       }
     ],
-    "artist": null,
+    "artist": "シーボルト",
     "patron": null,
     "style": null,
     "religion": "蘭学",
@@ -3984,7 +4007,8 @@
     "examNote": "洋学の塾は「鳴滝塾＝シーボルト＝長崎」「適塾＝緒方洪庵＝大坂」「芝蘭堂＝大槻玄沢＝江戸」の対応で問われる。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）化政文化・洋学の項"
+      "高校教科書（山川『詳説日本史』）化政文化・洋学の項",
+      "※画像を持たない項目のため所蔵機関の作品ページがない。記述は教科書水準の通説にもとづくもので、URL による追検証手段は未取得（M2-51）"
     ],
     "examTags": [],
     "status": "draft"
@@ -3999,7 +4023,7 @@
         "kind": "person-text"
       }
     ],
-    "artist": null,
+    "artist": "頼山陽",
     "patron": null,
     "style": "史論",
     "religion": null,
@@ -4067,7 +4091,8 @@
     "examNote": "史論は「新井白石＝『読史余論』（元禄・正徳期）」「頼山陽＝『日本外史』（化政期）」の対応で問われる。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）化政文化の項"
+      "高校教科書（山川『詳説日本史』）化政文化の項",
+      "※画像を持たない項目のため所蔵機関の作品ページがない。記述は教科書水準の通説にもとづくもので、URL による追検証手段は未取得（M2-51）"
     ],
     "examTags": [],
     "status": "draft"

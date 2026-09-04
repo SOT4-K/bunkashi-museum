@@ -184,3 +184,29 @@ describe('generateQ9QuestionFromIds（8章「二段構え」: writer 指定の a
     expect(result!.distractorWorks).toHaveLength(3)
   })
 })
+
+describe('M2-41「絵を見れば分かる問題を出さない」: Q9 の条件スロットに外見スロットが無いこと', () => {
+  // Q9Slot（types.ts）は artist/era/holder/style/technique の5種のみ。姿勢・持ち物・表情・
+  // 向き・色・構図のような「画像を見れば判定できる」スロットは元々含まれていない
+  // （engine/q9.ts の SLOT_PRIORITY 定数を参照）。実装を変えずに固定するための回帰テスト。
+  const ALLOWED_SLOTS = new Set(['artist', 'era', 'holder', 'style', 'technique'])
+  const FORBIDDEN_SLOT_WORDS = ['pose', 'posture', 'color', 'appearance', 'expression', 'composition']
+
+  it('条件生成（generateQ9Question）が実際に使うスロットは常に許可された5種のいずれか', () => {
+    const eras = testEras
+    // artistPool は artist 条件で、eraOnlyPool は era 条件で生成できることを他のテストで
+    // 確認済み。ここでは「生成できたときの slot が許可リストの外に出ないこと」だけを見る。
+    for (let seed = 0; seed < 10; seed++) {
+      const result = generateQ9Question(hokusai1, artistPool, eras, seededRandom(seed))
+      if (result) expect(ALLOWED_SLOTS.has(result.slot)).toBe(true)
+    }
+  })
+
+  it('スロット名に外見を示す語（pose/posture/color 等）が含まれない', () => {
+    for (const slot of ALLOWED_SLOTS) {
+      for (const forbidden of FORBIDDEN_SLOT_WORDS) {
+        expect(slot).not.toContain(forbidden)
+      }
+    }
+  })
+})

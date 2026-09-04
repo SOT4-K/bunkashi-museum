@@ -7,7 +7,7 @@
       { "left": "阿修羅像（八部衆像）", "right": "興福寺（もと西金堂）", "kind": "作品×所蔵" },
       { "left": "興福寺西金堂", "right": "光明皇后", "kind": "作品×人物" }
     ],
-    "artist": null,
+    "artist": "不明",
     "patron": "光明皇后",
     "style": "乾漆像（天平彫刻）",
     "religion": "仏教（法相宗・藤原氏の氏寺興福寺）",
@@ -68,7 +68,7 @@
       },
       {
         "slot": "other",
-        "text": "三面六臂の姿である"
+        "text": "天平6年（734年）の西金堂の造立にともなって造られた"
       },
       {
         "slot": "location",
@@ -139,7 +139,8 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）天平文化の項",
-      "興福寺公式サイト（国宝館）"
+      "興福寺公式サイト（国宝館）",
+      "画像出典ページ（Wikimedia Commons、小川晴暘撮影『東洋美術』1933年）: https://commons.wikimedia.org/wiki/File:ASURA_Kohfukuji.jpg"
     ],
     "examTags": [
       "frequent"
@@ -153,7 +154,7 @@
       { "left": "十大弟子像", "right": "脱活乾漆像", "kind": "作品×技法" },
       { "left": "十大弟子像", "right": "興福寺（もと西金堂）", "kind": "作品×所蔵" }
     ],
-    "artist": null,
+    "artist": "不明",
     "patron": "光明皇后",
     "style": "乾漆像（天平彫刻）",
     "religion": "仏教（法相宗・藤原氏の氏寺興福寺）",
@@ -285,7 +286,8 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）天平文化の項",
-      "興福寺公式サイト（国宝館）"
+      "興福寺公式サイト（国宝館）",
+      "画像出典ページ（Wikimedia Commons、飛鳥園編『東洋美術』奈良時代特輯 1933年）: https://commons.wikimedia.org/wiki/File:FURUNA_Kofukuji.JPG"
     ],
     "examTags": [],
     "status": "draft"
@@ -297,7 +299,7 @@
       { "left": "執金剛神像", "right": "塑像", "kind": "作品×技法" },
       { "left": "執金剛神像", "right": "東大寺法華堂（三月堂）", "kind": "作品×所蔵" }
     ],
-    "artist": null,
+    "artist": "不明",
     "patron": null,
     "style": "塑像（天平彫刻）",
     "religion": "鎮護国家（華厳宗・東大寺）",
@@ -355,12 +357,8 @@
         "text": "秘仏として伝えられる"
       },
       {
-        "slot": "other",
-        "text": "甲冑を着け金剛杵を振り上げる姿"
-      },
-      {
-        "slot": "other",
-        "text": "彩色がよく残る"
+        "slot": "religion",
+        "text": "仏法を守る神（執金剛神）を表す"
       }
     ],
     "falseStatements": [
@@ -424,7 +422,8 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）天平文化の項",
-      "東大寺公式サイト"
+      "東大寺公式サイト",
+      "画像出典ページ（Wikimedia Commons、東京美術研究所『美術研究』No.96 1939年）: https://commons.wikimedia.org/wiki/File:Vajirapani_Shukong%C5%8Dshin_T%C5%8Ddai-ji_before_1939.jpg"
     ],
     "examTags": [
       "frequent"
@@ -439,7 +438,7 @@
       { "left": "四天王像（戒壇堂）", "right": "東大寺戒壇堂", "kind": "作品×所蔵" },
       { "left": "戒壇", "right": "鑑真がもたらした受戒の制度", "kind": "語句×語句" }
     ],
-    "artist": null,
+    "artist": "不明",
     "patron": null,
     "style": "塑像（天平彫刻）",
     "religion": "鎮護国家（華厳宗・東大寺）",
@@ -495,7 +494,7 @@
       },
       {
         "slot": "other",
-        "text": "広目天の静かな表情で知られる"
+        "text": "鑑真の来日にともなって設けられた戒壇の堂に安置される"
       },
       {
         "slot": "other",
@@ -559,7 +558,8 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）天平文化の項",
-      "東大寺公式サイト"
+      "東大寺公式サイト",
+      "画像出典ページ（Wikimedia Commons、審美書院『Japanese Temples and Their Treasures』1910年）: https://commons.wikimedia.org/wiki/File:%E3%80%8EJapanese_Temples_and_Their_Treasures%E3%80%8F%E3%80%8A%E5%9B%9B%E5%A4%A9%E7%8E%8B%E7%AB%8B%E5%83%8F_%E6%8C%81%E5%9B%BD%E5%A4%A9%E3%80%8B8%E4%B8%96%E7%B4%80%E4%B8%AD%E9%A0%83%E3%80%81%E5%A5%88%E8%89%AF%E6%99%82%E4%BB%A3%E3%80%81%E6%9D%B1%E5%A4%A7%E5%AF%BA%EF%BC%88%E6%88%92%E5%A3%87%E5%A0%82%E6%89%80%E5%9C%A8%EF%BC%89%E3%80%81%E5%A5%88%E8%89%AF.jpg"
     ],
     "examTags": [
       "frequent"
@@ -573,7 +573,7 @@
       { "left": "不空羂索観音像", "right": "脱活乾漆像", "kind": "作品×技法" },
       { "left": "不空羂索観音像", "right": "東大寺法華堂（三月堂）", "kind": "作品×所蔵" }
     ],
-    "artist": null,
+    "artist": "不明",
     "patron": null,
     "style": "乾漆像（天平彫刻）",
     "religion": "鎮護国家（華厳宗・東大寺）",
@@ -627,11 +627,7 @@
       },
       {
         "slot": "other",
-        "text": "三目八臂の姿である"
-      },
-      {
-        "slot": "other",
-        "text": "銀製の宝冠をもつ"
+        "text": "鎮護国家の思想のもとで造営が進んだ東大寺の像である"
       },
       {
         "slot": "location",

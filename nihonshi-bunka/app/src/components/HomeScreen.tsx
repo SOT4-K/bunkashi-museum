@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import styles from './HomeScreen.module.css'
-import { previewSessionComposition } from '../engine/session'
 import { isItemMastered } from '../engine/srs'
 import { titleForLevel } from '../engine/progress'
 import { useStandalone } from '../hooks/useStandalone'
-import type { Era, Passage, ProgressState, Work } from '../types'
+import type { Era, ProgressState, Work } from '../types'
 
 const ADD_TO_HOME_DISMISSED_KEY = 'bunkashi.addToHomeDismissed'
 
@@ -34,11 +33,7 @@ export function HomeScreen({
   works,
   eras,
   progress,
-  today,
-  dailyNewRemaining,
-  onStart,
-  themeSets = [],
-  onStartThemeSet,
+  hasMockExam,
   onStartMockExam,
   onStartMissReview,
   missLogCount = 0,
@@ -46,14 +41,10 @@ export function HomeScreen({
   works: Work[]
   eras: Era[]
   progress: ProgressState
-  today: string
-  dailyNewRemaining: number
-  onStart: () => void
-  /** テーマセット（リード文＋下線部→図版問題）一覧。省略時はセクションを出さない（既存呼び出し元互換）。 */
-  themeSets?: Passage[]
-  onStartThemeSet?: (passage: Passage) => void
-  /** 本番モード（M2-20）。省略時はボタンを出さない（既存呼び出し元互換）。 */
-  onStartMockExam?: () => void
+  /** 本番モードが組み立てられるか（content.ts の passages が1件以上あるか）。M2-45。 */
+  hasMockExam: boolean
+  /** 本番モード（M2-20 → M2-45 でランダム学習を統合）。 */
+  onStartMockExam: () => void
   /** 間違いノート復習（M2-23）。省略時はボタンを出さない（既存呼び出し元互換）。 */
   onStartMissReview?: () => void
   missLogCount?: number
@@ -66,14 +57,8 @@ export function HomeScreen({
   const currentEra = pickCurrentEra(eras, works, progress)
   const stats = currentEra ? eraStats(currentEra, works, progress) : { total: 0, mastered: 0, discovered: 0 }
   const masteryRatio = stats.total > 0 ? stats.mastered / stats.total : 0
-  const composition = previewSessionComposition(works, eras, progress, today, dailyNewRemaining)
-  // M2-21: 「学習を始める」はランダム学習（全15文化・下線プール）に変わり、SRSの復習・新規が
-  // 0件でも passages（テーマセットの元）があれば出題できる。そのため候補判定に
-  // themeSets（=passages）の有無も加える（既存の復習・新規件数表示はそのまま残す。目安として
-  // 有用なため。ランダム学習の正確な件数は毎回組み立ててみないと分からずコストが高い）。
-  const canStart = composition.reviewCount + composition.newCount > 0 || themeSets.length > 0
-  // works が0件（本番ビルドで reviewed が無い等）と、単に今日の分をやり終えたのを区別する。
-  // 前者を「また明日」と言うのは誤り（明日になっても出題できる作品は増えない）。
+  // works が0件（本番ビルドで reviewed が無い等）と、本番モードがまだ組み立てられない
+  // （passages 未投入）のを区別する（M2-45: 「今日の分」概念は本番モードには無い）。
   const noWorksAvailable = works.length === 0
 
   function dismissBanner() {
@@ -103,58 +88,33 @@ export function HomeScreen({
         <span>{progress.xp} XP</span>
       </div>
 
+      {/* M2-45: ホームの入口は「本番モード」「間違い復習」＋進捗表示だけにする（テーマセット
+          一覧・ランダム学習の「学習を始める」は削除。分析10.5章）。 */}
       <div>
-        <button type="button" className={styles.startButton} onClick={onStart} disabled={!canStart}>
-          <span>学習を始める</span>
-          <span className={styles.startSub}>
-            復習 {composition.reviewCount}・新規 {composition.newCount}
-          </span>
+        <button
+          type="button"
+          className={styles.startButton}
+          onClick={onStartMockExam}
+          disabled={!hasMockExam}
+          data-testid="mock-exam-button"
+        >
+          <span>本番モード</span>
+          <span className={styles.startSub}>大問IV形式10問・20点満点</span>
         </button>
-        {!canStart && (
+        {!hasMockExam && (
           <div className={styles.bossLine}>
-            {noWorksAvailable ? '出題できる作品がまだない。' : '今日の分は学習し終えた。また明日。'}
+            {noWorksAvailable ? '出題できる作品がまだない。' : 'リード文の投入待ち。'}
           </div>
         )}
       </div>
 
-      {onStartMissReview && (
+      {/* M2-45: 間違い復習は「0件なら非表示」（decisions.md 2026-09-04 22:30）。旧仕様
+          （0件でも disabled で表示）から変更した。 */}
+      {onStartMissReview && missLogCount > 0 && (
         <div>
-          <button
-            type="button"
-            className={styles.themeSetItem}
-            data-testid="miss-review-button"
-            onClick={onStartMissReview}
-            disabled={missLogCount === 0}
-          >
-            {missLogCount === 0 ? '間違いなし' : `間違えた問題を復習（${missLogCount}問）`}
+          <button type="button" className={styles.themeSetItem} data-testid="miss-review-button" onClick={onStartMissReview}>
+            {`間違えた問題を復習（${missLogCount}問）`}
           </button>
-        </div>
-      )}
-
-      {onStartMockExam && themeSets.length > 0 && (
-        <div>
-          <button type="button" className={styles.themeSetItem} data-testid="mock-exam-button" onClick={onStartMockExam}>
-            本番モード（大問IV形式10問・20点満点）
-          </button>
-        </div>
-      )}
-
-      {themeSets.length > 0 && onStartThemeSet && (
-        <div className={styles.eraBlock}>
-          <div className={styles.eraLabel}>テーマセット（模試型）</div>
-          <div className={styles.themeSetList}>
-            {themeSets.map((p) => (
-              <button
-                type="button"
-                key={p.id}
-                className={styles.themeSetItem}
-                data-testid="theme-set-button"
-                onClick={() => onStartThemeSet(p)}
-              >
-                {p.title}
-              </button>
-            ))}
-          </div>
         </div>
       )}
 
