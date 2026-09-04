@@ -152,8 +152,9 @@ export interface PassageUnderlineAsk {
 export interface PassageUnderline {
   key: string
   /** この下線から出題する作品（先頭から見て、出題プールにある最初の作品を対象にする）。
-   *  kind: "image" の passage では省略可（leadWorkIds を対象にする。9章）。 */
-  workIds: string[]
+   *  kind: "image" の passage の q12 下線では省略可（作品を直接問わない文字4択のため。
+   *  leadWorkIds が画像側の対象になる。9章）。 */
+  workIds?: string[]
   note?: string
   /** 下線の性質（8章「二段構え」。作品を一意に決めない一段外した手がかりの種別）。 */
   anchorKind?: 'temple' | 'hall' | 'person' | 'event' | 'school' | 'style' | 'institution'

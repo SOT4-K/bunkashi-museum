@@ -78,7 +78,14 @@ export function excerptAroundUnderline(passage: Pick<Passage, 'text'>, key: stri
     .join('')
 }
 
-/** underline に紐づく最初の「出題プールにある作品」を返す（テーマセット構築で使う）。 */
+/**
+ * underline に紐づく最初の「出題プールにある作品」を返す（テーマセット構築で使う）。
+ * kind: "image" の q12 下線（9章）は作品を直接問わないため workIds を持たないことがある
+ * （Hayato 修正、2026-09-04 M2-13 統合時: 未定義のまま .find() すると例外で本番ビルドが
+ * 落ちていた）。その場合は null を返し、呼び出し側（themeSet.ts の pickThemeTargetId）で
+ * passage.leadWorkIds へのフォールバックに委ねる。
+ */
 export function pickUnderlineTargetId(underline: PassageUnderline, availableIds: Set<string>): string | null {
+  if (!underline.workIds || underline.workIds.length === 0) return null
   return underline.workIds.find((id) => availableIds.has(id)) ?? null
 }

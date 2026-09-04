@@ -288,8 +288,9 @@ export function buildThemeSetQuestions(passage: Passage, pool: Work[], eras: Era
     const targetId = pickThemeTargetId(underline, passage, availableIds)
     const target = targetId ? byId.get(targetId) : undefined
     if (!target) {
+      // workIds が無い（kind:"image" の q12 下線、9章）ことがあるため join 前に防御する。
       console.warn(
-        `[themeSet] passage "${passage.id}" underline "${underline.key}": 出題プールに対象作品が無い（workIds: ${underline.workIds.join(', ')}）。スキップする。`,
+        `[themeSet] passage "${passage.id}" underline "${underline.key}": 出題プールに対象作品が無い（workIds: ${(underline.workIds ?? []).join(', ')}）。スキップする。`,
       )
       continue
     }
@@ -308,7 +309,14 @@ export function buildThemeSetQuestions(passage: Passage, pool: Work[], eras: Era
   // セット内に Q9 を1問以上（無ければ、生成可能な下線を探して Q9 優先で作り直す）。
   // 1下線しか無いセットでは「1問以上」の意味が薄く、唯一の設問（ask で明示的に選ばれたものかも
   // しれない）を強制的に上書きしてしまうため対象外にする。
-  if (items.length >= 2 && !items.some((it) => it.result.question.type === 'q9')) {
+  // Hayato 修正（2026-09-04 M2-13 統合時）: kind:"image"（9章「画像リード型セット」）は
+  // 「Q10・Q4・Q12・Q9のいずれか」を writer が意図的に混ぜる設計で、Q9/Q10 各1問以上の
+  // 制約（8章、text 型セット向け）は課されていない。この強制ループが writer 手書きの
+  // q12（answerText/distractorTexts）を q9/q10 に上書きすると、stem は「(1)を描いた
+  // 絵師は」のような文字4択の文面のまま、選択肢だけが画像4枚に化けて意味が壊れる
+  // （実データ kasei-image-01 で確認）。kind:"image" では強制しない。
+  const forceQ9AndQ10 = passage.kind !== 'image'
+  if (forceQ9AndQ10 && items.length >= 2 && !items.some((it) => it.result.question.type === 'q9')) {
     for (const it of items) {
       const forced = buildThemeQuestionForWorkWithMeta(it.target, pool, eras, rng, {
         ask: { ...it.underline.ask, type: 'q9' },
@@ -326,7 +334,7 @@ export function buildThemeSetQuestions(passage: Passage, pool: Work[], eras: Era
   // reviewer 指摘 [中]-4（2026-09-04 M2-11）: このループが「その項目が現在 q9 かどうか」を
   // 見ずに差し替えると、直前の Q9 強制ループで作った（セット唯一の）Q9 を消しかねない。
   // セット内の q9 が1件しかない場合は、その項目を Q10 強制の対象から除外する。
-  if (items.length >= 2 && !items.some((it) => it.result.question.type === 'q10')) {
+  if (forceQ9AndQ10 && items.length >= 2 && !items.some((it) => it.result.question.type === 'q10')) {
     const q9Count = items.filter((it) => it.result.question.type === 'q9').length
     for (const it of items) {
       if (q9Count <= 1 && it.result.question.type === 'q9') continue
