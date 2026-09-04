@@ -1,6 +1,12 @@
 [
   {
     "id": "ashura-kofukuji",
+    "orderIndex": 20,
+    "pairs": [
+      { "left": "阿修羅像", "right": "脱活乾漆像", "kind": "作品×技法" },
+      { "left": "阿修羅像（八部衆像）", "right": "興福寺（もと西金堂）", "kind": "作品×所蔵" },
+      { "left": "興福寺西金堂", "right": "光明皇后", "kind": "作品×人物" }
+    ],
     "artist": null,
     "patron": "光明皇后",
     "style": "乾漆像（天平彫刻）",
@@ -142,6 +148,11 @@
   },
   {
     "id": "judai-deshi-kofukuji",
+    "orderIndex": 25,
+    "pairs": [
+      { "left": "十大弟子像", "right": "脱活乾漆像", "kind": "作品×技法" },
+      { "left": "十大弟子像", "right": "興福寺（もと西金堂）", "kind": "作品×所蔵" }
+    ],
     "artist": null,
     "patron": "光明皇后",
     "style": "乾漆像（天平彫刻）",
@@ -281,6 +292,11 @@
   },
   {
     "id": "shukongoshin-todaiji",
+    "orderIndex": 10,
+    "pairs": [
+      { "left": "執金剛神像", "right": "塑像", "kind": "作品×技法" },
+      { "left": "執金剛神像", "right": "東大寺法華堂（三月堂）", "kind": "作品×所蔵" }
+    ],
     "artist": null,
     "patron": null,
     "style": "塑像（天平彫刻）",
@@ -417,6 +433,12 @@
   },
   {
     "id": "shitenno-kaidando",
+    "orderIndex": 40,
+    "pairs": [
+      { "left": "四天王像（戒壇堂）", "right": "塑像", "kind": "作品×技法" },
+      { "left": "四天王像（戒壇堂）", "right": "東大寺戒壇堂", "kind": "作品×所蔵" },
+      { "left": "戒壇", "right": "鑑真がもたらした受戒の制度", "kind": "語句×語句" }
+    ],
     "artist": null,
     "patron": null,
     "style": "塑像（天平彫刻）",
@@ -546,6 +568,11 @@
   },
   {
     "id": "fukukensaku-todaiji",
+    "orderIndex": 30,
+    "pairs": [
+      { "left": "不空羂索観音像", "right": "脱活乾漆像", "kind": "作品×技法" },
+      { "left": "不空羂索観音像", "right": "東大寺法華堂（三月堂）", "kind": "作品×所蔵" }
+    ],
     "artist": null,
     "patron": null,
     "style": "乾漆像（天平彫刻）",
@@ -682,6 +709,12 @@
   },
   {
     "id": "ganjin-toshodaiji",
+    "orderIndex": 60,
+    "pairs": [
+      { "left": "鑑真和上像", "right": "脱活乾漆像", "kind": "作品×技法" },
+      { "left": "鑑真和上像", "right": "唐招提寺", "kind": "作品×所蔵" },
+      { "left": "鑑真", "right": "戒律を伝えた唐の僧", "kind": "人物×事績" }
+    ],
     "artist": null,
     "patron": null,
     "style": "肖像彫刻",
@@ -816,6 +849,11 @@
   },
   {
     "id": "torige-ritsujo-byobu",
+    "orderIndex": 55,
+    "pairs": [
+      { "left": "鳥毛立女屏風", "right": "正倉院", "kind": "作品×所蔵" },
+      { "left": "鳥毛立女屏風", "right": "もとは鳥の羽毛を貼った屏風", "kind": "作品×技法" }
+    ],
     "artist": null,
     "patron": null,
     "style": "唐風の樹下美人図",
@@ -945,6 +983,11 @@
   },
   {
     "id": "kichijoten-yakushiji",
+    "orderIndex": 65,
+    "pairs": [
+      { "left": "吉祥天像", "right": "薬師寺", "kind": "作品×所蔵" },
+      { "left": "吉祥天像", "right": "麻布着色", "kind": "作品×技法" }
+    ],
     "artist": null,
     "patron": null,
     "style": "唐風の仏画",
@@ -1068,6 +1111,11 @@
   },
   {
     "id": "shosoin-hoko",
+    "orderIndex": 50,
+    "pairs": [
+      { "left": "正倉院宝庫", "right": "校倉造・高床式", "kind": "作品×技法" },
+      { "left": "正倉院宝庫", "right": "東大寺境内", "kind": "作品×所蔵" }
+    ],
     "artist": null,
     "patron": null,
     "style": "校倉造",
@@ -1195,6 +1243,11 @@
   },
   {
     "id": "toshodaiji-kondo",
+    "orderIndex": 70,
+    "pairs": [
+      { "left": "唐招提寺金堂", "right": "寄棟造・本瓦葺", "kind": "作品×技法" },
+      { "left": "唐招提寺", "right": "鑑真", "kind": "作品×人物" }
+    ],
     "artist": null,
     "patron": null,
     "style": "天平建築（寄棟造・本瓦葺）",
@@ -1321,5 +1374,340 @@
       "frequent"
     ],
     "status": "draft"
+  },
+  {
+    "id": "nanto-rokushu",
+    "kind": "concept",
+    "orderIndex": 5,
+    "pairs": [
+      { "left": "南都六宗", "right": "三論・成実・法相・倶舎・華厳・律", "kind": "語句×語句" },
+      { "left": "南都六宗", "right": "奈良の大寺で学ばれた仏教の学派", "kind": "語句×語句" }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "仏教",
+    "periodLabel": "奈良時代（8世紀）",
+    "eraNote": "奈良時代には、平城京の大寺を中心に三論・成実・法相・倶舎・華厳・律の六つの学派（南都六宗）が学ばれた。これらは宗派というより仏教教理の研究の集まりで、国家の保護のもとで学問として発展した。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      { "slot": "religion", "text": "三論・成実・法相・倶舎・華厳・律の六つをいう" },
+      { "slot": "other", "text": "平城京の大寺で学ばれた仏教の学派である" },
+      { "slot": "other", "text": "国家の保護のもとで教理の研究が進んだ" }
+    ],
+    "falseStatements": [
+      { "text": "天台宗・真言宗を含む六つの宗派である", "why": "天台宗・真言宗は平安時代前期に最澄・空海が開いたもので南都六宗には含まれない。時代・宗派ずらし", "verifiedFalse": true },
+      { "text": "鎌倉時代に庶民の間で広まった新しい仏教である", "why": "南都六宗は奈良時代の学問的な仏教。鎌倉新仏教との時代・性格ずらし", "verifiedFalse": true }
+    ],
+    "title": "南都六宗",
+    "reading": "なんとろくしゅう",
+    "era": "tenpyo",
+    "category": "other",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "三論・成実・法相・倶舎・華厳・律",
+      "奈良の大寺で学ばれた学派",
+      "国家の保護のもとでの学問的仏教",
+      "天台・真言（平安）と区別する"
+    ],
+    "explanation": "奈良時代、平城京の大寺を中心に学ばれた六つの仏教の学派。三論・成実・法相・倶舎・華厳・律をいい、宗派というよりは教理研究の集まりであった。国家の保護を受けて学問として発展し、平安時代の天台宗・真言宗と対比される。",
+    "examNote": "単独出題より、天平文化のリード文・誤文の素材として使う（画像なし項目）。六宗の名を1つ入れ替える誤文が定番。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）天平文化の項"
+    ],
+    "examTags": [],
+    "status": "reviewed"
+  },
+  {
+    "id": "kokubunji-daibutsu",
+    "kind": "concept",
+    "orderIndex": 12,
+    "pairs": [
+      { "left": "国分寺建立の詔（741年）", "right": "聖武天皇", "kind": "作品×人物" },
+      { "left": "大仏造立の詔（743年）", "right": "聖武天皇", "kind": "作品×人物" },
+      { "left": "鎮護国家", "right": "仏教の力で国家を守る考え", "kind": "語句×語句" }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "仏教（鎮護国家）",
+    "periodLabel": "奈良時代（8世紀中頃）",
+    "eraNote": "ききんや疫病、争乱が続くなか、聖武天皇は仏教の力で国家を守る鎮護国家の考えに立ち、741年に国分寺建立の詔、743年に大仏造立の詔を出した。東大寺と国分寺・国分尼寺の造営は、天平文化の中心をなす事業となった。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      { "slot": "other", "text": "聖武天皇が741年に国分寺建立の詔を出した" },
+      { "slot": "other", "text": "聖武天皇が743年に大仏造立の詔を出した" },
+      { "slot": "religion", "text": "仏教の力で国家を守る鎮護国家の考えにもとづく" },
+      { "slot": "other", "text": "総国分寺にあたるのが東大寺である" }
+    ],
+    "falseStatements": [
+      { "text": "国分寺建立の詔を出したのは桓武天皇である", "why": "聖武天皇が741年に出した。人物・時代ずらし", "verifiedFalse": true },
+      { "text": "大仏造立は民衆の反対によって中止された", "why": "大仏は造立され、752年に開眼供養が行われた。史実ずらし", "verifiedFalse": true }
+    ],
+    "title": "国分寺建立の詔と大仏造立の詔",
+    "reading": "こくぶんじこんりゅうのみことのりとだいぶつぞうりゅうのみことのり",
+    "era": "tenpyo",
+    "category": "other",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "741年 国分寺建立の詔（聖武天皇）",
+      "743年 大仏造立の詔（聖武天皇）",
+      "鎮護国家の思想",
+      "総国分寺＝東大寺"
+    ],
+    "explanation": "ききんや疫病、争乱が相次ぐなか、聖武天皇は仏教の力で国家を安定させようとして、741年に国分寺建立の詔を、743年に大仏造立の詔を出した。東大寺は総国分寺にあたり、各国の国分寺・国分尼寺とともに天平文化の中心的な事業となった。",
+    "examNote": "単独出題より、天平文化のリード文・誤文の素材として使う（画像なし項目）。年号と人物の組合せが頻出。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）天平文化の項"
+    ],
+    "examTags": [],
+    "status": "reviewed"
+  },
+  {
+    "id": "gyoki-ganjin",
+    "kind": "person",
+    "orderIndex": 15,
+    "pairs": [
+      { "left": "行基", "right": "民間布教・社会事業／大仏造立に協力", "kind": "人物×事績" },
+      { "left": "鑑真", "right": "唐から戒律を伝える／唐招提寺", "kind": "人物×事績" }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "仏教",
+    "periodLabel": "奈良時代（8世紀）",
+    "eraNote": "天平文化を支えた僧には、民間に布教しながら橋や池をつくる社会事業を行い、のちに大仏造立に協力した行基や、たびかさなる渡航の失敗をこえて来日し、正式な受戒の制度を伝えて唐招提寺を開いた鑑真がいる。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      { "slot": "other", "text": "行基は民間で布教し、橋や池をつくる社会事業を行った" },
+      { "slot": "other", "text": "行基はのちに大仏造立に協力した", "shared": ["kokubunji-daibutsu"] },
+      { "slot": "other", "text": "鑑真は唐から渡来し、戒律を伝えた", "shared": ["ganjin-toshodaiji"] },
+      { "slot": "other", "text": "鑑真は唐招提寺を開いた", "shared": ["toshodaiji-kondo", "ganjin-toshodaiji"] }
+    ],
+    "falseStatements": [
+      { "text": "鑑真は民間布教と社会事業を行った日本の僧である", "why": "鑑真は唐から渡来して戒律を伝えた僧。民間布教・社会事業は行基で人物ずらし", "verifiedFalse": true },
+      { "text": "行基は唐から戒律を伝えるために来日した", "why": "戒律を伝えたのは鑑真。行基は日本の僧で人物の入れ替えずらし", "verifiedFalse": true }
+    ],
+    "title": "行基・鑑真",
+    "reading": "ぎょうき・がんじん",
+    "era": "tenpyo",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "行基＝民間布教・社会事業、大仏造立に協力",
+      "鑑真＝唐から戒律を伝える、唐招提寺",
+      "東大寺に戒壇が設けられた",
+      "人物の入れ替えが誤文の定番"
+    ],
+    "explanation": "行基は民間に布教しながら橋や用水池をつくる社会事業を行い、はじめは朝廷に取り締まられたが、のちに大仏造立に協力した。鑑真はたびかさなる渡航の失敗をこえて来日し、正式な受戒の制度を伝えて東大寺に戒壇を設け、のちに唐招提寺を開いた。",
+    "examNote": "単独出題より、天平文化のリード文・誤文（人物の入替）の素材として使う（画像なし項目）。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）天平文化の項"
+    ],
+    "examTags": [],
+    "status": "reviewed"
+  },
+  {
+    "id": "hiden-seyakuin",
+    "kind": "concept",
+    "orderIndex": 18,
+    "pairs": [
+      { "left": "悲田院・施薬院", "right": "光明皇后", "kind": "作品×人物" },
+      { "left": "光明皇后", "right": "聖武天皇の后", "kind": "人物×事績" }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "仏教",
+    "periodLabel": "奈良時代（8世紀）",
+    "eraNote": "聖武天皇の后である光明皇后は、身寄りのない人や病人を救うために悲田院・施薬院を設けたと伝えられる。興福寺西金堂の造営など造像事業にも深くかかわり、天平文化を支えた人物として扱われる。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      { "slot": "other", "text": "光明皇后は聖武天皇の后である" },
+      { "slot": "other", "text": "悲田院・施薬院を設けたと伝えられる" },
+      { "slot": "other", "text": "興福寺西金堂の造営にかかわった", "shared": ["ashura-kofukuji", "judai-deshi-kofukuji"] }
+    ],
+    "falseStatements": [
+      { "text": "悲田院・施薬院は僧の受戒を行う施設である", "why": "受戒を行うのは戒壇。悲田院・施薬院は病人や身寄りのない人を救う施設で内容ずらし", "verifiedFalse": true },
+      { "text": "光明皇后は桓武天皇の后である", "why": "光明皇后は聖武天皇の后。人物・時代ずらし", "verifiedFalse": true }
+    ],
+    "title": "光明皇后と悲田院・施薬院",
+    "reading": "こうみょうこうごうとひでんいん・せやくいん",
+    "era": "tenpyo",
+    "category": "other",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "光明皇后＝聖武天皇の后",
+      "悲田院（身寄りのない人の救済）",
+      "施薬院（病人の救済）",
+      "興福寺西金堂の造像にもかかわる"
+    ],
+    "explanation": "聖武天皇の后である光明皇后は、仏教の慈悲の教えにもとづき、身寄りのない人を収容する悲田院、病人に薬を与える施薬院を設けたと伝えられる。興福寺西金堂の造営など天平の造像事業にも深くかかわった。",
+    "examNote": "単独出題より、天平文化のリード文・誤文の素材として使う（画像なし項目）。「悲田院・施薬院＝光明皇后」の対応が頻出。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）天平文化の項"
+    ],
+    "examTags": [],
+    "status": "reviewed"
+  },
+  {
+    "id": "kojiki-nihonshoki",
+    "kind": "text",
+    "orderIndex": 35,
+    "pairs": [
+      { "left": "『古事記』（712年）", "right": "稗田阿礼が誦習し太安万侶が筆録", "kind": "書物×著者" },
+      { "left": "『日本書紀』（720年）", "right": "舎人親王ら／漢文・編年体", "kind": "書物×著者" }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "periodLabel": "奈良時代（8世紀前半）",
+    "eraNote": "天武天皇のもとで始められた国史編纂の事業は奈良時代に実を結び、712年に『古事記』、720年に『日本書紀』が成立した。国家の由来を示す歴史書として、天平文化の一角をなす。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      { "slot": "other", "text": "『古事記』は712年に成立した" },
+      { "slot": "other", "text": "『古事記』は稗田阿礼が誦習した内容を太安万侶が筆録したとされる" },
+      { "slot": "other", "text": "『日本書紀』は720年に舎人親王らによって編まれた" },
+      { "slot": "other", "text": "『日本書紀』は漢文の編年体で書かれている" }
+    ],
+    "falseStatements": [
+      { "text": "『日本書紀』は『古事記』より先に完成した", "why": "『古事記』712年、『日本書紀』720年の順。前後の入れ替えずらし", "verifiedFalse": true },
+      { "text": "『古事記』は紀貫之が編んだ", "why": "紀貫之は『古今和歌集』の編者（国風文化）。人物・時代ずらし", "verifiedFalse": true }
+    ],
+    "title": "『古事記』『日本書紀』",
+    "reading": "こじき・にほんしょき",
+    "era": "tenpyo",
+    "category": "literature",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "『古事記』712年（稗田阿礼・太安万侶）",
+      "『日本書紀』720年（舎人親王ら、漢文・編年体）",
+      "天武朝に始まる国史編纂の成果",
+      "成立年の前後が誤文の定番"
+    ],
+    "explanation": "天武天皇のもとで始められた国史編纂の成果。712年に成立した『古事記』は、稗田阿礼が誦習した内容を太安万侶が筆録したとされる。720年に成立した『日本書紀』は舎人親王らが編んだ漢文の編年体の歴史書で、以後の国史編纂の出発点となった。",
+    "examNote": "単独出題より、天平文化のリード文・空欄補充の素材として使う（画像なし項目）。成立年と編者の組合せが頻出。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）天平文化の項"
+    ],
+    "examTags": [],
+    "status": "reviewed"
+  },
+  {
+    "id": "fudoki",
+    "kind": "text",
+    "orderIndex": 38,
+    "pairs": [
+      { "left": "『風土記』", "right": "国ごとの地誌（713年に編纂を命じる）", "kind": "書物×分類" },
+      { "left": "『出雲国風土記』", "right": "ほぼ完全な形で現存", "kind": "書物×分類" }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "periodLabel": "奈良時代（8世紀前半）",
+    "eraNote": "713年、国ごとに地名の由来・産物・伝承などを記して報告するよう命じられ、『風土記』が編まれた。ほぼ完全な形で残るのは『出雲国風土記』で、地方のようすを伝える資料として重んじられる。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      { "slot": "other", "text": "713年に国ごとの地誌を編むよう命じられた" },
+      { "slot": "other", "text": "地名の由来・産物・伝承などを記す" },
+      { "slot": "other", "text": "『出雲国風土記』がほぼ完全な形で残る" }
+    ],
+    "falseStatements": [
+      { "text": "『風土記』は和歌を集めた歌集である", "why": "『風土記』は国ごとの地誌。和歌を集めたのは『万葉集』で内容ずらし", "verifiedFalse": true },
+      { "text": "ほぼ完全な形で残る『風土記』は『常陸国風土記』である", "why": "ほぼ完全な形で残るのは『出雲国風土記』。書名ずらし", "verifiedFalse": true }
+    ],
+    "title": "『風土記』",
+    "reading": "ふどき",
+    "era": "tenpyo",
+    "category": "literature",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "713年に編纂を命じられた国ごとの地誌",
+      "地名の由来・産物・伝承を記す",
+      "『出雲国風土記』がほぼ完全な形で現存",
+      "『古事記』『日本書紀』と性格が異なる"
+    ],
+    "explanation": "713年、国ごとに地名の由来・産物・古老の伝承などを記して報告するよう命じられて編まれた地誌。多くは断片しか伝わらないが、『出雲国風土記』はほぼ完全な形で残り、奈良時代の地方のようすを知る貴重な資料となっている。",
+    "examNote": "単独出題より、天平文化のリード文・誤文の素材として使う（画像なし項目）。『古事記』『日本書紀』との性格の違いが問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）天平文化の項"
+    ],
+    "examTags": [],
+    "status": "reviewed"
+  },
+  {
+    "id": "manyoshu-kaifuso",
+    "kind": "text",
+    "orderIndex": 45,
+    "pairs": [
+      { "left": "『万葉集』", "right": "和歌集（万葉がなで記す）", "kind": "書物×分類" },
+      { "left": "『懐風藻』", "right": "現存最古の漢詩集", "kind": "書物×分類" },
+      { "left": "山上憶良", "right": "貧窮問答歌", "kind": "人物×作品" }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "periodLabel": "奈良時代（8世紀）",
+    "eraNote": "天平文化の文学では、天皇から民衆までの歌を漢字の音訓を用いた万葉がなで記した『万葉集』と、現存最古の漢詩集である『懐風藻』が編まれた。大伴家持・山上憶良らの歌が知られ、貴族の教養として漢詩文も重んじられた。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      { "slot": "other", "text": "『万葉集』は天皇から民衆までの歌を収める歌集である" },
+      { "slot": "other", "text": "『万葉集』は漢字の音訓を用いた万葉がなで記されている" },
+      { "slot": "other", "text": "『懐風藻』は現存最古の漢詩集である" },
+      { "slot": "other", "text": "山上憶良の貧窮問答歌が収められている" }
+    ],
+    "falseStatements": [
+      { "text": "『万葉集』は最初の勅撰和歌集である", "why": "最初の勅撰和歌集は『古今和歌集』（国風文化）。『万葉集』は勅撰ではなく時代・性格ずらし", "verifiedFalse": true },
+      { "text": "『懐風藻』はかな文字で書かれた和歌集である", "why": "『懐風藻』は漢詩集。かな文字が広まるのは国風文化で内容・時代ずらし", "verifiedFalse": true }
+    ],
+    "title": "『万葉集』『懐風藻』",
+    "reading": "まんようしゅう・かいふうそう",
+    "era": "tenpyo",
+    "category": "literature",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "『万葉集』＝天皇から民衆までの歌、万葉がな",
+      "『懐風藻』＝現存最古の漢詩集",
+      "山上憶良「貧窮問答歌」",
+      "『古今和歌集』（国風・最初の勅撰）と区別する"
+    ],
+    "explanation": "『万葉集』は天皇から民衆までの歌を広く収めた歌集で、漢字の音訓を用いた万葉がなで記されている。山上憶良の貧窮問答歌などが知られる。『懐風藻』は現存最古の漢詩集で、貴族の教養として漢詩文が重んじられたことを示す。",
+    "examNote": "単独出題より、天平文化のリード文・誤文の素材として使う（画像なし項目）。「『万葉集』＝天平／『古今和歌集』＝国風（最初の勅撰）」の区別が最頻出。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）天平文化の項"
+    ],
+    "examTags": [],
+    "status": "reviewed"
   }
 ]

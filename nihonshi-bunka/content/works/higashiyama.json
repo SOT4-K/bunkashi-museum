@@ -1,6 +1,12 @@
 [
   {
     "id": "ginkaku",
+    "orderIndex": 1482,
+    "pairs": [
+      { "kind": "建築×建立者", "left": "慈照寺銀閣", "right": "足利義政" },
+      { "kind": "建築×様式", "left": "慈照寺銀閣", "right": "書院造風と禅宗様の二層" },
+      { "kind": "文化×建築", "left": "東山文化", "right": "慈照寺銀閣" }
+    ],
     "artist": null,
     "patron": "足利義政",
     "style": "書院造系の楼閣建築（二層）",
@@ -100,6 +106,11 @@
   },
   {
     "id": "togudo-doujinsai",
+    "orderIndex": 1486,
+    "pairs": [
+      { "kind": "様式×建築", "left": "書院造", "right": "慈照寺東求堂同仁斎" },
+      { "kind": "建築×建立者", "left": "慈照寺東求堂", "right": "足利義政" }
+    ],
     "artist": null,
     "patron": "足利義政",
     "style": "書院造（住居建築）",
@@ -197,6 +208,11 @@
   },
   {
     "id": "ryoanji-sekitei",
+    "orderIndex": 1490,
+    "pairs": [
+      { "kind": "様式×庭園", "left": "枯山水", "right": "龍安寺方丈庭園（石庭）" },
+      { "kind": "庭園×所在", "left": "龍安寺方丈庭園（石庭）", "right": "龍安寺（京都市右京区）" }
+    ],
     "artist": null,
     "patron": null,
     "style": "枯山水",
@@ -284,6 +300,11 @@
   },
   {
     "id": "murata-juko",
+    "orderIndex": 1480,
+    "pairs": [
+      { "kind": "人物×茶", "left": "村田珠光", "right": "侘び茶の創始" },
+      { "kind": "人物×師", "left": "村田珠光", "right": "一休宗純（禅を学んだと伝わる）" }
+    ],
     "kind": "person",
     "artist": null,
     "patron": null,
@@ -358,6 +379,11 @@
   },
   {
     "id": "sesshu",
+    "orderIndex": 1486,
+    "pairs": [
+      { "kind": "人物×分野", "left": "雪舟", "right": "水墨画の大成" },
+      { "kind": "人物×作品", "left": "雪舟", "right": "秋冬山水図・四季山水図巻" }
+    ],
     "kind": "person",
     "artist": null,
     "patron": null,
@@ -434,6 +460,11 @@
   },
   {
     "id": "otogizoshi",
+    "orderIndex": 1500,
+    "pairs": [
+      { "kind": "書物×分類", "left": "御伽草子", "right": "庶民向けの短編物語群" },
+      { "kind": "書物×代表作", "left": "御伽草子", "right": "一寸法師・浦島太郎" }
+    ],
     "kind": "text",
     "artist": null,
     "patron": null,
@@ -505,5 +536,356 @@
     ],
     "examTags": [],
     "status": "reviewed"
+  },
+  {
+    "id": "sogi",
+    "orderIndex": 1488,
+    "pairs": [
+      { "kind": "人物×分野", "left": "宗祇", "right": "正風連歌の確立" },
+      { "kind": "人物×編著", "left": "宗祇", "right": "新撰菟玖波集・水無瀬三吟百韻" }
+    ],
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "室町時代中期〜後期（15世紀）",
+    "eraNote": "東山文化。連歌は地方の武士や庶民にまで広まり、宗祇は和歌に近い格調を重んじる正風連歌を確立した。連歌師は各地を旅して地方に文化を伝える役割も果たした。",
+    "facts": [
+      { "slot": "other", "text": "正風連歌を確立した" },
+      { "slot": "other", "text": "『新撰菟玖波集』を編んだ" },
+      { "slot": "other", "text": "弟子とよんだ『水無瀬三吟百韻』が知られる" }
+    ],
+    "falseStatements": [
+      { "text": "菟玖波集を編んだ", "why": "菟玖波集を編んだのは二条良基（南北朝期）。人物・作品の入れ替え", "verifiedFalse": true },
+      { "text": "俳諧連歌を始めて犬筑波集を編んだ", "why": "犬筑波集は山崎宗鑑。人物・作品の入れ替え", "verifiedFalse": true },
+      { "text": "水墨画を大成した", "why": "水墨画の大成は雪舟。人物・分野の入れ替え", "verifiedFalse": true },
+      { "text": "北山文化の人物である", "why": "宗祇は東山文化期（15世紀後半）の連歌師。時代の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "宗祇",
+    "reading": "そうぎ",
+    "era": "higashiyama",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "正風連歌の確立者",
+      "『新撰菟玖波集』を編んだ",
+      "『水無瀬三吟百韻』",
+      "各地を旅して連歌を地方に広めた"
+    ],
+    "explanation": "和歌に近い格調を重んじる正風連歌を確立した連歌師。『新撰菟玖波集』を編み、弟子とともによんだ『水無瀬三吟百韻』が代表作として知られる。各地をめぐって連歌を指導したことで、応仁の乱後に文化が地方へ広がる担い手ともなった。",
+    "examNote": "連歌は「二条良基（菟玖波集）→ 宗祇（正風連歌・新撰菟玖波集）→ 山崎宗鑑（俳諧連歌・犬筑波集）」の流れで問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）東山文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "yamazaki-sokan",
+    "orderIndex": 1520,
+    "pairs": [
+      { "kind": "人物×分野", "left": "山崎宗鑑", "right": "俳諧連歌" },
+      { "kind": "人物×編著", "left": "山崎宗鑑", "right": "犬筑波集" }
+    ],
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "室町時代後期（15世紀末〜16世紀前半）",
+    "eraNote": "東山文化ののち、連歌はさらに庶民のあいだへ広がり、こっけいや機知を重んじる俳諧連歌が生まれた。山崎宗鑑はその代表で、『犬筑波集』を編んだ。",
+    "facts": [
+      { "slot": "other", "text": "俳諧連歌の代表的な作者" },
+      { "slot": "other", "text": "『犬筑波集』を編んだ" },
+      { "slot": "other", "text": "のちの俳諧（俳句）につながる流れをつくった" }
+    ],
+    "falseStatements": [
+      { "text": "正風連歌を確立した", "why": "正風連歌の確立は宗祇。人物の入れ替え", "verifiedFalse": true },
+      { "text": "菟玖波集を編んだ", "why": "菟玖波集は二条良基。人物・作品の入れ替え", "verifiedFalse": true },
+      { "text": "御伽草子の作者である", "why": "御伽草子は作者不詳の短編物語群。分野の入れ替え", "verifiedFalse": true },
+      { "text": "元禄文化の俳人である", "why": "宗鑑は室町時代後期の人物。松尾芭蕉（元禄）との時代の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "山崎宗鑑",
+    "reading": "やまざきそうかん",
+    "era": "higashiyama",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "俳諧連歌の代表的な作者",
+      "『犬筑波集』を編んだ",
+      "こっけい・機知を重んじる作風",
+      "のちの俳諧（俳句）につながる"
+    ],
+    "explanation": "格調を重んじる正風連歌に対し、こっけいや機知を取り入れた俳諧連歌を広めた人物。その作品を集めた『犬筑波集』は、連歌が庶民のあいだへさらに広がったことを示す。この流れはのちの俳諧、さらに江戸時代の俳句へとつながっていく。",
+    "examNote": "「犬筑波集＝山崎宗鑑＝俳諧連歌」。宗祇（正風連歌・新撰菟玖波集）との対比で問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）東山文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "shubun",
+    "orderIndex": 1440,
+    "pairs": [
+      { "kind": "人物×分野", "left": "周文", "right": "水墨画（相国寺の画僧）" },
+      { "kind": "人物×弟子", "left": "周文", "right": "雪舟" }
+    ],
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "禅宗（臨済宗）",
+    "holder": null,
+    "subject": null,
+    "periodLabel": "室町時代中期（15世紀前半）",
+    "eraNote": "東山文化に先立つ室町中期。禅宗とともに伝わった水墨画は、五山の画僧によって受けつがれた。相国寺の画僧・周文は幕府の御用をつとめ、雪舟はその流れをくむとされる。",
+    "facts": [
+      { "slot": "other", "text": "相国寺の画僧で水墨画を描いた" },
+      { "slot": "other", "text": "幕府の御用をつとめた" },
+      { "slot": "other", "text": "雪舟は周文の流れをくむとされる" }
+    ],
+    "falseStatements": [
+      { "text": "明に渡って画技を学び水墨画を大成した", "why": "明に渡って水墨画を大成したのは雪舟。人物の入れ替え", "verifiedFalse": true },
+      { "text": "狩野派の祖である", "why": "狩野派の祖は狩野正信。人物・画派の入れ替え", "verifiedFalse": true },
+      { "text": "大和絵の絵師である", "why": "周文は水墨画の画僧。分野の入れ替え", "verifiedFalse": true },
+      { "text": "桃山文化の障壁画を手がけた", "why": "桃山の障壁画は狩野永徳・長谷川等伯ら。時代の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "周文",
+    "reading": "しゅうぶん",
+    "era": "higashiyama",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "相国寺の画僧",
+      "幕府の御用をつとめた水墨画家",
+      "雪舟の先行者とされる",
+      "室町水墨画の系譜（明兆・如拙・周文・雪舟）"
+    ],
+    "explanation": "京都・相国寺の画僧で、幕府の御用をつとめた水墨画家。如拙のあとを受けて室町の水墨画を発展させ、雪舟はその流れをくむとされる。禅宗とともに伝わった水墨画が、五山の画僧たちによって日本に根づいていく過程を示す人物である。",
+    "examNote": "室町の水墨画は「如拙 → 周文 → 雪舟」の系譜で問われる。雪舟（明へ渡り水墨画を大成）との事績の取り違えに注意。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）東山文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "kano-masanobu",
+    "orderIndex": 1480,
+    "pairs": [
+      { "kind": "人物×画派", "left": "狩野正信", "right": "狩野派の祖" },
+      { "kind": "画派×特色", "left": "狩野派", "right": "水墨画と大和絵の融合" }
+    ],
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "室町時代中期〜後期（15世紀後半）",
+    "eraNote": "東山文化。幕府の御用絵師となった狩野正信は、水墨画の技法に大和絵の彩色や主題を取り入れた画風を開き、その一門（狩野派）は子の元信を経て桃山文化の狩野永徳へと続く。",
+    "facts": [
+      { "slot": "other", "text": "狩野派の祖" },
+      { "slot": "other", "text": "幕府の御用絵師をつとめた" },
+      { "slot": "other", "text": "子の元信とともに水墨画と大和絵を融合させた" }
+    ],
+    "falseStatements": [
+      { "text": "明に渡って水墨画を学んだ", "why": "明に渡ったのは雪舟。人物・事績の入れ替え", "verifiedFalse": true },
+      { "text": "唐獅子図屏風を描いた", "why": "唐獅子図屏風は狩野永徳（桃山文化）。人物・時代の入れ替え", "verifiedFalse": true },
+      { "text": "土佐派の絵師である", "why": "正信は狩野派の祖。画派の入れ替え", "verifiedFalse": true },
+      { "text": "浮世絵の祖とされる", "why": "浮世絵の祖は菱川師宣（元禄文化）。時代・分野の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "狩野正信",
+    "reading": "かのうまさのぶ",
+    "era": "higashiyama",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "狩野派の祖",
+      "幕府の御用絵師",
+      "水墨画に大和絵を取り入れた",
+      "子の元信、のちの狩野永徳へ続く"
+    ],
+    "explanation": "室町幕府の御用絵師となり、狩野派の祖となった絵師。禅宗とともに伝わった水墨画の技法に、大和絵の彩色や主題を取り入れた画風を開いた。その一門は子の元信を経て、桃山文化の狩野永徳による濃絵の障壁画へと受けつがれ、以後、近世を通じて画壇の中心となる。",
+    "examNote": "「狩野派の祖＝狩野正信」「濃絵の障壁画＝狩野永徳（桃山）」。雪舟（禅僧出身の水墨画家）との系統の違いが問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）東山文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "shoin-zukuri",
+    "orderIndex": 1486,
+    "pairs": [
+      { "kind": "様式×建築", "left": "書院造", "right": "慈照寺東求堂同仁斎" },
+      { "kind": "様式×要素", "left": "書院造", "right": "床の間・違い棚・付書院・畳" }
+    ],
+    "kind": "concept",
+    "artist": null,
+    "patron": null,
+    "style": "書院造",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "室町時代中期（15世紀後半）",
+    "eraNote": "東山文化。寝殿造にかわって、床の間・違い棚・付書院を備え、畳を敷きつめた住宅の様式が整えられた。書院造と呼ばれるこの様式は、のちの和室の原型となった。",
+    "facts": [
+      { "slot": "style", "text": "床の間・違い棚・付書院を備える住宅の様式" },
+      { "slot": "other", "text": "畳を敷きつめ、明障子や襖で部屋を仕切る" },
+      { "slot": "other", "text": "代表例は慈照寺東求堂同仁斎" }
+    ],
+    "falseStatements": [
+      { "text": "平安時代の貴族の住宅様式である", "why": "平安時代の貴族の住宅は寝殿造。時代・様式の入れ替え", "verifiedFalse": true },
+      { "text": "禅宗とともに伝わった仏堂の様式である", "why": "禅宗とともに伝わったのは禅宗様（仏堂建築）。分野の入れ替え", "verifiedFalse": true },
+      { "text": "金閣に用いられた様式である", "why": "金閣は寝殿造風と禅宗様の折衷。建築の入れ替え", "verifiedFalse": true },
+      { "text": "水を用いず石と砂で山水を表す庭園の様式である", "why": "それは枯山水（庭園）。分野の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "書院造",
+    "reading": "しょいんづくり",
+    "era": "higashiyama",
+    "category": "style",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "床の間・違い棚・付書院を備える",
+      "畳を敷きつめる",
+      "代表例は慈照寺東求堂同仁斎",
+      "のちの和室の原型"
+    ],
+    "explanation": "床の間・違い棚・付書院を備え、畳を敷きつめて襖や明障子で部屋を仕切る住宅の様式。平安時代の寝殿造にかわって整えられ、のちの和室の原型となった。慈照寺東求堂の一室「同仁斎」が最も古い例として挙げられ、床の間に絵や花を飾る生活文化もここから広がった。",
+    "examNote": "「書院造＝東求堂同仁斎（東山文化）」「寝殿造＝平安の貴族住宅」「権現造＝日光東照宮（寛永期）」の様式対応で問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）東山文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "karesansui",
+    "orderIndex": 1490,
+    "pairs": [
+      { "kind": "様式×庭園", "left": "枯山水", "right": "龍安寺方丈庭園・大徳寺大仙院庭園" },
+      { "kind": "様式×素材", "left": "枯山水", "right": "白砂と石（水を用いない）" }
+    ],
+    "kind": "concept",
+    "artist": null,
+    "patron": null,
+    "style": "枯山水",
+    "religion": "禅宗",
+    "holder": null,
+    "subject": null,
+    "periodLabel": "室町時代中期〜後期（15〜16世紀）",
+    "eraNote": "東山文化。禅の精神を反映し、水を用いずに白砂と石だけで山水を象徴的に表す庭園の様式が発達した。龍安寺方丈庭園や大徳寺大仙院庭園がその代表とされる。",
+    "facts": [
+      { "slot": "style", "text": "水を用いず白砂と石で山水を表す庭園の様式" },
+      { "slot": "other", "text": "禅寺の方丈の前庭に営まれた" },
+      { "slot": "other", "text": "龍安寺方丈庭園・大徳寺大仙院庭園が代表" }
+    ],
+    "falseStatements": [
+      { "text": "池を中心に園路をめぐらせる庭園の様式である", "why": "それは池泉回遊式庭園。様式の入れ替え", "verifiedFalse": true },
+      { "text": "金閣の庭園に用いられた様式である", "why": "金閣の庭園は池泉回遊式（鏡湖池）。建築・様式の入れ替え", "verifiedFalse": true },
+      { "text": "床の間・違い棚を備える住宅の様式である", "why": "それは書院造（建築）。分野の入れ替え", "verifiedFalse": true },
+      { "text": "江戸時代に生まれた庭園様式である", "why": "枯山水は室町時代に発達した。時代の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "枯山水",
+    "reading": "かれさんすい",
+    "era": "higashiyama",
+    "category": "style",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "水を用いず白砂と石で山水を表す",
+      "禅寺の方丈の前庭に営まれた",
+      "龍安寺方丈庭園・大徳寺大仙院庭園",
+      "池泉回遊式庭園と対比される"
+    ],
+    "explanation": "水を用いず、白砂と石の組み合わせだけで山や水の風景を象徴的に表す庭園の様式。禅の精神を映したものとされ、禅寺の方丈の前庭に営まれた。龍安寺方丈庭園（石庭）や大徳寺大仙院庭園が代表とされ、池を中心とする池泉回遊式庭園（金閣・銀閣の庭）とはっきり区別される。",
+    "examNote": "「枯山水＝龍安寺石庭・大仙院庭園（東山文化）」。金閣・銀閣の庭（池泉回遊式）との取り違えが定番。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）東山文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "ashikaga-gakko",
+    "orderIndex": 1439,
+    "pairs": [
+      { "kind": "施設×再興した人物", "left": "足利学校", "right": "上杉憲実" },
+      { "kind": "施設×所在", "left": "足利学校", "right": "下野国（栃木県足利市）" }
+    ],
+    "kind": "concept",
+    "artist": null,
+    "patron": "上杉憲実",
+    "style": null,
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "室町時代中期（15世紀前半に再興）",
+    "eraNote": "東山文化。応仁の乱の前後、公家や僧が地方に下ったことで学問も地方へ広がった。関東管領の上杉憲実が再興した足利学校には各地から学徒が集まり、のちに宣教師によって「坂東の大学」と伝えられた。",
+    "facts": [
+      { "slot": "patron", "text": "関東管領の上杉憲実が再興した" },
+      { "slot": "location", "text": "下野国（栃木県足利市）にある" },
+      { "slot": "other", "text": "各地から集まった僧や武士が儒学などを学んだ" }
+    ],
+    "falseStatements": [
+      { "text": "空海が庶民のために開いた学校である", "why": "綜芸種智院は空海（弘仁・貞観文化）。人物・時代の入れ替え", "verifiedFalse": true },
+      { "text": "江戸幕府が設けた昌平坂学問所である", "why": "昌平坂学問所は江戸時代の幕府の学問所。時代・施設の入れ替え", "verifiedFalse": true },
+      { "text": "京都に置かれた", "why": "足利学校は下野国（栃木県足利市）にある。所在の入れ替え", "verifiedFalse": true },
+      { "text": "藤原氏が設けた大学別曹である", "why": "大学別曹（勧学院など）は平安時代の貴族の教育施設。時代・内容の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "足利学校",
+    "reading": "あしかががっこう",
+    "era": "higashiyama",
+    "category": "other",
+    "location": "下野国（栃木県足利市）",
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "上杉憲実が再興",
+      "下野国（栃木県足利市）",
+      "各地から学徒が集まった",
+      "学問が地方へ広がったことを示す"
+    ],
+    "explanation": "関東管領の上杉憲実が書物を寄進して再興した学校で、各地から集まった僧や武士が儒学などを学んだ。応仁の乱の前後、京都の公家や僧が地方に下ったことで文化と学問が地方へ広がった東山文化期の状況を示す代表例とされ、のちに来日した宣教師によって「坂東の大学」として伝えられた。",
+    "examNote": "「足利学校＝上杉憲実＝下野国」。空海の綜芸種智院（弘仁・貞観）や江戸の昌平坂学問所との取り違えに注意。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）東山文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
   }
 ]

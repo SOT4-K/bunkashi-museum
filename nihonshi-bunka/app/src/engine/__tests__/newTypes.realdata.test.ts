@@ -52,20 +52,29 @@ describe('実データ: Q4/Q6/Q8 の生成可否と衝突チェック', () => {
     console.log(`[Q6] 生成できない作品 (${ungenerable.length}件):`, ungenerable)
   })
 
-  it('Q8: 生成できる全作品で、10 seed とも正解・誤答の組合せ文字列が重複しない', () => {
-    const ungenerable: string[] = []
-    for (const work of works) {
-      let generatedAtLeastOnce = false
-      for (let seed = 0; seed < 10; seed++) {
-        const result = generateComboQuestion(work, works, seededRandom(seed))
-        if (!result) continue
-        generatedAtLeastOnce = true
-        const texts = [result.correct.text, ...result.distractors.map((d) => d.text)]
-        expect(new Set(texts).size, `${work.id} (seed ${seed}) の4択に重複テキストがある`).toBe(texts.length)
-        expect(result.distractors).toHaveLength(3)
+  // M2-16 補修: content/works/ が writer の並行作業で増え続け（実測 173→200件超）、
+  // 全作品×10seed の総当たりが既定の 5000ms タイムアウトに収まらなくなっていた
+  // （full suite 実行時は他ファイルとの CPU 競合でさらに伸びる）。ロジックは変えず、
+  // タイムアウトだけ延ばす（builder の担当外だが、npm test を通す必要があるための最小修正。
+  // 完了報告に明記する）。
+  it(
+    'Q8: 生成できる全作品で、10 seed とも正解・誤答の組合せ文字列が重複しない',
+    () => {
+      const ungenerable: string[] = []
+      for (const work of works) {
+        let generatedAtLeastOnce = false
+        for (let seed = 0; seed < 10; seed++) {
+          const result = generateComboQuestion(work, works, seededRandom(seed))
+          if (!result) continue
+          generatedAtLeastOnce = true
+          const texts = [result.correct.text, ...result.distractors.map((d) => d.text)]
+          expect(new Set(texts).size, `${work.id} (seed ${seed}) の4択に重複テキストがある`).toBe(texts.length)
+          expect(result.distractors).toHaveLength(3)
+        }
+        if (!generatedAtLeastOnce) ungenerable.push(work.id)
       }
-      if (!generatedAtLeastOnce) ungenerable.push(work.id)
-    }
-    console.log(`[Q8] 生成できない作品 (${ungenerable.length}件):`, ungenerable)
-  })
+      console.log(`[Q8] 生成できない作品 (${ungenerable.length}件):`, ungenerable)
+    },
+    30000,
+  )
 })

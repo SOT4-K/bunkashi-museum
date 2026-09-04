@@ -490,3 +490,230 @@ describe('selectLearnThemeSets（「学習を始める」のテーマセット�
     expect(result.length).toBeLessThanOrEqual(2)
   })
 })
+
+// M2-16: 出題配分（COMPOSITION_SEQUENCE）と画像なし項目のプール分離、年代順並べ替えの追加。
+describe('M2-16: desiredCategory（型構成カテゴリの割り当て）', () => {
+  // pairs・facts・falseStatements・holder・artist をすべて持ち、q13/q10/q4/q9 のどれでも
+  // 生成できる作品（image-eligible）。
+  const richPairsWork = makeWork({
+    id: 'rich-pairs',
+    era: 'tenpyo',
+    category: 'sculpture',
+    holder: '興福寺',
+    artist: '運慶',
+    pairs: [{ left: '仏師', right: '運慶' }],
+    facts: [
+      { slot: 'other', text: 'rich正文1' },
+      { slot: 'other', text: 'rich正文2' },
+      { slot: 'other', text: 'rich正文3' },
+    ],
+    falseStatements: [
+      { text: 'rich誤文1', why: 'x', verifiedFalse: true },
+      { text: 'rich誤文2', why: 'x', verifiedFalse: true },
+      { text: 'rich誤文3', why: 'x', verifiedFalse: true },
+    ],
+  })
+  const otherPairsWorks: Work[] = [
+    makeWork({
+      id: 'op1',
+      era: 'hakuho',
+      category: 'sculpture',
+      holder: '東大寺',
+      artist: '快慶',
+      pairs: [{ left: '書物', right: '徒然草' }],
+    }),
+    makeWork({
+      id: 'op2',
+      era: 'asuka',
+      category: 'sculpture',
+      holder: '東寺',
+      artist: '快慶',
+      pairs: [{ left: '様式', right: '寝殿造' }],
+    }),
+    makeWork({
+      id: 'op3',
+      era: 'konin-jogan',
+      category: 'sculpture',
+      holder: '唐招提寺',
+      artist: '快慶',
+      pairs: [{ left: '原料', right: '有田' }],
+    }),
+  ]
+  const richPool: Work[] = [richPairsWork, ...otherPairsWorks]
+
+  it('desiredCategory: "pairs" は Q9 より優先され、pairs があれば q13 になる', () => {
+    const q = buildThemeQuestionForWork(richPairsWork, richPool, testEras, seededRandom(1), { desiredCategory: 'pairs' })
+    expect(q).not.toBeNull()
+    expect(q!.type).toBe('q13')
+    expect(q!.reversed).toBe(false)
+  })
+
+  it('desiredCategory: "q10" は Q9 より優先され、facts/falseStatements があれば q10 になる', () => {
+    const q = buildThemeQuestionForWork(richPairsWork, richPool, testEras, seededRandom(1), { desiredCategory: 'q10' })
+    expect(q).not.toBeNull()
+    expect(q!.type).toBe('q10')
+  })
+
+  it('desiredCategory: "q4"/"q4-reversed" はそれぞれ reversed フラグの異なる q4 になる', () => {
+    const normal = buildThemeQuestionForWork(richPairsWork, richPool, testEras, seededRandom(1), { desiredCategory: 'q4' })
+    const reversed = buildThemeQuestionForWork(richPairsWork, richPool, testEras, seededRandom(1), {
+      desiredCategory: 'q4-reversed',
+    })
+    expect(normal!.type).toBe('q4')
+    expect(normal!.reversed).toBe(false)
+    expect(reversed!.type).toBe('q4')
+    expect(reversed!.reversed).toBe(true)
+  })
+
+  it('desiredCategory: "image" は q9 になる（画像を持つ対象のとき）', () => {
+    const q = buildThemeQuestionForWork(richPairsWork, richPool, testEras, seededRandom(1), { desiredCategory: 'image' })
+    expect(q).not.toBeNull()
+    expect(q!.type).toBe('q9')
+  })
+
+  it('desiredCategory が生成できなければ通常の優先順位（Q9優先）に落ちる', () => {
+    // pairs を持たない作品に desiredCategory: "pairs" を指定 → Q9 にフォールバックする
+    const q = buildThemeQuestionForWork(targetWithArtist, pool, testEras, seededRandom(1), { desiredCategory: 'pairs' })
+    expect(q).not.toBeNull()
+    expect(q!.type).toBe('q9')
+  })
+
+  it('ask が明示されていれば desiredCategory より優先される', () => {
+    const q = buildThemeQuestionForWork(richPairsWork, richPool, testEras, seededRandom(1), {
+      ask: { type: 'q10' },
+      desiredCategory: 'pairs',
+    })
+    expect(q).not.toBeNull()
+    expect(q!.type).toBe('q10')
+  })
+
+  it('desiredCategory の結果が avoidType と同じ型なら使わず、通常の優先順位に落ちる（同型連続を避ける）', () => {
+    // desiredCategory: "pairs" は生成できれば q13 になるはずだが、avoidType: "q13" のときは
+    // 使わない（直前が q13 で連続してしまうため）。通常の優先順位（Q9優先）に落ちる。
+    const q = buildThemeQuestionForWork(richPairsWork, richPool, testEras, seededRandom(1), {
+      desiredCategory: 'pairs',
+      avoidType: 'q13',
+    })
+    expect(q).not.toBeNull()
+    expect(q!.type).not.toBe('q13')
+  })
+})
+
+describe('M2-16: pool（画像なし項目も含む）と imagePool（画像で出題できる作品だけ）の分離', () => {
+  // kind: text（画像なし）の対象。facts/falseStatements はあるが image は無い扱い
+  // （imagePool に含まれない）。
+  const textWork = makeWork({
+    id: 'text-1',
+    era: 'tenpyo',
+    category: 'literature',
+    kind: 'text',
+    facts: [
+      { slot: 'other', text: 'text正文1' },
+      { slot: 'other', text: 'text正文2' },
+      { slot: 'other', text: 'text正文3' },
+    ],
+    falseStatements: [
+      { text: 'text誤文1', why: 'x', verifiedFalse: true },
+      { text: 'text誤文2', why: 'x', verifiedFalse: true },
+      { text: 'text誤文3', why: 'x', verifiedFalse: true },
+    ],
+  })
+  const imageWork = makeWork({ id: 'img-1', era: 'tenpyo', category: 'sculpture', artist: '運慶' })
+  const fullPool: Work[] = [textWork, imageWork]
+  const imagePool: Work[] = [imageWork]
+
+  it('画像を持たない対象は Q9（desiredCategory: "image"）を試さず、次善の型（Q4等）に落ちる', () => {
+    const q = buildThemeQuestionForWork(textWork, fullPool, testEras, seededRandom(1), {
+      desiredCategory: 'image',
+      imagePool,
+    })
+    expect(q).not.toBeNull()
+    expect(q!.type).not.toBe('q9')
+    expect(q!.type).not.toBe('q1')
+  })
+
+  it('画像を持たない対象で facts/falseStatements/pairs も無ければ null を返す（q1 は使えない）', () => {
+    const bareTextWork = makeWork({ id: 'bare-text', kind: 'text' })
+    const q = buildThemeQuestionForWork(bareTextWork, [bareTextWork, imageWork], testEras, seededRandom(1), { imagePool })
+    expect(q).toBeNull()
+  })
+
+  it('buildThemeSetQuestions: 画像も facts/pairs も無い対象は console.warn してスキップする（エラーにしない）', () => {
+    const bareTextWork = makeWork({ id: 'bare-text-2', kind: 'text' })
+    const passage: Passage = {
+      id: 'text-only-p',
+      era: 'tenpyo',
+      title: '画像なしのみのセット',
+      text: '本文。[[a|下線]]。',
+      sources: ['x'],
+      underlines: [{ key: 'a', workIds: ['bare-text-2'] }],
+    }
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    const result = buildThemeSetQuestions(passage, [bareTextWork], testEras, seededRandom(1), [])
+    expect(result).toHaveLength(0)
+    expect(warnSpy).toHaveBeenCalled()
+    warnSpy.mockRestore()
+  })
+
+  it('buildThemeSetQuestions: imagePool を渡すと、画像なし対象は Q4 等の文字問題になり、画像を持つ対象は通常どおり生成される', () => {
+    const passage: Passage = {
+      id: 'mixed-pool-p',
+      era: 'tenpyo',
+      title: '混在プールのセット',
+      text: '本文。[[a|下線A]][[b|下線B]]。',
+      sources: ['x'],
+      underlines: [
+        { key: 'a', workIds: ['text-1'] },
+        { key: 'b', workIds: ['img-1'] },
+      ],
+    }
+    const result = buildThemeSetQuestions(passage, fullPool, testEras, seededRandom(1), imagePool)
+    expect(result.length).toBeGreaterThan(0)
+    const textItem = result.find((r) => r.question.work.id === 'text-1')
+    expect(textItem).toBeDefined()
+    expect(textItem!.question.type).not.toBe('q1')
+    expect(textItem!.question.type).not.toBe('q9')
+  })
+})
+
+describe('M2-16: appendOrderQuestionIfDue（年代順並べ替え。3セットに1問）', () => {
+  const dummyQuestions = [
+    { underlineKey: 'a', question: { type: 'q1' as const, work: makeWork({ id: 'w1' }), choiceWorks: [], correctIndex: 0, isReview: false } },
+  ]
+  const withOrderIndex: Work[] = [
+    makeWork({ id: 'o1', orderIndex: 700 }),
+    makeWork({ id: 'o2', orderIndex: 750 }),
+    makeWork({ id: 'o3', orderIndex: 800 }),
+  ]
+
+  it('questions が空なら何もしない', () => {
+    expect(appendOrderQuestionIfDue([], 2, withOrderIndex, seededRandom(1))).toEqual([])
+  })
+
+  it('(setIndex+1) % 3 !== 0 のときは何もしない（1本目・2本目）', () => {
+    expect(appendOrderQuestionIfDue(dummyQuestions, 0, withOrderIndex, seededRandom(1))).toHaveLength(1)
+    expect(appendOrderQuestionIfDue(dummyQuestions, 1, withOrderIndex, seededRandom(1))).toHaveLength(1)
+  })
+
+  it('3本目（setIndex=2）で orderIndex データがそろっていれば q14 を1問追加する', () => {
+    const result = appendOrderQuestionIfDue(dummyQuestions, 2, withOrderIndex, seededRandom(1))
+    expect(result).toHaveLength(2)
+    const added = result[1]
+    expect(added.question.type).toBe('q14')
+    expect(added.underlineKey).toBe('order')
+    expect(added.question.orderItems).toHaveLength(3)
+    expect(added.question.choiceStatements).toHaveLength(4)
+  })
+
+  it('3本目でも orderIndex データが無ければ何も追加しない（壊れない）', () => {
+    const noOrderIndexPool: Work[] = [makeWork({ id: 'p1' }), makeWork({ id: 'p2' }), makeWork({ id: 'p3' })]
+    const result = appendOrderQuestionIfDue(dummyQuestions, 2, noOrderIndexPool, seededRandom(1))
+    expect(result).toHaveLength(1)
+  })
+
+  it('6本目（setIndex=5）でも追加する（3の倍数ごと）', () => {
+    const result = appendOrderQuestionIfDue(dummyQuestions, 5, withOrderIndex, seededRandom(1))
+    expect(result).toHaveLength(2)
+    expect(result[1].question.type).toBe('q14')
+  })
+})

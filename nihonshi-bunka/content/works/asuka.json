@@ -3,9 +3,9 @@
     "id": "horyuji-shaka-sanzon",
     "orderIndex": 20,
     "pairs": [
-      { "left": "法隆寺金堂釈迦三尊像", "right": "鞍作鳥（止利仏師）", "kind": "work-artist" },
-      { "left": "法隆寺金堂釈迦三尊像", "right": "北魏様式（止利様式）", "kind": "work-style" },
-      { "left": "法隆寺金堂釈迦三尊像", "right": "銅造（金銅仏）", "kind": "work-technique" }
+      { "left": "法隆寺金堂釈迦三尊像", "right": "鞍作鳥（止利仏師）", "kind": "作品×作者" },
+      { "left": "法隆寺金堂釈迦三尊像", "right": "北魏様式（止利様式）", "kind": "作品×様式" },
+      { "left": "法隆寺金堂釈迦三尊像", "right": "銅造（金銅仏）", "kind": "作品×技法" }
     ],
     "artist": "鞍作鳥（止利仏師）",
     "patron": null,
@@ -121,9 +121,9 @@
     "id": "koryuji-miroku",
     "orderIndex": 30,
     "pairs": [
-      { "left": "広隆寺弥勒菩薩半跏思惟像", "right": "赤松の一木造", "kind": "work-technique" },
-      { "left": "広隆寺", "right": "秦河勝（秦氏の氏寺）", "kind": "work-person" },
-      { "left": "半跏思惟像", "right": "広隆寺・中宮寺", "kind": "term-pair" }
+      { "left": "広隆寺弥勒菩薩半跏思惟像", "right": "赤松の一木造", "kind": "作品×技法" },
+      { "left": "広隆寺", "right": "秦河勝（秦氏の氏寺）", "kind": "作品×人物" },
+      { "left": "半跏思惟像", "right": "広隆寺・中宮寺", "kind": "語句×語句" }
     ],
     "artist": null,
     "patron": "秦河勝",
@@ -235,9 +235,9 @@
     "id": "chuguji-hanka-shiyui",
     "orderIndex": 40,
     "pairs": [
-      { "left": "中宮寺半跏思惟像", "right": "樟（クスノキ）材", "kind": "work-technique" },
-      { "left": "中宮寺", "right": "聖徳太子ゆかりの尼寺", "kind": "work-holder" },
-      { "left": "中宮寺半跏思惟像", "right": "南朝系統のやわらかな作風", "kind": "work-style" }
+      { "left": "中宮寺半跏思惟像", "right": "樟（クスノキ）材", "kind": "作品×技法" },
+      { "left": "中宮寺", "right": "聖徳太子ゆかりの尼寺", "kind": "作品×所蔵" },
+      { "left": "中宮寺半跏思惟像", "right": "南朝系統のやわらかな作風", "kind": "作品×様式" }
     ],
     "artist": null,
     "patron": null,
@@ -349,9 +349,9 @@
     "id": "tamamushi-zushi",
     "orderIndex": 50,
     "pairs": [
-      { "left": "玉虫厨子", "right": "法隆寺", "kind": "work-holder" },
-      { "left": "玉虫厨子", "right": "捨身飼虎図（説話画）", "kind": "work-subject" },
-      { "left": "玉虫厨子", "right": "玉虫の羽・金銅透かし彫り金具", "kind": "work-technique" }
+      { "left": "玉虫厨子", "right": "法隆寺", "kind": "作品×所蔵" },
+      { "left": "玉虫厨子", "right": "捨身飼虎図（説話画）", "kind": "作品×主題" },
+      { "left": "玉虫厨子", "right": "玉虫の羽・金銅透かし彫り金具", "kind": "作品×技法" }
     ],
     "artist": null,
     "patron": null,
@@ -451,9 +451,9 @@
     "id": "kudara-kannon",
     "orderIndex": 60,
     "pairs": [
-      { "left": "法隆寺百済観音像", "right": "南朝様式", "kind": "work-style" },
-      { "left": "法隆寺百済観音像", "right": "樟の一木造", "kind": "work-technique" },
-      { "left": "法隆寺百済観音像", "right": "水瓶を持つ観音菩薩", "kind": "work-subject" }
+      { "left": "法隆寺百済観音像", "right": "南朝様式", "kind": "作品×様式" },
+      { "left": "法隆寺百済観音像", "right": "樟の一木造", "kind": "作品×技法" },
+      { "left": "法隆寺百済観音像", "right": "水瓶を持つ観音菩薩", "kind": "作品×主題" }
     ],
     "artist": null,
     "patron": null,
@@ -568,9 +568,9 @@
     "kind": "person",
     "orderIndex": 15,
     "pairs": [
-      { "left": "鞍作鳥（止利仏師）", "right": "法隆寺金堂釈迦三尊像", "kind": "person-work" },
-      { "left": "鞍作鳥（止利仏師）", "right": "北魏様式（止利様式）", "kind": "person-style" },
-      { "left": "鞍作鳥（止利仏師）", "right": "飛鳥大仏（飛鳥寺釈迦如来像）", "kind": "person-work" }
+      { "left": "鞍作鳥（止利仏師）", "right": "法隆寺金堂釈迦三尊像", "kind": "人物×作品" },
+      { "left": "鞍作鳥（止利仏師）", "right": "北魏様式（止利様式）", "kind": "人物×様式" },
+      { "left": "鞍作鳥（止利仏師）", "right": "飛鳥大仏（飛鳥寺釈迦如来像）", "kind": "人物×作品" }
     ],
     "artist": null,
     "patron": null,
@@ -635,8 +635,8 @@
     "kind": "person",
     "orderIndex": 10,
     "pairs": [
-      { "left": "曇徴", "right": "高句麗／紙・墨の製法", "kind": "person-item" },
-      { "left": "観勒", "right": "百済／暦法", "kind": "person-item" }
+      { "left": "曇徴", "right": "高句麗／紙・墨の製法", "kind": "人物×事績" },
+      { "left": "観勒", "right": "百済／暦法", "kind": "人物×事績" }
     ],
     "artist": null,
     "patron": null,
@@ -698,9 +698,9 @@
     "kind": "person",
     "orderIndex": 5,
     "pairs": [
-      { "left": "厩戸王（聖徳太子）", "right": "三経義疏", "kind": "person-text" },
-      { "left": "厩戸王（聖徳太子）", "right": "四天王寺・法隆寺（斑鳩寺）", "kind": "person-temple" },
-      { "left": "蘇我馬子", "right": "飛鳥寺（法興寺）", "kind": "person-temple" }
+      { "left": "厩戸王（聖徳太子）", "right": "三経義疏", "kind": "人物×著作" },
+      { "left": "厩戸王（聖徳太子）", "right": "四天王寺・法隆寺（斑鳩寺）", "kind": "人物×寺院" },
+      { "left": "蘇我馬子", "right": "飛鳥寺（法興寺）", "kind": "人物×寺院" }
     ],
     "artist": null,
     "patron": null,
@@ -746,8 +746,8 @@
     "kind": "text",
     "orderIndex": 8,
     "pairs": [
-      { "left": "三経義疏", "right": "厩戸王（聖徳太子）", "kind": "text-author" },
-      { "left": "三経義疏", "right": "法華経・維摩経・勝鬘経の注釈", "kind": "term-pair" }
+      { "left": "三経義疏", "right": "厩戸王（聖徳太子）", "kind": "書物×著者" },
+      { "left": "三経義疏", "right": "法華経・維摩経・勝鬘経の注釈", "kind": "語句×語句" }
     ],
     "artist": null,
     "patron": null,
@@ -791,9 +791,9 @@
     "kind": "concept",
     "orderIndex": 12,
     "pairs": [
-      { "left": "飛鳥寺（法興寺）", "right": "蘇我馬子", "kind": "work-person" },
-      { "left": "四天王寺", "right": "厩戸王（聖徳太子）", "kind": "work-person" },
-      { "left": "法隆寺（斑鳩寺）", "right": "厩戸王（聖徳太子）", "kind": "work-person" }
+      { "left": "飛鳥寺（法興寺）", "right": "蘇我馬子", "kind": "作品×人物" },
+      { "left": "四天王寺", "right": "厩戸王（聖徳太子）", "kind": "作品×人物" },
+      { "left": "法隆寺（斑鳩寺）", "right": "厩戸王（聖徳太子）", "kind": "作品×人物" }
     ],
     "artist": null,
     "patron": null,
@@ -839,10 +839,10 @@
     "kind": "concept",
     "orderIndex": 14,
     "pairs": [
-      { "left": "飛鳥寺式伽藍配置", "right": "塔を三方の金堂が囲む", "kind": "term-pair" },
-      { "left": "四天王寺式伽藍配置", "right": "塔と金堂が南北に一直線に並ぶ", "kind": "term-pair" },
-      { "left": "法隆寺式伽藍配置", "right": "塔と金堂が東西に並ぶ", "kind": "term-pair" },
-      { "left": "若草伽藍跡", "right": "法隆寺再建をめぐる論争", "kind": "term-pair" }
+      { "left": "飛鳥寺式伽藍配置", "right": "塔を三方の金堂が囲む", "kind": "語句×語句" },
+      { "left": "四天王寺式伽藍配置", "right": "塔と金堂が南北に一直線に並ぶ", "kind": "語句×語句" },
+      { "left": "法隆寺式伽藍配置", "right": "塔と金堂が東西に並ぶ", "kind": "語句×語句" },
+      { "left": "若草伽藍跡", "right": "法隆寺再建をめぐる論争", "kind": "語句×語句" }
     ],
     "artist": null,
     "patron": null,
@@ -889,8 +889,8 @@
     "kind": "concept",
     "orderIndex": 35,
     "pairs": [
-      { "left": "北魏様式（止利様式）", "right": "法隆寺金堂釈迦三尊像", "kind": "style-work" },
-      { "left": "南朝様式", "right": "法隆寺百済観音像・中宮寺半跏思惟像", "kind": "style-work" }
+      { "left": "北魏様式（止利様式）", "right": "法隆寺金堂釈迦三尊像", "kind": "様式×作品" },
+      { "left": "南朝様式", "right": "法隆寺百済観音像・中宮寺半跏思惟像", "kind": "様式×作品" }
     ],
     "artist": null,
     "patron": null,
@@ -936,8 +936,8 @@
     "kind": "concept",
     "orderIndex": 45,
     "pairs": [
-      { "left": "天寿国繡帳", "right": "中宮寺", "kind": "work-holder" },
-      { "left": "天寿国繡帳", "right": "刺繡（繡帳）", "kind": "work-technique" }
+      { "left": "天寿国繡帳", "right": "中宮寺", "kind": "作品×所蔵" },
+      { "left": "天寿国繡帳", "right": "刺繡（繡帳）", "kind": "作品×技法" }
     ],
     "artist": null,
     "patron": null,

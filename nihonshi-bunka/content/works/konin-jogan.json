@@ -3,9 +3,9 @@
     "id": "kanshinji-nyoirin-kannon",
     "orderIndex": 40,
     "pairs": [
-      { "left": "観心寺如意輪観音像", "right": "一木造・翻波式", "kind": "work-technique" },
-      { "left": "観心寺如意輪観音像", "right": "密教（真言宗）の尊像", "kind": "work-religion" },
-      { "left": "観心寺如意輪観音像", "right": "六臂（腕が6本）", "kind": "work-subject" }
+      { "left": "観心寺如意輪観音像", "right": "一木造・翻波式", "kind": "作品×技法" },
+      { "left": "観心寺如意輪観音像", "right": "密教（真言宗）の尊像", "kind": "作品×信仰" },
+      { "left": "観心寺如意輪観音像", "right": "六臂（腕が6本）", "kind": "作品×主題" }
     ],
     "artist": null,
     "patron": null,
@@ -113,9 +113,9 @@
     "id": "muroji-gojunoto",
     "orderIndex": 20,
     "pairs": [
-      { "left": "室生寺", "right": "女人高野", "kind": "work-holder" },
-      { "left": "室生寺五重塔", "right": "山岳寺院の建築", "kind": "work-style" },
-      { "left": "高野山金剛峯寺", "right": "空海", "kind": "work-person" }
+      { "left": "室生寺", "right": "女人高野", "kind": "作品×所蔵" },
+      { "left": "室生寺五重塔", "right": "山岳寺院の建築", "kind": "作品×様式" },
+      { "left": "高野山金剛峯寺", "right": "空海", "kind": "作品×人物" }
     ],
     "artist": null,
     "patron": null,
@@ -211,9 +211,9 @@
     "id": "toji-fudo-myoo",
     "orderIndex": 30,
     "pairs": [
-      { "left": "東寺（教王護国寺）", "right": "空海（嵯峨天皇から賜る）", "kind": "work-person" },
-      { "left": "東寺講堂の仏像群", "right": "立体曼荼羅", "kind": "term-pair" },
-      { "left": "東寺講堂 不動明王像", "right": "一木造", "kind": "work-technique" }
+      { "left": "東寺（教王護国寺）", "right": "空海（嵯峨天皇から賜る）", "kind": "作品×人物" },
+      { "left": "東寺講堂の仏像群", "right": "立体曼荼羅", "kind": "語句×語句" },
+      { "left": "東寺講堂 不動明王像", "right": "一木造", "kind": "作品×技法" }
     ],
     "artist": null,
     "patron": "空海",
@@ -327,9 +327,9 @@
     "kind": "person",
     "orderIndex": 10,
     "pairs": [
-      { "left": "最澄", "right": "天台宗／比叡山延暦寺", "kind": "person-school" },
-      { "left": "空海", "right": "真言宗／高野山金剛峯寺", "kind": "person-school" },
-      { "left": "空海", "right": "東寺（教王護国寺）", "kind": "person-temple" }
+      { "left": "最澄", "right": "天台宗／比叡山延暦寺", "kind": "人物×宗派" },
+      { "left": "空海", "right": "真言宗／高野山金剛峯寺", "kind": "人物×宗派" },
+      { "left": "空海", "right": "東寺（教王護国寺）", "kind": "人物×寺院" }
     ],
     "artist": null,
     "patron": null,
@@ -395,9 +395,9 @@
     "kind": "person",
     "orderIndex": 15,
     "pairs": [
-      { "left": "三筆", "right": "空海・嵯峨天皇・橘逸勢（唐風の書）", "kind": "person-item" },
-      { "left": "空海", "right": "風信帖", "kind": "person-work" },
-      { "left": "三蹟", "right": "小野道風・藤原佐理・藤原行成（和様の書）", "kind": "person-item" }
+      { "left": "三筆", "right": "空海・嵯峨天皇・橘逸勢（唐風の書）", "kind": "人物×事績" },
+      { "left": "空海", "right": "風信帖", "kind": "人物×作品" },
+      { "left": "三蹟", "right": "小野道風・藤原佐理・藤原行成（和様の書）", "kind": "人物×事績" }
     ],
     "artist": null,
     "patron": null,
@@ -460,8 +460,8 @@
     "kind": "text",
     "orderIndex": 12,
     "pairs": [
-      { "left": "『凌雲集』『文華秀麗集』『経国集』", "right": "勅撰漢詩集", "kind": "text-item" },
-      { "left": "嵯峨天皇", "right": "漢詩文の奨励", "kind": "person-item" }
+      { "left": "『凌雲集』『文華秀麗集』『経国集』", "right": "勅撰漢詩集", "kind": "書物×分類" },
+      { "left": "嵯峨天皇", "right": "漢詩文の奨励", "kind": "人物×事績" }
     ],
     "artist": null,
     "patron": null,
@@ -507,8 +507,8 @@
     "kind": "text",
     "orderIndex": 14,
     "pairs": [
-      { "left": "空海", "right": "『三教指帰』『性霊集』", "kind": "person-text" },
-      { "left": "最澄", "right": "『顕戒論』『山家学生式』", "kind": "person-text" }
+      { "left": "空海", "right": "『三教指帰』『性霊集』", "kind": "人物×著作" },
+      { "left": "最澄", "right": "『顕戒論』『山家学生式』", "kind": "人物×著作" }
     ],
     "artist": null,
     "patron": null,
@@ -554,10 +554,10 @@
     "kind": "concept",
     "orderIndex": 18,
     "pairs": [
-      { "left": "勧学院", "right": "藤原氏", "kind": "term-pair" },
-      { "left": "弘文院", "right": "和気氏", "kind": "term-pair" },
-      { "left": "奨学院", "right": "在原氏（皇族・王氏）", "kind": "term-pair" },
-      { "left": "綜芸種智院", "right": "空海", "kind": "work-person" }
+      { "left": "勧学院", "right": "藤原氏", "kind": "語句×語句" },
+      { "left": "弘文院", "right": "和気氏", "kind": "語句×語句" },
+      { "left": "奨学院", "right": "在原氏（皇族・王氏）", "kind": "語句×語句" },
+      { "left": "綜芸種智院", "right": "空海", "kind": "作品×人物" }
     ],
     "artist": null,
     "patron": null,
@@ -603,8 +603,8 @@
     "kind": "concept",
     "orderIndex": 25,
     "pairs": [
-      { "left": "一木造・翻波式", "right": "弘仁・貞観文化", "kind": "style-era" },
-      { "left": "寄木造（定朝様）", "right": "国風文化", "kind": "style-era" }
+      { "left": "一木造・翻波式", "right": "弘仁・貞観文化", "kind": "様式×時代" },
+      { "left": "寄木造（定朝様）", "right": "国風文化", "kind": "様式×時代" }
     ],
     "artist": null,
     "patron": null,
@@ -650,8 +650,8 @@
     "kind": "concept",
     "orderIndex": 35,
     "pairs": [
-      { "left": "曼荼羅", "right": "密教の世界を絵で表す", "kind": "term-pair" },
-      { "left": "立体曼荼羅", "right": "東寺講堂の仏像配置", "kind": "term-pair" }
+      { "left": "曼荼羅", "right": "密教の世界を絵で表す", "kind": "語句×語句" },
+      { "left": "立体曼荼羅", "right": "東寺講堂の仏像配置", "kind": "語句×語句" }
     ],
     "artist": null,
     "patron": null,
@@ -697,8 +697,8 @@
     "kind": "concept",
     "orderIndex": 45,
     "pairs": [
-      { "left": "神仏習合", "right": "神宮寺・神前読経", "kind": "term-pair" },
-      { "left": "修験道", "right": "山岳信仰と密教の結合", "kind": "term-pair" }
+      { "left": "神仏習合", "right": "神宮寺・神前読経", "kind": "語句×語句" },
+      { "left": "修験道", "right": "山岳信仰と密教の結合", "kind": "語句×語句" }
     ],
     "artist": null,
     "patron": null,

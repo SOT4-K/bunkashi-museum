@@ -3,9 +3,9 @@
     "id": "shakoki-dogu",
     "orderIndex": 20,
     "pairs": [
-      { "left": "土偶", "right": "縄文時代の呪術（豊穣・安産の祈り）", "kind": "work-use" },
-      { "left": "遮光器土偶", "right": "青森県亀ヶ岡遺跡", "kind": "work-place" },
-      { "left": "土偶", "right": "土製", "kind": "work-technique" }
+      { "left": "土偶", "right": "縄文時代の呪術（豊穣・安産の祈り）", "kind": "作品×用途" },
+      { "left": "遮光器土偶", "right": "青森県亀ヶ岡遺跡", "kind": "作品×出土地・所在地" },
+      { "left": "土偶", "right": "土製", "kind": "作品×技法" }
     ],
     "artist": null,
     "patron": null,
@@ -106,9 +106,9 @@
     "id": "kaen-doki",
     "orderIndex": 10,
     "pairs": [
-      { "left": "火焔型土器", "right": "新潟県笹山遺跡（信濃川流域）", "kind": "work-place" },
-      { "left": "縄文土器", "right": "煮炊き・貯蔵（深鉢形）", "kind": "work-use" },
-      { "left": "火焔型土器", "right": "縄文時代中期", "kind": "work-era" }
+      { "left": "火焔型土器", "right": "新潟県笹山遺跡（信濃川流域）", "kind": "作品×出土地・所在地" },
+      { "left": "縄文土器", "right": "煮炊き・貯蔵（深鉢形）", "kind": "作品×用途" },
+      { "left": "火焔型土器", "right": "縄文時代中期", "kind": "作品×時代" }
     ],
     "artist": null,
     "patron": null,
@@ -208,9 +208,9 @@
     "id": "keiko-bujin-haniwa",
     "orderIndex": 50,
     "pairs": [
-      { "left": "埴輪", "right": "古墳の墳丘に並べる", "kind": "work-use" },
-      { "left": "挂甲の武人", "right": "群馬県太田市", "kind": "work-place" },
-      { "left": "形象埴輪", "right": "人物・動物・家をかたどる", "kind": "term-pair" }
+      { "left": "埴輪", "right": "古墳の墳丘に並べる", "kind": "作品×用途" },
+      { "left": "挂甲の武人", "right": "群馬県太田市", "kind": "作品×出土地・所在地" },
+      { "left": "形象埴輪", "right": "人物・動物・家をかたどる", "kind": "語句×語句" }
     ],
     "artist": null,
     "patron": null,
@@ -310,9 +310,9 @@
     "id": "kesadasuki-dotaku",
     "orderIndex": 30,
     "pairs": [
-      { "left": "銅鐸", "right": "弥生時代の農耕祭祀", "kind": "work-use" },
-      { "left": "銅鐸", "right": "青銅製（鋳造）", "kind": "work-technique" },
-      { "left": "袈裟襷文銅鐸", "right": "広島県黒川遺跡", "kind": "work-place" }
+      { "left": "銅鐸", "right": "弥生時代の農耕祭祀", "kind": "作品×用途" },
+      { "left": "銅鐸", "right": "青銅製（鋳造）", "kind": "作品×技法" },
+      { "left": "袈裟襷文銅鐸", "right": "広島県黒川遺跡", "kind": "作品×出土地・所在地" }
     ],
     "artist": null,
     "patron": null,
@@ -407,8 +407,8 @@
     "id": "zenpokoenfun",
     "orderIndex": 40,
     "pairs": [
-      { "left": "前方後円墳", "right": "大和政権の首長の墓", "kind": "term-pair" },
-      { "left": "大仙陵古墳（仁徳天皇陵）", "right": "大阪府堺市", "kind": "work-place" }
+      { "left": "前方後円墳", "right": "大和政権の首長の墓", "kind": "語句×語句" },
+      { "left": "大仙陵古墳（仁徳天皇陵）", "right": "大阪府堺市", "kind": "作品×出土地・所在地" }
     ],
     "kind": "concept",
     "artist": null,
@@ -474,8 +474,8 @@
     "id": "kaizuka-jomon",
     "orderIndex": 5,
     "pairs": [
-      { "left": "大森貝塚", "right": "モース", "kind": "work-person" },
-      { "left": "貝塚", "right": "縄文時代の生活跡", "kind": "term-pair" }
+      { "left": "大森貝塚", "right": "モース", "kind": "作品×人物" },
+      { "left": "貝塚", "right": "縄文時代の生活跡", "kind": "語句×語句" }
     ],
     "kind": "concept",
     "artist": null,
@@ -539,8 +539,8 @@
     "kind": "concept",
     "orderIndex": 22,
     "pairs": [
-      { "left": "抜歯", "right": "縄文時代の通過儀礼", "kind": "term-pair" },
-      { "left": "屈葬", "right": "縄文時代の埋葬", "kind": "term-pair" }
+      { "left": "抜歯", "right": "縄文時代の通過儀礼", "kind": "語句×語句" },
+      { "left": "屈葬", "right": "縄文時代の埋葬", "kind": "語句×語句" }
     ],
     "artist": null,
     "patron": null,
@@ -586,8 +586,8 @@
     "kind": "concept",
     "orderIndex": 28,
     "pairs": [
-      { "left": "石包丁", "right": "穂首刈り", "kind": "work-use" },
-      { "left": "石包丁", "right": "磨製石器", "kind": "work-technique" }
+      { "left": "石包丁", "right": "穂首刈り", "kind": "作品×用途" },
+      { "left": "石包丁", "right": "磨製石器", "kind": "作品×技法" }
     ],
     "artist": null,
     "patron": null,
@@ -633,8 +633,8 @@
     "kind": "concept",
     "orderIndex": 32,
     "pairs": [
-      { "left": "環濠集落", "right": "吉野ヶ里遺跡（佐賀県）", "kind": "work-place" },
-      { "left": "高地性集落", "right": "戦いへの備え", "kind": "term-pair" }
+      { "left": "環濠集落", "right": "吉野ヶ里遺跡（佐賀県）", "kind": "作品×出土地・所在地" },
+      { "left": "高地性集落", "right": "戦いへの備え", "kind": "語句×語句" }
     ],
     "artist": null,
     "patron": null,
@@ -680,8 +680,8 @@
     "kind": "concept",
     "orderIndex": 34,
     "pairs": [
-      { "left": "甕棺墓", "right": "北部九州", "kind": "work-place" },
-      { "left": "支石墓", "right": "朝鮮半島の影響", "kind": "term-pair" }
+      { "left": "甕棺墓", "right": "北部九州", "kind": "作品×出土地・所在地" },
+      { "left": "支石墓", "right": "朝鮮半島の影響", "kind": "語句×語句" }
     ],
     "artist": null,
     "patron": null,
@@ -727,8 +727,8 @@
     "kind": "concept",
     "orderIndex": 45,
     "pairs": [
-      { "left": "古墳前期の副葬品", "right": "銅鏡・玉・腕輪形石製品", "kind": "term-pair" },
-      { "left": "古墳中・後期の副葬品", "right": "鉄製の武器・武具・馬具", "kind": "term-pair" }
+      { "left": "古墳前期の副葬品", "right": "銅鏡・玉・腕輪形石製品", "kind": "語句×語句" },
+      { "left": "古墳中・後期の副葬品", "right": "鉄製の武器・武具・馬具", "kind": "語句×語句" }
     ],
     "artist": null,
     "patron": null,
@@ -773,9 +773,9 @@
     "id": "inariyama-tekken",
     "orderIndex": 55,
     "pairs": [
-      { "left": "稲荷山古墳出土鉄剣", "right": "埼玉県", "kind": "work-place" },
-      { "left": "江田船山古墳出土鉄刀", "right": "熊本県", "kind": "work-place" },
-      { "left": "獲加多支鹵大王", "right": "ワカタケル大王（雄略天皇とされる）", "kind": "term-pair" }
+      { "left": "稲荷山古墳出土鉄剣", "right": "埼玉県", "kind": "作品×出土地・所在地" },
+      { "left": "江田船山古墳出土鉄刀", "right": "熊本県", "kind": "作品×出土地・所在地" },
+      { "left": "獲加多支鹵大王", "right": "ワカタケル大王（雄略天皇とされる）", "kind": "語句×語句" }
     ],
     "artist": null,
     "patron": null,

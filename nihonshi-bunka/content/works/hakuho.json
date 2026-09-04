@@ -3,9 +3,9 @@
     "id": "yakushi-sanzon-yakushiji",
     "orderIndex": 30,
     "pairs": [
-      { "left": "薬師寺", "right": "天武天皇（発願）", "kind": "work-person" },
-      { "left": "薬師寺金堂薬師三尊像", "right": "銅造（金銅仏）", "kind": "work-technique" },
-      { "left": "薬師寺金堂薬師三尊像", "right": "グプタ様式の影響", "kind": "work-style" }
+      { "left": "薬師寺", "right": "天武天皇（発願）", "kind": "作品×人物" },
+      { "left": "薬師寺金堂薬師三尊像", "right": "銅造（金銅仏）", "kind": "作品×技法" },
+      { "left": "薬師寺金堂薬師三尊像", "right": "グプタ様式の影響", "kind": "作品×様式" }
     ],
     "artist": null,
     "patron": "天武天皇",
@@ -126,9 +126,9 @@
     "id": "yamadadera-butsuzu",
     "orderIndex": 20,
     "pairs": [
-      { "left": "山田寺", "right": "蘇我倉山田石川麻呂", "kind": "work-person" },
-      { "left": "興福寺仏頭", "right": "興福寺国宝館（もと山田寺）", "kind": "work-holder" },
-      { "left": "興福寺仏頭", "right": "銅造（金銅仏）", "kind": "work-technique" }
+      { "left": "山田寺", "right": "蘇我倉山田石川麻呂", "kind": "作品×人物" },
+      { "left": "興福寺仏頭", "right": "興福寺国宝館（もと山田寺）", "kind": "作品×所蔵" },
+      { "left": "興福寺仏頭", "right": "銅造（金銅仏）", "kind": "作品×技法" }
     ],
     "artist": null,
     "patron": "蘇我倉山田石川麻呂",
@@ -245,9 +245,9 @@
     "id": "takamatsuzuka-heki",
     "orderIndex": 50,
     "pairs": [
-      { "left": "高松塚古墳壁画", "right": "女子群像・四神図", "kind": "work-subject" },
-      { "left": "高松塚古墳", "right": "奈良県明日香村", "kind": "work-place" },
-      { "left": "高松塚古墳壁画", "right": "1972年の発見", "kind": "work-event" }
+      { "left": "高松塚古墳壁画", "right": "女子群像・四神図", "kind": "作品×主題" },
+      { "left": "高松塚古墳", "right": "奈良県明日香村", "kind": "作品×出土地・所在地" },
+      { "left": "高松塚古墳壁画", "right": "1972年の発見", "kind": "作品×できごと" }
     ],
     "artist": null,
     "patron": null,
@@ -352,9 +352,9 @@
     "id": "yakushiji-toto",
     "orderIndex": 60,
     "pairs": [
-      { "left": "薬師寺東塔", "right": "三重塔（各層に裳階）", "kind": "work-technique" },
-      { "left": "薬師寺東塔", "right": "「凍れる音楽」", "kind": "term-pair" },
-      { "left": "薬師寺", "right": "天武天皇（発願）", "kind": "work-person" }
+      { "left": "薬師寺東塔", "right": "三重塔（各層に裳階）", "kind": "作品×技法" },
+      { "left": "薬師寺東塔", "right": "「凍れる音楽」", "kind": "語句×語句" },
+      { "left": "薬師寺", "right": "天武天皇（発願）", "kind": "作品×人物" }
     ],
     "artist": null,
     "patron": "天武天皇",
@@ -464,9 +464,9 @@
     "id": "horyuji-kondo-heki",
     "orderIndex": 40,
     "pairs": [
-      { "left": "法隆寺金堂壁画", "right": "阿弥陀浄土図", "kind": "work-subject" },
-      { "left": "法隆寺金堂壁画", "right": "1949年の火災で焼損", "kind": "work-event" },
-      { "left": "文化財保護法（1950年）", "right": "法隆寺金堂壁画の焼損", "kind": "term-pair" }
+      { "left": "法隆寺金堂壁画", "right": "阿弥陀浄土図", "kind": "作品×主題" },
+      { "left": "法隆寺金堂壁画", "right": "1949年の火災で焼損", "kind": "作品×できごと" },
+      { "left": "文化財保護法（1950年）", "right": "法隆寺金堂壁画の焼損", "kind": "語句×語句" }
     ],
     "artist": null,
     "patron": null,
@@ -561,8 +561,8 @@
     "kind": "concept",
     "orderIndex": 45,
     "pairs": [
-      { "left": "キトラ古墳壁画", "right": "精密な天文図", "kind": "work-subject" },
-      { "left": "キトラ古墳", "right": "奈良県明日香村", "kind": "work-place" }
+      { "left": "キトラ古墳壁画", "right": "精密な天文図", "kind": "作品×主題" },
+      { "left": "キトラ古墳", "right": "奈良県明日香村", "kind": "作品×出土地・所在地" }
     ],
     "artist": null,
     "patron": null,
@@ -639,9 +639,9 @@
     "kind": "person",
     "orderIndex": 10,
     "pairs": [
-      { "left": "柿本人麻呂", "right": "持統・文武朝の宮廷歌人", "kind": "person-item" },
-      { "left": "額田王", "right": "天智・天武朝の女性歌人", "kind": "person-item" },
-      { "left": "柿本人麻呂・額田王", "right": "『万葉集』", "kind": "person-text" }
+      { "left": "柿本人麻呂", "right": "持統・文武朝の宮廷歌人", "kind": "人物×事績" },
+      { "left": "額田王", "right": "天智・天武朝の女性歌人", "kind": "人物×事績" },
+      { "left": "柿本人麻呂・額田王", "right": "『万葉集』", "kind": "人物×著作" }
     ],
     "artist": null,
     "patron": null,
@@ -704,8 +704,8 @@
     "kind": "concept",
     "orderIndex": 5,
     "pairs": [
-      { "left": "藤原京", "right": "持統天皇（694年遷都）", "kind": "work-person" },
-      { "left": "藤原京", "right": "最初の本格的な都城", "kind": "term-pair" }
+      { "left": "藤原京", "right": "持統天皇（694年遷都）", "kind": "作品×人物" },
+      { "left": "藤原京", "right": "最初の本格的な都城", "kind": "語句×語句" }
     ],
     "artist": null,
     "patron": null,
@@ -751,8 +751,8 @@
     "kind": "concept",
     "orderIndex": 15,
     "pairs": [
-      { "left": "大官大寺", "right": "官寺（国家の寺）", "kind": "term-pair" },
-      { "left": "薬師寺", "right": "天武天皇の発願", "kind": "work-person" }
+      { "left": "大官大寺", "right": "官寺（国家の寺）", "kind": "語句×語句" },
+      { "left": "薬師寺", "right": "天武天皇の発願", "kind": "作品×人物" }
     ],
     "artist": null,
     "patron": null,
@@ -798,8 +798,8 @@
     "kind": "concept",
     "orderIndex": 25,
     "pairs": [
-      { "left": "白鳳文化", "right": "唐初期の文化の影響", "kind": "term-pair" },
-      { "left": "薬師寺金堂薬師三尊像", "right": "インドのグプタ様式の影響", "kind": "work-style" }
+      { "left": "白鳳文化", "right": "唐初期の文化の影響", "kind": "語句×語句" },
+      { "left": "薬師寺金堂薬師三尊像", "right": "インドのグプタ様式の影響", "kind": "作品×様式" }
     ],
     "artist": null,
     "patron": null,
@@ -845,8 +845,8 @@
     "kind": "concept",
     "orderIndex": 35,
     "pairs": [
-      { "left": "若草伽藍跡", "right": "法隆寺の再建をめぐる論争", "kind": "term-pair" },
-      { "left": "法隆寺西院伽藍", "right": "現存する世界最古級の木造建築", "kind": "term-pair" }
+      { "left": "若草伽藍跡", "right": "法隆寺の再建をめぐる論争", "kind": "語句×語句" },
+      { "left": "法隆寺西院伽藍", "right": "現存する世界最古級の木造建築", "kind": "語句×語句" }
     ],
     "artist": null,
     "patron": null,
@@ -892,8 +892,8 @@
     "kind": "concept",
     "orderIndex": 12,
     "pairs": [
-      { "left": "天武天皇", "right": "国史編纂の開始", "kind": "person-item" },
-      { "left": "『古事記』『日本書紀』", "right": "奈良時代に完成", "kind": "text-item" }
+      { "left": "天武天皇", "right": "国史編纂の開始", "kind": "人物×事績" },
+      { "left": "『古事記』『日本書紀』", "right": "奈良時代に完成", "kind": "書物×分類" }
     ],
     "artist": null,
     "patron": null,

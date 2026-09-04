@@ -1,6 +1,12 @@
 [
   {
     "id": "himeji-jo",
+    "orderIndex": 1609,
+    "pairs": [
+      { "kind": "城×大改修した人物", "left": "姫路城", "right": "池田輝政" },
+      { "kind": "城×外観", "left": "姫路城", "right": "白漆喰総塗籠（白鷺城）" },
+      { "kind": "文化×建築", "left": "桃山文化", "right": "天守を中心とする城郭建築" }
+    ],
     "artist": null,
     "patron": "池田輝政",
     "style": "城郭建築（天守を持つ城）",
@@ -92,6 +98,12 @@
   },
   {
     "id": "sen-no-rikyu",
+    "orderIndex": 1585,
+    "pairs": [
+      { "kind": "人物×茶", "left": "千利休", "right": "侘び茶の大成" },
+      { "kind": "人物×主君", "left": "千利休", "right": "織田信長・豊臣秀吉（茶頭）" },
+      { "kind": "人物×茶室", "left": "千利休", "right": "妙喜庵待庵" }
+    ],
     "kind": "person",
     "artist": null,
     "patron": null,
@@ -168,6 +180,11 @@
   },
   {
     "id": "izumo-no-okuni",
+    "orderIndex": 1603,
+    "pairs": [
+      { "kind": "人物×芸能", "left": "出雲阿国", "right": "かぶき踊り" },
+      { "kind": "芸能×のちの発展", "left": "かぶき踊り", "right": "歌舞伎" }
+    ],
     "kind": "person",
     "artist": null,
     "patron": null,
@@ -242,6 +259,11 @@
   },
   {
     "id": "noe-shohekiga",
+    "orderIndex": 1590,
+    "pairs": [
+      { "kind": "様式×担い手", "left": "濃絵", "right": "狩野永徳・狩野山楽・長谷川等伯" },
+      { "kind": "様式×技法", "left": "濃絵", "right": "金地に群青・緑青などの濃彩" }
+    ],
     "kind": "concept",
     "artist": null,
     "patron": null,
@@ -316,6 +338,11 @@
   },
   {
     "id": "kirishitan-ban",
+    "orderIndex": 1593,
+    "pairs": [
+      { "kind": "書物×技法", "left": "キリシタン版（天草版）", "right": "活字印刷" },
+      { "kind": "書物×伝えた人物", "left": "キリシタン版（天草版）", "right": "ヴァリニャーノ" }
+    ],
     "kind": "concept",
     "artist": null,
     "patron": null,
@@ -387,5 +414,354 @@
     ],
     "examTags": [],
     "status": "reviewed"
+  },
+  {
+    "id": "kano-eitoku",
+    "orderIndex": 1580,
+    "pairs": [
+      { "kind": "人物×作品", "left": "狩野永徳", "right": "唐獅子図屏風・洛中洛外図屏風" },
+      { "kind": "人物×様式", "left": "狩野永徳", "right": "濃絵（金地濃彩の障壁画）" }
+    ],
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": "濃絵（金地濃彩）",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "安土桃山時代（16世紀後半）",
+    "eraNote": "桃山文化。織田信長・豊臣秀吉に仕えた狩野永徳は、城郭の書院を飾る金地に濃い色彩の障壁画（濃絵）を大画面で描き、豪壮な桃山文化を代表する絵師となった。",
+    "facts": [
+      { "slot": "other", "text": "濃絵の障壁画を代表する絵師" },
+      { "slot": "other", "text": "唐獅子図屏風・洛中洛外図屏風（上杉本）が代表作" },
+      { "slot": "other", "text": "織田信長・豊臣秀吉に仕えた" }
+    ],
+    "falseStatements": [
+      { "text": "松林図屏風を描いた", "why": "松林図屏風は長谷川等伯の水墨画。人物・作品の入れ替え", "verifiedFalse": true },
+      { "text": "風神雷神図屏風を描いた", "why": "風神雷神図屏風は俵屋宗達（寛永期）。人物・時代の入れ替え", "verifiedFalse": true },
+      { "text": "狩野派の祖である", "why": "狩野派の祖は狩野正信（東山文化）。人物・時代の入れ替え", "verifiedFalse": true },
+      { "text": "水墨画を大成した", "why": "水墨画の大成は雪舟（東山文化）。人物・分野の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "狩野永徳",
+    "reading": "かのうえいとく",
+    "era": "momoyama",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "桃山文化を代表する絵師",
+      "濃絵（金地濃彩の障壁画）",
+      "唐獅子図屏風・洛中洛外図屏風（上杉本）",
+      "信長・秀吉に仕えた"
+    ],
+    "explanation": "織田信長・豊臣秀吉に仕え、城郭や寺院の書院を飾る障壁画を大画面で描いた絵師。金箔を貼った地に群青・緑青などの濃い色彩を用いる濃絵を得意とし、唐獅子図屏風や洛中洛外図屏風（上杉本）が代表作とされる。狩野正信にはじまる狩野派を、天下人に仕える画壇の中心へと押し上げた人物である。",
+    "examNote": "「濃絵＝狩野永徳」「水墨の松林図屏風＝長谷川等伯」の対比が定番。狩野正信（狩野派の祖・東山文化）との時代の取り違えに注意。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）桃山文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "hasegawa-tohaku",
+    "orderIndex": 1595,
+    "pairs": [
+      { "kind": "人物×作品", "left": "長谷川等伯", "right": "松林図屏風・智積院襖絵" },
+      { "kind": "人物×技法", "left": "長谷川等伯", "right": "水墨画と濃絵の両方を描いた" }
+    ],
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "安土桃山時代（16世紀後半〜17世紀初め）",
+    "eraNote": "桃山文化。長谷川等伯は、金地に濃彩を用いる障壁画（智積院襖絵など）と、余白を生かした水墨画（松林図屏風）の両方を手がけ、豪壮さと静けさの両面をあわせもつ桃山の絵画を代表する。",
+    "facts": [
+      { "slot": "other", "text": "水墨画『松林図屏風』を描いた" },
+      { "slot": "other", "text": "子の久蔵とともに智積院の襖絵を手がけた" },
+      { "slot": "other", "text": "濃絵と水墨画の両方を描いた" }
+    ],
+    "falseStatements": [
+      { "text": "唐獅子図屏風を描いた", "why": "唐獅子図屏風は狩野永徳。人物・作品の入れ替え", "verifiedFalse": true },
+      { "text": "狩野派の祖である", "why": "狩野派の祖は狩野正信。画派・人物の入れ替え", "verifiedFalse": true },
+      { "text": "元禄文化の絵師である", "why": "等伯は安土桃山時代の絵師。時代の入れ替え", "verifiedFalse": true },
+      { "text": "浮世絵版画を確立した", "why": "浮世絵版画の確立は江戸時代（菱川師宣・鈴木春信ら）。分野・時代の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "長谷川等伯",
+    "reading": "はせがわとうはく",
+    "era": "momoyama",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "『松林図屏風』（水墨画）",
+      "子の久蔵と智積院襖絵（濃絵）",
+      "狩野永徳と並ぶ桃山の絵師",
+      "豪壮な濃絵と静かな水墨画の両面"
+    ],
+    "explanation": "金地に濃彩を用いる障壁画と、墨の濃淡と余白で霧の松林を描く水墨画の両方を手がけた絵師。子の久蔵とともに智積院の襖絵を描き、一方で『松林図屏風』では静けさをたたえた画面をつくり出した。豪壮華麗と評される桃山文化のなかに、簡素・静寂を尊ぶ美意識も併存していたことを示す。",
+    "examNote": "「松林図屏風＝長谷川等伯（水墨）」「唐獅子図屏風＝狩野永徳（濃絵）」の対比で問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）桃山文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "takeno-joo",
+    "orderIndex": 1550,
+    "pairs": [
+      { "kind": "人物×茶", "left": "武野紹鴎", "right": "侘び茶の継承（珠光と利休の間）" },
+      { "kind": "人物×弟子", "left": "武野紹鴎", "right": "千利休" }
+    ],
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "室町時代後期（16世紀前半）",
+    "eraNote": "桃山文化に先立つ時期。村田珠光にはじまる侘び茶は、堺の豪商であった武野紹鴎に受けつがれ、その弟子である千利休によって大成された。",
+    "facts": [
+      { "slot": "other", "text": "村田珠光の侘び茶を受けつぎ発展させた" },
+      { "slot": "other", "text": "堺の豪商で、千利休の師とされる" },
+      { "slot": "other", "text": "侘び茶の系譜をつなぐ人物" }
+    ],
+    "falseStatements": [
+      { "text": "侘び茶を創始した", "why": "侘び茶の創始は村田珠光。段階の入れ替え", "verifiedFalse": true },
+      { "text": "侘び茶を大成した", "why": "侘び茶を大成したのは弟子の千利休。段階の入れ替え", "verifiedFalse": true },
+      { "text": "喫茶の習慣を宋から伝えた", "why": "喫茶を伝えたのは栄西（鎌倉文化・喫茶養生記）。人物・時代の入れ替え", "verifiedFalse": true },
+      { "text": "かぶき踊りを始めた", "why": "かぶき踊りの創始は出雲阿国。人物・分野の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "武野紹鴎",
+    "reading": "たけのじょうおう",
+    "era": "momoyama",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "村田珠光の侘び茶を受けついだ",
+      "堺の豪商",
+      "千利休の師",
+      "「創始＝珠光／継承＝紹鴎／大成＝利休」"
+    ],
+    "explanation": "村田珠光にはじまる侘び茶を受けついで発展させた堺の豪商・茶人。弟子の千利休がこれを大成し、簡素な草庵の茶室と、道具や作法を切りつめた茶の湯の形が完成した。茶の湯は「栄西（喫茶の伝来）→ 村田珠光（創始）→ 武野紹鴎（継承）→ 千利休（大成）」の流れで整理される。",
+    "examNote": "茶の湯の系譜は空欄組合せ問題（人物×段階）で頻出。珠光＝創始、紹鴎＝継承、利休＝大成を取り違えないこと。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）桃山文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "myokian-taian",
+    "orderIndex": 1582,
+    "pairs": [
+      { "kind": "茶室×作った人物", "left": "妙喜庵待庵", "right": "千利休" },
+      { "kind": "茶室×特徴", "left": "妙喜庵待庵", "right": "二畳敷の草庵風茶室" }
+    ],
+    "kind": "concept",
+    "artist": null,
+    "patron": null,
+    "style": "草庵風茶室",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "安土桃山時代（16世紀後半）",
+    "eraNote": "桃山文化。千利休は、豪壮な城郭建築と対照的な、二畳敷という極端に狭い草庵風の茶室を完成させた。妙喜庵待庵は利休の作と伝えられる唯一の現存茶室とされる。",
+    "facts": [
+      { "slot": "other", "text": "千利休の作と伝えられる草庵風の茶室" },
+      { "slot": "other", "text": "二畳敷という極端に狭い座敷" },
+      { "slot": "other", "text": "京都府大山崎町の妙喜庵にある" }
+    ],
+    "falseStatements": [
+      { "text": "足利義政が建てた持仏堂である", "why": "義政の持仏堂は慈照寺東求堂（東山文化）。建築・時代の入れ替え", "verifiedFalse": true },
+      { "text": "金箔を用いた豪華な茶室である", "why": "待庵は簡素な草庵風の茶室。属性の反転（秀吉の黄金の茶室との混同）", "verifiedFalse": true },
+      { "text": "村田珠光が建てた", "why": "待庵は千利休の作と伝えられる。人物・時代の入れ替え", "verifiedFalse": true },
+      { "text": "数寄屋造の代表建築である", "why": "数寄屋造の代表は桂離宮（寛永期）。様式・時代の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "妙喜庵待庵",
+    "reading": "みょうきあん たいあん",
+    "era": "momoyama",
+    "category": "architecture",
+    "location": "妙喜庵（京都府大山崎町）",
+    "author": null,
+    "technique": "木造・二畳敷の草庵風茶室",
+    "keyPoints": [
+      "千利休の作と伝えられる茶室",
+      "二畳敷の草庵風",
+      "妙喜庵（京都府大山崎町）",
+      "豪壮な城郭建築と対照的な簡素さ"
+    ],
+    "explanation": "千利休の作と伝えられる二畳敷の草庵風茶室。土壁と低い天井、にじり口といった簡素な構えで、金銀と大画面の障壁画に彩られた城郭建築とは対照的な、侘びの美意識を形にしたものとされる。豪壮華麗と簡素静寂という桃山文化の二面性を示す建築として紹介される。",
+    "examNote": "「待庵＝千利休＝二畳の草庵茶室」。秀吉の黄金の茶室（豪華さの象徴）と対にして問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）桃山文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "chosenjin-toko",
+    "orderIndex": 1600,
+    "pairs": [
+      { "kind": "焼物×産地", "left": "有田焼（肥前）", "right": "李参平ら朝鮮人陶工" },
+      { "kind": "焼物×産地", "left": "薩摩焼・萩焼", "right": "薩摩・長門（朝鮮人陶工が伝えた技術）" }
+    ],
+    "kind": "concept",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "安土桃山時代末〜江戸時代初め（16世紀末〜17世紀初め）",
+    "eraNote": "桃山文化。文禄・慶長の役に際して大名たちが連れ帰った朝鮮人陶工により、各地で技術の高い焼き物が作られるようになった。有田焼（肥前）・薩摩焼・萩焼などがその例で、この戦いは「焼き物戦争」とも呼ばれる。",
+    "facts": [
+      { "slot": "other", "text": "文禄・慶長の役に際して連れて来られた朝鮮人陶工が各地に技術を伝えた" },
+      { "slot": "other", "text": "有田焼（肥前）・薩摩焼・萩焼などが起こった" },
+      { "slot": "other", "text": "茶の湯の流行が焼き物の需要を支えた" }
+    ],
+    "falseStatements": [
+      { "text": "日明貿易によって明から伝えられた技術である", "why": "朝鮮人陶工による技術伝来は文禄・慶長の役にともなうもの。時代・相手国の入れ替え", "verifiedFalse": true },
+      { "text": "有田焼は京都で焼かれた", "why": "有田焼は肥前（佐賀県）。所在の入れ替え", "verifiedFalse": true },
+      { "text": "色絵を完成させたのは野々村仁清である", "why": "有田焼の色絵を完成させたのは酒井田柿右衛門。野々村仁清は京焼（元禄文化）。人物の入れ替え", "verifiedFalse": true },
+      { "text": "鎌倉時代に始まった", "why": "安土桃山時代末〜江戸時代初めの出来事。時代の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "朝鮮人陶工と諸国の焼き物",
+    "reading": "ちょうせんじんとうこうとしょこくのやきもの",
+    "era": "momoyama",
+    "category": "craft",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "文禄・慶長の役にともなう技術の伝来",
+      "有田焼（肥前）・薩摩焼・萩焼など",
+      "茶の湯の流行が需要を支えた",
+      "有田焼の色絵は酒井田柿右衛門（江戸初期）"
+    ],
+    "explanation": "文禄・慶長の役に際して大名たちが連れ帰った朝鮮人陶工により、西日本の各地で技術の高い焼き物が作られるようになった。肥前の有田焼、薩摩焼、萩焼などがその例で、茶の湯の流行による茶器の需要がこれを支えた。有田焼ではのちに酒井田柿右衛門が色絵の技法を完成させている。",
+    "examNote": "「焼き物×産地」の組合せは頻出（有田＝肥前、薩摩＝薩摩、萩＝長門）。色絵の柿右衛門（江戸初期）・京焼の野々村仁清（元禄）との人物の取り違えに注意。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）桃山文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "jurakudai",
+    "orderIndex": 1587,
+    "pairs": [
+      { "kind": "建築×造営者", "left": "聚楽第", "right": "豊臣秀吉" },
+      { "kind": "建築×性格", "left": "聚楽第", "right": "京都に築かれた政庁兼邸宅" }
+    ],
+    "kind": "concept",
+    "artist": null,
+    "patron": "豊臣秀吉",
+    "style": null,
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "安土桃山時代（16世紀末）",
+    "eraNote": "桃山文化。豊臣秀吉が京都に築いた聚楽第は、政庁と邸宅を兼ねた壮大な建物で、後陽成天皇を迎えて権威を示した。のちに取りこわされ現存しないが、桃山の豪壮な建築を代表する例として挙げられる。",
+    "facts": [
+      { "slot": "patron", "text": "豊臣秀吉が京都に築いた" },
+      { "slot": "other", "text": "政庁と邸宅を兼ねた壮大な建物であった" },
+      { "slot": "other", "text": "のちに取りこわされ現存しない" }
+    ],
+    "falseStatements": [
+      { "text": "織田信長が築いた城である", "why": "聚楽第を築いたのは豊臣秀吉。信長の城は安土城。人物の入れ替え", "verifiedFalse": true },
+      { "text": "現在も天守が残っている", "why": "のちに取りこわされ現存しない。属性の反転", "verifiedFalse": true },
+      { "text": "徳川家康が江戸に築いた", "why": "聚楽第は京都。人物・所在の入れ替え", "verifiedFalse": true },
+      { "text": "禅宗様の仏堂建築である", "why": "聚楽第は政庁兼邸宅の建築。分野・様式の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "聚楽第",
+    "reading": "じゅらくてい（じゅらくだい）",
+    "era": "momoyama",
+    "category": "architecture",
+    "location": "京都",
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "豊臣秀吉が京都に築いた",
+      "政庁と邸宅を兼ねた壮大な建物",
+      "後陽成天皇を迎えた",
+      "取りこわされ現存しない"
+    ],
+    "explanation": "豊臣秀吉が京都に築いた、政庁と邸宅を兼ねる壮大な建物。後陽成天皇を迎えて諸大名に忠誠を誓わせるなど、秀吉の権威を示す場となった。のちに取りこわされて現存しないが、大坂城・伏見城とともに、天下人の富と力を建築で示した桃山文化の性格を伝える例とされる。",
+    "examNote": "「聚楽第＝豊臣秀吉＝京都」。安土城（信長）・大坂城（秀吉）・伏見城（秀吉）と造営者を整理して覚える。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）桃山文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "nanban-bunka",
+    "orderIndex": 1600,
+    "pairs": [
+      { "kind": "文化×担い手", "left": "南蛮文化", "right": "ポルトガル人・スペイン人（宣教師・商人）" },
+      { "kind": "文化×もたらされたもの", "left": "南蛮文化", "right": "活字印刷術・天文学・医学・南蛮屏風" }
+    ],
+    "kind": "concept",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "キリスト教",
+    "holder": null,
+    "subject": null,
+    "periodLabel": "安土桃山時代（16世紀後半〜17世紀初め）",
+    "eraNote": "桃山文化。ポルトガル人・スペイン人の来航によって、キリスト教とともに活字印刷術・天文学・医学・地理学などがもたらされた。南蛮人の姿や船を描いた南蛮屏風も作られ、衣服や食べ物の名にもその影響が残った。",
+    "facts": [
+      { "slot": "other", "text": "ポルトガル人・スペイン人の来航によって伝えられた" },
+      { "slot": "other", "text": "活字印刷術・天文学・医学・地理学などがもたらされた" },
+      { "slot": "other", "text": "南蛮人の姿や船を描いた南蛮屏風が作られた" }
+    ],
+    "falseStatements": [
+      { "text": "オランダ人によって伝えられた蘭学のことである", "why": "蘭学は江戸時代のオランダ経由の学問。時代・相手国の入れ替え", "verifiedFalse": true },
+      { "text": "日明貿易によってもたらされた", "why": "南蛮文化はポルトガル・スペインとの南蛮貿易にともなうもの。相手国・時代の入れ替え", "verifiedFalse": true },
+      { "text": "禅宗とともに宋から伝えられた", "why": "禅宗の伝来は鎌倉時代。時代・内容の入れ替え", "verifiedFalse": true },
+      { "text": "鎖国の完成後に最も栄えた", "why": "南蛮文化は禁教・鎖国以前に栄えた。時代の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "南蛮文化",
+    "reading": "なんばんぶんか",
+    "era": "momoyama",
+    "category": "other",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "ポルトガル人・スペイン人の来航による",
+      "活字印刷術・天文学・医学・地理学",
+      "南蛮屏風",
+      "禁教・鎖国とともに衰えた"
+    ],
+    "explanation": "ポルトガル人・スペイン人の来航にともない、キリスト教とともに日本に入った文化。活字印刷術によるキリシタン版の刊行、天文学・医学・地理学の知識、パンやカステラといった食べ物、南蛮人の姿や船を描いた南蛮屏風などがその例である。江戸幕府の禁教と鎖国の政策によって、この流れは断たれていった。",
+    "examNote": "「南蛮文化＝ポルトガル・スペイン（桃山）」「蘭学＝オランダ（江戸中期）」を時代と相手国で区別する。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）桃山文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
   }
 ]

@@ -336,5 +336,404 @@
     ],
     "examTags": [],
     "status": "reviewed"
+  },
+  {
+    "id": "ashikaga-yoshimitsu",
+    "orderIndex": 1392,
+    "pairs": [
+      { "kind": "人物×事績", "left": "足利義満", "right": "南北朝の合一（1392年）" },
+      { "kind": "人物×建築", "left": "足利義満", "right": "北山の山荘（のちの鹿苑寺）" },
+      { "kind": "人物×貿易", "left": "足利義満", "right": "日明貿易の開始（1404年）" }
+    ],
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "禅宗（臨済宗に帰依）",
+    "holder": null,
+    "subject": null,
+    "periodLabel": "室町時代前期（14世紀後半〜15世紀初め）",
+    "eraNote": "北山文化。3代将軍足利義満は1392年に南北朝の合一を実現して幕府の権力を安定させ、京都北山に山荘を営んだ。臨済宗を保護して五山・十刹の制を整え、明との国交を開いて日明貿易を始めるなど、北山文化の性格を方向づけた。",
+    "facts": [
+      { "slot": "period", "text": "1392年に南北朝の合一を実現した" },
+      { "slot": "other", "text": "京都北山に山荘を営んだ（のちの鹿苑寺）" },
+      { "slot": "other", "text": "明との国交を開き1404年に日明貿易を始めた" }
+    ],
+    "falseStatements": [
+      { "text": "東山に山荘を営んだ将軍である", "why": "東山に山荘を営んだのは8代将軍足利義政。人物・場所の入れ替え", "verifiedFalse": true },
+      { "text": "応仁の乱のときの将軍である", "why": "応仁の乱（1467〜77年）のときの将軍は足利義政。時代の入れ替え", "verifiedFalse": true },
+      { "text": "南蛮貿易を始めた", "why": "南蛮貿易はポルトガル・スペインとの貿易（桃山文化）。時代・相手国の入れ替え", "verifiedFalse": true },
+      { "text": "千利休を茶頭として召しかかえた", "why": "千利休を茶頭としたのは織田信長・豊臣秀吉。時代・人物の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "足利義満",
+    "reading": "あしかがよしみつ",
+    "era": "kitayama",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "1392年に南北朝を合一",
+      "京都北山に山荘を営む（のちの鹿苑寺）",
+      "五山・十刹の制を整え臨済宗を保護",
+      "1404年に日明貿易を開始"
+    ],
+    "explanation": "南北朝の合一を実現して幕府の権力を安定させた3代将軍。京都北山に山荘を営み、その中心建物はのちに禅寺（鹿苑寺）に受けつがれた。臨済宗を保護して五山・十刹の制を整え、明との国交を開いて勘合を用いる貿易を始めるなど、公家文化と武家文化の融合、大陸の禅宗文化の流入という北山文化の性格を方向づけた人物である。",
+    "examNote": "「北山文化＝足利義満」「東山文化＝足利義政」の対応が最頻出。南北朝の合一（1392年）・日明貿易の開始（1404年）の年代も年代順の問いで問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）北山文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "kanami",
+    "orderIndex": 1375,
+    "pairs": [
+      { "kind": "人物×芸能", "left": "観阿弥", "right": "猿楽から能を大成（世阿弥の父）" },
+      { "kind": "人物×保護者", "left": "観阿弥", "right": "足利義満" }
+    ],
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "南北朝時代〜室町時代前期（14世紀後半）",
+    "eraNote": "北山文化。猿楽の一座を率いた観阿弥は、子の世阿弥とともに足利義満の保護を受け、庶民の芸能であった猿楽を、幽玄を重んじる芸術性の高い能へと高めた。",
+    "facts": [
+      { "slot": "other", "text": "子の世阿弥とともに能を大成した" },
+      { "slot": "other", "text": "足利義満の保護を受けた" },
+      { "slot": "other", "text": "猿楽の一座を率いた" }
+    ],
+    "falseStatements": [
+      { "text": "風姿花伝を著した", "why": "風姿花伝の著者は子の世阿弥。人物の入れ替え", "verifiedFalse": true },
+      { "text": "侘び茶を創始した", "why": "侘び茶の創始は村田珠光（東山文化）。人物・分野の入れ替え", "verifiedFalse": true },
+      { "text": "かぶき踊りを始めた", "why": "かぶき踊りの創始は出雲阿国（桃山文化）。人物・時代の入れ替え", "verifiedFalse": true },
+      { "text": "足利義政の保護を受けた", "why": "観阿弥・世阿弥が保護を受けたのは足利義満。人物・時代の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "観阿弥",
+    "reading": "かんあみ",
+    "era": "kitayama",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "世阿弥の父",
+      "猿楽から能を大成した父子の一方",
+      "足利義満の保護を受けた",
+      "能楽論書を著したのは子の世阿弥"
+    ],
+    "explanation": "猿楽の一座を率い、子の世阿弥とともに、庶民の芸能であった猿楽を芸術性の高い能へと高めた人物。将軍足利義満の保護を受けて活動し、その後の能の発展の土台をつくった。能楽論書『風姿花伝』を著したのは子の世阿弥であり、父子のどちらの事績かを問う設問が多い。",
+    "examNote": "「観阿弥・世阿弥＝能の大成＝足利義満の保護」。『風姿花伝』は世阿弥の著作である点に注意。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）北山文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "fushikaden",
+    "orderIndex": 1402,
+    "pairs": [
+      { "kind": "書物×著者", "left": "風姿花伝（花伝書）", "right": "世阿弥" },
+      { "kind": "書物×分野", "left": "風姿花伝（花伝書）", "right": "能楽論" }
+    ],
+    "kind": "text",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "室町時代前期（15世紀初め）",
+    "eraNote": "北山文化。能を大成した世阿弥は、その修行と演技の心得を『風姿花伝』にまとめた。「秘すれば花」の言葉で知られ、日本の芸能論の古典とされる。",
+    "facts": [
+      { "slot": "other", "text": "世阿弥が著した能楽論書" },
+      { "slot": "other", "text": "花伝書とも呼ばれる" },
+      { "slot": "other", "text": "「秘すれば花」の言葉で知られる" }
+    ],
+    "falseStatements": [
+      { "text": "二条良基が編んだ連歌集である", "why": "二条良基が編んだのは菟玖波集（連歌集）。作品・人物の入れ替え", "verifiedFalse": true },
+      { "text": "道元が著した禅の書である", "why": "道元の著作は正法眼蔵（鎌倉文化）。作品・人物の入れ替え", "verifiedFalse": true },
+      { "text": "五山文学を代表する漢詩集である", "why": "五山文学は禅僧による漢詩文。分野の入れ替え", "verifiedFalse": true },
+      { "text": "茶の作法をまとめた書物である", "why": "能の修行と演技の心得を説く能楽論書。分野の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "風姿花伝",
+    "reading": "ふうしかでん",
+    "era": "kitayama",
+    "category": "literature",
+    "location": null,
+    "author": "世阿弥",
+    "technique": null,
+    "keyPoints": [
+      "世阿弥の能楽論書",
+      "花伝書とも呼ばれる",
+      "「秘すれば花」",
+      "北山文化を代表する著作"
+    ],
+    "explanation": "能を大成した世阿弥が、修行の道筋と演技の心得を書きとめた能楽論書。年齢に応じた稽古のあり方や、観客を引きつける「花」について説き、「秘すれば花」の言葉で知られる。父・観阿弥から受けついだ芸を理論としてまとめたもので、北山文化を代表する著作とされる。",
+    "examNote": "「風姿花伝＝世阿弥」。観阿弥の著作としないこと、連歌論（二条良基）との分野の取り違えに注意。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）北山文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "nijo-yoshimoto",
+    "orderIndex": 1356,
+    "pairs": [
+      { "kind": "人物×編著", "left": "二条良基", "right": "菟玖波集" },
+      { "kind": "人物×規則", "left": "二条良基", "right": "応安新式（連歌の規則）" }
+    ],
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "南北朝時代〜室町時代前期（14世紀）",
+    "eraNote": "北山文化。和歌から生まれた連歌は、南北朝期以降、貴族から地方の武士・庶民にまで広がった。二条良基は連歌集『菟玖波集』を編み、連歌の規則である応安新式を定めて、連歌を和歌と並ぶ地位に引き上げた。",
+    "facts": [
+      { "slot": "other", "text": "連歌集『菟玖波集』を編んだ" },
+      { "slot": "other", "text": "連歌の規則である応安新式を定めた" },
+      { "slot": "other", "text": "連歌を和歌と並ぶ地位に高めた" }
+    ],
+    "falseStatements": [
+      { "text": "正風連歌を確立した", "why": "正風連歌の確立は宗祇（東山文化）。人物・時代の入れ替え", "verifiedFalse": true },
+      { "text": "俳諧連歌を始めて犬筑波集を編んだ", "why": "犬筑波集は山崎宗鑑。人物・作品の入れ替え", "verifiedFalse": true },
+      { "text": "能楽論書『風姿花伝』を著した", "why": "風姿花伝の著者は世阿弥。分野・人物の入れ替え", "verifiedFalse": true },
+      { "text": "新古今和歌集の撰者である", "why": "新古今和歌集の撰者は藤原定家ら（鎌倉文化）。時代・作品の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "二条良基",
+    "reading": "にじょうよしもと",
+    "era": "kitayama",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "連歌集『菟玖波集』の編者",
+      "連歌の規則・応安新式を定めた",
+      "連歌を和歌と並ぶ地位に高めた",
+      "宗祇（東山文化・正風連歌）の先駆"
+    ],
+    "explanation": "複数の人が上の句と下の句を交互によみつぐ連歌を、和歌と並ぶ文芸の地位に引き上げた人物。連歌集『菟玖波集』を編み、あわせて連歌の規則である応安新式を定めた。連歌はこののち地方の武士や庶民にも広まり、東山文化期には宗祇が正風連歌を確立する。",
+    "examNote": "連歌は「二条良基（菟玖波集・応安新式）→ 宗祇（正風連歌・新撰菟玖波集）→ 山崎宗鑑（俳諧連歌・犬筑波集）」の流れで問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）北山文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "tsukubashu",
+    "orderIndex": 1356,
+    "pairs": [
+      { "kind": "書物×編者", "left": "菟玖波集", "right": "二条良基" },
+      { "kind": "書物×分野", "left": "菟玖波集", "right": "連歌集" }
+    ],
+    "kind": "text",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "南北朝時代（14世紀半ば）",
+    "eraNote": "北山文化。二条良基が編んだ連歌集で、勅撰集に準じる扱いを受けたことによって、連歌は和歌と並ぶ文芸として認められた。",
+    "facts": [
+      { "slot": "other", "text": "二条良基が編んだ連歌集" },
+      { "slot": "other", "text": "連歌が和歌と並ぶ地位を得るきっかけとなった" },
+      { "slot": "other", "text": "のちに宗祇が新撰菟玖波集を編んだ" }
+    ],
+    "falseStatements": [
+      { "text": "宗祇が編んだ", "why": "宗祇が編んだのは新撰菟玖波集（東山文化）。人物・作品の入れ替え", "verifiedFalse": true },
+      { "text": "俳諧連歌を集めたものである", "why": "俳諧連歌を集めたのは犬筑波集（山崎宗鑑）。作品の入れ替え", "verifiedFalse": true },
+      { "text": "勅撰和歌集である", "why": "和歌集ではなく連歌集。ジャンルの入れ替え", "verifiedFalse": true },
+      { "text": "世阿弥の能楽論をまとめたものである", "why": "能楽論書は風姿花伝。分野の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "菟玖波集",
+    "reading": "つくばしゅう",
+    "era": "kitayama",
+    "category": "literature",
+    "location": null,
+    "author": "二条良基（編）",
+    "technique": null,
+    "keyPoints": [
+      "二条良基が編んだ連歌集",
+      "連歌が和歌と並ぶ地位を得た",
+      "のちの新撰菟玖波集（宗祇）と区別する",
+      "南北朝期の成立"
+    ],
+    "explanation": "二条良基が編んだ連歌集。それまで遊びとみなされがちだった連歌が、この集によって和歌と並ぶ文芸として認められた。東山文化期に宗祇が編んだ『新撰菟玖波集』と名前が似ているため、編者と時期の取り違えを突く設問が多い。",
+    "examNote": "「菟玖波集＝二条良基」「新撰菟玖波集＝宗祇」。名前が似ているので編者で覚え分ける。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）北山文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "gozan-jissatsu",
+    "orderIndex": 1386,
+    "pairs": [
+      { "kind": "制度×整えた人物", "left": "五山・十刹の制", "right": "足利義満" },
+      { "kind": "制度×宗派", "left": "五山・十刹の制", "right": "臨済宗" }
+    ],
+    "kind": "concept",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "禅宗（臨済宗）",
+    "holder": null,
+    "subject": null,
+    "periodLabel": "室町時代前期（14世紀末）",
+    "eraNote": "北山文化。足利義満は中国の制度にならい、臨済宗の主要な寺院に五山・十刹という格づけを定めて保護と統制を行った。この制度のもとで五山の禅僧は漢詩文をつくり、幕府の外交や学問の担い手ともなった。",
+    "facts": [
+      { "slot": "other", "text": "足利義満が整えた臨済宗寺院の格づけの制度" },
+      { "slot": "other", "text": "この制度のもとで五山文学が発達した" },
+      { "slot": "other", "text": "五山の禅僧は幕府の外交や学問も担った" }
+    ],
+    "falseStatements": [
+      { "text": "曹洞宗の寺院を格づけした制度である", "why": "五山・十刹の制は臨済宗の寺院を対象とする。宗派の入れ替え", "verifiedFalse": true },
+      { "text": "院政期に院が造営した御願寺の総称である", "why": "院の御願寺の総称は六勝寺。時代・内容の入れ替え", "verifiedFalse": true },
+      { "text": "足利義政が定めた", "why": "整えたのは足利義満。人物・時代の入れ替え", "verifiedFalse": true },
+      { "text": "江戸幕府が定めた寺請の制度である", "why": "寺請制度は江戸時代の宗教統制。時代・内容の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "五山・十刹の制",
+    "reading": "ござん・じっさつのせい",
+    "era": "kitayama",
+    "category": "religion",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "臨済宗寺院の格づけの制度",
+      "足利義満が整えた",
+      "五山文学の基盤",
+      "禅僧が外交・学問の担い手となった"
+    ],
+    "explanation": "中国の制度にならい、臨済宗の主要寺院に五山・十刹という格づけを定めて幕府が保護と統制を行った制度。足利義満のもとで整えられた。この制度に支えられた五山の禅僧たちは、漢詩文の創作（五山文学）だけでなく、明との外交文書の作成や学問の担い手としても活躍した。",
+    "examNote": "「五山・十刹の制＝足利義満＝臨済宗」。五山文学（義堂周信・絶海中津）とセットで問われる。院政期の六勝寺との混同に注意。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）北山文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "musso-soseki",
+    "orderIndex": 1339,
+    "pairs": [
+      { "kind": "人物×寺院", "left": "夢窓疎石", "right": "天龍寺" },
+      { "kind": "人物×事績", "left": "夢窓疎石", "right": "天龍寺船の派遣を足利尊氏に勧めた" }
+    ],
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "禅宗（臨済宗）",
+    "holder": null,
+    "subject": null,
+    "periodLabel": "南北朝時代（14世紀前半）",
+    "eraNote": "北山文化に先立つ南北朝期。臨済宗の禅僧・夢窓疎石は足利尊氏・直義の帰依を受け、後醍醐天皇の菩提を弔うために天龍寺の造営を勧めた。造営費を得るために元へ送られた貿易船は天龍寺船と呼ばれる。",
+    "facts": [
+      { "slot": "other", "text": "足利尊氏・直義の帰依を受けた臨済宗の禅僧" },
+      { "slot": "other", "text": "天龍寺の造営を勧めた" },
+      { "slot": "other", "text": "造営費を得るための天龍寺船が元へ送られた" }
+    ],
+    "falseStatements": [
+      { "text": "臨済宗を日本に伝えた", "why": "臨済宗を伝えたのは栄西（鎌倉文化）。人物・時代の入れ替え", "verifiedFalse": true },
+      { "text": "龍安寺の石庭を作庭したことが確定している", "why": "龍安寺石庭の作庭者は諸説あり未確定。断定できない", "verifiedFalse": true },
+      { "text": "曹洞宗を開いた", "why": "曹洞宗の開祖は道元。宗派の入れ替え", "verifiedFalse": true },
+      { "text": "日明貿易を始めた", "why": "日明貿易を始めたのは足利義満。人物・事績の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "夢窓疎石",
+    "reading": "むそうそせき",
+    "era": "kitayama",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "足利尊氏・直義の帰依を受けた臨済宗の禅僧",
+      "天龍寺の造営を勧めた",
+      "天龍寺船（元への貿易船）",
+      "室町幕府と禅宗の結びつきを示す人物"
+    ],
+    "explanation": "足利尊氏・直義の帰依を受けた臨済宗の禅僧。後醍醐天皇の菩提を弔うために天龍寺の造営を勧め、その費用を得るために元へ貿易船（天龍寺船）が送られた。幕府と禅宗が深く結びつき、のちの五山・十刹の制や五山文学につながっていく流れを示す人物である。",
+    "examNote": "「天龍寺・天龍寺船＝夢窓疎石＝足利尊氏」。龍安寺石庭の作庭者を夢窓疎石と断定する選択肢は誤り（作庭者は諸説あり未確定）。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）南北朝期・北山文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "taiheiki",
+    "orderIndex": 1370,
+    "pairs": [
+      { "kind": "書物×主題", "left": "太平記", "right": "南北朝の動乱" },
+      { "kind": "書物×分類", "left": "太平記", "right": "軍記物語" }
+    ],
+    "kind": "text",
+    "artist": null,
+    "patron": null,
+    "style": "軍記物語",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "南北朝時代（14世紀後半の成立とされる）",
+    "eraNote": "北山文化に先立つ南北朝期の文学。動乱の時代を背景に、南北朝の争乱を描く軍記物語『太平記』が生まれ、太平記読みによって語り広められた。",
+    "facts": [
+      { "slot": "other", "text": "南北朝の動乱を描いた軍記物語" },
+      { "slot": "other", "text": "作者は不詳" },
+      { "slot": "other", "text": "太平記読みによって語り広められた" }
+    ],
+    "falseStatements": [
+      { "text": "平氏の興亡を描いた軍記物語である", "why": "平氏の興亡を描くのは平家物語（鎌倉文化）。作品の入れ替え", "verifiedFalse": true },
+      { "text": "世阿弥が著した", "why": "太平記は作者不詳。世阿弥の著作は風姿花伝。人物の入れ替え", "verifiedFalse": true },
+      { "text": "庶民を主人公とする短編物語群である", "why": "短編物語群は御伽草子（東山文化）。ジャンル・時代の入れ替え", "verifiedFalse": true },
+      { "text": "鎌倉幕府の事績を記した歴史書である", "why": "幕府の事績を記す歴史書は吾妻鏡。ジャンルの入れ替え", "verifiedFalse": true }
+    ],
+    "title": "太平記",
+    "reading": "たいへいき",
+    "era": "kitayama",
+    "category": "literature",
+    "location": null,
+    "author": "作者不詳",
+    "technique": null,
+    "keyPoints": [
+      "南北朝の動乱を描いた軍記物語",
+      "作者不詳",
+      "太平記読みによって語り広められた",
+      "平家物語（鎌倉文化）と区別する"
+    ],
+    "explanation": "南北朝の動乱を描いた軍記物語で、作者は不詳。のちに太平記読みと呼ばれる語り手によって広められ、武士や庶民のあいだで親しまれた。平氏の興亡を描く平家物語（鎌倉文化）と対にして、軍記物語の代表として問われる。",
+    "examNote": "「太平記＝南北朝の動乱」「平家物語＝平氏の興亡」。本アプリでは南北朝期の作品を北山文化の区分に含めている（教科書では南北朝期の文化として扱われることが多い）。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）南北朝期・北山文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
   }
 ]
