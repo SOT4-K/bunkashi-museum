@@ -7,7 +7,7 @@
       { "left": "阿修羅像（八部衆像）", "right": "興福寺（もと西金堂）", "kind": "作品×所蔵" },
       { "left": "興福寺西金堂", "right": "光明皇后", "kind": "作品×人物" }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": "光明皇后",
     "style": "乾漆像（天平彫刻）",
     "religion": "仏教（法相宗・藤原氏の氏寺興福寺）",
@@ -154,7 +154,7 @@
       { "left": "十大弟子像", "right": "脱活乾漆像", "kind": "作品×技法" },
       { "left": "十大弟子像", "right": "興福寺（もと西金堂）", "kind": "作品×所蔵" }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": "光明皇后",
     "style": "乾漆像（天平彫刻）",
     "religion": "仏教（法相宗・藤原氏の氏寺興福寺）",
@@ -299,7 +299,7 @@
       { "left": "執金剛神像", "right": "塑像", "kind": "作品×技法" },
       { "left": "執金剛神像", "right": "東大寺法華堂（三月堂）", "kind": "作品×所蔵" }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": null,
     "style": "塑像（天平彫刻）",
     "religion": "鎮護国家（華厳宗・東大寺）",
@@ -438,7 +438,7 @@
       { "left": "四天王像（戒壇堂）", "right": "東大寺戒壇堂", "kind": "作品×所蔵" },
       { "left": "戒壇", "right": "鑑真がもたらした受戒の制度", "kind": "語句×語句" }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": null,
     "style": "塑像（天平彫刻）",
     "religion": "鎮護国家（華厳宗・東大寺）",
@@ -573,7 +573,7 @@
       { "left": "不空羂索観音像", "right": "脱活乾漆像", "kind": "作品×技法" },
       { "left": "不空羂索観音像", "right": "東大寺法華堂（三月堂）", "kind": "作品×所蔵" }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": null,
     "style": "乾漆像（天平彫刻）",
     "religion": "鎮護国家（華厳宗・東大寺）",
@@ -712,7 +712,7 @@
       { "left": "鑑真和上像", "right": "唐招提寺", "kind": "作品×所蔵" },
       { "left": "鑑真", "right": "戒律を伝えた唐の僧", "kind": "人物×事績" }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": null,
     "style": "肖像彫刻",
     "religion": "律宗（戒律）",
@@ -852,7 +852,7 @@
       { "left": "鳥毛立女屏風", "right": "正倉院", "kind": "作品×所蔵" },
       { "left": "鳥毛立女屏風", "right": "もとは鳥の羽毛を貼った屏風", "kind": "作品×技法" }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": null,
     "style": "唐風の樹下美人図",
     "religion": null,
@@ -987,7 +987,7 @@
       { "left": "吉祥天像", "right": "薬師寺", "kind": "作品×所蔵" },
       { "left": "吉祥天像", "right": "麻布着色", "kind": "作品×技法" }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": null,
     "style": "唐風の仏画",
     "religion": null,
@@ -1116,7 +1116,7 @@
       { "left": "正倉院宝庫", "right": "校倉造・高床式", "kind": "作品×技法" },
       { "left": "正倉院宝庫", "right": "東大寺境内", "kind": "作品×所蔵" }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": null,
     "style": "校倉造",
     "religion": null,
@@ -1249,7 +1249,7 @@
       { "left": "唐招提寺金堂", "right": "寄棟造・本瓦葺", "kind": "作品×技法" },
       { "left": "唐招提寺", "right": "鑑真", "kind": "作品×人物" }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": null,
     "style": "天平建築（寄棟造・本瓦葺）",
     "religion": "律宗（戒律）",

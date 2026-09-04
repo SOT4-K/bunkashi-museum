@@ -121,7 +121,7 @@
       { "left": "平等院鳳凰堂", "right": "阿弥陀堂建築", "kind": "作品×様式" },
       { "left": "末法思想", "right": "浄土教の広まり", "kind": "語句×語句" }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": "藤原頼通",
     "style": "阿弥陀堂建築（国風文化）",
     "religion": "浄土教",
@@ -297,7 +297,7 @@
     "era": "kokufu",
     "category": "calligraphy",
     "location": "分蔵（原本の一部は土佐山内家宝物資料館ほか）",
-    "author": null,
+    "author": "伝 紀貫之",
     "technique": "かな書道（散らし書き）",
     "keyPoints": [
       "国風文化を代表する和様の書",
@@ -330,7 +330,7 @@
       { "left": "醍醐寺五重塔", "right": "京都府内最古の木造建築", "kind": "語句×語句" },
       { "left": "醍醐寺五重塔", "right": "醍醐天皇の菩提を弔う", "kind": "作品×人物" }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": "朱雀天皇（発願）、村上天皇の代に完成",
     "style": "国風文化建築（五重塔）",
     "religion": "仏教（真言宗）",

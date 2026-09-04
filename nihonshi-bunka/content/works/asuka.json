@@ -126,7 +126,7 @@
       { "left": "広隆寺", "right": "秦河勝（秦氏の氏寺）", "kind": "作品×人物" },
       { "left": "半跏思惟像", "right": "広隆寺・中宮寺", "kind": "語句×語句" }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": "秦河勝",
     "style": "木彫像（南朝様式に近い一木造）",
     "religion": "仏教",
@@ -241,7 +241,7 @@
       { "left": "中宮寺", "right": "聖徳太子ゆかりの尼寺", "kind": "作品×所蔵" },
       { "left": "中宮寺半跏思惟像", "right": "南朝系統のやわらかな作風", "kind": "作品×様式" }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": null,
     "style": "木彫像（南朝様式に近い一木造）",
     "religion": "仏教",
@@ -356,7 +356,7 @@
       { "left": "玉虫厨子", "right": "捨身飼虎図（説話画）", "kind": "作品×主題" },
       { "left": "玉虫厨子", "right": "玉虫の羽・金銅透かし彫り金具", "kind": "作品×技法" }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": null,
     "style": "工芸（厨子・飛鳥様式）",
     "religion": "仏教",
@@ -457,9 +457,9 @@
     "pairs": [
       { "left": "法隆寺百済観音像", "right": "南朝様式", "kind": "作品×様式" },
       { "left": "法隆寺百済観音像", "right": "樟の一木造", "kind": "作品×技法" },
-      { "left": "法隆寺百済観音像", "right": "水瓶を持つ観音菩薩", "kind": "作品×主題" }
+      { "left": "法隆寺百済観音像", "right": "観音菩薩", "kind": "作品×主題" }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": null,
     "style": "木彫像（南朝様式）",
     "religion": "仏教",

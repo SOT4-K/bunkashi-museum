@@ -15,11 +15,11 @@
       },
       {
         "left": "観心寺如意輪観音像",
-        "right": "六臂（腕が6本）",
+        "right": "如意輪観音（密教の新しい尊格）",
         "kind": "作品×主題"
       }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": null,
     "style": "一木造・翻波式（密教彫刻）",
     "religion": "密教（真言宗）",
@@ -142,7 +142,7 @@
         "kind": "作品×人物"
       }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": null,
     "style": "弘仁・貞観建築（山岳寺院）",
     "religion": "仏教（真言宗系、女人高野）",
@@ -253,7 +253,7 @@
         "kind": "作品×技法"
       }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": "空海",
     "style": "一木造（密教彫刻・立体曼荼羅）",
     "religion": "密教（真言宗）",

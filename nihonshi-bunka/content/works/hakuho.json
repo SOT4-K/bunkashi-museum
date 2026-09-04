@@ -7,7 +7,7 @@
       { "left": "薬師寺金堂薬師三尊像", "right": "銅造（金銅仏）", "kind": "作品×技法" },
       { "left": "薬師寺金堂薬師三尊像", "right": "グプタ様式の影響", "kind": "作品×様式" }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": "天武天皇",
     "style": "金銅仏（清新・グプタ様式の影響）",
     "religion": "仏教（法相宗）",
@@ -131,7 +131,7 @@
       { "left": "興福寺仏頭", "right": "興福寺国宝館（もと山田寺）", "kind": "作品×所蔵" },
       { "left": "興福寺仏頭", "right": "銅造（金銅仏）", "kind": "作品×技法" }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": "蘇我倉山田石川麻呂",
     "style": "金銅仏（清新な白鳳様式）",
     "religion": "仏教",
@@ -251,7 +251,7 @@
       { "left": "高松塚古墳", "right": "奈良県明日香村", "kind": "作品×出土地・所在地" },
       { "left": "高松塚古墳壁画", "right": "1972年の発見", "kind": "作品×できごと" }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": null,
     "style": "壁画（唐・高句麗の影響）",
     "religion": null,
@@ -355,11 +355,11 @@
     "id": "yakushiji-toto",
     "orderIndex": 60,
     "pairs": [
-      { "left": "薬師寺東塔", "right": "三重塔（各層に裳階）", "kind": "作品×技法" },
+      { "left": "薬師寺東塔", "right": "白鳳建築で現存する唯一の遺構", "kind": "語句×語句" },
       { "left": "薬師寺東塔", "right": "「凍れる音楽」", "kind": "語句×語句" },
       { "left": "薬師寺", "right": "天武天皇（発願）", "kind": "作品×人物" }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": "天武天皇",
     "style": "白鳳建築（三重塔・裳階付き）",
     "religion": "仏教（法相宗）",
@@ -472,7 +472,7 @@
       { "left": "法隆寺金堂壁画", "right": "1949年の火災で焼損", "kind": "作品×できごと" },
       { "left": "文化財保護法（1950年）", "right": "法隆寺金堂壁画の焼損", "kind": "語句×語句" }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": null,
     "style": "壁画（唐・インドの影響を受けた仏教絵画）",
     "religion": "仏教",

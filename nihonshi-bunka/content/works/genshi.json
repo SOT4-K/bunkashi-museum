@@ -19,7 +19,7 @@
         "kind": "作品×技法"
       }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": null,
     "style": "土偶（縄文晩期）",
     "religion": "呪術・信仰（縄文時代の精霊崇拝）",
@@ -139,7 +139,7 @@
         "kind": "作品×時代"
       }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": null,
     "style": "縄文土器（火焔型）",
     "religion": null,
@@ -187,8 +187,8 @@
         "verifiedFalse": true
       },
       {
-        "text": "彩色された須恵器である",
-        "why": "須恵器は古墳時代以降の硬質な土器。縄文土器とは時代・技法が異なる",
+        "text": "古墳時代以降に作られた須恵器である",
+        "why": "須恵器は古墳時代以降の硬質な土器。縄文時代中期の縄文土器とは時代・技法が異なる",
         "verifiedFalse": true
       },
       {
@@ -250,7 +250,7 @@
         "kind": "語句×語句"
       }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": null,
     "style": "形象埴輪（人物埴輪）",
     "religion": null,
@@ -369,7 +369,7 @@
         "kind": "作品×出土地・所在地"
       }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": null,
     "style": "銅鐸（袈裟襷文）",
     "religion": "農耕祭祀",
@@ -1017,7 +1017,7 @@
         "kind": "語句×語句"
       }
     ],
-    "artist": "不明",
+    "artist": null,
     "patron": null,
     "style": "銘文をもつ鉄剣（金象嵌）",
     "religion": null,
