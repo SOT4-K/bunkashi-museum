@@ -12,32 +12,57 @@
     "underlines": [
       {
         "key": "a",
-        "workIds": ["kuya-shonin-zo"],
-        "ask": { "slot": "technique", "type": "q10" },
+        "workIds": [
+          "kuya-shonin-zo"
+        ],
+        "ask": {
+          "slot": "technique",
+          "type": "q10"
+        },
         "note": "技法条件＋2文正誤。画像を出して「木造彩色・玉眼である／運慶の作である（誤）」等の正誤を問う想定"
       },
       {
         "key": "b",
-        "workIds": ["kuya-shonin-zo"],
-        "ask": { "slot": "artist", "type": "q9" },
+        "workIds": [
+          "kuya-shonin-zo"
+        ],
+        "ask": {
+          "slot": "artist",
+          "type": "q9"
+        },
         "note": "作者条件。「下線部bの人物が製作した彫刻はどれか」。作品名は本文に出していない"
       },
       {
         "key": "c",
-        "workIds": ["kamakura-daibutsu"],
-        "ask": { "slot": "holder", "type": "q4" },
+        "workIds": [
+          "kamakura-daibutsu"
+        ],
+        "ask": {
+          "slot": "holder",
+          "type": "q4"
+        },
         "note": "所在条件＋関連記述。artist は不詳のため ask に使わない。falseStatements に東大寺盧舎那仏との混同型がある"
       },
       {
         "key": "d",
-        "workIds": ["engakuji-shariden"],
-        "ask": { "slot": "technique", "type": "q9" },
-        "note": "様式条件。「下線部dの様式による建築はどれか」。誤答候補に和様の建築が入ると成立しないため、選択肢は他様式・他時代から取る"
+        "workIds": [
+          "engakuji-shariden"
+        ],
+        "ask": {
+          "slot": "technique",
+          "type": "q10"
+        },
+        "note": "様式条件＋2文正誤。禅宗様の建築（銀閣も上層が禅宗様）と画像上・条件文だけでは区別しにくいため、画像を出すq10に変更（reviewer指摘[中]-5, 2026-09-04 M2-11）"
       },
       {
         "key": "e",
-        "workIds": ["sanjusangendo-hondo"],
-        "ask": { "slot": "technique", "type": "q10" },
+        "workIds": [
+          "sanjusangendo-hondo"
+        ],
+        "ask": {
+          "slot": "technique",
+          "type": "q10"
+        },
         "note": "様式条件＋2文正誤。当初の建立は院政期（1164年）、現存建物は鎌倉再建（1266年）という年代の扱いに注意"
       }
     ]

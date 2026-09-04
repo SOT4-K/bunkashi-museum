@@ -74,9 +74,16 @@ function isPassagePublishable(passage: Passage): boolean {
   return passage.underlines.every((u) => u.workIds.some((id) => playableWorksById.has(id)))
 }
 
-export const passages: Passage[] = [...rawPassages]
-  .filter(isPassagePublishable)
-  .sort((a, b) => a.id.localeCompare(b.id))
+/**
+ * eras.json の order（時代順）→ 同一時代内は id 順。reviewer 指摘 [中]-6（2026-09-04 M2-11）:
+ * id のローマ字順だと「飛鳥の次に元禄、その次が原始」のように時代がバラバラに並んでいた。
+ */
+const eraOrderIndex: Record<string, number> = Object.fromEntries(eras.map((e) => [e.id, e.order]))
+
+export const passages: Passage[] = [...rawPassages].filter(isPassagePublishable).sort((a, b) => {
+  const orderDiff = (eraOrderIndex[a.era] ?? 0) - (eraOrderIndex[b.era] ?? 0)
+  return orderDiff !== 0 ? orderDiff : a.id.localeCompare(b.id)
+})
 
 export const passagesByEra: Record<string, Passage[]> = passages.reduce<Record<string, Passage[]>>((acc, p) => {
   ;(acc[p.era] ??= []).push(p)

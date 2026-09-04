@@ -47,18 +47,53 @@ function slotValue(work: Work, slot: Q9Slot): string | null {
   }
 }
 
-function slotLabel(slot: Q9Slot, value: string, eraName: string): string {
+/**
+ * value から括弧内の補足（撮影者・年代等）と読点以降の説明を落とし、設問の条件文に使える
+ * 短い語だけを残す。reviewer 指摘（2026-09-04 M2-11 [中]-3）: 長い technique/holder の値を
+ * そのまま条件文に使うと、答えの説明（年号・技法の由来など）を先に与えてしまう。
+ */
+function shortenValue(value: string): string {
+  return value
+    .replace(/（[^）]*）/g, '')
+    .split(/[、。]/)[0]
+    .trim()
+}
+
+/**
+ * 条件文（「〜のもの」の形。「〜でないもの」は slotLabelNegated）。
+ * reviewer 指摘 [中]-3: 「の作品のもの」の重複、建築・庭園に「所蔵する」は不適切
+ * （「〜にある」に統一）を修正。
+ */
+function slotLabel(slot: Q9Slot, rawValue: string, eraName: string): string {
+  const value = shortenValue(rawValue)
   switch (slot) {
     case 'artist':
-      return `作者が${value}`
+      return `作者が${value}のもの`
     case 'era':
-      return `${eraName}の作品`
+      return `${eraName}のもの`
     case 'holder':
-      return `${value}が所蔵する作品`
+      return `${value}にあるもの`
     case 'style':
-      return `${value}の様式`
+      return `${value}の様式のもの`
     case 'technique':
-      return `製法が${value}`
+      return `製法が${value}のもの`
+  }
+}
+
+/** 「〜でないもの」（逆パターン）版。slotLabel と同じ短縮・語尾統一を行う。 */
+function slotLabelNegated(slot: Q9Slot, rawValue: string, eraName: string): string {
+  const value = shortenValue(rawValue)
+  switch (slot) {
+    case 'artist':
+      return `作者が${value}でないもの`
+    case 'era':
+      return `${eraName}でないもの`
+    case 'holder':
+      return `${value}にないもの`
+    case 'style':
+      return `${value}の様式でないもの`
+    case 'technique':
+      return `製法が${value}でないもの`
   }
 }
 
@@ -104,13 +139,16 @@ function generateNormal(
     if (!value) continue
     const candidates = near.filter((w) => slotValue(w, slot) !== value)
     if (candidates.length < 3) continue
-    const window = candidates.slice(0, Math.max(candidates.length, 6))
+    // reviewer 指摘 [中]-2（2026-09-04 M2-11）: Math.max だと常に全件を返し、直前の
+    // nearbyCandidates による時代距離ソートが無効化されていた。Math.min が正しい
+    // （近い時代から最大6件の窓を取り、そこからシャッフルして3件選ぶ）。
+    const window = candidates.slice(0, Math.min(candidates.length, 6))
     const distractorWorks = shuffle(window, rng).slice(0, 3)
     if (distractorWorks.length < 3) continue
     return {
       reversed: false,
       slot,
-      conditionText: `${slotLabel(slot, value, eraNameOf(target.era, eras))}のもの`,
+      conditionText: slotLabel(slot, value, eraNameOf(target.era, eras)),
       correctWork: target,
       distractorWorks,
     }
@@ -147,7 +185,7 @@ function generateReversed(
     return {
       reversed: true,
       slot,
-      conditionText: `${slotLabel(slot, value, eraNameOf(distractorWorks[0].era, eras))}でないもの`,
+      conditionText: slotLabelNegated(slot, value, eraNameOf(distractorWorks[0].era, eras)),
       correctWork: target,
       distractorWorks,
     }

@@ -36,6 +36,10 @@ export interface ThemeBuildOptions {
   /** この型はできれば避ける（直前の設問と同じ型で連続させないため）。生成できる型が
    *  他に無ければ最終的にはこの型も使う（同型連続よりは何か出す方を優先する）。 */
   avoidType?: QuestionType
+  /** true のとき Q9 を試さない（同じ作品が同セット内で既に Q9 の正解に使われている。
+   *  reviewer 指摘 [中]-1, 2026-09-04 M2-11: 画像1件しか無い区分では同じ画像を正解とする
+   *  Q9 が複数回出て「同じ問題が無限に出る」ように見える）。 */
+  avoidQ9?: boolean
 }
 
 interface BuildResult {
@@ -56,11 +60,12 @@ function buildThemeQuestionForWorkWithMeta(
   rng: RandomFn,
   opts: ThemeBuildOptions,
 ): BuildResult {
-  const { ask, avoidEraSlot = false, avoidType } = opts
+  const { ask, avoidEraSlot = false, avoidType, avoidQ9 = false } = opts
   const askSlot = isQ9Slot(ask?.slot) ? ask?.slot : undefined
   const avoidSlotsForQ9: Q9Slot[] = avoidEraSlot ? ['era'] : []
 
   const tryQ9 = (): BuildResult | null => {
+    if (avoidQ9) return null
     const data = generateQ9Question(work, pool, eras, rng, { avoidSlots: avoidSlotsForQ9, preferredSlot: askSlot })
     if (!data) return null
     const { items, correctIndex } = buildChoices(data.correctWork, data.distractorWorks, rng)
@@ -215,6 +220,9 @@ export function buildThemeSetQuestions(passage: Passage, pool: Work[], eras: Era
   const items: BuiltItem[] = []
   let eraSlotUsed = false
   let previousType: QuestionType | undefined
+  // reviewer 指摘 [中]-1（2026-09-04 M2-11）: 画像1件しか無い区分（kitayama/momoyama 等）では
+  // 同じ作品を正解とする Q9 が複数回出てしまう。同一作品の2回目以降の Q9 は避ける。
+  const q9UsedWorkIds = new Set<string>()
 
   for (const underline of passage.underlines) {
     const targetId = pickUnderlineTargetId(underline, availableIds)
@@ -229,8 +237,10 @@ export function buildThemeSetQuestions(passage: Passage, pool: Work[], eras: Era
       ask: underline.ask,
       avoidEraSlot: eraSlotUsed,
       avoidType: previousType,
+      avoidQ9: q9UsedWorkIds.has(target.id),
     })
     if (result.q9Slot === 'era') eraSlotUsed = true
+    if (result.question.type === 'q9') q9UsedWorkIds.add(target.id)
     previousType = result.question.type
     items.push({ underline, target, result })
   }
@@ -253,8 +263,13 @@ export function buildThemeSetQuestions(passage: Passage, pool: Work[], eras: Era
   }
 
   // セット内に Q10 を1問以上（無ければ、生成可能な下線を探して Q10 優先で作り直す）。
+  // reviewer 指摘 [中]-4（2026-09-04 M2-11）: このループが「その項目が現在 q9 かどうか」を
+  // 見ずに差し替えると、直前の Q9 強制ループで作った（セット唯一の）Q9 を消しかねない。
+  // セット内の q9 が1件しかない場合は、その項目を Q10 強制の対象から除外する。
   if (items.length >= 2 && !items.some((it) => it.result.question.type === 'q10')) {
+    const q9Count = items.filter((it) => it.result.question.type === 'q9').length
     for (const it of items) {
+      if (q9Count <= 1 && it.result.question.type === 'q9') continue
       const forced = buildThemeQuestionForWorkWithMeta(it.target, pool, eras, rng, {
         ask: { ...it.underline.ask, type: 'q10' },
       })
