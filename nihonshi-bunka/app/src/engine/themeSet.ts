@@ -179,7 +179,11 @@ function buildThemeQuestionForWorkWithMeta(
     const r = withStem(tryQ10(), ask.stem)
     if (r) return r
   } else if (ask?.type === 'q4') {
-    const r = withStem(tryQ4() ?? tryQ4Reversed(), ask.stem)
+    // reviewer 指摘 [重大]-1（2026-09-04 M2-14）: ask.reversed が無いと通常型が常に先に
+    // 試されて必ず成功するため、「最も不適切なもの」を問う stem でも正文に正解フラグが
+    // 付き採点が反転する。ask.reversed を尊重して型を固定する（フォールバックしない：
+    // 反転して正文が正解のまま出るくらいなら、その下線は次善の型に譲る）。
+    const r = withStem(ask.reversed ? tryQ4Reversed() : tryQ4(), ask.stem)
     if (r) return r
   } else if (ask?.type === 'q12') {
     const r = withStem(tryQ12(), ask.stem)

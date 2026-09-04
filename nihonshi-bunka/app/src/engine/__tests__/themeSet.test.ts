@@ -94,6 +94,7 @@ function richWork(overrides: Partial<Work> & { id: string }): Work {
     falseStatements: [
       { text: `${overrides.id}誤文1`, why: 'x', verifiedFalse: true },
       { text: `${overrides.id}誤文2`, why: 'x', verifiedFalse: true },
+      { text: `${overrides.id}誤文3`, why: 'x', verifiedFalse: true },
     ],
     ...overrides,
   })
@@ -121,6 +122,26 @@ describe('ask（下線から出したい設問の型・条件スロット。修�
     const result = buildThemeSetQuestions(passageWithAsk, askPool, testEras, seededRandom(1))
     expect(result).toHaveLength(1)
     expect(result[0].question.type).toBe('q4')
+    expect(result[0].question.reversed).not.toBe(true)
+  })
+
+  it('ask.reversed が true のとき Q4 は「最も不適切なもの」型（誤文が正解）で生成される（reviewer指摘[重大]-1, 2026-09-04 M2-14）', () => {
+    const passageWithReversedAsk: Passage = {
+      id: 'ask-p1-reversed',
+      era: 'tenpyo',
+      title: 'ask reversed テスト',
+      text: '本文。[[a|下線]]。',
+      sources: ['x'],
+      underlines: [{ key: 'a', workIds: ['ask-a'], ask: { type: 'q4', reversed: true, stem: '最も不適切なものはどれか' } }],
+    }
+    const result = buildThemeSetQuestions(passageWithReversedAsk, askPool, testEras, seededRandom(1))
+    expect(result).toHaveLength(1)
+    expect(result[0].question.type).toBe('q4')
+    expect(result[0].question.reversed).toBe(true)
+    // 反転型では、正解の選択肢は falseStatements 由来（誤文）でなければならない
+    const q = result[0].question
+    const correctText = q.choiceStatements?.[q.correctIndex]?.text
+    expect(correctText).toContain('誤文')
   })
 
   it('ask.slot を指定すると、Q9 の条件スロットとして優先的に試される', () => {

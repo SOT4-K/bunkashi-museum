@@ -146,6 +146,11 @@ export interface PassageUnderlineAsk {
   answerText?: string
   /** q12 の誤答の文（3件、writer 指定。engine は何も合成しない）。 */
   distractorTexts?: string[]
+  /** type: 'q4' のとき、「最も不適切なもの」（正文3＋誤文1、誤文が正解）を出すなら true。
+   *  reviewer 指摘 [重大]-1（2026-09-04 M2-14）: これが無いと通常型（正文1＋誤文3）が
+   *  常に先に試されて必ず成功するため、stem が「最も不適切なものはどれか」でも
+   *  正解フラグは適切な（正しい）文に付いてしまい、採点が反転する。 */
+  reversed?: boolean
 }
 
 /** リード文中の1つの下線部。text 内の `[[key|下線テキスト]]` マーカーに対応する。 */

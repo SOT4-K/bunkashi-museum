@@ -55,7 +55,8 @@
         "ask": {
           "type": "q4",
           "stem": "下線部cに関して、この時代に確立した城郭建築の様式を伝える次の写真の城について述べた文として最も不適切なものはどれか。",
-          "answerId": "himeji-jo"
+          "answerId": "himeji-jo",
+          "reversed": true
         },
         "note": "画像を出す型。falseStatements の『江戸時代中期に新築された』や、城郭ではなく御殿建築とする属性の反転型が使える"
       },

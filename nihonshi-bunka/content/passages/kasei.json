@@ -15,19 +15,27 @@
       {
         "key": "a",
         "anchorKind": "event",
-        "workIds": ["kanbara-yoru-no-yuki"],
+        "workIds": [
+          "kanbara-yoru-no-yuki"
+        ],
         "ask": {
           "type": "q9",
           "stem": "下線部aの流行を背景に歌川広重が刊行した、東海道の宿駅を順に描いた連作のうち、雪の降る夜の宿場を描いた図として最も適切なものはどれか",
           "answerId": "kanbara-yoru-no-yuki",
-          "distractorIds": ["shono-hakuu", "ohashi-atake-yudachi", "gaifu-kaisei"]
+          "distractorIds": [
+            "shono-hakuu",
+            "ohashi-atake-yudachi",
+            "gaifu-kaisei"
+          ]
         },
         "note": "A＝街道と旅の流行（下線）／B＝東海道の連作・雪の夜（設問で追加）。誤答のうち2件は同じ絵師の別作品で、うち1件は同じ連作（条件Aのみを満たす）"
       },
       {
         "key": "b",
         "anchorKind": "person",
-        "workIds": ["kanagawa-oki-namiura"],
+        "workIds": [
+          "kanagawa-oki-namiura"
+        ],
         "ask": {
           "type": "q10",
           "stem": "下線部bが富士を主題として刊行した連作の一図である次の錦絵について述べた文A・Bの正誤の組合せとして最も適切なものはどれか",
@@ -38,19 +46,27 @@
       {
         "key": "c",
         "anchorKind": "school",
-        "workIds": ["ohashi-atake-yudachi"],
+        "workIds": [
+          "ohashi-atake-yudachi"
+        ],
         "ask": {
           "type": "q9",
           "stem": "下線部cのうち、東海道の宿駅の連作で知られる絵師が晩年に江戸の名所を描いた連作の一図で、隅田川にかかる橋を襲う夕立を描いたものとして最も適切なものはどれか",
           "answerId": "ohashi-atake-yudachi",
-          "distractorIds": ["shono-hakuu", "kanbara-yoru-no-yuki", "soma-no-furudairi"]
+          "distractorIds": [
+            "shono-hakuu",
+            "kanbara-yoru-no-yuki",
+            "soma-no-furudairi"
+          ]
         },
         "note": "A＝歌川派（下線）／B＝晩年の江戸の名所の連作・橋と夕立（設問で追加）。誤答3件はすべて条件Aのみを満たす（同じ絵師の別連作2件、同門の別の絵師1件）"
       },
       {
         "key": "d",
         "anchorKind": "person",
-        "workIds": ["ino-map"],
+        "workIds": [
+          "ino-map"
+        ],
         "ask": {
           "type": "q4",
           "stem": "下線部dのもとで天文・測量を学んだ人物が全国を歩いて測量し、その死後の文政4年（1821年）に完成した次の地図について述べた文として最も適切なものはどれか",
@@ -61,7 +77,9 @@
       {
         "key": "e",
         "anchorKind": "event",
-        "workIds": ["takami-senseki"],
+        "workIds": [
+          "takami-senseki"
+        ],
         "ask": {
           "type": "q10",
           "stem": "下線部eで処罰された三河田原藩の家老が描いた次の肖像画について述べた文A・Bの正誤の組合せとして最も適切なものはどれか",
@@ -76,7 +94,9 @@
     "era": "kasei",
     "kind": "image",
     "title": "図から読む、物語を題材にした絵（化政期）",
-    "leadWorkIds": ["soma-no-furudairi"],
+    "leadWorkIds": [
+      "soma-no-furudairi"
+    ],
     "text": "(1)は、荒れはてた御所の一室に、[[a|妖術を使う女性]]が現れた場面である。女性は手にした巻物を広げ、床下から巨大な骸骨を呼び出している。骸骨は骨の指で御簾を押し上げ、上から人間をのぞきこむ。画面の左下では、御所を探索する武士が刀を構えて上を見上げている。この女性は[[b|平将門]]の娘とされ、場面は19世紀前半の江戸で盛んに出版された[[c|読本]]の物語に取材している。(1)は[[d|三枚の紙を横に並べて一つの画面とする形式]]で刷られており、[[e|歌舞伎や物語の場面を題材とする絵]]が町の人々に好まれた当時のようすを伝えている。",
     "sources": [
       "描かれた場面（妖術を使う女性・巻物・巨大な骸骨・刀を構える武士）、平将門の娘とされること: Victoria and Albert Museum 蔵の作品解説（画像は Wikimedia Commons 経由）",
@@ -89,12 +109,10 @@
         "key": "a",
         "anchorKind": "person",
         "ask": {
-          "type": "q12",
-          "stem": "(1)を描いた絵師として最も適切なものはどれか",
-          "answerText": "歌川国芳",
-          "distractorTexts": ["葛飾北斎", "東洲斎写楽", "鈴木春信"]
+          "type": "q4",
+          "stem": "(1)について述べた文として最も適切なものはどれか。"
         },
-        "note": "作者を問う。誤答は同じ浮世絵師で3件"
+        "note": "9章の型の混在指摘（reviewer M2-14 [中]-8）に対応。全問Q12だったのをQ4（画像を出す型）に1問差し替え。workIdsを空にしたままleadWorkIds（soma-no-furudairi）にフォールバックさせる"
       },
       {
         "key": "b",
@@ -103,7 +121,11 @@
           "type": "q12",
           "stem": "下線部bの娘とされる女性が登場する、(1)が取材した読本の作者として最も適切なものはどれか",
           "answerText": "山東京伝",
-          "distractorTexts": ["曲亭馬琴", "十返舎一九", "式亭三馬"]
+          "distractorTexts": [
+            "曲亭馬琴",
+            "十返舎一九",
+            "式亭三馬"
+          ]
         },
         "note": "誤答は同じ江戸後期の小説の作者3件（読本1・滑稽本2）"
       },
@@ -114,7 +136,11 @@
           "type": "q12",
           "stem": "下線部cが数多く出版された時期に江戸で栄えた文化として最も適切なものはどれか",
           "answerText": "化政文化",
-          "distractorTexts": ["元禄文化", "宝暦・天明期の文化", "寛永期の文化"]
+          "distractorTexts": [
+            "元禄文化",
+            "宝暦・天明期の文化",
+            "寛永期の文化"
+          ]
         },
         "note": "誤答は江戸時代の他の3区分"
       },
@@ -125,7 +151,11 @@
           "type": "q12",
           "stem": "下線部dで刷られた(1)の技法として最も適切なものはどれか",
           "answerText": "木版多色刷の錦絵",
-          "distractorTexts": ["絹本着色の肉筆画", "腐食銅版による銅版画", "紙本金地著色の屏風"]
+          "distractorTexts": [
+            "絹本着色の肉筆画",
+            "腐食銅版による銅版画",
+            "紙本金地著色の屏風"
+          ]
         },
         "note": "誤答は同じ江戸時代の他の技法3件"
       },
@@ -136,7 +166,11 @@
           "type": "q12",
           "stem": "(1)を描いた絵師と同じ一門で、東海道の宿駅を順に描いた連作で知られる人物として最も適切なものはどれか",
           "answerText": "歌川広重",
-          "distractorTexts": ["葛飾北斎", "喜多川歌麿", "渡辺崋山"]
+          "distractorTexts": [
+            "葛飾北斎",
+            "喜多川歌麿",
+            "渡辺崋山"
+          ]
         },
         "note": "誤答は同じ江戸時代の絵師3件"
       }

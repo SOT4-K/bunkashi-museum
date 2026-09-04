@@ -12,19 +12,27 @@
       {
         "key": "a",
         "anchorKind": "person",
-        "workIds": ["toji-fudo-myoo"],
+        "workIds": [
+          "toji-fudo-myoo"
+        ],
         "ask": {
           "type": "q9",
-          "stem": "下線部aの天皇から空海が与えられた寺に安置され、密教の世界を仏像の配置によって表す立体曼荼羅の中心をなす像はどれか",
+          "stem": "下線部aの天皇から空海が与えられた寺に安置され、密教の世界を仏像の配置によって表す立体曼荼羅のうち、五大明王の中心をなす像はどれか",
           "answerId": "toji-fudo-myoo",
-          "distractorIds": ["kanshinji-nyoirin-kannon", "byodoin-amida-nyorai", "kuya-shonin-zo"]
+          "distractorIds": [
+            "kanshinji-nyoirin-kannon",
+            "byodoin-amida-nyorai",
+            "kuya-shonin-zo"
+          ]
         },
         "note": "二段: 下線＝天皇／設問＝堂と立体曼荼羅。誤答の kanshinji-nyoirin-kannon は同時代の密教彫刻（Aのみ）"
       },
       {
         "key": "b",
         "anchorKind": "style",
-        "workIds": ["muroji-gojunoto"],
+        "workIds": [
+          "muroji-gojunoto"
+        ],
         "ask": {
           "type": "q10",
           "stem": "下線部bの一つに残る次の建物（画像）について述べたA・Bの文の正誤の組合せとして正しいものはどれか",
@@ -35,19 +43,27 @@
       {
         "key": "c",
         "anchorKind": "style",
-        "workIds": ["kanshinji-nyoirin-kannon"],
+        "workIds": [
+          "kanshinji-nyoirin-kannon"
+        ],
         "ask": {
           "type": "q9",
           "stem": "下線部cのうち、秘仏として伝えられ、六本の腕をもつ像はどれか",
           "answerId": "kanshinji-nyoirin-kannon",
-          "distractorIds": ["toji-fudo-myoo", "kudara-kannon", "byodoin-amida-nyorai"]
+          "distractorIds": [
+            "toji-fudo-myoo",
+            "kudara-kannon",
+            "byodoin-amida-nyorai"
+          ]
         },
         "note": "二段: 下線＝密教の新しい尊格（A）／設問＝秘仏と像容（B）。誤答の toji-fudo-myoo は A のみ、kudara-kannon は同じ観音像。盲検対策で stem に寺名を出していない"
       },
       {
         "key": "d",
         "anchorKind": "school",
-        "workIds": ["toji-fudo-myoo"],
+        "workIds": [
+          "toji-fudo-myoo"
+        ],
         "ask": {
           "type": "q4",
           "stem": "下線部dの広まりのなかで造られた次の像（画像）について述べた文として最も適切なものはどれか",

@@ -329,6 +329,18 @@ function validatePassages({ worksById, hasImageAsset, eraIds, errors, warnings }
             }
           }
 
+          // reviewer 指摘 [重大]-1（2026-09-04 M2-14）: stem が「最も不適切なもの」を問う文面
+          // なのに ask.reversed が無いと、engine は通常型（正文1＋誤文3）を先に試して必ず
+          // 成功するため、正解フラグが適切な（正しい）文に付いたまま出題され採点が反転する。
+          if (ask.type === 'q4' && typeof ask.stem === 'string' && ask.stem.includes('不適切') && !ask.reversed) {
+            errors.push(
+              `${label} / ${underline.key}: ask.stem に「不適切」が含まれるが ask.reversed が true でない（正解が反転する）`,
+            )
+          }
+          if (ask.reversed && ask.type !== 'q4') {
+            errors.push(`${label} / ${underline.key}: ask.reversed は ask.type が "q4" のときのみ使える`)
+          }
+
           // 9章「画像リード型セット」: q12 は answerText・distractorTexts（3件）が必須。
           if (ask.type === 'q12') {
             if (!ask.answerText || typeof ask.answerText !== 'string') {
