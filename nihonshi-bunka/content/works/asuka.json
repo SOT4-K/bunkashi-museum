@@ -1,0 +1,618 @@
+[
+  {
+    "id": "horyuji-shaka-sanzon",
+    "artist": "鞍作鳥（止利仏師）",
+    "patron": null,
+    "style": "金銅仏（北魏様式・止利様式）",
+    "religion": "仏教（法相宗）",
+    "periodLabel": "飛鳥時代（7世紀前半、623年銘）",
+    "eraNote": "7世紀前半、推古天皇の時代に厩戸王（聖徳太子）や蘇我馬子を中心として栄えた、日本最初の仏教文化。渡来系の鞍作鳥（止利仏師）らが中国の南北朝時代の北魏様式（止利様式）を受けて仏像を制作し、法隆寺金堂釈迦三尊像はその代表作である。",
+    "holder": "法隆寺金堂",
+    "subject": null,
+    "facts": [
+      {
+        "slot": "artist",
+        "text": "鞍作鳥（止利仏師）の作",
+        "shared": ["tamamushi-zushi"]
+      },
+      {
+        "slot": "era",
+        "text": "飛鳥文化の作品",
+        "shared": ["koryuji-miroku", "chuguji-hanka-shiyui", "tamamushi-zushi", "kudara-kannon"]
+      },
+      {
+        "slot": "style",
+        "text": "北魏様式（止利様式）の仏像である"
+      },
+      {
+        "slot": "technique",
+        "text": "銅造の金銅仏である"
+      },
+      {
+        "slot": "other",
+        "text": "アルカイックスマイル（古拙の微笑）と杏仁形の目が特徴"
+      },
+      {
+        "slot": "location",
+        "text": "法隆寺金堂にある",
+        "shared": ["tamamushi-zushi"]
+      },
+      {
+        "slot": "other",
+        "text": "光背の銘文に623年の制作が記される"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "南朝様式の仏像である",
+        "why": "北魏様式（止利様式）。百済観音像・中宮寺半跏思惟像との様式ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "木造の一木造である",
+        "why": "銅造の金銅仏。技法ずらし（一木造は弘仁・貞観文化）",
+        "verifiedFalse": true
+      },
+      {
+        "text": "作者不詳の像である",
+        "why": "鞍作鳥（止利仏師）の作と銘文にある。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "薬師寺金堂にある",
+        "why": "法隆寺金堂。所在ずらし（薬師寺は白鳳文化）",
+        "verifiedFalse": true
+      },
+      {
+        "text": "白鳳文化の作品である",
+        "why": "623年銘の飛鳥文化の作品。時代ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "法隆寺金堂釈迦三尊像",
+    "reading": "ほうりゅうじこんどうしゃかさんぞんぞう",
+    "era": "asuka",
+    "category": "sculpture",
+    "location": "法隆寺（奈良）",
+    "author": "鞍作鳥（止利仏師）",
+    "technique": "銅造（金銅仏）",
+    "keyPoints": [
+      "飛鳥文化を代表する仏像",
+      "鞍作鳥（止利仏師）の作、623年銘",
+      "北魏様式（止利様式）",
+      "アルカイックスマイルと杏仁形の目"
+    ],
+    "explanation": "法隆寺金堂の本尊。光背の銘文により、聖徳太子の病気平癒と没後の冥福を祈って623年に鞍作鳥（止利仏師）が制作したことが分かる。中国の北魏様式（止利様式）を受け、正面性を重んじた硬い表情とアルカイックスマイル（古拙の微笑）、杏仁形（アーモンド形）の目が特徴。",
+    "examNote": "「北魏様式＝法隆寺金堂釈迦三尊像・止利仏師」「南朝様式＝百済観音像・中宮寺半跏思惟像」の対比が最頻出。",
+    "confusables": [
+      {
+        "id": "kudara-kannon",
+        "howToTell": "釈迦三尊像は北魏様式で正面性の強い硬い表情。百済観音像は南朝様式で細身で優美な立像。"
+      }
+    ],
+    "image": {
+      "file": "horyuji-shaka-sanzon.jpg",
+      "credit": "",
+      "license": "",
+      "sourceUrl": "",
+      "sourceName": ""
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）飛鳥文化の項",
+      "法隆寺公式サイト"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "koryuji-miroku",
+    "artist": null,
+    "patron": "秦河勝",
+    "style": "木彫像（南朝様式に近い一木造）",
+    "religion": "仏教",
+    "periodLabel": "飛鳥時代（6〜7世紀）",
+    "eraNote": "7世紀前半、日本最初の仏教文化である飛鳥文化の彫刻。渡来系氏族の秦氏の氏寺である広隆寺には、朝鮮半島の様式に近いとされる赤松の一木造の弥勒菩薩半跏思惟像が伝わり、中宮寺の半跏思惟像とともに南朝系統の柔和な作風を代表する。",
+    "holder": "広隆寺",
+    "subject": null,
+    "facts": [
+      {
+        "slot": "era",
+        "text": "飛鳥文化の作品",
+        "shared": ["horyuji-shaka-sanzon", "chuguji-hanka-shiyui", "tamamushi-zushi", "kudara-kannon"]
+      },
+      {
+        "slot": "technique",
+        "text": "赤松の一木造である"
+      },
+      {
+        "slot": "other",
+        "text": "片足を組み、頬に指をあてて考える姿（半跏思惟像）である",
+        "shared": ["chuguji-hanka-shiyui"]
+      },
+      {
+        "slot": "location",
+        "text": "広隆寺にある"
+      },
+      {
+        "slot": "other",
+        "text": "秦氏の氏寺に伝わる"
+      },
+      {
+        "slot": "other",
+        "text": "朝鮮半島の様式に近いとされる"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "樟の一木造である",
+        "why": "赤松の一木造。中宮寺半跏思惟像（樟）との材質ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "中宮寺にある",
+        "why": "広隆寺。所在ずらし（同じ半跏思惟像の中宮寺像との混同）",
+        "verifiedFalse": true
+      },
+      {
+        "text": "銅造の金銅仏である",
+        "why": "木造（一木造）。法隆寺金堂釈迦三尊像との技法ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "蘇我馬子の氏寺に伝わる",
+        "why": "秦氏の氏寺・広隆寺。蘇我馬子の氏寺は飛鳥寺（法興寺）で人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "白鳳文化の作品である",
+        "why": "飛鳥文化の作品。時代ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "広隆寺弥勒菩薩半跏思惟像（宝冠弥勒）",
+    "reading": "こうりゅうじみろくぼさつはんかしいぞう",
+    "era": "asuka",
+    "category": "sculpture",
+    "location": "広隆寺（京都）",
+    "author": null,
+    "technique": "赤松の一木造",
+    "keyPoints": [
+      "飛鳥文化",
+      "秦氏の氏寺・広隆寺に伝わる",
+      "赤松の一木造",
+      "中宮寺半跏思惟像と並び称される"
+    ],
+    "explanation": "渡来系氏族の秦氏の氏寺である広隆寺に伝わる半跏思惟像。片足を組んで頬に指をあてて考える姿で、赤松の一木造は朝鮮半島の様式に近いとされる。柔和で優美な表情から「宝冠弥勒」とも呼ばれ、中宮寺の半跏思惟像と並ぶ南朝系統の飛鳥彫刻の代表作。",
+    "examNote": "広隆寺像（赤松・秦氏）と中宮寺像（樟）を材質と所蔵先のペアで覚える。",
+    "confusables": [
+      {
+        "id": "chuguji-hanka-shiyui",
+        "howToTell": "広隆寺像は赤松の一木造で秦氏の氏寺。中宮寺像は樟の一木造で尼寺の中宮寺。"
+      }
+    ],
+    "image": {
+      "file": "koryuji-miroku.jpg",
+      "credit": "",
+      "license": "",
+      "sourceUrl": "",
+      "sourceName": ""
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）飛鳥文化の項"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "chuguji-hanka-shiyui",
+    "artist": null,
+    "patron": null,
+    "style": "木彫像（南朝様式に近い一木造）",
+    "religion": "仏教",
+    "periodLabel": "飛鳥時代（7世紀）",
+    "eraNote": "7世紀前半、日本最初の仏教文化である飛鳥文化の彫刻。聖徳太子ゆかりの尼寺である中宮寺には、樟の一木造の半跏思惟像が伝わり、広隆寺の弥勒菩薩半跏思惟像とともに柔和な表情をもつ南朝系統の作風を代表する。",
+    "holder": "中宮寺",
+    "subject": null,
+    "facts": [
+      {
+        "slot": "era",
+        "text": "飛鳥文化の作品",
+        "shared": ["horyuji-shaka-sanzon", "koryuji-miroku", "tamamushi-zushi", "kudara-kannon"]
+      },
+      {
+        "slot": "technique",
+        "text": "樟の一木造である"
+      },
+      {
+        "slot": "other",
+        "text": "片足を組み、頬に指をあてて考える姿（半跏思惟像）である",
+        "shared": ["koryuji-miroku"]
+      },
+      {
+        "slot": "location",
+        "text": "中宮寺にある"
+      },
+      {
+        "slot": "other",
+        "text": "聖徳太子ゆかりの尼寺に伝わる"
+      },
+      {
+        "slot": "other",
+        "text": "如意輪観音とも伝えられる"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "赤松の一木造である",
+        "why": "樟の一木造。広隆寺弥勒菩薩半跏思惟像との材質ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "広隆寺にある",
+        "why": "中宮寺。所在ずらし（同じ半跏思惟像の広隆寺像との混同）",
+        "verifiedFalse": true
+      },
+      {
+        "text": "乾漆像である",
+        "why": "木造（一木造）。乾漆像は天平文化の技法で時代・技法ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "秦氏の氏寺に伝わる",
+        "why": "聖徳太子ゆかりの尼寺・中宮寺に伝わる。秦氏の氏寺は広隆寺で内容ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "国風文化の作品である",
+        "why": "飛鳥文化の作品。時代ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "中宮寺半跏思惟像",
+    "reading": "ちゅうぐうじはんかしいぞう",
+    "era": "asuka",
+    "category": "sculpture",
+    "location": "中宮寺（奈良）",
+    "author": null,
+    "technique": "樟の一木造",
+    "keyPoints": [
+      "飛鳥文化",
+      "聖徳太子ゆかりの尼寺・中宮寺に伝わる",
+      "樟の一木造",
+      "広隆寺弥勒菩薩半跏思惟像と並び称される"
+    ],
+    "explanation": "聖徳太子ゆかりの尼寺、中宮寺に伝わる半跏思惟像。樟の一木造で、柔和で神秘的な微笑をたたえる表情から「古代エジプトのスフィンクス、ダ・ヴィンチのモナリザと並ぶ東洋の三大微笑像」と評されることもある。広隆寺の弥勒菩薩半跏思惟像と並ぶ飛鳥彫刻の代表作。",
+    "examNote": "広隆寺像（赤松・秦氏）と中宮寺像（樟・尼寺）を材質と所蔵先のペアで覚える。",
+    "confusables": [
+      {
+        "id": "koryuji-miroku",
+        "howToTell": "中宮寺像は樟の一木造で尼寺の中宮寺。広隆寺像は赤松の一木造で秦氏の氏寺。"
+      }
+    ],
+    "image": {
+      "file": "chuguji-hanka-shiyui.jpg",
+      "credit": "",
+      "license": "",
+      "sourceUrl": "",
+      "sourceName": ""
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）飛鳥文化の項"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "tamamushi-zushi",
+    "artist": null,
+    "patron": null,
+    "style": "工芸（厨子・飛鳥様式）",
+    "religion": "仏教",
+    "periodLabel": "飛鳥時代（7世紀）",
+    "eraNote": "7世紀前半、日本最初の仏教文化である飛鳥文化の工芸。法隆寺に伝わる玉虫厨子は、木製の宮殿形の仏具（厨子）に金銅の透かし彫り金具を配し、下地に玉虫の羽を敷き詰めた装飾で知られ、飛鳥時代の工芸技術と仏教美術の様式をあわせ伝える。",
+    "holder": "法隆寺",
+    "subject": null,
+    "facts": [
+      {
+        "slot": "era",
+        "text": "飛鳥文化の作品",
+        "shared": ["horyuji-shaka-sanzon", "koryuji-miroku", "chuguji-hanka-shiyui", "kudara-kannon"]
+      },
+      {
+        "slot": "technique",
+        "text": "玉虫の羽を装飾に使う"
+      },
+      {
+        "slot": "location",
+        "text": "法隆寺にある",
+        "shared": ["horyuji-shaka-sanzon"]
+      },
+      {
+        "slot": "category",
+        "text": "宮殿形の仏具（厨子）である"
+      },
+      {
+        "slot": "other",
+        "text": "側面に捨身飼虎図などの説話画が描かれる"
+      },
+      {
+        "slot": "artist",
+        "text": "止利派の工人によるとされる",
+        "shared": ["horyuji-shaka-sanzon"]
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "正倉院宝物である",
+        "why": "法隆寺に伝わる。正倉院宝物は天平文化で所在・時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "鳥の羽毛を全面に貼った屏風である",
+        "why": "宮殿形の厨子（仏具）。鳥毛立女屏風（天平文化）との内容・時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "白鳳文化の工芸である",
+        "why": "飛鳥文化の工芸。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "中宮寺にある",
+        "why": "法隆寺にある。所在ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "刺繍による作品である",
+        "why": "木製に金銅金具と玉虫の羽による装飾。天寿国繡帳（刺繍）との技法ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "玉虫厨子",
+    "reading": "たまむしのずし",
+    "era": "asuka",
+    "category": "craft",
+    "location": "法隆寺（奈良）",
+    "author": null,
+    "technique": "木製、金銅透かし彫り金具、玉虫の羽による装飾",
+    "keyPoints": [
+      "飛鳥文化",
+      "法隆寺に伝わる宮殿形の厨子",
+      "玉虫の羽を下地に敷いた装飾",
+      "捨身飼虎図など説話画をもつ"
+    ],
+    "explanation": "法隆寺に伝わる宮殿形の仏具（厨子）。木製の本体に金銅の透かし彫り金具を配し、その下に玉虫の羽を敷き詰めて装飾したことから玉虫厨子と呼ばれる。側面には釈迦の前世を描いた捨身飼虎図などの説話画があり、飛鳥時代の工芸技術と仏教絵画の様式を伝える貴重な遺品。",
+    "examNote": "「玉虫厨子＝法隆寺・飛鳥文化」を覚える。正倉院宝物（天平文化）と時代・所蔵先を混同しないこと。",
+    "confusables": [],
+    "image": {
+      "file": "tamamushi-zushi.jpg",
+      "credit": "",
+      "license": "",
+      "sourceUrl": "",
+      "sourceName": ""
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）飛鳥文化の項",
+      "法隆寺公式サイト"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "kudara-kannon",
+    "artist": null,
+    "patron": null,
+    "style": "木彫像（南朝様式）",
+    "religion": "仏教",
+    "periodLabel": "飛鳥時代（7世紀）",
+    "eraNote": "7世紀前半、日本最初の仏教文化である飛鳥文化の彫刻。法隆寺の百済観音像は、中国南朝の様式を受けた細身で優美な木彫像で、北魏様式の法隆寺金堂釈迦三尊像とともに、飛鳥彫刻の二つの様式系統を代表する。",
+    "holder": "法隆寺（大宝蔵院百済観音堂）",
+    "subject": null,
+    "facts": [
+      {
+        "slot": "era",
+        "text": "飛鳥文化の作品",
+        "shared": ["horyuji-shaka-sanzon", "koryuji-miroku", "chuguji-hanka-shiyui", "tamamushi-zushi"]
+      },
+      {
+        "slot": "style",
+        "text": "南朝様式の仏像である"
+      },
+      {
+        "slot": "technique",
+        "text": "木造（樟の一木造）である"
+      },
+      {
+        "slot": "other",
+        "text": "細身で背が高く、優美な姿である"
+      },
+      {
+        "slot": "location",
+        "text": "法隆寺にある",
+        "shared": ["horyuji-shaka-sanzon", "tamamushi-zushi"]
+      },
+      {
+        "slot": "other",
+        "text": "水瓶を持つ観音菩薩像である"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "北魏様式の仏像である",
+        "why": "南朝様式。法隆寺金堂釈迦三尊像との様式ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "銅造の金銅仏である",
+        "why": "木造（樟の一木造）。技法ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "半跏思惟の姿である",
+        "why": "水瓶を持って立つ観音菩薩像。広隆寺・中宮寺の半跏思惟像との内容ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "薬師寺にある",
+        "why": "法隆寺。所在ずらし（薬師寺は白鳳文化）",
+        "verifiedFalse": true
+      },
+      {
+        "text": "白鳳文化の作品である",
+        "why": "飛鳥文化の作品。時代ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "法隆寺百済観音像",
+    "reading": "ほうりゅうじくだらかんのんぞう",
+    "era": "asuka",
+    "category": "sculpture",
+    "location": "法隆寺（奈良）",
+    "author": null,
+    "technique": "樟の一木造",
+    "keyPoints": [
+      "飛鳥文化",
+      "法隆寺に伝わる南朝様式の観音像",
+      "細身で優美な姿",
+      "水瓶を持つ"
+    ],
+    "explanation": "法隆寺に伝わる観音菩薩像。中国南朝の様式を受けた細身で背の高い、優美な姿が特徴で、北魏様式の法隆寺金堂釈迦三尊像とは対照的な作風を示す。近代以降「百済観音」と呼ばれるようになったが、朝鮮半島の百済との直接の関係は明らかではない。",
+    "examNote": "「北魏様式（止利様式）＝釈迦三尊像」「南朝様式＝百済観音像・半跏思惟像」の対比で問われる。",
+    "confusables": [
+      {
+        "id": "horyuji-shaka-sanzon",
+        "howToTell": "百済観音像は南朝様式で細身・優美な立像。釈迦三尊像は北魏様式で正面性の強い硬い表情。"
+      }
+    ],
+    "image": {
+      "file": "kudara-kannon.jpg",
+      "credit": "",
+      "license": "",
+      "sourceUrl": "",
+      "sourceName": ""
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）飛鳥文化の項",
+      "法隆寺公式サイト"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "tori-busshi",
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "periodLabel": "飛鳥時代（7世紀前半）",
+    "eraNote": "渡来系の仏師で、飛鳥文化の仏像制作を主導した鞍作鳥（止利仏師）は、中国の北魏様式を受けた「止利様式」と呼ばれる作風を確立し、法隆寺金堂釈迦三尊像や飛鳥大仏（飛鳥寺釈迦如来像）を手がけたとされる。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      {
+        "slot": "other",
+        "text": "渡来系の仏師である（司馬達等の孫、鞍作止利とも）"
+      },
+      {
+        "slot": "other",
+        "text": "法隆寺金堂釈迦三尊像を制作した",
+        "shared": ["horyuji-shaka-sanzon"]
+      },
+      {
+        "slot": "style",
+        "text": "北魏様式（止利様式）を確立した"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "百済観音像の作者である",
+        "why": "百済観音像は作者不詳（南朝様式）。止利仏師は北魏様式の釈迦三尊像の作者とされる",
+        "verifiedFalse": true
+      },
+      {
+        "text": "奈良時代に活動した仏師である",
+        "why": "飛鳥時代（7世紀前半）に活動した。時代ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "鞍作鳥（止利仏師）",
+    "reading": "くらつくりのとり（とりぶっし）",
+    "era": "asuka",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "飛鳥文化を代表する渡来系の仏師",
+      "北魏様式（止利様式）を確立",
+      "法隆寺金堂釈迦三尊像の作者"
+    ],
+    "explanation": "渡来人の子孫とされる飛鳥時代の仏師。中国の北魏様式を受けた正面性の強い作風（止利様式）を確立し、法隆寺金堂釈迦三尊像や飛鳥寺の釈迦如来像（飛鳥大仏）を手がけたと伝えられる。",
+    "examNote": "単独出題より、飛鳥彫刻のリード文・誤文（作者入替）の素材として使う（画像なし項目）。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）飛鳥文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "donchou-kanroku",
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "periodLabel": "飛鳥時代（7世紀初め）",
+    "eraNote": "6世紀末から7世紀初め、朝鮮半島の高句麗・百済からは僧が来日して大陸の学術・技術を伝えた。高句麗の曇徴は紙・墨の製法や絵画の技法を、百済の観勒は暦法を伝えたとされ、飛鳥文化の国際性を示す例として教科書に取り上げられる。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      {
+        "slot": "other",
+        "text": "曇徴は高句麗の僧で、紙・墨の製法を伝えたとされる"
+      },
+      {
+        "slot": "other",
+        "text": "観勒は百済の僧で、暦法を伝えたとされる"
+      },
+      {
+        "slot": "other",
+        "text": "ともに飛鳥時代（7世紀初め）に来日した"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "曇徴は暦法を伝え、観勒は紙・墨の製法を伝えた",
+        "why": "伝来した技術が入れ替わっている（曇徴＝紙・墨、観勒＝暦法）。内容ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "ともに新羅から来日した僧である",
+        "why": "曇徴は高句麗、観勒は百済の僧。出身国の入れ替えずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "曇徴・観勒",
+    "reading": "どんちょう・かんろく",
+    "era": "asuka",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "曇徴（高句麗僧）＝紙・墨の製法を伝える",
+      "観勒（百済僧）＝暦法を伝える",
+      "飛鳥文化の国際性を示す渡来僧"
+    ],
+    "explanation": "飛鳥時代、朝鮮半島から来日した渡来僧のうち、高句麗の曇徴は紙・墨の製法と絵画の技法を、百済の観勒は暦法（暦の作り方）を日本に伝えたとされる。大陸・半島の文物が仏教とともに流入した飛鳥文化の国際性を示す例として教科書で扱われる。",
+    "examNote": "「曇徴＝紙・墨」「観勒＝暦法」の対応を問う空欄補充・組合せ問題（画像なし項目）の素材。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）飛鳥文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  }
+]

@@ -1,0 +1,407 @@
+[
+  {
+    "id": "mikaeri-bijin",
+    "artist": "菱川師宣",
+    "patron": null,
+    "style": "肉筆浮世絵（美人画）",
+    "religion": null,
+    "holder": "東京国立博物館",
+    "subject": null,
+    "periodLabel": "江戸時代前期（17世紀末、元禄期）",
+    "eraNote": "江戸時代前期（17世紀末〜18世紀初め）、5代将軍徳川綱吉の頃の元禄文化の絵画。上方が中心の元禄文化のなかで、菱川師宣は江戸で活動し、それまで版本の挿絵であった浮世絵を一枚絵として独立させ、浮世絵の祖と呼ばれる。本図は肉筆（手描き）の代表作で、のちの版画中心の浮世絵とは技法が異なる。",
+    "facts": [
+      { "slot": "artist", "text": "菱川師宣の作" },
+      { "slot": "era", "text": "元禄文化の作品", "shared": ["fujin-raijin-korin", "yatsuhashi-suzuribako"] },
+      { "slot": "period", "text": "17世紀末（元禄期）の作", "shared": ["fujin-raijin-korin", "yatsuhashi-suzuribako"] },
+      { "slot": "technique", "text": "肉筆（手描き）の浮世絵である" },
+      { "slot": "other", "text": "作者は浮世絵の祖と呼ばれる" },
+      { "slot": "other", "text": "振り返る一人の女性の後ろ姿を描く" }
+    ],
+    "falseStatements": [
+      { "text": "尾形光琳の作", "why": "光琳は装飾画・工芸（燕子花図屏風など）。人物ずらし", "verifiedFalse": true },
+      { "text": "木版多色刷の錦絵である", "why": "肉筆（手描き）。化政期の錦絵（北斎・広重ら）との技法・時代ずらし", "verifiedFalse": true },
+      { "text": "化政文化の作品", "why": "元禄期の作。時代ずらし", "verifiedFalse": true },
+      { "text": "女性が三人描かれている", "why": "一人の女性を描く。喜多川歌麿「寛政三美人」との内容ずらし", "verifiedFalse": true },
+      { "text": "京都で活動した絵師の作である", "why": "師宣は江戸で活動した。地域ずらし", "verifiedFalse": true }
+    ],
+    "title": "見返り美人図",
+    "reading": "みかえりびじんず",
+    "era": "genroku",
+    "category": "painting",
+    "location": "東京国立博物館",
+    "author": "菱川師宣",
+    "technique": "絹本着色（肉筆浮世絵）",
+    "keyPoints": [
+      "元禄文化",
+      "菱川師宣（浮世絵の祖）",
+      "肉筆（手描き）の美人画。のちの版画浮世絵とは技法が異なる",
+      "振り返る一人の女性の後ろ姿"
+    ],
+    "explanation": "菊模様の紅色の着物をまとった若い女性が、ふと足を止めて振り返る一瞬をとらえた肉筆画。手描きの一点物であり、木版で多数刷られる化政期の錦絵とは技法が異なる点が目印。菱川師宣はそれまで版本の挿絵にすぎなかった絵を、一枚の独立した鑑賞用の絵として確立し、浮世絵の祖と呼ばれる。本図はその代表作で、江戸の女性の風俗を描いた元禄期の江戸町人文化を象徴する作品として知られる。",
+    "examNote": "「見返り美人図＝菱川師宣＝元禄期＝肉筆浮世絵」。化政期の版画浮世絵（北斎・広重・歌麿・写楽）と技法・時代が異なる点が問われやすい。",
+    "confusables": [
+      { "id": "yatsuhashi-suzuribako", "howToTell": "見返り美人図は絹に描いた肉筆の絵画。八橋蒔絵螺鈿硯箱は漆・貝殻を使った工芸品で、絵画ではない。" }
+    ],
+    "image": {
+      "file": "mikaeri-bijin.jpg",
+      "credit": "",
+      "license": "",
+      "sourceUrl": "",
+      "sourceName": ""
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）元禄文化の項",
+      "東京国立博物館（ColBase 収蔵品、登録番号 A-60）"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "fujin-raijin-korin",
+    "artist": "尾形光琳",
+    "patron": null,
+    "style": "装飾画（琳派）",
+    "religion": null,
+    "holder": "東京国立博物館",
+    "subject": "俵屋宗達「風神雷神図屏風」の模写",
+    "periodLabel": "江戸時代前期（18世紀初め、元禄期以降）",
+    "eraNote": "江戸時代前期〜中期（17世紀末〜18世紀初め）、元禄文化の絵画。5代将軍徳川綱吉の頃、上方の富裕な町人が担い手となった元禄文化のなかで、尾形光琳は俵屋宗達の画風を学んで発展させ、装飾的な画風を琳派として確立した。本図は宗達の代表作を約半世紀後に模写したもので、琳派の様式の継承を示す。",
+    "facts": [
+      { "slot": "artist", "text": "尾形光琳の作" },
+      { "slot": "era", "text": "元禄文化の作品", "shared": ["mikaeri-bijin", "yatsuhashi-suzuribako"] },
+      { "slot": "period", "text": "18世紀初め（元禄期以降）の作", "shared": ["yatsuhashi-suzuribako"] },
+      { "slot": "technique", "text": "紙本金地著色・二曲一双の屏風である" },
+      { "slot": "other", "text": "俵屋宗達の「風神雷神図屏風」（寛永期）の模写である" },
+      { "slot": "other", "text": "光琳は宗達の画風を発展させて琳派を確立した" }
+    ],
+    "falseStatements": [
+      { "text": "俵屋宗達の作", "why": "宗達は寛永期の原本の作者。光琳はそれを模写した別人物。人物・時代ずらし", "verifiedFalse": true },
+      { "text": "寛永文化の作品", "why": "元禄期以降の作。時代ずらし（宗達の原本との混同）", "verifiedFalse": true },
+      { "text": "現在は建仁寺が所蔵する", "why": "建仁寺が所蔵するのは宗達の原本。光琳の模写は東京国立博物館蔵。所在ずらし", "verifiedFalse": true },
+      { "text": "菱川師宣の作", "why": "師宣は肉筆浮世絵（見返り美人図）。人物ずらし", "verifiedFalse": true },
+      { "text": "水墨画である", "why": "金地著色。技法ずらし", "verifiedFalse": true }
+    ],
+    "title": "風神雷神図屏風（尾形光琳筆・模写）",
+    "reading": "ふうじんらいじんずびょうぶ",
+    "era": "genroku",
+    "category": "painting",
+    "location": "東京国立博物館",
+    "author": "尾形光琳",
+    "technique": "紙本金地著色・二曲一双の屏風",
+    "keyPoints": [
+      "元禄文化（18世紀初め以降）",
+      "尾形光琳（琳派の確立者）",
+      "俵屋宗達（寛永期）の代表作の模写",
+      "所蔵は東京国立博物館（宗達の原本は建仁寺伝来）"
+    ],
+    "explanation": "俵屋宗達が寛永期に描いた「風神雷神図屏風」の構図を、約半世紀後に尾形光琳が模写した作品。金地に風神・雷神を左右に配し、中央を余白とする構図は宗達の原本を忠実に踏襲しているが、輪郭線や彩色に光琳独自の描き方が加えられている。光琳は宗達の画風を学び直して発展させ、装飾的な画風を「琳派」として確立した人物で、本図はその出発点を示す作品といえる。原本（宗達筆、建仁寺伝来）と模写（光琳筆、東京国立博物館蔵）を、時代（寛永／元禄）と所蔵先で区別する。",
+    "examNote": "「宗達（原本・建仁寺・寛永期）→光琳（模写・東京国立博物館・元禄期）→抱一（模写・化政期）」の3代にわたる模写の関係が問われやすい。",
+    "confusables": [
+      { "id": "mikaeri-bijin", "howToTell": "見返り美人図は一人の女性を描いた肉筆美人画（菱川師宣）。風神雷神図屏風は風神・雷神を描いた金地の装飾屏風（尾形光琳）。" }
+    ],
+    "image": {
+      "file": "fujin-raijin-korin.png",
+      "credit": "",
+      "license": "",
+      "sourceUrl": "",
+      "sourceName": ""
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）元禄文化の項",
+      "東京国立博物館（ColBase 収蔵品、登録番号 A-11189-1）",
+      "キヤノン綴プロジェクト"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "yatsuhashi-suzuribako",
+    "artist": "尾形光琳",
+    "patron": null,
+    "style": "蒔絵（琳派の工芸）",
+    "religion": null,
+    "holder": "東京国立博物館",
+    "subject": "『伊勢物語』第九段「八橋」の場面の意匠化",
+    "periodLabel": "江戸時代前期〜中期（18世紀、元禄期以降）",
+    "eraNote": "江戸時代前期〜中期（17世紀末〜18世紀初め）、元禄文化の工芸。尾形光琳は絵画だけでなく蒔絵の意匠にも独自の様式を確立し、伊勢物語などの古典文学を大胆に図案化した工芸品を残した。本作は国宝で、光琳の工芸家としての代表作である。",
+    "facts": [
+      { "slot": "artist", "text": "尾形光琳の作" },
+      { "slot": "era", "text": "元禄文化の作品", "shared": ["mikaeri-bijin", "fujin-raijin-korin"] },
+      { "slot": "period", "text": "18世紀（元禄期以降）の作", "shared": ["fujin-raijin-korin"] },
+      { "slot": "technique", "text": "蒔絵・螺鈿の硯箱である" },
+      { "slot": "other", "text": "『伊勢物語』第九段「東下り」の八橋の場面を意匠化した" },
+      { "slot": "other", "text": "鉛板で橋を、螺鈿でカキツバタの花を表す" }
+    ],
+    "falseStatements": [
+      { "text": "本阿弥光悦の作", "why": "光悦は寛永期の蒔絵・書・陶芸の作者。人物・時代ずらし", "verifiedFalse": true },
+      { "text": "絵画（屏風）である", "why": "蒔絵・螺鈿を用いた硯箱（工芸品）。風神雷神図屏風との分野ずらし", "verifiedFalse": true },
+      { "text": "寛永文化の作品", "why": "元禄期以降の作。時代ずらし", "verifiedFalse": true },
+      { "text": "野々村仁清の作", "why": "仁清は色絵の陶工。光琳は蒔絵・絵画。人物・分野ずらし", "verifiedFalse": true },
+      { "text": "『源氏物語』の場面を題材とする", "why": "『伊勢物語』（八橋）が題材。作品の取り違え", "verifiedFalse": true }
+    ],
+    "title": "八橋蒔絵螺鈿硯箱",
+    "reading": "やつはしまきえらでんすずりばこ",
+    "era": "genroku",
+    "category": "craft",
+    "location": "東京国立博物館（国宝）",
+    "author": "尾形光琳",
+    "technique": "蒔絵・鉛板・螺鈿を用いた漆塗りの硯箱",
+    "keyPoints": [
+      "元禄文化（18世紀、光琳の工芸の代表作）",
+      "尾形光琳（琳派、絵画と工芸の両方で活躍）",
+      "『伊勢物語』第九段「八橋」の場面を意匠化",
+      "鉛板の橋、螺鈿のカキツバタ、金の蒔絵",
+      "国宝"
+    ],
+    "explanation": "蓋が山形に高く盛り上がった硯箱で、『伊勢物語』第九段「東下り」でカキツバタの名所として詠まれる「八橋」の情景を大胆に図案化している。橋は腐食させた鉛の板、カキツバタの花は貝殻を用いた螺鈿、葉や茎は金の蒔絵で表され、和歌の文字も蒔絵で散らされているのが目印。文学の一場面を写実的に描くのではなく、意匠として大胆に単純化した点に、光琳の装飾美術家としての独創性が表れている。上下二段で、上段に硯と水滴、下段に紙を収める。",
+    "examNote": "「八橋蒔絵螺鈿硯箱＝尾形光琳＝伊勢物語（八橋）」。同じ光琳の絵画（燕子花図屏風もカキツバタと伊勢物語が主題）と主題が重なる点も問われる。",
+    "confusables": [
+      { "id": "mikaeri-bijin", "howToTell": "見返り美人図は絹に描いた絵画。八橋蒔絵螺鈿硯箱は漆・貝殻・金属を使った立体の工芸品。" }
+    ],
+    "image": {
+      "file": "yatsuhashi-suzuribako.jpg",
+      "credit": "",
+      "license": "",
+      "sourceUrl": "",
+      "sourceName": ""
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）元禄文化の項",
+      "東京国立博物館（ColBase 収蔵品、登録番号 H-86）"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "ninsei-nonomura",
+    "artist": null,
+    "patron": null,
+    "style": "京焼（色絵陶器）",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "person",
+    "periodLabel": "江戸時代前期（17世紀中頃〜後半）",
+    "eraNote": "江戸時代前期、元禄文化に先立つ時期から元禄期にかけて京都で活躍した陶工。仁清は京焼の色絵（上絵付けをした陶器）を完成させ、上方の町人文化の担い手による工芸の発達を代表する。肥前・有田焼の酒井田柿右衛門（赤絵、寛永期）と並び称される。",
+    "facts": [
+      { "slot": "style", "text": "京焼の色絵を完成させた" },
+      { "slot": "era", "text": "元禄文化の人物", "shared": ["ihara-saikaku", "chikamatsu-monzaemon", "matsuo-basho", "arai-hakuseki"] },
+      { "slot": "other", "text": "京都・仁和寺門前に御室窯を開いた" },
+      { "slot": "other", "text": "尾形乾山（尾形光琳の弟）は仁清に学んだ" }
+    ],
+    "falseStatements": [
+      { "text": "酒井田柿右衛門と同一人物である", "why": "柿右衛門は肥前・有田焼の陶工で別人・別産地。人物・地域ずらし", "verifiedFalse": true },
+      { "text": "肥前（有田）の陶工である", "why": "京都（御室）の陶工。地域ずらし", "verifiedFalse": true },
+      { "text": "水墨画家である", "why": "陶工（京焼の色絵）。分野ずらし", "verifiedFalse": true },
+      { "text": "寛永期に初めて色絵を完成させた", "why": "仁清の活動・完成期は元禄文化に近い江戸前期（17世紀中頃〜後半）とされる。時代ずらし", "verifiedFalse": true }
+    ],
+    "title": "野々村仁清（京焼の色絵）",
+    "reading": "ののむらにんせい",
+    "era": "genroku",
+    "category": "other",
+    "location": "京都・御室（仁和寺門前）",
+    "author": null,
+    "technique": "京焼（色絵陶器）",
+    "keyPoints": [
+      "元禄文化（京都の工芸）",
+      "京焼の色絵（上絵付け）を完成",
+      "仁和寺門前に御室窯を開いた",
+      "尾形乾山（光琳の弟）が仁清に学んだ"
+    ],
+    "explanation": "京都・仁和寺の門前に御室窯を開いた陶工で、金・銀を交えた華やかな上絵付けの技法（色絵）を京焼として完成させたとされる。優美な器形と絵画的な文様が特徴で、尾形光琳の弟である尾形乾山は仁清に陶芸を学んだと伝えられる。肥前・有田焼の赤絵（酒井田柿右衛門、寛永期）と並んで、江戸前期の日本の色絵陶器を代表する。",
+    "examNote": "「野々村仁清＝京焼（京都）＝色絵」「酒井田柿右衛門＝有田焼（肥前）＝赤絵」と産地・技法・時期をセットで覚える。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）元禄文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "ihara-saikaku",
+    "artist": "井原西鶴",
+    "patron": null,
+    "style": "浮世草子",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "text",
+    "periodLabel": "江戸時代前期（17世紀後半〜末、元禄期）",
+    "eraNote": "江戸時代前期、元禄文化の文学。上方の町人が経済力をつけるなか、井原西鶴は現世を「浮世」として肯定的に描く浮世草子という散文文学の分野を開き、町人や武士の生活・恋愛・金銭をありのままに描いた。",
+    "facts": [
+      { "slot": "artist", "text": "井原西鶴の作" },
+      { "slot": "style", "text": "浮世草子を創始した" },
+      { "slot": "era", "text": "元禄文化の人物", "shared": ["ninsei-nonomura", "chikamatsu-monzaemon", "matsuo-basho", "arai-hakuseki"] },
+      { "slot": "other", "text": "代表作は『好色一代男』『日本永代蔵』" }
+    ],
+    "falseStatements": [
+      { "text": "近松門左衛門の作", "why": "近松は人形浄瑠璃・歌舞伎の脚本（曽根崎心中）。西鶴は浮世草子（散文）。人物・分野ずらし", "verifiedFalse": true },
+      { "text": "俳諧の作者である", "why": "浮世草子（散文小説）の作者。松尾芭蕉（俳諧）との分野ずらし", "verifiedFalse": true },
+      { "text": "化政期の滑稽本の作者である", "why": "元禄期の浮世草子。十返舎一九（化政期・滑稽本）との時代・分野ずらし", "verifiedFalse": true },
+      { "text": "代表作は『奥の細道』である", "why": "『奥の細道』は松尾芭蕉の紀行文。作品の取り違え", "verifiedFalse": true }
+    ],
+    "title": "井原西鶴（浮世草子）",
+    "reading": "いはらさいかく",
+    "era": "genroku",
+    "category": "other",
+    "location": "—",
+    "author": "井原西鶴",
+    "technique": "浮世草子（散文の小説）",
+    "keyPoints": [
+      "元禄文化",
+      "浮世草子の創始者",
+      "代表作『好色一代男』『日本永代蔵』",
+      "町人の生活をありのままに描いた"
+    ],
+    "explanation": "井原西鶴は、それまでの仮名草子とは異なり、現世（浮世）を肯定的にとらえて町人や武士の恋愛・金銭・生活をありのままに描く浮世草子という文学分野を開いた。『好色一代男』で好色物、『日本永代蔵』で町人物という分野を確立し、上方の経済発展を背景とした元禄期の町人の生き方を写実的に描き出した。",
+    "examNote": "「井原西鶴＝浮世草子＝『好色一代男』」。同じ元禄期の近松門左衛門（人形浄瑠璃の脚本）と分野を混同しないこと。",
+    "confusables": [
+      { "id": "chikamatsu-monzaemon", "howToTell": "西鶴は読む散文（浮世草子）。近松は演じる脚本（人形浄瑠璃・歌舞伎）。" }
+    ],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）元禄文化の項"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "chikamatsu-monzaemon",
+    "artist": "近松門左衛門",
+    "patron": null,
+    "style": "人形浄瑠璃・歌舞伎の脚本",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "text",
+    "periodLabel": "江戸時代前期（17世紀末〜18世紀初め、元禄期）",
+    "eraNote": "江戸時代前期、元禄文化の文学・芸能。近松門左衛門は人形浄瑠璃・歌舞伎の脚本作者として、義理と人情の板挟みに苦しむ町人の姿を描き、太夫（語り手）の竹本義太夫と組んで大坂で人気を博した。",
+    "facts": [
+      { "slot": "artist", "text": "近松門左衛門の作" },
+      { "slot": "style", "text": "人形浄瑠璃・歌舞伎の脚本を書いた" },
+      { "slot": "era", "text": "元禄文化の人物", "shared": ["ninsei-nonomura", "ihara-saikaku", "matsuo-basho", "arai-hakuseki"] },
+      { "slot": "other", "text": "代表作は『曽根崎心中』（世話物）『国性爺合戦』（時代物）" },
+      { "slot": "other", "text": "語り手の竹本義太夫（義太夫節）と組んで活動した" }
+    ],
+    "falseStatements": [
+      { "text": "井原西鶴の作", "why": "西鶴は浮世草子（散文）の作者。近松は脚本作者。人物・分野ずらし", "verifiedFalse": true },
+      { "text": "浮世草子の作者である", "why": "人形浄瑠璃・歌舞伎の脚本作者。井原西鶴との分野ずらし", "verifiedFalse": true },
+      { "text": "化政期の歌舞伎作者である", "why": "元禄期の作者。鶴屋南北（化政期）との時代ずらし", "verifiedFalse": true },
+      { "text": "代表作は『南総里見八犬伝』である", "why": "『南総里見八犬伝』は化政期の曲亭馬琴の読本。作品の取り違え", "verifiedFalse": true }
+    ],
+    "title": "近松門左衛門（人形浄瑠璃）",
+    "reading": "ちかまつもんざえもん",
+    "era": "genroku",
+    "category": "other",
+    "location": "—",
+    "author": "近松門左衛門",
+    "technique": "人形浄瑠璃・歌舞伎の脚本",
+    "keyPoints": [
+      "元禄文化",
+      "人形浄瑠璃・歌舞伎の脚本作者",
+      "代表作『曽根崎心中』（世話物）『国性爺合戦』（時代物）",
+      "語り手・竹本義太夫と組んで活動"
+    ],
+    "explanation": "近松門左衛門は人形浄瑠璃・歌舞伎の脚本を書いた作者で、実際に起きた事件を題材に町人の義理と人情の葛藤を描いた世話物（『曽根崎心中』）と、歴史や伝説を題材にした時代物（『国性爺合戦』）の両方で優れた作品を残した。三味線に合わせて物語を語る義太夫節を大成した竹本義太夫と組み、大坂の竹本座を拠点に人気を博した。",
+    "examNote": "「近松門左衛門＝人形浄瑠璃の脚本＝『曽根崎心中』」「竹本義太夫＝語り（義太夫節）」とコンビで覚える。井原西鶴（浮世草子）と分野を混同しないこと。",
+    "confusables": [
+      { "id": "ihara-saikaku", "howToTell": "近松は演じる脚本（人形浄瑠璃・歌舞伎）。西鶴は読む散文（浮世草子）。" }
+    ],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）元禄文化の項"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "matsuo-basho",
+    "artist": "松尾芭蕉",
+    "patron": null,
+    "style": "俳諧（蕉風俳諧）",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "text",
+    "periodLabel": "江戸時代前期（17世紀後半〜末、元禄期）",
+    "eraNote": "江戸時代前期、元禄文化の文学。松尾芭蕉は、寛永期に松永貞徳が始めた貞門俳諧の言葉遊びから一歩進めて、深い趣（さび・しをり）を重んじる蕉風俳諧を大成し、俳諧を高い芸術性を持つ文芸に高めた。",
+    "facts": [
+      { "slot": "artist", "text": "松尾芭蕉の作" },
+      { "slot": "style", "text": "蕉風俳諧を大成した" },
+      { "slot": "era", "text": "元禄文化の人物", "shared": ["ninsei-nonomura", "ihara-saikaku", "chikamatsu-monzaemon", "arai-hakuseki"] },
+      { "slot": "other", "text": "代表作は紀行文『奥の細道』" },
+      { "slot": "other", "text": "貞門俳諧（松永貞徳、寛永期）を継承・発展させた" }
+    ],
+    "falseStatements": [
+      { "text": "松永貞徳の作", "why": "貞徳は寛永期の貞門俳諧の祖。芭蕉は元禄期に蕉風俳諧を大成した別人物。人物・時代ずらし", "verifiedFalse": true },
+      { "text": "浮世草子の作者である", "why": "俳諧（俳句の前身）の作者。井原西鶴（浮世草子）との分野ずらし", "verifiedFalse": true },
+      { "text": "代表作は『好色一代男』である", "why": "『好色一代男』は井原西鶴の浮世草子。作品の取り違え", "verifiedFalse": true },
+      { "text": "化政期の俳人である", "why": "元禄期の俳人。小林一茶（化政期）との時代ずらし", "verifiedFalse": true }
+    ],
+    "title": "松尾芭蕉（蕉風俳諧）",
+    "reading": "まつおばしょう",
+    "era": "genroku",
+    "category": "other",
+    "location": "—",
+    "author": "松尾芭蕉",
+    "technique": "俳諧（蕉風俳諧）",
+    "keyPoints": [
+      "元禄文化",
+      "蕉風俳諧の大成者",
+      "代表作『奥の細道』（紀行文）",
+      "寛永期の貞門俳諧を継承・発展させた"
+    ],
+    "explanation": "松尾芭蕉は、寛永期に松永貞徳が始めた貞門俳諧の言葉遊び中心の作風から一歩進め、さび・しをりといった深い趣を重んじる蕉風俳諧を大成した。江戸から奥州・北陸をめぐった旅の紀行文『奥の細道』は俳諧紀行文の代表作で、旅先で詠んだ句を交えながら綴られている。芭蕉によって俳諧は言葉遊びの域を超えた高い芸術性を持つ文芸として確立された。",
+    "examNote": "「松尾芭蕉＝蕉風俳諧＝『奥の細道』＝元禄期」。寛永期の貞門俳諧（松永貞徳）との前後関係、化政期の小林一茶との時代の違いが問われやすい。",
+    "confusables": [
+      { "id": "teimon-haikai", "howToTell": "貞門俳諧（松永貞徳）は寛永期の言葉遊び中心の俳諧。蕉風俳諧（松尾芭蕉）は元禄期のより深い趣を重んじる俳諧。" }
+    ],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）元禄文化の項"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "arai-hakuseki",
+    "artist": null,
+    "patron": null,
+    "style": "朱子学（歴史研究）",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "person",
+    "periodLabel": "江戸時代前期〜中期（17世紀末〜18世紀前半）",
+    "eraNote": "江戸時代前期〜中期、元禄期からその後にかけて活躍した儒学者・政治家。新井白石は朱子学の立場から日本の歴史を時代区分して論じた史論『読史余論』を著し、また6代・7代将軍のもとで政治を主導した（正徳の治）。",
+    "facts": [
+      { "slot": "style", "text": "朱子学の立場から史論『読史余論』を著した" },
+      { "slot": "era", "text": "元禄文化の人物", "shared": ["ninsei-nonomura", "ihara-saikaku", "chikamatsu-monzaemon", "matsuo-basho"] },
+      { "slot": "other", "text": "6代将軍徳川家宣・7代将軍家継のもとで政治を主導した（正徳の治）" }
+    ],
+    "falseStatements": [
+      { "text": "国学者である", "why": "朱子学の立場に立つ儒学者。本居宣長ら国学者との学派ずらし", "verifiedFalse": true },
+      { "text": "代表作は『古事記伝』である", "why": "『古事記伝』は本居宣長（国学）の著作。作品の取り違え", "verifiedFalse": true },
+      { "text": "田沼意次のもとで政治を行った", "why": "白石は6代・7代将軍（家宣・家継）のもとで正徳の治を行った。田沼時代（宝暦・天明期）とは別の時期。時代ずらし", "verifiedFalse": true },
+      { "text": "蘭学者である", "why": "朱子学の儒学者・政治家。杉田玄白ら蘭学者との分野ずらし", "verifiedFalse": true }
+    ],
+    "title": "新井白石（『読史余論』・正徳の治）",
+    "reading": "あらいはくせき",
+    "era": "genroku",
+    "category": "other",
+    "location": "—",
+    "author": null,
+    "technique": "史論（朱子学的な歴史区分論）",
+    "keyPoints": [
+      "元禄期から正徳期にかけて活躍",
+      "朱子学者・政治家",
+      "史論『読史余論』を著した",
+      "正徳の治（6代家宣・7代家継のもとでの政治）"
+    ],
+    "explanation": "新井白石は朱子学を学んだ儒学者で、日本の歴史を武家政権の推移から段階的にとらえた史論『読史余論』を著した。学者としての活動に加え、6代将軍徳川家宣・7代将軍家継のもとで政治を主導し（正徳の治）、貨幣の質を戻す改鋳や、長崎貿易を制限する海舶互市新例など実務にも携わった。学問と政治の両面で名が出る人物である。",
+    "examNote": "「新井白石＝朱子学＝『読史余論』＝正徳の治」。政治史（貨幣改鋳・海舶互市新例）と文化史（史論の著作）の両方で問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）元禄文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  }
+]

@@ -40,11 +40,17 @@ describe('selectReviewCandidates', () => {
     expect(picks.length).toBeLessThanOrEqual(REVIEW_MAX)
   })
 
-  it('復習期日が来ていなければ0件', () => {
+  it('復習期日が来ていなければ0件（q9 も生成できない単独プールで検証）', () => {
+    // testWorks 全体を pool に渡すと、a1 は他時代の同カテゴリ作品があるため
+    // q9（時代文化条件）が「まだ出題したことがない＝今すぐ導入してよい」型として拾われる
+    // （M2 チケットで新設。era は常に値を持つため、同カテゴリ・他時代の作品が3件あれば
+    // 常に生成できる。q4/q6/q8 と同じ「導入」の扱い）。ここでは a1 単独プールにして
+    // q9 も生成不可にし、「due な型が無ければ0件」という本来の検証意図を保つ。
     const base = createInitialProgress(today)
     const items = { ...base.items, a1: createItemProgress('2026-12-01') } // 未来
     const progress = { ...base, items }
-    const picks = selectReviewCandidates(testWorks, progress, today, seededRandom(3))
+    const soloPool = testWorks.filter((w) => w.id === 'a1')
+    const picks = selectReviewCandidates(soloPool, progress, today, seededRandom(3))
     expect(picks).toHaveLength(0)
   })
 })
@@ -52,11 +58,12 @@ describe('selectReviewCandidates', () => {
 describe('selectNewCandidates', () => {
   // 2026-09-04 仕様変更（オーナー方針: Q4 中心のアプリなので新規出題を q1 固定にしない）。
   // testWorks は facts/artist/patron が無く testEras も items が無いため、
-  // 新規で選べるのは常に生成できる q1/q2 のみになる（q4/q6/q8 は生成不可なので候補から外れる）。
-  it('未出題の作品だけを返し、型は q1/q2 のいずれか（q3 は名前を知らないので出さない）', () => {
+  // q4/q6/q8 は生成不可。ただし q9（M2 チケットで新設）は era（時代文化）条件だけでも
+  // 生成できるため、他時代・同カテゴリの作品が3件以上ある testWorks では候補になりうる。
+  it('未出題の作品だけを返し、型は q1/q2/q9 のいずれか（q3 は名前を知らないので出さない）', () => {
     const progress = createInitialProgress(today)
     const picks = selectNewCandidates(testWorks, testEras, progress, 15, 10, seededRandom(4))
-    expect(picks.every((p) => ['q1', 'q2'].includes(p.type))).toBe(true)
+    expect(picks.every((p) => ['q1', 'q2', 'q9'].includes(p.type))).toBe(true)
   })
 
   it('型が q1 に偏らない（生成可能な複数の型から重み付きで選ばれる）', () => {
@@ -161,20 +168,22 @@ describe('buildSession', () => {
 })
 
 describe('requeueType', () => {
-  // 2026-09-04 仕様変更: q1〜q8 の範囲に拡張し、work が生成できる型（+ 元の型を除く）から重み付きで選ぶ。
-  const work = testWorks[0] // facts/artist/patron 無し・testEras は items 無し → q4/q6/q8 は生成不可
+  // 2026-09-04 仕様変更: q1〜q9 の範囲に拡張し、work が生成できる型（+ 元の型を除く）から重み付きで選ぶ。
+  // testWorks は facts/artist/patron 無し・testEras は items 無し → q4/q6/q8 は生成不可。
+  // q9（M2 チケットで新設）は era 条件だけでも生成できるため候補に入る。
+  const work = testWorks[0]
 
-  it('元の型とは異なる型を返す（testWorks では生成可能なのが q1/q2/q3 のみ）', () => {
+  it('元の型とは異なる型を返す（testWorks では生成可能なのが q1/q2/q3/q9 のみ）', () => {
     for (let seed = 0; seed < 20; seed++) {
       const type = requeueType('q1', work, testWorks, testEras, seededRandom(seed))
       expect(type).not.toBe('q1')
-      expect(['q2', 'q3']).toContain(type)
+      expect(['q2', 'q3', 'q9']).toContain(type)
     }
   })
 
-  it('q1/q3 のいずれかを返す（元が q2 のとき）', () => {
+  it('q1/q3/q9 のいずれかを返す（元が q2 のとき）', () => {
     const type = requeueType('q2', work, testWorks, testEras, seededRandom(1))
-    expect(['q1', 'q3']).toContain(type)
+    expect(['q1', 'q3', 'q9']).toContain(type)
   })
 
   it('work が q4 を生成できるなら、元の型と違えば q4 が選ばれうる', () => {
@@ -282,8 +291,11 @@ describe('selectReviewCandidates（拡張型 q4/q6/q8 の導入）', () => {
     expect(sawQ4).toBe(true)
   })
 
-  it('work が q4/q6/q8 のどれも生成できず、q1/q2/q3 も due でなければ復習候補にならない', () => {
+  it('work が q4/q6/q8/q9 のどれも生成できず、q1/q2/q3 も due でなければ復習候補にならない', () => {
     const w = testWorks[0]
+    // q9（era 条件）は同カテゴリの他作品が pool に無いと生成できない。ここでは w 単独プールにして
+    // 「他に生成できる型が無い」ケースを検証する（testWorks 全体を渡すと q9 が候補になる。上のテスト参照）。
+    const soloPool = testWorks.filter((x) => x.id === w.id)
     const base = createInitialProgress(today)
     const item = {
       ...createItemProgress(today),
@@ -292,7 +304,7 @@ describe('selectReviewCandidates（拡張型 q4/q6/q8 の導入）', () => {
       q3: { box: 1, due: '2099-01-01', correct: 1, wrong: 0 },
     }
     const progress: ProgressState = { ...base, items: { [w.id]: item } }
-    const picks = selectReviewCandidates(testWorks, progress, today, seededRandom(1), testEras)
+    const picks = selectReviewCandidates(soloPool, progress, today, seededRandom(1), testEras)
     expect(picks.find((p) => p.work.id === w.id)).toBeUndefined()
   })
 })

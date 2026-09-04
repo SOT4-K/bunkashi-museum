@@ -14,6 +14,16 @@ const PROMPTS: Record<Question['type'], string> = {
   q4: 'この作品に関する記述として正しいものは？',
   q6: 'この作品と同じ文化に属する事項は？',
   q8: '作者（建立者）と様式（宗教背景）の組合せとして正しいものは？',
+  q9: '条件に合う作品は？',
+  q10: '次の2つの記述の正誤の組合せとして正しいものは？',
+}
+
+const Q4_REVERSED_PROMPT = 'この作品に関する記述として最も不適切なものは？'
+
+function promptFor(question: Question): string {
+  if (question.type === 'q4' && question.reversed) return Q4_REVERSED_PROMPT
+  if (question.type === 'q9' && question.conditionText) return `${question.conditionText}を選べ`
+  return PROMPTS[question.type]
 }
 
 export function QuestionCard({
@@ -39,13 +49,17 @@ export function QuestionCard({
     return `${styles.choice} ${styles.choiceDim}`
   }
 
-  if (question.type === 'q3') {
+  if (question.type === 'q3' || question.type === 'q9') {
+    // Q9 は正解の作品自身も画像4枚のうちの1枚（＝答え）なので、Q3 と違って別枠でヒーロー画像を
+    // 見せない（見せると答えが分かってしまう）。条件文（conditionText）だけを出題文にする。
     return (
       <div>
-        <div className={styles.titleHero}>
-          <div className={`${styles.titleHeroText} caption-bold`}>{question.work.title}</div>
-        </div>
-        <p className={styles.prompt}>{PROMPTS.q3}</p>
+        {question.type === 'q3' && (
+          <div className={styles.titleHero}>
+            <div className={`${styles.titleHeroText} caption-bold`}>{question.work.title}</div>
+          </div>
+        )}
+        <p className={styles.prompt}>{promptFor(question)}</p>
         <div className={styles.imageGrid}>
           {question.choiceWorks.map((w, index) => {
             const isCorrectOption = index === question.correctIndex
@@ -132,14 +146,22 @@ export function QuestionCard({
           ? (question.choiceEraItems ?? []).map((it) => it.text)
           : question.type === 'q8'
             ? (question.choiceCombos ?? []).map((c) => c.text)
-            : question.choiceWorks.map((w) => w.title)
+            : question.type === 'q10'
+              ? (question.choicePairLabels ?? [])
+              : question.choiceWorks.map((w) => w.title)
 
   return (
     <div>
       <button type="button" className={styles.hero} onClick={() => setLightboxWork(question.work)} aria-label="この画像を拡大表示">
         <WorkImage mono src={imageSrc(question.work)} alt="作品" />
       </button>
-      <p className={styles.prompt}>{PROMPTS[question.type]}</p>
+      <p className={styles.prompt}>{promptFor(question)}</p>
+      {question.type === 'q10' && question.statementPair && (
+        <div className={styles.statementPairBlock} data-testid="statement-pair">
+          <p>A: {question.statementPair.sentenceA.text}</p>
+          <p>B: {question.statementPair.sentenceB.text}</p>
+        </div>
+      )}
       <div className={styles.choiceList}>
         {choiceLabels.map((label, index) => {
           const isCorrectOption = index === question.correctIndex

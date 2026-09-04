@@ -1,0 +1,494 @@
+[
+  {
+    "id": "shakoki-dogu",
+    "artist": null,
+    "patron": null,
+    "style": "土偶（縄文晩期）",
+    "religion": "呪術・信仰（縄文時代の精霊崇拝）",
+    "periodLabel": "縄文時代晩期（前1000年頃）",
+    "eraNote": "文字のない縄文時代の遺物。狩猟採集を基盤とした縄文文化では、豊穣や安産を祈る呪術的な道具として土偶が作られた。遮光器土偶はその晩期を代表する作例で、青森県亀ヶ岡遺跡から出土したことから「亀ヶ岡文化」の名でも呼ばれる東北地方の縄文晩期文化を象徴する。",
+    "holder": "東京国立博物館",
+    "subject": null,
+    "facts": [
+      {
+        "slot": "era",
+        "text": "縄文時代晩期の遺物",
+        "shared": ["kaen-doki"]
+      },
+      {
+        "slot": "location",
+        "text": "青森県つがる市（亀ヶ岡遺跡）で出土した"
+      },
+      {
+        "slot": "other",
+        "text": "目がゴーグル（遮光器）のような形で表される"
+      },
+      {
+        "slot": "other",
+        "text": "女性を表すとされる呪術的な土製の人形である",
+        "shared": ["kaen-doki"]
+      },
+      {
+        "slot": "other",
+        "text": "片脚を欠いた状態で発見された"
+      },
+      {
+        "slot": "category",
+        "text": "重要文化財に指定されている"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "弥生時代の遺物である",
+        "why": "縄文時代晩期の遺物。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "銅製である",
+        "why": "土製（土偶）。材質ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "群馬県で出土した",
+        "why": "青森県亀ヶ岡遺跡出土。所在ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "祭祀用の青銅器である",
+        "why": "土製の人形（土偶）。銅鐸など青銅祭器との内容ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "埴輪の一種である",
+        "why": "埴輪は古墳時代の副葬・墳丘用の土製品。土偶は縄文時代の呪術的人形で時代・用途が異なる",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "遮光器土偶",
+    "reading": "しゃこうきどぐう",
+    "era": "genshi",
+    "category": "craft",
+    "location": "青森県つがる市（亀ヶ岡遺跡）出土",
+    "author": null,
+    "technique": "土製（土偶）",
+    "keyPoints": [
+      "縄文時代晩期",
+      "青森県亀ヶ岡遺跡出土",
+      "ゴーグルのような大きな目（遮光器に似る）",
+      "女性を表すとされる呪術的人形"
+    ],
+    "explanation": "縄文時代晩期を代表する土偶。青森県亀ヶ岡遺跡から出土し、目がイヌイットの遮光器（雪目を防ぐ道具）に似ることから「遮光器土偶」と呼ばれる。土偶の多くは女性を表すとされ、豊穣や安産を祈る呪術的な意味をもったと考えられている。",
+    "examNote": "「土偶＝縄文時代・呪術（女性像）」「埴輪＝古墳時代・墳丘に並べる」の区別が最頻出。",
+    "confusables": [],
+    "image": {
+      "file": "shakoki-dogu.jpg",
+      "credit": "",
+      "license": "",
+      "sourceUrl": "",
+      "sourceName": ""
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）原始文化の項",
+      "東京国立博物館展示"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "kaen-doki",
+    "artist": null,
+    "patron": null,
+    "style": "縄文土器（火焔型）",
+    "religion": null,
+    "periodLabel": "縄文時代中期（前3000年頃）",
+    "eraNote": "文字のない縄文時代の遺物。狩猟採集と木の実の採集を基盤とした縄文文化では、煮炊きや貯蔵に土器が用いられ、中期には燃え上がる炎のような装飾をもつ火焔型土器が信濃川流域（新潟県）を中心に作られた。",
+    "holder": "十日町市博物館",
+    "subject": null,
+    "facts": [
+      {
+        "slot": "era",
+        "text": "縄文時代中期の遺物",
+        "shared": ["shakoki-dogu"]
+      },
+      {
+        "slot": "location",
+        "text": "新潟県十日町市（笹山遺跡）で出土した"
+      },
+      {
+        "slot": "other",
+        "text": "縁に燃え上がる炎のような大きな突起がある"
+      },
+      {
+        "slot": "category",
+        "text": "深鉢形の土器である"
+      },
+      {
+        "slot": "other",
+        "text": "実用（煮炊き）に使われたと考えられている"
+      },
+      {
+        "slot": "category",
+        "text": "国宝に指定されている"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "弥生土器の一種である",
+        "why": "縄文時代中期の縄文土器。時代・種別ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "青森県で出土した",
+        "why": "新潟県十日町市の笹山遺跡出土。所在ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "祭祀専用で実用性がない",
+        "why": "深鉢形で煮炊きなど実用に使われたと考えられている。用途ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "彩色された須恵器である",
+        "why": "須恵器は古墳時代以降の硬質な土器。縄文土器とは時代・技法が異なる",
+        "verifiedFalse": true
+      },
+      {
+        "text": "重要文化財に指定されている",
+        "why": "国宝指定。指定区分ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "火焔型土器（笹山遺跡）",
+    "reading": "かえんがたどき（ささやまいせき）",
+    "era": "genshi",
+    "category": "craft",
+    "location": "新潟県十日町市（笹山遺跡）出土",
+    "author": null,
+    "technique": "土製（縄文土器・深鉢形）",
+    "keyPoints": [
+      "縄文時代中期",
+      "新潟県笹山遺跡出土",
+      "燃え上がる炎に似た大きな突起の装飾",
+      "国宝指定（笹山遺跡出土深鉢形土器の一群）"
+    ],
+    "explanation": "縄文時代中期、信濃川流域を中心に作られた装飾性の高い土器。縁に大きく燃え上がる炎のような突起をもつことから火焔型土器と呼ばれる。新潟県十日町市の笹山遺跡から出土した一群57点が国宝に指定されている。",
+    "examNote": "「火焔型土器＝縄文中期・新潟」を覚える。弥生土器（実用的・簡素）との装飾性の対比で問われやすい。",
+    "confusables": [],
+    "image": {
+      "file": "kaen-doki.jpg",
+      "credit": "",
+      "license": "",
+      "sourceUrl": "",
+      "sourceName": ""
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）原始文化の項",
+      "十日町市博物館展示"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "keiko-bujin-haniwa",
+    "artist": null,
+    "patron": null,
+    "style": "形象埴輪（人物埴輪）",
+    "religion": null,
+    "periodLabel": "古墳時代後期（6世紀）",
+    "eraNote": "古墳時代には各地に前方後円墳などの古墳が築かれ、墳丘の上や周囲に埴輪が並べられた。当初は円筒埴輪が中心だったが、しだいに人物・動物・家などをかたどった形象埴輪が加わり、当時の服装や生活・武具のようすを伝える資料となっている。",
+    "holder": "東京国立博物館",
+    "subject": null,
+    "facts": [
+      {
+        "slot": "era",
+        "text": "古墳時代の遺物",
+        "shared": []
+      },
+      {
+        "slot": "location",
+        "text": "群馬県太田市飯塚町で出土した"
+      },
+      {
+        "slot": "other",
+        "text": "挂甲（小札を綴った甲冑）を身につけた武人を表す"
+      },
+      {
+        "slot": "category",
+        "text": "人物埴輪（形象埴輪）である"
+      },
+      {
+        "slot": "other",
+        "text": "衝角付冑をかぶり、大刀・弓矢を持つ姿である"
+      },
+      {
+        "slot": "category",
+        "text": "国宝に指定されている"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "円筒埴輪である",
+        "why": "人物を表した形象埴輪（人物埴輪）。円筒埴輪との種別ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "縄文時代の遺物である",
+        "why": "古墳時代（6世紀）の遺物。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "青森県で出土した",
+        "why": "群馬県太田市出土。所在ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "女性の巫女を表す",
+        "why": "甲冑・武具を身につけた男性の武人を表す。内容ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "銅製である",
+        "why": "土製（埴輪）。材質ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "埴輪 挂甲の武人",
+    "reading": "はにわ けいこうのぶじん",
+    "era": "genshi",
+    "category": "craft",
+    "location": "群馬県太田市飯塚町出土",
+    "author": null,
+    "technique": "土製（形象埴輪）",
+    "keyPoints": [
+      "古墳時代後期（6世紀）",
+      "群馬県太田市出土",
+      "甲冑（挂甲）を着けた武人埴輪",
+      "国宝指定"
+    ],
+    "explanation": "古墳の墳丘に並べられた形象埴輪の代表作。小札を綴った挂甲という甲冑を身につけ、衝角付冑をかぶり、大刀・弓矢を携えた武人の姿を表す。6世紀の東国武人の武装を知る貴重な資料で、国宝に指定されている。",
+    "examNote": "「埴輪＝古墳時代・墳丘に並べる（円筒埴輪と形象埴輪）」「土偶＝縄文時代・呪術」の区別が最頻出。",
+    "confusables": [],
+    "image": {
+      "file": "keiko-bujin-haniwa.jpg",
+      "credit": "",
+      "license": "",
+      "sourceUrl": "",
+      "sourceName": ""
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）原始文化の項",
+      "東京国立博物館展示"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "kesadasuki-dotaku",
+    "artist": null,
+    "patron": null,
+    "style": "銅鐸（袈裟襷文）",
+    "religion": "農耕祭祀",
+    "periodLabel": "弥生時代（前後1〜2世紀頃）",
+    "eraNote": "弥生時代には大陸から稲作とともに青銅器・鉄器が伝わった。青銅製の銅鐸・銅剣・銅矛は農耕祭祀に用いられた祭器と考えられ、表面に袈裟や襷のような文様（袈裟襷文）を施した銅鐸が各地から出土している。",
+    "holder": "広島県立歴史民俗資料館",
+    "subject": null,
+    "facts": [
+      {
+        "slot": "era",
+        "text": "弥生時代の遺物",
+        "shared": []
+      },
+      {
+        "slot": "other",
+        "text": "袈裟や襷のような文様（袈裟襷文）で表面が区画される"
+      },
+      {
+        "slot": "category",
+        "text": "青銅製の祭器（銅鐸）である"
+      },
+      {
+        "slot": "other",
+        "text": "農耕祭祀に用いられたと考えられている"
+      },
+      {
+        "slot": "location",
+        "text": "広島県の黒川遺跡で出土した"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "古墳時代の遺物である",
+        "why": "弥生時代の遺物。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "鉄製である",
+        "why": "青銅製。材質ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "武器として使われた",
+        "why": "農耕祭祀に用いられた祭器と考えられる。用途ずらし（銅剣・銅矛との混同）",
+        "verifiedFalse": true
+      },
+      {
+        "text": "土偶の一種である",
+        "why": "土偶は土製の人形（縄文時代）。銅鐸は青銅製の祭器（弥生時代）で材質・時代が異なる",
+        "verifiedFalse": true
+      },
+      {
+        "text": "埴輪とともに古墳の周囲に並べられた",
+        "why": "銅鐸は弥生時代の祭器で埋納されることが多く、古墳の埴輪とは時代・用途が異なる",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "袈裟襷文銅鐸",
+    "reading": "けさだすきもんどうたく",
+    "era": "genshi",
+    "category": "craft",
+    "location": "広島県（黒川遺跡）出土",
+    "author": null,
+    "technique": "青銅製（鋳造）",
+    "keyPoints": [
+      "弥生時代",
+      "青銅製の祭器（銅鐸）",
+      "袈裟や襷のような文様（袈裟襷文）",
+      "農耕祭祀に用いられたと考えられる"
+    ],
+    "explanation": "弥生時代の青銅製祭器である銅鐸のうち、表面が袈裟や襷のような文様で区画されるものを袈裟襷文銅鐸と呼ぶ。銅剣・銅矛とともに大陸から伝わった金属器文化を代表し、農耕の豊穣を祈る祭祀に用いられたと考えられている。",
+    "examNote": "「銅鐸・銅剣・銅矛＝弥生時代の青銅製祭器」を覚える。用途は諸説あるが教科書では農耕祭祀との関連が説かれる。",
+    "confusables": [],
+    "image": {
+      "file": "kesadasuki-dotaku.jpg",
+      "credit": "",
+      "license": "",
+      "sourceUrl": "",
+      "sourceName": ""
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）原始文化の項",
+      "広島県立歴史民俗資料館展示"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "zenpokoenfun",
+    "kind": "concept",
+    "artist": null,
+    "patron": null,
+    "style": "前方後円墳",
+    "religion": null,
+    "periodLabel": "古墳時代（3〜6世紀）",
+    "eraNote": "3世紀後半以降、近畿地方を中心に前方後円墳という日本独自の形をした墳丘墓が各地の首長のために築かれ、大和政権の勢力拡大とともに全国に広まった。墳丘や周囲には埴輪が並べられた。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      {
+        "slot": "other",
+        "text": "円形と方形を組み合わせた日本独自の形をもつ墳丘墓"
+      },
+      {
+        "slot": "other",
+        "text": "近畿地方の大和政権を中心に各地の首長のために築かれた"
+      },
+      {
+        "slot": "other",
+        "text": "墳丘の周囲に埴輪が並べられた",
+        "shared": ["keiko-bujin-haniwa"]
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "弥生時代に大陸から伝わった墳墓形式である",
+        "why": "前方後円墳は日本独自の形式で、古墳時代（3世紀後半以降）に成立した。時代・由来ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "仏教寺院の伽藍配置の一形式である",
+        "why": "古墳（墳墓）であり寺院建築ではない。内容ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "前方後円墳",
+    "reading": "ぜんぽうこうえんふん",
+    "era": "genshi",
+    "category": "architecture",
+    "location": "近畿地方を中心に全国に分布",
+    "author": null,
+    "technique": "盛土による墳丘墓",
+    "keyPoints": [
+      "古墳時代（3〜6世紀）",
+      "円形部と方形部を組み合わせた日本独自の墳丘墓",
+      "大和政権の首長の墓に多い",
+      "周囲に埴輪を並べる"
+    ],
+    "explanation": "円形の後円部と方形の前方部を組み合わせた、日本独自の形をもつ墳丘墓。3世紀後半以降、近畿地方を中心に大和政権の首長のために築かれ、政権の勢力拡大とともに全国に広まった。代表例に大仙陵古墳（仁徳天皇陵、大阪府堺市）がある。",
+    "examNote": "単独出題より、埴輪・古墳文化のリード文や誤文の素材として使う（画像なし項目）。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）原始文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "kaizuka-jomon",
+    "kind": "concept",
+    "artist": null,
+    "patron": null,
+    "style": "貝塚",
+    "religion": null,
+    "periodLabel": "縄文時代",
+    "eraNote": "狩猟・採集・漁労を基盤とした縄文時代の人々は、食べた貝の殻や動物の骨、土器の破片などを一定の場所に捨て続け、それが層をなして貝塚となった。貝塚は当時の生活・食生活を知る手がかりとなる遺跡である。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      {
+        "slot": "other",
+        "text": "縄文時代の人々の生活跡（ゴミ捨て場）である"
+      },
+      {
+        "slot": "other",
+        "text": "貝殻・動物の骨・土器片などが層をなして堆積する"
+      },
+      {
+        "slot": "other",
+        "text": "大森貝塚（東京都、モースが発見）が代表例として知られる"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "弥生時代の水田跡である",
+        "why": "貝塚は縄文時代の生活跡（ゴミ捨て場）。水田跡（登呂遺跡など）との時代・内容ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "古墳時代の埋葬施設である",
+        "why": "貝塚は縄文時代の生活跡で埋葬施設ではない。時代・内容ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "貝塚",
+    "reading": "かいづか",
+    "era": "genshi",
+    "category": "other",
+    "location": "全国各地（代表例: 大森貝塚、東京都）",
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "縄文時代の生活跡",
+      "貝殻・動物の骨・土器片が堆積",
+      "大森貝塚（モースが発見）が代表例",
+      "当時の食生活を知る手がかり"
+    ],
+    "explanation": "縄文時代の人々が食べた貝の殻や動物の骨、土器の破片などを捨て続けた場所が層をなして残ったもの。代表例の大森貝塚は、1877年に来日した動物学者モースが発見・発掘したことで知られる。",
+    "examNote": "単独出題より、縄文文化のリード文や誤文の素材として使う（画像なし項目）。モースと大森貝塚の組み合わせで問われやすい。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）原始文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  }
+]

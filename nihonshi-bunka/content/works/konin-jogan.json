@@ -1,0 +1,405 @@
+[
+  {
+    "id": "kanshinji-nyoirin-kannon",
+    "artist": null,
+    "patron": null,
+    "style": "一木造・翻波式（密教彫刻）",
+    "religion": "密教（真言宗）",
+    "periodLabel": "平安時代前期・弘仁貞観文化（9世紀）",
+    "eraNote": "平安京遷都ののち、嵯峨天皇から清和天皇の頃までの弘仁・貞観文化の彫刻。空海が伝えた密教（真言宗）の広まりとともに、如意輪観音・不動明王など新しい尊格の像が作られ、一木造で衣文を波状に刻む翻波式の量感ある彫刻が特徴となった。観心寺の如意輪観音像はその代表作である。",
+    "holder": "観心寺（本堂）",
+    "subject": null,
+    "facts": [
+      {
+        "slot": "era",
+        "text": "弘仁・貞観文化の作品",
+        "shared": ["muroji-gojunoto", "toji-fudo-myoo"]
+      },
+      {
+        "slot": "technique",
+        "text": "一木造である",
+        "shared": ["toji-fudo-myoo"]
+      },
+      {
+        "slot": "other",
+        "text": "六臂（腕が6本）の如意輪観音像である"
+      },
+      {
+        "slot": "location",
+        "text": "観心寺にある"
+      },
+      {
+        "slot": "other",
+        "text": "秘仏として伝えられる"
+      },
+      {
+        "slot": "religion",
+        "text": "密教（真言宗）の尊像である",
+        "shared": ["toji-fudo-myoo"]
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "寄木造である",
+        "why": "一木造。寄木造は国風文化の定朝様との技法・時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "東大寺法華堂にある",
+        "why": "観心寺（大阪）にある。所在ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "乾漆像である",
+        "why": "一木造の木彫像。天平文化の乾漆像との技法・時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "四臂（腕が4本）の像である",
+        "why": "六臂の如意輪観音像。像容ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "白鳳文化の作品である",
+        "why": "弘仁・貞観文化（9世紀）の作品。時代ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "観心寺如意輪観音像",
+    "reading": "かんしんじにょいりんかんのんぞう",
+    "era": "konin-jogan",
+    "category": "sculpture",
+    "location": "観心寺（大阪）",
+    "author": null,
+    "technique": "一木造",
+    "keyPoints": [
+      "弘仁・貞観文化を代表する密教彫刻",
+      "観心寺の秘仏",
+      "六臂の如意輪観音像",
+      "一木造の量感ある表現"
+    ],
+    "explanation": "大阪の観心寺に伝わる秘仏。六本の腕をもつ如意輪観音の姿で、平安時代前期に真言宗の密教とともに新しく広まった尊格を表す。一木造による豊かな肉体表現は、弘仁・貞観彫刻の重厚な量感を代表する作例とされる。",
+    "examNote": "「一木造・翻波式＝弘仁・貞観文化」「寄木造＝国風文化・定朝様」の技法と時代の対応が最頻出。",
+    "confusables": [],
+    "image": {
+      "file": "kanshinji-nyoirin-kannon.jpg",
+      "credit": "",
+      "license": "",
+      "sourceUrl": "",
+      "sourceName": ""
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）弘仁・貞観文化の項"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "muroji-gojunoto",
+    "artist": null,
+    "patron": null,
+    "style": "弘仁・貞観建築（山岳寺院）",
+    "religion": "仏教（真言宗系、女人高野）",
+    "periodLabel": "平安時代前期・弘仁貞観文化（9世紀初め）",
+    "eraNote": "平安京遷都ののち、最澄・空海が開いた天台宗・真言宗の広まりとともに、山中で修行を行う山岳寺院が各地に建てられた。女性の参詣を許したことから「女人高野」と呼ばれる室生寺には、屋外に建つ五重塔としては国内最小級の遺構が伝わる。",
+    "holder": "室生寺",
+    "subject": null,
+    "facts": [
+      {
+        "slot": "era",
+        "text": "弘仁・貞観文化の作品",
+        "shared": ["kanshinji-nyoirin-kannon", "toji-fudo-myoo"]
+      },
+      {
+        "slot": "style",
+        "text": "山岳寺院の建築である"
+      },
+      {
+        "slot": "other",
+        "text": "屋外にある五重塔としては国内最小級とされる"
+      },
+      {
+        "slot": "location",
+        "text": "室生寺にある"
+      },
+      {
+        "slot": "other",
+        "text": "女人高野と呼ばれる"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "校倉造の倉庫である",
+        "why": "木造の五重塔。正倉院正倉（校倉造）との様式・用途ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "高野山金剛峯寺にある",
+        "why": "室生寺にある。所在ずらし（「女人高野」の呼称からの混同に注意）",
+        "verifiedFalse": true
+      },
+      {
+        "text": "白鳳文化の建築である",
+        "why": "弘仁・貞観文化（9世紀）の建築。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "三重塔である",
+        "why": "五重塔。層数ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "禅宗様の建築である",
+        "why": "弘仁・貞観期の山岳寺院建築。禅宗様は鎌倉時代以降の様式で様式・時代ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "室生寺五重塔",
+    "reading": "むろうじごじゅうのとう",
+    "era": "konin-jogan",
+    "category": "architecture",
+    "location": "室生寺（奈良県宇陀市）",
+    "author": null,
+    "technique": "木造五重塔",
+    "keyPoints": [
+      "弘仁・貞観文化",
+      "女人高野と呼ばれる室生寺",
+      "屋外の五重塔として国内最小級",
+      "山岳寺院建築の代表例"
+    ],
+    "explanation": "奈良県宇陀市の山中にある室生寺の五重塔。高さ約16mで、屋外に建つ五重塔としては国内最小級とされる。女性の参詣を許したことから「女人高野」と呼ばれる室生寺は、密教の広まりとともに各地に建てられた山岳寺院を代表する。",
+    "examNote": "「女人高野＝室生寺」を覚える。高野山（金剛峯寺、空海開山）との混同に注意。",
+    "confusables": [],
+    "image": {
+      "file": "muroji-gojunoto.jpg",
+      "credit": "",
+      "license": "",
+      "sourceUrl": "",
+      "sourceName": ""
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）弘仁・貞観文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "toji-fudo-myoo",
+    "artist": null,
+    "patron": "空海",
+    "style": "一木造（密教彫刻・立体曼荼羅）",
+    "religion": "密教（真言宗）",
+    "periodLabel": "平安時代前期・弘仁貞観文化（9世紀）",
+    "eraNote": "空海が嵯峨天皇から賜って真言宗の根本道場とした東寺（教王護国寺）の講堂には、密教の教えを仏像の配置で表す「立体曼荼羅」が安置される。不動明王像はその中心をなす五大明王の一体で、一木造による厳しい表情と量感が弘仁・貞観彫刻の特色を伝える。",
+    "holder": "東寺講堂",
+    "subject": null,
+    "facts": [
+      {
+        "slot": "patron",
+        "text": "空海が真言宗の根本道場とした東寺にある"
+      },
+      {
+        "slot": "era",
+        "text": "弘仁・貞観文化の作品",
+        "shared": ["kanshinji-nyoirin-kannon", "muroji-gojunoto"]
+      },
+      {
+        "slot": "technique",
+        "text": "一木造である",
+        "shared": ["kanshinji-nyoirin-kannon"]
+      },
+      {
+        "slot": "other",
+        "text": "五大明王像の中心をなす"
+      },
+      {
+        "slot": "location",
+        "text": "東寺講堂にある"
+      },
+      {
+        "slot": "other",
+        "text": "講堂の仏像群は密教の教えを表す立体曼荼羅として配置される"
+      },
+      {
+        "slot": "religion",
+        "text": "密教（真言宗）の尊像である",
+        "shared": ["kanshinji-nyoirin-kannon"]
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "神護寺にある",
+        "why": "東寺講堂にある。所在ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "天台宗の最澄が安置した像である",
+        "why": "真言宗の空海が根本道場とした東寺にある。宗派・人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "寄木造である",
+        "why": "一木造。国風文化の寄木造（定朝様）との技法・時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "如意輪観音像である",
+        "why": "不動明王像。観心寺如意輪観音像との内容ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "鎌倉文化の作品である",
+        "why": "弘仁・貞観文化（9世紀）の作品。時代ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "東寺講堂 不動明王像",
+    "reading": "とうじこうどう ふどうみょうおうぞう",
+    "era": "konin-jogan",
+    "category": "sculpture",
+    "location": "東寺（教王護国寺、京都）",
+    "author": null,
+    "technique": "一木造",
+    "keyPoints": [
+      "弘仁・貞観文化を代表する密教彫刻",
+      "空海が根本道場とした東寺講堂",
+      "五大明王像の中心",
+      "立体曼荼羅の一体"
+    ],
+    "explanation": "空海が嵯峨天皇から賜り真言宗の根本道場とした東寺の講堂に安置される。講堂内には密教の世界観を仏像の配置によって表現した「立体曼荼羅」があり、不動明王像は五大明王像の中心をなす。一木造の重厚な体軀と厳しい表情が、密教彫刻の力強さを伝える。",
+    "examNote": "「東寺講堂の立体曼荼羅＝空海・真言宗」を覚える。同じ密教でも天台宗（最澄・延暦寺）と混同しない。",
+    "confusables": [],
+    "image": {
+      "file": "toji-fudo-myoo.jpg",
+      "credit": "",
+      "license": "",
+      "sourceUrl": "",
+      "sourceName": ""
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）弘仁・貞観文化の項",
+      "東寺（教王護国寺）公式サイト"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "saicho-kukai",
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "periodLabel": "平安時代前期（9世紀初め）",
+    "eraNote": "平安京遷都後、最澄と空海はともに遣唐使とともに入唐し、帰国後にそれぞれ天台宗・真言宗を開いた。最澄は比叡山に延暦寺を、空海は高野山に金剛峯寺を建てて根本道場とし、加持祈禱によって現世の利益を求める密教が貴族に広まる基盤を築いた。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      {
+        "slot": "religion",
+        "text": "最澄は天台宗を開き、比叡山延暦寺を根本道場とした"
+      },
+      {
+        "slot": "religion",
+        "text": "空海は真言宗を開き、高野山金剛峯寺を根本道場とした",
+        "shared": ["toji-fudo-myoo"]
+      },
+      {
+        "slot": "other",
+        "text": "ともに遣唐使とともに入唐した"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "最澄は真言宗を、空海は天台宗を開いた",
+        "why": "宗派が入れ替わっている（最澄＝天台宗、空海＝真言宗）。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "空海は比叡山延暦寺を開いた",
+        "why": "空海が開いたのは高野山金剛峯寺（東寺は嵯峨天皇から賜った）。延暦寺は最澄。所在ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "最澄・空海",
+    "reading": "さいちょう・くうかい",
+    "era": "konin-jogan",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "最澄＝天台宗・比叡山延暦寺",
+      "空海＝真言宗・高野山金剛峯寺（東寺も賜る）",
+      "ともに遣唐使で入唐",
+      "密教が貴族に広まる基盤を築いた"
+    ],
+    "explanation": "平安時代前期、遣唐使とともに入唐し新しい仏教を伝えた二人の僧。最澄は天台宗を開いて比叡山に延暦寺を建て、空海は真言宗を開いて高野山に金剛峯寺を建てるとともに、嵯峨天皇から東寺（教王護国寺）を賜り真言宗の根本道場とした。加持祈禱によって現世の利益を求める密教が、この二人によって貴族社会に広まった。",
+    "examNote": "「最澄＝天台宗・延暦寺」「空海＝真言宗・金剛峯寺・東寺」の対応が最頻出（画像なし項目、リード文・誤文の素材）。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）弘仁・貞観文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "sanpitsu",
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "periodLabel": "平安時代前期（9世紀）",
+    "eraNote": "弘仁・貞観文化では唐風の文化が引き続き重んじられ、宮廷では漢詩文や書が盛んであった。空海・嵯峨天皇・橘逸勢の三人は書にすぐれ、後世「三筆」と呼ばれた。空海が最澄に宛てた書状「風信帖」はその代表的な遺品である。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      {
+        "slot": "other",
+        "text": "空海・嵯峨天皇・橘逸勢の3人を指す"
+      },
+      {
+        "slot": "other",
+        "text": "唐風の書にすぐれた人物として並び称される"
+      },
+      {
+        "slot": "other",
+        "text": "空海の書状「風信帖」が代表的な遺品として知られる"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "小野道風・藤原佐理・藤原行成を指す",
+        "why": "この3人は「三蹟」（国風文化、和様の書）。三筆（弘仁・貞観文化、唐風の書）との時代・様式ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "最澄を含む3人を指す",
+        "why": "三筆は空海・嵯峨天皇・橘逸勢の3人。最澄は含まれない。人物ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "三筆（空海・嵯峨天皇・橘逸勢）",
+    "reading": "さんぴつ",
+    "era": "konin-jogan",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "弘仁・貞観文化の書の名手3人",
+      "空海・嵯峨天皇・橘逸勢",
+      "唐風の書（三蹟＝和様の書と対比）",
+      "空海「風信帖」が代表作"
+    ],
+    "explanation": "弘仁・貞観文化を代表する書の名手3人。真言宗を開いた空海、平安京で漢詩文を奨励した嵯峨天皇、遣唐使に随行した橘逸勢の3人を指し、いずれも唐風の力強い書風にすぐれた。空海が最澄に宛てた書状「風信帖」がその代表的な遺品として伝わる。",
+    "examNote": "「三筆（弘仁・貞観、唐風）」と「三蹟（国風文化、和様）」の対比が最頻出（画像なし項目）。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）弘仁・貞観文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  }
+]

@@ -71,6 +71,17 @@
   font-size: 17px;
 }
 
+/* Q10（2文正誤組合せ）の A・B 文表示。 */
+.statementPairBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  border-radius: var(--radius-image);
+  background: var(--surface-2, rgba(255, 255, 255, 0.04));
+  font-size: 15px;
+}
+
 .choiceList {
   display: flex;
   flex-direction: column;

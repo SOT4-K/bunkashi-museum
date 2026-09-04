@@ -5,6 +5,12 @@
 //  sourceUrl・attributionText 必須）と画像実体が無ければエラー（本番ビルドに含まれる
 //  のに出典を欠くのを防ぐ）。draft はエントリ無しでも警告のみ（M1 は全件 draft）。
 //  confusables が1件以下の作品は警告（DESIGN.md 3章: ディストラクタの質に関わる）。
+// M2 チケット「テーマセット・モード」で追加:
+//  work.kind（'artifact'省略時デフォルト|'person'|'text'|'concept'）。person/text/concept は
+//  image/location/technique/confusables を必須から外す（facts/explanation/sources/category/status は必須のまま）。
+//  work.holder / work.subject（任意、型チェックのみ）。
+//  eras.json の各要素の weight（数値、省略時は1。無くても警告のみ）。
+//  content/passages/<era>.json（リード文＋下線部）の検証（下記 validatePassages 参照）。
 // npm run build の prebuild で必ず走る。エラーがあれば exit code 1 で失敗させる
 // （警告のみなら exit 0）。
 //
@@ -20,26 +26,16 @@ const worksDir = join(root, 'content', 'works')
 const erasPath = join(root, 'content', 'eras.json')
 const imagesDir = join(root, 'content', 'images')
 const manifestPath = join(imagesDir, 'manifest.json')
+const passagesDir = join(root, 'content', 'passages')
 
 // status: reviewed で必須の manifest フィールド
 const REQUIRED_MANIFEST_FIELDS = ['file', 'license', 'sourceUrl', 'attributionText']
 
-const REQUIRED_FIELDS = [
-  'id',
-  'title',
-  'reading',
-  'era',
-  'category',
-  'location',
-  'technique',
-  'keyPoints',
-  'explanation',
-  'confusables',
-  'image',
-  'sources',
-  'examTags',
-  'status',
-]
+// 全 kind 共通で必須の項目
+const COMMON_REQUIRED_FIELDS = ['id', 'title', 'reading', 'era', 'category', 'explanation', 'sources', 'examTags', 'status']
+
+// kind: artifact（省略時デフォルト）のみ必須の項目（画像で出題するための項目）
+const ARTIFACT_ONLY_REQUIRED_FIELDS = ['location', 'technique', 'keyPoints', 'confusables', 'image']
 
 const VALID_CATEGORIES = new Set([
   'architecture',
@@ -52,9 +48,133 @@ const VALID_CATEGORIES = new Set([
 ])
 
 const VALID_STATUS = new Set(['draft', 'reviewed'])
+const VALID_KINDS = new Set(['artifact', 'person', 'text', 'concept'])
+
+// リード文の下線マーカー。app/src/engine/passage.ts の UNDERLINE_MARKER と揃える
+// （プレーン Node ESM のスクリプトからは TS を直接 import できないため重複実装。
+// 変更する場合は両方揃え、app 側は __tests__/passage.test.ts で固定してある）。
+const UNDERLINE_MARKER = /\[\[([a-zA-Z0-9_-]+)\|([^\]]*)\]\]/g
 
 function loadJson(path) {
   return JSON.parse(readFileSync(path, 'utf-8'))
+}
+
+function extractUnderlineKeys(text) {
+  const keys = []
+  const re = new RegExp(UNDERLINE_MARKER)
+  let match
+  while ((match = re.exec(text))) {
+    keys.push(match[1])
+  }
+  return keys
+}
+
+// content/passages/<era>.json（リード文＋下線部→図版問題。M2 チケット「テーマセット」）の検証。
+//  各要素 {id, era, title, text, sources, underlines:[{key, workIds, note?}]}。
+//  - text 内の [[key|...]] マーカーと underlines[].key が過不足なく一致すること
+//  - workIds が実在する作品 id であり、かつその作品が画像を持つ（kind: artifact/省略 かつ
+//    manifest.json にエントリがあり画像実体が content/images/ にある）こと（満たさなければエラー。
+//    「生成できない下線」を公開させないため）
+//  - 下線は1passageにつき3〜5個、text は200〜400字程度（目安。文字数は警告のみ）
+function validatePassages({ worksById, hasImageAsset, eraIds, errors, warnings }) {
+  if (!existsSync(passagesDir)) {
+    // M2 コンテンツ投入前は無くてもよい（エラーにしない）
+    return
+  }
+  const files = readdirSync(passagesDir).filter((f) => f.endsWith('.json'))
+  const seenIds = new Map()
+
+  for (const file of files) {
+    let passages
+    try {
+      passages = loadJson(join(passagesDir, file))
+    } catch (e) {
+      errors.push(`passages/${file}: JSON として読めない（${e.message}）`)
+      continue
+    }
+    if (!Array.isArray(passages)) {
+      errors.push(`passages/${file}: 配列である必要がある`)
+      continue
+    }
+
+    for (const passage of passages) {
+      const label = `passages/${file} / ${passage.id ?? '(id無し)'}`
+
+      for (const field of ['id', 'era', 'title', 'text', 'sources', 'underlines']) {
+        if (!(field in passage)) {
+          errors.push(`${label}: 必須項目 "${field}" が無い`)
+        }
+      }
+      if (!passage.id || !passage.text || !Array.isArray(passage.underlines)) continue
+
+      if (seenIds.has(passage.id)) {
+        errors.push(`${label}: id "${passage.id}" が ${seenIds.get(passage.id)} と重複している`)
+      } else {
+        seenIds.set(passage.id, `passages/${file}`)
+      }
+
+      if (passage.era && !eraIds.has(passage.era)) {
+        errors.push(`${label}: era "${passage.era}" は content/eras.json に無い`)
+      }
+
+      // 文字数は目安（厳密チェックしない。警告のみ）
+      const len = passage.text.length
+      if (len < 150 || len > 500) {
+        warnings.push(`${label}: 本文が ${len} 字（目安 200〜400 字から外れている）`)
+      }
+
+      // 下線数の目安
+      if (passage.underlines.length < 3 || passage.underlines.length > 5) {
+        warnings.push(`${label}: 下線が ${passage.underlines.length} 個（目安 3〜5 個）`)
+      }
+
+      // text 内マーカーと underlines[].key の過不足一致
+      const textKeys = extractUnderlineKeys(passage.text)
+      const textKeySet = new Set(textKeys)
+      const underlineKeySet = new Set(passage.underlines.map((u) => u.key).filter(Boolean))
+
+      const dupInText = textKeys.filter((k, i) => textKeys.indexOf(k) !== i)
+      if (dupInText.length > 0) {
+        errors.push(`${label}: 本文中で下線キーが重複している: ${[...new Set(dupInText)].join(', ')}`)
+      }
+      for (const k of textKeySet) {
+        if (!underlineKeySet.has(k)) {
+          errors.push(`${label}: 本文のマーカー "[[${k}|...]]" に対応する underlines[].key が無い`)
+        }
+      }
+      for (const k of underlineKeySet) {
+        if (!textKeySet.has(k)) {
+          errors.push(`${label}: underlines[].key "${k}" が本文中のマーカーに無い`)
+        }
+      }
+
+      // underlines[].workIds の検証
+      for (const underline of passage.underlines) {
+        if (!underline.key) {
+          errors.push(`${label}: underlines に key の無い要素がある`)
+          continue
+        }
+        if (!Array.isArray(underline.workIds) || underline.workIds.length === 0) {
+          errors.push(`${label} / ${underline.key}: workIds が無いか空`)
+          continue
+        }
+        let hasGeneratable = false
+        for (const workId of underline.workIds) {
+          const work = worksById.get(workId)
+          if (!work) {
+            errors.push(`${label} / ${underline.key}: workIds "${workId}" は存在しない作品`)
+            continue
+          }
+          if (hasImageAsset(work)) hasGeneratable = true
+        }
+        if (!hasGeneratable) {
+          errors.push(
+            `${label} / ${underline.key}: workIds のどれも画像で出題できない（kind が artifact でない、manifest.json に無い、または画像実体が無い）`,
+          )
+        }
+      }
+    }
+  }
 }
 
 function main() {
@@ -75,6 +195,16 @@ function main() {
     process.exit(1)
   }
   const eraIds = new Set(eras.map((e) => e.id))
+
+  // weight（自由出題・時代ボスの重み）。省略時は1として扱う。数値でなければエラー、
+  // 無いだけなら警告（既存コンテンツを壊さないため）。
+  for (const era of eras) {
+    if (!('weight' in era)) {
+      warnings.push(`content/eras.json / ${era.id}: weight が無い（省略時は1として扱う）`)
+    } else if (typeof era.weight !== 'number' || era.weight <= 0) {
+      errors.push(`content/eras.json / ${era.id}: weight は正の数値である必要がある`)
+    }
+  }
 
   const workFiles = readdirSync(worksDir).filter((f) => f.endsWith('.json'))
   if (workFiles.length === 0) {
@@ -101,11 +231,27 @@ function main() {
 
       const label = `${file} / ${work.id ?? '(id無し)'}`
 
-      // 必須項目
-      for (const field of REQUIRED_FIELDS) {
+      // kind（省略時 artifact）。不正な値ならエラー、以降の判定にも使う
+      const kind = 'kind' in work ? work.kind : 'artifact'
+      if ('kind' in work && !VALID_KINDS.has(work.kind)) {
+        errors.push(`${label}: kind "${work.kind}" は artifact/person/text/concept のいずれかである必要がある`)
+      }
+      const isArtifact = kind === 'artifact' || !VALID_KINDS.has(kind)
+
+      // 必須項目（全 kind 共通 ＋ artifact のみ）
+      const requiredFields = isArtifact ? [...COMMON_REQUIRED_FIELDS, ...ARTIFACT_ONLY_REQUIRED_FIELDS] : COMMON_REQUIRED_FIELDS
+      for (const field of requiredFields) {
         if (!(field in work)) {
           errors.push(`${label}: 必須項目 "${field}" が無い`)
         }
+      }
+
+      // holder / subject（任意。型チェックのみ）
+      if ('holder' in work && work.holder !== null && typeof work.holder !== 'string') {
+        errors.push(`${label}: holder は string か null である必要がある`)
+      }
+      if ('subject' in work && work.subject !== null && typeof work.subject !== 'string') {
+        errors.push(`${label}: subject は string か null である必要がある`)
       }
 
       // id の重複
@@ -122,9 +268,15 @@ function main() {
         errors.push(`${label}: era "${work.era}" は content/eras.json に無い`)
       }
 
-      // category
-      if (work.category && !VALID_CATEGORIES.has(work.category)) {
-        errors.push(`${label}: category "${work.category}" は不正な値`)
+      // category: artifact は視覚カテゴリの列挙値に限定（同カテゴリ・近時代のディストラクタ選定に使うため）。
+      // person/text/concept は出題プールに入らずディストラクタ選定に使われないため、
+      // 自由記述の分類（literature/person 等）を許す（非空文字列であることだけ確認）。
+      if (isArtifact) {
+        if (work.category && !VALID_CATEGORIES.has(work.category)) {
+          errors.push(`${label}: category "${work.category}" は不正な値`)
+        }
+      } else if ('category' in work && typeof work.category !== 'string') {
+        errors.push(`${label}: category は string である必要がある`)
       }
 
       // status
@@ -152,7 +304,8 @@ function main() {
 
       // manifest.json との照合（画像のライセンス記録）。id で引く
       // （works 側の image.file は拡張子が違うことがあるため file 名では引かない）。
-      if (work.id) {
+      // kind が person/text/concept の作品は画像を持たないため対象外。
+      if (work.id && isArtifact) {
         const entry = manifestById.get(work.id)
         if (work.status === 'reviewed') {
           if (!entry) {
@@ -186,6 +339,20 @@ function main() {
       }
     }
   }
+
+  // 作品ごとに「出題プールにある画像付き作品」かどうか（passages の workIds 検証に使う）
+  const worksById = new Map(allWorks.filter((w) => w.id).map((w) => [w.id, w]))
+  function hasImageAsset(work) {
+    if (!work || !work.id) return false
+    const kind = 'kind' in work ? work.kind : 'artifact'
+    const isArtifactKind = kind === 'artifact' || !VALID_KINDS.has(kind)
+    if (!isArtifactKind) return false
+    const entry = manifestById.get(work.id)
+    if (!entry || !entry.file) return false
+    return existsSync(join(imagesDir, entry.file))
+  }
+
+  validatePassages({ worksById, hasImageAsset, eraIds, errors, warnings })
 
   if (warnings.length > 0) {
     console.warn(`content の警告 ${warnings.length} 件:`)

@@ -1,7 +1,7 @@
 // content/ 以下（app/ の外、nihonshi-bunka/content/）を Vite の import.meta.glob で読み込む。
 // このファイル（app/src/content.ts）から見ると content/ は2階層上（app/src → app → nihonshi-bunka → content）。
 // vite.config.ts の server.fs.allow に '..' を追加してある。
-import type { Era, Work } from './types'
+import type { Era, Passage, Work } from './types'
 import { hasRealImage } from './utils/image'
 
 const eraModules = import.meta.glob('../../content/eras.json', {
@@ -14,9 +14,18 @@ const workModules = import.meta.glob('../../content/works/*.json', {
   import: 'default',
 }) as Record<string, Work[]>
 
+// content/passages/ はテーマセット（リード文＋下線部→図版問題）用。M2 チケットで新設。
+// ファイルが1つも無い環境（M2 コンテンツ投入前など）でも glob は空オブジェクトを返すため落ちない。
+const passageModules = import.meta.glob('../../content/passages/*.json', {
+  eager: true,
+  import: 'default',
+}) as Record<string, Passage[]>
+
 const rawEras: Era[] = Object.values(eraModules)[0] ?? []
 
 const rawWorks: Work[] = Object.values(workModules).flat()
+
+const rawPassages: Passage[] = Object.values(passageModules).flat()
 
 /**
  * status: reviewed のみ本番に含める仕様。ただし
@@ -34,11 +43,13 @@ export const works: Work[] = shouldIncludeDraft()
   : rawWorks.filter((w) => w.status === 'reviewed')
 
 /**
- * 出題に使える作品＝ライセンス記録済みの実画像がある作品だけ。
+ * 出題に使える作品＝ライセンス記録済みの実画像がある「artifact」作品だけ。
  * プレースホルダ SVG は作品名を描いているため出題に使うと答えが見える（reviewer 指摘 R1, 2026-09-03）。
- * 図鑑・成績は全作品（未収集として表示）、学習は playableWorks のみ。
+ * kind: person/text/concept（画像を持たない項目）は単独出題せず、リード文・誤文・Q9 の
+ * 素材としてのみ使う（M2 チケット「テーマセット・モード」。works には残す＝素材プールは worksByEra 等で全件を見る）。
+ * 図鑑・成績は全作品（未収集として表示）、学習・テーマセットの出題対象は playableWorks のみ。
  */
-export const playableWorks: Work[] = works.filter(hasRealImage)
+export const playableWorks: Work[] = works.filter((w) => hasRealImage(w) && (w.kind ?? 'artifact') === 'artifact')
 
 export const worksById: Record<string, Work> = Object.fromEntries(works.map((w) => [w.id, w]))
 
@@ -47,3 +58,15 @@ export const erasById: Record<string, Era> = Object.fromEntries(eras.map((e) => 
 export function worksByEra(eraId: string): Work[] {
   return works.filter((w) => w.era === eraId)
 }
+
+/**
+ * status: reviewed のみ本番に含める（work と同じ扱い）。dev/VITE_INCLUDE_DRAFT のときは
+ * passage 自体に status が無いため常に含める（M2 は passage に status を持たせていない。
+ * 素材となる作品側の status で事実上の検証を管理する）。
+ */
+export const passages: Passage[] = [...rawPassages].sort((a, b) => a.id.localeCompare(b.id))
+
+export const passagesByEra: Record<string, Passage[]> = passages.reduce<Record<string, Passage[]>>((acc, p) => {
+  ;(acc[p.era] ??= []).push(p)
+  return acc
+}, {})

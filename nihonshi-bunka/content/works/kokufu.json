@@ -1,0 +1,421 @@
+[
+  {
+    "id": "byodoin-amida-nyorai",
+    "artist": "定朝",
+    "patron": "藤原頼通",
+    "style": "寄木造（定朝様）",
+    "religion": "浄土教",
+    "periodLabel": "平安時代中期・国風文化（1053年）",
+    "eraNote": "遣唐使停止後、唐の文化を消化して日本の風土に合った優美な文化が生まれた国風文化の彫刻。末法思想の広がりを背景に浄土教が広まるなか、藤原頼通が建立した平等院鳳凰堂の本尊として、仏師定朝が完成させた阿弥陀如来像は、寄木造の技法を完成させた定朝様の代表作である。",
+    "holder": "平等院鳳凰堂",
+    "subject": null,
+    "facts": [
+      {
+        "slot": "artist",
+        "text": "定朝の作、1053年"
+      },
+      {
+        "slot": "patron",
+        "text": "藤原頼通が建立した平等院鳳凰堂の本尊である",
+        "shared": ["byodoin-hoo-do"]
+      },
+      {
+        "slot": "era",
+        "text": "国風文化の作品",
+        "shared": ["byodoin-hoo-do", "koyagire", "daigoji-gojunoto"]
+      },
+      {
+        "slot": "technique",
+        "text": "寄木造（定朝様）である"
+      },
+      {
+        "slot": "religion",
+        "text": "末法思想を背景とする浄土教の像である"
+      },
+      {
+        "slot": "location",
+        "text": "平等院鳳凰堂にある",
+        "shared": ["byodoin-hoo-do"]
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "一木造である",
+        "why": "寄木造（定朝様）。弘仁・貞観文化の一木造との技法・時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "運慶の作である",
+        "why": "定朝の作（1053年）。運慶は鎌倉時代の慶派の仏師で人物・時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "東大寺にある",
+        "why": "平等院鳳凰堂にある。所在ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "聖武天皇の発願による像である",
+        "why": "藤原頼通が建立した平等院の本尊。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "薬師如来像である",
+        "why": "阿弥陀如来像。尊格ずらし（浄土教の本尊は阿弥陀如来）",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "平等院鳳凰堂阿弥陀如来像",
+    "reading": "びょうどういんほうおうどうあみだにょらいぞう",
+    "era": "kokufu",
+    "category": "sculpture",
+    "location": "平等院（京都府宇治市）",
+    "author": "定朝",
+    "technique": "寄木造",
+    "keyPoints": [
+      "国風文化を代表する仏像",
+      "定朝の作、1053年",
+      "藤原頼通が建立した平等院鳳凰堂の本尊",
+      "寄木造（定朝様）の完成形"
+    ],
+    "explanation": "関白藤原頼通が父道長の別荘を寺に改めて建立した平等院鳳凰堂の本尊。仏師定朝の作で、一つの像を複数の木材で分担して彫り、組み合わせる寄木造の技法を完成させた。優美で穏やかな表情の「定朝様」は、以後の仏像彫刻の規範となった。末法の世に極楽往生を願う浄土教の広まりを背景とする。",
+    "examNote": "「定朝＝寄木造の完成」「平等院鳳凰堂＝藤原頼通建立」の組み合わせが最頻出。",
+    "confusables": [],
+    "image": {
+      "file": "byodoin-amida-nyorai.jpg",
+      "credit": "",
+      "license": "",
+      "sourceUrl": "",
+      "sourceName": ""
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）国風文化の項",
+      "平等院公式サイト"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "byodoin-hoo-do",
+    "artist": null,
+    "patron": "藤原頼通",
+    "style": "阿弥陀堂建築（国風文化）",
+    "religion": "浄土教",
+    "periodLabel": "平安時代中期・国風文化（1053年）",
+    "eraNote": "末法思想の広がりを背景に浄土教が広まった国風文化の建築。関白藤原頼通が宇治の別荘を寺に改めて建立した平等院の阿弥陀堂は、翼を広げた鳥の形に似た独特の姿から鳳凰堂と呼ばれ、極楽浄土をこの世に表現した国風文化建築の頂点とされる。",
+    "holder": "平等院",
+    "subject": null,
+    "facts": [
+      {
+        "slot": "patron",
+        "text": "藤原頼通が建立した",
+        "shared": ["byodoin-amida-nyorai"]
+      },
+      {
+        "slot": "era",
+        "text": "国風文化の作品",
+        "shared": ["byodoin-amida-nyorai", "koyagire", "daigoji-gojunoto"]
+      },
+      {
+        "slot": "style",
+        "text": "阿弥陀堂建築である"
+      },
+      {
+        "slot": "other",
+        "text": "左右対称の翼廊をもち鳥の形に似ることから鳳凰堂と呼ばれる"
+      },
+      {
+        "slot": "location",
+        "text": "京都府宇治市の平等院にある",
+        "shared": ["byodoin-amida-nyorai"]
+      },
+      {
+        "slot": "religion",
+        "text": "末法思想を背景とする浄土教の建築である"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "校倉造の建築である",
+        "why": "阿弥陀堂建築。正倉院正倉（校倉造）との様式・時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "空海が建立した",
+        "why": "藤原頼通が建立した。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "禅宗様の建築である",
+        "why": "国風文化の阿弥陀堂建築。禅宗様は鎌倉時代以降で様式・時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "醍醐寺にある",
+        "why": "平等院（京都府宇治市）にある。所在ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "法界寺阿弥陀堂の別称である",
+        "why": "平等院鳳凰堂と法界寺阿弥陀堂は別の建築。混同ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "平等院鳳凰堂",
+    "reading": "びょうどういんほうおうどう",
+    "era": "kokufu",
+    "category": "architecture",
+    "location": "平等院（京都府宇治市）",
+    "author": null,
+    "technique": "寝殿造風の阿弥陀堂建築",
+    "keyPoints": [
+      "国風文化を代表する阿弥陀堂建築",
+      "藤原頼通建立、1053年",
+      "左右対称の翼廊で鳥の形に似る",
+      "極楽浄土を現世に表現"
+    ],
+    "explanation": "関白藤原頼通が宇治の別荘を寺に改めて建立した平等院の阿弥陀堂。中堂の左右に翼廊、背後に尾廊を配した左右対称の構成が翼を広げた鳥に似ることから鳳凰堂と呼ばれる。末法の世に極楽往生を願う浄土教の広まりを背景に、極楽浄土をこの世に再現しようとした国風文化建築の代表作。",
+    "examNote": "「平等院鳳凰堂＝藤原頼通、末法思想・浄土教」を覚える。10円硬貨の図柄としても知られる。",
+    "confusables": [],
+    "image": {
+      "file": "byodoin-hoo-do.jpg",
+      "credit": "",
+      "license": "",
+      "sourceUrl": "",
+      "sourceName": ""
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）国風文化の項",
+      "平等院公式サイト"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "koyagire",
+    "artist": "伝・紀貫之",
+    "patron": null,
+    "style": "和様の書（かな書道）",
+    "religion": null,
+    "periodLabel": "平安時代中期・国風文化（11世紀）",
+    "eraNote": "遣唐使停止後、唐風の書に対して日本独自のかな文字を美しく書く和様の書道が発達した国風文化。『古今和歌集』の現存する最古級の写本である高野切は、優美な線と散らし書きの構成で和様書道の完成度を示す代表作である。",
+    "holder": "分割所蔵（原本は複数箇所に分蔵、原本の一部は土佐山内家宝物資料館などに伝わる）",
+    "subject": null,
+    "facts": [
+      {
+        "slot": "era",
+        "text": "国風文化の作品",
+        "shared": ["byodoin-amida-nyorai", "byodoin-hoo-do", "daigoji-gojunoto"]
+      },
+      {
+        "slot": "other",
+        "text": "『古今和歌集』の現存最古級の写本である"
+      },
+      {
+        "slot": "style",
+        "text": "和様のかな書道である"
+      },
+      {
+        "slot": "artist",
+        "text": "伝統的に紀貫之の筆と伝えられる（確証はない）"
+      },
+      {
+        "slot": "other",
+        "text": "複数の筆者・巻に分かれて伝わる"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "『源氏物語』の写本である",
+        "why": "『古今和歌集』の写本。書物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "唐風の漢詩文の書である",
+        "why": "和様のかな書道。弘仁・貞観文化の唐風の書（三筆）との様式・時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "小野道風の筆と確定している",
+        "why": "伝統的に紀貫之の筆と伝えられるが確証はない。人物ずらし・断定の誤り",
+        "verifiedFalse": true
+      },
+      {
+        "text": "鎌倉時代に書かれた",
+        "why": "平安時代中期（国風文化、11世紀）に書かれた。時代ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "高野切（古今和歌集）",
+    "reading": "こうやぎれ（こきんわかしゅう）",
+    "era": "kokufu",
+    "category": "calligraphy",
+    "location": "分蔵（原本の一部は土佐山内家宝物資料館ほか）",
+    "author": null,
+    "technique": "かな書道（散らし書き）",
+    "keyPoints": [
+      "国風文化を代表する和様の書",
+      "『古今和歌集』の現存最古級の写本",
+      "伝・紀貫之筆（確証なし）",
+      "散らし書きの優美な構成"
+    ],
+    "explanation": "最初の勅撰和歌集『古今和歌集』の現存する最古級の写本。優美な線で文字を大小に配置する「散らし書き」の技法が用いられ、和様のかな書道の完成度を示す。江戸時代に多くの断簡に分割され、高野山に伝わった巻があったことから「高野切」と呼ばれる。伝統的に紀貫之の筆と伝えられるが確証はない。",
+    "examNote": "「三跡（小野道風・藤原佐理・藤原行成）」の書とあわせて、国風文化の和様の書の代表例として扱われる。弘仁・貞観の「三筆」（唐風）と対比。",
+    "confusables": [],
+    "image": {
+      "file": "koyagire.jpg",
+      "credit": "",
+      "license": "",
+      "sourceUrl": "",
+      "sourceName": ""
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）国風文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "daigoji-gojunoto",
+    "artist": null,
+    "patron": "醍醐天皇（発願）、朱雀天皇（完成）",
+    "style": "国風文化建築（五重塔）",
+    "religion": "仏教（真言宗）",
+    "periodLabel": "平安時代中期・国風文化（951年）",
+    "eraNote": "国風文化の建築。醍醐天皇の菩提を弔うために発願され、朱雀天皇の代の951年に完成した醍醐寺の五重塔は、京都府内に現存する最古の木造建築とされ、応仁の乱による京都の荒廃を免れた数少ない古建築のひとつである。",
+    "holder": "醍醐寺",
+    "subject": null,
+    "facts": [
+      {
+        "slot": "era",
+        "text": "国風文化の作品",
+        "shared": ["byodoin-amida-nyorai", "byodoin-hoo-do", "koyagire"]
+      },
+      {
+        "slot": "other",
+        "text": "951年に完成した"
+      },
+      {
+        "slot": "other",
+        "text": "京都府内に現存する最古の木造建築とされる"
+      },
+      {
+        "slot": "location",
+        "text": "醍醐寺にある"
+      },
+      {
+        "slot": "other",
+        "text": "応仁の乱による焼失を免れた"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "薬師寺東塔と同じ白鳳建築である",
+        "why": "951年完成の国風文化建築。薬師寺東塔（白鳳建築）との時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "平等院にある",
+        "why": "醍醐寺にある。所在ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "三重塔である",
+        "why": "五重塔。層数ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "応仁の乱で焼失し江戸時代に再建された",
+        "why": "応仁の乱による焼失を免れ、創建当初の姿を伝える。史実ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "醍醐寺五重塔",
+    "reading": "だいごじごじゅうのとう",
+    "era": "kokufu",
+    "category": "architecture",
+    "location": "醍醐寺（京都）",
+    "author": null,
+    "technique": "木造五重塔",
+    "keyPoints": [
+      "国風文化の建築、951年完成",
+      "京都府内最古の木造建築とされる",
+      "醍醐天皇の菩提を弔うため発願",
+      "応仁の乱の焼失を免れた"
+    ],
+    "explanation": "醍醐天皇の菩提を弔うために発願され、朱雀天皇の代の951年に完成した醍醐寺の五重塔。京都府内に現存する最古の木造建築とされ、1467年からの応仁の乱で京都の多くの寺院が焼失するなかで焼失を免れた貴重な遺構である。",
+    "examNote": "「京都府内最古の木造建築＝醍醐寺五重塔」を覚える。応仁の乱を免れた古建築として問われることがある。",
+    "confusables": [],
+    "image": {
+      "file": "daigoji-gojunoto.jpg",
+      "credit": "",
+      "license": "",
+      "sourceUrl": "",
+      "sourceName": ""
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）国風文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "kokufu-bungaku",
+    "kind": "text",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "periodLabel": "平安時代中期・国風文化（10〜11世紀）",
+    "eraNote": "遣唐使停止後、かな文字の普及を背景に和歌・物語・随筆・日記など多様な国文学が発達した。紀貫之らが編んだ最初の勅撰和歌集『古今和歌集』、紫式部の『源氏物語』、清少納言の『枕草子』は、国風文化の文学を代表する作品として教科書で必ず扱われる。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      {
+        "slot": "other",
+        "text": "『古今和歌集』は紀貫之らが編んだ最初の勅撰和歌集である"
+      },
+      {
+        "slot": "other",
+        "text": "『源氏物語』は紫式部による長編物語である"
+      },
+      {
+        "slot": "other",
+        "text": "『枕草子』は清少納言による随筆である"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "『源氏物語』は清少納言の作である",
+        "why": "『源氏物語』の作者は紫式部。『枕草子』の作者・清少納言との人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "『古今和歌集』は『万葉集』の別名である",
+        "why": "『古今和歌集』は国風文化の最初の勅撰和歌集。『万葉集』は天平文化の和歌集で別の書物。時代・書物ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "国風文学（古今和歌集・源氏物語・枕草子）",
+    "reading": "こくふうぶんがく",
+    "era": "kokufu",
+    "category": "literature",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "『古今和歌集』＝紀貫之ら編、最初の勅撰和歌集",
+      "『源氏物語』＝紫式部",
+      "『枕草子』＝清少納言",
+      "かな文字の普及を背景とする国文学"
+    ],
+    "explanation": "国風文化を代表する文学作品群。紀貫之らが編んだ『古今和歌集』は最初の勅撰和歌集で、仮名序をもつ。紫式部の『源氏物語』は王朝物語文学の最高峰、清少納言の『枕草子』は随筆文学の代表とされ、ともに一条天皇の后に仕えた女性による作品として並び称される。",
+    "examNote": "単独出題より、国風文化のリード文・誤文（作者入替）の素材として使う（画像なし項目）。作者と作品の組合せが最頻出。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）国風文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  }
+]

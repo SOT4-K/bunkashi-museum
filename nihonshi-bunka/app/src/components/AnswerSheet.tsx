@@ -41,7 +41,9 @@ export function AnswerSheet({
   const isUnknown = selection.kind === 'unknown'
 
   const otherWorks =
-    question.type === 'q1' || question.type === 'q3' ? question.choiceWorks.filter((w) => w.id !== work.id) : []
+    question.type === 'q1' || question.type === 'q3' || question.type === 'q9'
+      ? question.choiceWorks.filter((w) => w.id !== work.id)
+      : []
   const otherEras =
     question.type === 'q2' ? (question.choiceEras ?? []).filter((e) => e.id !== work.era) : []
 
@@ -188,6 +190,34 @@ export function AnswerSheet({
             ))}
           </div>
           {correctEraDetailExcerpt && <p className={styles.explanation}>{correctEraDetailExcerpt}</p>}
+        </div>
+      )}
+
+      {question.type === 'q9' && question.conditionText && (
+        <p className={styles.examNote}>条件: {question.conditionText}</p>
+      )}
+
+      {question.type === 'q4' && question.reversed && (
+        <p className={styles.examNote}>この設問は「最も不適切なもの（誤っているもの）」を選ぶ形式。</p>
+      )}
+
+      {question.type === 'q10' && question.statementPair && (
+        <div>
+          <div className={styles.sectionLabel}>2つの記述</div>
+          <div className={styles.statementList}>
+            {(['A', 'B'] as const).map((label) => {
+              const sentence = label === 'A' ? question.statementPair!.sentenceA : question.statementPair!.sentenceB
+              return (
+                <div className={styles.statementItem} key={label}>
+                  <span className={sentence.actuallyTrue ? styles.statementCorrect : styles.statementWrong}>
+                    {label}: {sentence.actuallyTrue ? '○ 正しい' : '× 誤り'}
+                  </span>
+                  <span className={styles.statementText}>{sentence.text}</span>
+                  {!sentence.actuallyTrue && sentence.why && <div className={styles.statementWhy}>{sentence.why}</div>}
+                </div>
+              )
+            })}
+          </div>
         </div>
       )}
 

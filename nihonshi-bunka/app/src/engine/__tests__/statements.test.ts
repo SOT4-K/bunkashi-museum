@@ -178,3 +178,53 @@ describe('generateStatementQuestion', () => {
     }
   })
 })
+
+describe('generateStatementQuestion（reversed: 「最も不適切なもの」型）', () => {
+  it('facts が3件未満なら null（正文3件がそろわない）', () => {
+    const w = makeWork({
+      id: 'few-facts',
+      facts: [{ slot: 'other', text: '正文1' }],
+      falseStatements: [
+        { text: 'A', why: 'a', verifiedFalse: true },
+        { text: 'B', why: 'b', verifiedFalse: true },
+      ],
+    })
+    expect(generateStatementQuestion(w, [w], seededRandom(1), { reversed: true })).toBeNull()
+  })
+
+  it('誤文が1件も無ければ null', () => {
+    const w = makeWork({
+      id: 'no-false',
+      facts: [
+        { slot: 'other', text: '正文1' },
+        { slot: 'other', text: '正文2' },
+        { slot: 'other', text: '正文3' },
+      ],
+      falseStatements: [],
+    })
+    expect(generateStatementQuestion(w, [w], seededRandom(1), { reversed: true })).toBeNull()
+  })
+
+  it('correct が誤文（answer）、distractors が正文3件になる（10 seed で一貫）', () => {
+    const w = makeWork({
+      id: 'rev-ok',
+      facts: [
+        { slot: 'other', text: '正文1' },
+        { slot: 'other', text: '正文2' },
+        { slot: 'other', text: '正文3' },
+        { slot: 'other', text: '正文4' },
+      ],
+      falseStatements: [{ text: '誤文1', why: 'x', verifiedFalse: true }],
+    })
+    for (let seed = 0; seed < 10; seed++) {
+      const result = generateStatementQuestion(w, [w], seededRandom(seed), { reversed: true })
+      expect(result).not.toBeNull()
+      expect(result!.reversed).toBe(true)
+      expect(result!.correct.correct).toBe(false) // 答え（correctフィールド）は誤文
+      expect(result!.distractors).toHaveLength(3)
+      expect(result!.distractors.every((d) => d.correct)).toBe(true) // distractors は正文
+      const texts = [result!.correct.text, ...result!.distractors.map((d) => d.text)]
+      expect(new Set(texts).size).toBe(texts.length)
+    }
+  })
+})

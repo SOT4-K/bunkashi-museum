@@ -12,9 +12,13 @@ import { shuffle } from './distractors'
 import type { StatementOption, Work } from '../types'
 
 export interface StatementQuestionData {
+  /** 4択の「答え」となる選択肢。reversed のときは正しい文3件のほうが distractors 側になり、
+   *  correct には誤文（answer）が入る（フィールド名は「答えの選択肢」の意味で、文自体の真偽とは別）。 */
   correct: StatementOption
   /** 常に3件（揃わない場合は generateStatementQuestion が null を返す） */
   distractors: StatementOption[]
+  /** true のとき「最も不適切なもの（誤っているもの）」を選ばせる出題（correct=誤文1、distractors=正文3） */
+  reversed: boolean
 }
 
 /** slot 名から Work の対応フィールドへのマッピング。'other' や未知の slot は値の同一性を判定できない。 */
@@ -47,6 +51,19 @@ function pickCorrectFact(target: Work, rng: RandomFn): StatementOption | null {
   if (target.facts.length === 0) return null
   const fact = target.facts[Math.floor(rng() * target.facts.length)]
   return { text: fact.text, correct: true, why: null }
+}
+
+/** target.facts から重複しない正文を最大 count 件（シャッフル済み）。 */
+function pickDistinctCorrectFacts(target: Work, count: number, rng: RandomFn): StatementOption[] {
+  const seen = new Set<string>()
+  const out: StatementOption[] = []
+  for (const fact of shuffle(target.facts, rng)) {
+    if (seen.has(fact.text)) continue
+    seen.add(fact.text)
+    out.push({ text: fact.text, correct: true, why: null })
+    if (out.length >= count) break
+  }
+  return out
 }
 
 /**
@@ -85,11 +102,31 @@ function dedupeByText(options: StatementOption[], excludeTexts: Set<string>): St
   return out
 }
 
+/**
+ * @param opts.reversed true のとき「最も不適切なもの（誤っているもの）」を選ばせる出題を作る。
+ *   正文3件（target.facts から重複なく）＋誤文1件（answer）。正文が3件そろわない、または
+ *   誤文が1件も無ければ null。
+ */
 export function generateStatementQuestion(
   target: Work,
   pool: Work[],
   rng: RandomFn,
+  opts: { reversed?: boolean } = {},
 ): StatementQuestionData | null {
+  if (opts.reversed) {
+    const trueOptions = pickDistinctCorrectFacts(target, 3, rng)
+    if (trueOptions.length < 3) return null
+    const excludeTexts = new Set(trueOptions.map((t) => t.text))
+    const verified = dedupeByText(shuffle(verifiedFalseStatementCandidates(target), rng), excludeTexts)
+    let falseOption = verified[0]
+    if (!falseOption) {
+      const others = dedupeByText(shuffle(otherWorkFactCandidates(target, pool), rng), excludeTexts)
+      falseOption = others[0]
+    }
+    if (!falseOption) return null
+    return { correct: falseOption, distractors: trueOptions, reversed: true }
+  }
+
   const correct = pickCorrectFact(target, rng)
   if (!correct) return null
 
@@ -104,5 +141,5 @@ export function generateStatementQuestion(
   }
 
   if (chosen.length < 3) return null
-  return { correct, distractors: chosen.slice(0, 3) }
+  return { correct, distractors: chosen.slice(0, 3), reversed: false }
 }

@@ -4,7 +4,7 @@ import { previewSessionComposition } from '../engine/session'
 import { isItemMastered } from '../engine/srs'
 import { titleForLevel } from '../engine/progress'
 import { useStandalone } from '../hooks/useStandalone'
-import type { Era, ProgressState, Work } from '../types'
+import type { Era, Passage, ProgressState, Work } from '../types'
 
 const ADD_TO_HOME_DISMISSED_KEY = 'bunkashi.addToHomeDismissed'
 
@@ -37,6 +37,8 @@ export function HomeScreen({
   today,
   dailyNewRemaining,
   onStart,
+  themeSets = [],
+  onStartThemeSet,
 }: {
   works: Work[]
   eras: Era[]
@@ -44,6 +46,9 @@ export function HomeScreen({
   today: string
   dailyNewRemaining: number
   onStart: () => void
+  /** テーマセット（リード文＋下線部→図版問題）一覧。省略時はセクションを出さない（既存呼び出し元互換）。 */
+  themeSets?: Passage[]
+  onStartThemeSet?: (passage: Passage) => void
 }) {
   const standalone = useStandalone()
   const [bannerDismissed, setBannerDismissed] = useState(
@@ -108,6 +113,25 @@ export function HomeScreen({
           {bossReady
             ? `${currentEra.name}の時代ボスに挑戦できる`
             : `時代ボスまで発見率 ${Math.round(discoveryRatio * 100)}%（60%で解放）`}
+        </div>
+      )}
+
+      {themeSets.length > 0 && onStartThemeSet && (
+        <div className={styles.eraBlock}>
+          <div className={styles.eraLabel}>テーマセット（模試型）</div>
+          <div className={styles.themeSetList}>
+            {themeSets.map((p) => (
+              <button
+                type="button"
+                key={p.id}
+                className={styles.themeSetItem}
+                data-testid="theme-set-button"
+                onClick={() => onStartThemeSet(p)}
+              >
+                {p.title}
+              </button>
+            ))}
+          </div>
         </div>
       )}
 

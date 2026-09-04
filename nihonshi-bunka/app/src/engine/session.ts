@@ -13,7 +13,9 @@ import { buildChoices, pickEraDistractors, pickWorkDistractors, shuffle, type Ra
 import { generateComboQuestion } from './combos'
 import { generateEraItemQuestion } from './eraItems'
 import { generateStatementQuestion } from './statements'
+import { generateQ9Question } from './q9'
 import { dueTypes, isDue } from './srs'
+import { eraWeight, weightedSampleWithoutReplacement } from './weighted'
 import type { Era, ProgressState, Question, QuestionType, Work } from '../types'
 
 export const REVIEW_MAX = 7
@@ -28,12 +30,15 @@ const PROBE_RANDOM: RandomFn = () => 0
 /** DESIGN.md 10章5項の初期値。1セッション全体でこの比率に厳密従うわけではなく、
  *  復習でどの方向を優先するかの重みとして使う（新規出題は常に q1）。 */
 export const QUESTION_TYPE_WEIGHTS: Record<QuestionType, number> = {
-  q1: 0.25,
-  q2: 0.15,
-  q3: 0.15,
-  q4: 0.25,
-  q6: 0.1,
-  q8: 0.1,
+  q1: 0.2,
+  q2: 0.12,
+  q3: 0.12,
+  q4: 0.2,
+  q6: 0.08,
+  q8: 0.08,
+  q9: 0.2,
+  // q10（2文正誤）はテーマセット専用（engine/themeSet.ts）。自由出題の重みには含めない。
+  q10: 0,
 }
 
 export interface SessionPick {
@@ -52,14 +57,20 @@ export function canGenerateType(type: QuestionType, work: Work, pool: Work[], er
       return generateEraItemQuestion(work, eras, PROBE_RANDOM) !== null
     case 'q8':
       return generateComboQuestion(work, pool, PROBE_RANDOM) !== null
+    case 'q9':
+      return generateQ9Question(work, pool, eras, PROBE_RANDOM) !== null
+    case 'q10':
+      // テーマセット専用（engine/themeSet.ts）。自由出題では生成しない。
+      return false
     default:
       return true
   }
 }
 
 /** 新規出題（まだ一度も見せていない作品）で候補になりうる型。q3（作品名→画像）は
- *  名前をまだ知らないので出さない。q5/q7/⑨ は実装しない（DESIGN.md 10章）。 */
-const NEW_CANDIDATE_TYPES: QuestionType[] = ['q1', 'q2', 'q4', 'q6', 'q8']
+ *  名前をまだ知らないので出さない。q5/q7/⑨ は実装しない（DESIGN.md 10章）。
+ *  q10（2文正誤）はテーマセット専用のため含めない。 */
+const NEW_CANDIDATE_TYPES: QuestionType[] = ['q1', 'q2', 'q4', 'q6', 'q8', 'q9']
 
 /** types から QUESTION_TYPE_WEIGHTS に従って重み付きで1つ選ぶ。重みが無ければ一様分布にフォールバック。 */
 function weightedTypePick(types: QuestionType[], rng: RandomFn): QuestionType {
@@ -92,7 +103,7 @@ export function selectReviewCandidates(
     const item = progress.items[work.id]
     if (!item) continue // 未出題の作品は新規側で扱う
     const due: QuestionType[] = dueTypes(item, today)
-    for (const type of ['q4', 'q6', 'q8'] as QuestionType[]) {
+    for (const type of ['q4', 'q6', 'q8', 'q9'] as QuestionType[]) {
       const cell = item[type]
       if (cell) {
         if (isDue(cell, today)) due.push(type)
@@ -113,6 +124,8 @@ export function selectReviewCandidates(
  * 新規出題を q1 固定にしない。2026-09-04）。q3 は名前をまだ知らないため対象外。
  * work がその型を生成できないとき（facts 不足等）は候補から外し、生成できる型の中で選ぶ
  * （q1/q2 は常に生成できるため候補が空になることはない）。
+ * どの作品を選ぶかは eras.json の weight で重み付けする（decisions.md 2026-09-04
+ * 「範囲を縄文から化政までに拡張」: 原始は他の約半分の頻度）。
  */
 export function selectNewCandidates(
   works: Work[],
@@ -124,8 +137,7 @@ export function selectNewCandidates(
 ): SessionPick[] {
   const unseen = works.filter((w) => !progress.items[w.id])
   const limit = Math.max(0, Math.min(NEW_MAX_PER_SESSION, sessionRemaining, dailyNewRemaining))
-  return shuffle(unseen, rng)
-    .slice(0, limit)
+  return weightedSampleWithoutReplacement(unseen, (w) => eraWeight(w.era, eras), limit, rng)
     .map((work) => {
       const candidates = NEW_CANDIDATE_TYPES.filter((t) => canGenerateType(t, work, works, eras))
       return { work, type: weightedTypePick(candidates, rng) }
@@ -217,6 +229,18 @@ export function buildQuestion(
     return { type, work, choiceWorks: [], choiceCombos: items, correctIndex, isReview }
   }
 
+  if (type === 'q9') {
+    const data = generateQ9Question(work, pool, eras, rng)
+    if (!data) return null
+    const { items, correctIndex } = buildChoices(data.correctWork, data.distractorWorks, rng)
+    return { type, work, choiceWorks: items, correctIndex, isReview, conditionText: data.conditionText, reversed: data.reversed }
+  }
+
+  if (type === 'q10') {
+    // テーマセット専用（engine/themeSet.ts が直接組み立てる）。自由出題からは呼ばれない想定。
+    return null
+  }
+
   const distractors = pickWorkDistractors(work, pool, eraOrderIndex, 3, rng)
   const { items, correctIndex } = buildChoices(work, distractors, rng)
   return { type, work, choiceWorks: items, correctIndex, isReview }
@@ -287,7 +311,7 @@ export function requeueType(
   eras: Era[],
   rng: RandomFn = defaultRandom,
 ): QuestionType {
-  const allTypes: QuestionType[] = ['q1', 'q2', 'q3', 'q4', 'q6', 'q8']
+  const allTypes: QuestionType[] = ['q1', 'q2', 'q3', 'q4', 'q6', 'q8', 'q9']
   const candidates = allTypes.filter((t) => t !== originalType && canGenerateType(t, work, pool, eras))
   return weightedTypePick(candidates, rng)
 }

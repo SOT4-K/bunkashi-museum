@@ -1,0 +1,620 @@
+[
+  {
+    "id": "yakushi-sanzon-yakushiji",
+    "artist": null,
+    "patron": "天武天皇",
+    "style": "金銅仏（清新・グプタ様式の影響）",
+    "religion": "仏教（法相宗）",
+    "periodLabel": "飛鳥時代後期・白鳳文化（7世紀後半〜8世紀初め）",
+    "eraNote": "大化改新から天武・持統天皇の頃にかけて、律令国家の形成と並行して栄えた白鳳文化の彫刻。唐初期の様式に加えインドのグプタ様式の影響も受け、若々しく清新な写実表現が特徴で、天武天皇発願の薬師寺金堂に安置される薬師三尊像はその代表作である。",
+    "holder": "薬師寺金堂",
+    "subject": null,
+    "facts": [
+      {
+        "slot": "patron",
+        "text": "天武天皇の発願で建立された薬師寺の像"
+      },
+      {
+        "slot": "era",
+        "text": "白鳳文化の作品",
+        "shared": ["yamadadera-butsuzu", "takamatsuzuka-heki", "yakushiji-toto"]
+      },
+      {
+        "slot": "period",
+        "text": "7世紀後半〜8世紀初めの作",
+        "shared": ["yamadadera-butsuzu", "takamatsuzuka-heki"]
+      },
+      {
+        "slot": "technique",
+        "text": "銅造（金銅仏）である",
+        "shared": ["yamadadera-butsuzu"]
+      },
+      {
+        "slot": "style",
+        "text": "グプタ様式の影響を受けた若々しい写実表現である"
+      },
+      {
+        "slot": "location",
+        "text": "薬師寺金堂にある",
+        "shared": ["yakushiji-toto"]
+      },
+      {
+        "slot": "other",
+        "text": "中尊の薬師如来と日光・月光の両菩薩からなる三尊像である"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "聖武天皇の発願による像である",
+        "why": "天武天皇発願の薬師寺。東大寺大仏（聖武天皇発願）との人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "乾漆像である",
+        "why": "銅造（金銅仏）。天平文化の乾漆像との技法・時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "北魏様式の仏像である",
+        "why": "グプタ様式の影響を受けた清新な白鳳彫刻。飛鳥文化の北魏様式との様式・時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "法隆寺金堂にある",
+        "why": "薬師寺金堂。所在ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "天平文化の作品である",
+        "why": "白鳳文化の作品。時代ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "薬師寺金堂薬師三尊像",
+    "reading": "やくしじこんどうやくしさんぞんぞう",
+    "era": "hakuho",
+    "category": "sculpture",
+    "location": "薬師寺（奈良）",
+    "author": null,
+    "technique": "銅造（金銅仏）",
+    "keyPoints": [
+      "白鳳文化を代表する仏像",
+      "天武天皇発願の薬師寺金堂",
+      "グプタ様式の影響を受けた清新な写実表現",
+      "薬師如来・日光菩薩・月光菩薩の三尊"
+    ],
+    "explanation": "天武天皇が皇后（後の持統天皇）の病気平癒を祈って発願した薬師寺の金堂に安置される三尊像。中尊の薬師如来を中心に日光・月光の両菩薩が脇に立つ。唐初期の様式に加えインドのグプタ様式の影響も受け、若々しく力強い肉体表現をもつ白鳳彫刻の頂点とされる。",
+    "examNote": "「白鳳文化＝天武・持統朝、清新でグプタ様式の影響」「天平文化＝聖武天皇、乾漆・塑像」の時代対比が頻出。",
+    "confusables": [
+      {
+        "id": "yamadadera-butsuzu",
+        "howToTell": "薬師三尊像は現存する三尊完備の金銅仏。興福寺仏頭は火災で頭部のみ残る旧山田寺本尊。"
+      }
+    ],
+    "image": {
+      "file": "yakushi-sanzon-yakushiji.jpg",
+      "credit": "",
+      "license": "",
+      "sourceUrl": "",
+      "sourceName": ""
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）白鳳文化の項",
+      "薬師寺公式サイト"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "yamadadera-butsuzu",
+    "artist": null,
+    "patron": "蘇我倉山田石川麻呂",
+    "style": "金銅仏（清新な白鳳様式）",
+    "religion": "仏教",
+    "periodLabel": "白鳳文化（685年）",
+    "eraNote": "大化改新にかかわった蘇我倉山田石川麻呂が建立した山田寺の講堂本尊として685年に完成した銅造仏頭。もとの像は鎌倉時代に興福寺の僧兵に奪われ東金堂本尊となったが、後の火災で頭部のみが残り、現在は興福寺国宝館に伝わる白鳳彫刻の代表作である。",
+    "holder": "興福寺国宝館",
+    "subject": null,
+    "facts": [
+      {
+        "slot": "patron",
+        "text": "蘇我倉山田石川麻呂が建立した山田寺の本尊であった"
+      },
+      {
+        "slot": "era",
+        "text": "白鳳文化の作品",
+        "shared": ["yakushi-sanzon-yakushiji", "takamatsuzuka-heki", "yakushiji-toto"]
+      },
+      {
+        "slot": "period",
+        "text": "685年の完成が知られる",
+        "shared": ["yakushi-sanzon-yakushiji"]
+      },
+      {
+        "slot": "technique",
+        "text": "銅造（金銅仏）である",
+        "shared": ["yakushi-sanzon-yakushiji"]
+      },
+      {
+        "slot": "other",
+        "text": "頭部のみが現存する（火災で焼損）"
+      },
+      {
+        "slot": "location",
+        "text": "興福寺国宝館にある（もとは山田寺の本尊）"
+      },
+      {
+        "slot": "other",
+        "text": "鎌倉時代に興福寺の僧兵が奪い東金堂本尊とした"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "全身が完全な形で現存する",
+        "why": "火災で頭部のみが残る。像容ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "乾漆像である",
+        "why": "銅造（金銅仏）。天平文化の乾漆像との技法・時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "聖武天皇の発願による",
+        "why": "蘇我倉山田石川麻呂が建立した山田寺の本尊。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "薬師寺にある",
+        "why": "興福寺国宝館にある（もとは山田寺）。所在ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "飛鳥文化の作品である",
+        "why": "685年完成の白鳳文化の作品。時代ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "興福寺仏頭（旧山田寺講堂本尊）",
+    "reading": "こうふくじぶっとう（きゅうやまだでらこうどうほんぞん）",
+    "era": "hakuho",
+    "category": "sculpture",
+    "location": "興福寺国宝館（奈良、もとは山田寺）",
+    "author": null,
+    "technique": "銅造（金銅仏）",
+    "keyPoints": [
+      "白鳳文化（685年完成）",
+      "もとは山田寺講堂本尊（蘇我倉山田石川麻呂建立）",
+      "火災で頭部のみ現存",
+      "現在は興福寺国宝館に伝わる"
+    ],
+    "explanation": "蘇我倉山田石川麻呂が建立した山田寺の講堂本尊として685年に完成した銅造仏。鎌倉時代に興福寺の僧兵が奪って東金堂本尊としたが、1411年の火災で頭部のみを残して焼損し、現在は興福寺国宝館に「仏頭」として伝わる。若々しく清新な表情が白鳳彫刻の特色を伝える。",
+    "examNote": "「山田寺（建立）」と「興福寺（現在の所在）」の両方が問われる。頭部のみ現存という史実も頻出。",
+    "confusables": [
+      {
+        "id": "yakushi-sanzon-yakushiji",
+        "howToTell": "興福寺仏頭は頭部のみ現存。薬師三尊像は三尊とも完全な形で現存する。"
+      }
+    ],
+    "image": {
+      "file": "yamadadera-butsuzu.jpg",
+      "credit": "",
+      "license": "",
+      "sourceUrl": "",
+      "sourceName": ""
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）白鳳文化の項",
+      "興福寺公式サイト（国宝館）"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "takamatsuzuka-heki",
+    "artist": null,
+    "patron": null,
+    "style": "壁画（唐・高句麗の影響）",
+    "religion": null,
+    "periodLabel": "白鳳文化（7世紀末〜8世紀初め）",
+    "eraNote": "天武・持統朝の頃、律令国家の形成と並行して栄えた白鳳文化の絵画。奈良県明日香村の高松塚古墳は1972年に発見され、石室内に極彩色の壁画が描かれていたことで注目を集めた。唐や高句麗の影響を受けた人物群像・四神図は白鳳絵画の到達点を示す。",
+    "holder": "国（文化庁所管、現地保存）",
+    "subject": "西壁に描かれた女子群像（貴族女性の群れ）",
+    "facts": [
+      {
+        "slot": "era",
+        "text": "白鳳文化の作品",
+        "shared": ["yakushi-sanzon-yakushiji", "yamadadera-butsuzu", "yakushiji-toto"]
+      },
+      {
+        "slot": "location",
+        "text": "奈良県明日香村の高松塚古墳の石室内にある"
+      },
+      {
+        "slot": "other",
+        "text": "1972年に発見された"
+      },
+      {
+        "slot": "other",
+        "text": "女子群像・男子群像・四神図（青竜・白虎など）が描かれる"
+      },
+      {
+        "slot": "style",
+        "text": "唐・高句麗の影響を受けた極彩色の壁画である"
+      },
+      {
+        "slot": "other",
+        "text": "天文図はない（天文図があるのはキトラ古墳）"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "天文図が描かれている",
+        "why": "天文図があるのはキトラ古墳。高松塚古墳との内容ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "法隆寺金堂の壁画である",
+        "why": "高松塚古墳石室内の壁画。法隆寺金堂壁画（1949年焼損）との内容ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "江戸時代に発見された",
+        "why": "1972年（昭和47年）に発見された。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "装飾古墳の壁画で幾何学文様のみが描かれる",
+        "why": "人物群像・四神図が描かれる。九州の装飾古墳（幾何学文様中心）との内容ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "天平文化の作品である",
+        "why": "白鳳文化の作品（7世紀末〜8世紀初め）。時代ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "高松塚古墳壁画",
+    "reading": "たかまつづかこふんへきが",
+    "era": "hakuho",
+    "category": "painting",
+    "location": "奈良県明日香村",
+    "author": null,
+    "technique": "漆喰壁への彩色（極彩色壁画）",
+    "keyPoints": [
+      "白鳳文化",
+      "奈良県明日香村、1972年発見",
+      "女子群像・男子群像・四神図",
+      "唐・高句麗の影響を受けた極彩色壁画"
+    ],
+    "explanation": "1972年に発見された奈良県明日香村の古墳壁画。石室の壁に、色鮮やかな衣装をまとった女子群像・男子群像や、方位を守る四神（東の青竜、西の白虎など）が描かれる。唐や高句麗の絵画の影響を受けた構図・技法をもち、白鳳文化の絵画の到達点を示す遺品として注目された。",
+    "examNote": "「高松塚古墳＝女子群像・四神図（天文図なし）」「キトラ古墳＝天文図あり」の区別が頻出。",
+    "confusables": [
+      {
+        "id": "kitora-kofun-heki",
+        "howToTell": "高松塚古墳壁画は女子群像で知られ天文図はない。キトラ古墳壁画は精密な天文図をもつ。"
+      }
+    ],
+    "image": {
+      "file": "takamatsuzuka-heki.jpg",
+      "credit": "",
+      "license": "",
+      "sourceUrl": "",
+      "sourceName": ""
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）白鳳文化の項",
+      "文化庁「国宝高松塚古墳壁画」公式ページ"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "yakushiji-toto",
+    "artist": null,
+    "patron": "天武天皇",
+    "style": "白鳳建築（三重塔・裳階付き）",
+    "religion": "仏教（法相宗）",
+    "periodLabel": "白鳳文化（8世紀初め、平城京移転後の再建説あり）",
+    "eraNote": "天武天皇が発願し、天武・持統・文武の三代にわたって造営された薬師寺の伽藍のうち、東塔は各層に裳階（もこし）と呼ばれる小さな屋根を付けたため六重に見える三重塔で、白鳳建築として現存する唯一の遺構とされる。",
+    "holder": "薬師寺",
+    "subject": null,
+    "facts": [
+      {
+        "slot": "patron",
+        "text": "天武天皇発願の薬師寺の建築である",
+        "shared": ["yakushi-sanzon-yakushiji"]
+      },
+      {
+        "slot": "era",
+        "text": "白鳳文化の作品",
+        "shared": ["yakushi-sanzon-yakushiji", "yamadadera-butsuzu", "takamatsuzuka-heki"]
+      },
+      {
+        "slot": "style",
+        "text": "各層に裳階を付けた三重塔で六重に見える"
+      },
+      {
+        "slot": "other",
+        "text": "「凍れる音楽」と評される美しい建築である"
+      },
+      {
+        "slot": "location",
+        "text": "薬師寺にある",
+        "shared": ["yakushi-sanzon-yakushiji"]
+      },
+      {
+        "slot": "other",
+        "text": "西塔は昭和に再建されたもので東塔が古い遺構である"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "五重塔である",
+        "why": "三重塔（裳階により六重に見える）。層数ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "法隆寺にある",
+        "why": "薬師寺にある。所在ずらし（法隆寺五重塔は飛鳥建築）",
+        "verifiedFalse": true
+      },
+      {
+        "text": "校倉造の倉庫である",
+        "why": "三重塔（仏塔）。正倉院正倉（校倉造）との様式・用途ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "聖武天皇発願の建築である",
+        "why": "天武天皇発願の薬師寺。東大寺（聖武天皇発願）との人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "天平文化の建築である",
+        "why": "白鳳文化の建築。時代ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "薬師寺東塔",
+    "reading": "やくしじとうとう",
+    "era": "hakuho",
+    "category": "architecture",
+    "location": "薬師寺（奈良）",
+    "author": null,
+    "technique": "木造三重塔（各層に裳階を付す）",
+    "keyPoints": [
+      "白鳳文化を代表する建築",
+      "天武天皇発願の薬師寺",
+      "三重塔だが裳階により六重に見える",
+      "「凍れる音楽」と称される"
+    ],
+    "explanation": "薬師寺伽藍のうち、白鳳建築として現存する唯一の遺構とされる塔。三重塔だが各層に裳階（小さな屋根）を付けたため六重に見える独特の構成で、その律動的な美しさから「凍れる音楽」と評される。西塔は昭和に再建されたもので、東塔が創建当初に近い姿を伝える。",
+    "examNote": "「薬師寺東塔＝白鳳建築唯一の現存例、三重塔（裳階で六重に見える）」を覚える。法隆寺五重塔（飛鳥建築）と混同しない。",
+    "confusables": [],
+    "image": {
+      "file": "yakushiji-toto.jpg",
+      "credit": "",
+      "license": "",
+      "sourceUrl": "",
+      "sourceName": ""
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）白鳳文化の項",
+      "薬師寺公式サイト"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "horyuji-kondo-heki",
+    "artist": null,
+    "patron": null,
+    "style": "壁画（唐・インドの影響を受けた仏教絵画）",
+    "religion": "仏教",
+    "periodLabel": "白鳳文化（7世紀末）",
+    "eraNote": "天武・持統朝の頃に栄えた白鳳文化の絵画。法隆寺金堂の壁には、唐やインドのアジャンター壁画に通じる様式で阿弥陀浄土図などが描かれ、白鳳絵画の最高峰とされたが、1949年の火災で大部分が焼損したことでも知られる。",
+    "holder": "法隆寺金堂",
+    "subject": "阿弥陀浄土図（阿弥陀如来と諸尊）",
+    "facts": [
+      {
+        "slot": "era",
+        "text": "白鳳文化の作品",
+        "shared": ["yakushi-sanzon-yakushiji", "yamadadera-butsuzu", "takamatsuzuka-heki"]
+      },
+      {
+        "slot": "location",
+        "text": "法隆寺金堂の内壁にある"
+      },
+      {
+        "slot": "other",
+        "text": "1949年の火災で大部分が焼損した"
+      },
+      {
+        "slot": "other",
+        "text": "阿弥陀浄土図など四方の壁に如来像が描かれていた"
+      },
+      {
+        "slot": "style",
+        "text": "唐やインドのアジャンター壁画に通じる様式である"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "現在も焼損せず完全な状態で残る",
+        "why": "1949年の火災で大部分が焼損した。史実ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "高松塚古墳の壁画である",
+        "why": "法隆寺金堂の壁画。高松塚古墳壁画との所在・内容ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "鎌倉時代に焼損した",
+        "why": "1949年（昭和24年）に焼損した。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "正倉院に伝わる屏風絵である",
+        "why": "法隆寺金堂の壁に直接描かれた壁画。正倉院宝物（天平文化）との所在・時代ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "法隆寺金堂壁画",
+    "reading": "ほうりゅうじこんどうへきが",
+    "era": "hakuho",
+    "category": "painting",
+    "location": "法隆寺（奈良）",
+    "author": null,
+    "technique": "壁面への彩色（漆喰下地）",
+    "keyPoints": [
+      "白鳳文化",
+      "法隆寺金堂の内壁に描かれた仏教絵画",
+      "阿弥陀浄土図など",
+      "1949年の火災で大部分焼損"
+    ],
+    "explanation": "法隆寺金堂の内壁に描かれた仏教絵画群。唐やインドのアジャンター壁画に通じる濃密な彩色と量感のある表現で、白鳳絵画の最高峰とされた。1949年（昭和24年）の火災で大部分が焼損し、この火災が1950年の文化財保護法制定の契機となった。",
+    "examNote": "「1949年の火災で焼損」「文化財保護法制定のきっかけ」という史実がセットで問われる。要確認: このファイルの撮影年に関する情報源に矛盾があり（詳細はimages/manifest-A.json参照）、焼損前撮影という記載の一次確認はできていない。",
+    "confusables": [],
+    "image": {
+      "file": "horyuji-kondo-heki.jpg",
+      "credit": "",
+      "license": "",
+      "sourceUrl": "",
+      "sourceName": ""
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）白鳳文化の項"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "kitora-kofun-heki",
+    "kind": "concept",
+    "artist": null,
+    "patron": null,
+    "style": "壁画（唐・高句麗の影響）",
+    "religion": null,
+    "periodLabel": "白鳳文化（7世紀末〜8世紀初め）",
+    "eraNote": "高松塚古墳と同じく奈良県明日香村にある終末期古墳。1983年にファイバースコープ調査で石室内の壁画が確認され、精密な天文図をもつことで注目された。高松塚古墳とともに白鳳期の古墳壁画を代表する（画像は未取得。高松塚との混同を防ぐための比較素材）。",
+    "holder": "国（文化庁所管、現地保存）",
+    "subject": "四神図・十二支像・精密な天文図",
+    "facts": [
+      {
+        "slot": "location",
+        "text": "奈良県明日香村のキトラ古墳の石室内にある"
+      },
+      {
+        "slot": "other",
+        "text": "1983年に石室内の壁画が確認された"
+      },
+      {
+        "slot": "other",
+        "text": "天文図・四神図・十二支像が描かれる"
+      },
+      {
+        "slot": "era",
+        "text": "白鳳文化の作品",
+        "shared": ["yakushi-sanzon-yakushiji", "yamadadera-butsuzu", "takamatsuzuka-heki"]
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "女子群像で知られ、高松塚古墳と呼ばれる",
+        "why": "女子群像はキトラ古墳ではなく高松塚古墳の特徴。所在・内容ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "天文図はなく幾何学文様のみが描かれる",
+        "why": "精密な天文図があることで知られる。内容ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "キトラ古墳壁画",
+    "reading": "きとらこふんへきが",
+    "era": "hakuho",
+    "category": "painting",
+    "location": "奈良県明日香村",
+    "author": null,
+    "technique": "漆喰壁への彩色",
+    "keyPoints": [
+      "白鳳文化",
+      "奈良県明日香村、1983年に壁画確認",
+      "精密な天文図をもつ",
+      "高松塚古墳と混同されやすい"
+    ],
+    "explanation": "奈良県明日香村にある終末期古墳。1983年のファイバースコープ調査で石室内に四神図・十二支像・精密な天文図が描かれていることが確認された。同じ明日香村の高松塚古墳（女子群像で知られる）と並ぶ白鳳期の壁画古墳だが、天文図の有無が両者を区別する最大の手がかりとなる。",
+    "examNote": "「高松塚＝女子群像（天文図なし）」「キトラ＝天文図あり」の対比が最頻出（画像なし項目、比較素材）。",
+    "confusables": [
+      {
+        "id": "takamatsuzuka-heki",
+        "howToTell": "キトラ古墳壁画は精密な天文図をもつ。高松塚古墳壁画は女子群像で知られ天文図はない。"
+      }
+    ],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）白鳳文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "hakuho-kajin",
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "periodLabel": "白鳳文化（7世紀後半）",
+    "eraNote": "白鳳文化の文学では、律令国家の形成期にふさわしい力強い和歌が宮廷を中心に詠まれた。柿本人麻呂は持統・文武朝に活躍した宮廷歌人で、額田王は天智・天武朝に活躍した女性歌人として知られ、ともに『万葉集』にその歌が収められている。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      {
+        "slot": "other",
+        "text": "柿本人麻呂は持統・文武朝に活躍した宮廷歌人である"
+      },
+      {
+        "slot": "other",
+        "text": "額田王は天智・天武朝に活躍した女性歌人である"
+      },
+      {
+        "slot": "other",
+        "text": "歌は『万葉集』に収められている"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "柿本人麻呂は『古今和歌集』の代表歌人である",
+        "why": "柿本人麻呂は『万葉集』の代表歌人。『古今和歌集』は国風文化の紀貫之らによる勅撰集で時代・書物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "額田王は男性の歌人である",
+        "why": "額田王は女性の歌人。人物属性ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "柿本人麻呂・額田王",
+    "reading": "かきのもとのひとまろ・ぬかたのおおきみ",
+    "era": "hakuho",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "白鳳文化の宮廷歌人",
+      "柿本人麻呂（持統・文武朝）",
+      "額田王（天智・天武朝の女性歌人）",
+      "『万葉集』にその歌が収められる"
+    ],
+    "explanation": "白鳳文化を代表する歌人。柿本人麻呂は持統・文武朝に活躍し、雄大で技巧的な長歌・短歌で知られる宮廷歌人。額田王は天智・天武朝に活躍した女性歌人で、大海人皇子（天武天皇）との相聞歌などが有名。ともに奈良時代にまとめられた『万葉集』にその歌が収められている。",
+    "examNote": "単独出題より、白鳳文化のリード文・誤文の素材として使う（画像なし項目）。天平文化の『万葉集』編纂との時代の違いに注意。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）白鳳文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  }
+]

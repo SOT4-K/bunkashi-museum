@@ -1,0 +1,491 @@
+[
+  {
+    "id": "kuya-shonin-zo",
+    "artist": "康勝（運慶の四男）",
+    "patron": null,
+    "style": "肖像彫刻（写実的な鎌倉彫刻）",
+    "religion": "浄土教（空也は市聖と呼ばれた念仏聖）",
+    "holder": "六波羅蜜寺（京都市）",
+    "subject": null,
+    "periodLabel": "鎌倉時代（13世紀前半）",
+    "eraNote": "鎌倉時代、公家と武家という二つの中心をもった文化。彫刻では運慶・快慶ら慶派を中心に写実的な表現が発達し、高僧の肖像彫刻も数多く作られた。空也上人像は運慶の四男・康勝の作で、平安中期に口称念仏を広めた僧・空也の姿を写実的に表す。",
+    "facts": [
+      { "slot": "artist", "text": "康勝（運慶の四男）の作" },
+      { "slot": "era", "text": "鎌倉文化の彫刻" },
+      { "slot": "other", "text": "口から「南無阿弥陀仏」の6字を表す6体の小さな阿弥陀仏が出る" },
+      { "slot": "other", "text": "鹿角の杖・鉦・草鞋姿で歩きながら念仏を唱える姿" },
+      { "slot": "location", "text": "六波羅蜜寺にある" }
+    ],
+    "falseStatements": [
+      { "text": "運慶自身の作である", "why": "作者は運慶の四男・康勝。人物の入れ替え", "verifiedFalse": true },
+      { "text": "東大寺重源上人像である", "why": "重源上人像は東大寺の高僧肖像彫刻で別の作品。作品の入れ替え", "verifiedFalse": true },
+      { "text": "国風文化の作品である", "why": "鎌倉時代の作。時代の入れ替え", "verifiedFalse": true },
+      { "text": "乾漆像である", "why": "木造彩色の写実的肖像彫刻。技法の入れ替え", "verifiedFalse": true },
+      { "text": "浄土寺浄土堂に安置されている", "why": "浄土寺浄土堂の本尊は快慶作の阿弥陀三尊像。所蔵の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "空也上人像",
+    "reading": "くうやしょうにんぞう",
+    "era": "kamakura",
+    "category": "sculpture",
+    "location": "六波羅蜜寺（京都市）",
+    "author": "康勝",
+    "technique": "木造彩色、玉眼",
+    "keyPoints": [
+      "鎌倉文化の写実的肖像彫刻",
+      "作者は康勝（運慶の四男）",
+      "口から6体の阿弥陀仏が現れる",
+      "市聖・空也（念仏を広めた僧）の姿"
+    ],
+    "explanation": "口称念仏（「南無阿弥陀仏」と声に出して唱える念仏）を広めた平安中期の僧・空也の姿を、鎌倉時代に運慶の四男・康勝が写実的に彫刻した肖像彫刻。鹿角の杖をつき、胸に鉦を下げ、草鞋を履いて歩きながら念仏を唱える姿で、口からは「南無阿弥陀仏」の6字を表す6体の小さな阿弥陀仏が針金でつながれて飛び出す独特の表現が目印。写実を重んじる鎌倉彫刻らしく、痩せた体つきや衣のしわまで細かく表現されている。",
+    "examNote": "「作者＝康勝（運慶の四男）」と「口から6体の阿弥陀仏」の2点が最頻出。運慶本人の作と誤認させる選択肢が多い。",
+    "confusables": [],
+    "image": {
+      "file": "kuya-shonin-zo.jpg",
+      "credit": "ASUKAYEN『日本美術史（東洋美術）』1933年11月刊",
+      "license": "PD-Japan-oldphoto（1958年以前公表）",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kuya_Portrait.JPG",
+      "sourceName": "Wikimedia Commons"
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
+      "Wikimedia Commons（『日本美術史』1933年刊）"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "kamakura-daibutsu",
+    "artist": "不詳（鋳物師として丹治久友の名が伝わる）",
+    "patron": "不詳（民間の勧進によると考えられる）",
+    "style": "露座の大仏（銅造）",
+    "religion": "浄土教",
+    "holder": "高徳院（神奈川県鎌倉市）",
+    "subject": null,
+    "periodLabel": "鎌倉時代（13世紀半ば、建長4年＝1252年に鋳造開始と伝わる）",
+    "eraNote": "鎌倉時代、武家社会の成立とともに、公家文化に加えて武士や庶民に支持された素朴で力強い文化が生まれた。高徳院の阿弥陀如来像（鎌倉大仏）は建長4年（1252年）に鋳造が始まったと伝わる銅造の大仏で、東大寺の盧舎那仏（奈良の大仏）と並び称される。",
+    "facts": [
+      { "slot": "era", "text": "鎌倉文化の彫刻" },
+      { "slot": "other", "text": "露座（屋外に安置）の大仏である" },
+      { "slot": "other", "text": "尊格は阿弥陀如来" },
+      { "slot": "period", "text": "1252年に鋳造が始まったと伝わる" },
+      { "slot": "location", "text": "神奈川県鎌倉市の高徳院にある" }
+    ],
+    "falseStatements": [
+      { "text": "東大寺盧舎那仏像（奈良の大仏）である", "why": "奈良の大仏は東大寺の盧舎那仏で天平文化の作。尊格・所在・時代の入れ替え", "verifiedFalse": true },
+      { "text": "天平文化の作品である", "why": "鎌倉時代の作。時代の入れ替え", "verifiedFalse": true },
+      { "text": "大仏殿の中に安置されている", "why": "現在は露座で大仏殿を持たない。属性の反転", "verifiedFalse": true },
+      { "text": "東大寺にある", "why": "神奈川県鎌倉市の高徳院にある。所蔵の入れ替え", "verifiedFalse": true },
+      { "text": "尊格は釈迦如来である", "why": "尊格は阿弥陀如来。尊格の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "高徳院阿弥陀如来像（鎌倉大仏）",
+    "reading": "こうとくいん あみだにょらいぞう（かまくらだいぶつ）",
+    "era": "kamakura",
+    "category": "sculpture",
+    "location": "高徳院（神奈川県鎌倉市）",
+    "author": "不詳",
+    "technique": "銅造（鋳造）",
+    "keyPoints": [
+      "鎌倉文化の銅造大仏",
+      "尊格は阿弥陀如来",
+      "露座（大仏殿を持たない）",
+      "奈良の大仏（東大寺盧舎那仏）と混同されやすい"
+    ],
+    "explanation": "神奈川県鎌倉市の高徳院にある銅造の大仏で、尊格は阿弥陀如来。建長4年（1252年）に鋳造が始まったと伝わる。かつては大仏殿の中に安置されていたが、室町時代の災害で建物が失われたと伝えられ、以後は屋根のない露座のまま今日に至る。奈良の東大寺盧舎那仏（奈良の大仏）と並び「日本の大仏」として並び称されるが、尊格（阿弥陀如来／盧舎那仏）・時代（鎌倉／天平）・所在（鎌倉／奈良）がすべて異なる。",
+    "examNote": "「大仏＝奈良（東大寺・盧舎那仏・天平文化）」と「大仏＝鎌倉（高徳院・阿弥陀如来・鎌倉文化）」を混同させる選択肢が定番。露座である点も鎌倉大仏の特徴。",
+    "confusables": [],
+    "image": {
+      "file": "kamakura-daibutsu.jpg",
+      "credit": "Dandy1022 撮影, 2021年8月9日",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Great_Buddha_of_K%C5%8Dtoku-in_(Kamakura_Daibutsu).jpg",
+      "sourceName": "Wikimedia Commons"
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
+      "Wikimedia Commons"
+    ],
+    "examTags": ["frequent", "outdoor-fop-nonCommercialCaution"],
+    "status": "draft"
+  },
+  {
+    "id": "engakuji-shariden",
+    "artist": null,
+    "patron": null,
+    "style": "禅宗様建築",
+    "religion": "禅宗（臨済宗）",
+    "holder": "円覚寺（神奈川県鎌倉市）",
+    "subject": null,
+    "periodLabel": "鎌倉時代に伝わった禅宗様建築の代表（現存の建物自体は室町時代前期・15世紀前半の建立と推定）",
+    "eraNote": "鎌倉時代、宋・元との交流を通じて禅宗とともに新しい建築様式である禅宗様（唐様）が伝わった。円覚寺舎利殿はその代表とされる仏堂建築で、急勾配の屋根と密に組まれた組物を特徴とする。現存の建物はもと鎌倉尼五山の太平寺の仏殿で、室町時代前期にこの地へ移築されたと考えられている。",
+    "facts": [
+      { "slot": "style", "text": "禅宗様（唐様）建築の代表" },
+      { "slot": "location", "text": "円覚寺にある", "shared": ["sanjusangendo-hondo"] },
+      { "slot": "other", "text": "現在の建物はもと鎌倉尼五山の太平寺の仏殿で、室町時代前期にここへ移築された" },
+      { "slot": "other", "text": "柿葺（こけらぶき）の急勾配の屋根をもつ" }
+    ],
+    "falseStatements": [
+      { "text": "大仏様の建築である", "why": "大仏様の代表は東大寺南大門。円覚寺舎利殿は禅宗様。様式の入れ替え", "verifiedFalse": true },
+      { "text": "東大寺南大門である", "why": "別の建物。作品（建物）の入れ替え", "verifiedFalse": true },
+      { "text": "三十三間堂と同じ和様の建築である", "why": "三十三間堂は和様。円覚寺舎利殿は禅宗様。様式の入れ替え", "verifiedFalse": true },
+      { "text": "京都の建仁寺にある", "why": "神奈川県鎌倉市の円覚寺にある。所在の入れ替え", "verifiedFalse": true },
+      { "text": "鎌倉時代の建立当初のまま現存する", "why": "現在の建物は室町時代前期に太平寺から移築されたもの。時期の誤り", "verifiedFalse": true }
+    ],
+    "title": "円覚寺舎利殿",
+    "reading": "えんがくじ しゃりでん",
+    "era": "kamakura",
+    "category": "architecture",
+    "location": "円覚寺（神奈川県鎌倉市）",
+    "author": null,
+    "technique": "木造・禅宗様（柿葺）",
+    "keyPoints": [
+      "鎌倉時代に伝わった禅宗様建築の代表",
+      "現在の建物は室町時代前期に太平寺から移築",
+      "急勾配の柿葺屋根、密に組まれた組物（詰組）",
+      "大仏様（東大寺南大門）・和様（三十三間堂）と並ぶ鎌倉建築の3様式"
+    ],
+    "explanation": "禅宗とともに宋から伝わった建築様式である禅宗様（唐様）を代表する仏堂建築。急な勾配の柿葺屋根と、軒下に密に組まれた組物（詰組）、桟唐戸などの細部が特徴で、現在の建物はもと鎌倉尼五山の太平寺の仏殿を室町時代前期（15世紀前半頃）にこの地へ移築したものと考えられている。鎌倉建築は大仏様（東大寺南大門）・禅宗様（円覚寺舎利殿）・和様（三十三間堂）の3様式に整理して出題されることが多い。",
+    "examNote": "「禅宗様＝円覚寺舎利殿」「大仏様＝東大寺南大門」「和様＝三十三間堂」の組み合わせで問われる。現存の建物自体が室町時代の移築である点は資料集レベルの細部。",
+    "confusables": [
+      { "id": "sanjusangendo-hondo", "howToTell": "三十三間堂本堂は和様の長大な堂で軒が低く水平線が強調される。円覚寺舎利殿は禅宗様で屋根の勾配が急、細部の組物が密。" }
+    ],
+    "image": {
+      "file": "engakuji-shariden.jpg",
+      "credit": "Fg2 撮影, 2008年11月",
+      "license": "パブリックドメイン（投稿者が権利を放棄）",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Engakuji-Shariden-M9239.jpg",
+      "sourceName": "Wikimedia Commons"
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
+      "Wikimedia Commons"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "sanjusangendo-hondo",
+    "artist": null,
+    "patron": "平清盛（後白河法皇のために建立、当初）",
+    "style": "和様建築",
+    "religion": "仏教（千手観音信仰）",
+    "holder": "妙法院（京都市）",
+    "subject": null,
+    "periodLabel": "当初の建立は院政期（1164年）だが、現存する建物は鎌倉時代の再建（1266年）",
+    "eraNote": "鎌倉時代、東大寺再建にともなう大仏様や、禅とともに伝わった禅宗様に対し、伝統的な日本風の様式である和様も引き続き用いられた。三十三間堂（蓮華王院本堂）はその代表とされる建築で、南北約120mにおよぶ長大な仏堂に千手観音像が居並ぶ。当初は院政期の1164年に平清盛が建立したが焼失し、現存する建物は鎌倉時代の1266年に再建されたものである。",
+    "facts": [
+      { "slot": "style", "text": "和様の長大な建築（南北約120m）" },
+      { "slot": "era", "text": "現存の建物は鎌倉時代の再建（1266年）" },
+      { "slot": "other", "text": "当初は院政期の1164年に平清盛が後白河法皇のために建立" },
+      { "slot": "other", "text": "本尊の千手観音坐像（湛慶作）を中心に1000体の千手観音立像を安置" },
+      { "slot": "location", "text": "妙法院にある", "shared": ["engakuji-shariden"] }
+    ],
+    "falseStatements": [
+      { "text": "禅宗様の代表建築である", "why": "和様の代表建築。円覚寺舎利殿（禅宗様）との様式の入れ替え", "verifiedFalse": true },
+      { "text": "建物は院政期の建立当初のまま現存する", "why": "当初の建物は焼失し、現存は1266年の鎌倉再建。時期の誤り", "verifiedFalse": true },
+      { "text": "運慶が建立を発願した", "why": "発願は平清盛（後白河法皇のため）。人物の入れ替え", "verifiedFalse": true },
+      { "text": "高山寺の所蔵である", "why": "妙法院に属する。所蔵の入れ替え", "verifiedFalse": true },
+      { "text": "本尊は阿弥陀如来である", "why": "本尊は千手観音。尊格の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "三十三間堂（蓮華王院本堂）",
+    "reading": "さんじゅうさんげんどう（れんげおういんほんどう）",
+    "era": "kamakura",
+    "category": "architecture",
+    "location": "妙法院（京都市）",
+    "author": null,
+    "technique": "木造・和様",
+    "keyPoints": [
+      "和様建築の代表",
+      "当初建立は院政期（1164年、平清盛発願）",
+      "現存の建物は鎌倉時代の再建（1266年）",
+      "本尊・千手観音坐像を中心に千体の千手観音像を安置"
+    ],
+    "explanation": "南北約120mにおよぶ長大な仏堂で、鎌倉建築の3様式（大仏様・禅宗様・和様）のうち和様を代表する建築とされる。当初は院政期の1164年、平清盛が後白河法皇のために建立したが、まもなく焼失し、現存する建物は鎌倉時代の1266年に再建されたものである。堂内には本尊の千手観音坐像（湛慶作）を中心に、千体の千手観音立像が居並ぶ。",
+    "examNote": "「和様＝三十三間堂」。当初建立（院政期・平清盛）と現存の建物（鎌倉再建）の時期が異なる点が資料集レベルで問われることがある。",
+    "confusables": [
+      { "id": "engakuji-shariden", "howToTell": "三十三間堂は和様で軒が低く水平の連続。円覚寺舎利殿は禅宗様で屋根の勾配が急。" }
+    ],
+    "image": {
+      "file": "sanjusangendo-hondo.jpg",
+      "credit": "663highland 撮影, 2005年11月12日",
+      "license": "CC BY-SA 3.0 / GFDL",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sanjusangendo_temple01s1408.jpg",
+      "sourceName": "Wikimedia Commons"
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
+      "Wikimedia Commons"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "honen",
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "浄土宗",
+    "holder": null,
+    "subject": null,
+    "periodLabel": "平安時代末期〜鎌倉時代初期（12世紀後半）",
+    "eraNote": "鎌倉文化。法然・親鸞・一遍・日蓮・栄西・道元による鎌倉新仏教がおこり、庶民にも実践しやすい平易な教えが広まった。法然は専修念仏を説いて浄土宗を開いた。",
+    "facts": [
+      { "slot": "religion", "text": "浄土宗の開祖" },
+      { "slot": "other", "text": "専修念仏（ひたすら南無阿弥陀仏と称えることを説く）を説いた" },
+      { "slot": "other", "text": "著書は『選択本願念仏集』" }
+    ],
+    "falseStatements": [
+      { "text": "浄土真宗を開いた", "why": "浄土真宗の開祖は弟子の親鸞。宗派の入れ替え", "verifiedFalse": true },
+      { "text": "踊念仏を広めた", "why": "踊念仏は一遍（時宗）。人物の入れ替え", "verifiedFalse": true },
+      { "text": "南宋に渡り臨済宗を伝えた", "why": "臨済宗を伝えたのは栄西。宗派・人物の入れ替え", "verifiedFalse": true },
+      { "text": "題目（南無妙法蓮華経）を唱えることを説いた", "why": "題目を説いたのは日蓮（日蓮宗）。教義の入れ替え", "verifiedFalse": true },
+      { "text": "室町時代の僧である", "why": "法然は平安末〜鎌倉初期（12世紀後半）の僧。時代の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "法然",
+    "reading": "ほうねん",
+    "era": "kamakura",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "浄土宗の開祖",
+      "専修念仏（ひたすら念仏を称える）",
+      "著書『選択本願念仏集』",
+      "弟子に親鸞がいる"
+    ],
+    "explanation": "阿弥陀仏の本願を信じ、ひたすら「南無阿弥陀仏」と称える専修念仏によって誰もが救われると説いた僧で、浄土宗の開祖。著書『選択本願念仏集』で自らの教えをまとめた。旧仏教側からの弾圧を受け、一時流罪となった。弟子の親鸞はその教えをさらに徹底し、浄土真宗を開いた。",
+    "examNote": "「専修念仏＝法然＝浄土宗」。弟子・親鸞の「悪人正機＝浄土真宗」との違いを問う設問が多い。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "shinran",
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "浄土真宗",
+    "holder": null,
+    "subject": null,
+    "periodLabel": "鎌倉時代前期〜中期（12世紀末〜13世紀）",
+    "eraNote": "鎌倉文化。鎌倉新仏教のひとり親鸞は、師・法然の専修念仏をさらに徹底し、悪人正機を説いて浄土真宗を開いた。",
+    "facts": [
+      { "slot": "religion", "text": "浄土真宗の開祖" },
+      { "slot": "other", "text": "悪人正機を説いた" },
+      { "slot": "other", "text": "著書は『教行信証』" }
+    ],
+    "falseStatements": [
+      { "text": "浄土宗を開いた", "why": "浄土宗の開祖は師の法然。宗派の入れ替え", "verifiedFalse": true },
+      { "text": "踊念仏で布教した", "why": "踊念仏は一遍（時宗）。人物の入れ替え", "verifiedFalse": true },
+      { "text": "只管打坐を説いた", "why": "只管打坐は道元（曹洞宗）。教義の入れ替え", "verifiedFalse": true },
+      { "text": "法華経を根本経典とした", "why": "法華経を根本とするのは日蓮（日蓮宗）。教義の入れ替え", "verifiedFalse": true },
+      { "text": "室町時代に活躍した", "why": "親鸞は鎌倉時代前期〜中期の僧。時代の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "親鸞",
+    "reading": "しんらん",
+    "era": "kamakura",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "浄土真宗の開祖",
+      "悪人正機（悪人こそ阿弥陀仏に救われる）",
+      "著書『教行信証』",
+      "法然の弟子"
+    ],
+    "explanation": "法然の弟子で、師の専修念仏の教えをさらに徹底し、阿弥陀仏の力にすがる自覚を持つ悪人こそ救われるとする悪人正機を説いた。著書『教行信証』で教えをまとめ、その教団はのちに浄土真宗（一向宗）と呼ばれた。妻帯し肉食も行うなど、戒律にとらわれない姿勢も特徴とされる。",
+    "examNote": "「悪人正機＝親鸞＝浄土真宗」。師の法然（専修念仏・浄土宗）との違いが最頻出。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "ippen",
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "時宗",
+    "holder": null,
+    "subject": null,
+    "periodLabel": "鎌倉時代中期（13世紀）",
+    "eraNote": "鎌倉文化。鎌倉新仏教のひとり一遍は、踊念仏によって身分を問わずすべての人に念仏を広めようとし、時宗を開いた。",
+    "facts": [
+      { "slot": "religion", "text": "時宗の開祖" },
+      { "slot": "other", "text": "踊念仏によって念仏を広めた" },
+      { "slot": "other", "text": "諸国を遊行し、賦算（念仏の札を配る）を行った" }
+    ],
+    "falseStatements": [
+      { "text": "浄土真宗を開いた", "why": "浄土真宗の開祖は親鸞。宗派の入れ替え", "verifiedFalse": true },
+      { "text": "専修念仏を説き著書『選択本願念仏集』を著した", "why": "法然の事績。人物の入れ替え", "verifiedFalse": true },
+      { "text": "禅宗を伝えた", "why": "禅宗を伝えたのは栄西・道元。宗派の入れ替え", "verifiedFalse": true },
+      { "text": "延暦寺にとどまり天台宗を広めた", "why": "一遍は時宗を開いて独自に諸国を遊行した。事績の入れ替え", "verifiedFalse": true },
+      { "text": "南北朝時代の僧である", "why": "一遍は鎌倉時代中期（13世紀）の僧。時代の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "一遍",
+    "reading": "いっぺん",
+    "era": "kamakura",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "時宗の開祖",
+      "踊念仏で布教",
+      "諸国を遊行し賦算（念仏の札配り）を行った",
+      "一遍上人絵伝（一遍聖絵）にその生涯が描かれる"
+    ],
+    "explanation": "念仏を唱えながら踊る踊念仏によって、身分を問わずすべての人に念仏を広めようとした僧で、時宗の開祖。特定の寺院を持たず、諸国を巡り歩く遊行の生活を送り、念仏の札を配る賦算を行った。その生涯は死後に弟子がまとめた一遍上人絵伝（一遍聖絵）に描かれている。",
+    "examNote": "「踊念仏＝一遍＝時宗」。一遍上人絵伝（絵巻）とセットで問われることが多い。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "nichiren",
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "日蓮宗（法華宗）",
+    "holder": null,
+    "subject": null,
+    "periodLabel": "鎌倉時代中期（13世紀）",
+    "eraNote": "鎌倉文化。鎌倉新仏教のひとり日蓮は、法華経こそ唯一正しい経典であるとし、題目を唱えることを説いて日蓮宗を開いた。",
+    "facts": [
+      { "slot": "religion", "text": "日蓮宗の開祖" },
+      { "slot": "other", "text": "題目（南無妙法蓮華経）を唱えることを説いた" },
+      { "slot": "other", "text": "著書は『立正安国論』" }
+    ],
+    "falseStatements": [
+      { "text": "念仏を唱えることを説いた", "why": "念仏を説いたのは法然・親鸞・一遍。日蓮は題目（法華経）を重視。教義の入れ替え", "verifiedFalse": true },
+      { "text": "曹洞宗を開いた", "why": "曹洞宗の開祖は道元。宗派の入れ替え", "verifiedFalse": true },
+      { "text": "南宋に渡って禅を学んだ", "why": "南宋で禅を学んだのは栄西・道元。事績の入れ替え", "verifiedFalse": true },
+      { "text": "浄土宗を開いた", "why": "浄土宗の開祖は法然。宗派の入れ替え", "verifiedFalse": true },
+      { "text": "室町幕府によって佐渡へ流された", "why": "佐渡流罪は鎌倉幕府による処罰。主体の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "日蓮",
+    "reading": "にちれん",
+    "era": "kamakura",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "日蓮宗（法華宗）の開祖",
+      "題目（南無妙法蓮華経）を唱えることを説く",
+      "著書『立正安国論』で幕府に法華経への帰依を説いた",
+      "佐渡への流罪を経験"
+    ],
+    "explanation": "法華経こそが唯一正しい経典であるとし、「南無妙法蓮華経」という題目を唱えることで救われると説いた僧で、日蓮宗（法華宗）の開祖。著書『立正安国論』で幕府に法華経への帰依を説き、他宗を激しく攻撃したため迫害を受け、佐渡へ流罪となった。",
+    "examNote": "「題目＝日蓮＝日蓮宗」「立正安国論」がセットで問われる。念仏系の宗派（浄土宗・浄土真宗・時宗）との教義の違いに注意。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+    ],
+    "examTags": ["frequent"],
+    "status": "draft"
+  },
+  {
+    "id": "eisai",
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "臨済宗",
+    "holder": null,
+    "subject": null,
+    "periodLabel": "鎌倉時代初期（12世紀末〜13世紀初め）",
+    "eraNote": "鎌倉文化。宋・元との交流のなかで禅宗が伝わり、栄西は臨済宗を日本に伝えた。臨済宗は公案問答による修行を重んじ、幕府や公家の帰依を受けて発展した。",
+    "facts": [
+      { "slot": "religion", "text": "臨済宗の開祖（日本への伝来者）" },
+      { "slot": "other", "text": "宋（南宋）に2度渡り禅を学んだ" },
+      { "slot": "other", "text": "茶の効用を説いた『喫茶養生記』を著した" }
+    ],
+    "falseStatements": [
+      { "text": "曹洞宗を開いた", "why": "曹洞宗の開祖は道元。宗派の入れ替え", "verifiedFalse": true },
+      { "text": "只管打坐（座禅に徹すること）を説いた", "why": "只管打坐は道元の教え。教義の入れ替え", "verifiedFalse": true },
+      { "text": "踊念仏を広めた", "why": "踊念仏は一遍（時宗）。人物の入れ替え", "verifiedFalse": true },
+      { "text": "室町時代に日明貿易を開いた", "why": "栄西は鎌倉時代初期の僧。日明貿易は室町時代、足利義満による。時代・事績の入れ替え", "verifiedFalse": true },
+      { "text": "法華経を根本経典とした", "why": "法華経中心は日蓮。教義の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "栄西",
+    "reading": "えいさい（ようさい）",
+    "era": "kamakura",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "臨済宗を日本に伝えた僧",
+      "宋に2度渡って禅を学んだ",
+      "茶の効用を説く『喫茶養生記』の著者",
+      "公案問答による修行を重んじる臨済宗"
+    ],
+    "explanation": "南宋に2度渡って禅を学び、帰国後に臨済宗を広めた僧。公案（禅の問答）を用いる修行法を重んじる臨済宗は、幕府や公家の帰依を受けて発展し、のちに五山・十刹の制のもとで保護された。喫茶の習慣を伝えたことでも知られ、茶の効用を説く『喫茶養生記』を著した。",
+    "examNote": "「臨済宗＝栄西＝公案問答」。曹洞宗（道元・只管打坐）との違い、喫茶の伝来者である点が問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "dogen",
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "曹洞宗",
+    "holder": null,
+    "subject": null,
+    "periodLabel": "鎌倉時代前期（13世紀前半）",
+    "eraNote": "鎌倉文化。栄西につづき道元も宋に渡って禅を学び、帰国後に曹洞宗を開いた。臨済宗と違い権力から距離を置き、越前（福井）に永平寺を開いた。",
+    "facts": [
+      { "slot": "religion", "text": "曹洞宗の開祖" },
+      { "slot": "other", "text": "只管打坐（ひたすら座禅に徹すること）を説いた" },
+      { "slot": "other", "text": "著書は『正法眼蔵』。越前（福井）に永平寺を開いた" }
+    ],
+    "falseStatements": [
+      { "text": "臨済宗を伝えた", "why": "臨済宗の伝来は栄西。宗派の入れ替え", "verifiedFalse": true },
+      { "text": "公案問答を重視する禅を説いた", "why": "公案問答を重視するのは臨済宗（栄西）。道元の曹洞宗は只管打坐を重視。教義の入れ替え", "verifiedFalse": true },
+      { "text": "京都に本山を構えた", "why": "道元は権力から距離を置き、越前（福井）に永平寺を開いた。所在の入れ替え", "verifiedFalse": true },
+      { "text": "題目を唱えることを説いた", "why": "題目は日蓮（日蓮宗）の教え。教義の入れ替え", "verifiedFalse": true },
+      { "text": "室町時代の僧である", "why": "道元は鎌倉時代前期（13世紀前半）の僧。時代の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "道元",
+    "reading": "どうげん",
+    "era": "kamakura",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "曹洞宗の開祖",
+      "只管打坐（ひたすら座禅に徹する）",
+      "著書『正法眼蔵』",
+      "越前（福井）に永平寺を開いた"
+    ],
+    "explanation": "ひたすら座禅に徹すること（只管打坐）によって悟りに至ると説いた僧で、曹洞宗の開祖。臨済宗と違って権力や世俗から距離を置く姿勢を貫き、京都を離れて越前（福井県）に永平寺を開いた。著書『正法眼蔵』に禅の思想をまとめている。",
+    "examNote": "「曹洞宗＝道元＝只管打坐＝永平寺（福井）」。臨済宗（栄西・公案問答・京都や鎌倉の五山）との違いが最頻出。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  }
+]
