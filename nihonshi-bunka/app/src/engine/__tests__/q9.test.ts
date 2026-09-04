@@ -82,3 +82,72 @@ describe('generateQ9Question（逆パターン: 合わない1枚）', () => {
     expect(result).toBeNull()
   })
 })
+
+// 修正の仕様（M2-09〜11）: スロット優先順位を holder→artist→technique→era に変更。
+const multiSlotTarget = makeWork({ id: 'ms1', era: 'tenpyo', category: 'sculpture', holder: '興福寺', artist: '運慶' })
+const multiSlotPool: Work[] = [
+  multiSlotTarget,
+  makeWork({ id: 'ms2', era: 'hakuho', category: 'sculpture', holder: '東大寺', artist: '快慶' }),
+  makeWork({ id: 'ms3', era: 'asuka', category: 'sculpture', holder: '東寺', artist: '快慶' }),
+  makeWork({ id: 'ms4', era: 'konin-jogan', category: 'sculpture', holder: '唐招提寺', artist: '快慶' }),
+]
+
+describe('スロット優先順位（修正の仕様: holder→artist→technique→era）', () => {
+  it('holder と artist の両方で生成できる作品では holder を優先する', () => {
+    for (let seed = 0; seed < 5; seed++) {
+      const result = generateQ9Question(multiSlotTarget, multiSlotPool, testEras, seededRandom(seed))
+      expect(result?.slot).toBe('holder')
+    }
+  })
+
+  it('technique のみで判定できる作品では technique スロットが使われる（style より先）', () => {
+    const techTarget = makeWork({ id: 'te1', era: 'tenpyo', category: 'craft', technique: '乾漆' })
+    const techPool: Work[] = [
+      techTarget,
+      makeWork({ id: 'te2', era: 'hakuho', category: 'craft', technique: '塑像' }),
+      makeWork({ id: 'te3', era: 'asuka', category: 'craft', technique: '木造' }),
+      makeWork({ id: 'te4', era: 'konin-jogan', category: 'craft', technique: '金銅' }),
+    ]
+    const result = generateQ9Question(techTarget, techPool, testEras, seededRandom(1))
+    expect(result?.slot).toBe('technique')
+  })
+
+  it('technique が空文字（未設定）の作品では technique を飛ばして era にフォールバックする', () => {
+    // testFixtures.makeWork のデフォルト technique は '' なので、eraOnlyTarget は
+    // holder/artist/style/technique すべて「値なし」扱いになり era に落ちる。
+    const result = generateQ9Question(eraOnlyTarget, eraOnlyPool, testEras, seededRandom(1))
+    expect(result?.slot).toBe('era')
+  })
+})
+
+describe('avoidSlots / preferredSlot オプション（修正の仕様: ask.slot・era 1セット1問まで）', () => {
+  it('avoidSlots で指定したスロットは試さない（避けた結果 null になることもある）', () => {
+    const result = generateQ9Question(eraOnlyTarget, eraOnlyPool, testEras, seededRandom(1), { avoidSlots: ['era'] })
+    // eraOnlyPool は era でしか判定できない構成なので、era を避けると生成できない
+    expect(result).toBeNull()
+  })
+
+  it('avoidSlots で holder を避けると、holder より優先度の低い artist にフォールバックする', () => {
+    for (let seed = 0; seed < 5; seed++) {
+      const result = generateQ9Question(multiSlotTarget, multiSlotPool, testEras, seededRandom(seed), {
+        avoidSlots: ['holder'],
+      })
+      expect(result?.slot).toBe('artist')
+    }
+  })
+
+  it('preferredSlot を指定すると、通常の優先順位より先にそのスロットを試す（ask.slot の反映）', () => {
+    for (let seed = 0; seed < 5; seed++) {
+      const result = generateQ9Question(multiSlotTarget, multiSlotPool, testEras, seededRandom(seed), {
+        preferredSlot: 'artist',
+      })
+      expect(result?.slot).toBe('artist')
+    }
+  })
+
+  it('preferredSlot がその作品で使えない値なら、通常の優先順位にフォールバックする', () => {
+    // hokusai1 は style を持たないので、preferredSlot: style は使えず artist に落ちる
+    const result = generateQ9Question(hokusai1, artistPool, testEras, seededRandom(1), { preferredSlot: 'style' })
+    expect(result?.slot).toBe('artist')
+  })
+})
