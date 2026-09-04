@@ -40,8 +40,8 @@ jobs:
         env:
           # GitHub Pages はリポジトリ名のサブパスに配信されるため base を合わせる
           VITE_BASE: /${{ github.event.repository.name }}/
-          # M1 の間はサンプルが全部 draft のため、draft も本番ビルドに含める
-          VITE_INCLUDE_DRAFT: "1"
+          # M2（2026-09-04）で撤去: status: reviewed のみ本番に含める（decisions.md 2026-09-03）。
+          # reviewer の事実検証を通っていない draft を公開しない
         run: npm run build
 
       - uses: actions/upload-pages-artifact@v3
