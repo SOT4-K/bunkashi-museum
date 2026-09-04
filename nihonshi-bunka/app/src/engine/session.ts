@@ -174,6 +174,13 @@ export function interleaveByEra(picks: SessionPick[], rng: RandomFn = defaultRan
  * q4/q6/q8 はデータ不足で生成できないことがあり、その場合 null を返す
  * （呼び出し側は buildQuestionOrFallback を使うと自動で q1 にフォールバックする）。
  */
+export interface BuildQuestionOptions {
+  /** true のとき Q9 の era スロットを避ける（自由出題で era 条件を連続させないため。
+   *  修正の仕様 M2-09〜11。避けられなければ他の型にフォールバックする＝呼び出し側で
+   *  buildQuestionOrFallback を使えば q1 まで落ちる）。 */
+  avoidQ9EraSlot?: boolean
+}
+
 export function buildQuestion(
   work: Work,
   type: 'q1' | 'q2' | 'q3',
@@ -181,6 +188,7 @@ export function buildQuestion(
   eras: Era[],
   isReview?: boolean,
   rng?: RandomFn,
+  opts?: BuildQuestionOptions,
 ): Question
 export function buildQuestion(
   work: Work,
@@ -189,6 +197,7 @@ export function buildQuestion(
   eras: Era[],
   isReview?: boolean,
   rng?: RandomFn,
+  opts?: BuildQuestionOptions,
 ): Question | null
 export function buildQuestion(
   work: Work,
@@ -197,6 +206,7 @@ export function buildQuestion(
   eras: Era[],
   isReview = false,
   rng: RandomFn = defaultRandom,
+  opts: BuildQuestionOptions = {},
 ): Question | null {
   const eraOrderIndex = Object.fromEntries(eras.map((e) => [e.id, e.order]))
 
@@ -230,10 +240,19 @@ export function buildQuestion(
   }
 
   if (type === 'q9') {
-    const data = generateQ9Question(work, pool, eras, rng)
+    const data = generateQ9Question(work, pool, eras, rng, { avoidSlots: opts.avoidQ9EraSlot ? ['era'] : [] })
     if (!data) return null
     const { items, correctIndex } = buildChoices(data.correctWork, data.distractorWorks, rng)
-    return { type, work, choiceWorks: items, correctIndex, isReview, conditionText: data.conditionText, reversed: data.reversed }
+    return {
+      type,
+      work,
+      choiceWorks: items,
+      correctIndex,
+      isReview,
+      conditionText: data.conditionText,
+      reversed: data.reversed,
+      q9Slot: data.slot,
+    }
   }
 
   if (type === 'q10') {
@@ -254,8 +273,11 @@ export function buildQuestionOrFallback(
   eras: Era[],
   isReview = false,
   rng: RandomFn = defaultRandom,
+  opts: BuildQuestionOptions = {},
 ): Question {
-  return buildQuestion(work, type, pool, eras, isReview, rng) ?? buildQuestion(work, 'q1', pool, eras, isReview, rng)
+  return (
+    buildQuestion(work, type, pool, eras, isReview, rng, opts) ?? buildQuestion(work, 'q1', pool, eras, isReview, rng)
+  )
 }
 
 export interface SessionComposition {
@@ -281,6 +303,7 @@ export function previewSessionComposition(
 /**
  * セッション全体（最大10問）を組み立てる。
  * dailyNewRemaining は「今日あと何件の新規作品を出してよいか」（呼び出し側が progress.newToday から計算）。
+ * Q9 の era 条件は連続させない（修正の仕様 M2-09〜11。直前が era 条件の Q9 だったら次は避ける）。
  */
 export function buildSession(
   works: Work[],
@@ -295,7 +318,14 @@ export function buildSession(
   const fresh = selectNewCandidates(works, eras, progress, dailyNewRemaining, sessionRemaining, rng)
   const reviewIds = new Set(review.map((p) => p.work.id))
   const picks = interleaveByEra([...review, ...fresh], rng)
-  return picks.map(({ work, type }) => buildQuestionOrFallback(work, type, works, eras, reviewIds.has(work.id), rng))
+  const out: Question[] = []
+  let avoidQ9EraSlot = false
+  for (const { work, type } of picks) {
+    const question = buildQuestionOrFallback(work, type, works, eras, reviewIds.has(work.id), rng, { avoidQ9EraSlot })
+    avoidQ9EraSlot = question.type === 'q9' && question.q9Slot === 'era'
+    out.push(question)
+  }
+  return out
 }
 
 /**

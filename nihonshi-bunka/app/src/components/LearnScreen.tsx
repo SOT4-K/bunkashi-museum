@@ -92,7 +92,12 @@ export function LearnScreen({
     if (!correct && !current.isRetry) {
       // 誤答の同セッション内再出題は 1 作品 1 回まで（無限に伸びるセッションを防ぐ）
       const nextType = requeueType(current.type, current.work, works, eras)
-      const requeued = { ...buildQuestionOrFallback(current.work, nextType, works, eras, current.isReview), isRetry: true }
+      // Q9 の era 条件は連続させない（修正の仕様 M2-09〜11）。直前の設問が era 条件の Q9 だったら避ける。
+      const avoidQ9EraSlot = current.type === 'q9' && current.q9Slot === 'era'
+      const requeued = {
+        ...buildQuestionOrFallback(current.work, nextType, works, eras, current.isReview, undefined, { avoidQ9EraSlot }),
+        isRetry: true,
+      }
       setQueue((prev) => [...prev, requeued])
     }
 

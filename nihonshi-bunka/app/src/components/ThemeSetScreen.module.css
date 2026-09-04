@@ -37,3 +37,18 @@
   color: inherit;
   border-bottom: 2px solid var(--shu, #c8102e);
 }
+
+/* リード文を全文表示するフェーズ（模試のページのような見た目）。 */
+.readPanel {
+  border: 1px solid var(--border-quiet);
+  border-radius: var(--radius-image);
+  padding: 16px;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.underlinePrompt {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}

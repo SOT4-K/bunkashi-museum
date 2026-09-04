@@ -2,16 +2,44 @@
   {
     "id": "higashiyama-yoshimasa",
     "era": "higashiyama",
-    "title": "足利義政と東山文化",
-    "text": "応仁の乱（1467〜77年）で京都が荒廃するなか、8代将軍足利義政は東山に山荘を営み、禅の精神にもとづく簡素で幽玄・侘びを重んじる文化が生まれた。山荘の中心建物である[[a|慈照寺銀閣]]は金箔を用いない簡素な外観をもち、同じ境内の持仏堂[[b|東求堂]]の四畳半「同仁斎」は書院造の起源とされる。庭園では水を用いず石と砂で山水を表す枯山水が発達し、[[c|龍安寺方丈庭園]]はその代表とされる。絵画では雪舟が明に渡って学んだ水墨画を大成し、茶の湯では村田珠光が侘び茶を創始するなど、簡素と幽玄を重んじる生活文化が後世に受け継がれた。",
+    "title": "応仁の乱後の東山山荘と侘びの美",
+    "text": "応仁の乱（1467〜77年）で京都が荒廃するなか、8代将軍足利義政は京都の東山に山荘を営み、禅の精神にもとづく簡素で幽玄・侘びを重んじる文化が育った。これを[[a|東山文化]]という。のちに慈照寺となるこの山荘の中心建物は、金箔を張らない簡素な二層の楼閣で、初層に住宅風の意匠、上層に[[b|禅宗様]]を用いる。同じ境内の持仏堂に設けられた四畳半の座敷は、畳を敷きつめ、床の間・違い棚・明障子をそなえた[[c|書院造]]の起源とされ、のちの和風住宅の原型となった。庭園では、水を用いず白砂と石組だけで山水を象徴的に表す[[d|枯山水]]が発達し、京都の[[e|龍安寺]]にその代表例が伝わる。絵画では雪舟が明で学んだ水墨画を大成し、茶の湯では村田珠光が侘び茶を始めた。",
     "sources": [
       "高校教科書（山川『詳説日本史』）東山文化の項",
-      "work/nihonshi-bunka/content/eras.json（higashiyama）"
+      "work/nihonshi-bunka/content/eras.json（higashiyama の detail・items）",
+      "work/nihonshi-bunka/content/works/higashiyama.json（ginkaku / togudo-doujinsai / ryoanji-sekitei の facts・explanation）"
     ],
     "underlines": [
-      { "key": "a", "workIds": ["ginkaku"], "note": "金箔を用いない簡素な二層の楼閣建築" },
-      { "key": "b", "workIds": ["togudo-doujinsai"], "note": "四畳半「同仁斎」は書院造の起源とされる" },
-      { "key": "c", "workIds": ["ryoanji-sekitei"], "note": "白砂に15個の石を配した枯山水庭園の代表" }
+      {
+        "key": "a",
+        "workIds": ["ginkaku"],
+        "ask": { "slot": "era", "type": "q9" },
+        "note": "時代条件（1セットに1問まで）。「下線部aの文化を代表する建築はどれか」"
+      },
+      {
+        "key": "b",
+        "workIds": ["ginkaku"],
+        "ask": { "slot": "technique", "type": "q10" },
+        "note": "様式条件＋2文正誤。禅宗様は鎌倉区分の禅宗様建築（engakuji-shariden）とも重なるため画像を出す型に限る。「金箔を張らない簡素な外観／足利義満が建てた（誤）」等を問う想定"
+      },
+      {
+        "key": "c",
+        "workIds": ["togudo-doujinsai"],
+        "ask": { "slot": "technique", "type": "q4" },
+        "note": "様式条件＋関連記述。同区分の楼閣建築（ginkaku）の初層も書院造風のため、画像を出さない条件型（q9）には使わない"
+      },
+      {
+        "key": "d",
+        "workIds": ["ryoanji-sekitei"],
+        "ask": { "slot": "technique", "type": "q10" },
+        "note": "技法条件＋2文正誤。作庭者・年代は諸説あり確定していないので、年代を断定する文は出さない"
+      },
+      {
+        "key": "e",
+        "workIds": ["ryoanji-sekitei"],
+        "ask": { "slot": "holder", "type": "q9" },
+        "note": "所在条件。「下線部eの寺に伝わる庭園はどれか」。庭園の作品名は本文に出していない"
+      }
     ]
   }
 ]

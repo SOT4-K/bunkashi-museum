@@ -6,9 +6,9 @@
 //   共有する条件を探し、target はそれに当てはまらない（＝「合わない1枚」＝正解）。
 import type { RandomFn } from './distractors'
 import { shuffle } from './distractors'
-import type { Era, Work } from '../types'
+import type { Era, Q9Slot, Work } from '../types'
 
-export type Q9Slot = 'artist' | 'era' | 'holder' | 'style'
+export type { Q9Slot } from '../types'
 
 export interface Q9QuestionData {
   reversed: boolean
@@ -19,8 +19,16 @@ export interface Q9QuestionData {
   distractorWorks: Work[]
 }
 
-/** 試す順序。ticket の記載順（作者/時代文化/所蔵/様式）に合わせる。 */
-const SLOT_PRIORITY: Q9Slot[] = ['artist', 'era', 'holder', 'style']
+export interface Q9GenerateOptions {
+  reversed?: boolean
+  /** このスロットは試さない（例: 1セットに1問までの era をすでに使った）。修正の仕様（M2-09〜11）。 */
+  avoidSlots?: Q9Slot[]
+  /** この下線の ask.slot（あれば最優先で試す。失敗すれば通常の優先順位に落ちる）。 */
+  preferredSlot?: Q9Slot
+}
+
+/** 試す順序（修正の仕様 M2-09〜11: holder→artist→technique→era。era は最後＝1セット1問までにする）。 */
+const SLOT_PRIORITY: Q9Slot[] = ['holder', 'artist', 'technique', 'era']
 
 function slotValue(work: Work, slot: Q9Slot): string | null {
   switch (slot) {
@@ -32,6 +40,10 @@ function slotValue(work: Work, slot: Q9Slot): string | null {
       return work.holder ?? null
     case 'style':
       return work.style
+    case 'technique':
+      // technique は必須の string フィールドだが未設定は空文字（testFixtures.makeWork 参照）。
+      // 空文字は「値が無い」として扱う。
+      return work.technique || null
   }
 }
 
@@ -45,7 +57,19 @@ function slotLabel(slot: Q9Slot, value: string, eraName: string): string {
       return `${value}が所蔵する作品`
     case 'style':
       return `${value}の様式`
+    case 'technique':
+      return `製法が${value}`
   }
+}
+
+/** ask.slot / avoidSlots を反映した、実際に試すスロット順。preferredSlot があれば先頭に回す。 */
+function effectiveSlotOrder(opts: Pick<Q9GenerateOptions, 'avoidSlots' | 'preferredSlot'>): Q9Slot[] {
+  const avoid = new Set(opts.avoidSlots ?? [])
+  const base = SLOT_PRIORITY.filter((s) => !avoid.has(s))
+  if (opts.preferredSlot && !avoid.has(opts.preferredSlot) && base.includes(opts.preferredSlot)) {
+    return [opts.preferredSlot, ...base.filter((s) => s !== opts.preferredSlot)]
+  }
+  return base
 }
 
 function eraOrderIndexOf(eras: Era[]): Record<string, number> {
@@ -66,10 +90,16 @@ function nearbyCandidates(target: Work, pool: Work[], eraOrderIndex: Record<stri
     .map((x) => x.w)
 }
 
-function generateNormal(target: Work, pool: Work[], eras: Era[], rng: RandomFn): Q9QuestionData | null {
+function generateNormal(
+  target: Work,
+  pool: Work[],
+  eras: Era[],
+  rng: RandomFn,
+  opts: Pick<Q9GenerateOptions, 'avoidSlots' | 'preferredSlot'>,
+): Q9QuestionData | null {
   const eraOrderIndex = eraOrderIndexOf(eras)
   const near = nearbyCandidates(target, pool, eraOrderIndex)
-  for (const slot of SLOT_PRIORITY) {
+  for (const slot of effectiveSlotOrder(opts)) {
     const value = slotValue(target, slot)
     if (!value) continue
     const candidates = near.filter((w) => slotValue(w, slot) !== value)
@@ -88,10 +118,16 @@ function generateNormal(target: Work, pool: Work[], eras: Era[], rng: RandomFn):
   return null
 }
 
-function generateReversed(target: Work, pool: Work[], eras: Era[], rng: RandomFn): Q9QuestionData | null {
+function generateReversed(
+  target: Work,
+  pool: Work[],
+  eras: Era[],
+  rng: RandomFn,
+  opts: Pick<Q9GenerateOptions, 'avoidSlots' | 'preferredSlot'>,
+): Q9QuestionData | null {
   const eraOrderIndex = eraOrderIndexOf(eras)
   const near = nearbyCandidates(target, pool, eraOrderIndex)
-  for (const slot of SLOT_PRIORITY) {
+  for (const slot of effectiveSlotOrder(opts)) {
     const targetValue = slotValue(target, slot)
     const groups = new Map<string, Work[]>()
     for (const w of near) {
@@ -124,7 +160,7 @@ export function generateQ9Question(
   pool: Work[],
   eras: Era[],
   rng: RandomFn,
-  opts: { reversed?: boolean } = {},
+  opts: Q9GenerateOptions = {},
 ): Q9QuestionData | null {
-  return opts.reversed ? generateReversed(target, pool, eras, rng) : generateNormal(target, pool, eras, rng)
+  return opts.reversed ? generateReversed(target, pool, eras, rng, opts) : generateNormal(target, pool, eras, rng, opts)
 }

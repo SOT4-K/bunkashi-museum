@@ -26,24 +26,51 @@ function noopAnswer() {
   return { xpGained: 10, isNewDiscovery: false, isNewlyMastered: false }
 }
 
+/** 「問題へ」ボタンを押して読解フェーズから設問フェーズへ進める共通処理。 */
+function startQuiz() {
+  fireEvent.click(screen.getByTestId('start-quiz-button'))
+}
+
 describe('ThemeSetScreen', () => {
-  it('プールに無い workIds の下線はスキップされ、1問だけ出題される', () => {
+  it('開始直後はリード文全文表示（読解フェーズ）で、下線がすべて表示される', () => {
     render(
       <ThemeSetScreen passage={passage} pool={pool} eras={testEras} onAnswer={noopAnswer} onFinish={() => {}} />,
     )
+    expect(screen.getByTestId('passage-read-panel')).toBeInTheDocument()
+    expect(screen.getByText('下線部A')).toBeInTheDocument()
+    expect(screen.getByText('存在しない作品への言及')).toBeInTheDocument()
+    expect(screen.queryByTestId('choice-button')).not.toBeInTheDocument()
+  })
+
+  it('「問題へ」を押すと設問フェーズになり、1問だけ出題される（workIds がプールに無い下線はスキップ）', () => {
+    render(
+      <ThemeSetScreen passage={passage} pool={pool} eras={testEras} onAnswer={noopAnswer} onFinish={() => {}} />,
+    )
+    startQuiz()
     expect(screen.getByText('1/1')).toBeInTheDocument()
   })
 
-  it('リード文タイトルが表示され、「リード文を見返す」で本文パネルが開閉する', () => {
+  it('各問の冒頭に「下線部○に関して」と下線部の文言が表示される', () => {
     render(
       <ThemeSetScreen passage={passage} pool={pool} eras={testEras} onAnswer={noopAnswer} onFinish={() => {}} />,
     )
+    startQuiz()
+    const prompt = screen.getByTestId('underline-prompt')
+    expect(prompt.textContent).toContain('下線部a')
+    expect(prompt.textContent).toContain('下線部A')
+  })
+
+  it('設問フェーズでも「リード文を見返す」で本文パネルが開閉する', () => {
+    render(
+      <ThemeSetScreen passage={passage} pool={pool} eras={testEras} onAnswer={noopAnswer} onFinish={() => {}} />,
+    )
+    startQuiz()
     expect(screen.getByText('テスト用リード文タイトル')).toBeInTheDocument()
     expect(screen.queryByTestId('context-panel')).not.toBeInTheDocument()
 
     fireEvent.click(screen.getByTestId('context-toggle'))
     expect(screen.getByTestId('context-panel')).toBeInTheDocument()
-    expect(screen.getByText('下線部A')).toBeInTheDocument()
+    expect(within(screen.getByTestId('context-panel')).getByText('下線部A')).toBeInTheDocument()
 
     fireEvent.click(screen.getByTestId('context-toggle'))
     expect(screen.queryByTestId('context-panel')).not.toBeInTheDocument()
@@ -62,6 +89,7 @@ describe('ThemeSetScreen', () => {
       render(
         <ThemeSetScreen passage={passage} pool={pool} eras={testEras} onAnswer={noopAnswer} onFinish={() => {}} />,
       )
+      startQuiz()
       const choices = screen.getAllByTestId('choice-button')
       fireEvent.click(choices[0])
       act(() => {
@@ -78,11 +106,12 @@ describe('ThemeSetScreen', () => {
     })
   })
 
-  it('生成できる図版問題が無いリード文は「作れなかった」メッセージを出す', () => {
+  it('生成できる図版問題が無いリード文は読解フェーズを飛ばして「作れなかった」メッセージを出す', () => {
     const emptyPassage: Passage = { ...passage, underlines: [{ key: 'z', workIds: ['nowhere'] }] }
     render(
       <ThemeSetScreen passage={emptyPassage} pool={pool} eras={testEras} onAnswer={noopAnswer} onFinish={() => {}} />,
     )
     expect(screen.getByText(/からは今のところ図版問題を作れなかった/)).toBeInTheDocument()
+    expect(screen.queryByTestId('passage-read-panel')).not.toBeInTheDocument()
   })
 })

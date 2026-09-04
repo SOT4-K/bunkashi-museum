@@ -124,12 +124,24 @@ export interface Era {
 
 // --- リード文＋下線部（テーマセット。decisions.md 2026-09-04「模試型」） ---
 
+/** 下線部から出す設問の希望（mock-exam-analysis.md 7章「修正の仕様」）。省略時は engine が
+ *  優先順位（Q9→Q10→Q8→Q4→Q1）で決める。指定した type/slot で生成できなければ次善に落ちる
+ *  （必ず値を返す。エラーにしない）。 */
+export interface PassageUnderlineAsk {
+  /** Q9 の条件スロット（engine/q9.ts の Q9Slot のうち ask で指定できるもの＋subject）。 */
+  slot: 'holder' | 'artist' | 'technique' | 'era' | 'subject'
+  /** q11 は M3 候補で未実装（生成できないので次善に落ちる）。 */
+  type: 'q9' | 'q10' | 'q4' | 'q11'
+}
+
 /** リード文中の1つの下線部。text 内の `[[key|下線テキスト]]` マーカーに対応する。 */
 export interface PassageUnderline {
   key: string
   /** この下線から出題する作品（先頭から見て、出題プールにある最初の作品を対象にする） */
   workIds: string[]
   note?: string
+  /** この下線から出したい設問の型・条件スロット（省略可）。M2-09〜11 修正の仕様。 */
+  ask?: PassageUnderlineAsk
 }
 
 export interface Passage {
@@ -156,6 +168,10 @@ export interface Passage {
  *   （テーマセットのみで使用。命名の妥当性はオーナー確認事項として報告する）。
  */
 export type QuestionType = 'q1' | 'q2' | 'q3' | 'q4' | 'q6' | 'q8' | 'q9' | 'q10'
+
+/** Q9 の条件スロット（作者・時代文化・所蔵・様式・製法）。engine/q9.ts が生成ロジックを持つ
+ *  （型はここで定義し、q9.ts から re-export する。types.ts が engine に依存しないため）。 */
+export type Q9Slot = 'artist' | 'era' | 'holder' | 'style' | 'technique'
 
 /**
  * 回答の種類。'unknown' は4択の下の「わからない」ボタン（当てずっぽうで誤答選択肢を
@@ -213,6 +229,9 @@ export interface Question {
   statementPair?: { sentenceA: StatementPairSentence; sentenceB: StatementPairSentence }
   /** Q9 の出題文（例:「作者が葛飾北斎であるもの」）。Q4 reversed のときは「最も不適切なもの」の意 */
   conditionText?: string
+  /** Q9 のとき実際に使われた条件スロット。自由出題で era 条件を連続させないための内部情報
+   *  （表示には使わない。修正の仕様 M2-09〜11）。 */
+  q9Slot?: Q9Slot
   /** Q9/Q4 の逆パターン（「合わない1枚」「最も不適切なもの」）かどうか */
   reversed?: boolean
   correctIndex: number

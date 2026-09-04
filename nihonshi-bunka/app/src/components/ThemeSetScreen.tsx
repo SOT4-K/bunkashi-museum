@@ -1,6 +1,10 @@
-// テーマセット（リード文＋下線部→図版問題）の学習画面。decisions.md 2026-09-04「模試型」。
-// LearnScreen と同じ回答フロー（QuestionCard→AnswerSheet）を使うが、出題は buildThemeSetQuestions
-// で passage から一括生成する（SRS の復習キューではなく、1つのリード文＝1セット）。
+// テーマセット（リード文＋下線部→図版問題）の学習画面。decisions.md 2026-09-04「模試型」と
+// mock-exam-analysis.md 7章「修正の仕様（M2-09〜11）」:
+//  セット開始→リード文を全文表示（下線a〜eを強調、模試のページと同じ見え方）→「問題へ」→
+//  各問の冒頭に「下線部○に関して」＋下線部の文言を表示→全問終了で結果。
+//  リード文は問題中も「リード文を見返す」で折りたたみ表示できる（既存機能を維持）。
+// 出題は buildThemeSetQuestions で passage から一括生成する（SRS の復習キューではなく、
+// 1つのリード文＝1セット）。
 import { useEffect, useMemo, useRef, useState } from 'react'
 import styles from './ThemeSetScreen.module.css'
 import learnStyles from './LearnScreen.module.css'
@@ -18,6 +22,8 @@ interface AnsweredState {
   isNewDiscovery: boolean
   isNewlyMastered: boolean
 }
+
+type Phase = 'read' | 'quiz' | 'done'
 
 export function ThemeSetScreen({
   passage,
@@ -42,7 +48,17 @@ export function ThemeSetScreen({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const themeQuestions = useMemo(() => buildThemeSetQuestions(passage, pool, eras), [passage.id])
   const segments = useMemo(() => splitPassageText(passage.text), [passage.text])
+  // 下線 key → 下線部の文言（下線部に結んだ問題文の冒頭「下線部○に関して」に使う）
+  const underlineTextByKey = useMemo(() => {
+    const map = new Map<string, string>()
+    for (const seg of segments) {
+      if (seg.type === 'underline') map.set(seg.key, seg.value)
+    }
+    return map
+  }, [segments])
 
+  const total = themeQuestions.length
+  const [phase, setPhase] = useState<Phase>(total > 0 ? 'read' : 'done')
   const [index, setIndex] = useState(0)
   const [answered, setAnswered] = useState<AnsweredState | null>(null)
   const [showSheet, setShowSheet] = useState(false)
@@ -57,9 +73,11 @@ export function ThemeSetScreen({
     }
   }, [])
 
-  const total = themeQuestions.length
-  const done = total > 0 && index >= total
   const current = themeQuestions[index]
+
+  function handleStartQuiz() {
+    setPhase('quiz')
+  }
 
   function handleResult(answer: AnswerKind, selection: MissSelection) {
     if (!current) return
@@ -104,7 +122,9 @@ export function ThemeSetScreen({
     setAnswered(null)
     setShowSheet(false)
     setContextOpen(false)
-    setIndex((prev) => prev + 1)
+    const nextIndex = index + 1
+    setIndex(nextIndex)
+    if (nextIndex >= total) setPhase('done')
   }
 
   if (total === 0) {
@@ -118,7 +138,31 @@ export function ThemeSetScreen({
     )
   }
 
-  if (done) {
+  if (phase === 'read') {
+    return (
+      <div className={learnStyles.screen}>
+        <div className={styles.header}>
+          <div className={`${styles.title} caption-bold`}>{passage.title}</div>
+        </div>
+        <div className={styles.readPanel} data-testid="passage-read-panel">
+          {segments.map((seg, i) =>
+            seg.type === 'underline' ? (
+              <mark key={i} className={styles.underline}>
+                {seg.value}
+              </mark>
+            ) : (
+              <span key={i}>{seg.value}</span>
+            ),
+          )}
+        </div>
+        <button type="button" className={learnStyles.doneButton} data-testid="start-quiz-button" onClick={handleStartQuiz}>
+          問題へ
+        </button>
+      </div>
+    )
+  }
+
+  if (phase === 'done') {
     return (
       <div className={learnStyles.summaryScreen} data-testid="theme-set-summary">
         <div>
@@ -138,7 +182,9 @@ export function ThemeSetScreen({
     )
   }
 
+  // phase === 'quiz'
   const isLast = index === total - 1
+  const underlineLabel = current ? (underlineTextByKey.get(current.underlineKey) ?? '') : ''
 
   return (
     <div className={learnStyles.screen}>
@@ -178,6 +224,10 @@ export function ThemeSetScreen({
           )}
         </div>
       )}
+
+      <p className={styles.underlinePrompt} data-testid="underline-prompt">
+        下線部{current.underlineKey}に関して: {underlineLabel}
+      </p>
 
       <QuestionCard question={current.question} answered={answered} onChoice={handleChoice} onUnknown={handleUnknown} />
 

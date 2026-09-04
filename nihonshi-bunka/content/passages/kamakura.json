@@ -2,17 +2,44 @@
   {
     "id": "kamakura-chokoku-kenchiku",
     "era": "kamakura",
-    "title": "写実的な彫刻と建築の3様式",
-    "text": "鎌倉時代には、京都の公家文化と鎌倉の武家文化という二つの中心のもとで、素朴で力強い新しい文化が生まれた。彫刻では運慶の子・康勝が[[a|空也上人像]]のような写実的な肖像彫刻を残し、神奈川の高徳院には露座の[[b|阿弥陀如来像（鎌倉大仏）]]が造立された。建築では宋から伝わった禅宗様の[[c|円覚寺舎利殿]]と、伝統的な和様による[[d|三十三間堂]]が並び立ち、大仏様（東大寺南大門）とあわせて鎌倉建築の3様式とされる。仏教では法然・親鸞・一遍・日蓮・栄西・道元らによる鎌倉新仏教もおこった。",
+    "title": "写実の彫刻と、並び立つ三つの建築様式",
+    "text": "鎌倉時代の文化は、伝統を守る京都の公家文化と、武士や庶民に支持された素朴で力強い鎌倉の武家文化という二つの中心をもち、宋・元との交流によって禅宗や宋学が新しく加わった。彫刻では運慶・快慶ら慶派が写実的な作風を確立し、[[a|瞳に水晶をはめこむ玉眼]]の技法が広く用いられた。運慶の子[[b|康勝]]も、実在の僧の姿を写した肖像彫刻を手がけている。鎌倉の[[c|高徳院]]では、民間の勧進によって銅を鋳た露座の大仏が造られた。建築では、東大寺の再建に用いられた大仏様、宋から伝えられ禅寺に用いられた[[d|禅宗様]]、平安以来の伝統をひく[[e|和様]]が並び立った。仏教では法然・親鸞・一遍・日蓮・栄西・道元による鎌倉新仏教もおこった。",
     "sources": [
       "高校教科書（山川『詳説日本史』）鎌倉文化の項",
-      "work/nihonshi-bunka/content/eras.json（kamakura）"
+      "work/nihonshi-bunka/content/eras.json（kamakura の detail・items）",
+      "work/nihonshi-bunka/content/works/kamakura.json（kuya-shonin-zo / kamakura-daibutsu / engakuji-shariden / sanjusangendo-hondo の facts・explanation）"
     ],
     "underlines": [
-      { "key": "a", "workIds": ["kuya-shonin-zo"], "note": "口から6体の阿弥陀仏が現れる、康勝作の写実的肖像彫刻" },
-      { "key": "b", "workIds": ["kamakura-daibutsu"], "note": "露座の銅造阿弥陀如来。奈良の大仏（盧舎那仏）との混同に注意" },
-      { "key": "c", "workIds": ["engakuji-shariden"], "note": "禅宗様（唐様）建築の代表" },
-      { "key": "d", "workIds": ["sanjusangendo-hondo"], "note": "和様建築の代表。当初建立は院政期、現存の建物は鎌倉再建" }
+      {
+        "key": "a",
+        "workIds": ["kuya-shonin-zo"],
+        "ask": { "slot": "technique", "type": "q10" },
+        "note": "技法条件＋2文正誤。画像を出して「木造彩色・玉眼である／運慶の作である（誤）」等の正誤を問う想定"
+      },
+      {
+        "key": "b",
+        "workIds": ["kuya-shonin-zo"],
+        "ask": { "slot": "artist", "type": "q9" },
+        "note": "作者条件。「下線部bの人物が製作した彫刻はどれか」。作品名は本文に出していない"
+      },
+      {
+        "key": "c",
+        "workIds": ["kamakura-daibutsu"],
+        "ask": { "slot": "holder", "type": "q4" },
+        "note": "所在条件＋関連記述。artist は不詳のため ask に使わない。falseStatements に東大寺盧舎那仏との混同型がある"
+      },
+      {
+        "key": "d",
+        "workIds": ["engakuji-shariden"],
+        "ask": { "slot": "technique", "type": "q9" },
+        "note": "様式条件。「下線部dの様式による建築はどれか」。誤答候補に和様の建築が入ると成立しないため、選択肢は他様式・他時代から取る"
+      },
+      {
+        "key": "e",
+        "workIds": ["sanjusangendo-hondo"],
+        "ask": { "slot": "technique", "type": "q10" },
+        "note": "様式条件＋2文正誤。当初の建立は院政期（1164年）、現存建物は鎌倉再建（1266年）という年代の扱いに注意"
+      }
     ]
   }
 ]
