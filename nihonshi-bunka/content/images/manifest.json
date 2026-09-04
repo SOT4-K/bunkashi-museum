@@ -983,34 +983,6 @@
       "notes": "M2-15/M2-18で最優先とされていた項目。前回2回のセッションで戦前白黒写真を発見できなかったが、今回Category:Nio_at_the_Nandaimon,_Todaijiを直接ブラウズして発見。★content/works/kamakura.jsonに対応する作品項目（work）自体がまだ存在しないため、image欄は埋められていない。writerが新規work項目を作成する必要がある"
     },
     {
-      "id": "sharaku-otani-oniji",
-      "file": "sharaku-otani-oniji.jpg",
-      "title": "三代目大谷鬼次の奴江戸兵衛",
-      "sourceName": "The Metropolitan Museum of Art (Open Access)",
-      "sourceUrl": "https://www.metmuseum.org/art/collection/search/37358",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
-      "credit": "東洲斎写楽、1794年。The Metropolitan Museum of Art",
-      "attributionText": "「大谷鬼次の奴江戸兵衛」The Metropolitan Museum of Art, Open Access (CC0)",
-      "identified": "Met object 37358: artist Tōshūsai Sharaku, title 'Kabuki Actor Ōtani Oniji III as Yakko Edobei', isPublicDomain: true。大首絵の代表作",
-      "retrievedAt": "2026-09-04",
-      "notes": "3.3章定番リスト『写楽の役者絵』に対応。★content/works/にはまだ写楽・役者絵の作品項目自体が存在しないため、work側のimageフィールドは未設定。writerが新規work項目（宝暦・天明期文化 horeki-tenmei.json 想定）を作成する必要がある"
-    },
-    {
-      "id": "utamaro-three-beauties",
-      "file": "utamaro-three-beauties.jpg",
-      "title": "寛政三美人",
-      "sourceName": "The Metropolitan Museum of Art (Open Access)",
-      "sourceUrl": "https://www.metmuseum.org/art/collection/search/55639",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
-      "credit": "喜多川歌麿、ca. 1791年。The Metropolitan Museum of Art",
-      "attributionText": "「寛政三美人（Three Beauties of the Kwansei Period）」The Metropolitan Museum of Art, Open Access (CC0)",
-      "identified": "Met object 55639: artist Kitagawa Utamaro, title 'Three Beauties of the Kwansei Period', isPublicDomain: true。歌麿の代表的な大首絵美人画",
-      "retrievedAt": "2026-09-04",
-      "notes": "3.3章定番リスト『歌麿の美人画』に対応。★content/works/には歌麿の作品項目がまだ存在しないため、work側のimageフィールドは未設定。writerが新規work項目（宝暦・天明期文化 horeki-tenmei.json 想定）を作成する必要がある"
-    },
-    {
       "id": "inariyama-tekken",
       "file": "inariyama-tekken.jpg",
       "title": "稲荷山古墳出土鉄剣（金錯銘鉄剣）",

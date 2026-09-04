@@ -88,7 +88,7 @@ export default function App() {
             passage={activeThemeSet}
             pool={themeSetPool}
             imagePool={playableWorks}
-            setIndex={activeThemeSetIndex}
+            sequenceIndex={activeThemeSetIndex}
             eras={eras}
             onAnswer={(workId, type, ans, isReview, today) => {
               const result = answer(workId, type, ans, isReview, today)

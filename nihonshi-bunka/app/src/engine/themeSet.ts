@@ -275,9 +275,12 @@ function buildThemeQuestionForWorkWithMeta(
 
   // M2-16: ask が明示されていない下線は、まず「狙う型カテゴリ」（desiredCategory。
   // COMPOSITION_SEQUENCE）を試す。失敗すれば通常の優先順位に落ちる（best-effort）。
+  // 生成できても type が avoidType（直前の設問と同じ）に一致するときは使わない
+  // （'q4' と 'q4-reversed' は同じ QuestionType 'q4' を共有するため、COMPOSITION_SEQUENCE で
+  // 隣り合う位置に割り当てると同型連続になりうる。その場合は通常の優先順位に委ねる）。
   if (!ask?.type && desiredCategory) {
     const r = tryCategory(desiredCategory)
-    if (r) return r
+    if (r && r.question.type !== avoidType) return r
   }
 
   // 通常の優先順位: Q9→Q10→Q8→Q4→Q4逆→Q13→Q13逆→Q1（画像を持つ対象のみ）。avoidType は

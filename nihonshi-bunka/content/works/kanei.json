@@ -1,6 +1,19 @@
 [
   {
     "id": "fujin-raijin-sotatsu",
+    "orderIndex": 1630,
+    "pairs": [
+      {
+        "left": "俵屋宗達",
+        "right": "装飾画（琳派の源流）",
+        "kind": "person-style"
+      },
+      {
+        "left": "俵屋宗達",
+        "right": "本阿弥光悦",
+        "kind": "person-person"
+      }
+    ],
     "artist": "俵屋宗達",
     "patron": null,
     "style": "装飾画（大和絵の伝統を生かした琳派の源流）",
@@ -114,6 +127,14 @@
   },
   {
     "id": "shokintei-katsura",
+    "orderIndex": 1620,
+    "pairs": [
+      {
+        "left": "八条宮智仁親王・智忠親王",
+        "right": "数寄屋造",
+        "kind": "person-style"
+      }
+    ],
     "artist": null,
     "patron": "八条宮智仁親王・智忠親王",
     "style": "数寄屋造",
@@ -227,6 +248,14 @@
   },
   {
     "id": "yomeimon-nikko",
+    "orderIndex": 1636,
+    "pairs": [
+      {
+        "left": "徳川家光",
+        "right": "権現造",
+        "kind": "person-style"
+      }
+    ],
     "artist": null,
     "patron": "徳川家光",
     "style": "権現造",
@@ -334,6 +363,19 @@
   },
   {
     "id": "tanyu-getsuya-sansui",
+    "orderIndex": 1662,
+    "pairs": [
+      {
+        "left": "狩野探幽",
+        "right": "幕府の御用絵師",
+        "kind": "person-role"
+      },
+      {
+        "left": "狩野探幽",
+        "right": "水墨画（狩野派）",
+        "kind": "person-style"
+      }
+    ],
     "artist": "狩野探幽",
     "patron": null,
     "style": "水墨画（狩野派）",
@@ -436,6 +478,14 @@
   },
   {
     "id": "hayashi-razan",
+    "orderIndex": 1630,
+    "pairs": [
+      {
+        "left": "林羅山",
+        "right": "朱子学",
+        "kind": "person-school"
+      }
+    ],
     "artist": null,
     "patron": null,
     "style": null,
@@ -514,6 +564,19 @@
   },
   {
     "id": "sakaida-kakiemon",
+    "orderIndex": 1645,
+    "pairs": [
+      {
+        "left": "酒井田柿右衛門",
+        "right": "赤絵",
+        "kind": "person-technique"
+      },
+      {
+        "left": "有田焼",
+        "right": "肥前",
+        "kind": "craft-region"
+      }
+    ],
     "artist": null,
     "patron": null,
     "style": "有田焼（色絵磁器）",
@@ -593,6 +656,14 @@
   },
   {
     "id": "honami-koetsu",
+    "orderIndex": 1615,
+    "pairs": [
+      {
+        "left": "本阿弥光悦",
+        "right": "書・蒔絵・陶芸",
+        "kind": "person-field"
+      }
+    ],
     "artist": null,
     "patron": null,
     "style": "書・蒔絵・陶芸（多分野で活躍した芸術家）",
@@ -671,6 +742,14 @@
   },
   {
     "id": "teimon-haikai",
+    "orderIndex": 1630,
+    "pairs": [
+      {
+        "left": "松永貞徳",
+        "right": "貞門俳諧",
+        "kind": "person-genre"
+      }
+    ],
     "artist": "松永貞徳",
     "patron": null,
     "style": "俳諧（貞門俳諧）",

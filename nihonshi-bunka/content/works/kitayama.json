@@ -1,6 +1,12 @@
 [
   {
     "id": "kinkaku",
+    "orderIndex": 1397,
+    "pairs": [
+      { "kind": "建築×建立者", "left": "鹿苑寺金閣", "right": "足利義満" },
+      { "kind": "建築×様式", "left": "鹿苑寺金閣", "right": "寝殿造風と禅宗様の折衷（三層）" },
+      { "kind": "文化×建築", "left": "北山文化", "right": "鹿苑寺金閣" }
+    ],
     "artist": null,
     "patron": "足利義満",
     "style": "寝殿造と禅宗様の折衷（三層構造）",
@@ -92,6 +98,12 @@
   },
   {
     "id": "zeami",
+    "orderIndex": 1400,
+    "pairs": [
+      { "kind": "人物×著作", "left": "世阿弥", "right": "風姿花伝（花伝書）" },
+      { "kind": "人物×芸能", "left": "世阿弥", "right": "能（猿楽から大成）" },
+      { "kind": "人物×保護者", "left": "観阿弥・世阿弥", "right": "足利義満" }
+    ],
     "kind": "person",
     "artist": null,
     "patron": null,
@@ -168,6 +180,11 @@
   },
   {
     "id": "gozan-bungaku",
+    "orderIndex": 1390,
+    "pairs": [
+      { "kind": "文学×担い手", "left": "五山文学", "right": "義堂周信・絶海中津ら臨済宗の禅僧" },
+      { "kind": "文学×制度", "left": "五山文学", "right": "五山・十刹の制" }
+    ],
     "kind": "concept",
     "artist": null,
     "patron": null,
@@ -242,6 +259,12 @@
   },
   {
     "id": "nichimin-boeki",
+    "orderIndex": 1404,
+    "pairs": [
+      { "kind": "貿易×開始者", "left": "日明貿易（勘合貿易）", "right": "足利義満" },
+      { "kind": "貿易×証票", "left": "日明貿易（勘合貿易）", "right": "勘合" },
+      { "kind": "貿易×輸入品", "left": "日明貿易（勘合貿易）", "right": "生糸・銅銭（永楽通宝）" }
+    ],
     "kind": "concept",
     "artist": null,
     "patron": null,

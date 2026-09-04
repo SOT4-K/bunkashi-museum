@@ -29,6 +29,9 @@ vi.mock('../content', () => ({
   eras: testEras,
   works: [w1, w2],
   playableWorks: [w1, w2],
+  // M2-16: ThemeSetScreen の pool は themeSetPool（画像なし項目も含む）を渡す。
+  // このテストの作品は全て kind: artifact（既定）なので playableWorks と同じ内容でよい。
+  themeSetPool: [w1, w2],
   passages: [passageA, passageB],
   passagesByEra: {},
 }))

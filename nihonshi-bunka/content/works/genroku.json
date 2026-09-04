@@ -1,6 +1,19 @@
 [
   {
     "id": "mikaeri-bijin",
+    "orderIndex": 1690,
+    "pairs": [
+      {
+        "left": "菱川師宣",
+        "right": "肉筆浮世絵",
+        "kind": "person-technique"
+      },
+      {
+        "left": "菱川師宣",
+        "right": "浮世絵の祖",
+        "kind": "person-role"
+      }
+    ],
     "artist": "菱川師宣",
     "patron": null,
     "style": "肉筆浮世絵（美人画）",
@@ -109,6 +122,14 @@
   },
   {
     "id": "fujin-raijin-korin",
+    "orderIndex": 1710,
+    "pairs": [
+      {
+        "left": "尾形光琳",
+        "right": "琳派",
+        "kind": "person-style"
+      }
+    ],
     "artist": "尾形光琳",
     "patron": null,
     "style": "装飾画（琳派）",
@@ -221,6 +242,19 @@
   },
   {
     "id": "yatsuhashi-suzuribako",
+    "orderIndex": 1710,
+    "pairs": [
+      {
+        "left": "尾形光琳",
+        "right": "蒔絵",
+        "kind": "person-technique"
+      },
+      {
+        "left": "八橋の意匠",
+        "right": "『伊勢物語』",
+        "kind": "subject-text"
+      }
+    ],
     "artist": "尾形光琳",
     "patron": null,
     "style": "蒔絵（琳派の工芸）",
@@ -329,6 +363,19 @@
   },
   {
     "id": "ninsei-nonomura",
+    "orderIndex": 1660,
+    "pairs": [
+      {
+        "left": "野々村仁清",
+        "right": "色絵",
+        "kind": "person-technique"
+      },
+      {
+        "left": "京焼",
+        "right": "京都",
+        "kind": "craft-region"
+      }
+    ],
     "artist": null,
     "patron": null,
     "style": "京焼（色絵陶器）",
@@ -408,6 +455,14 @@
   },
   {
     "id": "ihara-saikaku",
+    "orderIndex": 1682,
+    "pairs": [
+      {
+        "left": "井原西鶴",
+        "right": "浮世草子",
+        "kind": "person-genre"
+      }
+    ],
     "artist": "井原西鶴",
     "patron": null,
     "style": "浮世草子",
@@ -494,6 +549,19 @@
   },
   {
     "id": "chikamatsu-monzaemon",
+    "orderIndex": 1703,
+    "pairs": [
+      {
+        "left": "近松門左衛門",
+        "right": "人形浄瑠璃の脚本",
+        "kind": "person-genre"
+      },
+      {
+        "left": "竹本義太夫",
+        "right": "義太夫節",
+        "kind": "person-genre"
+      }
+    ],
     "artist": "近松門左衛門",
     "patron": null,
     "style": "人形浄瑠璃・歌舞伎の脚本",
@@ -584,6 +652,19 @@
   },
   {
     "id": "matsuo-basho",
+    "orderIndex": 1689,
+    "pairs": [
+      {
+        "left": "松尾芭蕉",
+        "right": "蕉風俳諧",
+        "kind": "person-genre"
+      },
+      {
+        "left": "松尾芭蕉",
+        "right": "『奥の細道』",
+        "kind": "person-text"
+      }
+    ],
     "artist": "松尾芭蕉",
     "patron": null,
     "style": "俳諧（蕉風俳諧）",
@@ -674,6 +755,14 @@
   },
   {
     "id": "arai-hakuseki",
+    "orderIndex": 1712,
+    "pairs": [
+      {
+        "left": "新井白石",
+        "right": "『読史余論』",
+        "kind": "person-text"
+      }
+    ],
     "artist": null,
     "patron": null,
     "style": "朱子学（歴史研究）",

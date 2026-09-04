@@ -1,6 +1,12 @@
 [
   {
     "id": "kuya-shonin-zo",
+    "orderIndex": 1225,
+    "pairs": [
+      { "kind": "作品×作者", "left": "空也上人像", "right": "康勝（運慶の四男）" },
+      { "kind": "作品×所蔵", "left": "空也上人像", "right": "六波羅蜜寺（京都）" },
+      { "kind": "作品×技法", "left": "空也上人像", "right": "木造彩色・玉眼" }
+    ],
     "artist": "康勝",
     "patron": null,
     "style": "肖像彫刻（写実的な鎌倉彫刻）",
@@ -92,6 +98,12 @@
   },
   {
     "id": "kamakura-daibutsu",
+    "orderIndex": 1252,
+    "pairs": [
+      { "kind": "作品×尊格", "left": "高徳院阿弥陀如来像（鎌倉大仏）", "right": "阿弥陀如来" },
+      { "kind": "作品×技法", "left": "高徳院阿弥陀如来像（鎌倉大仏）", "right": "銅造（鋳造）" },
+      { "kind": "作品×所在", "left": "高徳院阿弥陀如来像（鎌倉大仏）", "right": "高徳院（神奈川県鎌倉市）" }
+    ],
     "artist": null,
     "patron": "不詳（民間の勧進によると考えられる）",
     "style": "露座の大仏（銅造）",
@@ -183,6 +195,11 @@
   },
   {
     "id": "engakuji-shariden",
+    "orderIndex": 1285,
+    "pairs": [
+      { "kind": "様式×建築", "left": "禅宗様（唐様）", "right": "円覚寺舎利殿" },
+      { "kind": "建築×所在", "left": "円覚寺舎利殿", "right": "円覚寺（神奈川県鎌倉市）" }
+    ],
     "artist": null,
     "patron": null,
     "style": "禅宗様建築",
@@ -276,6 +293,12 @@
   },
   {
     "id": "sanjusangendo-hondo",
+    "orderIndex": 1266,
+    "pairs": [
+      { "kind": "様式×建築", "left": "和様", "right": "三十三間堂（蓮華王院本堂）" },
+      { "kind": "建築×発願者", "left": "蓮華王院（当初の建立）", "right": "平清盛（後白河上皇のため）" },
+      { "kind": "建築×本尊", "left": "三十三間堂", "right": "千手観音坐像（湛慶作）" }
+    ],
     "artist": null,
     "patron": "平清盛",
     "style": "和様建築",
@@ -371,6 +394,12 @@
   },
   {
     "id": "honen",
+    "orderIndex": 1175,
+    "pairs": [
+      { "kind": "人物×宗派", "left": "法然", "right": "浄土宗" },
+      { "kind": "人物×著作", "left": "法然", "right": "選択本願念仏集" },
+      { "kind": "人物×教え", "left": "法然", "right": "専修念仏" }
+    ],
     "kind": "person",
     "artist": null,
     "patron": null,
@@ -447,6 +476,12 @@
   },
   {
     "id": "shinran",
+    "orderIndex": 1224,
+    "pairs": [
+      { "kind": "人物×宗派", "left": "親鸞", "right": "浄土真宗" },
+      { "kind": "人物×著作", "left": "親鸞", "right": "教行信証" },
+      { "kind": "人物×教え", "left": "親鸞", "right": "悪人正機" }
+    ],
     "kind": "person",
     "artist": null,
     "patron": null,
@@ -523,6 +558,12 @@
   },
   {
     "id": "ippen",
+    "orderIndex": 1274,
+    "pairs": [
+      { "kind": "人物×宗派", "left": "一遍", "right": "時宗" },
+      { "kind": "人物×教え", "left": "一遍", "right": "踊念仏・賦算" },
+      { "kind": "人物×絵巻", "left": "一遍", "right": "一遍上人絵伝（一遍聖絵）" }
+    ],
     "kind": "person",
     "artist": null,
     "patron": null,
@@ -597,6 +638,12 @@
   },
   {
     "id": "nichiren",
+    "orderIndex": 1253,
+    "pairs": [
+      { "kind": "人物×宗派", "left": "日蓮", "right": "日蓮宗（法華宗）" },
+      { "kind": "人物×著作", "left": "日蓮", "right": "立正安国論" },
+      { "kind": "人物×教え", "left": "日蓮", "right": "題目（南無妙法蓮華経）" }
+    ],
     "kind": "person",
     "artist": null,
     "patron": null,
@@ -673,6 +720,12 @@
   },
   {
     "id": "eisai",
+    "orderIndex": 1191,
+    "pairs": [
+      { "kind": "人物×宗派", "left": "栄西", "right": "臨済宗" },
+      { "kind": "人物×著作", "left": "栄西", "right": "喫茶養生記" },
+      { "kind": "人物×教え", "left": "栄西", "right": "公案問答" }
+    ],
     "kind": "person",
     "artist": null,
     "patron": null,
@@ -747,6 +800,12 @@
   },
   {
     "id": "dogen",
+    "orderIndex": 1227,
+    "pairs": [
+      { "kind": "人物×宗派", "left": "道元", "right": "曹洞宗" },
+      { "kind": "人物×著作", "left": "道元", "right": "正法眼蔵" },
+      { "kind": "人物×寺院", "left": "道元", "right": "永平寺（越前）" }
+    ],
     "kind": "person",
     "artist": null,
     "patron": null,
@@ -818,5 +877,479 @@
     ],
     "examTags": [],
     "status": "reviewed"
+  },
+  {
+    "id": "kongorikishi-todaiji",
+    "orderIndex": 1203,
+    "pairs": [
+      { "kind": "作品×作者", "left": "東大寺南大門金剛力士像", "right": "運慶・快慶ら" },
+      { "kind": "作品×所在", "left": "東大寺南大門金剛力士像", "right": "東大寺南大門" },
+      { "kind": "様式×建築", "left": "大仏様", "right": "東大寺南大門" }
+    ],
+    "artist": "運慶・快慶",
+    "patron": "重源（東大寺再建の大勧進）",
+    "style": "写実的な鎌倉彫刻（慶派）",
+    "religion": "仏教（南大門の門守護神）",
+    "holder": "東大寺南大門（奈良県奈良市）",
+    "subject": null,
+    "periodLabel": "鎌倉時代（1203年＝建仁3年）",
+    "eraNote": "鎌倉時代、平氏の南都焼打ちで焼けた東大寺の再建にともなって、勧進をつのる重源のもとで造像が進められた。金剛力士像は運慶・快慶らの一門によって1203年に造られた巨大な木造彫刻で、力強い筋肉や動きのある姿に、写実を重んじる鎌倉彫刻の特色がよく表れている。",
+    "facts": [
+      { "slot": "artist", "text": "運慶・快慶らの作" },
+      { "slot": "era", "text": "鎌倉文化の彫刻" },
+      { "slot": "period", "text": "1203年に造られた" },
+      { "slot": "other", "text": "口を開いた阿形と口を閉じた吽形の一対からなる" },
+      { "slot": "location", "text": "東大寺南大門に安置されている" }
+    ],
+    "falseStatements": [
+      { "text": "定朝の作である", "why": "定朝は平等院鳳凰堂阿弥陀如来像（国風文化）の作者。人物・時代の入れ替え", "verifiedFalse": true },
+      { "text": "天平文化の作品である", "why": "鎌倉時代（1203年）の作。時代の入れ替え", "verifiedFalse": true },
+      { "text": "銅造の大仏である", "why": "木造（寄木造）の巨像。技法の入れ替え", "verifiedFalse": true },
+      { "text": "法隆寺金堂に安置されている", "why": "東大寺南大門に安置されている。所在の入れ替え", "verifiedFalse": true },
+      { "text": "康勝が一人で造った", "why": "運慶・快慶らの一門による造像。人物の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "東大寺南大門金剛力士像",
+    "reading": "とうだいじなんだいもん こんごうりきしぞう",
+    "era": "kamakura",
+    "category": "sculpture",
+    "location": "東大寺南大門（奈良県奈良市）",
+    "author": "運慶・快慶",
+    "technique": "木造（寄木造）",
+    "keyPoints": [
+      "鎌倉文化を代表する写実的な彫刻",
+      "運慶・快慶らの作（1203年）",
+      "阿形・吽形の一対",
+      "東大寺再建（大仏様の南大門）にともなう造像"
+    ],
+    "explanation": "平氏の南都焼打ちで焼けた東大寺の再建にともない、運慶・快慶らの一門によって1203年に造られた巨大な木造の門守護神像。向かって右に口を閉じた吽形、左に口を開いた阿形が立ち、盛り上がった筋肉や翻る衣に、写実と力強さを重んじる鎌倉彫刻の特色がよく表れている。像を納める東大寺南大門は、重源が宋の技術を取り入れて用いた大仏様の代表的な建築である。",
+    "examNote": "「東大寺南大門＝大仏様（重源）」「金剛力士像＝運慶・快慶」の組合せが最頻出。空也上人像（康勝）との作者の取り違えに注意。",
+    "confusables": [
+      {
+        "id": "kuya-shonin-zo",
+        "howToTell": "金剛力士像は東大寺南大門に立つ一対の巨像（運慶・快慶）。空也上人像は六波羅蜜寺の等身大の僧の肖像彫刻で、口から6体の阿弥陀仏が出る（康勝）。"
+      },
+      {
+        "id": "kamakura-daibutsu",
+        "howToTell": "金剛力士像は木造の門守護神で二体一対。鎌倉大仏は銅造の阿弥陀如来坐像で屋外に単独で座る。"
+      }
+    ],
+    "image": {
+      "file": "kongorikishi-todaiji.jpg",
+      "credit": "『Histoire de l'art du Japon』パリ万博日本帝国委員会編、Paris, M. de Brunoff、1900年刊",
+      "license": "パブリックドメイン（1900年公表）",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:NIWAU_(Brama_et_Indra,_sanscrit),_Fin_du_%E2%85%AB_si%C3%A8cle_(Nara_Todaiji),_Histoire_de_l%27art_du_Japon_(39).jpg",
+      "sourceName": "Wikimedia Commons"
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
+      "research/m2-image-log-2026-09-04-wave2.md 2章（画像の出典・ライセンス）",
+      "Wikimedia Commons『Histoire de l'art du Japon』（1900年）"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "unkei",
+    "orderIndex": 1203,
+    "pairs": [
+      { "kind": "人物×作品", "left": "運慶", "right": "東大寺南大門金剛力士像（快慶らと共作）" },
+      { "kind": "人物×流派", "left": "運慶", "right": "慶派（奈良仏師の系譜）" }
+    ],
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": "写実的な鎌倉彫刻（慶派）",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "鎌倉時代（12世紀後半〜13世紀前半）",
+    "eraNote": "鎌倉文化。東大寺・興福寺の再興造像を通じて、運慶を中心とする慶派の仏師が、人体の構造や表情を写しとる力強い作風を確立した。玉眼（水晶を目にはめる技法）も広く用いられた。",
+    "facts": [
+      { "slot": "other", "text": "快慶らとともに東大寺南大門金剛力士像を造った" },
+      { "slot": "other", "text": "写実的で力強い作風の慶派を代表する仏師" },
+      { "slot": "other", "text": "興福寺北円堂の無著・世親像も手がけたとされる" }
+    ],
+    "falseStatements": [
+      { "text": "平等院鳳凰堂の阿弥陀如来像を造った", "why": "平等院の阿弥陀如来像は定朝の作（国風文化）。人物・時代の入れ替え", "verifiedFalse": true },
+      { "text": "空也上人像を自ら造った", "why": "空也上人像は運慶の四男・康勝の作。人物の入れ替え", "verifiedFalse": true },
+      { "text": "寄木造を初めて完成させた", "why": "寄木造を完成させたのは定朝（国風文化）。事績・時代の入れ替え", "verifiedFalse": true },
+      { "text": "室町時代の仏師である", "why": "運慶は鎌倉時代前期の仏師。時代の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "運慶",
+    "reading": "うんけい",
+    "era": "kamakura",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "鎌倉文化を代表する仏師",
+      "慶派（写実的で力強い作風）",
+      "快慶らと東大寺南大門金剛力士像を造る",
+      "子に康勝（空也上人像の作者）がいる"
+    ],
+    "explanation": "東大寺・興福寺の再興造像を担い、人体の構造や表情を写しとる写実的で力強い作風を確立した鎌倉時代の仏師。快慶らとともに東大寺南大門の金剛力士像を造ったことで知られ、興福寺北円堂の無著・世親像も手がけたとされる。その一門（慶派）からは、六波羅蜜寺の空也上人像を造った四男の康勝や、三十三間堂の本尊を造った湛慶が出ている。",
+    "examNote": "「運慶・快慶＝東大寺南大門金剛力士像」。定朝（国風文化・寄木造・平等院）との時代と作品の取り違えが定番。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "chogen",
+    "orderIndex": 1195,
+    "pairs": [
+      { "kind": "人物×事績", "left": "重源", "right": "東大寺の再建（大勧進）" },
+      { "kind": "人物×様式", "left": "重源", "right": "大仏様（宋の技術を取り入れた建築様式）" }
+    ],
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "仏教",
+    "holder": null,
+    "subject": null,
+    "periodLabel": "平安時代末期〜鎌倉時代初期（12世紀後半〜13世紀初め）",
+    "eraNote": "鎌倉文化。平氏の南都焼打ちで焼けた東大寺の再建は、勧進によって費用を集める重源のもとで進められ、宋の技術を取り入れた大仏様が用いられた。",
+    "facts": [
+      { "slot": "other", "text": "東大寺再建の大勧進をつとめた僧" },
+      { "slot": "other", "text": "宋の技術を取り入れた大仏様を用いた" },
+      { "slot": "other", "text": "広く民衆から寄付をつのる勧進によって費用を集めた" }
+    ],
+    "falseStatements": [
+      { "text": "臨済宗を日本に伝えた", "why": "臨済宗を伝えたのは栄西。人物・事績の入れ替え", "verifiedFalse": true },
+      { "text": "禅宗様を用いて円覚寺舎利殿を建てた", "why": "重源が用いたのは大仏様。様式・建築の入れ替え", "verifiedFalse": true },
+      { "text": "東大寺を焼き打ちした平氏の武将である", "why": "重源は再建を進めた僧。立場の反転", "verifiedFalse": true },
+      { "text": "室町時代に東大寺を再建した", "why": "重源の再建は鎌倉時代初期。時代の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "重源",
+    "reading": "ちょうげん",
+    "era": "kamakura",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "東大寺再建の大勧進",
+      "大仏様（宋の技術を取り入れた様式）を用いた",
+      "勧進によって広く費用を集めた",
+      "南大門・金剛力士像の造営はこの再建にともなうもの"
+    ],
+    "explanation": "平氏の南都焼打ちで焼けた東大寺の再建を、勧進（人々に寄付をつのること）によって進めた僧。再建にあたっては宋の技術を取り入れた大仏様が用いられ、その代表とされるのが東大寺南大門である。運慶・快慶らによる金剛力士像の造像も、この再建事業の一環として行われた。",
+    "examNote": "「東大寺再建＝重源＝大仏様」。禅宗様（円覚寺舎利殿）・和様（三十三間堂）との様式の対応で問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "daibutsuyo",
+    "orderIndex": 1199,
+    "pairs": [
+      { "kind": "様式×建築", "left": "大仏様", "right": "東大寺南大門" },
+      { "kind": "様式×人物", "left": "大仏様", "right": "重源" }
+    ],
+    "kind": "concept",
+    "artist": null,
+    "patron": null,
+    "style": "大仏様（天竺様）",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "鎌倉時代（12世紀末〜13世紀初め）",
+    "eraNote": "鎌倉文化。東大寺の再建にあたり、重源が宋の技術を取り入れて用いた建築様式が大仏様である。柱に横木を何段も差し通す構造で、大きな建物を短期間に力強く建てられる点に特徴がある。",
+    "facts": [
+      { "slot": "style", "text": "東大寺再建に用いられた建築様式" },
+      { "slot": "other", "text": "代表的な建築は東大寺南大門" },
+      { "slot": "other", "text": "重源が宋の技術を取り入れて用いた" }
+    ],
+    "falseStatements": [
+      { "text": "円覚寺舎利殿が代表的な建築である", "why": "円覚寺舎利殿は禅宗様の代表。様式の入れ替え", "verifiedFalse": true },
+      { "text": "禅宗とともに伝えられた様式である", "why": "禅宗とともに伝わったのは禅宗様。様式の入れ替え", "verifiedFalse": true },
+      { "text": "平安時代からの伝統的な日本風の様式である", "why": "伝統的な日本風の様式は和様。様式の入れ替え", "verifiedFalse": true },
+      { "text": "書院造の起源となった様式である", "why": "書院造は室町時代の住宅様式（東求堂同仁斎）。分野・時代の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "大仏様",
+    "reading": "だいぶつよう",
+    "era": "kamakura",
+    "category": "style",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "東大寺再建に用いられた建築様式",
+      "重源が宋の技術を取り入れた",
+      "代表は東大寺南大門",
+      "禅宗様・和様と並ぶ鎌倉建築の3様式"
+    ],
+    "explanation": "東大寺の再建にあたって重源が宋の技術を取り入れて用いた建築様式。柱に横木を何段も差し通す力強い構造をとり、大きな建物を短期間で建てるのに適していた。代表的な建築は東大寺南大門で、禅宗とともに伝わった禅宗様（円覚寺舎利殿）、伝統的な和様（三十三間堂）と並べて、鎌倉時代の建築の3様式として整理される。",
+    "examNote": "「大仏様＝東大寺南大門＝重源」「禅宗様＝円覚寺舎利殿」「和様＝三十三間堂」の3点セットで覚える。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "shinkokin-wakashu",
+    "orderIndex": 1205,
+    "pairs": [
+      { "kind": "書物×撰者", "left": "新古今和歌集", "right": "藤原定家ら" },
+      { "kind": "書物×命じた人物", "left": "新古今和歌集", "right": "後鳥羽上皇" }
+    ],
+    "kind": "text",
+    "artist": null,
+    "patron": "後鳥羽上皇",
+    "style": null,
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "鎌倉時代前期（1205年）",
+    "eraNote": "鎌倉文化。公家のあいだでは伝統的な文化が受けつがれ、後鳥羽上皇の命によって新古今和歌集が編まれた。技巧をこらした余情ある歌風で知られ、藤原定家らが撰者をつとめた。",
+    "facts": [
+      { "slot": "patron", "text": "後鳥羽上皇の命によって編まれた勅撰和歌集" },
+      { "slot": "other", "text": "藤原定家らが撰者をつとめた" },
+      { "slot": "era", "text": "鎌倉時代前期（1205年）の成立" }
+    ],
+    "falseStatements": [
+      { "text": "後白河上皇が編んだ今様の集成である", "why": "今様の集成は梁塵秘抄（院政期）。作品・人物の入れ替え", "verifiedFalse": true },
+      { "text": "紀貫之らが撰者をつとめた", "why": "紀貫之らが撰したのは古今和歌集（国風文化）。人物・作品の入れ替え", "verifiedFalse": true },
+      { "text": "軍記物語である", "why": "勅撰和歌集。ジャンルの入れ替え", "verifiedFalse": true },
+      { "text": "室町時代に編まれた連歌集である", "why": "連歌集は菟玖波集・新撰菟玖波集など。時代・ジャンルの入れ替え", "verifiedFalse": true }
+    ],
+    "title": "新古今和歌集",
+    "reading": "しんこきんわかしゅう",
+    "era": "kamakura",
+    "category": "literature",
+    "location": null,
+    "author": "藤原定家ら（撰）",
+    "technique": null,
+    "keyPoints": [
+      "後鳥羽上皇の命による勅撰和歌集",
+      "撰者は藤原定家ら",
+      "1205年成立",
+      "技巧をこらした余情ある歌風"
+    ],
+    "explanation": "後鳥羽上皇の命によって編まれた勅撰和歌集で、藤原定家らが撰者をつとめた。技巧をこらし、言葉の余情を重んじる歌風で知られる。武家の政権が生まれたのちも、公家のあいだで伝統的な文化が受けつがれたことを示す代表的な作品とされる。",
+    "examNote": "「新古今和歌集＝後鳥羽上皇の命＝藤原定家」。古今和歌集（国風文化・紀貫之）との取り違えが定番。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "heike-monogatari",
+    "orderIndex": 1240,
+    "pairs": [
+      { "kind": "書物×主題", "left": "平家物語", "right": "平氏の興亡" },
+      { "kind": "書物×伝え方", "left": "平家物語", "right": "琵琶法師による平曲" }
+    ],
+    "kind": "text",
+    "artist": null,
+    "patron": null,
+    "style": "軍記物語",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "鎌倉時代前期（13世紀前半）",
+    "eraNote": "鎌倉文化。武士の活躍を主題とする軍記物語が発達し、平家物語はその代表とされる。琵琶法師によって平曲として語られ、文字を読めない人々にも広まった。",
+    "facts": [
+      { "slot": "other", "text": "平氏の興亡を主題とする軍記物語" },
+      { "slot": "other", "text": "琵琶法師によって平曲として語られた" },
+      { "slot": "era", "text": "鎌倉文化を代表する軍記物語" }
+    ],
+    "falseStatements": [
+      { "text": "平将門の乱を主題とする", "why": "将門の乱を描くのは将門記。作品の入れ替え", "verifiedFalse": true },
+      { "text": "藤原道長の栄華を描く歴史物語である", "why": "歴史物語は大鏡。ジャンル・作品の入れ替え", "verifiedFalse": true },
+      { "text": "後鳥羽上皇の命による勅撰和歌集である", "why": "勅撰和歌集は新古今和歌集。ジャンルの入れ替え", "verifiedFalse": true },
+      { "text": "御伽草子の一つである", "why": "御伽草子は室町時代の庶民向け短編物語群。時代・ジャンルの入れ替え", "verifiedFalse": true }
+    ],
+    "title": "平家物語",
+    "reading": "へいけものがたり",
+    "era": "kamakura",
+    "category": "literature",
+    "location": null,
+    "author": "作者不詳",
+    "technique": null,
+    "keyPoints": [
+      "鎌倉文化を代表する軍記物語",
+      "平氏の興亡を主題とする",
+      "琵琶法師が平曲として語り広めた",
+      "作者不詳"
+    ],
+    "explanation": "平氏の興亡を主題とし、武士の戦いと人の世のはかなさを描いた軍記物語。琵琶を弾きながら語る琵琶法師によって平曲として広められ、文字を読めない人々のあいだにも物語が行きわたった。武士が文化の担い手として前面に出た鎌倉文化を代表する作品とされる。",
+    "examNote": "「平家物語＝軍記物語＝琵琶法師の平曲」。院政期の将門記・陸奥話記（漢文体の初期軍記）との時代の違いに注意。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "azuma-kagami",
+    "orderIndex": 1300,
+    "pairs": [
+      { "kind": "書物×主題", "left": "吾妻鏡", "right": "鎌倉幕府の歴史" },
+      { "kind": "書物×形式", "left": "吾妻鏡", "right": "編年体（日記の形式）" }
+    ],
+    "kind": "text",
+    "artist": null,
+    "patron": null,
+    "style": "歴史書",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "鎌倉時代後期（13世紀末〜14世紀初め頃の成立とされる）",
+    "eraNote": "鎌倉文化。武家の側でも歴史をまとめる動きが生まれ、幕府の事績を年月を追って記した吾妻鏡が編まれた。鎌倉幕府の歴史を知るうえでの基本史料とされる。",
+    "facts": [
+      { "slot": "other", "text": "鎌倉幕府の事績を記した歴史書" },
+      { "slot": "other", "text": "年月を追って記す編年体をとる" },
+      { "slot": "other", "text": "編者は不詳" }
+    ],
+    "falseStatements": [
+      { "text": "藤原道長の栄華を老人の対話で描く", "why": "老人の対話形式は大鏡（院政期の歴史物語）。作品の入れ替え", "verifiedFalse": true },
+      { "text": "平氏の興亡を主題とする軍記物語である", "why": "軍記物語は平家物語。ジャンルの入れ替え", "verifiedFalse": true },
+      { "text": "室町幕府の歴史を記した書物である", "why": "吾妻鏡が記すのは鎌倉幕府。時代の入れ替え", "verifiedFalse": true },
+      { "text": "後鳥羽上皇が編ませた勅撰和歌集である", "why": "勅撰和歌集は新古今和歌集。ジャンル・人物の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "吾妻鏡",
+    "reading": "あづまかがみ",
+    "era": "kamakura",
+    "category": "literature",
+    "location": null,
+    "author": "編者不詳",
+    "technique": null,
+    "keyPoints": [
+      "鎌倉幕府の事績を記した歴史書",
+      "編年体（年月を追う形式）",
+      "編者不詳",
+      "武家による歴史編纂の例"
+    ],
+    "explanation": "鎌倉幕府の事績を年月を追って記した歴史書で、編者は不詳。武家の側から自らの政権の歩みを記録した書物であり、鎌倉時代を知るうえでの基本的な史料とされる。老人の対話形式で摂関家の栄華を語る大鏡（院政期）とは、形式も立場も対照的である。",
+    "examNote": "「吾妻鏡＝鎌倉幕府の歴史書＝編年体」。大鏡（紀伝体・歴史物語）との形式の違いで問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "ninsho",
+    "orderIndex": 1250,
+    "pairs": [
+      { "kind": "人物×宗派", "left": "忍性", "right": "律宗" },
+      { "kind": "人物×施設", "left": "忍性", "right": "北山十八間戸（病人の救済施設）" }
+    ],
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "律宗",
+    "holder": null,
+    "subject": null,
+    "periodLabel": "鎌倉時代中期〜後期（13世紀）",
+    "eraNote": "鎌倉文化。新仏教のおこりに刺激され、旧仏教の側でも戒律を重んじる改革が進んだ。律宗の忍性は師の叡尊とともに戒律の復興につとめ、病者や貧しい人々の救済にも力を注いだ。",
+    "facts": [
+      { "slot": "religion", "text": "律宗の僧" },
+      { "slot": "other", "text": "叡尊に学び、戒律の復興につとめた" },
+      { "slot": "other", "text": "奈良に北山十八間戸を設けて病者を救済したと伝えられる" }
+    ],
+    "falseStatements": [
+      { "text": "浄土真宗を開いた", "why": "浄土真宗の開祖は親鸞。宗派の入れ替え", "verifiedFalse": true },
+      { "text": "踊念仏によって布教した", "why": "踊念仏は一遍（時宗）。人物・教えの入れ替え", "verifiedFalse": true },
+      { "text": "東大寺再建の大勧進をつとめた", "why": "東大寺再建の大勧進は重源。人物・事績の入れ替え", "verifiedFalse": true },
+      { "text": "室町時代の禅僧である", "why": "忍性は鎌倉時代の律宗の僧。時代・宗派の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "忍性",
+    "reading": "にんしょう",
+    "era": "kamakura",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "律宗の僧（旧仏教の改革）",
+      "師は叡尊",
+      "北山十八間戸で病者を救済",
+      "社会事業に力を注いだ"
+    ],
+    "explanation": "戒律を重んじる律宗の僧で、師の叡尊とともに戒律の復興につとめた。あわせて橋や道の整備、病者や貧しい人々の救済といった社会事業にも力を注ぎ、奈良の北山十八間戸はその代表とされる。鎌倉新仏教のおこりに刺激されて旧仏教の側でも改革が進んだことを示す人物として紹介される。",
+    "examNote": "「律宗＝叡尊・忍性＝北山十八間戸」。鎌倉新仏教の6人（法然・親鸞・一遍・日蓮・栄西・道元）と旧仏教側の改革者を分けて覚える。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "ise-shinto",
+    "orderIndex": 1320,
+    "pairs": [
+      { "kind": "神道×人物", "left": "伊勢神道", "right": "度会家行" },
+      { "kind": "神道×主張", "left": "伊勢神道", "right": "神本仏迹説（神を本とする考え）" }
+    ],
+    "kind": "concept",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "神道",
+    "holder": null,
+    "subject": null,
+    "periodLabel": "鎌倉時代後期（13世紀末〜14世紀前半）",
+    "eraNote": "鎌倉文化。神仏習合が進むなかで、仏を本とする本地垂迹説に対し、神を本と考える立場も現れた。伊勢神宮外宮の神官・度会家行が唱えた伊勢神道はその代表で、蒙古襲来を機に高まった神国の意識を背景とする。",
+    "facts": [
+      { "slot": "other", "text": "伊勢神宮外宮の神官・度会家行が大成した" },
+      { "slot": "other", "text": "神を本とする神本仏迹説の立場をとる" },
+      { "slot": "era", "text": "鎌倉時代後期に成立した神道の説" }
+    ],
+    "falseStatements": [
+      { "text": "吉田兼倶が大成した", "why": "吉田神道（唯一神道）を大成したのは室町時代の吉田兼倶。人物・時代の入れ替え", "verifiedFalse": true },
+      { "text": "仏を本とする本地垂迹説を主張した", "why": "伊勢神道は神を本とする神本仏迹説。主張の反転", "verifiedFalse": true },
+      { "text": "禅宗の一派である", "why": "伊勢神道は神道の説。宗教の入れ替え", "verifiedFalse": true },
+      { "text": "江戸時代に国学者が唱えた", "why": "伊勢神道は鎌倉時代後期。時代の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "伊勢神道",
+    "reading": "いせしんとう",
+    "era": "kamakura",
+    "category": "religion",
+    "location": null,
+    "author": "度会家行",
+    "technique": null,
+    "keyPoints": [
+      "度会家行が大成した神道の説",
+      "神を本とする神本仏迹説",
+      "伊勢神宮外宮の神官による",
+      "室町時代の吉田神道（吉田兼倶）と区別する"
+    ],
+    "explanation": "伊勢神宮外宮の神官であった度会家行が大成した神道の説。仏が本体で神はその現れとする本地垂迹説に対し、神こそが本体であるとする神本仏迹説の立場をとる。蒙古襲来を機に高まった神国の意識を背景に生まれたとされ、のちの室町時代に吉田兼倶が大成した吉田神道（唯一神道）と対にして問われる。",
+    "examNote": "「伊勢神道＝度会家行（鎌倉）」「吉田神道＝吉田兼倶（室町）」の対応が頻出。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
   }
 ]

@@ -1,6 +1,12 @@
 [
   {
     "id": "yakushi-sanzon-yakushiji",
+    "orderIndex": 30,
+    "pairs": [
+      { "left": "薬師寺", "right": "天武天皇（発願）", "kind": "work-person" },
+      { "left": "薬師寺金堂薬師三尊像", "right": "銅造（金銅仏）", "kind": "work-technique" },
+      { "left": "薬師寺金堂薬師三尊像", "right": "グプタ様式の影響", "kind": "work-style" }
+    ],
     "artist": null,
     "patron": "天武天皇",
     "style": "金銅仏（清新・グプタ様式の影響）",
@@ -118,6 +124,12 @@
   },
   {
     "id": "yamadadera-butsuzu",
+    "orderIndex": 20,
+    "pairs": [
+      { "left": "山田寺", "right": "蘇我倉山田石川麻呂", "kind": "work-person" },
+      { "left": "興福寺仏頭", "right": "興福寺国宝館（もと山田寺）", "kind": "work-holder" },
+      { "left": "興福寺仏頭", "right": "銅造（金銅仏）", "kind": "work-technique" }
+    ],
     "artist": null,
     "patron": "蘇我倉山田石川麻呂",
     "style": "金銅仏（清新な白鳳様式）",
@@ -231,6 +243,12 @@
   },
   {
     "id": "takamatsuzuka-heki",
+    "orderIndex": 50,
+    "pairs": [
+      { "left": "高松塚古墳壁画", "right": "女子群像・四神図", "kind": "work-subject" },
+      { "left": "高松塚古墳", "right": "奈良県明日香村", "kind": "work-place" },
+      { "left": "高松塚古墳壁画", "right": "1972年の発見", "kind": "work-event" }
+    ],
     "artist": null,
     "patron": null,
     "style": "壁画（唐・高句麗の影響）",
@@ -332,6 +350,12 @@
   },
   {
     "id": "yakushiji-toto",
+    "orderIndex": 60,
+    "pairs": [
+      { "left": "薬師寺東塔", "right": "三重塔（各層に裳階）", "kind": "work-technique" },
+      { "left": "薬師寺東塔", "right": "「凍れる音楽」", "kind": "term-pair" },
+      { "left": "薬師寺", "right": "天武天皇（発願）", "kind": "work-person" }
+    ],
     "artist": null,
     "patron": "天武天皇",
     "style": "白鳳建築（三重塔・裳階付き）",
@@ -438,6 +462,12 @@
   },
   {
     "id": "horyuji-kondo-heki",
+    "orderIndex": 40,
+    "pairs": [
+      { "left": "法隆寺金堂壁画", "right": "阿弥陀浄土図", "kind": "work-subject" },
+      { "left": "法隆寺金堂壁画", "right": "1949年の火災で焼損", "kind": "work-event" },
+      { "left": "文化財保護法（1950年）", "right": "法隆寺金堂壁画の焼損", "kind": "term-pair" }
+    ],
     "artist": null,
     "patron": null,
     "style": "壁画（唐・インドの影響を受けた仏教絵画）",
@@ -529,6 +559,11 @@
   {
     "id": "kitora-kofun-heki",
     "kind": "concept",
+    "orderIndex": 45,
+    "pairs": [
+      { "left": "キトラ古墳壁画", "right": "精密な天文図", "kind": "work-subject" },
+      { "left": "キトラ古墳", "right": "奈良県明日香村", "kind": "work-place" }
+    ],
     "artist": null,
     "patron": null,
     "style": "壁画（唐・高句麗の影響）",
@@ -602,6 +637,12 @@
   {
     "id": "hakuho-kajin",
     "kind": "person",
+    "orderIndex": 10,
+    "pairs": [
+      { "left": "柿本人麻呂", "right": "持統・文武朝の宮廷歌人", "kind": "person-item" },
+      { "left": "額田王", "right": "天智・天武朝の女性歌人", "kind": "person-item" },
+      { "left": "柿本人麻呂・額田王", "right": "『万葉集』", "kind": "person-text" }
+    ],
     "artist": null,
     "patron": null,
     "style": null,
@@ -654,6 +695,240 @@
     "confusables": [],
     "sources": [
       "高校教科書（山川『詳説日本史』）白鳳文化の項"
+    ],
+    "examTags": [],
+    "status": "reviewed"
+  },
+  {
+    "id": "fujiwarakyo",
+    "kind": "concept",
+    "orderIndex": 5,
+    "pairs": [
+      { "left": "藤原京", "right": "持統天皇（694年遷都）", "kind": "work-person" },
+      { "left": "藤原京", "right": "最初の本格的な都城", "kind": "term-pair" }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "都城",
+    "religion": null,
+    "periodLabel": "白鳳文化（694年遷都）",
+    "eraNote": "天武天皇が造営を進め、持統天皇の694年に遷都した藤原京は、中国にならって条坊制の街路をもつ最初の本格的な都城である。律令国家の形成が形となって表れたもので、白鳳文化の背景をなす。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      { "slot": "other", "text": "持統天皇が694年に遷都した都である" },
+      { "slot": "other", "text": "中国にならった条坊制をもつ最初の本格的な都城である" },
+      { "slot": "other", "text": "710年に平城京へ都が移されるまで用いられた" }
+    ],
+    "falseStatements": [
+      { "text": "桓武天皇が造営した都である", "why": "桓武天皇が造営したのは長岡京・平安京。藤原京は持統天皇の遷都で人物・時代ずらし", "verifiedFalse": true },
+      { "text": "平城京の次に営まれた都である", "why": "藤原京から平城京へ移った（710年）。前後の入れ替えずらし", "verifiedFalse": true }
+    ],
+    "title": "藤原京",
+    "reading": "ふじわらきょう",
+    "era": "hakuho",
+    "category": "other",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "持統天皇、694年遷都",
+      "最初の本格的な都城（条坊制）",
+      "710年に平城京へ移る",
+      "白鳳文化の政治的背景"
+    ],
+    "explanation": "天武天皇のもとで造営が始まり、持統天皇の694年に遷都された都。中国の都城にならった条坊制の街路をもつ最初の本格的な都で、律令国家の形成が都の形にも表れている。710年に平城京へ都が移されるまで用いられた。",
+    "examNote": "単独出題より、白鳳文化のリード文・誤文の素材として使う（画像なし項目）。藤原京→平城京の順序が誤文の定番。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）白鳳文化の項"
+    ],
+    "examTags": [],
+    "status": "reviewed"
+  },
+  {
+    "id": "kanji-zoei",
+    "kind": "concept",
+    "orderIndex": 15,
+    "pairs": [
+      { "left": "大官大寺", "right": "官寺（国家の寺）", "kind": "term-pair" },
+      { "left": "薬師寺", "right": "天武天皇の発願", "kind": "work-person" }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "官寺",
+    "religion": "仏教",
+    "periodLabel": "白鳳文化（7世紀後半）",
+    "eraNote": "天武・持統朝には、国家が造営し維持する官寺として大官大寺や薬師寺が営まれ、仏教は国家を守るものとして重んじられた。豪族の氏寺が中心であった飛鳥文化から、国家仏教へと重心が移ったことを示す。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      { "slot": "other", "text": "大官大寺・薬師寺は国家が造営した官寺である" },
+      { "slot": "other", "text": "天武天皇の発願で薬師寺の造営が始まった", "shared": ["yakushi-sanzon-yakushiji", "yakushiji-toto"] },
+      { "slot": "other", "text": "豪族の氏寺中心から国家仏教へと重心が移った" }
+    ],
+    "falseStatements": [
+      { "text": "官寺とは豪族が一族のために建てた寺のことである", "why": "豪族が一族のために建てた寺は氏寺。官寺は国家が造営・維持する寺で内容ずらし", "verifiedFalse": true },
+      { "text": "大官大寺は蘇我馬子が建てた", "why": "蘇我馬子が建てたのは飛鳥寺（法興寺）。人物ずらし", "verifiedFalse": true }
+    ],
+    "title": "官寺の造営（大官大寺・薬師寺）",
+    "reading": "かんじのぞうえい",
+    "era": "hakuho",
+    "category": "other",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "国家が造営・維持する寺＝官寺",
+      "大官大寺・薬師寺",
+      "薬師寺は天武天皇の発願",
+      "氏寺中心（飛鳥）→国家仏教（白鳳）"
+    ],
+    "explanation": "天武・持統朝には、国家が造営して維持する官寺として大官大寺や薬師寺が営まれた。豪族が氏寺を建てた飛鳥文化に対し、白鳳文化では仏教が国家を守るものとして重んじられ、天平文化の国分寺建立へとつながっていく。",
+    "examNote": "単独出題より、白鳳文化のリード文・誤文の素材として使う（画像なし項目）。「氏寺（飛鳥）／官寺（白鳳）／国分寺（天平）」の流れで覚える。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）白鳳文化の項"
+    ],
+    "examTags": [],
+    "status": "reviewed"
+  },
+  {
+    "id": "kentoshi-hakuho",
+    "kind": "concept",
+    "orderIndex": 25,
+    "pairs": [
+      { "left": "白鳳文化", "right": "唐初期の文化の影響", "kind": "term-pair" },
+      { "left": "薬師寺金堂薬師三尊像", "right": "インドのグプタ様式の影響", "kind": "work-style" }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "periodLabel": "白鳳文化（7世紀後半〜8世紀初め）",
+    "eraNote": "白鳳文化は、遣唐使などを通じて伝えられた唐初期の文化の影響を強く受け、さらにインドのグプタ様式に通じる表現も取り入れた。飛鳥文化が中国南北朝と朝鮮半島の影響を受けたのに対し、影響のもとが唐に移っている点が対比される。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      { "slot": "other", "text": "唐初期の文化の影響を強く受けている" },
+      { "slot": "other", "text": "インドのグプタ様式に通じる表現もみられる", "shared": ["yakushi-sanzon-yakushiji"] },
+      { "slot": "other", "text": "飛鳥文化は中国南北朝・朝鮮半島の影響を受けた点で対比される" }
+    ],
+    "falseStatements": [
+      { "text": "宋の文化の影響を受けて成立した", "why": "唐初期の文化の影響を受けた。宋の影響は鎌倉文化（禅宗様など）で時代ずらし", "verifiedFalse": true },
+      { "text": "遣唐使が停止されたのちに生まれた文化である", "why": "遣唐使停止（894年）後に生まれたのは国風文化。時代ずらし", "verifiedFalse": true }
+    ],
+    "title": "唐初期文化の影響（白鳳文化の性格）",
+    "reading": "とうしょきぶんかのえいきょう",
+    "era": "hakuho",
+    "category": "other",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "唐初期の文化の影響",
+      "インドのグプタ様式に通じる表現",
+      "飛鳥＝南北朝・朝鮮半島／白鳳＝唐初期",
+      "若々しく清新な作風"
+    ],
+    "explanation": "白鳳文化は、遣唐使などを通じて伝えられた唐初期の文化の影響を強く受けて成立した。仏像には唐の様式に加えてインドのグプタ様式に通じる若々しい肉体表現がみられる。中国南北朝や朝鮮半島の影響を受けた飛鳥文化との対比で問われる。",
+    "examNote": "単独出題より、白鳳文化のリード文・誤文（影響のもとの入替）の素材として使う（画像なし項目）。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）白鳳文化の項"
+    ],
+    "examTags": [],
+    "status": "reviewed"
+  },
+  {
+    "id": "horyuji-saiken-ronso",
+    "kind": "concept",
+    "orderIndex": 35,
+    "pairs": [
+      { "left": "若草伽藍跡", "right": "法隆寺の再建をめぐる論争", "kind": "term-pair" },
+      { "left": "法隆寺西院伽藍", "right": "現存する世界最古級の木造建築", "kind": "term-pair" }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "仏教",
+    "periodLabel": "白鳳文化（7世紀後半の再建とされる）",
+    "eraNote": "法隆寺の境内では、現在の伽藍とは軸線の異なる若草伽藍の跡が見つかっており、創建の伽藍が焼失したのち再建されたと考えられている。飛鳥文化の造像を伝えつつ、建物自体は白鳳期の再建とみる立場から、時代区分の扱いが問われることがある。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      { "slot": "other", "text": "法隆寺の境内で若草伽藍の跡が見つかっている" },
+      { "slot": "other", "text": "現在の伽藍は焼失後に再建されたものと考えられている" },
+      { "slot": "other", "text": "西院伽藍は現存する世界最古級の木造建築とされる" }
+    ],
+    "falseStatements": [
+      { "text": "若草伽藍は平安時代に造営された", "why": "若草伽藍は法隆寺の創建期（7世紀）の伽藍跡とされる。時代ずらし", "verifiedFalse": true },
+      { "text": "法隆寺の伽藍は創建以来まったく手が加えられていないことが確定している", "why": "若草伽藍跡の発見により、焼失後の再建と考えられている。史実ずらし", "verifiedFalse": true }
+    ],
+    "title": "若草伽藍と法隆寺の再建",
+    "reading": "わかくさがらんとほうりゅうじのさいけん",
+    "era": "hakuho",
+    "category": "other",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "若草伽藍跡＝法隆寺創建期の伽藍と考えられる",
+      "現在の伽藍は焼失後の再建とされる",
+      "西院伽藍は現存最古級の木造建築",
+      "飛鳥／白鳳の時代区分にかかわる論点"
+    ],
+    "explanation": "法隆寺の境内では、現在の伽藍とは軸線の異なる若草伽藍の跡が見つかっており、創建の伽藍が焼失したのち再建されたと考えられている。西院伽藍は現存する世界最古級の木造建築とされ、飛鳥文化の造像を伝えながら建物は白鳳期の再建とみる見方がある。",
+    "examNote": "単独出題より、飛鳥・白鳳のリード文・誤文の素材として使う（画像なし項目）。若草伽藍跡の名称が問われることがある。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）飛鳥文化・白鳳文化の項"
+    ],
+    "examTags": [],
+    "status": "reviewed"
+  },
+  {
+    "id": "kokushi-hensan",
+    "kind": "concept",
+    "orderIndex": 12,
+    "pairs": [
+      { "left": "天武天皇", "right": "国史編纂の開始", "kind": "person-item" },
+      { "left": "『古事記』『日本書紀』", "right": "奈良時代に完成", "kind": "text-item" }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "periodLabel": "白鳳文化（7世紀後半）",
+    "eraNote": "天武天皇のもとで国家の歴史をまとめる事業が始められ、その成果は奈良時代の『古事記』『日本書紀』として実を結んだ。律令国家の形成と歩調をあわせた文化事業として、白鳳文化の一面を示す。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      { "slot": "other", "text": "天武天皇のもとで国史をまとめる事業が始められた" },
+      { "slot": "other", "text": "その成果は奈良時代の『古事記』『日本書紀』として結実した" }
+    ],
+    "falseStatements": [
+      { "text": "『古事記』『日本書紀』は白鳳文化の時期に完成した", "why": "編纂の開始は天武朝だが、完成は奈良時代（天平文化の項で扱う）。時期ずらし", "verifiedFalse": true },
+      { "text": "国史編纂を命じたのは桓武天皇である", "why": "天武天皇のもとで始められた。人物・時代ずらし", "verifiedFalse": true }
+    ],
+    "title": "国史編纂の開始",
+    "reading": "こくしへんさんのかいし",
+    "era": "hakuho",
+    "category": "other",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "天武天皇のもとで開始",
+      "成果は奈良時代の『古事記』『日本書紀』",
+      "律令国家の形成と並行する文化事業",
+      "完成時期は天平文化で扱う"
+    ],
+    "explanation": "天武天皇のもとで、国家の歴史をまとめる事業が始められた。その成果は奈良時代に『古事記』（712年）・『日本書紀』（720年）として結実する。律令国家の形成と歩調をあわせた文化事業で、開始（白鳳）と完成（天平）の時期の違いが問われやすい。",
+    "examNote": "単独出題より、白鳳文化のリード文・誤文の素材として使う（画像なし項目）。開始（天武朝）と完成（奈良時代）の区別に注意。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）白鳳文化・天平文化の項"
     ],
     "examTags": [],
     "status": "reviewed"

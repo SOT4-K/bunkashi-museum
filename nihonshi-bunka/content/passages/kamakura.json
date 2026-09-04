@@ -107,12 +107,12 @@
           "stem": "下線部aのうち運慶の四男が造った、市中で念仏を勧めた僧の姿を写す肖像彫刻はどれか。",
           "answerId": "kuya-shonin-zo",
           "distractorIds": [
+            "kongorikishi-todaiji",
             "kamakura-daibutsu",
-            "byodoin-amida-nyorai",
-            "kanshinji-nyoirin-kannon"
+            "byodoin-amida-nyorai"
           ]
         },
-        "note": "二段構え: A=慶派の仏師たち（流派）／B=運慶の四男の作・念仏を勧めた僧の肖像。1本目（kamakura-01）は A=六波羅蜜寺・B=康勝だったので、下線側を流派にずらして条件を入れ替えた。誤答はすべて彫刻で、byodoin-amida-nyorai は作者が明らかな像（Bの一部だけを満たす）"
+        "note": "二段構え: A=慶派の仏師たち（流派）／B=運慶の四男の作・念仏を勧めた僧の肖像。1本目（kamakura-01）は A=六波羅蜜寺・B=康勝だったので、下線側を流派にずらして条件を入れ替えた。誤答はすべて彫刻で、kongorikishi-todaiji は同じ慶派の作（Aだけを満たす理想的な誤答）、byodoin-amida-nyorai は作者が明らかな別時代の像。kongorikishi-todaiji は status:draft のため本番ビルドでは出題プールに入らず engine が同カテゴリの別作品で自動補充する（reviewer が承認して reviewed になれば、そのまま誤答として出る）"
       },
       {
         "key": "b",

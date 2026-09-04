@@ -31,7 +31,7 @@ export function ThemeSetScreen({
   passage,
   pool,
   imagePool = pool,
-  setIndex = 0,
+  sequenceIndex = 0,
   eras,
   onAnswer,
   onFinish,
@@ -44,7 +44,7 @@ export function ThemeSetScreen({
   imagePool?: Work[]
   /** 「学習を始める」等で連続提示するテーマセットの通し番号（0始まり）。3セットに1問の
    *  年代順並べ替え（M2-16）の頻度判定に使う。省略時は0（毎回1本目扱い＝並べ替えは出ない）。 */
-  setIndex?: number
+  sequenceIndex?: number
   eras: Era[]
   onAnswer: (
     workId: string,
@@ -58,9 +58,9 @@ export function ThemeSetScreen({
   const today = todayIso()
   const themeQuestions = useMemo(() => {
     const base = buildThemeSetQuestions(passage, pool, eras, undefined, imagePool)
-    return appendOrderQuestionIfDue(base, setIndex, imagePool)
+    return appendOrderQuestionIfDue(base, sequenceIndex, imagePool)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [passage.id, setIndex])
+  }, [passage.id, sequenceIndex])
   const segments = useMemo(() => splitPassageText(passage.text), [passage.text])
   // 9章「画像リード型セット」: kind === "image" のとき、リード文の代わりに参照画像1〜2枚を表示する。
   const isImageLead = passage.kind === 'image'

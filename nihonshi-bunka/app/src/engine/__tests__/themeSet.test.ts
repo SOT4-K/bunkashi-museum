@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import { buildThemeQuestionForWork, buildThemeSetQuestions, selectLearnThemeSets } from '../themeSet'
+import { appendOrderQuestionIfDue, buildThemeQuestionForWork, buildThemeSetQuestions, selectLearnThemeSets } from '../themeSet'
 import { createItemProgress } from '../srs'
 import { makeWork, seededRandom, testEras } from './testFixtures'
 import type { Passage, ProgressState, Work } from '../../types'
@@ -20,14 +20,16 @@ const barePool: Work[] = [bareTarget, makeWork({ id: 'bare2', era: 'tenpyo', cat
 describe('buildThemeQuestionForWork', () => {
   it('Q9 が生成できる作品では q9 を優先して選ぶ', () => {
     const q = buildThemeQuestionForWork(targetWithArtist, pool, testEras, seededRandom(1))
-    expect(q.type).toBe('q9')
-    expect(q.work.id).toBe('t1')
+    expect(q).not.toBeNull()
+    expect(q!.type).toBe('q9')
+    expect(q!.work.id).toBe('t1')
   })
 
-  it('どの拡張型も生成できない作品では q1 にフォールバックする（必ず Question を返す）', () => {
+  it('画像を持つ対象（imagePool にある）では、どの拡張型も生成できなくても q1 にフォールバックする（必ず Question を返す）', () => {
     const q = buildThemeQuestionForWork(bareTarget, barePool, testEras, seededRandom(1))
-    expect(q.type).toBe('q1')
-    expect(q.choiceWorks).toHaveLength(2) // barePool には distractor が1件しか無い（4択に満たないがQ1は生成される）
+    expect(q).not.toBeNull()
+    expect(q!.type).toBe('q1')
+    expect(q!.choiceWorks).toHaveLength(2) // barePool には distractor が1件しか無い（4択に満たないがQ1は生成される）
   })
 
   it('生成される Question は常に画像を持つ（work.image か choiceWorks のどちらか）', () => {
@@ -36,8 +38,9 @@ describe('buildThemeQuestionForWork', () => {
       [bareTarget, barePool],
     ] as const) {
       const q = buildThemeQuestionForWork(target, p, testEras, seededRandom(2))
-      const hasPromptImage = Boolean(q.work?.image)
-      const hasChoiceImages = q.choiceWorks.length > 0
+      expect(q).not.toBeNull()
+      const hasPromptImage = Boolean(q!.work?.image)
+      const hasChoiceImages = q!.choiceWorks.length > 0
       expect(hasPromptImage || hasChoiceImages).toBe(true)
     }
   })

@@ -439,15 +439,16 @@ function main() {
       }
 
       // pairs（語句の組合せ問題 T1/Q13 の素材）・orderIndex（年代順並べ替え T7/Q14）は
-      // M2-16 で追加した任意フィールド（writer が M2-17 で投入中）。型チェックのみ、
-      // 無くてもエラー・警告にしない（無い作品は Q13/Q14 が自然にスキップされる設計）。
+      // M2-16 で追加した任意フィールド（writer が M2-17 で投入中）。フィールド名は実データ
+      // （left/right/kind）に合わせてある。型チェックのみ、無くてもエラー・警告にしない
+      // （無い作品は Q13/Q14 が自然にスキップされる設計）。
       if ('pairs' in work && work.pairs !== undefined) {
         if (!Array.isArray(work.pairs)) {
           errors.push(`${label}: pairs は配列である必要がある`)
         } else {
           work.pairs.forEach((p, i) => {
-            if (!p || typeof p.a !== 'string' || !p.a || typeof p.b !== 'string' || !p.b) {
-              errors.push(`${label}: pairs[${i}] は非空の a・b（string）を持つ必要がある`)
+            if (!p || typeof p.left !== 'string' || !p.left || typeof p.right !== 'string' || !p.right) {
+              errors.push(`${label}: pairs[${i}] は非空の left・right（string）を持つ必要がある`)
             }
           })
         }

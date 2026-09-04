@@ -3,7 +3,7 @@ import styles from './LearnScreen.module.css'
 import { WorkImage } from './WorkImage'
 import { ImageLightbox } from './ImageLightbox'
 import { ExpandIcon } from './icons'
-import { hasRealImage, imageSrc } from '../utils/image'
+import { imageSrc } from '../utils/image'
 import type { MissSelection } from '../engine/explain'
 import type { Question, Work } from '../types'
 
@@ -164,9 +164,12 @@ export function QuestionCard({
 
   // Q12（画像なし文字4択。9章「画像リード型セット」）はリード文自体が画像なので、
   // 設問ごとのヒーロー画像は出さない（そもそも question.work の画像＝答えではないことが多い）。
-  // Q13/Q14 は work が画像を持たない対象（kind: person/text/concept）や、複数作品を代表する
-  // 仮のものであることがあるため、実画像が無ければヒーロー画像を出さない（M2-16）。
-  const showHeroImage = question.type !== 'q12' && question.type !== 'q14' && hasRealImage(question.work)
+  // M2-16: 画像を持たない対象（kind: person/text/concept。Q4/Q8/Q10/Q13 の対象に戻した）は
+  // ヒーロー画像を出さない（プレースホルダ SVG が作品名を描くため答えが分かってしまう。
+  // kind ではなく hasRealImage で判定すると、画像取得前の artifact 作品（プレースホルダ表示中）
+  // まで隠れてしまい既存の挙動が変わるため、判定は kind だけを見る）。Q14 は複数作品を束ねる
+  // 仮の work のため常に出さない。
+  const showHeroImage = question.type !== 'q12' && question.type !== 'q14' && (question.work.kind ?? 'artifact') === 'artifact'
 
   return (
     <div>

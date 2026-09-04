@@ -109,14 +109,17 @@ export interface Work {
   orderIndex?: number
 }
 
-/** Work.pairs の1件。a・b が「正しい組」。engine/pairs.ts が生成ロジックを持つ。 */
+/** Work.pairs の1件。left・right が「正しい組」。engine/pairs.ts が生成ロジックを持つ。
+ *  フィールド名は M2-17（writer、pairs データの投入）の実データに合わせてある
+ *  （left/right/kind。例: {left: "土偶", right: "縄文時代の呪術", kind: "work-use"}）。 */
 export interface WorkPair {
   /** 組の左側（人物・書物・様式・原料など） */
-  a: string
+  left: string
   /** 組の右側（技法・作者・建築・産地など） */
-  b: string
-  /** 表示用ラベル（例: "仏師×製法"）。省略可、現状は設問文には使わない（将来の拡張用）。 */
-  label?: string
+  right: string
+  /** 組の種類を表す自由記述ラベル（例: "work-place" "人物×拠点"）。省略可、
+   *  現状は設問文には使わない（将来の拡張用）。writer によって命名がまちまち（英語/日本語）。 */
+  kind?: string
 }
 
 /** eras.json の items[].category（自由記述に近いが代表的な値）。 */

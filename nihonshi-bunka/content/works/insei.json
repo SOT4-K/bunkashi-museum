@@ -622,5 +622,354 @@
     ],
     "examTags": [],
     "status": "reviewed"
+  },
+  {
+    "id": "shirakawa-joko",
+    "orderIndex": 1086,
+    "pairs": [
+      { "kind": "人物×事績", "left": "白河上皇", "right": "院政の開始（1086年）" },
+      { "kind": "人物×造営", "left": "白河上皇", "right": "法勝寺（六勝寺の一つ）" }
+    ],
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "平安時代後期（11世紀後半〜12世紀前半）",
+    "eraNote": "院政期の文化。白河上皇は1086年、幼い堀河天皇に位を譲ったのちも上皇として政務をとり、院政を始めた。院や后は京都白河の地に御願寺を相次いで造営し、その造営と参詣が院政期の文化を支えた。",
+    "facts": [
+      { "slot": "era", "text": "院政を始めた上皇" },
+      { "slot": "period", "text": "1086年に位を譲ったのちも政務をとりつづけた" },
+      { "slot": "other", "text": "法勝寺を造営した" }
+    ],
+    "falseStatements": [
+      { "text": "今様を集めた梁塵秘抄を編んだ", "why": "梁塵秘抄を編んだのは後白河上皇。人物の入れ替え", "verifiedFalse": true },
+      { "text": "奥州藤原氏の初代である", "why": "奥州藤原氏の初代は藤原清衡。人物・立場の入れ替え", "verifiedFalse": true },
+      { "text": "摂関政治の全盛期を築いた", "why": "摂関政治の全盛は藤原道長・頼通。白河上皇は摂関家を抑えて院政を始めた側。人物の入れ替え", "verifiedFalse": true },
+      { "text": "鎌倉時代の上皇である", "why": "白河上皇は平安時代後期（11世紀後半〜12世紀前半）の人物。時代の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "白河上皇",
+    "reading": "しらかわじょうこう",
+    "era": "insei",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "1086年に院政を始めた",
+      "六勝寺の一つ法勝寺を造営",
+      "熊野詣・高野詣をたびたび行った",
+      "院政期の文化の出発点となる人物"
+    ],
+    "explanation": "幼い天皇に位を譲ったのちも上皇として政務をとりつづけ、院政を始めた人物。京都白河の地に法勝寺を造営し、以後、院や后によって同じ地に御願寺（六勝寺）が相次いで建てられた。熊野や高野への参詣をたびたび行ったことでも知られ、その造営と参詣が院政期の文化の背景となった。",
+    "examNote": "「院政の開始＝1086年＝白河上皇」。今様を愛好した後白河上皇との取り違えが定番。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）院政期の文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "goshirakawa-joko",
+    "orderIndex": 1170,
+    "pairs": [
+      { "kind": "人物×著作", "left": "後白河上皇", "right": "梁塵秘抄（今様の集成）" },
+      { "kind": "人物×造営", "left": "後白河上皇", "right": "蓮華王院（平清盛に造営させた）" }
+    ],
+    "kind": "person",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "平安時代後期（12世紀後半）",
+    "eraNote": "院政期の文化。後白河上皇は保元・平治の乱を経て長く院政を行い、当時流行した歌謡である今様を深く愛好して梁塵秘抄を編んだ。平清盛に命じて造営させた蓮華王院は、のちに焼失し鎌倉時代に再建された。",
+    "facts": [
+      { "slot": "other", "text": "今様を愛好し、梁塵秘抄を編んだ" },
+      { "slot": "other", "text": "平清盛に蓮華王院を造営させた" },
+      { "slot": "era", "text": "院政期に長く院政を行った上皇" }
+    ],
+    "falseStatements": [
+      { "text": "1086年に院政を始めた最初の上皇である", "why": "院政を始めたのは白河上皇。人物の入れ替え", "verifiedFalse": true },
+      { "text": "大鏡の作者である", "why": "大鏡は作者不詳の歴史物語。人物の入れ替え", "verifiedFalse": true },
+      { "text": "浄土宗を開いた", "why": "浄土宗の開祖は法然（鎌倉文化）。人物・分野の入れ替え", "verifiedFalse": true },
+      { "text": "明との貿易を開いた", "why": "日明貿易を開いたのは足利義満（北山文化）。時代・人物の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "後白河上皇",
+    "reading": "ごしらかわじょうこう",
+    "era": "insei",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "今様を愛好し梁塵秘抄を編んだ",
+      "保元・平治の乱を経て長く院政を行った",
+      "平清盛に蓮華王院を造営させた",
+      "庶民の芸能が文化に取り込まれたことを示す人物"
+    ],
+    "explanation": "保元・平治の乱を経て長く院政を行った上皇。当時流行した歌謡である今様を深く愛好し、みずから今様を集めた梁塵秘抄を編んだ。平清盛に命じて蓮華王院を造営させたことでも知られ、庶民のあいだで歌われた芸能が院や貴族の世界に取り込まれた院政期の文化をよく表す人物とされる。",
+    "examNote": "「今様＝梁塵秘抄＝後白河上皇」。院政を始めた白河上皇との取り違えが定番。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）院政期の文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "genji-monogatari-emaki",
+    "orderIndex": 1130,
+    "pairs": [
+      { "kind": "作品×伝承筆者", "left": "源氏物語絵巻", "right": "伝 藤原隆能" },
+      { "kind": "作品×技法", "left": "源氏物語絵巻", "right": "大和絵（濃彩、引目鉤鼻・吹抜屋台）" }
+    ],
+    "kind": "text",
+    "artist": null,
+    "patron": null,
+    "style": "大和絵（絵巻物）",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "平安時代後期（12世紀前半、院政期）",
+    "eraNote": "院政期の文化。大和絵と詞書を組み合わせた絵巻物が全盛期を迎え、源氏物語絵巻はその代表とされる。貴族の邸内の場面を、屋根を描かずに上から見下ろす構図（吹抜屋台）や、類型化した顔の描き方（引目鉤鼻）で表す。",
+    "facts": [
+      { "slot": "era", "text": "院政期文化の代表的な絵巻物" },
+      { "slot": "style", "text": "彩色をほどこした大和絵で描かれる" },
+      { "slot": "other", "text": "伝承筆者は藤原隆能とされる" }
+    ],
+    "falseStatements": [
+      { "text": "鳥羽僧正覚猷の筆と伝えられる", "why": "覚猷は鳥獣人物戯画の伝承筆者。人物の入れ替え", "verifiedFalse": true },
+      { "text": "墨一色の白描画である", "why": "彩色をほどこした大和絵。様式の反転（白描画は鳥獣人物戯画）", "verifiedFalse": true },
+      { "text": "鎌倉時代に描かれた", "why": "院政期（12世紀前半）の作。時代の入れ替え", "verifiedFalse": true },
+      { "text": "庶民の生活を主題とする", "why": "宮廷の貴族社会を主題とする。信貴山縁起絵巻など庶民を描く絵巻との入れ替え", "verifiedFalse": true }
+    ],
+    "title": "源氏物語絵巻",
+    "reading": "げんじものがたりえまき",
+    "era": "insei",
+    "category": "painting",
+    "location": null,
+    "author": "伝 藤原隆能",
+    "technique": null,
+    "keyPoints": [
+      "院政期の代表的な絵巻物",
+      "彩色をほどこした大和絵",
+      "伝承筆者は藤原隆能",
+      "貴族社会を主題とする"
+    ],
+    "explanation": "紫式部の源氏物語の場面を、詞書と絵を交互に配して描いた絵巻物。彩色をほどこした大和絵で貴族の邸内の情景を表し、屋根を描かずに室内を見下ろす構図や、類型化した顔の描き方が特徴とされる。伝承筆者は藤原隆能。庶民や動物を主題とする信貴山縁起絵巻・鳥獣人物戯画と並べて、院政期の絵巻物の広がりを示す作品として紹介される。",
+    "examNote": "院政期の絵巻物は「源氏物語絵巻（貴族・彩色）」「信貴山縁起絵巻（庶民・説話）」「伴大納言絵詞（事件）」「鳥獣人物戯画（白描・戯画）」の4点セットで問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）院政期の文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "shigisan-engi-emaki",
+    "orderIndex": 1160,
+    "pairs": [
+      { "kind": "作品×主題", "left": "信貴山縁起絵巻", "right": "命蓮上人にまつわる説話" },
+      { "kind": "作品×場面", "left": "信貴山縁起絵巻", "right": "空を飛ぶ倉（飛倉の巻）" }
+    ],
+    "kind": "text",
+    "artist": null,
+    "patron": null,
+    "style": "大和絵（絵巻物）",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "平安時代後期（12世紀後半、院政期）",
+    "eraNote": "院政期の文化。絵巻物は貴族社会だけでなく庶民の姿も題材にした。信貴山縁起絵巻は信貴山の僧・命蓮にまつわる説話を描き、空を飛ぶ倉の場面や、驚く人々の生き生きとした表情で知られる。",
+    "facts": [
+      { "slot": "era", "text": "院政期文化の絵巻物" },
+      { "slot": "other", "text": "命蓮上人にまつわる説話を主題とする" },
+      { "slot": "other", "text": "空を飛ぶ倉の場面で知られる" }
+    ],
+    "falseStatements": [
+      { "text": "藤原道長の栄華を描く歴史物語である", "why": "歴史物語は大鏡。ジャンル・作品の入れ替え", "verifiedFalse": true },
+      { "text": "墨一色の白描による戯画である", "why": "白描の戯画は鳥獣人物戯画。作品の入れ替え", "verifiedFalse": true },
+      { "text": "後白河上皇が編んだ歌謡集である", "why": "歌謡集は梁塵秘抄。作品の入れ替え", "verifiedFalse": true },
+      { "text": "鎌倉時代の一遍上人絵伝と同じ時期の作である", "why": "信貴山縁起絵巻は院政期、一遍上人絵伝は鎌倉時代後期。時代の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "信貴山縁起絵巻",
+    "reading": "しぎさんえんぎえまき",
+    "era": "insei",
+    "category": "painting",
+    "location": null,
+    "author": "筆者不詳",
+    "technique": null,
+    "keyPoints": [
+      "院政期の絵巻物",
+      "信貴山の僧・命蓮にまつわる説話",
+      "空を飛ぶ倉の場面",
+      "庶民の姿を生き生きと描く"
+    ],
+    "explanation": "信貴山の僧・命蓮にまつわる説話を描いた絵巻物。米倉が空を飛ぶ場面や、それに驚く人々の表情など、動きのある描写と庶民の姿の描き方で知られる。貴族社会を描く源氏物語絵巻と対照的に、院政期に武士や庶民の姿が文化へ取り込まれていったことを示す作品として紹介される。",
+    "examNote": "「信貴山縁起絵巻＝命蓮上人＝空飛ぶ倉」。源氏物語絵巻（貴族・彩色）との主題の違いで問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）院政期の文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "ban-dainagon-ekotoba",
+    "orderIndex": 1170,
+    "pairs": [
+      { "kind": "作品×主題", "left": "伴大納言絵詞", "right": "応天門の変" },
+      { "kind": "作品×伝承筆者", "left": "伴大納言絵詞", "right": "伝 常盤光長" }
+    ],
+    "kind": "text",
+    "artist": null,
+    "patron": null,
+    "style": "大和絵（絵巻物）",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "平安時代後期（12世紀後半、院政期）",
+    "eraNote": "院政期の文化。絵巻物では過去の事件も題材になった。伴大納言絵詞は、平安時代前期に起こった応天門の変を主題とし、炎上する門に集まる群衆の姿を大画面で描く。",
+    "facts": [
+      { "slot": "era", "text": "院政期文化の絵巻物" },
+      { "slot": "other", "text": "応天門の変を主題とする" },
+      { "slot": "other", "text": "門に集まる群衆の姿を描く" }
+    ],
+    "falseStatements": [
+      { "text": "平将門の乱を描いた軍記物語である", "why": "将門の乱を描くのは将門記（軍記物語）。作品・ジャンルの入れ替え", "verifiedFalse": true },
+      { "text": "鎌倉時代の一遍上人絵伝である", "why": "一遍上人絵伝は鎌倉時代の別の絵巻。作品・時代の入れ替え", "verifiedFalse": true },
+      { "text": "墨一色の白描による戯画である", "why": "白描の戯画は鳥獣人物戯画。作品の入れ替え", "verifiedFalse": true },
+      { "text": "源氏物語の場面を描いた絵巻である", "why": "源氏物語の場面を描くのは源氏物語絵巻。作品の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "伴大納言絵詞",
+    "reading": "ばんだいなごんえことば",
+    "era": "insei",
+    "category": "painting",
+    "location": null,
+    "author": "伝 常盤光長",
+    "technique": null,
+    "keyPoints": [
+      "院政期の絵巻物",
+      "応天門の変を主題とする",
+      "群衆の描写で知られる",
+      "伝承筆者は常盤光長"
+    ],
+    "explanation": "平安時代前期に起こった応天門の変を主題とする絵巻物。炎上する門に群がる人々の姿を大きな画面で描き、表情や動きを描き分ける点に特色がある。伝承筆者は常盤光長とされる。源氏物語絵巻・信貴山縁起絵巻・鳥獣人物戯画とあわせ、院政期の絵巻物の代表として並べて問われる。",
+    "examNote": "「伴大納言絵詞＝応天門の変」。院政期の四大絵巻の一つとして、他の3点との主題の違いで問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）院政期の文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "shomonki",
+    "orderIndex": 970,
+    "pairs": [
+      { "kind": "書物×主題", "left": "将門記", "right": "平将門の乱" },
+      { "kind": "書物×分類", "left": "将門記", "right": "軍記物語（陸奥話記と並ぶ初期の作）" }
+    ],
+    "kind": "text",
+    "artist": null,
+    "patron": null,
+    "style": "軍記物語",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "periodLabel": "平安時代中期（10世紀後半頃の成立とされる。教科書では院政期の文化の軍記物語として扱われる）",
+    "eraNote": "院政期の文化。武士の成長を背景に、合戦を主題とする軍記物語が現れた。将門記は平将門の乱を、陸奥話記は前九年合戦を描き、いずれも漢文体で書かれている。",
+    "facts": [
+      { "slot": "other", "text": "平将門の乱を主題とする軍記物語" },
+      { "slot": "other", "text": "漢文体で書かれている" },
+      { "slot": "other", "text": "前九年合戦を描く陸奥話記と並ぶ初期の軍記物語" }
+    ],
+    "falseStatements": [
+      { "text": "藤原道長の栄華を描く歴史物語である", "why": "歴史物語は大鏡。ジャンル・作品の入れ替え", "verifiedFalse": true },
+      { "text": "後白河上皇が編んだ歌謡集である", "why": "歌謡集は梁塵秘抄。作品の入れ替え", "verifiedFalse": true },
+      { "text": "前九年合戦を主題とする", "why": "前九年合戦を描くのは陸奥話記。作品の入れ替え", "verifiedFalse": true },
+      { "text": "琵琶法師によって語り広められた", "why": "琵琶法師が語ったのは鎌倉時代の平家物語（平曲）。作品・時代の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "将門記",
+    "reading": "しょうもんき",
+    "era": "insei",
+    "category": "literature",
+    "location": null,
+    "author": "作者不詳",
+    "technique": null,
+    "keyPoints": [
+      "平将門の乱を描いた軍記物語",
+      "漢文体で書かれる",
+      "陸奥話記（前九年合戦）と並ぶ初期の軍記物語",
+      "武士の成長を文学の面から示す"
+    ],
+    "explanation": "関東で起こった平将門の乱を主題とし、漢文体で書かれた軍記物語。前九年合戦を描く陸奥話記とともに、武士の戦いを主題とする文学の始まりとされる。院政期の文化では、武士や庶民の姿が説話・軍記・歴史物語に取り込まれていったことが特徴で、その代表として教科書に挙げられる。",
+    "examNote": "「将門記＝平将門の乱」「陸奥話記＝前九年合戦」の対応で問われる。鎌倉時代の平家物語（琵琶法師の平曲）との時代の取り違えに注意。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）院政期の文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "rokushoji",
+    "orderIndex": 1077,
+    "pairs": [
+      { "kind": "寺院群×発願者", "left": "六勝寺", "right": "白河上皇ら院・后" },
+      { "kind": "寺院群×所在", "left": "六勝寺", "right": "京都・白河の地" }
+    ],
+    "kind": "concept",
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "仏教",
+    "holder": null,
+    "subject": null,
+    "periodLabel": "平安時代後期（11世紀後半〜12世紀、院政期）",
+    "eraNote": "院政期の文化。院や后は京都白河の地に御願寺を相次いで造営した。白河上皇の法勝寺をはじめ、寺名に「勝」の字を含む六つの寺は六勝寺と総称され、院の権威と財力を示した。",
+    "facts": [
+      { "slot": "other", "text": "院や后が造営した六つの御願寺の総称" },
+      { "slot": "other", "text": "白河上皇の法勝寺が最初に造営された" },
+      { "slot": "other", "text": "京都・白河の地に営まれた" }
+    ],
+    "falseStatements": [
+      { "text": "奥州藤原氏が平泉に建てた寺院群である", "why": "平泉の中尊寺・毛越寺などとは別。所在・発願者の入れ替え", "verifiedFalse": true },
+      { "text": "幕府が禅寺に定めた格づけの制度である", "why": "禅寺の格づけは五山・十刹の制（室町時代）。時代・内容の入れ替え", "verifiedFalse": true },
+      { "text": "奈良に置かれた南都七大寺のことである", "why": "南都七大寺は奈良の古代寺院。所在・時代の入れ替え", "verifiedFalse": true },
+      { "text": "禅宗の伝来にともなって開かれた", "why": "六勝寺は院政期の御願寺。禅宗の伝来は鎌倉時代。時代・宗派の入れ替え", "verifiedFalse": true }
+    ],
+    "title": "六勝寺",
+    "reading": "ろくしょうじ",
+    "era": "insei",
+    "category": "other",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "院や后が造営した六つの御願寺",
+      "最初は白河上皇の法勝寺",
+      "京都・白河の地に営まれた",
+      "院政期の院の権威を示す"
+    ],
+    "explanation": "白河上皇の法勝寺をはじめ、院や后の発願によって京都・白河の地に相次いで造営された六つの御願寺の総称。いずれも寺名に「勝」の字を含むことからこう呼ばれる。造営には多くの費用と人手が費やされ、院政期における院の権威と財力、そして仏教への手厚い保護を示すものとされる。",
+    "examNote": "「六勝寺＝院の御願寺＝法勝寺が最初」。室町時代の五山・十刹の制（禅寺の格づけ）との混同に注意。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）院政期の文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
   }
 ]

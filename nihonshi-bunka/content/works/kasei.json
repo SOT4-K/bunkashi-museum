@@ -1,6 +1,14 @@
 [
   {
     "id": "kanagawa-oki-namiura",
+    "orderIndex": 1831,
+    "pairs": [
+      {
+        "left": "葛飾北斎",
+        "right": "「富嶽三十六景」",
+        "kind": "person-series"
+      }
+    ],
     "artist": "葛飾北斎",
     "patron": null,
     "style": "浮世絵（錦絵・風景画）",
@@ -148,6 +156,14 @@
   },
   {
     "id": "gaifu-kaisei",
+    "orderIndex": 1831,
+    "pairs": [
+      {
+        "left": "葛飾北斎",
+        "right": "「富嶽三十六景」",
+        "kind": "person-series"
+      }
+    ],
     "artist": "葛飾北斎",
     "patron": null,
     "style": "浮世絵（錦絵・風景画）",
@@ -290,6 +306,14 @@
   },
   {
     "id": "hokusai-manga",
+    "orderIndex": 1814,
+    "pairs": [
+      {
+        "left": "葛飾北斎",
+        "right": "絵手本（版本）",
+        "kind": "person-technique"
+      }
+    ],
     "artist": "葛飾北斎",
     "patron": null,
     "style": "版本（絵手本）",
@@ -416,6 +440,14 @@
   },
   {
     "id": "shono-hakuu",
+    "orderIndex": 1833,
+    "pairs": [
+      {
+        "left": "歌川広重",
+        "right": "「東海道五十三次」",
+        "kind": "person-series"
+      }
+    ],
     "artist": "歌川広重",
     "patron": null,
     "style": "浮世絵（錦絵・風景画）",
@@ -562,6 +594,14 @@
   },
   {
     "id": "kanbara-yoru-no-yuki",
+    "orderIndex": 1833,
+    "pairs": [
+      {
+        "left": "歌川広重",
+        "right": "「東海道五十三次」",
+        "kind": "person-series"
+      }
+    ],
     "artist": "歌川広重",
     "patron": null,
     "style": "浮世絵（錦絵・風景画）",
@@ -702,6 +742,14 @@
   },
   {
     "id": "ohashi-atake-yudachi",
+    "orderIndex": 1857,
+    "pairs": [
+      {
+        "left": "歌川広重",
+        "right": "「名所江戸百景」",
+        "kind": "person-series"
+      }
+    ],
     "artist": "歌川広重",
     "patron": null,
     "style": "浮世絵（錦絵・風景画）",
@@ -822,6 +870,19 @@
   },
   {
     "id": "poppin-wo-fuku-onna",
+    "orderIndex": 1793,
+    "pairs": [
+      {
+        "left": "喜多川歌麿",
+        "right": "美人大首絵",
+        "kind": "person-style"
+      },
+      {
+        "left": "蔦屋重三郎",
+        "right": "版元",
+        "kind": "person-role"
+      }
+    ],
     "artist": "喜多川歌麿",
     "patron": null,
     "style": "美人大首絵",
@@ -967,6 +1028,14 @@
   },
   {
     "id": "kansei-san-bijin",
+    "orderIndex": 1791,
+    "pairs": [
+      {
+        "left": "喜多川歌麿",
+        "right": "美人大首絵",
+        "kind": "person-style"
+      }
+    ],
     "artist": "喜多川歌麿",
     "patron": null,
     "style": "美人大首絵",
@@ -1102,6 +1171,19 @@
   },
   {
     "id": "otani-oniji",
+    "orderIndex": 1794,
+    "pairs": [
+      {
+        "left": "東洲斎写楽",
+        "right": "役者大首絵",
+        "kind": "person-style"
+      },
+      {
+        "left": "蔦屋重三郎",
+        "right": "版元",
+        "kind": "person-role"
+      }
+    ],
     "artist": "東洲斎写楽",
     "patron": null,
     "style": "役者大首絵",
@@ -1236,6 +1318,14 @@
   },
   {
     "id": "dankin-bijin",
+    "orderIndex": 1765,
+    "pairs": [
+      {
+        "left": "鈴木春信",
+        "right": "錦絵の創始",
+        "kind": "person-technique"
+      }
+    ],
     "artist": "鈴木春信",
     "patron": null,
     "style": "錦絵（美人画）",
@@ -1375,6 +1465,19 @@
   },
   {
     "id": "soma-no-furudairi",
+    "orderIndex": 1845,
+    "pairs": [
+      {
+        "left": "歌川国芳",
+        "right": "武者絵",
+        "kind": "person-genre"
+      },
+      {
+        "left": "山東京伝",
+        "right": "読本",
+        "kind": "person-genre"
+      }
+    ],
     "artist": "歌川国芳",
     "patron": null,
     "style": "浮世絵（錦絵・武者絵、三枚続）",
@@ -1516,6 +1619,14 @@
   },
   {
     "id": "juben-jugi",
+    "orderIndex": 1771,
+    "pairs": [
+      {
+        "left": "池大雅・与謝蕪村",
+        "right": "文人画（南画）",
+        "kind": "person-style"
+      }
+    ],
     "artist": "池大雅・与謝蕪村",
     "patron": null,
     "style": "文人画（南画）",
@@ -1646,6 +1757,14 @@
   },
   {
     "id": "sessho-zu",
+    "orderIndex": 1780,
+    "pairs": [
+      {
+        "left": "円山応挙",
+        "right": "写生画（円山派）",
+        "kind": "person-style"
+      }
+    ],
     "artist": "円山応挙",
     "patron": null,
     "style": "写生画（円山派）",
@@ -1772,6 +1891,14 @@
   },
   {
     "id": "doshoku-saie",
+    "orderIndex": 1765,
+    "pairs": [
+      {
+        "left": "伊藤若冲",
+        "right": "花鳥画（極彩色）",
+        "kind": "person-genre"
+      }
+    ],
     "artist": "伊藤若冲",
     "patron": null,
     "style": "花鳥画（絹本着色）",
@@ -1905,6 +2032,19 @@
   },
   {
     "id": "takami-senseki",
+    "orderIndex": 1837,
+    "pairs": [
+      {
+        "left": "渡辺崋山",
+        "right": "西洋の陰影法による肖像画",
+        "kind": "person-style"
+      },
+      {
+        "left": "渡辺崋山",
+        "right": "蛮社の獄",
+        "kind": "person-event"
+      }
+    ],
     "artist": "渡辺崋山",
     "patron": null,
     "style": "肖像画（西洋の陰影法を取り入れた）",
@@ -2033,6 +2173,14 @@
   },
   {
     "id": "shinobazu-ike",
+    "orderIndex": 1775,
+    "pairs": [
+      {
+        "left": "小田野直武",
+        "right": "秋田蘭画",
+        "kind": "person-style"
+      }
+    ],
     "artist": "小田野直武",
     "patron": null,
     "style": "洋風画（秋田蘭画）",
@@ -2165,6 +2313,19 @@
   },
   {
     "id": "ino-map",
+    "orderIndex": 1821,
+    "pairs": [
+      {
+        "left": "伊能忠敬",
+        "right": "実測による日本地図",
+        "kind": "person-field"
+      },
+      {
+        "left": "高橋至時",
+        "right": "幕府天文方",
+        "kind": "person-role"
+      }
+    ],
     "artist": "伊能忠敬",
     "patron": "江戸幕府",
     "style": null,
@@ -2296,6 +2457,19 @@
   },
   {
     "id": "kaitai-shinsho",
+    "orderIndex": 1774,
+    "pairs": [
+      {
+        "left": "杉田玄白・前野良沢",
+        "right": "『解体新書』",
+        "kind": "person-text"
+      },
+      {
+        "left": "小田野直武",
+        "right": "『解体新書』の図",
+        "kind": "person-role"
+      }
+    ],
     "artist": "杉田玄白・前野良沢",
     "patron": null,
     "style": null,
@@ -2432,6 +2606,14 @@
   },
   {
     "id": "mimeguri-no-kei",
+    "orderIndex": 1783,
+    "pairs": [
+      {
+        "left": "司馬江漢",
+        "right": "銅版画",
+        "kind": "person-technique"
+      }
+    ],
     "artist": "司馬江漢",
     "patron": null,
     "style": "洋風画（銅版画）",

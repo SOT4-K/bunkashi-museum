@@ -1,6 +1,12 @@
 [
   {
     "id": "byodoin-amida-nyorai",
+    "orderIndex": 50,
+    "pairs": [
+      { "left": "平等院鳳凰堂阿弥陀如来像", "right": "定朝", "kind": "work-artist" },
+      { "left": "定朝", "right": "寄木造（定朝様）の完成", "kind": "person-style" },
+      { "left": "平等院", "right": "藤原頼通", "kind": "work-person" }
+    ],
     "artist": "定朝",
     "patron": "藤原頼通",
     "style": "寄木造（定朝様）",
@@ -107,6 +113,12 @@
   },
   {
     "id": "byodoin-hoo-do",
+    "orderIndex": 40,
+    "pairs": [
+      { "left": "平等院鳳凰堂", "right": "藤原頼通（1053年）", "kind": "work-person" },
+      { "left": "平等院鳳凰堂", "right": "阿弥陀堂建築", "kind": "work-style" },
+      { "left": "末法思想", "right": "浄土教の広まり", "kind": "term-pair" }
+    ],
     "artist": null,
     "patron": "藤原頼通",
     "style": "阿弥陀堂建築（国風文化）",
@@ -213,6 +225,12 @@
   },
   {
     "id": "koyagire",
+    "orderIndex": 30,
+    "pairs": [
+      { "left": "高野切", "right": "『古今和歌集』の写本", "kind": "work-subject" },
+      { "left": "高野切", "right": "和様のかな書道（散らし書き）", "kind": "work-technique" },
+      { "left": "高野切", "right": "伝・紀貫之筆", "kind": "work-artist" }
+    ],
     "artist": null,
     "patron": null,
     "style": "和様の書（かな書道）",
@@ -301,6 +319,12 @@
   },
   {
     "id": "daigoji-gojunoto",
+    "orderIndex": 10,
+    "pairs": [
+      { "left": "醍醐寺五重塔", "right": "951年完成", "kind": "work-event" },
+      { "left": "醍醐寺五重塔", "right": "京都府内最古の木造建築", "kind": "term-pair" },
+      { "left": "醍醐寺五重塔", "right": "醍醐天皇の菩提を弔う", "kind": "work-person" }
+    ],
     "artist": null,
     "patron": "朱雀天皇（発願）、村上天皇の代に完成",
     "style": "国風文化建築（五重塔）",
@@ -390,6 +414,12 @@
   {
     "id": "kokufu-bungaku",
     "kind": "text",
+    "orderIndex": 20,
+    "pairs": [
+      { "left": "『古今和歌集』", "right": "紀貫之ら（最初の勅撰和歌集）", "kind": "text-author" },
+      { "left": "『源氏物語』", "right": "紫式部", "kind": "text-author" },
+      { "left": "『枕草子』", "right": "清少納言", "kind": "text-author" }
+    ],
     "artist": null,
     "patron": null,
     "style": null,
