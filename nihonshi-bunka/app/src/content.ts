@@ -60,11 +60,23 @@ export function worksByEra(eraId: string): Work[] {
 }
 
 /**
- * status: reviewed のみ本番に含める（work と同じ扱い）。dev/VITE_INCLUDE_DRAFT のときは
- * passage 自体に status が無いため常に含める（M2 は passage に status を持たせていない。
- * 素材となる作品側の status で事実上の検証を管理する）。
+ * passage 自体は status を持たない（M2 は素材となる作品側の status で事実上の検証を管理する設計）。
+ * ただし全下線が reviewed 作品を持たない passage をそのまま公開すると、下線の大半が
+ * buildThemeSetQuestions でスキップされ「図版問題を作れなかった」行き止まりになる
+ * （reviewer 指摘・群B/群C 共通、2026-09-04）。本番ビルドでは
+ * 全下線の workIds が1つ以上 playableWorks に含まれる passage のみ公開する
+ * （dev/VITE_INCLUDE_DRAFT のときは検証中の内容を見るため常に全件含める）。
  */
-export const passages: Passage[] = [...rawPassages].sort((a, b) => a.id.localeCompare(b.id))
+const playableWorksById = new Set(playableWorks.map((w) => w.id))
+
+function isPassagePublishable(passage: Passage): boolean {
+  if (shouldIncludeDraft()) return true
+  return passage.underlines.every((u) => u.workIds.some((id) => playableWorksById.has(id)))
+}
+
+export const passages: Passage[] = [...rawPassages]
+  .filter(isPassagePublishable)
+  .sort((a, b) => a.id.localeCompare(b.id))
 
 export const passagesByEra: Record<string, Passage[]> = passages.reduce<Record<string, Passage[]>>((acc, p) => {
   ;(acc[p.era] ??= []).push(p)

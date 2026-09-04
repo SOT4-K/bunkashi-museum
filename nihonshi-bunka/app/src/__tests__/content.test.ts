@@ -13,6 +13,10 @@ describe('content (import.meta.glob 読み込み)', () => {
   })
 
   it('dev モード（VITE_INCLUDE_DRAFT 未設定でもテストは DEV 扱い）では draft も含む', () => {
-    expect(works.every((w) => w.status === 'draft')).toBe(true)
+    // M2 以降、content/works/ は reviewed と draft が混在する（reviewer 検証を通った分だけ reviewed）。
+    // draft が1件でも works に残っていれば、dev モードでフィルタされていないと確認できる
+    // （reviewed のみに絞られていたら draft は works から消えているはず）。
+    expect(works.some((w) => w.status === 'draft')).toBe(true)
+    expect(works.some((w) => w.status === 'reviewed')).toBe(true)
   })
 })

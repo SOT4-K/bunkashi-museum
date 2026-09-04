@@ -13,12 +13,17 @@
       {
         "slot": "era",
         "text": "弘仁・貞観文化の作品",
-        "shared": ["muroji-gojunoto", "toji-fudo-myoo"]
+        "shared": [
+          "muroji-gojunoto",
+          "toji-fudo-myoo"
+        ]
       },
       {
         "slot": "technique",
         "text": "一木造である",
-        "shared": ["toji-fudo-myoo"]
+        "shared": [
+          "toji-fudo-myoo"
+        ]
       },
       {
         "slot": "other",
@@ -35,7 +40,9 @@
       {
         "slot": "religion",
         "text": "密教（真言宗）の尊像である",
-        "shared": ["toji-fudo-myoo"]
+        "shared": [
+          "toji-fudo-myoo"
+        ]
       }
     ],
     "falseStatements": [
@@ -91,8 +98,10 @@
     "sources": [
       "高校教科書（山川『詳説日本史』）弘仁・貞観文化の項"
     ],
-    "examTags": ["frequent"],
-    "status": "draft"
+    "examTags": [
+      "frequent"
+    ],
+    "status": "reviewed"
   },
   {
     "id": "muroji-gojunoto",
@@ -108,7 +117,10 @@
       {
         "slot": "era",
         "text": "弘仁・貞観文化の作品",
-        "shared": ["kanshinji-nyoirin-kannon", "toji-fudo-myoo"]
+        "shared": [
+          "kanshinji-nyoirin-kannon",
+          "toji-fudo-myoo"
+        ]
       },
       {
         "slot": "style",
@@ -181,7 +193,7 @@
       "高校教科書（山川『詳説日本史』）弘仁・貞観文化の項"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "toji-fudo-myoo",
@@ -201,12 +213,17 @@
       {
         "slot": "era",
         "text": "弘仁・貞観文化の作品",
-        "shared": ["kanshinji-nyoirin-kannon", "muroji-gojunoto"]
+        "shared": [
+          "kanshinji-nyoirin-kannon",
+          "muroji-gojunoto"
+        ]
       },
       {
         "slot": "technique",
         "text": "一木造である",
-        "shared": ["kanshinji-nyoirin-kannon"]
+        "shared": [
+          "kanshinji-nyoirin-kannon"
+        ]
       },
       {
         "slot": "other",
@@ -223,7 +240,9 @@
       {
         "slot": "religion",
         "text": "密教（真言宗）の尊像である",
-        "shared": ["kanshinji-nyoirin-kannon"]
+        "shared": [
+          "kanshinji-nyoirin-kannon"
+        ]
       }
     ],
     "falseStatements": [
@@ -280,8 +299,10 @@
       "高校教科書（山川『詳説日本史』）弘仁・貞観文化の項",
       "東寺（教王護国寺）公式サイト"
     ],
-    "examTags": ["frequent"],
-    "status": "draft"
+    "examTags": [
+      "frequent"
+    ],
+    "status": "reviewed"
   },
   {
     "id": "saicho-kukai",
@@ -302,7 +323,9 @@
       {
         "slot": "religion",
         "text": "空海は真言宗を開き、高野山金剛峯寺を根本道場とした",
-        "shared": ["toji-fudo-myoo"]
+        "shared": [
+          "toji-fudo-myoo"
+        ]
       },
       {
         "slot": "other",
@@ -341,7 +364,7 @@
       "高校教科書（山川『詳説日本史』）弘仁・貞観文化の項"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "sanpitsu",
@@ -400,6 +423,6 @@
       "高校教科書（山川『詳説日本史』）弘仁・貞観文化の項"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   }
 ]

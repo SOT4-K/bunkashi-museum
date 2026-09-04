@@ -10,19 +10,65 @@
     "periodLabel": "江戸時代初期（17世紀前半、寛永期）",
     "eraNote": "江戸時代初期（17世紀前半）、3代将軍徳川家光の頃を中心とする寛永期の文化の絵画。桃山文化の豪壮さを受け継ぎつつ、朝廷・公家や京都の上層町人の伝統的な美意識と結びついた装飾的な画風が生まれ、俵屋宗達は大和絵の伝統を生かしてこの流れを開いた。",
     "facts": [
-      { "slot": "artist", "text": "俵屋宗達の作" },
-      { "slot": "era", "text": "寛永期の文化の作品", "shared": ["tanyu-getsuya-sansui"] },
-      { "slot": "period", "text": "17世紀前半（江戸時代初期）の作", "shared": ["tanyu-getsuya-sansui", "shokintei-katsura", "yomeimon-nikko"] },
-      { "slot": "technique", "text": "紙本金地著色・二曲一双の屏風である" },
-      { "slot": "other", "text": "画面の左右両端に風神・雷神を大きく配し、中央を余白とする構図" },
-      { "slot": "other", "text": "後年、尾形光琳（元禄期）・酒井抱一（化政期）が模写した" }
+      {
+        "slot": "artist",
+        "text": "俵屋宗達の作"
+      },
+      {
+        "slot": "era",
+        "text": "寛永期の文化の作品",
+        "shared": [
+          "tanyu-getsuya-sansui"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "17世紀前半（江戸時代初期）の作",
+        "shared": [
+          "tanyu-getsuya-sansui",
+          "shokintei-katsura",
+          "yomeimon-nikko"
+        ]
+      },
+      {
+        "slot": "technique",
+        "text": "紙本金地著色・二曲一双の屏風である"
+      },
+      {
+        "slot": "other",
+        "text": "画面の左右両端に風神・雷神を大きく配し、中央を余白とする構図"
+      },
+      {
+        "slot": "other",
+        "text": "後年、尾形光琳（元禄期）・酒井抱一（化政期）が模写した"
+      }
     ],
     "falseStatements": [
-      { "text": "尾形光琳の作", "why": "光琳は元禄期にこの構図を模写した別人物。人物・時代ずらし", "verifiedFalse": true },
-      { "text": "元禄文化の作品", "why": "寛永期（17世紀前半）の作。時代ずらし", "verifiedFalse": true },
-      { "text": "紙本墨画（水墨画）である", "why": "金地著色。技法ずらし", "verifiedFalse": true },
-      { "text": "現在は東京国立博物館が所蔵する", "why": "東京国立博物館が所蔵するのは尾形光琳による模写。原本は建仁寺伝来・京都国立博物館寄託。所在ずらし", "verifiedFalse": true },
-      { "text": "六曲一双の屏風である", "why": "二曲一双。形式ずらし", "verifiedFalse": true }
+      {
+        "text": "尾形光琳の作",
+        "why": "光琳は元禄期にこの構図を模写した別人物。人物・時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "元禄文化の作品",
+        "why": "寛永期（17世紀前半）の作。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "紙本墨画（水墨画）である",
+        "why": "金地著色。技法ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "現在は東京国立博物館が所蔵する",
+        "why": "東京国立博物館が所蔵するのは尾形光琳による模写。原本は建仁寺伝来・京都国立博物館寄託。所在ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "六曲一双の屏風である",
+        "why": "二曲一双。形式ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "風神雷神図屏風",
     "reading": "ふうじんらいじんずびょうぶ",
@@ -40,7 +86,14 @@
     "explanation": "金地の二曲一双の屏風の左右両端いっぱいに、風神と雷神をそれぞれ大きく配し、中央を大胆に余白とした構図が目印。特定の物語の一場面ではなく、風神雷神という画題そのものを意匠として完成させた点に宗達の独創性がある。宗達は「伊年」の印を持つ絵屋（俵屋）の当主で、本阿弥光悦とともに寛永期の京都の芸術を主導し、大和絵の伝統を生かした装飾的な画風を確立した。この構図は約半世紀後に尾形光琳（元禄期）が模写し、さらに酒井抱一（化政期）も模写したことで、時代を超えて琳派の系譜を示す作品となっている。",
     "examNote": "「俵屋宗達（原本・建仁寺・寛永期）→尾形光琳（模写・東京国立博物館・元禄期）→酒井抱一（模写・化政期）」と3人が同一構図を模写した点が、作者・所蔵・時代を組み合わせて問う設問の定番。",
     "confusables": [
-      { "id": "yomeimon-nikko", "howToTell": "陽明門は極彩色の彫刻で埋め尽くされた建築。風神雷神図屏風は金地の絵画で、彫刻ではない。" }
+      {
+        "id": "yomeimon-nikko",
+        "howToTell": "陽明門は極彩色の彫刻で埋め尽くされた建築。風神雷神図屏風は金地の絵画で、彫刻ではない。"
+      },
+      {
+        "id": "fujin-raijin-korin",
+        "howToTell": "光琳の模写（元禄期）は図像が画面内に収まり、下方に黒い雲が描かれ落款がある。宗達の原作（寛永期）は図像が画面の端で切れ、落款がない。判別が難しい場合は年代（寛永期の宗達／元禄期の光琳、約80年後の模写）で覚える。"
+      }
     ],
     "image": {
       "file": "fujin-raijin-sotatsu.png",
@@ -54,8 +107,10 @@
       "京都国立博物館「名品紹介」",
       "キヤノン綴プロジェクト"
     ],
-    "examTags": ["frequent"],
-    "status": "draft"
+    "examTags": [
+      "frequent"
+    ],
+    "status": "reviewed"
   },
   {
     "id": "shokintei-katsura",
@@ -68,19 +123,66 @@
     "periodLabel": "江戸時代初期（17世紀前半、元和〜寛永期）",
     "eraNote": "江戸時代初期（17世紀前半）、寛永期の文化の建築。幕藩体制が固まるこの時期、公家や京都の上層町人のあいだで伝統的な美意識に基づく簡素で洗練された建築様式が発達し、桂離宮はその代表とされる。日光東照宮の権現造と対照的な、公家文化の流れを示す。",
     "facts": [
-      { "slot": "patron", "text": "八条宮智仁親王が着手し、子の智忠親王が増築・完成させた" },
-      { "slot": "era", "text": "寛永期の文化の建築", "shared": ["fujin-raijin-sotatsu", "tanyu-getsuya-sansui"] },
-      { "slot": "period", "text": "17世紀前半（元和〜寛永期）の造営", "shared": ["fujin-raijin-sotatsu", "tanyu-getsuya-sansui", "yomeimon-nikko"] },
-      { "slot": "style", "text": "数寄屋造の代表例である" },
-      { "slot": "other", "text": "古書院・中書院と回遊式庭園、複数の茶屋からなる" },
-      { "slot": "other", "text": "素木（しらき）を生かした簡素で洗練された意匠" }
+      {
+        "slot": "patron",
+        "text": "八条宮智仁親王が着手し、子の智忠親王が増築・完成させた"
+      },
+      {
+        "slot": "era",
+        "text": "寛永期の文化の建築",
+        "shared": [
+          "fujin-raijin-sotatsu",
+          "tanyu-getsuya-sansui"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "17世紀前半（元和〜寛永期）の造営",
+        "shared": [
+          "fujin-raijin-sotatsu",
+          "tanyu-getsuya-sansui",
+          "yomeimon-nikko"
+        ]
+      },
+      {
+        "slot": "style",
+        "text": "数寄屋造の代表例である"
+      },
+      {
+        "slot": "other",
+        "text": "古書院・中書院と回遊式庭園、複数の茶屋からなる"
+      },
+      {
+        "slot": "other",
+        "text": "素木（しらき）を生かした簡素で洗練された意匠"
+      }
     ],
     "falseStatements": [
-      { "text": "徳川家光が建てた", "why": "建てたのは公家の八条宮家（智仁親王・智忠親王）。人物ずらし（日光東照宮との混同）", "verifiedFalse": true },
-      { "text": "権現造の代表例である", "why": "数寄屋造。日光東照宮（権現造）との様式ずらし", "verifiedFalse": true },
-      { "text": "極彩色の彫刻で埋め尽くされている", "why": "素木を生かした簡素な意匠。様式ずらし", "verifiedFalse": true },
-      { "text": "室町時代の建築である", "why": "江戸時代初期（元和〜寛永期）の建築。時代ずらし", "verifiedFalse": true },
-      { "text": "禅宗の仏堂建築である", "why": "公家の別荘建築（住宅・庭園）。分野ずらし", "verifiedFalse": true }
+      {
+        "text": "徳川家光が建てた",
+        "why": "建てたのは公家の八条宮家（智仁親王・智忠親王）。人物ずらし（日光東照宮との混同）",
+        "verifiedFalse": true
+      },
+      {
+        "text": "権現造の代表例である",
+        "why": "数寄屋造。日光東照宮（権現造）との様式ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "極彩色の彫刻で埋め尽くされている",
+        "why": "素木を生かした簡素な意匠。様式ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "室町時代の建築である",
+        "why": "江戸時代初期（元和〜寛永期）の建築。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "禅宗の仏堂建築である",
+        "why": "公家の別荘建築（住宅・庭園）。分野ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "桂離宮",
     "reading": "かつらりきゅう",
@@ -98,7 +200,14 @@
     "explanation": "公家の八条宮家の別荘として、智仁親王が元和年間に着手し、その死後、子の智忠親王が中書院を増築するなどして寛永年間に完成させた。素木の柱や簡素な障子など、装飾を抑えた洗練された意匠の建物群（古書院・中書院・新御殿）が、船遊びもできる広大な回遊式庭園に配され、庭園には複数の茶屋（松琴亭など）が置かれているのが特徴。極彩色の彫刻で埋め尽くされた日光東照宮の権現造と、装飾を抑えた桂離宮の数寄屋造は、同じ寛永期に生まれた対照的な二つの建築の流れとして教科書でも対で扱われる。",
     "examNote": "「日光東照宮＝権現造＝徳川家光」「桂離宮＝数寄屋造＝八条宮家（公家）」と、建てた主体と様式をセットで覚える。",
     "confusables": [
-      { "id": "yomeimon-nikko", "howToTell": "陽明門は極彩色の彫刻に覆われた権現造の門。桂離宮は素木を生かした簡素な数寄屋造の建物群。" }
+      {
+        "id": "yomeimon-nikko",
+        "howToTell": "陽明門は極彩色の彫刻に覆われた権現造の門。桂離宮は素木を生かした簡素な数寄屋造の建物群。"
+      },
+      {
+        "id": "togudo-doujinsai",
+        "howToTell": "松琴亭は市松模様の襖が目印の数寄屋風茶室（桂離宮）。東求堂同仁斎は違い棚・付書院を備えた書院造の四畳半（慈照寺）。"
+      }
     ],
     "image": {
       "file": "shokintei-katsura.jpg",
@@ -111,8 +220,10 @@
       "高校教科書（山川『詳説日本史』）寛永期の文化の項",
       "京都市「文化史11 桂離宮と修学院離宮」"
     ],
-    "examTags": ["frequent"],
-    "status": "draft"
+    "examTags": [
+      "frequent"
+    ],
+    "status": "reviewed"
   },
   {
     "id": "yomeimon-nikko",
@@ -125,19 +236,64 @@
     "periodLabel": "江戸時代初期（17世紀前半、寛永13年＝1636年）",
     "eraNote": "江戸時代初期（17世紀前半）、寛永期の文化の建築。3代将軍徳川家光は祖父・徳川家康を祀る日光東照宮を寛永13年（1636年）に全面的に造り替え（寛永の大造替）、極彩色の彫刻で飾られた豪壮な社殿群を完成させた。桂離宮の数寄屋造と対照的な、幕府権力を誇示する建築の流れを示す。",
     "facts": [
-      { "slot": "patron", "text": "徳川家光が寛永の大造替で現在の姿に造り替えた" },
-      { "slot": "era", "text": "寛永期の文化の建築", "shared": ["fujin-raijin-sotatsu", "tanyu-getsuya-sansui"] },
-      { "slot": "period", "text": "寛永13年（1636年）の造替", "shared": ["shokintei-katsura"] },
-      { "slot": "style", "text": "権現造の代表例である" },
-      { "slot": "other", "text": "徳川家康を祀る東照宮の門" },
-      { "slot": "other", "text": "500を超える極彩色の彫刻に覆われ「日暮御門」とも呼ばれる" }
+      {
+        "slot": "patron",
+        "text": "徳川家光が寛永の大造替で現在の姿に造り替えた"
+      },
+      {
+        "slot": "era",
+        "text": "寛永期の文化の建築",
+        "shared": [
+          "fujin-raijin-sotatsu",
+          "tanyu-getsuya-sansui"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "寛永13年（1636年）の造替",
+        "shared": [
+          "shokintei-katsura"
+        ]
+      },
+      {
+        "slot": "style",
+        "text": "日光東照宮は権現造の代表例である"
+      },
+      {
+        "slot": "other",
+        "text": "徳川家康を祀る東照宮の門"
+      },
+      {
+        "slot": "other",
+        "text": "500を超える極彩色の彫刻に覆われ「日暮御門」とも呼ばれる"
+      }
     ],
     "falseStatements": [
-      { "text": "八条宮智仁親王が建てた", "why": "建てたのは徳川家光。人物ずらし（桂離宮との混同）", "verifiedFalse": true },
-      { "text": "数寄屋造の代表例である", "why": "権現造。桂離宮（数寄屋造）との様式ずらし", "verifiedFalse": true },
-      { "text": "足利義満が建てた", "why": "義満は北山文化の金閣。時代・人物ずらし", "verifiedFalse": true },
-      { "text": "彫刻をほとんど持たない簡素な門である", "why": "500を超える極彩色の彫刻で埋め尽くされている。内容ずらし", "verifiedFalse": true },
-      { "text": "元禄期の建築である", "why": "寛永13年（1636年）の造替。時代ずらし", "verifiedFalse": true }
+      {
+        "text": "八条宮智仁親王が建てた",
+        "why": "建てたのは徳川家光。人物ずらし（桂離宮との混同）",
+        "verifiedFalse": true
+      },
+      {
+        "text": "数寄屋造の代表例である",
+        "why": "権現造。桂離宮（数寄屋造）との様式ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "足利義満が建てた",
+        "why": "義満は北山文化の金閣。時代・人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "彫刻をほとんど持たない簡素な門である",
+        "why": "500を超える極彩色の彫刻で埋め尽くされている。内容ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "元禄期の建築である",
+        "why": "寛永13年（1636年）の造替。時代ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "日光東照宮陽明門",
     "reading": "にっこうとうしょうぐう ようめいもん",
@@ -155,7 +311,10 @@
     "explanation": "徳川家康を祀る日光東照宮の陽明門は、3代将軍徳川家光が祖父の21年神忌に向けて行った寛永の大造替（寛永13年＝1636年完成）で現在の姿になった。三間一戸の楼門全体が、故事や子どもの遊び、賢人などを題材にした500を超える極彩色の彫刻で埋め尽くされているのが目印で、見飽きないことから「日暮御門」とも呼ばれる。本殿・石の間・拝殿を一体の建物とする権現造の社殿群の中心をなし、幕府の権威を誇示する豪壮な建築として、簡素な桂離宮（数寄屋造）と対比して教科書で扱われる。",
     "examNote": "「日光東照宮＝権現造＝徳川家光」。桂離宮（数寄屋造・八条宮家）との対比で問われることが多い。",
     "confusables": [
-      { "id": "shokintei-katsura", "howToTell": "桂離宮は素木を生かした簡素な数寄屋造。陽明門は極彩色の彫刻で埋め尽くされた権現造の門。" }
+      {
+        "id": "shokintei-katsura",
+        "howToTell": "桂離宮は素木を生かした簡素な数寄屋造。陽明門は極彩色の彫刻で埋め尽くされた権現造の門。"
+      }
     ],
     "image": {
       "file": "yomeimon-nikko.jpg",
@@ -168,8 +327,10 @@
       "高校教科書（山川『詳説日本史』）寛永期の文化の項",
       "文化遺産オンライン「東照宮 陽明門」"
     ],
-    "examTags": ["frequent"],
-    "status": "draft"
+    "examTags": [
+      "frequent"
+    ],
+    "status": "reviewed"
   },
   {
     "id": "tanyu-getsuya-sansui",
@@ -179,22 +340,64 @@
     "religion": null,
     "holder": "メトロポリタン美術館（ニューヨーク）",
     "subject": null,
-    "periodLabel": "江戸時代初期（17世紀、1662年以降）",
+    "periodLabel": "江戸時代前期（17世紀後半、1662年以降）",
     "eraNote": "江戸時代初期（17世紀前半〜中頃）、寛永期の文化の絵画。狩野探幽は元和3年（1617年）に幕府の御用絵師となり、江戸城・二条城・名古屋城の障壁画制作を手がけて、狩野派を幕府の御用絵師の家として確立した。宗達が装飾的な大和絵の流れを開いたのに対し、探幽は幕府の権威と結びついた水墨画・障壁画の中心となった。",
     "facts": [
-      { "slot": "artist", "text": "狩野探幽の作" },
-      { "slot": "era", "text": "寛永期の文化の作品", "shared": ["fujin-raijin-sotatsu"] },
-      { "slot": "period", "text": "17世紀前半（江戸時代初期）の作", "shared": ["fujin-raijin-sotatsu", "shokintei-katsura", "yomeimon-nikko"] },
-      { "slot": "technique", "text": "絹本墨画である" },
-      { "slot": "artist", "text": "作者は元和3年（1617年）に幕府の御用絵師となった" },
-      { "slot": "other", "text": "江戸城・二条城・名古屋城の障壁画も手がけた" }
+      {
+        "slot": "artist",
+        "text": "狩野探幽の作"
+      },
+      {
+        "slot": "era",
+        "text": "寛永期の文化の作品",
+        "shared": [
+          "fujin-raijin-sotatsu"
+        ]
+      },
+      {
+        "slot": "period",
+        "text": "17世紀後半（1662年以降）の作",
+        "shared": []
+      },
+      {
+        "slot": "technique",
+        "text": "絹本墨画である"
+      },
+      {
+        "slot": "artist",
+        "text": "作者は元和3年（1617年）に幕府の御用絵師となった"
+      },
+      {
+        "slot": "other",
+        "text": "江戸城・二条城・名古屋城の障壁画も手がけた"
+      }
     ],
     "falseStatements": [
-      { "text": "俵屋宗達の作", "why": "宗達は大和絵の伝統をいかした装飾画（風神雷神図屏風）。人物ずらし", "verifiedFalse": true },
-      { "text": "金地著色の華やかな屏風である", "why": "絹本の水墨画。風神雷神図屏風との技法ずらし", "verifiedFalse": true },
-      { "text": "元禄文化の作品", "why": "寛永期の作。時代ずらし", "verifiedFalse": true },
-      { "text": "幕府に仕えず京都でのみ活動した", "why": "元和3年に幕府御用絵師となり、江戸城などの障壁画を手がけた。内容ずらし", "verifiedFalse": true },
-      { "text": "長谷川等伯の作", "why": "等伯は桃山文化の水墨画（松林図屏風）。人物・時代ずらし", "verifiedFalse": true }
+      {
+        "text": "俵屋宗達の作",
+        "why": "宗達は大和絵の伝統をいかした装飾画（風神雷神図屏風）。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "金地著色の華やかな屏風である",
+        "why": "絹本の水墨画。風神雷神図屏風との技法ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "元禄文化の作品",
+        "why": "寛永期の作。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "幕府に仕えず京都でのみ活動した",
+        "why": "元和3年に幕府御用絵師となり、江戸城などの障壁画を手がけた。内容ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "長谷川等伯の作",
+        "why": "等伯は桃山文化の水墨画（松林図屏風）。人物・時代ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "月夜山水図",
     "reading": "げつやさんすいず",
@@ -204,15 +407,18 @@
     "author": "狩野探幽",
     "technique": "絹本墨画（三幅対の一幅）",
     "keyPoints": [
-      "寛永期の文化",
+      "寛永期の文化を代表する絵師（狩野探幽）の作品",
       "狩野探幽（幕府御用絵師、江戸城・二条城などの障壁画を担当）",
       "水墨を主とした落ち着いた山水表現",
       "1662年以降（法印探幽の落款）の作"
     ],
-    "explanation": "月夜の水辺の風景を、墨の濃淡を生かして静かに描いた三幅対のうちの一幅。俵屋宗達の金地著色の装飾的な画風とは対照的な、墨を主体とした落ち着いた表現が目印。狩野探幽は元和3年（1617年）に江戸幕府の御用絵師となり、江戸城・二条城・名古屋城などの障壁画制作を担った狩野派の中心人物で、桃山文化の豪壮な濃絵から、より穏やかで洗練された画風へと狩野派を導いたとされる。",
+    "explanation": "月夜の水辺の風景を、墨の濃淡を生かして静かに描いた三幅対のうちの一幅。俵屋宗達の金地著色の装飾的な画風とは対照的な、墨を主体とした落ち着いた表現が目印。本図は1662年以降（法印探幽の落款）の作。狩野探幽は元和3年（1617年）に江戸幕府の御用絵師となり、江戸城・二条城・名古屋城などの障壁画制作を担った狩野派の中心人物で、桃山文化の豪壮な濃絵から、より穏やかで洗練された画風へと狩野派を導いたとされる。",
     "examNote": "「狩野探幽＝幕府御用絵師＝寛永期」。同じ寛永期の俵屋宗達（装飾画・金地著色）と技法・立場（幕府御用／町の絵屋）が対照的な点が問われやすい。",
     "confusables": [
-      { "id": "fujin-raijin-sotatsu", "howToTell": "風神雷神図屏風は金地著色の華やかな屏風（俵屋宗達）。月夜山水図は墨主体の落ち着いた掛軸（狩野探幽）。" }
+      {
+        "id": "fujin-raijin-sotatsu",
+        "howToTell": "風神雷神図屏風は金地著色の華やかな屏風（俵屋宗達）。月夜山水図は墨主体の落ち着いた掛軸（狩野探幽）。"
+      }
     ],
     "image": {
       "file": "tanyu-getsuya-sansui.jpg",
@@ -226,7 +432,7 @@
       "The Metropolitan Museum of Art コレクション"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "hayashi-razan",
@@ -240,16 +446,49 @@
     "periodLabel": "江戸時代初期（16〜17世紀、1583〜1657年）",
     "eraNote": "江戸時代初期、寛永期の文化の学問。幕府は身分秩序を重んじる朱子学を統治に都合のよい思想として奨励し、林羅山は徳川家康以来4代の将軍に仕えて、朱子学を幕府の官学とする基礎を築いた。",
     "facts": [
-      { "slot": "religion", "text": "朱子学を奉じた儒学者" },
-      { "slot": "era", "text": "寛永期の文化の人物", "shared": ["sakaida-kakiemon", "honami-koetsu", "teimon-haikai"] },
-      { "slot": "other", "text": "徳川家康以下4代の将軍に仕えた幕府の儒官" },
-      { "slot": "other", "text": "上野忍岡に私塾（のちの昌平坂学問所の起源）を開いた" }
+      {
+        "slot": "religion",
+        "text": "朱子学を奉じた儒学者"
+      },
+      {
+        "slot": "era",
+        "text": "寛永期の文化の人物",
+        "shared": [
+          "sakaida-kakiemon",
+          "honami-koetsu",
+          "teimon-haikai"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "徳川家康以下4代の将軍に仕えた幕府の儒官"
+      },
+      {
+        "slot": "other",
+        "text": "上野忍岡に私塾（のちの昌平坂学問所の起源）を開いた"
+      }
     ],
     "falseStatements": [
-      { "text": "陽明学者である", "why": "林羅山は朱子学者。中江藤樹ら陽明学者との学派ずらし", "verifiedFalse": true },
-      { "text": "国学者である", "why": "朱子学者。本居宣長ら国学者との学派ずらし", "verifiedFalse": true },
-      { "text": "元禄期に初めて幕府に仕えた", "why": "徳川家康の時代（寛永期以前）から仕えた。時代ずらし", "verifiedFalse": true },
-      { "text": "蘭学者である", "why": "儒学（朱子学）者。杉田玄白ら蘭学者との分野ずらし", "verifiedFalse": true }
+      {
+        "text": "陽明学者である",
+        "why": "林羅山は朱子学者。中江藤樹ら陽明学者との学派ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "国学者である",
+        "why": "朱子学者。本居宣長ら国学者との学派ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "元禄期に初めて幕府に仕えた",
+        "why": "徳川家康の時代（寛永期以前）から仕えた。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "蘭学者である",
+        "why": "儒学（朱子学）者。杉田玄白ら蘭学者との分野ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "林羅山",
     "reading": "はやしらざん",
@@ -271,7 +510,7 @@
       "高校教科書（山川『詳説日本史』）寛永期の文化の項"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "sakaida-kakiemon",
@@ -285,15 +524,45 @@
     "periodLabel": "江戸時代初期（17世紀前半〜中頃）",
     "eraNote": "江戸時代初期、寛永期の文化の工芸。朝鮮出兵（文禄・慶長の役）で連行された朝鮮人陶工によって九州の陶磁器生産が発展するなか、酒井田柿右衛門は有田（肥前）で赤を主とする上絵付けの技法（赤絵）を完成させ、のちにヨーロッパにも輸出される色絵磁器の基礎を築いた。",
     "facts": [
-      { "slot": "style", "text": "有田焼（肥前）の赤絵を完成させた" },
-      { "slot": "era", "text": "寛永期の文化の人物", "shared": ["hayashi-razan", "honami-koetsu", "teimon-haikai"] },
-      { "slot": "other", "text": "朝鮮出兵で渡来した陶工の技術を背景とする有田焼の発展の中で活躍した" }
+      {
+        "slot": "style",
+        "text": "有田焼（肥前）の赤絵を完成させた"
+      },
+      {
+        "slot": "era",
+        "text": "寛永期の文化の人物",
+        "shared": [
+          "hayashi-razan",
+          "honami-koetsu",
+          "teimon-haikai"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "朝鮮出兵で渡来した陶工の技術を背景とする有田焼の発展の中で活躍した"
+      }
     ],
     "falseStatements": [
-      { "text": "野々村仁清と同一人物である", "why": "仁清は京焼（京都）、柿右衛門は有田焼（肥前）で別人・別産地。人物・地域ずらし", "verifiedFalse": true },
-      { "text": "本阿弥光悦の弟子である", "why": "師弟関係の記録はなく、光悦は書・蒔絵・陶芸で別分野の人物。人物ずらし", "verifiedFalse": true },
-      { "text": "元禄期に赤絵を完成させた", "why": "寛永期（江戸初期）の完成とされる。時代ずらし", "verifiedFalse": true },
-      { "text": "京都の陶工である", "why": "肥前（有田、現佐賀県）の陶工。地域ずらし", "verifiedFalse": true }
+      {
+        "text": "野々村仁清と同一人物である",
+        "why": "仁清は京焼（京都）、柿右衛門は有田焼（肥前）で別人・別産地。人物・地域ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "本阿弥光悦の弟子である",
+        "why": "師弟関係の記録はなく、光悦は書・蒔絵・陶芸で別分野の人物。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "元禄期に赤絵を完成させた",
+        "why": "寛永期（江戸初期）の完成とされる。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "京都の陶工である",
+        "why": "肥前（有田、現佐賀県）の陶工。地域ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "酒井田柿右衛門（赤絵の完成）",
     "reading": "さかいだかきえもん",
@@ -311,13 +580,16 @@
     "explanation": "肥前（現佐賀県）有田の陶工で、素地に赤を主とした鮮やかな色で上絵付けをする赤絵の技法を完成させたとされる。朝鮮出兵（文禄・慶長の役）の際に日本に連行された朝鮮人陶工によって、九州で磁器（白い素地に絵付けができる焼き物）の生産が始まったことを背景とし、有田焼はのちに長崎の出島を通じてヨーロッパにも輸出され、日本の陶磁器を代表する存在となった。",
     "examNote": "「酒井田柿右衛門＝有田焼（肥前）＝赤絵」「野々村仁清＝京焼（京都）＝色絵」と産地・技法をセットで覚える。両者を混同しないこと。",
     "confusables": [
-      { "id": "ninsei-nonomura", "howToTell": "柿右衛門は肥前・有田焼の赤絵。仁清は京都・京焼の色絵。産地も呼び名も異なる。" }
+      {
+        "id": "ninsei-nonomura",
+        "howToTell": "柿右衛門は肥前・有田焼の赤絵。仁清は京都・京焼の色絵。産地も呼び名も異なる。"
+      }
     ],
     "sources": [
       "高校教科書（山川『詳説日本史』）寛永期の文化の項"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "honami-koetsu",
@@ -331,16 +603,49 @@
     "periodLabel": "桃山〜江戸時代初期（1558〜1637年）",
     "eraNote": "桃山文化から江戸初期・寛永期の文化にかけて活躍した芸術家。俵屋宗達とともに寛永期の京都の芸術を主導し、書・蒔絵・陶芸など複数の分野で独自の作品を残して、のちの尾形光琳ら琳派の源流となった。",
     "facts": [
-      { "slot": "style", "text": "書・蒔絵・陶芸など複数の分野で活躍した" },
-      { "slot": "era", "text": "寛永期の文化の人物", "shared": ["hayashi-razan", "sakaida-kakiemon", "teimon-haikai"] },
-      { "slot": "other", "text": "俵屋宗達とともに寛永期の京都の芸術を主導した" },
-      { "slot": "other", "text": "徳川家康から洛北・鷹峯の地を与えられ、芸術家村（光悦村）を営んだ" }
+      {
+        "slot": "style",
+        "text": "書・蒔絵・陶芸など複数の分野で活躍した"
+      },
+      {
+        "slot": "era",
+        "text": "寛永期の文化の人物",
+        "shared": [
+          "hayashi-razan",
+          "sakaida-kakiemon",
+          "teimon-haikai"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "俵屋宗達とともに寛永期の京都の芸術を主導した"
+      },
+      {
+        "slot": "other",
+        "text": "徳川家康から洛北・鷹峯の地を与えられ、芸術家村（光悦村）を営んだ"
+      }
     ],
     "falseStatements": [
-      { "text": "浮世絵師である", "why": "書・蒔絵・陶芸の芸術家。菱川師宣ら浮世絵師との分野ずらし", "verifiedFalse": true },
-      { "text": "肥前・有田焼の陶工である", "why": "京都で活動した芸術家。酒井田柿右衛門（有田焼）との地域・分野ずらし", "verifiedFalse": true },
-      { "text": "元禄期に活躍した", "why": "桃山〜江戸初期（寛永期）に活躍。時代ずらし", "verifiedFalse": true },
-      { "text": "朱子学者である", "why": "書・蒔絵・陶芸の芸術家。林羅山ら儒学者との分野ずらし", "verifiedFalse": true }
+      {
+        "text": "浮世絵師である",
+        "why": "書・蒔絵・陶芸の芸術家。菱川師宣ら浮世絵師との分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "肥前・有田焼の陶工である",
+        "why": "京都で活動した芸術家。酒井田柿右衛門（有田焼）との地域・分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "元禄期に活躍した",
+        "why": "桃山〜江戸初期（寛永期）に活躍。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "朱子学者である",
+        "why": "書・蒔絵・陶芸の芸術家。林羅山ら儒学者との分野ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "本阿弥光悦",
     "reading": "ほんあみこうえつ",
@@ -362,7 +667,7 @@
       "高校教科書（山川『詳説日本史』）寛永期の文化の項"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "teimon-haikai",
@@ -376,16 +681,49 @@
     "periodLabel": "江戸時代初期（17世紀前半、寛永期）",
     "eraNote": "江戸時代初期、寛永期の文化の文芸。俳諧（俳句の前身となる連歌の形式）は、松永貞徳を祖とする貞門俳諧としてこの時期に一つの流派を形成し、のちの元禄期の松尾芭蕉による蕉風俳諧へとつながっていく。仮名草子とともに、庶民に近い読み物・文芸がこの時期に広がり始めたことを示す。",
     "facts": [
-      { "slot": "artist", "text": "松永貞徳を祖とする俳諧の流派" },
-      { "slot": "era", "text": "寛永期の文化の文芸", "shared": ["hayashi-razan", "sakaida-kakiemon", "honami-koetsu"] },
-      { "slot": "other", "text": "貞門俳諧と呼ばれる" },
-      { "slot": "other", "text": "のちの元禄期、松尾芭蕉の蕉風俳諧の源流となった" }
+      {
+        "slot": "artist",
+        "text": "松永貞徳を祖とする俳諧の流派"
+      },
+      {
+        "slot": "era",
+        "text": "寛永期の文化の文芸",
+        "shared": [
+          "hayashi-razan",
+          "sakaida-kakiemon",
+          "honami-koetsu"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "貞門俳諧と呼ばれる"
+      },
+      {
+        "slot": "other",
+        "text": "のちの元禄期、松尾芭蕉の蕉風俳諧の源流となった"
+      }
     ],
     "falseStatements": [
-      { "text": "松尾芭蕉が始めた", "why": "松尾芭蕉は元禄期の蕉風俳諧の大成者。貞門俳諧の祖は松永貞徳。人物・時代ずらし", "verifiedFalse": true },
-      { "text": "浮世草子である", "why": "俳諧（詩歌の一種）。井原西鶴の浮世草子（散文）との分野ずらし", "verifiedFalse": true },
-      { "text": "化政期に始まった", "why": "寛永期（江戸初期）に始まった。時代ずらし", "verifiedFalse": true },
-      { "text": "朱子学の一派である", "why": "俳諧（文芸）。林羅山らの儒学との分野ずらし", "verifiedFalse": true }
+      {
+        "text": "松尾芭蕉が始めた",
+        "why": "松尾芭蕉は元禄期の蕉風俳諧の大成者。貞門俳諧の祖は松永貞徳。人物・時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "浮世草子である",
+        "why": "俳諧（詩歌の一種）。井原西鶴の浮世草子（散文）との分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "化政期に始まった",
+        "why": "寛永期（江戸初期）に始まった。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "朱子学の一派である",
+        "why": "俳諧（文芸）。林羅山らの儒学との分野ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "貞門俳諧",
     "reading": "ていもんはいかい",
@@ -407,6 +745,6 @@
       "高校教科書（山川『詳説日本史』）寛永期の文化の項"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   }
 ]

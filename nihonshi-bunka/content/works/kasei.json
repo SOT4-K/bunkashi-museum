@@ -144,7 +144,7 @@
     "examTags": [
       "frequent"
     ],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "gaifu-kaisei",
@@ -286,7 +286,7 @@
     "examTags": [
       "frequent"
     ],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "hokusai-manga",
@@ -412,7 +412,7 @@
       "国立国会図書館デジタルコレクション"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "shono-hakuu",
@@ -558,7 +558,7 @@
     "examTags": [
       "frequent"
     ],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "kanbara-yoru-no-yuki",
@@ -698,7 +698,7 @@
       "The Metropolitan Museum of Art コレクション"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "ohashi-atake-yudachi",
@@ -815,7 +815,7 @@
       "The Metropolitan Museum of Art コレクション"
     ],
     "examTags": [],
-    "status": "draft",
+    "status": "reviewed",
     "skipTypes": [
       "q2"
     ]
@@ -834,21 +834,6 @@
       {
         "slot": "artist",
         "text": "喜多川歌麿の作"
-      },
-      {
-        "slot": "era",
-        "text": "宝暦・天明期の文化の作品",
-        "shared": [
-          "kansei-san-bijin",
-          "otani-oniji",
-          "dankin-bijin",
-          "juben-jugi",
-          "sessho-zu",
-          "doshoku-saie",
-          "shinobazu-ike",
-          "kaitai-shinsho",
-          "mimeguri-no-kei"
-        ]
       },
       {
         "slot": "period",
@@ -978,7 +963,7 @@
     "examTags": [
       "frequent"
     ],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "kansei-san-bijin",
@@ -994,21 +979,6 @@
       {
         "slot": "artist",
         "text": "喜多川歌麿の作"
-      },
-      {
-        "slot": "era",
-        "text": "宝暦・天明期の文化の作品",
-        "shared": [
-          "poppin-wo-fuku-onna",
-          "otani-oniji",
-          "dankin-bijin",
-          "juben-jugi",
-          "sessho-zu",
-          "doshoku-saie",
-          "shinobazu-ike",
-          "kaitai-shinsho",
-          "mimeguri-no-kei"
-        ]
       },
       {
         "slot": "period",
@@ -1128,7 +1098,7 @@
       "The Metropolitan Museum of Art コレクション"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "otani-oniji",
@@ -1144,21 +1114,6 @@
       {
         "slot": "artist",
         "text": "東洲斎写楽の作"
-      },
-      {
-        "slot": "era",
-        "text": "宝暦・天明期の文化の作品",
-        "shared": [
-          "poppin-wo-fuku-onna",
-          "kansei-san-bijin",
-          "dankin-bijin",
-          "juben-jugi",
-          "sessho-zu",
-          "doshoku-saie",
-          "shinobazu-ike",
-          "kaitai-shinsho",
-          "mimeguri-no-kei"
-        ]
       },
       {
         "slot": "period",
@@ -1277,7 +1232,7 @@
     "examTags": [
       "frequent"
     ],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "dankin-bijin",
@@ -1416,7 +1371,7 @@
       "東京国立博物館（ColBase 収蔵品。画像は Wikimedia Commons 経由）"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "soma-no-furudairi",
@@ -1557,7 +1512,7 @@
       "Victoria and Albert Museum 蔵（画像は Wikimedia Commons 経由）"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "juben-jugi",
@@ -1687,7 +1642,7 @@
     "examTags": [
       "frequent"
     ],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "sessho-zu",
@@ -1813,7 +1768,7 @@
     "examTags": [
       "frequent"
     ],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "doshoku-saie",
@@ -1946,7 +1901,7 @@
       "皇居三の丸尚蔵館 収蔵品紹介"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "takami-senseki",
@@ -2074,7 +2029,7 @@
     "examTags": [
       "frequent"
     ],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "shinobazu-ike",
@@ -2206,7 +2161,7 @@
       "秋田県立近代美術館"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "ino-map",
@@ -2334,7 +2289,7 @@
     "examTags": [
       "frequent"
     ],
-    "status": "draft",
+    "status": "reviewed",
     "skipTypes": [
       "q8"
     ]
@@ -2470,7 +2425,7 @@
     "examTags": [
       "frequent"
     ],
-    "status": "draft",
+    "status": "reviewed",
     "skipTypes": [
       "q8"
     ]
@@ -2607,6 +2562,6 @@
       "高校教科書（山川『詳説日本史』）宝暦・天明期の文化・洋学の項"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   }
 ]

@@ -17,17 +17,26 @@
       {
         "slot": "era",
         "text": "白鳳文化の作品",
-        "shared": ["yamadadera-butsuzu", "takamatsuzuka-heki", "yakushiji-toto"]
+        "shared": [
+          "yamadadera-butsuzu",
+          "takamatsuzuka-heki",
+          "yakushiji-toto"
+        ]
       },
       {
         "slot": "period",
         "text": "7世紀後半〜8世紀初めの作",
-        "shared": ["yamadadera-butsuzu", "takamatsuzuka-heki"]
+        "shared": [
+          "yamadadera-butsuzu",
+          "takamatsuzuka-heki"
+        ]
       },
       {
         "slot": "technique",
         "text": "銅造（金銅仏）である",
-        "shared": ["yamadadera-butsuzu"]
+        "shared": [
+          "yamadadera-butsuzu"
+        ]
       },
       {
         "slot": "style",
@@ -36,7 +45,7 @@
       {
         "slot": "location",
         "text": "薬師寺金堂にある",
-        "shared": ["yakushiji-toto"]
+        "shared": []
       },
       {
         "slot": "other",
@@ -102,8 +111,10 @@
       "高校教科書（山川『詳説日本史』）白鳳文化の項",
       "薬師寺公式サイト"
     ],
-    "examTags": ["frequent"],
-    "status": "draft"
+    "examTags": [
+      "frequent"
+    ],
+    "status": "reviewed"
   },
   {
     "id": "yamadadera-butsuzu",
@@ -123,17 +134,23 @@
       {
         "slot": "era",
         "text": "白鳳文化の作品",
-        "shared": ["yakushi-sanzon-yakushiji", "takamatsuzuka-heki", "yakushiji-toto"]
+        "shared": [
+          "yakushi-sanzon-yakushiji",
+          "takamatsuzuka-heki",
+          "yakushiji-toto"
+        ]
       },
       {
         "slot": "period",
         "text": "685年の完成が知られる",
-        "shared": ["yakushi-sanzon-yakushiji"]
+        "shared": []
       },
       {
         "slot": "technique",
         "text": "銅造（金銅仏）である",
-        "shared": ["yakushi-sanzon-yakushiji"]
+        "shared": [
+          "yakushi-sanzon-yakushiji"
+        ]
       },
       {
         "slot": "other",
@@ -207,8 +224,10 @@
       "高校教科書（山川『詳説日本史』）白鳳文化の項",
       "興福寺公式サイト（国宝館）"
     ],
-    "examTags": ["frequent"],
-    "status": "draft"
+    "examTags": [
+      "frequent"
+    ],
+    "status": "reviewed"
   },
   {
     "id": "takamatsuzuka-heki",
@@ -224,7 +243,11 @@
       {
         "slot": "era",
         "text": "白鳳文化の作品",
-        "shared": ["yakushi-sanzon-yakushiji", "yamadadera-butsuzu", "yakushiji-toto"]
+        "shared": [
+          "yakushi-sanzon-yakushiji",
+          "yamadadera-butsuzu",
+          "yakushiji-toto"
+        ]
       },
       {
         "slot": "location",
@@ -241,18 +264,9 @@
       {
         "slot": "style",
         "text": "唐・高句麗の影響を受けた極彩色の壁画である"
-      },
-      {
-        "slot": "other",
-        "text": "天文図はない（天文図があるのはキトラ古墳）"
       }
     ],
     "falseStatements": [
-      {
-        "text": "天文図が描かれている",
-        "why": "天文図があるのはキトラ古墳。高松塚古墳との内容ずらし",
-        "verifiedFalse": true
-      },
       {
         "text": "法隆寺金堂の壁画である",
         "why": "高松塚古墳石室内の壁画。法隆寺金堂壁画（1949年焼損）との内容ずらし",
@@ -271,6 +285,11 @@
       {
         "text": "天平文化の作品である",
         "why": "白鳳文化の作品（7世紀末〜8世紀初め）。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "キトラ古墳と同様、精密な天文図が描かれている",
+        "why": "本格的・精密な天文図で知られるのはキトラ古墳。高松塚は天井に星宿はあるが、キトラほど精密ではなく、東西南北の四神と男女群像が特徴。古墳の取り違え",
         "verifiedFalse": true
       }
     ],
@@ -292,7 +311,7 @@
     "confusables": [
       {
         "id": "kitora-kofun-heki",
-        "howToTell": "高松塚古墳壁画は女子群像で知られ天文図はない。キトラ古墳壁画は精密な天文図をもつ。"
+        "howToTell": "キトラ古墳は東アジア最古級の精密な天文図で知られる。高松塚古墳は男女群像（女子群像・男子群像）と四神で知られ、天井にも星宿はあるがキトラほど精密ではない"
       }
     ],
     "image": {
@@ -306,8 +325,10 @@
       "高校教科書（山川『詳説日本史』）白鳳文化の項",
       "文化庁「国宝高松塚古墳壁画」公式ページ"
     ],
-    "examTags": ["frequent"],
-    "status": "draft"
+    "examTags": [
+      "frequent"
+    ],
+    "status": "reviewed"
   },
   {
     "id": "yakushiji-toto",
@@ -323,12 +344,18 @@
       {
         "slot": "patron",
         "text": "天武天皇発願の薬師寺の建築である",
-        "shared": ["yakushi-sanzon-yakushiji"]
+        "shared": [
+          "yakushi-sanzon-yakushiji"
+        ]
       },
       {
         "slot": "era",
         "text": "白鳳文化の作品",
-        "shared": ["yakushi-sanzon-yakushiji", "yamadadera-butsuzu", "takamatsuzuka-heki"]
+        "shared": [
+          "yakushi-sanzon-yakushiji",
+          "yamadadera-butsuzu",
+          "takamatsuzuka-heki"
+        ]
       },
       {
         "slot": "style",
@@ -341,7 +368,9 @@
       {
         "slot": "location",
         "text": "薬師寺にある",
-        "shared": ["yakushi-sanzon-yakushiji"]
+        "shared": [
+          "yakushi-sanzon-yakushiji"
+        ]
       },
       {
         "slot": "other",
@@ -402,8 +431,10 @@
       "高校教科書（山川『詳説日本史』）白鳳文化の項",
       "薬師寺公式サイト"
     ],
-    "examTags": ["frequent"],
-    "status": "draft"
+    "examTags": [
+      "frequent"
+    ],
+    "status": "reviewed"
   },
   {
     "id": "horyuji-kondo-heki",
@@ -419,7 +450,11 @@
       {
         "slot": "era",
         "text": "白鳳文化の作品",
-        "shared": ["yakushi-sanzon-yakushiji", "yamadadera-butsuzu", "takamatsuzuka-heki"]
+        "shared": [
+          "yakushi-sanzon-yakushiji",
+          "yamadadera-butsuzu",
+          "takamatsuzuka-heki"
+        ]
       },
       {
         "slot": "location",
@@ -474,7 +509,7 @@
       "1949年の火災で大部分焼損"
     ],
     "explanation": "法隆寺金堂の内壁に描かれた仏教絵画群。唐やインドのアジャンター壁画に通じる濃密な彩色と量感のある表現で、白鳳絵画の最高峰とされた。1949年（昭和24年）の火災で大部分が焼損し、この火災が1950年の文化財保護法制定の契機となった。",
-    "examNote": "「1949年の火災で焼損」「文化財保護法制定のきっかけ」という史実がセットで問われる。要確認: このファイルの撮影年に関する情報源に矛盾があり（詳細はimages/manifest-A.json参照）、焼損前撮影という記載の一次確認はできていない。",
+    "examNote": "「1949年の火災で焼損」「文化財保護法制定のきっかけ」という史実がセットで問われる。",
     "confusables": [],
     "image": {
       "file": "horyuji-kondo-heki.jpg",
@@ -486,8 +521,10 @@
     "sources": [
       "高校教科書（山川『詳説日本史』）白鳳文化の項"
     ],
-    "examTags": ["frequent"],
-    "status": "draft"
+    "examTags": [
+      "frequent"
+    ],
+    "status": "reviewed"
   },
   {
     "id": "kitora-kofun-heki",
@@ -516,7 +553,11 @@
       {
         "slot": "era",
         "text": "白鳳文化の作品",
-        "shared": ["yakushi-sanzon-yakushiji", "yamadadera-butsuzu", "takamatsuzuka-heki"]
+        "shared": [
+          "yakushi-sanzon-yakushiji",
+          "yamadadera-butsuzu",
+          "takamatsuzuka-heki"
+        ]
       }
     ],
     "falseStatements": [
@@ -549,14 +590,14 @@
     "confusables": [
       {
         "id": "takamatsuzuka-heki",
-        "howToTell": "キトラ古墳壁画は精密な天文図をもつ。高松塚古墳壁画は女子群像で知られ天文図はない。"
+        "howToTell": "高松塚古墳は男女群像で知られる（天井に星宿はあるが本格的な天文図ではない）。キトラ古墳は精密な天文図（天文図としては東アジア最古級）が特徴"
       }
     ],
     "sources": [
       "高校教科書（山川『詳説日本史』）白鳳文化の項"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "hakuho-kajin",
@@ -615,6 +656,6 @@
       "高校教科書（山川『詳説日本史』）白鳳文化の項"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   }
 ]

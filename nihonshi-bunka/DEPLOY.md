@@ -37,12 +37,12 @@ PWA（ホーム画面に追加で全画面）は **HTTPS が必須**。上のど
 ## B. Cloudflare Pages（代替）
 1. Cloudflare アカウント（無料）→ Workers & Pages → Create → Pages → **Connect to Git** で上のリポジトリを選ぶ
 2. Build settings: Framework preset = Vite / Root directory = `nihonshi-bunka/app` / Build command = `npm run build` / Output = `dist`
-3. 環境変数 `VITE_BASE=/`（ルート配信なので `/`）。M1 の間は `VITE_INCLUDE_DRAFT=1`
+3. 環境変数 `VITE_BASE=/`（ルート配信なので `/`）
 4. 公開 URL: `https://<project>.pages.dev/`
 
 ## 公開前チェック（Hayato が確認、reviewer が検証）
 - [ ] `content/images/manifest.json` に全画像のライセンスと帰属が記録され、アプリの「クレジット」画面に表示される
-- [ ] `status: reviewed` 以外の作品が本番ビルドに含まれていない（M1 の限定公開のみ `VITE_INCLUDE_DRAFT=1` を許容）
+- [ ] `status: reviewed` 以外の作品が本番ビルドに含まれていない（M2 で `VITE_INCLUDE_DRAFT` は撤去済み。dev サーバーでのみ draft を見る）
 - [ ] Lighthouse の PWA 項目が合格（installable、HTTPS、manifest、service worker）
 - [ ] iPhone 実機でホーム画面追加 → 全画面起動 → オフラインでも前回の画像が表示される
 - [ ] 個人情報を送信していない（外部リクエストが画像とアプリ本体のみ）

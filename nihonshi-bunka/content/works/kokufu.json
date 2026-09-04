@@ -17,12 +17,18 @@
       {
         "slot": "patron",
         "text": "藤原頼通が建立した平等院鳳凰堂の本尊である",
-        "shared": ["byodoin-hoo-do"]
+        "shared": [
+          "byodoin-hoo-do"
+        ]
       },
       {
         "slot": "era",
         "text": "国風文化の作品",
-        "shared": ["byodoin-hoo-do", "koyagire", "daigoji-gojunoto"]
+        "shared": [
+          "byodoin-hoo-do",
+          "koyagire",
+          "daigoji-gojunoto"
+        ]
       },
       {
         "slot": "technique",
@@ -35,7 +41,9 @@
       {
         "slot": "location",
         "text": "平等院鳳凰堂にある",
-        "shared": ["byodoin-hoo-do"]
+        "shared": [
+          "byodoin-hoo-do"
+        ]
       }
     ],
     "falseStatements": [
@@ -92,8 +100,10 @@
       "高校教科書（山川『詳説日本史』）国風文化の項",
       "平等院公式サイト"
     ],
-    "examTags": ["frequent"],
-    "status": "draft"
+    "examTags": [
+      "frequent"
+    ],
+    "status": "reviewed"
   },
   {
     "id": "byodoin-hoo-do",
@@ -109,12 +119,18 @@
       {
         "slot": "patron",
         "text": "藤原頼通が建立した",
-        "shared": ["byodoin-amida-nyorai"]
+        "shared": [
+          "byodoin-amida-nyorai"
+        ]
       },
       {
         "slot": "era",
         "text": "国風文化の作品",
-        "shared": ["byodoin-amida-nyorai", "koyagire", "daigoji-gojunoto"]
+        "shared": [
+          "byodoin-amida-nyorai",
+          "koyagire",
+          "daigoji-gojunoto"
+        ]
       },
       {
         "slot": "style",
@@ -127,7 +143,9 @@
       {
         "slot": "location",
         "text": "京都府宇治市の平等院にある",
-        "shared": ["byodoin-amida-nyorai"]
+        "shared": [
+          "byodoin-amida-nyorai"
+        ]
       },
       {
         "slot": "religion",
@@ -188,24 +206,30 @@
       "高校教科書（山川『詳説日本史』）国風文化の項",
       "平等院公式サイト"
     ],
-    "examTags": ["frequent"],
-    "status": "draft"
+    "examTags": [
+      "frequent"
+    ],
+    "status": "reviewed"
   },
   {
     "id": "koyagire",
-    "artist": "伝・紀貫之",
+    "artist": null,
     "patron": null,
     "style": "和様の書（かな書道）",
     "religion": null,
     "periodLabel": "平安時代中期・国風文化（11世紀）",
     "eraNote": "遣唐使停止後、唐風の書に対して日本独自のかな文字を美しく書く和様の書道が発達した国風文化。『古今和歌集』の現存する最古級の写本である高野切は、優美な線と散らし書きの構成で和様書道の完成度を示す代表作である。",
-    "holder": "分割所蔵（原本は複数箇所に分蔵、原本の一部は土佐山内家宝物資料館などに伝わる）",
+    "holder": "分割所蔵（複数の美術館・個人に分蔵）",
     "subject": null,
     "facts": [
       {
         "slot": "era",
         "text": "国風文化の作品",
-        "shared": ["byodoin-amida-nyorai", "byodoin-hoo-do", "daigoji-gojunoto"]
+        "shared": [
+          "byodoin-amida-nyorai",
+          "byodoin-hoo-do",
+          "daigoji-gojunoto"
+        ]
       },
       {
         "slot": "other",
@@ -273,23 +297,27 @@
       "高校教科書（山川『詳説日本史』）国風文化の項"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "daigoji-gojunoto",
     "artist": null,
-    "patron": "醍醐天皇（発願）、朱雀天皇（完成）",
+    "patron": "朱雀天皇（発願）、村上天皇の代に完成",
     "style": "国風文化建築（五重塔）",
     "religion": "仏教（真言宗）",
     "periodLabel": "平安時代中期・国風文化（951年）",
-    "eraNote": "国風文化の建築。醍醐天皇の菩提を弔うために発願され、朱雀天皇の代の951年に完成した醍醐寺の五重塔は、京都府内に現存する最古の木造建築とされ、応仁の乱による京都の荒廃を免れた数少ない古建築のひとつである。",
+    "eraNote": "国風文化の建築。醍醐天皇の菩提を弔うために発願され、村上天皇の代の951年に完成した醍醐寺の五重塔は、京都府内に現存する最古の木造建築とされ、応仁の乱による京都の荒廃を免れた数少ない古建築のひとつである。",
     "holder": "醍醐寺",
     "subject": null,
     "facts": [
       {
         "slot": "era",
         "text": "国風文化の作品",
-        "shared": ["byodoin-amida-nyorai", "byodoin-hoo-do", "koyagire"]
+        "shared": [
+          "byodoin-amida-nyorai",
+          "byodoin-hoo-do",
+          "koyagire"
+        ]
       },
       {
         "slot": "other",
@@ -343,7 +371,7 @@
       "醍醐天皇の菩提を弔うため発願",
       "応仁の乱の焼失を免れた"
     ],
-    "explanation": "醍醐天皇の菩提を弔うために発願され、朱雀天皇の代の951年に完成した醍醐寺の五重塔。京都府内に現存する最古の木造建築とされ、1467年からの応仁の乱で京都の多くの寺院が焼失するなかで焼失を免れた貴重な遺構である。",
+    "explanation": "醍醐天皇の菩提を弔うために発願され、村上天皇の代の951年に完成した醍醐寺の五重塔。京都府内に現存する最古の木造建築とされ、1467年からの応仁の乱で京都の多くの寺院が焼失するなかで焼失を免れた貴重な遺構である。",
     "examNote": "「京都府内最古の木造建築＝醍醐寺五重塔」を覚える。応仁の乱を免れた古建築として問われることがある。",
     "confusables": [],
     "image": {
@@ -357,7 +385,7 @@
       "高校教科書（山川『詳説日本史』）国風文化の項"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "kokufu-bungaku",
@@ -416,6 +444,6 @@
       "高校教科書（山川『詳説日本史』）国風文化の項"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   }
 ]

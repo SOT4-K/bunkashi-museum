@@ -4,7 +4,7 @@
     "artist": "鞍作鳥（止利仏師）",
     "patron": null,
     "style": "金銅仏（北魏様式・止利様式）",
-    "religion": "仏教（法相宗）",
+    "religion": "仏教",
     "periodLabel": "飛鳥時代（7世紀前半、623年銘）",
     "eraNote": "7世紀前半、推古天皇の時代に厩戸王（聖徳太子）や蘇我馬子を中心として栄えた、日本最初の仏教文化。渡来系の鞍作鳥（止利仏師）らが中国の南北朝時代の北魏様式（止利様式）を受けて仏像を制作し、法隆寺金堂釈迦三尊像はその代表作である。",
     "holder": "法隆寺金堂",
@@ -13,12 +13,17 @@
       {
         "slot": "artist",
         "text": "鞍作鳥（止利仏師）の作",
-        "shared": ["tamamushi-zushi"]
+        "shared": []
       },
       {
         "slot": "era",
         "text": "飛鳥文化の作品",
-        "shared": ["koryuji-miroku", "chuguji-hanka-shiyui", "tamamushi-zushi", "kudara-kannon"]
+        "shared": [
+          "koryuji-miroku",
+          "chuguji-hanka-shiyui",
+          "tamamushi-zushi",
+          "kudara-kannon"
+        ]
       },
       {
         "slot": "style",
@@ -35,7 +40,7 @@
       {
         "slot": "location",
         "text": "法隆寺金堂にある",
-        "shared": ["tamamushi-zushi"]
+        "shared": []
       },
       {
         "slot": "other",
@@ -101,8 +106,10 @@
       "高校教科書（山川『詳説日本史』）飛鳥文化の項",
       "法隆寺公式サイト"
     ],
-    "examTags": ["frequent"],
-    "status": "draft"
+    "examTags": [
+      "frequent"
+    ],
+    "status": "reviewed"
   },
   {
     "id": "koryuji-miroku",
@@ -118,7 +125,12 @@
       {
         "slot": "era",
         "text": "飛鳥文化の作品",
-        "shared": ["horyuji-shaka-sanzon", "chuguji-hanka-shiyui", "tamamushi-zushi", "kudara-kannon"]
+        "shared": [
+          "horyuji-shaka-sanzon",
+          "chuguji-hanka-shiyui",
+          "tamamushi-zushi",
+          "kudara-kannon"
+        ]
       },
       {
         "slot": "technique",
@@ -127,7 +139,9 @@
       {
         "slot": "other",
         "text": "片足を組み、頬に指をあてて考える姿（半跏思惟像）である",
-        "shared": ["chuguji-hanka-shiyui"]
+        "shared": [
+          "chuguji-hanka-shiyui"
+        ]
       },
       {
         "slot": "location",
@@ -200,8 +214,10 @@
     "sources": [
       "高校教科書（山川『詳説日本史』）飛鳥文化の項"
     ],
-    "examTags": ["frequent"],
-    "status": "draft"
+    "examTags": [
+      "frequent"
+    ],
+    "status": "reviewed"
   },
   {
     "id": "chuguji-hanka-shiyui",
@@ -217,16 +233,23 @@
       {
         "slot": "era",
         "text": "飛鳥文化の作品",
-        "shared": ["horyuji-shaka-sanzon", "koryuji-miroku", "tamamushi-zushi", "kudara-kannon"]
+        "shared": [
+          "horyuji-shaka-sanzon",
+          "koryuji-miroku",
+          "tamamushi-zushi",
+          "kudara-kannon"
+        ]
       },
       {
         "slot": "technique",
-        "text": "樟の一木造である"
+        "text": "樟（クスノキ）材でつくられている"
       },
       {
         "slot": "other",
         "text": "片足を組み、頬に指をあてて考える姿（半跏思惟像）である",
-        "shared": ["koryuji-miroku"]
+        "shared": [
+          "koryuji-miroku"
+        ]
       },
       {
         "slot": "location",
@@ -274,7 +297,7 @@
     "category": "sculpture",
     "location": "中宮寺（奈良）",
     "author": null,
-    "technique": "樟の一木造",
+    "technique": "樟（クスノキ）材の像",
     "keyPoints": [
       "飛鳥文化",
       "聖徳太子ゆかりの尼寺・中宮寺に伝わる",
@@ -299,8 +322,10 @@
     "sources": [
       "高校教科書（山川『詳説日本史』）飛鳥文化の項"
     ],
-    "examTags": ["frequent"],
-    "status": "draft"
+    "examTags": [
+      "frequent"
+    ],
+    "status": "reviewed"
   },
   {
     "id": "tamamushi-zushi",
@@ -316,7 +341,12 @@
       {
         "slot": "era",
         "text": "飛鳥文化の作品",
-        "shared": ["horyuji-shaka-sanzon", "koryuji-miroku", "chuguji-hanka-shiyui", "kudara-kannon"]
+        "shared": [
+          "horyuji-shaka-sanzon",
+          "koryuji-miroku",
+          "chuguji-hanka-shiyui",
+          "kudara-kannon"
+        ]
       },
       {
         "slot": "technique",
@@ -325,7 +355,7 @@
       {
         "slot": "location",
         "text": "法隆寺にある",
-        "shared": ["horyuji-shaka-sanzon"]
+        "shared": []
       },
       {
         "slot": "category",
@@ -334,11 +364,6 @@
       {
         "slot": "other",
         "text": "側面に捨身飼虎図などの説話画が描かれる"
-      },
-      {
-        "slot": "artist",
-        "text": "止利派の工人によるとされる",
-        "shared": ["horyuji-shaka-sanzon"]
       }
     ],
     "falseStatements": [
@@ -396,7 +421,7 @@
       "法隆寺公式サイト"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "kudara-kannon",
@@ -412,7 +437,12 @@
       {
         "slot": "era",
         "text": "飛鳥文化の作品",
-        "shared": ["horyuji-shaka-sanzon", "koryuji-miroku", "chuguji-hanka-shiyui", "tamamushi-zushi"]
+        "shared": [
+          "horyuji-shaka-sanzon",
+          "koryuji-miroku",
+          "chuguji-hanka-shiyui",
+          "tamamushi-zushi"
+        ]
       },
       {
         "slot": "style",
@@ -429,7 +459,10 @@
       {
         "slot": "location",
         "text": "法隆寺にある",
-        "shared": ["horyuji-shaka-sanzon", "tamamushi-zushi"]
+        "shared": [
+          "horyuji-shaka-sanzon",
+          "tamamushi-zushi"
+        ]
       },
       {
         "slot": "other",
@@ -495,8 +528,10 @@
       "高校教科書（山川『詳説日本史』）飛鳥文化の項",
       "法隆寺公式サイト"
     ],
-    "examTags": ["frequent"],
-    "status": "draft"
+    "examTags": [
+      "frequent"
+    ],
+    "status": "reviewed"
   },
   {
     "id": "tori-busshi",
@@ -517,7 +552,9 @@
       {
         "slot": "other",
         "text": "法隆寺金堂釈迦三尊像を制作した",
-        "shared": ["horyuji-shaka-sanzon"]
+        "shared": [
+          "horyuji-shaka-sanzon"
+        ]
       },
       {
         "slot": "style",
@@ -555,7 +592,7 @@
       "高校教科書（山川『詳説日本史』）飛鳥文化の項"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "donchou-kanroku",
@@ -613,6 +650,6 @@
       "高校教科書（山川『詳説日本史』）飛鳥文化の項"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   }
 ]

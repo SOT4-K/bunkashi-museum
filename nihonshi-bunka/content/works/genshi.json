@@ -13,7 +13,7 @@
       {
         "slot": "era",
         "text": "縄文時代晩期の遺物",
-        "shared": ["kaen-doki"]
+        "shared": []
       },
       {
         "slot": "location",
@@ -26,7 +26,7 @@
       {
         "slot": "other",
         "text": "女性を表すとされる呪術的な土製の人形である",
-        "shared": ["kaen-doki"]
+        "shared": []
       },
       {
         "slot": "other",
@@ -91,8 +91,10 @@
       "高校教科書（山川『詳説日本史』）原始文化の項",
       "東京国立博物館展示"
     ],
-    "examTags": ["frequent"],
-    "status": "draft"
+    "examTags": [
+      "frequent"
+    ],
+    "status": "reviewed"
   },
   {
     "id": "kaen-doki",
@@ -108,7 +110,7 @@
       {
         "slot": "era",
         "text": "縄文時代中期の遺物",
-        "shared": ["shakoki-dogu"]
+        "shared": []
       },
       {
         "slot": "location",
@@ -153,8 +155,8 @@
         "verifiedFalse": true
       },
       {
-        "text": "重要文化財に指定されている",
-        "why": "国宝指定。指定区分ずらし",
+        "text": "簡素で装飾のない実用本位の土器である",
+        "why": "実際は縁に燃え上がる炎のような大きな突起を持つ装飾性の高い土器。様式（装飾性）の反転",
         "verifiedFalse": true
       }
     ],
@@ -185,8 +187,10 @@
       "高校教科書（山川『詳説日本史』）原始文化の項",
       "十日町市博物館展示"
     ],
-    "examTags": ["frequent"],
-    "status": "draft"
+    "examTags": [
+      "frequent"
+    ],
+    "status": "reviewed"
   },
   {
     "id": "keiko-bujin-haniwa",
@@ -279,8 +283,10 @@
       "高校教科書（山川『詳説日本史』）原始文化の項",
       "東京国立博物館展示"
     ],
-    "examTags": ["frequent"],
-    "status": "draft"
+    "examTags": [
+      "frequent"
+    ],
+    "status": "reviewed"
   },
   {
     "id": "kesadasuki-dotaku",
@@ -367,10 +373,11 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）原始文化の項",
-      "広島県立歴史民俗資料館展示"
+      "広島県立歴史民俗資料館展示",
+      "Wikimedia Commons（画像ファイルの記載情報。撮影者による作品情報。黒川遺跡出土・広島県立歴史民俗資料館展示）"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "zenpokoenfun",
@@ -395,7 +402,9 @@
       {
         "slot": "other",
         "text": "墳丘の周囲に埴輪が並べられた",
-        "shared": ["keiko-bujin-haniwa"]
+        "shared": [
+          "keiko-bujin-haniwa"
+        ]
       }
     ],
     "falseStatements": [
@@ -430,7 +439,7 @@
       "高校教科書（山川『詳説日本史』）原始文化の項"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "kaizuka-jomon",
@@ -489,6 +498,6 @@
       "高校教科書（山川『詳説日本史』）原始文化の項"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   }
 ]
