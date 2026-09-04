@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import {
   checkPassageConsistency,
   excerptAroundUnderline,
+  excerptSegmentsForUnderline,
   extractUnderlineKeys,
   pickUnderlineTargetId,
   splitPassageText,
@@ -92,6 +93,39 @@ describe('excerptAroundUnderline', () => {
 
   it('存在しないキーなら空文字', () => {
     expect(excerptAroundUnderline({ text }, 'zzz')).toBe('')
+  })
+})
+
+const longSentenceText =
+  '平安時代後期、地方の有力者によって阿弥陀堂建築である[[a|富貴寺大堂]]が豊後国に建立された。' +
+  '同じころ陸奥国では奥州藤原氏によって[[b|白水阿弥陀堂]]をはじめとする阿弥陀堂が各地に建てられた。'
+
+describe('excerptSegmentsForUnderline（M2-21: 下線を含む1〜2文だけを抜き出す）', () => {
+  it('対象の下線を含む文だけを返す（他の文は含まない。各文が40字以上あるため前文を含めない）', () => {
+    const segments = excerptSegmentsForUnderline(longSentenceText, 'a')
+    const joined = segments.map((s) => s.value).join('')
+    expect(joined).toContain('富貴寺大堂')
+    expect(joined).not.toContain('白水阿弥陀堂')
+  })
+
+  it('対象の文が短ければ前の文も含めて2文にする', () => {
+    // 「c」を含む文は短い（15字未満）ため、前の文（阿弥陀堂建築の文）も含まれる。
+    const shortText = '前置き。[[a|短い下線]]あり。'
+    const segments = excerptSegmentsForUnderline(shortText, 'a')
+    const joined = segments.map((s) => s.value).join('')
+    expect(joined).toContain('前置き')
+    expect(joined).toContain('短い下線')
+  })
+
+  it('下線ハイライト用のセグメント種別を保つ（対象キーは type: underline）', () => {
+    const segments = excerptSegmentsForUnderline(text, 'b')
+    const underlineSeg = segments.find((s) => s.type === 'underline' && s.key === 'b')
+    expect(underlineSeg).toEqual({ type: 'underline', key: 'b', value: '白水阿弥陀堂' })
+  })
+
+  it('存在しないキーなら本文全体にフォールバックする（異常な underline key への防御）', () => {
+    const segments = excerptSegmentsForUnderline(text, 'zzz')
+    expect(segments).toEqual(splitPassageText(text))
   })
 })
 

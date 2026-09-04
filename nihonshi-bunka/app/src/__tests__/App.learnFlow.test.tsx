@@ -1,5 +1,6 @@
-// 「学習を始める」のテーマセット連続提示（mock-exam-analysis.md 9章「M2-13」）の統合テスト。
-// content.ts をモックし、テーマセット2本→自由出題（尽きればメッセージ）の一連の流れを確認する。
+// 「学習を始める」（ランダム学習。M2-21）の統合テスト。content.ts をモックし、
+// ホームの「学習を始める」→ RandomLearnScreen（下線抜粋＋設問）→ 結果→ホーム、の流れと、
+// ホーム下部の個別テーマセット選択（従来どおり ThemeSetScreen）が引き続き動くことを確認する。
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { render, screen, fireEvent, within, act } from '@testing-library/react'
 import { makeWork, testEras } from '../engine/__tests__/testFixtures'
@@ -12,7 +13,7 @@ const passageA: Passage = {
   id: 'flow-a',
   era: 'tenpyo',
   title: 'テーマセットA',
-  text: '本文。[[a|下線A]]。',
+  text: '本文の冒頭。[[a|下線A]]という記述が続く。',
   sources: ['x'],
   underlines: [{ key: 'a', workIds: ['lw1'] }],
 }
@@ -20,7 +21,7 @@ const passageB: Passage = {
   id: 'flow-b',
   era: 'hakuho',
   title: 'テーマセットB',
-  text: '本文。[[a|下線B]]。',
+  text: '本文の冒頭。[[a|下線B]]という記述が続く。',
   sources: ['x'],
   underlines: [{ key: 'a', workIds: ['lw2'] }],
 }
@@ -29,11 +30,12 @@ vi.mock('../content', () => ({
   eras: testEras,
   works: [w1, w2],
   playableWorks: [w1, w2],
-  // M2-16: ThemeSetScreen の pool は themeSetPool（画像なし項目も含む）を渡す。
+  // M2-16: ThemeSetScreen/RandomLearnScreen の pool は themeSetPool（画像なし項目も含む）を渡す。
   // このテストの作品は全て kind: artifact（既定）なので playableWorks と同じ内容でよい。
   themeSetPool: [w1, w2],
   passages: [passageA, passageB],
   passagesByEra: {},
+  worksById: { lw1: w1, lw2: w2 },
 }))
 
 async function importApp() {
@@ -41,7 +43,7 @@ async function importApp() {
   return mod.default
 }
 
-describe('App: 「学習を始める」はテーマセットを連続提示し、尽きたら自由出題へ続ける（M2-13）', () => {
+describe('App: 「学習を始める」はランダム学習（全文化・下線プール・M2-21）を開始する', () => {
   beforeEach(() => {
     // このテスト環境では localStorage が未定義（progress.ts の loadProgress がその場合
     // createInitialProgress にフォールバックする設計）。App の再 render ごとに状態は
@@ -52,49 +54,35 @@ describe('App: 「学習を始める」はテーマセットを連続提示し�
     vi.useRealTimers()
   })
 
-  it('2本のテーマセットを順番に消化し、その後フリー出題（対象が尽きていればメッセージ）に移る', async () => {
+  it('「学習を始める」→ 下線抜粋＋設問（テーマセットの全文リードではない）→ 回答→ 結果→ ホームに戻る', async () => {
     const App = await importApp()
     render(<App />)
 
     fireEvent.click(screen.getByText('学習を始める'))
 
-    // 1本目: 読解フェーズ→設問→回答→結果→「ホームに戻る」
-    expect(screen.getByTestId('passage-read-panel')).toBeInTheDocument()
-    const firstTitle = screen.getByText(/テーマセット[AB]/).textContent
-    fireEvent.click(screen.getByTestId('start-quiz-button'))
-    fireEvent.click(screen.getAllByTestId('choice-button')[0])
-    act(() => {
-      vi.advanceTimersByTime(500)
-    })
-    const dialog1 = screen.getByRole('dialog')
-    fireEvent.click(within(dialog1).getByTestId('next-button'))
-    const summary1 = screen.getByTestId('theme-set-summary')
-    fireEvent.click(within(summary1).getByText('ホームに戻る'))
-
-    // 2本目に自動で進む（1本目と違うタイトル）
-    expect(screen.getByTestId('passage-read-panel')).toBeInTheDocument()
-    const secondTitle = screen.getByText(/テーマセット[AB]/).textContent
-    expect(secondTitle).not.toBe(firstTitle)
-
-    fireEvent.click(screen.getByTestId('start-quiz-button'))
-    fireEvent.click(screen.getAllByTestId('choice-button')[0])
-    act(() => {
-      vi.advanceTimersByTime(500)
-    })
-    const dialog2 = screen.getByRole('dialog')
-    fireEvent.click(within(dialog2).getByTestId('next-button'))
-    const summary2 = screen.getByTestId('theme-set-summary')
-    fireEvent.click(within(summary2).getByText('ホームに戻る'))
-
-    // テーマセットが尽きたので自由出題（LearnScreen。学習タブ）に自動で移る。
-    // 正誤はランダムなため（誤答だと lw1/lw2 が引き続き due になり得る）、遷移先の内容までは
-    // 決め打ちにせず、「テーマセット画面を離れ、学習タブに切り替わった」ことだけ確認する。
+    // ThemeSetScreen の全文リード表示（passage-read-panel）ではなく、下線抜粋（excerpt-panel）が出る。
     expect(screen.queryByTestId('passage-read-panel')).not.toBeInTheDocument()
-    expect(screen.queryByText('学習を始める')).not.toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /学習/ })).toHaveAttribute('aria-current', 'page')
+    expect(screen.getByTestId('excerpt-panel')).toBeInTheDocument()
+    expect(screen.getAllByTestId('choice-button').length).toBeGreaterThan(0)
+
+    // 候補作品が2件（lw1・lw2）しかないため実際の問題数は1〜2問。尽きるまで回答して結果画面へ。
+    for (let guard = 0; guard < 5; guard++) {
+      if (screen.queryByTestId('random-learn-summary')) break
+      fireEvent.click(screen.getAllByTestId('choice-button')[0])
+      act(() => {
+        vi.advanceTimersByTime(500)
+      })
+      const dialog = screen.getByRole('dialog')
+      fireEvent.click(within(dialog).getByTestId('next-button'))
+    }
+
+    const summary = screen.getByTestId('random-learn-summary')
+    fireEvent.click(within(summary).getByText('ホームに戻る'))
+
+    expect(screen.getByText('学習を始める')).toBeInTheDocument()
   })
 
-  it('ホーム下部から個別にテーマセットを選んだときは、終了後に自由出題へは続けない（従来どおりホームに戻る）', async () => {
+  it('ホーム下部から個別にテーマセットを選んだときは、従来どおり ThemeSetScreen（全文リード表示）で遊べる', async () => {
     const App = await importApp()
     render(<App />)
 
@@ -112,7 +100,6 @@ describe('App: 「学習を始める」はテーマセットを連続提示し�
     const summary = screen.getByTestId('theme-set-summary')
     fireEvent.click(within(summary).getByText('ホームに戻る'))
 
-    // 自由出題に自動遷移せず、ホーム画面に戻る（学習を始めるボタンが見える）
     expect(screen.getByText('学習を始める')).toBeInTheDocument()
   })
 })

@@ -39,6 +39,9 @@ export function HomeScreen({
   onStart,
   themeSets = [],
   onStartThemeSet,
+  onStartMockExam,
+  onStartMissReview,
+  missLogCount = 0,
 }: {
   works: Work[]
   eras: Era[]
@@ -49,6 +52,11 @@ export function HomeScreen({
   /** テーマセット（リード文＋下線部→図版問題）一覧。省略時はセクションを出さない（既存呼び出し元互換）。 */
   themeSets?: Passage[]
   onStartThemeSet?: (passage: Passage) => void
+  /** 本番モード（M2-20）。省略時はボタンを出さない（既存呼び出し元互換）。 */
+  onStartMockExam?: () => void
+  /** 間違いノート復習（M2-23）。省略時はボタンを出さない（既存呼び出し元互換）。 */
+  onStartMissReview?: () => void
+  missLogCount?: number
 }) {
   const standalone = useStandalone()
   const [bannerDismissed, setBannerDismissed] = useState(
@@ -59,7 +67,11 @@ export function HomeScreen({
   const stats = currentEra ? eraStats(currentEra, works, progress) : { total: 0, mastered: 0, discovered: 0 }
   const masteryRatio = stats.total > 0 ? stats.mastered / stats.total : 0
   const composition = previewSessionComposition(works, eras, progress, today, dailyNewRemaining)
-  const canStart = composition.reviewCount + composition.newCount > 0
+  // M2-21: 「学習を始める」はランダム学習（全15文化・下線プール）に変わり、SRSの復習・新規が
+  // 0件でも passages（テーマセットの元）があれば出題できる。そのため候補判定に
+  // themeSets（=passages）の有無も加える（既存の復習・新規件数表示はそのまま残す。目安として
+  // 有用なため。ランダム学習の正確な件数は毎回組み立ててみないと分からずコストが高い）。
+  const canStart = composition.reviewCount + composition.newCount > 0 || themeSets.length > 0
   // works が0件（本番ビルドで reviewed が無い等）と、単に今日の分をやり終えたのを区別する。
   // 前者を「また明日」と言うのは誤り（明日になっても出題できる作品は増えない）。
   const noWorksAvailable = works.length === 0
@@ -104,6 +116,28 @@ export function HomeScreen({
           </div>
         )}
       </div>
+
+      {onStartMissReview && (
+        <div>
+          <button
+            type="button"
+            className={styles.themeSetItem}
+            data-testid="miss-review-button"
+            onClick={onStartMissReview}
+            disabled={missLogCount === 0}
+          >
+            {missLogCount === 0 ? '間違いなし' : `間違えた問題を復習（${missLogCount}問）`}
+          </button>
+        </div>
+      )}
+
+      {onStartMockExam && themeSets.length > 0 && (
+        <div>
+          <button type="button" className={styles.themeSetItem} data-testid="mock-exam-button" onClick={onStartMockExam}>
+            本番モード（大問IV形式10問・20点満点）
+          </button>
+        </div>
+      )}
 
       {themeSets.length > 0 && onStartThemeSet && (
         <div className={styles.eraBlock}>

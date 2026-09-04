@@ -3,13 +3,20 @@ import styles from './App.module.css'
 import { TabBar } from './components/TabBar'
 import { HomeScreen } from './components/HomeScreen'
 import { LearnScreen } from './components/LearnScreen'
+import { CultureListScreen } from './components/CultureListScreen'
+import { PracticeSessionScreen } from './components/PracticeSessionScreen'
+import { RandomLearnScreen } from './components/RandomLearnScreen'
+import { MockExamScreen } from './components/MockExamScreen'
+import { MissReviewScreen } from './components/MissReviewScreen'
 import { MuseumScreen } from './components/MuseumScreen'
 import { StatsScreen } from './components/StatsScreen'
 import { ThemeSetScreen } from './components/ThemeSetScreen'
 import { useProgressStore } from './store/useProgressStore'
-import { eras, works, playableWorks, themeSetPool, passages } from './content'
+import { eras, works, playableWorks, themeSetPool, passages, worksById } from './content'
 import { todayIso } from './engine/srs'
-import { selectLearnThemeSets } from './engine/themeSet'
+import { buildRandomLearnSession, type RandomLearnItem } from './engine/randomLearn'
+import { buildMockExam, type MockExamSection } from './engine/mockExam'
+import { buildMissReviewSession, type MissReviewItem } from './engine/missLog'
 import type { Passage } from './types'
 
 // タブ遷移は React state のみで行い、history.pushState は使わない。
@@ -17,66 +24,67 @@ import type { Passage } from './types'
 // アプリ内タブ遷移と二重に食い違うことは起きない（詳細は README の「画面遷移」節）。
 export type TabId = 'home' | 'learn' | 'museum' | 'stats'
 
-// 「学習を始める」で連続提示するテーマセットの本数（mock-exam-analysis.md 9章「M2-13」: 2〜3本）。
-const LEARN_THEME_SET_COUNT = 3
-
 export default function App() {
   const [tab, setTab] = useState<TabId>('home')
   const [activeThemeSet, setActiveThemeSet] = useState<Passage | null>(null)
-  // 提示中のテーマセットの通し番号（0始まり）。3セットに1問の年代順並べ替え（M2-16。
-  // engine/themeSet.ts の appendOrderQuestionIfDue）の頻度判定に使う。
-  const [activeThemeSetIndex, setActiveThemeSetIndex] = useState(0)
-  // 「学習を始める」からのテーマセット連続提示（M2-13）: 残りのセットの待ち行列。
-  const [learnQueue, setLearnQueue] = useState<Passage[]>([])
-  // true のとき、テーマセットが尽きたら自由出題（LearnScreen）に自動で続ける
-  // （「学習を始める」経由のときだけ。ホーム下部の個別テーマセット選択では続けない）。
-  const [inLearnFlow, setInLearnFlow] = useState(false)
-  const { progress, startSession, answer, dailyNewRemaining, importProgress } = useProgressStore()
+  // ランダム学習（M2-21。ホームの「学習を始める」）の10問セット。
+  const [activeRandomLearn, setActiveRandomLearn] = useState<RandomLearnItem[] | null>(null)
+  // ランダム学習が1問も作れなかったとき（passages 未投入など）のフォールバック。
+  const [activeFreeSession, setActiveFreeSession] = useState(false)
+  // 本番モード（M2-20）。
+  const [activeMockExam, setActiveMockExam] = useState<MockExamSection[] | null>(null)
+  // 間違いノート復習（M2-23）。
+  const [activeMissReview, setActiveMissReview] = useState<MissReviewItem[] | null>(null)
+  // 学習タブ（文化別練習。M2-22）: 選択中の文化。null なら文化一覧を表示する。
+  const [practiceEraId, setPracticeEraId] = useState<string | null>(null)
+  const { progress, startSession, answer, dailyNewRemaining, importProgress, recordMiss, recordMissReviewOutcome } =
+    useProgressStore()
 
   /**
-   * 「学習を始める」（mock-exam-analysis.md 9章 M2-13）: まずテーマセットを2〜3本連続で
-   * 提示する（SRS の期限が来た作品を含むセット優先→習熟の低い区分）。1本も選べなければ
-   * （テーマセット未投入・対象作品なし等）今までどおり直接フリー出題（LearnScreen）へ。
+   * 「学習を始める」（M2-21）: 全15文化の下線プールからランダムに10問（本番配分・SRS優先）。
+   * 1問も作れなければ（passages 未投入等）自由出題（旧 buildSession）にフォールバックする。
    */
   function goLearn() {
     const today = todayIso()
-    const sets = selectLearnThemeSets(passages, playableWorks, eras, progress, today, LEARN_THEME_SET_COUNT)
-    if (sets.length > 0) {
-      startSession(today)
-      setActiveThemeSet(sets[0])
-      setActiveThemeSetIndex(0)
-      setLearnQueue(sets.slice(1))
-      setInLearnFlow(true)
+    const items = buildRandomLearnSession(passages, themeSetPool, playableWorks, eras, progress, today)
+    startSession(today)
+    if (items.length > 0) {
+      setActiveRandomLearn(items)
       return
     }
-    setTab('learn')
+    setActiveFreeSession(true)
   }
 
   function goThemeSet(passage: Passage) {
     startSession(todayIso())
     setActiveThemeSet(passage)
-    setActiveThemeSetIndex(0)
-    setLearnQueue([])
-    setInLearnFlow(false)
   }
 
-  /** テーマセット1本の終了時。待ち行列に残りがあれば次へ、無ければ終了処理
-   *  （「学習を始める」経由なら、どのセットにも入らなかった期限到来作品を拾うため
-   *  自由出題セッションへ続ける。buildSession はその時点の progress を見るので、
-   *  テーマセットで既に正解した作品は自然に due から外れる＝二重出題は起きない）。 */
-  function handleThemeSetFinish() {
-    if (learnQueue.length > 0) {
-      const [next, ...rest] = learnQueue
-      setActiveThemeSet(next)
-      setActiveThemeSetIndex((i) => i + 1)
-      setLearnQueue(rest)
-      return
-    }
-    setActiveThemeSet(null)
-    if (inLearnFlow) {
-      setInLearnFlow(false)
-      setTab('learn')
-    }
+  /** 本番モード（M2-20）。作れなければ何もしない（passages が少なすぎる等）。 */
+  function goMockExam() {
+    const items = buildMockExam(passages, themeSetPool, playableWorks, eras)
+    if (items.length === 0) return
+    startSession(todayIso())
+    setActiveMockExam(items)
+  }
+
+  /** 間違いノート復習（M2-23）。0件なら HomeScreen 側でボタンが disabled のため呼ばれない想定だが念のため防御する。 */
+  function goMissReview() {
+    const items = buildMissReviewSession(progress.missLog, worksById, themeSetPool, playableWorks, eras)
+    if (items.length === 0) return
+    startSession(todayIso())
+    setActiveMissReview(items)
+  }
+
+  const sharedOnAnswer = (
+    workId: Parameters<typeof answer>[0],
+    type: Parameters<typeof answer>[1],
+    ans: Parameters<typeof answer>[2],
+    isReview: Parameters<typeof answer>[3],
+    today: Parameters<typeof answer>[4],
+  ) => {
+    const result = answer(workId, type, ans, isReview, today)
+    return { xpGained: result.xpGained, isNewDiscovery: result.isNewDiscovery, isNewlyMastered: result.isNewlyMastered }
   }
 
   if (activeThemeSet) {
@@ -88,17 +96,79 @@ export default function App() {
             passage={activeThemeSet}
             pool={themeSetPool}
             imagePool={playableWorks}
-            sequenceIndex={activeThemeSetIndex}
             eras={eras}
-            onAnswer={(workId, type, ans, isReview, today) => {
-              const result = answer(workId, type, ans, isReview, today)
-              return {
-                xpGained: result.xpGained,
-                isNewDiscovery: result.isNewDiscovery,
-                isNewlyMastered: result.isNewlyMastered,
-              }
-            }}
-            onFinish={handleThemeSetFinish}
+            onAnswer={sharedOnAnswer}
+            onFinish={() => setActiveThemeSet(null)}
+          />
+        </main>
+        <TabBar active={tab} onChange={setTab} />
+      </div>
+    )
+  }
+
+  if (activeRandomLearn) {
+    return (
+      <div className={styles.app}>
+        <main className={styles.main}>
+          <RandomLearnScreen
+            items={activeRandomLearn}
+            eras={eras}
+            onAnswer={sharedOnAnswer}
+            onMiss={(workId, type, passageId, underlineKey) => recordMiss(workId, type, todayIso(), passageId, underlineKey)}
+            onFinish={() => setActiveRandomLearn(null)}
+          />
+        </main>
+        <TabBar active={tab} onChange={setTab} />
+      </div>
+    )
+  }
+
+  if (activeMockExam) {
+    return (
+      <div className={styles.app}>
+        <main className={styles.main}>
+          <MockExamScreen
+            sections={activeMockExam}
+            eras={eras}
+            onAnswer={sharedOnAnswer}
+            onMiss={(workId, type, passageId, underlineKey) => recordMiss(workId, type, todayIso(), passageId, underlineKey)}
+            onFinish={() => setActiveMockExam(null)}
+          />
+        </main>
+        <TabBar active={tab} onChange={setTab} />
+      </div>
+    )
+  }
+
+  if (activeMissReview) {
+    return (
+      <div className={styles.app}>
+        <main className={styles.main}>
+          <MissReviewScreen
+            items={activeMissReview}
+            eras={eras}
+            onAnswer={sharedOnAnswer}
+            onOutcome={recordMissReviewOutcome}
+            onFinish={() => setActiveMissReview(null)}
+          />
+        </main>
+        <TabBar active={tab} onChange={setTab} />
+      </div>
+    )
+  }
+
+  if (activeFreeSession) {
+    return (
+      <div className={styles.app}>
+        <main className={styles.main}>
+          <LearnScreen
+            works={playableWorks}
+            eras={eras}
+            progress={progress}
+            onAnswer={sharedOnAnswer}
+            onStartSession={startSession}
+            dailyNewRemaining={dailyNewRemaining}
+            onFinish={() => setActiveFreeSession(false)}
           />
         </main>
         <TabBar active={tab} onChange={setTab} />
@@ -119,26 +189,24 @@ export default function App() {
             onStart={goLearn}
             themeSets={passages}
             onStartThemeSet={goThemeSet}
+            onStartMockExam={goMockExam}
+            onStartMissReview={goMissReview}
+            missLogCount={progress.missLog.length}
           />
         )}
-        {tab === 'learn' && (
-          <LearnScreen
-            works={playableWorks}
-            eras={eras}
-            progress={progress}
-            onAnswer={(workId, type, ans, isReview, today) => {
-              const result = answer(workId, type, ans, isReview, today)
-              return {
-                xpGained: result.xpGained,
-                isNewDiscovery: result.isNewDiscovery,
-                isNewlyMastered: result.isNewlyMastered,
-              }
-            }}
-            onStartSession={startSession}
-            dailyNewRemaining={dailyNewRemaining}
-            onFinish={() => setTab('home')}
-          />
-        )}
+        {tab === 'learn' &&
+          (practiceEraId ? (
+            <PracticeSessionScreen
+              eraId={practiceEraId}
+              eraName={eras.find((e) => e.id === practiceEraId)?.name ?? practiceEraId}
+              pool={themeSetPool}
+              imagePool={playableWorks}
+              eras={eras}
+              onFinish={() => setPracticeEraId(null)}
+            />
+          ) : (
+            <CultureListScreen works={playableWorks} eras={eras} progress={progress} onSelectEra={setPracticeEraId} />
+          ))}
         {tab === 'museum' && (
           <MuseumScreen works={works} eras={eras} progress={progress} onStart={goLearn} />
         )}

@@ -367,13 +367,36 @@ export interface NewTodayState {
   count: number
 }
 
+/**
+ * 間違いノート1件（M2-23。ランダム学習・本番モードで「不正解」または「わからない」を
+ * 選んだ問題を記録する。文化別練習は対象外＝そもそも呼び出し側が記録しない）。
+ * 作品単位で1件（同じ作品を何度間違えても count が増えるだけで、エントリは増えない）。
+ */
+export interface MissLogEntry {
+  workId: string
+  /** 直近に間違えた設問の型（次回の出題で「別の型」を選ぶための除外候補）。 */
+  type: QuestionType
+  /** 文脈（テーマセット/ランダム学習由来のときのみ。本番モードも同様に持ちうる）。任意。 */
+  passageId?: string
+  underlineKey?: string
+  /** 直近に間違えた日（ISO date）。一覧の表示・並び替えに使う。 */
+  lastMissedAt: string
+  /** 間違えた回数（累計。復習で正解しても減らさない）。 */
+  count: number
+  /** 間違いノートの復習セッション内での連続正解数。2に達したらノートから外す（engine/missLog.ts）。 */
+  correctStreak: number
+}
+
 export interface ProgressState {
-  /** 1: q1/q2/q3 のみ。2: ItemProgress に q4/q6/q8 を追加（DESIGN.md 10章） */
-  version: 1 | 2
+  /** 1: q1/q2/q3 のみ。2: ItemProgress に q4/q6/q8 を追加（DESIGN.md 10章）。
+   *  3: missLog を追加（M2-23） */
+  version: 1 | 2 | 3
   xp: number
   level: number
   streak: StreakState
   items: Record<string, ItemProgress>
   bosses: Record<string, BossState>
   newToday: NewTodayState
+  /** 間違いノート（M2-23）。旧データ（version 1/2）には無いため migrate() で [] を補う。 */
+  missLog: MissLogEntry[]
 }

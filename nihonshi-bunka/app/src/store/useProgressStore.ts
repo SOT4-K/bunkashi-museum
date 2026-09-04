@@ -9,6 +9,8 @@ import {
   dailyNewRemaining as calcDailyNewRemaining,
   loadProgress,
   recordAnswer,
+  recordMiss as recordMissInState,
+  recordMissReviewOutcome as recordMissReviewOutcomeInState,
   saveProgress,
   updateStreak,
 } from '../engine/progress'
@@ -50,5 +52,27 @@ export function useProgressStore() {
     setProgress(createInitialProgress(todayIso()))
   }, [])
 
-  return { progress, startSession, answer, dailyNewRemaining, importProgress, resetProgress }
+  /** 間違いノートに1件記録する（M2-23。ランダム学習・本番モード専用。文化別練習は呼ばない）。 */
+  const recordMiss = useCallback(
+    (workId: string, type: QuestionType, today: string = todayIso(), passageId?: string, underlineKey?: string) => {
+      setProgress((prev) => recordMissInState(prev, workId, type, today, passageId, underlineKey))
+    },
+    [],
+  )
+
+  /** 間違いノート復習セッションでの1問の結果を反映する（M2-23）。 */
+  const recordMissReviewOutcome = useCallback((workId: string, correct: boolean) => {
+    setProgress((prev) => recordMissReviewOutcomeInState(prev, workId, correct))
+  }, [])
+
+  return {
+    progress,
+    startSession,
+    answer,
+    dailyNewRemaining,
+    importProgress,
+    resetProgress,
+    recordMiss,
+    recordMissReviewOutcome,
+  }
 }

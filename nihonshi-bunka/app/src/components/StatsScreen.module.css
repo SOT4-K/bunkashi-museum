@@ -52,6 +52,16 @@
   display: flex;
   justify-content: space-between;
   font-size: 15px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  padding: 0;
+  min-height: 32px;
+}
+
+.weakRow:disabled {
+  opacity: 0.6;
 }
 
 .weakCount {

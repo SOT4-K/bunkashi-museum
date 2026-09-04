@@ -12,8 +12,9 @@ import {
 describe('createInitialProgress / migrate', () => {
   it('壊れたデータは初期状態にフォールバックする', () => {
     const result = migrate({ nonsense: true }, '2026-09-03')
-    expect(result.version).toBe(2)
+    expect(result.version).toBe(3)
     expect(result.items).toEqual({})
+    expect(result.missLog).toEqual([])
   })
 
   it('null/undefined でも例外を投げない', () => {
@@ -46,10 +47,11 @@ describe('createInitialProgress / migrate', () => {
       newToday: { date: '2026-09-03', count: 1 },
     }
     const result = migrate(v1State, '2026-09-03')
-    expect(result.version).toBe(2)
+    expect(result.version).toBe(3)
     expect(result.xp).toBe(120)
     expect(result.items['ashura-kofukuji'].q1).toEqual(v1State.items['ashura-kofukuji'].q1)
     expect(result.items['ashura-kofukuji'].q4).toBeUndefined() // q4 は初出題まで作らない
+    expect(result.missLog).toEqual([]) // v1/v2 データには無いため migrate が補う（M2-23）
   })
 })
 

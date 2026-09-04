@@ -1,9 +1,25 @@
 import { useState } from 'react'
 import styles from './StatsScreen.module.css'
 import { CreditsSheet } from './CreditsSheet'
+import { WorkDetailSheet } from './WorkDetailSheet'
 import { isItemMastered } from '../engine/srs'
 import { migrate } from '../engine/progress'
+import { sortMissLogByCulture } from '../engine/missLog'
 import type { Era, ProgressState, Work } from '../types'
+
+const TYPE_LABELS_SHORT: Record<string, string> = {
+  q1: '画像→作品名',
+  q2: '画像→文化',
+  q3: '作品名→画像',
+  q4: '関連記述',
+  q6: '同時代事項',
+  q8: '組合せ文',
+  q9: '図版',
+  q10: '2文正誤',
+  q12: '文字4択',
+  q13: '語句組合せ',
+  q14: '年代順',
+}
 
 function wrongTotal(progress: ProgressState, workId: string): number {
   const item = progress.items[workId]
@@ -25,6 +41,11 @@ export function StatsScreen({
   const [text, setText] = useState('')
   const [message, setMessage] = useState('')
   const [showCredits, setShowCredits] = useState(false)
+  const [openWorkId, setOpenWorkId] = useState<string | null>(null)
+
+  const worksById = Object.fromEntries(works.map((w) => [w.id, w]))
+  const missLog = sortMissLogByCulture(progress.missLog ?? [], worksById, eras)
+  const openWork = openWorkId ? worksById[openWorkId] : null
 
   const sortedEras = [...eras].sort((a, b) => a.order - b.order).filter((e) => works.some((w) => w.era === e.id))
 
@@ -94,6 +115,37 @@ export function StatsScreen({
       </div>
 
       <div className={styles.section}>
+        <div className={styles.sectionLabel}>間違いノート（{missLog.length}件）</div>
+        {missLog.length === 0 ? (
+          <p className={styles.empty}>間違いなし。</p>
+        ) : (
+          <div className={styles.weakList} data-testid="miss-log-list">
+            {missLog.map((entry) => {
+              const work = worksById[entry.workId]
+              const eraName = eras.find((e) => e.id === work?.era)?.name ?? work?.era ?? ''
+              return (
+                <button
+                  type="button"
+                  key={entry.workId}
+                  className={styles.weakRow}
+                  data-testid="miss-log-item"
+                  onClick={() => setOpenWorkId(entry.workId)}
+                  disabled={!work}
+                >
+                  <span>
+                    {work?.title ?? entry.workId}（{eraName}）
+                  </span>
+                  <span className={styles.weakCount}>
+                    {TYPE_LABELS_SHORT[entry.type] ?? entry.type}・{entry.lastMissedAt}・{entry.count}回
+                  </span>
+                </button>
+              )
+            })}
+          </div>
+        )}
+      </div>
+
+      <div className={styles.section}>
         <div className={styles.sectionLabel}>進捗データ</div>
         <textarea
           className={styles.textarea}
@@ -119,6 +171,18 @@ export function StatsScreen({
       </div>
 
       {showCredits && <CreditsSheet onClose={() => setShowCredits(false)} />}
+
+      {openWork && (
+        <WorkDetailSheet
+          work={openWork}
+          eras={eras}
+          worksById={worksById}
+          onSelectConfusable={(id) => {
+            if (worksById[id]) setOpenWorkId(id)
+          }}
+          onClose={() => setOpenWorkId(null)}
+        />
+      )}
     </div>
   )
 }

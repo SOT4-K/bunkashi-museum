@@ -1,0 +1,30 @@
+.examHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.examLabel {
+  font-weight: 700;
+}
+
+.timer {
+  font-variant-numeric: tabular-nums;
+}
+
+.breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.breakdownRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border-quiet);
+  padding-bottom: 4px;
+}

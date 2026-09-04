@@ -79,6 +79,38 @@ export function excerptAroundUnderline(passage: Pick<Passage, 'text'>, key: stri
 }
 
 /**
+ * 指定した下線キーを含む1〜2文だけを抜き出す（M2-21「ランダム学習」9章。「下線部を含む
+ * 1〜2文＋設問」の見え方）。文境界は「。」で判定する。対象の文が短い（40字未満）ときは
+ * 前の文も含めて2文にする（文脈が薄すぎるのを避ける）。マーカーが見つからなければ本文全体を
+ * そのまま返す（後方互換のフォールバック。呼び出し側で異常な underline key を渡した場合など）。
+ * 戻り値は splitPassageText と同じ Segment 列（下線ハイライトの描画にそのまま使える）。
+ */
+export function excerptSegmentsForUnderline(text: string, key: string): PassageSegment[] {
+  const re = new RegExp(UNDERLINE_MARKER)
+  let match: RegExpExecArray | null
+  let range: [number, number] | null = null
+  while ((match = re.exec(text))) {
+    if (match[1] === key) {
+      range = [match.index, match.index + match[0].length]
+      break
+    }
+  }
+  if (!range) return splitPassageText(text)
+  const [start, end] = range
+
+  const sentenceStart = text.lastIndexOf('。', start) + 1
+  const nextPeriod = text.indexOf('。', end)
+  const sentenceEnd = nextPeriod === -1 ? text.length : nextPeriod + 1
+
+  const MIN_LEN = 40
+  if (sentenceEnd - sentenceStart < MIN_LEN && sentenceStart > 0) {
+    const prevStart = text.lastIndexOf('。', sentenceStart - 2) + 1
+    return splitPassageText(text.slice(prevStart, sentenceEnd).trim())
+  }
+  return splitPassageText(text.slice(sentenceStart, sentenceEnd).trim())
+}
+
+/**
  * underline に紐づく最初の「出題プールにある作品」を返す（テーマセット構築で使う）。
  * kind: "image" の q12 下線（9章）は作品を直接問わないため workIds を持たないことがある
  * （Hayato 修正、2026-09-04 M2-13 統合時: 未定義のまま .find() すると例外で本番ビルドが

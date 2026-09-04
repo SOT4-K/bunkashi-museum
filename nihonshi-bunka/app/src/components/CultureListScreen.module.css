@@ -1,0 +1,59 @@
+.screen {
+  flex: 1;
+  overflow-y: auto;
+  padding: calc(env(safe-area-inset-top) + 16px) 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.notice {
+  font-size: 13px;
+  color: var(--text-dim);
+  border: 1px solid var(--border-quiet);
+  border-radius: var(--radius-button);
+  padding: 10px 12px;
+}
+
+.empty {
+  font-size: 14px;
+  color: var(--text-dim);
+}
+
+.groupBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.groupLabel {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.cultureList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cultureItem {
+  min-height: 56px;
+  padding: 10px 14px;
+  border: 1px solid var(--border-quiet);
+  border-radius: var(--radius-button);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  text-align: left;
+}
+
+.cultureName {
+  font-size: 15px;
+}
+
+.cultureStats {
+  font-size: 12px;
+  color: var(--text-dim);
+}

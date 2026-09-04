@@ -459,7 +459,16 @@ describe('selectLearnThemeSets（「学習を始める」のテーマセット�
   }
 
   function emptyProgress(): ProgressState {
-    return { version: 2, xp: 0, level: 1, streak: { count: 0, lastDate: null }, items: {}, bosses: {}, newToday: { date: today, count: 0 } }
+    return {
+      version: 2,
+      xp: 0,
+      level: 1,
+      streak: { count: 0, lastDate: null },
+      items: {},
+      bosses: {},
+      newToday: { date: today, count: 0 },
+      missLog: [],
+    }
   }
 
   it('空配列を渡せば空配列', () => {

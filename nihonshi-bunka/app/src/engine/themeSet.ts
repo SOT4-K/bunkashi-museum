@@ -39,8 +39,9 @@ const defaultRandom: RandomFn = () => Math.random()
  *  index % length で割り当てる。5個の下線を持つセットなら各カテゴリちょうど1回になる。
  *  厳密な固定順ではない: ask で明示指定があればそちらが優先され、狙った型が生成できなければ
  *  通常の優先順位（Q9→Q10→Q8→Q4→Q13→Q1）に落ちる。 */
-type ThemeCategory = 'pairs' | 'q10' | 'q4' | 'q4-reversed' | 'image'
-const COMPOSITION_SEQUENCE: ThemeCategory[] = ['pairs', 'q10', 'q4', 'q4-reversed', 'image']
+// M2-21: engine/randomLearn.ts が同じ配分ロジック（本番配分）を再利用するため export する。
+export type ThemeCategory = 'pairs' | 'q10' | 'q4' | 'q4-reversed' | 'image'
+export const COMPOSITION_SEQUENCE: ThemeCategory[] = ['pairs', 'q10', 'q4', 'q4-reversed', 'image']
 
 function desiredCategoryForIndex(index: number): ThemeCategory {
   return COMPOSITION_SEQUENCE[index % COMPOSITION_SEQUENCE.length]

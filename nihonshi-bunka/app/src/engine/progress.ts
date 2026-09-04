@@ -1,12 +1,14 @@
 // localStorage 上の進捗（`bunkashi.v1`）の読み書き・XP/レベル/ストリーク更新。DESIGN.md 5〜6章。
 // スキーマ変更時は STORAGE_VERSION を上げ、migrate() に移行ロジックを足す（既存データは消さない）。
 import { applyItemAnswer, createItemProgress, todayIso } from './srs'
-import type { AnswerKind, ItemProgress, ProgressState, QuestionType } from '../types'
+import { addMiss, applyReviewOutcome } from './missLog'
+import type { AnswerKind, ItemProgress, MissLogEntry, ProgressState, QuestionType } from '../types'
 
 export const STORAGE_KEY = 'bunkashi.v1'
 // v2: ItemProgress に q4/q6/q8（DESIGN.md 10章）を追加。フィールドは optional なので
 // 既存データはそのまま読める。version の値だけ更新し、items は変換不要（migrate で拾う）。
-export const STORAGE_VERSION = 2 as const
+// v3: missLog（間違いノート。M2-23）を追加。既存データには無いため migrate() で [] を補う。
+export const STORAGE_VERSION = 3 as const
 
 export const XP_CORRECT = 10
 export const XP_REVIEW_CORRECT = 15
@@ -42,6 +44,7 @@ export function createInitialProgress(today: string = todayIso()): ProgressState
     items: {},
     bosses: {},
     newToday: { date: today, count: 0 },
+    missLog: [],
   }
 }
 
@@ -59,9 +62,14 @@ function isValidProgress(value: unknown): value is ProgressState {
 /** version 違い・壊れたデータを吸収して現行スキーマに揃える。既知データは消さない。 */
 export function migrate(raw: unknown, today: string = todayIso()): ProgressState {
   if (!isValidProgress(raw)) return createInitialProgress(today)
-  if (raw.version === STORAGE_VERSION) return raw
+  // v3 で missLog を追加。version が一致していても（手作りの fixture 等で）missLog が
+  // 無い可能性があるため、version 分岐に関わらず必ず補う。
+  const missLog: MissLogEntry[] = Array.isArray((raw as Partial<ProgressState>).missLog)
+    ? (raw as ProgressState).missLog
+    : []
+  if (raw.version === STORAGE_VERSION) return { ...raw, missLog }
   // 将来 version が上がったらここに変換を追加する。
-  return { ...createInitialProgress(today), ...raw, version: STORAGE_VERSION }
+  return { ...createInitialProgress(today), ...raw, missLog, version: STORAGE_VERSION }
 }
 
 export function loadProgress(today: string = todayIso()): ProgressState {
@@ -150,4 +158,27 @@ export function recordAnswer(
 
 function isFirstExposureSafeMastered(item: ItemProgress): boolean {
   return Boolean(item.masteredAt)
+}
+
+/**
+ * 間違いノートに1件追加/更新する（M2-23。ランダム学習・本番モードで「不正解」「わからない」を
+ * 選んだときに呼ぶ。文化別練習は呼び出し側がそもそも呼ばない＝記録しない）。
+ * ロジック本体は engine/missLog.ts（純関数、progress の他フィールドに依存しない）。
+ */
+export function recordMiss(
+  state: ProgressState,
+  workId: string,
+  type: QuestionType,
+  today: string,
+  passageId?: string,
+  underlineKey?: string,
+): ProgressState {
+  return { ...state, missLog: addMiss(state.missLog, workId, type, today, passageId, underlineKey) }
+}
+
+/**
+ * 間違いノート復習セッションでの1問の結果を反映する（M2-23）。2回連続正解でノートから外す。
+ */
+export function recordMissReviewOutcome(state: ProgressState, workId: string, correct: boolean): ProgressState {
+  return { ...state, missLog: applyReviewOutcome(state.missLog, workId, correct) }
 }

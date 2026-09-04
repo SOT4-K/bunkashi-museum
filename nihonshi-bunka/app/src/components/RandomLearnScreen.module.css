@@ -1,0 +1,10 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.eraLabel {
+  font-size: 13px;
+  color: var(--gunjo);
+}
