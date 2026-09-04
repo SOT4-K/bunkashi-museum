@@ -235,8 +235,10 @@ export function buildThemeSetQuestions(passage: Passage, pool: Work[], eras: Era
     items.push({ underline, target, result })
   }
 
-  // セット内に Q9 を1問以上（無ければ、生成可能な下線を探して Q9 優先で作り直す）
-  if (items.length > 0 && !items.some((it) => it.result.question.type === 'q9')) {
+  // セット内に Q9 を1問以上（無ければ、生成可能な下線を探して Q9 優先で作り直す）。
+  // 1下線しか無いセットでは「1問以上」の意味が薄く、唯一の設問（ask で明示的に選ばれたものかも
+  // しれない）を強制的に上書きしてしまうため対象外にする。
+  if (items.length >= 2 && !items.some((it) => it.result.question.type === 'q9')) {
     for (const it of items) {
       const forced = buildThemeQuestionForWorkWithMeta(it.target, pool, eras, rng, {
         ask: { ...it.underline.ask, type: 'q9' },
@@ -250,8 +252,8 @@ export function buildThemeSetQuestions(passage: Passage, pool: Work[], eras: Era
     }
   }
 
-  // セット内に Q10 を1問以上（無ければ、生成可能な下線を探して Q10 優先で作り直す）
-  if (items.length > 0 && !items.some((it) => it.result.question.type === 'q10')) {
+  // セット内に Q10 を1問以上（無ければ、生成可能な下線を探して Q10 優先で作り直す）。
+  if (items.length >= 2 && !items.some((it) => it.result.question.type === 'q10')) {
     for (const it of items) {
       const forced = buildThemeQuestionForWorkWithMeta(it.target, pool, eras, rng, {
         ask: { ...it.underline.ask, type: 'q10' },

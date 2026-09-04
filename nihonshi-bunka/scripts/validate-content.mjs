@@ -55,6 +55,27 @@ const VALID_KINDS = new Set(['artifact', 'person', 'text', 'concept'])
 const VALID_ASK_SLOTS = new Set(['holder', 'artist', 'technique', 'era', 'subject'])
 const VALID_ASK_TYPES = new Set(['q9', 'q10', 'q4', 'q11'])
 
+// 純関数として export し、app/src 側の Vitest から直接検証できるようにする
+// （このファイル自体は node scripts/validate-content.mjs として直接実行する想定だが、
+// 下記 main() の呼び出しはこのファイルが「直接実行されたとき」だけに限定してあるので、
+// import しても副作用（実ファイル読み込み・process.exit）は起きない）。
+
+/** 本文（マーカー記法込みの全文）に work.title が部分文字列として含まれるか。
+ *  下線先作品の答えが本文に書かれているのを機械的に防ぐチェックに使う（7章の指摘）。 */
+export function workTitleLeaksInText(work, text) {
+  return Boolean(work && work.title && typeof text === 'string' && text.includes(work.title))
+}
+
+/** underlines[].ask の値が正しいか（slot/type が許可された列挙値か）。
+ *  不正な項目名の配列（'slot' | 'type'）を返す。問題無ければ空配列。 */
+export function invalidAskFields(ask) {
+  if (!ask || typeof ask !== 'object') return ['type', 'slot']
+  const invalid = []
+  if (!ask.type || !VALID_ASK_TYPES.has(ask.type)) invalid.push('type')
+  if (!ask.slot || !VALID_ASK_SLOTS.has(ask.slot)) invalid.push('slot')
+  return invalid
+}
+
 // リード文の下線マーカー。app/src/engine/passage.ts の UNDERLINE_MARKER と揃える
 // （プレーン Node ESM のスクリプトからは TS を直接 import できないため重複実装。
 // 変更する場合は両方揃え、app 側は __tests__/passage.test.ts で固定してある）。
@@ -179,7 +200,7 @@ function validatePassages({ worksById, hasImageAsset, eraIds, errors, warnings }
           // 下線先作品の答えが本文に書かれていないか（図版問題の答えが本文に出ているのを防ぐ。
           // mock-exam-analysis.md 7章の指摘）。text 全体（マーカー記法込み）に、workIds が
           // 参照する作品の title が部分文字列として含まれていたらエラー。
-          if (work.title && passage.text.includes(work.title)) {
+          if (workTitleLeaksInText(work, passage.text)) {
             errors.push(
               `${label} / ${underline.key}: 本文に workIds "${workId}" の作品名 "${work.title}" がそのまま含まれている（図版問題の答えが本文に出てしまう）`,
             )
@@ -193,13 +214,13 @@ function validatePassages({ worksById, hasImageAsset, eraIds, errors, warnings }
 
         // ask（下線から出したい設問の型・条件スロット。省略可）。値が不正ならエラー。
         if ('ask' in underline && underline.ask != null) {
-          const ask = underline.ask
-          if (!ask.type || !VALID_ASK_TYPES.has(ask.type)) {
-            errors.push(`${label} / ${underline.key}: ask.type "${ask.type}" は q9/q10/q4/q11 のいずれかである必要がある`)
+          const invalid = invalidAskFields(underline.ask)
+          if (invalid.includes('type')) {
+            errors.push(`${label} / ${underline.key}: ask.type "${underline.ask.type}" は q9/q10/q4/q11 のいずれかである必要がある`)
           }
-          if (!ask.slot || !VALID_ASK_SLOTS.has(ask.slot)) {
+          if (invalid.includes('slot')) {
             errors.push(
-              `${label} / ${underline.key}: ask.slot "${ask.slot}" は holder/artist/technique/era/subject のいずれかである必要がある`,
+              `${label} / ${underline.key}: ask.slot "${underline.ask.slot}" は holder/artist/technique/era/subject のいずれかである必要がある`,
             )
           }
         }
@@ -399,4 +420,9 @@ function main() {
   console.log(`content OK: ${allWorks.length} 作品 / ${eras.length} 時代（警告 ${warnings.length} 件）`)
 }
 
-main()
+// このファイルが `node scripts/validate-content.mjs` として直接実行されたときだけ main() を走らせる。
+// Vitest から workTitleLeaksInText / invalidAskFields を import するときに、実ファイルの読み込みや
+// process.exit が副作用として起きないようにするため（app/src/engine/__tests__ 参照）。
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  main()
+}

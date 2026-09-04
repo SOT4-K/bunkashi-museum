@@ -13,7 +13,7 @@ import {
 } from '../session'
 import { createInitialProgress } from '../progress'
 import { createItemProgress } from '../srs'
-import type { Era, ProgressState, QuestionType } from '../../types'
+import type { Era, ProgressState, QuestionType, Work } from '../../types'
 import { makeWork, seededRandom, testEras, testWorks } from './testFixtures'
 
 const today = '2026-09-03'
@@ -165,6 +165,51 @@ describe('buildSession', () => {
     const questions = buildSession(testWorks, testEras, progress, today, 0, seededRandom(11))
     expect(questions.every((q) => ['a1', 'a2'].includes(q.work.id))).toBe(true)
   })
+
+  // 修正の仕様（M2-09〜11）: フリー出題（学ぶ）でも Q9 の era 条件は連続させない。
+  describe('Q9 の era 条件を連続させない', () => {
+    // holder/artist/style/technique を持たず、era でしか Q9 を生成できない作品群（category: garden）。
+    // era は testEras の4種を循環させ、どの作品から見ても同カテゴリ・別 era の候補が3件以上ある。
+    const eraOnlyEras = ['asuka', 'hakuho', 'tenpyo', 'konin-jogan']
+    const eraOnlyPool = Array.from({ length: 8 }, (_, i) =>
+      makeWork({ id: `eo${i}`, era: eraOnlyEras[i % eraOnlyEras.length], category: 'garden' }),
+    )
+
+    function progressWithoutDueQ1Q2Q3(): ProgressState {
+      const base = createInitialProgress(today)
+      const items = { ...base.items }
+      for (const w of eraOnlyPool) {
+        // q1/q2/q3 は未来日付＝復習期日ではない。q4/q6/q8/q9 のセルは無い（未導入）ため、
+        // canGenerateType で q9 だけが「導入してよい」候補として拾われる（q4/q6/q8 は生成不可）。
+        items[w.id] = {
+          ...createItemProgress(today),
+          q1: { box: 1, due: '2099-01-01', correct: 1, wrong: 0 },
+          q2: { box: 1, due: '2099-01-01', correct: 1, wrong: 0 },
+          q3: { box: 1, due: '2099-01-01', correct: 1, wrong: 0 },
+        }
+      }
+      return { ...base, items }
+    }
+
+    it('復習候補の due 型が q9 だけになるよう仕込むと、実際に q9(era) だけが選ばれる（テスト前提の確認）', () => {
+      const progress = progressWithoutDueQ1Q2Q3()
+      const picks = selectReviewCandidates(eraOnlyPool, progress, today, seededRandom(1), testEras)
+      expect(picks.length).toBeGreaterThan(0)
+      expect(picks.every((p) => p.type === 'q9')).toBe(true)
+    })
+
+    it('隣り合う設問が両方とも era 条件の q9 になることはない（seed 0〜49 で確認）', () => {
+      const progress = progressWithoutDueQ1Q2Q3()
+      for (let seed = 0; seed < 50; seed++) {
+        const questions = buildSession(eraOnlyPool, testEras, progress, today, 0, seededRandom(seed))
+        for (let i = 1; i < questions.length; i++) {
+          const prevIsEraQ9 = questions[i - 1].type === 'q9' && questions[i - 1].q9Slot === 'era'
+          const currIsEraQ9 = questions[i].type === 'q9' && questions[i].q9Slot === 'era'
+          expect(prevIsEraQ9 && currIsEraQ9).toBe(false)
+        }
+      }
+    })
+  })
 })
 
 describe('requeueType', () => {
@@ -263,6 +308,38 @@ describe('buildQuestion / buildQuestionOrFallback（q4/q6/q8）', () => {
     expect(result).not.toBeNull()
     expect(result!.choiceStatements).toHaveLength(4)
     expect(result!.choiceStatements!.filter((s) => s.correct)).toHaveLength(1)
+  })
+
+  // 修正の仕様（M2-09〜11）: buildQuestion に avoidQ9EraSlot オプションを追加。
+  describe('buildQuestion の avoidQ9EraSlot オプション', () => {
+    // era でしか Q9 を生成できない作品（holder/artist/style/technique 無し）。
+    const eraOnlyTarget = makeWork({ id: 'era-only', era: 'tenpyo', category: 'garden' })
+    const eraOnlyPool: Work[] = [
+      eraOnlyTarget,
+      makeWork({ id: 'era-only-2', era: 'hakuho', category: 'garden' }),
+      makeWork({ id: 'era-only-3', era: 'asuka', category: 'garden' }),
+      makeWork({ id: 'era-only-4', era: 'konin-jogan', category: 'garden' }),
+    ]
+
+    it('avoidQ9EraSlot を指定しなければ era 条件の q9 が生成される（前提の確認）', () => {
+      const result = buildQuestion(eraOnlyTarget, 'q9', eraOnlyPool, testEras, false, seededRandom(1))
+      expect(result).not.toBeNull()
+      expect(result!.q9Slot).toBe('era')
+    })
+
+    it('avoidQ9EraSlot: true を指定すると、era 以外に条件が無い作品では null になる', () => {
+      const result = buildQuestion(eraOnlyTarget, 'q9', eraOnlyPool, testEras, false, seededRandom(1), {
+        avoidQ9EraSlot: true,
+      })
+      expect(result).toBeNull()
+    })
+
+    it('buildQuestionOrFallback なら avoidQ9EraSlot で q9 が避けられたとき q1 に落ちる', () => {
+      const result = buildQuestionOrFallback(eraOnlyTarget, 'q9', eraOnlyPool, testEras, false, seededRandom(1), {
+        avoidQ9EraSlot: true,
+      })
+      expect(result.type).toBe('q1')
+    })
   })
 })
 
