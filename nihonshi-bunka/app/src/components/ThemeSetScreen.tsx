@@ -58,7 +58,7 @@ export function ThemeSetScreen({
   const today = todayIso()
   const themeQuestions = useMemo(() => {
     const base = buildThemeSetQuestions(passage, pool, eras, undefined, imagePool)
-    return appendOrderQuestionIfDue(base, sequenceIndex, imagePool)
+    return appendOrderQuestionIfDue(base, sequenceIndex, imagePool, undefined, eras)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [passage.id, sequenceIndex])
   const segments = useMemo(() => splitPassageText(passage.text), [passage.text])

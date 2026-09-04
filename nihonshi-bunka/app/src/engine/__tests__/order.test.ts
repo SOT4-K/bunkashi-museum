@@ -4,7 +4,7 @@
 import { describe, expect, it } from 'vitest'
 import { generateOrderQuestion } from '../order'
 import { makeWork, seededRandom } from './testFixtures'
-import type { Work } from '../../types'
+import type { Era, Work } from '../../types'
 
 describe('generateOrderQuestion: フォールバック（orderIndex が無い/足りない）', () => {
   it('pool が空なら null', () => {
@@ -91,6 +91,42 @@ describe('generateOrderQuestion: 生成できるとき', () => {
     const orderIndexes = data!.displayItems.map((d) => d.work.orderIndex)
     expect(new Set(orderIndexes).size).toBe(3)
   })
+
+  it(
+    'Hayato修正: orderIndexの尺度が区分ごとに不統一（一部は区分内相対値10〜70、他は西暦年） ' +
+      'でも、eras の order を第一キーにすることで区分をまたいだ正しい時代順になる',
+    () => {
+      // asuka(order=2)の相対値50は、tenpyo(order=4)の相対値20より「小さい」が、
+      // 実際の時代順は asuka(飛鳥) → tenpyo(天平) が正しい。eras 省略時（旧挙動）は
+      // orderIndex の大小だけで比較するため tenpyo(20) → asuka(50) と逆転してしまう。
+      const makeEra = (id: string, order: number): Era => ({
+        id,
+        name: id,
+        period: '',
+        order,
+        summary: '',
+        detail: '',
+        items: [],
+      })
+      const eras: Era[] = [makeEra('asuka', 2), makeEra('hakuho', 3), makeEra('tenpyo', 4)]
+      const pool: Work[] = [
+        makeWork({ id: 'asuka-work', era: 'asuka', orderIndex: 50 }),
+        makeWork({ id: 'hakuho-work', era: 'hakuho', orderIndex: 20 }),
+        makeWork({ id: 'tenpyo-work', era: 'tenpyo', orderIndex: 20 }),
+      ]
+
+      for (let seed = 0; seed < 10; seed++) {
+        const data = generateOrderQuestion(pool, seededRandom(seed), 3, eras)
+        expect(data).not.toBeNull()
+        const byId = new Map(data!.displayItems.map((d) => [d.work.id, d.label]))
+        const correctLabels = data!.choices[data!.correctIndex].text.split(' → ')
+        const correctWorkOrder = correctLabels.map(
+          (label) => [...byId.entries()].find(([, l]) => l === label)![0],
+        )
+        expect(correctWorkOrder).toEqual(['asuka-work', 'hakuho-work', 'tenpyo-work'])
+      }
+    },
+  )
 
   it('count を指定すればその件数で生成する', () => {
     const bigPool: Work[] = [

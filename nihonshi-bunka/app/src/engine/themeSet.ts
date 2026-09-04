@@ -492,10 +492,11 @@ export function appendOrderQuestionIfDue(
   setIndex: number,
   imagePool: Work[],
   rng: RandomFn = defaultRandom,
+  eras: Era[] = [],
 ): ThemeQuestion[] {
   if (questions.length === 0) return questions
   if ((setIndex + 1) % ORDER_QUESTION_FREQUENCY !== 0) return questions
-  const data = generateOrderQuestion(imagePool, rng)
+  const data = generateOrderQuestion(imagePool, rng, 3, eras)
   if (!data) return questions
   const nominalWork = data.displayItems[0].work
   const question: Question = {

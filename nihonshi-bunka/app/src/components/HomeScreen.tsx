@@ -58,9 +58,6 @@ export function HomeScreen({
   const currentEra = pickCurrentEra(eras, works, progress)
   const stats = currentEra ? eraStats(currentEra, works, progress) : { total: 0, mastered: 0, discovered: 0 }
   const masteryRatio = stats.total > 0 ? stats.mastered / stats.total : 0
-  const discoveryRatio = stats.total > 0 ? stats.discovered / stats.total : 0
-  const bossReady = discoveryRatio >= 0.6
-
   const composition = previewSessionComposition(works, eras, progress, today, dailyNewRemaining)
   const canStart = composition.reviewCount + composition.newCount > 0
   // works が0件（本番ビルドで reviewed が無い等）と、単に今日の分をやり終えたのを区別する。
@@ -107,14 +104,6 @@ export function HomeScreen({
           </div>
         )}
       </div>
-
-      {currentEra && (
-        <div className={styles.bossLine}>
-          {bossReady
-            ? `${currentEra.name}の時代ボスに挑戦できる`
-            : `時代ボスまで発見率 ${Math.round(discoveryRatio * 100)}%（60%で解放）`}
-        </div>
-      )}
 
       {themeSets.length > 0 && onStartThemeSet && (
         <div className={styles.eraBlock}>

@@ -6,7 +6,7 @@
 // 既存のセットをそのまま返す。壊れない設計）。
 import type { RandomFn } from './distractors'
 import { shuffle } from './distractors'
-import type { StatementOption, Work } from '../types'
+import type { Era, StatementOption, Work } from '../types'
 
 export interface OrderDisplayItem {
   label: string
@@ -37,14 +37,34 @@ function permutations<T>(items: T[]): T[][] {
  * pool から orderIndex を持つ作品を count 件選び、正しい制作順を問う4択を作る。
  * orderIndex が重複する作品は「どちらが先か一意に決まらない」ため、区分（orderIndex の値）
  * ごとに1件だけを候補にする。区分が count 件に満たなければ null。
+ *
+ * Hayato 修正（2026-09-04、波1統合時）: orderIndex の尺度が writer 群ごとに不統一
+ * （genshi/asuka/hakuho/konin-jogan/kokufu/tenpyo は区分内の相対値 10〜70、他の区分は
+ * 西暦年 1150〜1857）と判明。orderIndex 単独で全区分横断ソートすると、同じ相対値レンジを
+ * 使う区分どうし（例: asuka=50 と tenpyo=20）で年代が逆転しうる（実際には asuka が先）。
+ * eras.json の order（15区分の正しい配列順）を第一キー、orderIndex を区分内の第二キーに
+ * した合成キーでソートすることで、区分をまたいでも実際の時代順を保つ。eras が渡されない
+ * 場合は旧来どおり orderIndex のみで比較する（テストの後方互換用）。
  */
-export function generateOrderQuestion(pool: Work[], rng: RandomFn, count = 3): OrderQuestionData | null {
+export function generateOrderQuestion(
+  pool: Work[],
+  rng: RandomFn,
+  count = 3,
+  eras: Era[] = [],
+): OrderQuestionData | null {
+  const eraOrderById = new Map(eras.map((e) => [e.id, e.order]))
+  function sortKey(w: Work): number {
+    const eraOrder = eraOrderById.get(w.era) ?? 0
+    return eraOrder * 1_000_000 + w.orderIndex!
+  }
+
   const byOrder = new Map<number, Work[]>()
   for (const w of pool) {
     if (typeof w.orderIndex !== 'number') continue
-    const list = byOrder.get(w.orderIndex) ?? []
+    const key = sortKey(w)
+    const list = byOrder.get(key) ?? []
     list.push(w)
-    byOrder.set(w.orderIndex, list)
+    byOrder.set(key, list)
   }
   const distinctOrders = shuffle([...byOrder.keys()], rng)
   if (distinctOrders.length < count) return null
