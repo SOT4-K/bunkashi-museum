@@ -50,6 +50,11 @@ const VALID_CATEGORIES = new Set([
 const VALID_STATUS = new Set(['draft', 'reviewed'])
 const VALID_KINDS = new Set(['artifact', 'person', 'text', 'concept'])
 
+// underlines[].ask（下線から出したい設問の型・条件スロット。省略可）。
+// app/src/types.ts の PassageUnderlineAsk と揃える（M2-09〜11 修正の仕様）。
+const VALID_ASK_SLOTS = new Set(['holder', 'artist', 'technique', 'era', 'subject'])
+const VALID_ASK_TYPES = new Set(['q9', 'q10', 'q4', 'q11'])
+
 // リード文の下線マーカー。app/src/engine/passage.ts の UNDERLINE_MARKER と揃える
 // （プレーン Node ESM のスクリプトからは TS を直接 import できないため重複実装。
 // 変更する場合は両方揃え、app 側は __tests__/passage.test.ts で固定してある）。
@@ -70,11 +75,16 @@ function extractUnderlineKeys(text) {
 }
 
 // content/passages/<era>.json（リード文＋下線部→図版問題。M2 チケット「テーマセット」）の検証。
-//  各要素 {id, era, title, text, sources, underlines:[{key, workIds, note?}]}。
+//  各要素 {id, era, title, text, sources, underlines:[{key, workIds, note?, ask?}]}。
 //  - text 内の [[key|...]] マーカーと underlines[].key が過不足なく一致すること
 //  - workIds が実在する作品 id であり、かつその作品が画像を持つ（kind: artifact/省略 かつ
 //    manifest.json にエントリがあり画像実体が content/images/ にある）こと（満たさなければエラー。
 //    「生成できない下線」を公開させないため）
+//  - text（マーカー記法込みの全文）に、workIds が参照する作品の title が部分文字列として
+//    含まれていたらエラー（下線先作品の答えが本文に書かれているのを機械的に防ぐ。
+//    mock-exam-analysis.md 7章の修正の仕様）
+//  - underlines[].ask（省略可）: slot が holder/artist/technique/era/subject、
+//    type が q9/q10/q4/q11 のいずれかであること（不正な値はエラー）
 //  - 下線は1passageにつき3〜5個、text は200〜400字程度（目安。文字数は警告のみ）
 function validatePassages({ worksById, hasImageAsset, eraIds, errors, warnings }) {
   if (!existsSync(passagesDir)) {
@@ -166,11 +176,32 @@ function validatePassages({ worksById, hasImageAsset, eraIds, errors, warnings }
             continue
           }
           if (hasImageAsset(work)) hasGeneratable = true
+          // 下線先作品の答えが本文に書かれていないか（図版問題の答えが本文に出ているのを防ぐ。
+          // mock-exam-analysis.md 7章の指摘）。text 全体（マーカー記法込み）に、workIds が
+          // 参照する作品の title が部分文字列として含まれていたらエラー。
+          if (work.title && passage.text.includes(work.title)) {
+            errors.push(
+              `${label} / ${underline.key}: 本文に workIds "${workId}" の作品名 "${work.title}" がそのまま含まれている（図版問題の答えが本文に出てしまう）`,
+            )
+          }
         }
         if (!hasGeneratable) {
           errors.push(
             `${label} / ${underline.key}: workIds のどれも画像で出題できない（kind が artifact でない、manifest.json に無い、または画像実体が無い）`,
           )
+        }
+
+        // ask（下線から出したい設問の型・条件スロット。省略可）。値が不正ならエラー。
+        if ('ask' in underline && underline.ask != null) {
+          const ask = underline.ask
+          if (!ask.type || !VALID_ASK_TYPES.has(ask.type)) {
+            errors.push(`${label} / ${underline.key}: ask.type "${ask.type}" は q9/q10/q4/q11 のいずれかである必要がある`)
+          }
+          if (!ask.slot || !VALID_ASK_SLOTS.has(ask.slot)) {
+            errors.push(
+              `${label} / ${underline.key}: ask.slot "${ask.slot}" は holder/artist/technique/era/subject のいずれかである必要がある`,
+            )
+          }
         }
       }
     }
