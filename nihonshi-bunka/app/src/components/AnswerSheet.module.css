@@ -124,6 +124,16 @@
   color: var(--text-dim);
 }
 
+.workAuthor {
+  font-size: 15px;
+  color: var(--text-dim);
+}
+
+/* M2-43: 「次の問題」ボタン（footer、min-height 56px）が解説の末尾を隠さないための余白。 */
+.bottomSpacer {
+  height: calc(56px + env(safe-area-inset-bottom) + 12px);
+}
+
 .keyPoints {
   margin: 0;
   padding-left: 1.1em;

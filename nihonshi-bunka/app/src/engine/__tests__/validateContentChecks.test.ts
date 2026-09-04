@@ -6,7 +6,12 @@
 // 起きない。validate-content.mjs 側の「直接実行時のみ main() を呼ぶ」ガード参照）。
 import { describe, expect, it } from 'vitest'
 // @ts-expect-error 型定義の無いプレーン .mjs スクリプトを直接 import する
-import { workTitleLeaksInText, invalidAskFields, answerLeaksInUnderlineText } from '../../../../scripts/validate-content.mjs'
+import {
+  workTitleLeaksInText,
+  invalidAskFields,
+  answerLeaksInUnderlineText,
+  findAppearanceWords,
+} from '../../../../scripts/validate-content.mjs'
 
 describe('workTitleLeaksInText（下線先作品の答えが本文に書かれていないかのチェック）', () => {
   it('本文に作品名がそのまま含まれていれば true', () => {
@@ -82,5 +87,33 @@ describe('answerLeaksInUnderlineText（8章「二段構え」: 下線に答え�
     expect(answerLeaksInUnderlineText(null, '本文')).toEqual([])
     expect(answerLeaksInUnderlineText(work, '')).toEqual([])
     expect(answerLeaksInUnderlineText(work, undefined)).toEqual([])
+  })
+})
+
+describe('findAppearanceWords（M2-41「絵を見れば分かる問題を出さない」。実機フィードバック2 10.1章）', () => {
+  it('オーナーが実機で発見した実例2件を検出する', () => {
+    expect(findAppearanceWords('水瓶を手にする木彫の菩薩像はどれか')).toEqual(
+      expect.arrayContaining(['水瓶', '手にする']),
+    )
+    expect(findAppearanceWords('片足を組み、頬に指をあてて考える姿である')).toEqual(
+      expect.arrayContaining(['片足', '足を組', '頬に指']),
+    )
+  })
+
+  it('「〜色の」のような色の記述を正規表現で検出する', () => {
+    expect(findAppearanceWords('金色の光背を持つ')).toContain('◯色の')
+    expect(findAppearanceWords('朱色の柱が並ぶ')).toContain('◯色の')
+  })
+
+  it('知識でしか判定できない記述（作者・所蔵・時代・製法・由来）には反応しない', () => {
+    expect(findAppearanceWords('作者が葛飾北斎であるもの')).toEqual([])
+    expect(findAppearanceWords('法隆寺に安置される、赤松の一木造の像')).toEqual([])
+    expect(findAppearanceWords('化政期に刊行された連作の一図')).toEqual([])
+  })
+
+  it('text が無い・文字列でなければ空配列（例外を投げない）', () => {
+    expect(findAppearanceWords(undefined)).toEqual([])
+    expect(findAppearanceWords(null)).toEqual([])
+    expect(findAppearanceWords('')).toEqual([])
   })
 })

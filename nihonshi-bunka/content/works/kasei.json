@@ -82,8 +82,8 @@
         ]
       },
       {
-        "slot": "other",
-        "text": "大波の谷間に富士山を小さく描く"
+        "slot": "technique",
+        "text": "輸入顔料のベロ藍（プルシアンブルー）を用いる"
       }
     ],
     "falseStatements": [
@@ -108,8 +108,8 @@
         "verifiedFalse": true
       },
       {
-        "text": "美人画の大首絵である",
-        "why": "風景画。歌麿・写楽の大首絵との分野ずらし",
+        "text": "喜多川歌麿の作",
+        "why": "歌麿は宝暦・天明期の美人画の絵師。人物・時代ずらし",
         "verifiedFalse": true
       }
     ],
@@ -147,7 +147,7 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）化政文化の項",
-      "The Metropolitan Museum of Art コレクション"
+      "The Metropolitan Museum of Art コレクション（葛飾北斎「神奈川沖浪裏」）: https://www.metmuseum.org/art/collection/search/45434"
     ],
     "examTags": [
       "frequent"
@@ -233,7 +233,7 @@
       },
       {
         "slot": "other",
-        "text": "富士山だけを画面いっぱいに描く"
+        "text": "凱風とは夏に南から吹く風を指し、題名が季節を示す"
       }
     ],
     "falseStatements": [
@@ -297,7 +297,7 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）化政文化の項",
-      "The Metropolitan Museum of Art コレクション"
+      "The Metropolitan Museum of Art コレクション（葛飾北斎「凱風快晴」）: https://www.metmuseum.org/art/collection/search/57007"
     ],
     "examTags": [
       "frequent"
@@ -369,7 +369,7 @@
       },
       {
         "slot": "other",
-        "text": "墨を主とした人物や動物のスケッチを収める"
+        "text": "絵を学ぶ人の手本（絵手本）として広く用いられた"
       }
     ],
     "falseStatements": [
@@ -433,7 +433,8 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）化政文化の項",
-      "国立国会図書館デジタルコレクション"
+      "国立国会図書館デジタルコレクション",
+      "The Metropolitan Museum of Art コレクション（葛飾北斎『北斎漫画』十二編）: https://www.metmuseum.org/art/collection/search/57805"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -513,11 +514,11 @@
       },
       {
         "slot": "other",
-        "text": "宿場を襲うにわか雨（白雨）を描く"
+        "text": "東海道の庄野宿を主題とする"
       },
       {
         "slot": "other",
-        "text": "斜めの雨脚と傾く竹林を描く"
+        "text": "「白雨」はにわか雨（夕立）を指す語である"
       }
     ],
     "falseStatements": [
@@ -585,7 +586,7 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）化政文化の項",
-      "The Metropolitan Museum of Art コレクション"
+      "The Metropolitan Museum of Art コレクション（歌川広重「庄野 白雨」）: https://www.metmuseum.org/art/collection/search/36521"
     ],
     "examTags": [
       "frequent"
@@ -667,11 +668,11 @@
       },
       {
         "slot": "other",
-        "text": "雪の降る夜の宿場を描く"
+        "text": "東海道の蒲原宿を主題とする"
       },
       {
         "slot": "other",
-        "text": "雪の中を行く三人の旅人を描く"
+        "text": "同じ連作の「庄野 白雨」と対にして紹介されることが多い"
       }
     ],
     "falseStatements": [
@@ -735,7 +736,7 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）化政文化の項",
-      "The Metropolitan Museum of Art コレクション"
+      "The Metropolitan Museum of Art コレクション（歌川広重「蒲原 夜之雪」）: https://www.metmuseum.org/art/collection/search/56915"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -792,7 +793,7 @@
       },
       {
         "slot": "other",
-        "text": "隅田川の橋を襲う夕立を描く"
+        "text": "江戸の名所である隅田川べりを主題とする"
       },
       {
         "slot": "other",
@@ -860,7 +861,7 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）化政文化の項",
-      "The Metropolitan Museum of Art コレクション"
+      "The Metropolitan Museum of Art コレクション（歌川広重「大はしあたけの夕立」）: https://www.metmuseum.org/art/collection/search/36461"
     ],
     "examTags": [],
     "status": "reviewed",
@@ -1019,7 +1020,8 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項",
-      "東京国立博物館（ColBase 収蔵品）"
+      "東京国立博物館（ColBase 収蔵品、登録番号 A-10569-546）",
+      "The Metropolitan Museum of Art コレクション（喜多川歌麿「ポッピンを吹く女」）: https://www.metmuseum.org/art/collection/search/45017"
     ],
     "examTags": [
       "frequent"
@@ -1088,7 +1090,7 @@
       },
       {
         "slot": "other",
-        "text": "実在の評判の女性三人を描く"
+        "text": "当時実在した評判の女性を題材とする"
       },
       {
         "slot": "technique",

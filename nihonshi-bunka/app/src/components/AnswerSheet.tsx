@@ -118,6 +118,11 @@ export function AnswerSheet({
             {eraNameOf(work.era, eras)}・{work.location}
             {work.technique ? `・${work.technique}` : ''}
           </div>
+          {/* M2-43: 解説シートに時代・文化・作者を必ず表示する（不明は「作者不明」。空欄禁止）。
+              時代（work.periodLabel）・文化（targetEra.name）は periodBlock で既に表示している。 */}
+          <div className={styles.workAuthor} data-testid="answer-author">
+            作者: {work.author ?? '作者不明'}
+          </div>
         </div>
       </div>
 
@@ -305,6 +310,10 @@ export function AnswerSheet({
           onClose={() => setLightboxWork(null)}
         />
       )}
+
+      {/* M2-43: 「次の問題」ボタン（footer、高さ56px＋セーフエリア）が解説の末尾を隠さないよう、
+          本文にボタン高さ分の余白を確保する。 */}
+      <div className={styles.bottomSpacer} aria-hidden="true" />
     </BottomSheet>
   )
 }

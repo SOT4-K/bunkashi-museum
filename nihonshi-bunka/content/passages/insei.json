@@ -10,7 +10,11 @@
       "4文目（説話・歴史物語・今様）: content/works/insei.json の konjaku-monogatarishu / okagami / ryojin-hisho（facts）",
       "5文目（浄土教の地方への浸透・藤原清衡・平泉・中尊寺）: content/works/insei.json の fujiwara-kiyohira（facts・explanation）",
       "6〜7文目（九州への広がり・地方の豪族の発願）: content/works/insei.json の fukiji-odo / shiramizu-amidado（facts・explanation）",
-      "高校教科書（山川『詳説日本史』）院政期の文化の項"
+      "高校教科書（山川『詳説日本史』）院政期の文化の項",
+      "図版の同定URL（下線a）: https://commons.wikimedia.org/wiki/File:Chouju_sumou.jpg",
+      "図版の同定URL（下線c・d）: https://commons.wikimedia.org/wiki/File:%E5%AF%8C%E8%B2%B4%E5%AF%BA_%E5%A4%A7%E5%A0%82.JPG",
+      "図版の同定URL（下線b）: https://commons.wikimedia.org/wiki/File:Shiramizu_Amida-do_Hall.jpg",
+      "リード文の歴史記述そのものは教科書水準の通説で、一次資料・公的機関の公開ページは未参照（追検証URL未取得）"
     ],
     "underlines": [
       {
@@ -91,7 +95,10 @@
     "sources": [
       "1〜3文目（場面・全4巻・伝来先）: content/works/insei.json の choju-giga-sumo（subject・facts・keyPoints）",
       "4文目（武士・庶民の姿が文化に取り込まれた時期）: content/eras.json の insei（detail）",
-      "5文目（伝承筆者と複数筆者説）: content/works/insei.json の choju-giga-sumo（explanation・examNote）"
+      "5文目（伝承筆者と複数筆者説）: content/works/insei.json の choju-giga-sumo（explanation・examNote）",
+      "リード画像の同定URL: https://commons.wikimedia.org/wiki/File:Chouju_sumou.jpg",
+      "下線cの正解（富貴寺大堂）の同定URL: https://commons.wikimedia.org/wiki/File:%E5%AF%8C%E8%B2%B4%E5%AF%BA_%E5%A4%A7%E5%A0%82.JPG",
+      "説明文の歴史記述そのものは教科書水準の通説で、一次資料・公的機関の公開ページは未参照（追検証URL未取得）"
     ],
     "underlines": [
       {
@@ -102,7 +109,7 @@
           "stem": "下線部aのような場面を含むこの絵巻について述べた文A・Bの正誤の組合せとして正しいものはどれか。",
           "answerId": "choju-giga-sumo"
         },
-        "note": "説明文に技法（works の technique にあたる語）と時代を書いていないので、A/B文はそこを突ける。falseStatements の『彩色をほどこした濃絵である』『鎌倉文化の作品である』が該当"
+        "note": "説明文に時代と伝来先を書いていないので、A/B文はそこを突ける。falseStatements の『鎌倉文化の作品である』『東寺の所蔵である』が該当（M2-41 で『彩色をほどこした濃絵である』＝画像を見れば真偽が分かる文をデータ側から外した）"
       },
       {
         "key": "b",
@@ -165,7 +172,11 @@
       "Ｅ（浄土教の地方への浸透）: content/works/insei.json の fukiji-odo / shiramizu-amidado（eraNote・facts）",
       "Ｆ（院政期ののち武士が台頭し武家政権が生まれる）: content/eras.json の insei（detail）",
       "高校教科書（山川『詳説日本史』）院政期の文化の項",
-      "形式: research/nichidai-past-exams-analysis.md 1章「文化伏せ型（2016・2025）」"
+      "形式: research/nichidai-past-exams-analysis.md 1章「文化伏せ型（2016・2025）」",
+      "図版の同定URL（下線a）: https://commons.wikimedia.org/wiki/File:Chouju_sumou.jpg",
+      "図版の同定URL（下線b）: https://commons.wikimedia.org/wiki/File:Shiramizu_Amida-do_Hall.jpg",
+      "図版の同定URL（下線c）: https://commons.wikimedia.org/wiki/File:%E5%AF%8C%E8%B2%B4%E5%AF%BA_%E5%A4%A7%E5%A0%82.JPG",
+      "Ａ〜Ｆの歴史記述そのものは教科書水準の通説で、一次資料・公的機関の公開ページは未参照（追検証URL未取得）"
     ],
     "underlines": [
       {
@@ -180,7 +191,7 @@
           "answerId": "choju-giga-sumo",
           "reversed": true
         },
-        "note": "二段構え: A=武士や庶民の姿が文化に取り込まれた傾向（出来事）／B=画像で示す絵巻。1本目（insei-01）は同じ作品を q9 で出しているので、ここでは画像を出す型にして重複を避けた。falseStatements の『彩色をほどこした濃絵である』『鎌倉文化の作品である』『藤原隆能の作である』が使える"
+        "note": "二段構え: A=武士や庶民の姿が文化に取り込まれた傾向（出来事）／B=画像で示す絵巻。1本目（insei-01）は同じ作品を q9 で出しているので、ここでは画像を出す型にして重複を避けた。falseStatements の『鎌倉文化の作品である』『藤原隆能の作である』『紫式部が書いた物語の場面を描いた絵巻である』が使える（M2-41 で外見にもとづく誤文を差し替え済み）"
       },
       {
         "key": "b",
@@ -190,7 +201,7 @@
         ],
         "ask": {
           "type": "q9",
-          "stem": "下線部bの一族の初代の娘が建てたと伝えられ、阿字池をへだてて建つ庭園を伴う仏堂はどれか。",
+          "stem": "下線部bの一族の初代の娘が建てたと伝えられ、福島県で唯一の国宝建築とされる仏堂はどれか。",
           "answerId": "shiramizu-amidado",
           "distractorIds": [
             "fukiji-odo",
@@ -198,7 +209,7 @@
             "engakuji-shariden"
           ]
         },
-        "note": "二段構え: A=奥州藤原氏（一族）／B=初代の娘の建立・阿字池の庭園。1本目は同じ作品を『娘の発願・1160年』の条件で q10 に使っているので、ここでは庭園を足す条件に変えた。誤答の fukiji-odo は同じ院政期の地方の阿弥陀堂（Aだけを部分的に満たす）"
+        "note": "二段構え: A=奥州藤原氏（一族）／B=初代の娘の建立・福島県唯一の国宝建築。M2-41 で『阿字池をへだてて建つ庭園を伴う』（写真を見比べれば分かる条件）を、知識でしか判定できない指定（国宝・所在）に差し替えた。誤答の fukiji-odo は同じ院政期の地方の阿弥陀堂（Aだけを部分的に満たす）"
       },
       {
         "key": "c",

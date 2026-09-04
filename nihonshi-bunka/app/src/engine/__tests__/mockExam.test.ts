@@ -1,8 +1,13 @@
-// M2-20: 本番モード（大問IV形式10問）。
+// M2-20 → M2-45: 本番モード（大問IV形式10問）。「学習を始める」（旧 randomLearn.ts）を統合し、
+// 全15文化・重み付き抽選から出題する（旧仕様「kind: image を除外する」は撤廃）。
 import { describe, expect, it } from 'vitest'
 import { buildMockExam, formatCountdown, MOCK_EXAM_SIZE } from '../mockExam'
+import { createInitialProgress } from '../progress'
 import { makeWork, seededRandom, testEras } from './testFixtures'
 import type { Passage, Work } from '../../types'
+
+const today = '2026-09-05'
+const progress = createInitialProgress(today)
 
 function work(id: string, era: string, extra: Partial<Work> = {}): Work {
   return makeWork({ id, era, category: 'painting', artist: `作者${id}`, ...extra })
@@ -39,37 +44,101 @@ const passages: Passage[] = [
   textPassage('mp2', 'hakuho', ['mw2', 'mw6', 'mw10']),
   textPassage('mp3', 'tenpyo', ['mw3', 'mw7', 'mw11']),
   textPassage('mp4', 'konin-jogan', ['mw4', 'mw8', 'mw12']),
-  { ...textPassage('mp-image', 'asuka', ['mw1']), kind: 'image', leadWorkIds: ['mw1'] },
 ]
 
 describe('buildMockExam', () => {
   it('passages が空なら空配列', () => {
-    expect(buildMockExam([], pool, pool, testEras)).toEqual([])
+    expect(buildMockExam([], pool, pool, testEras, progress, today)).toEqual([])
   })
 
-  it('kind: "image" の passage は対象にしない（大問IVはリード文形式）', () => {
-    const sections = buildMockExam([{ ...textPassage('only-image', 'asuka', ['mw1']), kind: 'image' }], pool, pool, testEras)
-    expect(sections).toEqual([])
+  it('pool が空なら空配列', () => {
+    expect(buildMockExam(passages, [], [], testEras, progress, today)).toEqual([])
   })
 
-  it('合計がちょうど MOCK_EXAM_SIZE 問になる（十分な下線がある場合）', () => {
-    const sections = buildMockExam(passages, pool, pool, testEras, seededRandom(1))
-    const total = sections.reduce((sum, s) => sum + s.questions.length, 0)
-    expect(total).toBe(MOCK_EXAM_SIZE)
+  it('候補が十分にあれば MOCK_EXAM_SIZE 問ちょうど作る', () => {
+    const items = buildMockExam(passages, pool, pool, testEras, progress, today, seededRandom(1))
+    expect(items.length).toBe(MOCK_EXAM_SIZE)
   })
 
-  it('セクションには label（A, B, ...）と元の passage が付く', () => {
-    const sections = buildMockExam(passages, pool, pool, testEras, seededRandom(2))
-    expect(sections.length).toBeGreaterThan(0)
-    expect(sections[0].label).toBe('A')
-    for (const s of sections) {
-      expect(s.passage.underlines.length).toBeGreaterThanOrEqual(s.questions.length > 0 ? 1 : 0)
+  it('候補が MOCK_EXAM_SIZE 未満なら作れるだけ作る（水増ししない）', () => {
+    const small = textPassage('mp-small', 'asuka', ['mw1', 'mw2'])
+    const items = buildMockExam([small], pool, pool, testEras, progress, today, seededRandom(1))
+    expect(items.length).toBeGreaterThan(0)
+    expect(items.length).toBeLessThanOrEqual(2)
+  })
+
+  it('各問には出題元の passage・eraId・下線抜粋（excerpt）が付く', () => {
+    const items = buildMockExam(passages, pool, pool, testEras, progress, today, seededRandom(2))
+    expect(items.length).toBeGreaterThan(0)
+    for (const item of items) {
+      expect(item.passage.id).toBeTruthy()
+      expect(item.eraId).toBe(item.passage.era)
+      expect(item.excerpt.length).toBeGreaterThan(0)
+      expect(passages.some((p) => p.id === item.passage.id)).toBe(true)
     }
   })
 
-  it('下線が少なすぎて1問も作れない passage しか無ければ空配列', () => {
+  it('下線が無い passage しか無ければ空配列', () => {
     const emptyPassage: Passage = { id: 'empty', era: 'asuka', title: '空', text: '本文のみ。', sources: [], underlines: [] }
-    expect(buildMockExam([emptyPassage], pool, pool, testEras)).toEqual([])
+    expect(buildMockExam([emptyPassage], pool, pool, testEras, progress, today)).toEqual([])
+  })
+
+  it('kind: "image" の passage も対象にする（M2-45: 除外していた旧仕様を撤廃）', () => {
+    const imagePassage: Passage = {
+      id: 'mp-image',
+      era: 'asuka',
+      kind: 'image',
+      title: '画像リード',
+      leadWorkIds: ['mw1'],
+      text: '(1)は[[a|作者不明の作]]である。',
+      sources: ['x'],
+      underlines: [{ key: 'a', ask: { type: 'q4', stem: '(1)について述べた文として最も適切なものはどれか。' } }],
+    }
+    const items = buildMockExam([imagePassage], pool, pool, testEras, progress, today, seededRandom(3))
+    expect(items.length).toBe(1)
+    expect(items[0].passage.kind).toBe('image')
+  })
+
+  it('M2-25 の解消: 下線の ask.stem（writer 手書き）をそのまま設問文に使う', () => {
+    const passage: Passage = {
+      id: 'mp-ask',
+      era: 'asuka',
+      title: '二段構え',
+      text: '本文。[[a|手がかりの記述]]という下線がある。',
+      sources: ['x'],
+      underlines: [
+        {
+          key: 'a',
+          workIds: ['mw1'],
+          ask: { type: 'q9', stem: 'writer手書きの設問文', answerId: 'mw1', distractorIds: ['mw5', 'mw9', 'mw2'] },
+        },
+      ],
+    }
+    const items = buildMockExam([passage], pool, pool, testEras, progress, today, seededRandom(4))
+    expect(items.length).toBe(1)
+    expect(items[0].question.type).toBe('q9')
+    expect(items[0].question.stem).toBe('writer手書きの設問文')
+  })
+
+  it('SRS の期限が来ている作品は優先されやすい（重み付き抽選が due を反映する）', () => {
+    const dueProgress = createInitialProgress(today)
+    // mw1 の q1 を「昨日まで」の due にしておく（selectReviewCandidates が拾う）。
+    dueProgress.items['mw1'] = {
+      q1: { box: 1, due: '2026-09-01', correct: 1, wrong: 0 },
+      q2: { box: 0, due: today, correct: 0, wrong: 0 },
+      q3: { box: 0, due: today, correct: 0, wrong: 0 },
+      discoveredAt: today,
+      masteredAt: null,
+    }
+    let mw1FirstCount = 0
+    const trials = 30
+    for (let seed = 0; seed < trials; seed++) {
+      const items = buildMockExam(passages, pool, pool, testEras, dueProgress, today, seededRandom(seed))
+      if (items[0]?.question.work.id === 'mw1') mw1FirstCount++
+    }
+    // 12件中1件が常に4倍の重みを持つ想定（due bonus）。無ければ 1/12 ≈ 8% 程度のはずなので、
+    // 明確に高い比率（目安2割以上）で先頭に来ることを確認する（統計的な目安。決め打ちしすぎない）。
+    expect(mw1FirstCount).toBeGreaterThan(trials * 0.15)
   })
 })
 

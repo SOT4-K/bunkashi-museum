@@ -1,0 +1,103 @@
+/* M2-42: スクロールしても押せる固定位置の「リード文」ボタン。タブバー（position: fixed。
+   M2-44）の上に重ねて表示する。デスクトップでは #root と同じ 430px 幅の列に中央寄せする
+   （index.css の @media (min-width: 481px) と揃える）。 */
+.fixedButton {
+  position: fixed;
+  right: 16px;
+  bottom: calc(var(--tabbar-height) + env(safe-area-inset-bottom) + 14px);
+  z-index: 15;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: var(--gunjo);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 30%);
+}
+
+@media (min-width: 481px) {
+  .fixedButton {
+    right: calc(50% - 215px + 16px);
+  }
+}
+
+.title {
+  font-size: 17px;
+}
+
+.readPanel {
+  font-size: 15px;
+  line-height: 2.1;
+}
+
+.underline {
+  background: transparent;
+  color: inherit;
+  border-bottom: 1px dashed var(--text-dim);
+}
+
+.underlineCurrent {
+  background: rgba(200, 16, 46, 0.15);
+  color: inherit;
+  border-bottom: 2px solid var(--shu, #c8102e);
+}
+
+/* 下線の直下に小さくキー文字（a/b/c…）を表示する（本番の問題冊子と同じ見え方。M2-42）。 */
+.underlineWrap {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: bottom;
+  line-height: 1.4;
+}
+
+.underlineLabel {
+  font-size: 10px;
+  line-height: 1.2;
+  color: var(--gunjo);
+  font-weight: 700;
+}
+
+.closeButton {
+  width: 100%;
+  min-height: 48px;
+  border-radius: var(--radius-button);
+  background: var(--surface);
+  border: 1px solid var(--border-quiet);
+  font-size: 15px;
+}
+
+/* M2-52: 画像リード型のリード画像を問題画面にも常時表示する（既定で開いた状態）。 */
+.imageBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.imageToggle {
+  align-self: flex-start;
+  min-height: 32px;
+  font-size: 12px;
+  color: var(--gunjo);
+}
+
+.leadImageGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+}
+
+.leadImageItem {
+  border-radius: var(--radius-image);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  flex-shrink: 0;
+}
+
+.leadImageItem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}

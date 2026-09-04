@@ -62,6 +62,58 @@ const VALID_PASSAGE_KINDS = new Set(['text', 'image'])
 // 下記 main() の呼び出しはこのファイルが「直接実行されたとき」だけに限定してあるので、
 // import しても副作用（実ファイル読み込み・process.exit）は起きない）。
 
+// M2-41「絵を見れば分かる問題を出さない」（実機フィードバック2、10.1章）:
+//  設問文・条件文・正誤文（work.facts[].text / work.falseStatements[].text /
+//  passage.underlines[].ask.stem）に、画像を見れば判定できる外見の記述（姿勢・持ち物・
+//  表情・向き・色・構図）が含まれていたら警告する（エラーにはしない。正当な用法もあり得るため
+//  reviewer の目視判断に委ねる。decisions.md 2026-09-04 22:30「外見語を validate のエラーに
+//  しない」）。解説・見分け方（work.explanation / confusables.howToTell）は対象外
+//  （そこは覚えるための情報として外見の記述を残してよい、が仕様のため）。
+//  具体的な語のリストは「妥当なものを作ってよい」の指示どおり builder が決めた
+//  （decisions.md の2例「水瓶を手にする」「片足を組み、頬に指をあてて」から拾った語＋類義語）。
+const APPEARANCE_WORDS = [
+  // 持ち物（手にしている・構えている、の表現）
+  '水瓶',
+  '宝珠',
+  '数珠',
+  '手にする',
+  '手に取る',
+  '手にした',
+  '手に持つ',
+  '持った',
+  // 姿勢
+  '片足',
+  '半跏',
+  '足を組',
+  '腕を組',
+  '正座',
+  '直立',
+  '横たわ',
+  '寝そべ',
+  'しゃがみ',
+  // 表情・向き・構図
+  '微笑',
+  '笑みを',
+  '表情で',
+  '頬に指',
+  '見上げ',
+  '見下ろ',
+  '横向き',
+  '正面を向',
+  '振り返',
+  '構図',
+]
+/** 「〜色の」のような色の記述（列挙しきれないため正規表現で拾う）。 */
+const APPEARANCE_COLOR_PATTERN = /[一-龠ぁ-んァ-ヶー]色の/
+
+/** 外見の記述（見た目を見れば分かる語）を含むか（M2-41）。含まれていた語の配列を返す（空なら無し）。 */
+export function findAppearanceWords(text) {
+  if (typeof text !== 'string' || !text) return []
+  const found = APPEARANCE_WORDS.filter((w) => text.includes(w))
+  if (APPEARANCE_COLOR_PATTERN.test(text)) found.push('◯色の')
+  return found
+}
+
 /** 本文（マーカー記法込みの全文）に work.title が部分文字列として含まれるか。
  *  下線先作品の答えが本文に書かれているのを機械的に防ぐチェックに使う（7章の指摘）。 */
 export function workTitleLeaksInText(work, text) {
@@ -346,6 +398,15 @@ function validatePassages({ worksById, hasImageAsset, hasThemeSetAsset, eraIds, 
             errors.push(`${label} / ${underline.key}: ask.reversed は ask.type が "q4"/"q13" のときのみ使える`)
           }
 
+          // M2-41「絵を見れば分かる問題を出さない」: ask.stem（設問文。writer 手書き）に
+          // 外見の記述が含まれていないか（警告のみ）。
+          if (typeof ask.stem === 'string') {
+            const words = findAppearanceWords(ask.stem)
+            if (words.length > 0) {
+              warnings.push(`${label} / ${underline.key}: ask.stem に外見の記述の疑いがある語（${words.join('、')}）が含まれている`)
+            }
+          }
+
           // 9章「画像リード型セット」: q12 は answerText・distractorTexts（3件）が必須。
           if (ask.type === 'q12') {
             if (!ask.answerText || typeof ask.answerText !== 'string') {
@@ -428,6 +489,42 @@ function main() {
         if (!(field in work)) {
           errors.push(`${label}: 必須項目 "${field}" が無い`)
         }
+      }
+
+      // M2-43「解説の必須項目」（実機フィードバック2、10.3章）: time（periodLabel）・
+      // artist（author）の欠落を検出する（警告のみ）。AnswerSheet.tsx は author: null を
+      // 「作者不明」として表示するため、null 自体は正当な「不明」の表現。警告の対象は
+      // 「キー自体が無い」「空文字列」（= UI がそのまま空欄になる、意図しない省略の疑いが高い）。
+      // person/text/concept（解説シートに表示されない）は対象外。era の欠落は
+      // COMMON_REQUIRED_FIELDS で既にチェック済みのためここでは扱わない。
+      if (isArtifact) {
+        if (!('periodLabel' in work) || work.periodLabel === '') {
+          warnings.push(`${label}: periodLabel（時代表記）が無い/空（解説シートの時代表示が欠ける）`)
+        }
+        if (!('author' in work)) {
+          warnings.push(`${label}: author が無い（不明なら null を明示する。解説シートの作者表示が欠ける）`)
+        } else if (work.author === '') {
+          warnings.push(`${label}: author が空文字列（不明は null にする。空文字だと解説が空欄になる）`)
+        }
+      }
+
+      // M2-41「絵を見れば分かる問題を出さない」（実機フィードバック2、10.1章）: facts[].text・
+      // falseStatements[].text に外見の記述（画像を見れば判定できる語）が含まれていないか（警告のみ）。
+      if (Array.isArray(work.facts)) {
+        work.facts.forEach((f, i) => {
+          const words = findAppearanceWords(f?.text)
+          if (words.length > 0) {
+            warnings.push(`${label}: facts[${i}].text に外見の記述の疑いがある語（${words.join('、')}）が含まれている`)
+          }
+        })
+      }
+      if (Array.isArray(work.falseStatements)) {
+        work.falseStatements.forEach((s, i) => {
+          const words = findAppearanceWords(s?.text)
+          if (words.length > 0) {
+            warnings.push(`${label}: falseStatements[${i}].text に外見の記述の疑いがある語（${words.join('、')}）が含まれている`)
+          }
+        })
       }
 
       // holder / subject（任意。型チェックのみ）

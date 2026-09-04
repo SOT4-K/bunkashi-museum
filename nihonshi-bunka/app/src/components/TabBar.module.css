@@ -1,9 +1,28 @@
+/* M2-44: 画面下部に常時固定（`position: fixed`。スクロールの末尾ではなく常に見える位置）。
+   本文側は App.module.css の .main に同じ高さの下余白を入れて隠れないようにする。
+   デスクトップ（>481px）では #root と同じ 430px 幅の列に中央寄せする
+   （index.css の @media (min-width: 481px) と揃える。fixed は viewport 基準になるため）。 */
 .bar {
   display: flex;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
   border-top: 1px solid var(--border-quiet);
   background: var(--surface);
   padding-bottom: env(safe-area-inset-bottom);
   flex-shrink: 0;
+}
+
+@media (min-width: 481px) {
+  .bar {
+    left: 50%;
+    right: auto;
+    width: 100%;
+    max-width: 430px;
+    transform: translateX(-50%);
+  }
 }
 
 .item {

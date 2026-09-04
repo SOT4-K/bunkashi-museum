@@ -3,11 +3,23 @@
     "id": "kanshinji-nyoirin-kannon",
     "orderIndex": 40,
     "pairs": [
-      { "left": "観心寺如意輪観音像", "right": "一木造・翻波式", "kind": "作品×技法" },
-      { "left": "観心寺如意輪観音像", "right": "密教（真言宗）の尊像", "kind": "作品×信仰" },
-      { "left": "観心寺如意輪観音像", "right": "六臂（腕が6本）", "kind": "作品×主題" }
+      {
+        "left": "観心寺如意輪観音像",
+        "right": "一木造・翻波式",
+        "kind": "作品×技法"
+      },
+      {
+        "left": "観心寺如意輪観音像",
+        "right": "密教（真言宗）の尊像",
+        "kind": "作品×信仰"
+      },
+      {
+        "left": "観心寺如意輪観音像",
+        "right": "六臂（腕が6本）",
+        "kind": "作品×主題"
+      }
     ],
-    "artist": null,
+    "artist": "不明",
     "patron": null,
     "style": "一木造・翻波式（密教彫刻）",
     "religion": "密教（真言宗）",
@@ -33,7 +45,7 @@
       },
       {
         "slot": "other",
-        "text": "六臂（腕が6本）の如意輪観音像である"
+        "text": "密教の広まりとともに造られた如意輪観音の像である"
       },
       {
         "slot": "location",
@@ -68,8 +80,8 @@
         "verifiedFalse": true
       },
       {
-        "text": "四臂（腕が4本）の像である",
-        "why": "六臂の如意輪観音像。像容ずらし",
+        "text": "嵯峨天皇が空海に与えた寺の講堂にある",
+        "why": "観心寺（大阪）にある。東寺講堂の像との所在ずらし",
         "verifiedFalse": true
       },
       {
@@ -102,7 +114,8 @@
       "sourceName": ""
     },
     "sources": [
-      "高校教科書（山川『詳説日本史』）弘仁・貞観文化の項"
+      "高校教科書（山川『詳説日本史』）弘仁・貞観文化の項",
+      "画像出典ページ（Wikimedia Commons、観心寺蔵・『東洋美術』第9巻 1930年）: https://commons.wikimedia.org/wiki/File:NYOIRIN_KANSHINJI.JPG"
     ],
     "examTags": [
       "frequent"
@@ -113,11 +126,23 @@
     "id": "muroji-gojunoto",
     "orderIndex": 20,
     "pairs": [
-      { "left": "室生寺", "right": "女人高野", "kind": "作品×所蔵" },
-      { "left": "室生寺五重塔", "right": "山岳寺院の建築", "kind": "作品×様式" },
-      { "left": "高野山金剛峯寺", "right": "空海", "kind": "作品×人物" }
+      {
+        "left": "室生寺",
+        "right": "女人高野",
+        "kind": "作品×所蔵"
+      },
+      {
+        "left": "室生寺五重塔",
+        "right": "山岳寺院の建築",
+        "kind": "作品×様式"
+      },
+      {
+        "left": "高野山金剛峯寺",
+        "right": "空海",
+        "kind": "作品×人物"
+      }
     ],
-    "artist": null,
+    "artist": "不明",
     "patron": null,
     "style": "弘仁・貞観建築（山岳寺院）",
     "religion": "仏教（真言宗系、女人高野）",
@@ -168,8 +193,8 @@
         "verifiedFalse": true
       },
       {
-        "text": "三重塔である",
-        "why": "五重塔。層数ずらし",
+        "text": "応仁の乱による焼失をまぬかれた京都府内最古の木造建築である",
+        "why": "それは醍醐寺五重塔（国風文化、951年完成）。所在・内容ずらし",
         "verifiedFalse": true
       },
       {
@@ -211,9 +236,21 @@
     "id": "toji-fudo-myoo",
     "orderIndex": 30,
     "pairs": [
-      { "left": "東寺（教王護国寺）", "right": "空海（嵯峨天皇から賜る）", "kind": "作品×人物" },
-      { "left": "東寺講堂の仏像群", "right": "立体曼荼羅", "kind": "語句×語句" },
-      { "left": "東寺講堂 不動明王像", "right": "一木造", "kind": "作品×技法" }
+      {
+        "left": "東寺（教王護国寺）",
+        "right": "空海（嵯峨天皇から賜る）",
+        "kind": "作品×人物"
+      },
+      {
+        "left": "東寺講堂の仏像群",
+        "right": "立体曼荼羅",
+        "kind": "語句×語句"
+      },
+      {
+        "left": "東寺講堂 不動明王像",
+        "right": "一木造",
+        "kind": "作品×技法"
+      }
     ],
     "artist": null,
     "patron": "空海",
@@ -327,9 +364,21 @@
     "kind": "person",
     "orderIndex": 10,
     "pairs": [
-      { "left": "最澄", "right": "天台宗／比叡山延暦寺", "kind": "人物×宗派" },
-      { "left": "空海", "right": "真言宗／高野山金剛峯寺", "kind": "人物×宗派" },
-      { "left": "空海", "right": "東寺（教王護国寺）", "kind": "人物×寺院" }
+      {
+        "left": "最澄",
+        "right": "天台宗／比叡山延暦寺",
+        "kind": "人物×宗派"
+      },
+      {
+        "left": "空海",
+        "right": "真言宗／高野山金剛峯寺",
+        "kind": "人物×宗派"
+      },
+      {
+        "left": "空海",
+        "right": "東寺（教王護国寺）",
+        "kind": "人物×寺院"
+      }
     ],
     "artist": null,
     "patron": null,
@@ -395,9 +444,21 @@
     "kind": "person",
     "orderIndex": 15,
     "pairs": [
-      { "left": "三筆", "right": "空海・嵯峨天皇・橘逸勢（唐風の書）", "kind": "人物×事績" },
-      { "left": "空海", "right": "風信帖", "kind": "人物×作品" },
-      { "left": "三蹟", "right": "小野道風・藤原佐理・藤原行成（和様の書）", "kind": "人物×事績" }
+      {
+        "left": "三筆",
+        "right": "空海・嵯峨天皇・橘逸勢（唐風の書）",
+        "kind": "人物×事績"
+      },
+      {
+        "left": "空海",
+        "right": "風信帖",
+        "kind": "人物×作品"
+      },
+      {
+        "left": "三蹟",
+        "right": "小野道風・藤原佐理・藤原行成（和様の書）",
+        "kind": "人物×事績"
+      }
     ],
     "artist": null,
     "patron": null,
@@ -453,15 +514,30 @@
       "高校教科書（山川『詳説日本史』）弘仁・貞観文化の項"
     ],
     "examTags": [],
-    "status": "reviewed"
+    "status": "reviewed",
+    "image": {
+      "file": "sanpitsu.jpg",
+      "credit": "空海筆、平安時代初期（9世紀）。東寺蔵、国宝。図版出典: 尾上八郎『和様書道史』1934年刊",
+      "license": "パブリックドメイン（1899年著作権法第23条により保護期間満了）",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Huushincho_1.jpg",
+      "sourceName": "Wikimedia Commons"
+    }
   },
   {
     "id": "chokusen-kanshishu",
     "kind": "text",
     "orderIndex": 12,
     "pairs": [
-      { "left": "『凌雲集』『文華秀麗集』『経国集』", "right": "勅撰漢詩集", "kind": "書物×分類" },
-      { "left": "嵯峨天皇", "right": "漢詩文の奨励", "kind": "人物×事績" }
+      {
+        "left": "『凌雲集』『文華秀麗集』『経国集』",
+        "right": "勅撰漢詩集",
+        "kind": "書物×分類"
+      },
+      {
+        "left": "嵯峨天皇",
+        "right": "漢詩文の奨励",
+        "kind": "人物×事績"
+      }
     ],
     "artist": null,
     "patron": null,
@@ -472,13 +548,33 @@
     "holder": null,
     "subject": null,
     "facts": [
-      { "slot": "other", "text": "『凌雲集』『文華秀麗集』『経国集』は天皇の命で編まれた漢詩集である" },
-      { "slot": "other", "text": "唐風を重んじる文化のもとで漢詩文が盛んになった" },
-      { "slot": "other", "text": "嵯峨天皇は漢詩文を奨励した", "shared": ["sanpitsu"] }
+      {
+        "slot": "other",
+        "text": "『凌雲集』『文華秀麗集』『経国集』は天皇の命で編まれた漢詩集である"
+      },
+      {
+        "slot": "other",
+        "text": "唐風を重んじる文化のもとで漢詩文が盛んになった"
+      },
+      {
+        "slot": "other",
+        "text": "嵯峨天皇は漢詩文を奨励した",
+        "shared": [
+          "sanpitsu"
+        ]
+      }
     ],
     "falseStatements": [
-      { "text": "『凌雲集』は最初の勅撰和歌集である", "why": "『凌雲集』は勅撰漢詩集。最初の勅撰和歌集は『古今和歌集』（国風文化）で内容・時代ずらし", "verifiedFalse": true },
-      { "text": "これらは奈良時代に編まれた漢詩集である", "why": "平安時代前期（9世紀前半）に編まれた。奈良時代の漢詩集は『懐風藻』で時代・書物ずらし", "verifiedFalse": true }
+      {
+        "text": "『凌雲集』は最初の勅撰和歌集である",
+        "why": "『凌雲集』は勅撰漢詩集。最初の勅撰和歌集は『古今和歌集』（国風文化）で内容・時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "これらは奈良時代に編まれた漢詩集である",
+        "why": "平安時代前期（9世紀前半）に編まれた。奈良時代の漢詩集は『懐風藻』で時代・書物ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "勅撰漢詩集（凌雲集・文華秀麗集・経国集）",
     "reading": "ちょくせんかんししゅう",
@@ -507,8 +603,16 @@
     "kind": "text",
     "orderIndex": 14,
     "pairs": [
-      { "left": "空海", "right": "『三教指帰』『性霊集』", "kind": "人物×著作" },
-      { "left": "最澄", "right": "『顕戒論』『山家学生式』", "kind": "人物×著作" }
+      {
+        "left": "空海",
+        "right": "『三教指帰』『性霊集』",
+        "kind": "人物×著作"
+      },
+      {
+        "left": "最澄",
+        "right": "『顕戒論』『山家学生式』",
+        "kind": "人物×著作"
+      }
     ],
     "artist": null,
     "patron": null,
@@ -519,13 +623,36 @@
     "holder": null,
     "subject": null,
     "facts": [
-      { "slot": "other", "text": "空海は『三教指帰』『性霊集』を著した", "shared": ["saicho-kukai"] },
-      { "slot": "other", "text": "最澄は『顕戒論』を著し、大乗戒壇の設立を主張した", "shared": ["saicho-kukai"] },
-      { "slot": "other", "text": "最澄は『山家学生式』で天台宗の僧の養成を定めた" }
+      {
+        "slot": "other",
+        "text": "空海は『三教指帰』『性霊集』を著した",
+        "shared": [
+          "saicho-kukai"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "最澄は『顕戒論』を著し、大乗戒壇の設立を主張した",
+        "shared": [
+          "saicho-kukai"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "最澄は『山家学生式』で天台宗の僧の養成を定めた"
+      }
     ],
     "falseStatements": [
-      { "text": "『顕戒論』は空海の著作である", "why": "『顕戒論』は最澄の著作。空海は『三教指帰』『性霊集』で著者の入れ替えずらし", "verifiedFalse": true },
-      { "text": "『三教指帰』は浄土教の教えを説いた書物である", "why": "儒教・道教・仏教を比較した書。浄土教の代表的な書物は源信『往生要集』（国風文化）で内容・時代ずらし", "verifiedFalse": true }
+      {
+        "text": "『顕戒論』は空海の著作である",
+        "why": "『顕戒論』は最澄の著作。空海は『三教指帰』『性霊集』で著者の入れ替えずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "『三教指帰』は浄土教の教えを説いた書物である",
+        "why": "儒教・道教・仏教を比較した書。浄土教の代表的な書物は源信『往生要集』（国風文化）で内容・時代ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "空海・最澄の著作（三教指帰・性霊集・顕戒論）",
     "reading": "くうかい・さいちょうのちょさく",
@@ -554,11 +681,31 @@
     "kind": "concept",
     "orderIndex": 18,
     "pairs": [
-      { "left": "勧学院", "right": "藤原氏", "kind": "語句×語句" },
-      { "left": "弘文院", "right": "和気氏", "kind": "語句×語句" },
-      { "left": "奨学院", "right": "在原氏（皇族・王氏）", "kind": "語句×語句" },
-      { "left": "学館院", "right": "橘氏", "kind": "語句×語句" },
-      { "left": "綜芸種智院", "right": "空海", "kind": "作品×人物" }
+      {
+        "left": "勧学院",
+        "right": "藤原氏",
+        "kind": "語句×語句"
+      },
+      {
+        "left": "弘文院",
+        "right": "和気氏",
+        "kind": "語句×語句"
+      },
+      {
+        "left": "奨学院",
+        "right": "在原氏（皇族・王氏）",
+        "kind": "語句×語句"
+      },
+      {
+        "left": "学館院",
+        "right": "橘氏",
+        "kind": "語句×語句"
+      },
+      {
+        "left": "綜芸種智院",
+        "right": "空海",
+        "kind": "作品×人物"
+      }
     ],
     "artist": null,
     "patron": null,
@@ -569,13 +716,33 @@
     "holder": null,
     "subject": null,
     "facts": [
-      { "slot": "other", "text": "大学別曹は有力貴族が一族の子弟のために設けた寄宿施設である" },
-      { "slot": "other", "text": "藤原氏の勧学院、和気氏の弘文院、皇族・王氏の奨学院、橘氏の学館院などがある" },
-      { "slot": "other", "text": "空海は庶民にも開かれた綜芸種智院を設けた", "shared": ["saicho-kukai"] }
+      {
+        "slot": "other",
+        "text": "大学別曹は有力貴族が一族の子弟のために設けた寄宿施設である"
+      },
+      {
+        "slot": "other",
+        "text": "藤原氏の勧学院、和気氏の弘文院、皇族・王氏の奨学院、橘氏の学館院などがある"
+      },
+      {
+        "slot": "other",
+        "text": "空海は庶民にも開かれた綜芸種智院を設けた",
+        "shared": [
+          "saicho-kukai"
+        ]
+      }
     ],
     "falseStatements": [
-      { "text": "勧学院は和気氏が設けた大学別曹である", "why": "勧学院は藤原氏。和気氏は弘文院で氏族の入れ替えずらし", "verifiedFalse": true },
-      { "text": "綜芸種智院は最澄が設けた", "why": "綜芸種智院は空海が設けた。人物ずらし", "verifiedFalse": true }
+      {
+        "text": "勧学院は和気氏が設けた大学別曹である",
+        "why": "勧学院は藤原氏。和気氏は弘文院で氏族の入れ替えずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "綜芸種智院は最澄が設けた",
+        "why": "綜芸種智院は空海が設けた。人物ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "大学別曹と綜芸種智院",
     "reading": "だいがくべっそうとしゅげいしゅちいん",
@@ -604,8 +771,16 @@
     "kind": "concept",
     "orderIndex": 25,
     "pairs": [
-      { "left": "一木造", "right": "一本の木から像の主要部を彫り出す技法", "kind": "様式×特徴" },
-      { "left": "翻波式", "right": "衣のひだを大小の波のように刻む表現", "kind": "様式×特徴" }
+      {
+        "left": "一木造",
+        "right": "一本の木から像の主要部を彫り出す技法",
+        "kind": "様式×特徴"
+      },
+      {
+        "left": "翻波式",
+        "right": "衣のひだを大小の波のように刻む表現",
+        "kind": "様式×特徴"
+      }
     ],
     "artist": null,
     "patron": null,
@@ -616,13 +791,34 @@
     "holder": null,
     "subject": null,
     "facts": [
-      { "slot": "technique", "text": "一木造は一本の木から像の主要部を彫り出す技法である", "shared": ["kanshinji-nyoirin-kannon", "toji-fudo-myoo"] },
-      { "slot": "style", "text": "翻波式は衣のひだを大小の波のように刻む表現である" },
-      { "slot": "other", "text": "国風文化の寄木造（定朝様）と対比される" }
+      {
+        "slot": "technique",
+        "text": "一木造は一本の木から像の主要部を彫り出す技法である",
+        "shared": [
+          "kanshinji-nyoirin-kannon",
+          "toji-fudo-myoo"
+        ]
+      },
+      {
+        "slot": "style",
+        "text": "翻波式は衣のひだを大小の波のように刻む表現である"
+      },
+      {
+        "slot": "other",
+        "text": "国風文化の寄木造（定朝様）と対比される"
+      }
     ],
     "falseStatements": [
-      { "text": "一木造は複数の木材を組み合わせて像をつくる技法である", "why": "複数の木材を組み合わせるのは寄木造。技法の入れ替えずらし", "verifiedFalse": true },
-      { "text": "翻波式は国風文化を代表する彫刻の様式である", "why": "翻波式は弘仁・貞観文化の様式。国風文化は寄木造の定朝様で時代ずらし", "verifiedFalse": true }
+      {
+        "text": "一木造は複数の木材を組み合わせて像をつくる技法である",
+        "why": "複数の木材を組み合わせるのは寄木造。技法の入れ替えずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "翻波式は国風文化を代表する彫刻の様式である",
+        "why": "翻波式は弘仁・貞観文化の様式。国風文化は寄木造の定朝様で時代ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "一木造と翻波式",
     "reading": "いちぼくづくりとほんぱしき",
@@ -651,8 +847,16 @@
     "kind": "concept",
     "orderIndex": 35,
     "pairs": [
-      { "left": "曼荼羅", "right": "密教の世界を絵で表す", "kind": "語句×語句" },
-      { "left": "立体曼荼羅", "right": "東寺講堂の仏像配置", "kind": "語句×語句" }
+      {
+        "left": "曼荼羅",
+        "right": "密教の世界を絵で表す",
+        "kind": "語句×語句"
+      },
+      {
+        "left": "立体曼荼羅",
+        "right": "東寺講堂の仏像配置",
+        "kind": "語句×語句"
+      }
     ],
     "artist": null,
     "patron": null,
@@ -663,13 +867,37 @@
     "holder": null,
     "subject": null,
     "facts": [
-      { "slot": "other", "text": "曼荼羅は密教の世界を一定の決まりに従って描いた絵である" },
-      { "slot": "other", "text": "東寺講堂では仏像の配置によって同じ世界が立体で表されている", "shared": ["toji-fudo-myoo"] },
-      { "slot": "religion", "text": "密教（天台宗・真言宗）の広まりを背景とする", "shared": ["kanshinji-nyoirin-kannon", "toji-fudo-myoo"] }
+      {
+        "slot": "other",
+        "text": "曼荼羅は密教の世界を一定の決まりに従って描いた絵である"
+      },
+      {
+        "slot": "other",
+        "text": "東寺講堂では仏像の配置によって同じ世界が立体で表されている",
+        "shared": [
+          "toji-fudo-myoo"
+        ]
+      },
+      {
+        "slot": "religion",
+        "text": "密教（天台宗・真言宗）の広まりを背景とする",
+        "shared": [
+          "kanshinji-nyoirin-kannon",
+          "toji-fudo-myoo"
+        ]
+      }
     ],
     "falseStatements": [
-      { "text": "曼荼羅は極楽浄土へ迎えにくる仏を描いた絵である", "why": "それは来迎図（国風文化の浄土教絵画）。曼荼羅は密教の世界を表す図で内容・時代ずらし", "verifiedFalse": true },
-      { "text": "曼荼羅は禅宗の広まりとともに描かれるようになった", "why": "密教の広まりを背景とする。禅宗は鎌倉時代以降で宗派・時代ずらし", "verifiedFalse": true }
+      {
+        "text": "曼荼羅は極楽浄土へ迎えにくる仏を描いた絵である",
+        "why": "それは来迎図（国風文化の浄土教絵画）。曼荼羅は密教の世界を表す図で内容・時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "曼荼羅は禅宗の広まりとともに描かれるようになった",
+        "why": "密教の広まりを背景とする。禅宗は鎌倉時代以降で宗派・時代ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "曼荼羅と密教美術",
     "reading": "まんだらとみっきょうびじゅつ",
@@ -698,8 +926,16 @@
     "kind": "concept",
     "orderIndex": 45,
     "pairs": [
-      { "left": "神仏習合", "right": "神宮寺・神前読経", "kind": "語句×語句" },
-      { "left": "修験道", "right": "山岳信仰と密教の結合", "kind": "語句×語句" }
+      {
+        "left": "神仏習合",
+        "right": "神宮寺・神前読経",
+        "kind": "語句×語句"
+      },
+      {
+        "left": "修験道",
+        "right": "山岳信仰と密教の結合",
+        "kind": "語句×語句"
+      }
     ],
     "artist": null,
     "patron": null,
@@ -710,13 +946,33 @@
     "holder": null,
     "subject": null,
     "facts": [
-      { "slot": "religion", "text": "在来の神への信仰と仏教が結びついた（神仏習合）" },
-      { "slot": "other", "text": "神社の境内に神宮寺が建てられた" },
-      { "slot": "other", "text": "山岳信仰と密教が結びついて修験道が生まれた", "shared": ["muroji-gojunoto"] }
+      {
+        "slot": "religion",
+        "text": "在来の神への信仰と仏教が結びついた（神仏習合）"
+      },
+      {
+        "slot": "other",
+        "text": "神社の境内に神宮寺が建てられた"
+      },
+      {
+        "slot": "other",
+        "text": "山岳信仰と密教が結びついて修験道が生まれた",
+        "shared": [
+          "muroji-gojunoto"
+        ]
+      }
     ],
     "falseStatements": [
-      { "text": "神仏習合は明治時代に始まった", "why": "神仏習合は奈良時代から進み、平安時代前期に広まった。明治には逆に神仏分離が行われた。時代ずらし", "verifiedFalse": true },
-      { "text": "修験道は禅宗の一派である", "why": "修験道は山岳信仰と密教が結びついたもの。宗派ずらし", "verifiedFalse": true }
+      {
+        "text": "神仏習合は明治時代に始まった",
+        "why": "神仏習合は奈良時代から進み、平安時代前期に広まった。明治には逆に神仏分離が行われた。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "修験道は禅宗の一派である",
+        "why": "修験道は山岳信仰と密教が結びついたもの。宗派ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "神仏習合と修験道",
     "reading": "しんぶつしゅうごうとしゅげんどう",
@@ -738,6 +994,13 @@
       "高校教科書（山川『詳説日本史』）弘仁・貞観文化の項"
     ],
     "examTags": [],
-    "status": "reviewed"
+    "status": "reviewed",
+    "image": {
+      "file": "shinbutsu-shugo.jpg",
+      "credit": "作者不詳、10世紀（神護寺蔵、国宝）。出典: 文化庁報道発表PDF",
+      "license": "パブリックドメイン（PD-Japan / Public Domain Mark 1.0）",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:S%C5%8Dgy%C5%8D_Hachiman_Shinz%C5%8D_%E5%83%A7%E5%BD%A2%E5%85%AB%E5%B9%A1%E7%A5%9E%E5%83%8F_(Jingo-ji_%E7%A5%9E%E8%AD%B7%E5%AF%BA).jpg",
+      "sourceName": "Wikimedia Commons"
+    }
   }
 ]

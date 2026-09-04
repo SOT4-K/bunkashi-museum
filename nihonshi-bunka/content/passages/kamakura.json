@@ -12,7 +12,12 @@
       "5文目（禅宗の伝来と幕府の帰依・鎌倉の禅寺）: content/works/kamakura.json の engakuji-shariden（eraNote・holder）、content/eras.json の kamakura（detail）",
       "6文目（平清盛が後白河法皇のために建てた堂）: content/works/kamakura.json の sanjusangendo-hondo（patron・facts・eraNote）",
       "7文目（鎌倉新仏教と旧仏教の改革）: content/eras.json の kamakura（detail）",
-      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
+      "図版の同定URL（下線a）: https://commons.wikimedia.org/wiki/File:Kuya_Portrait.JPG",
+      "図版の同定URL（下線b）: https://commons.wikimedia.org/wiki/File:The_Great_Buddha_of_K%C5%8Dtoku-in_(Kamakura_Daibutsu).jpg",
+      "図版の同定URL（下線c）: https://commons.wikimedia.org/wiki/File:Engakuji-Shariden-M9239.jpg",
+      "図版の同定URL（下線d）: https://commons.wikimedia.org/wiki/File:Sanjusangendo_temple01s1408.jpg",
+      "リード文の歴史記述そのものは教科書水準の通説で、一次資料・公的機関の公開ページは未参照（追検証URL未取得）"
     ],
     "underlines": [
       {
@@ -44,7 +49,7 @@
           "stem": "下線部bによって造られ、鎌倉の高徳院に伝わる次の阿弥陀如来像について述べた文A・Bの正誤の組合せとして正しいものはどれか。",
           "answerId": "kamakura-daibutsu"
         },
-        "note": "二段構え: A=民間の寄進による造像（出来事）／B=高徳院・阿弥陀如来。画像を出す型。falseStatements に『東大寺盧舎那仏像である』『大仏殿の中に安置されている』『尊格は釈迦如来である』があり、奈良の大仏との混同型が使える。リード文には尊格も技法にあたる語も書いていない"
+        "note": "二段構え: A=民間の寄進による造像（出来事）／B=高徳院・阿弥陀如来。画像を出す型。falseStatements に『東大寺盧舎那仏像である』『聖武天皇の発願によって造られた』『尊格は釈迦如来である』があり、奈良の大仏との混同型が使える（M2-41 で『大仏殿の中に安置されている』＝写真を見れば真偽が分かる文を差し替えた）。リード文には尊格も技法にあたる語も書いていない"
       },
       {
         "key": "c",
@@ -94,7 +99,12 @@
       "Ｆ（千手観音信仰・京都の堂の再建）: content/works/kamakura.json の sanjusangendo-hondo（facts・eraNote）",
       "Ｇ（南北朝の動乱ののちの公武の文化の融合）: content/eras.json の kitayama（detail）",
       "高校教科書（山川『詳説日本史』）鎌倉文化の項",
-      "形式: research/nichidai-past-exams-analysis.md 1章「文化伏せ型（2016・2025）」"
+      "形式: research/nichidai-past-exams-analysis.md 1章「文化伏せ型（2016・2025）」",
+      "図版の同定URL（下線a・e）: https://commons.wikimedia.org/wiki/File:Kuya_Portrait.JPG",
+      "図版の同定URL（下線b）: https://commons.wikimedia.org/wiki/File:The_Great_Buddha_of_K%C5%8Dtoku-in_(Kamakura_Daibutsu).jpg",
+      "図版の同定URL（下線c）: https://commons.wikimedia.org/wiki/File:Engakuji-Shariden-M9239.jpg",
+      "図版の同定URL（下線d）: https://commons.wikimedia.org/wiki/File:Sanjusangendo_temple01s1408.jpg",
+      "Ａ〜Ｇの歴史記述そのものは教科書水準の通説で、一次資料・公的機関の公開ページは未参照（追検証URL未取得）"
     ],
     "underlines": [
       {
@@ -105,7 +115,7 @@
         ],
         "ask": {
           "type": "q9",
-          "stem": "下線部aのうち運慶の四男が造った、市中で念仏を勧めた僧の姿を写す肖像彫刻はどれか。",
+          "stem": "下線部aのうち運慶の四男である康勝が造り、京都の六波羅蜜寺に伝わるものはどれか。",
           "answerId": "kuya-shonin-zo",
           "distractorIds": [
             "kongorikishi-todaiji",
@@ -113,7 +123,7 @@
             "byodoin-amida-nyorai"
           ]
         },
-        "note": "二段構え: A=慶派の仏師たち（流派）／B=運慶の四男の作・念仏を勧めた僧の肖像。1本目（kamakura-01）は A=六波羅蜜寺・B=康勝だったので、下線側を流派にずらして条件を入れ替えた。誤答はすべて彫刻で、kongorikishi-todaiji は同じ慶派の作（Aだけを満たす理想的な誤答）、byodoin-amida-nyorai は作者が明らかな別時代の像。kongorikishi-todaiji は status:draft のため本番ビルドでは出題プールに入らず engine が同カテゴリの別作品で自動補充する（reviewer が承認して reviewed になれば、そのまま誤答として出る）"
+        "note": "二段構え: A=慶派の仏師たち（流派）／B=康勝の作・六波羅蜜寺への伝来。1本目（kamakura-01）は下線側が六波羅蜜寺だったので、下線を流派にずらし、寺院を設問側の条件に回した。M2-41 で『市中で念仏を勧めた僧の姿を写す肖像彫刻』（4枚の画像のうち僧の像は1枚しかなく、見比べれば選べる条件）を削除している。誤答はすべて彫刻で、kongorikishi-todaiji は同じ慶派の作（Aだけを満たす理想的な誤答）、byodoin-amida-nyorai は作者が明らかな別時代の像。kongorikishi-todaiji は status:draft のため本番ビルドでは出題プールに入らず engine が同カテゴリの別作品で自動補充する（reviewer が承認して reviewed になれば、そのまま誤答として出る）"
       },
       {
         "key": "b",
@@ -126,7 +136,7 @@
           "stem": "下線部bに造られた次の像について述べた文として最も適切なものはどれか。",
           "answerId": "kamakura-daibutsu"
         },
-        "note": "二段構え: A=幕府の都（場所）／B=画像で示す像。1本目は同じ作品を q10 で出しているので型を変えた。正文は facts の『尊格は阿弥陀如来』『露座』、誤文は『東大寺盧舎那仏像である』『天平文化の作品である』が使える"
+        "note": "二段構え: A=幕府の都（場所）／B=画像で示す像。1本目は同じ作品を q10 で出しているので型を変えた。正文は facts の『尊格は阿弥陀如来』『もとは大仏殿の中に安置されていたが、のちに建物が失われたと伝えられる』、誤文は『東大寺盧舎那仏像である』『天平文化の作品である』が使える"
       },
       {
         "key": "c",
@@ -149,7 +159,7 @@
         ],
         "ask": {
           "type": "q9",
-          "stem": "下線部dにもとづき、湛慶が造った本尊を中心に千体の観音像を安置する、京都の長大な堂はどれか。",
+          "stem": "下線部dにもとづき、湛慶が造った本尊を中心に千体の観音像を安置する、京都の堂はどれか。",
           "answerId": "sanjusangendo-hondo",
           "distractorIds": [
             "byodoin-hoo-do",

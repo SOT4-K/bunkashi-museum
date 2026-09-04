@@ -5,11 +5,11 @@
     "pairs": [
       { "kind": "作品×作者", "left": "空也上人像", "right": "康勝（運慶の四男）" },
       { "kind": "作品×所蔵", "left": "空也上人像", "right": "六波羅蜜寺（京都）" },
-      { "kind": "作品×技法", "left": "空也上人像", "right": "木造彩色・玉眼" }
+      { "kind": "作品×技法", "left": "空也上人像", "right": "木造・玉眼" }
     ],
     "artist": "康勝",
     "patron": null,
-    "style": "肖像彫刻（写実的な鎌倉彫刻）",
+    "style": "肖像彫刻（鎌倉時代の慶派）",
     "religion": "浄土教（空也は市聖と呼ばれた念仏聖）",
     "holder": "六波羅蜜寺（京都市）",
     "subject": null,
@@ -26,11 +26,11 @@
       },
       {
         "slot": "other",
-        "text": "口から「南無阿弥陀仏」の6字を表す6体の小さな阿弥陀仏が出る"
+        "text": "平安時代中期に京の市中で念仏を広めた僧・空也を主題とする"
       },
       {
-        "slot": "other",
-        "text": "鹿角の杖・鉦・草鞋姿で歩きながら念仏を唱える姿"
+        "slot": "period",
+        "text": "鎌倉時代前期（13世紀前半）の作"
       },
       {
         "slot": "location",
@@ -70,7 +70,7 @@
     "category": "sculpture",
     "location": "六波羅蜜寺（京都市）",
     "author": "康勝",
-    "technique": "木造彩色、玉眼",
+    "technique": "木造・玉眼",
     "keyPoints": [
       "鎌倉文化の写実的肖像彫刻",
       "作者は康勝（運慶の四男）",
@@ -88,8 +88,8 @@
       "sourceName": "Wikimedia Commons"
     },
     "sources": [
-      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
-      "Wikimedia Commons（『日本美術史』1933年刊）"
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項（書名のみ。オンラインで追検証できるURLは無し）",
+      "画像と作品同定: Wikimedia Commons（『日本美術史』1933年刊） https://commons.wikimedia.org/wiki/File:Kuya_Portrait.JPG"
     ],
     "examTags": [
       "frequent"
@@ -106,7 +106,7 @@
     ],
     "artist": null,
     "patron": "不詳（民間の勧進によると考えられる）",
-    "style": "露座の大仏（銅造）",
+    "style": "銅造の大仏（阿弥陀如来）",
     "religion": "浄土教",
     "holder": "高徳院（神奈川県鎌倉市）",
     "subject": null,
@@ -119,7 +119,7 @@
       },
       {
         "slot": "other",
-        "text": "露座（屋外に安置）の大仏である"
+        "text": "もとは大仏殿の中に安置されていたが、のちに建物が失われたと伝えられる"
       },
       {
         "slot": "other",
@@ -146,8 +146,8 @@
         "verifiedFalse": true
       },
       {
-        "text": "大仏殿の中に安置されている",
-        "why": "現在は露座で大仏殿を持たない。属性の反転",
+        "text": "聖武天皇の発願によって造られた",
+        "why": "聖武天皇の発願は東大寺盧舎那仏像（天平文化）。鎌倉大仏は民間の勧進によると考えられる。人物・時代の入れ替え",
         "verifiedFalse": true
       },
       {
@@ -166,7 +166,7 @@
     "era": "kamakura",
     "category": "sculpture",
     "location": "高徳院（神奈川県鎌倉市）",
-    "author": "不詳",
+    "author": "作者不明（鋳物師として丹治久友の名が伝わる）",
     "technique": "銅造（鋳造）",
     "keyPoints": [
       "鎌倉文化の銅造大仏",
@@ -185,8 +185,8 @@
       "sourceName": "Wikimedia Commons"
     },
     "sources": [
-      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
-      "Wikimedia Commons"
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項（書名のみ。オンラインで追検証できるURLは無し）",
+      "画像と作品同定: Wikimedia Commons https://commons.wikimedia.org/wiki/File:The_Great_Buddha_of_K%C5%8Dtoku-in_(Kamakura_Daibutsu).jpg"
     ],
     "examTags": [
       "frequent"
@@ -224,7 +224,7 @@
       },
       {
         "slot": "other",
-        "text": "茅葺の急勾配の屋根をもつ"
+        "text": "大仏様・和様と並ぶ、鎌倉時代の建築様式の一つを代表する"
       }
     ],
     "falseStatements": [
@@ -259,8 +259,8 @@
     "era": "kamakura",
     "category": "architecture",
     "location": "円覚寺（神奈川県鎌倉市）",
-    "author": null,
-    "technique": "木造・禅宗様（茅葺）",
+    "author": "作者不明",
+    "technique": "木造・禅宗様",
     "keyPoints": [
       "鎌倉時代に伝わった禅宗様建築の代表",
       "現在の建物は室町時代に太平寺から移築",
@@ -283,8 +283,8 @@
       "sourceName": "Wikimedia Commons"
     },
     "sources": [
-      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
-      "Wikimedia Commons"
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項（書名のみ。オンラインで追検証できるURLは無し）",
+      "画像と作品同定: Wikimedia Commons https://commons.wikimedia.org/wiki/File:Engakuji-Shariden-M9239.jpg"
     ],
     "examTags": [
       "frequent"
@@ -310,7 +310,7 @@
     "facts": [
       {
         "slot": "style",
-        "text": "和様の長大な建築（南北約120m）"
+        "text": "和様建築の代表とされる"
       },
       {
         "slot": "era",
@@ -362,7 +362,7 @@
     "era": "kamakura",
     "category": "architecture",
     "location": "妙法院（京都市）",
-    "author": null,
+    "author": "作者不明（当初の建立の発願者は平清盛）",
     "technique": "木造・和様",
     "keyPoints": [
       "和様建築の代表",
@@ -386,8 +386,8 @@
       "sourceName": "Wikimedia Commons"
     },
     "sources": [
-      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
-      "Wikimedia Commons"
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項（書名のみ。オンラインで追検証できるURLは無し）",
+      "画像と作品同定: Wikimedia Commons https://commons.wikimedia.org/wiki/File:Sanjusangendo_temple01s1408.jpg"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -467,7 +467,8 @@
     "examNote": "「専修念仏＝法然＝浄土宗」。弟子・親鸞の「悪人正機＝浄土真宗」との違いを問う設問が多い。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
+      "追検証URL未取得: 教科書水準の通説にもとづく記述で、所蔵機関・公的機関の公開ページは未参照（画像が無く ColBase 等に該当ページを特定できていない項目）"
     ],
     "examTags": [
       "frequent"
@@ -549,7 +550,8 @@
     "examNote": "「悪人正機＝親鸞＝浄土真宗」。師の法然（専修念仏・浄土宗）との違いが最頻出。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
+      "追検証URL未取得: 教科書水準の通説にもとづく記述で、所蔵機関・公的機関の公開ページは未参照（画像が無く ColBase 等に該当ページを特定できていない項目）"
     ],
     "examTags": [
       "frequent"
@@ -631,7 +633,8 @@
     "examNote": "「踊念仏＝一遍＝時宗」。一遍上人絵伝（絵巻）とセットで問われることが多い。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
+      "追検証URL未取得: 教科書水準の通説にもとづく記述で、所蔵機関・公的機関の公開ページは未参照（画像が無く ColBase 等に該当ページを特定できていない項目）"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -711,7 +714,8 @@
     "examNote": "「題目＝日蓮＝日蓮宗」「立正安国論」がセットで問われる。念仏系の宗派（浄土宗・浄土真宗・時宗）との教義の違いに注意。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
+      "追検証URL未取得: 教科書水準の通説にもとづく記述で、所蔵機関・公的機関の公開ページは未参照（画像が無く ColBase 等に該当ページを特定できていない項目）"
     ],
     "examTags": [
       "frequent"
@@ -793,7 +797,8 @@
     "examNote": "「臨済宗＝栄西＝公案問答」。曹洞宗（道元・只管打坐）との違い、喫茶の伝来者である点が問われる。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
+      "追検証URL未取得: 教科書水準の通説にもとづく記述で、所蔵機関・公的機関の公開ページは未参照（画像が無く ColBase 等に該当ページを特定できていない項目）"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -873,7 +878,8 @@
     "examNote": "「曹洞宗＝道元＝只管打坐＝永平寺（福井）」。臨済宗（栄西・公案問答・京都や鎌倉の五山）との違いが最頻出。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
+      "追検証URL未取得: 教科書水準の通説にもとづく記述で、所蔵機関・公的機関の公開ページは未参照（画像が無く ColBase 等に該当ページを特定できていない項目）"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -888,7 +894,7 @@
     ],
     "artist": "運慶・快慶",
     "patron": "東大寺（重源の再建事業にともなう造像）",
-    "style": "写実的な鎌倉彫刻（慶派）",
+    "style": "鎌倉彫刻（慶派）",
     "religion": "仏教（南大門の門守護神）",
     "holder": "東大寺南大門（奈良県奈良市）",
     "subject": null,
@@ -898,7 +904,7 @@
       { "slot": "artist", "text": "運慶・快慶らの作" },
       { "slot": "era", "text": "鎌倉文化の彫刻" },
       { "slot": "period", "text": "1203年に造られた" },
-      { "slot": "other", "text": "口を開いた阿形と口を閉じた吽形の一対からなる" },
+      { "slot": "other", "text": "東大寺再建の勧進を進めた重源のもとで造られた" },
       { "slot": "location", "text": "東大寺南大門に安置されている" }
     ],
     "falseStatements": [
@@ -941,9 +947,9 @@
       "sourceName": "Wikimedia Commons"
     },
     "sources": [
-      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項（書名のみ。オンラインで追検証できるURLは無し）",
       "research/m2-image-log-2026-09-04-wave2.md 2章（画像の出典・ライセンス）",
-      "Wikimedia Commons『Histoire de l'art du Japon』（1900年）"
+      "画像と作品同定: Wikimedia Commons『Histoire de l'art du Japon』（1900年） https://commons.wikimedia.org/wiki/File:NIWAU_(Brama_et_Indra,_sanscrit),_Fin_du_%E2%85%AB_si%C3%A8cle_(Nara_Todaiji),_Histoire_de_l%27art_du_Japon_(39).jpg"
     ],
     "examTags": [
       "frequent"
@@ -960,7 +966,7 @@
     "kind": "person",
     "artist": null,
     "patron": null,
-    "style": "写実的な鎌倉彫刻（慶派）",
+    "style": "鎌倉彫刻（慶派）",
     "religion": null,
     "holder": null,
     "subject": null,
@@ -994,7 +1000,8 @@
     "examNote": "「運慶・快慶＝東大寺南大門金剛力士像」。定朝（国風文化・寄木造・平等院）との時代と作品の取り違えが定番。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
+      "追検証URL未取得: 教科書水準の通説にもとづく記述で、所蔵機関・公的機関の公開ページは未参照（画像が無く ColBase 等に該当ページを特定できていない項目）"
     ],
     "examTags": [
       "frequent"
@@ -1045,7 +1052,8 @@
     "examNote": "「東大寺再建＝重源＝大仏様」。禅宗様（円覚寺舎利殿）・和様（三十三間堂）との様式の対応で問われる。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
+      "追検証URL未取得: 教科書水準の通説にもとづく記述で、所蔵機関・公的機関の公開ページは未参照（画像が無く ColBase 等に該当ページを特定できていない項目）"
     ],
     "examTags": [
       "frequent"
@@ -1096,7 +1104,8 @@
     "examNote": "「大仏様＝東大寺南大門＝重源」「禅宗様＝円覚寺舎利殿」「和様＝三十三間堂」の3点セットで覚える。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
+      "追検証URL未取得: 教科書水準の通説にもとづく記述で、所蔵機関・公的機関の公開ページは未参照（画像が無く ColBase 等に該当ページを特定できていない項目）"
     ],
     "examTags": [
       "frequent"
@@ -1147,7 +1156,8 @@
     "examNote": "「新古今和歌集＝後鳥羽上皇の命＝藤原定家」。古今和歌集（国風文化・紀貫之）との取り違えが定番。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
+      "追検証URL未取得: 教科書水準の通説にもとづく記述で、所蔵機関・公的機関の公開ページは未参照（画像が無く ColBase 等に該当ページを特定できていない項目）"
     ],
     "examTags": [
       "frequent"
@@ -1198,7 +1208,8 @@
     "examNote": "「平家物語＝軍記物語＝琵琶法師の平曲」。院政期の将門記・陸奥話記（漢文体の初期軍記）との時代の違いに注意。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
+      "追検証URL未取得: 教科書水準の通説にもとづく記述で、所蔵機関・公的機関の公開ページは未参照（画像が無く ColBase 等に該当ページを特定できていない項目）"
     ],
     "examTags": [
       "frequent"
@@ -1249,7 +1260,8 @@
     "examNote": "「吾妻鏡＝鎌倉幕府の歴史書＝編年体」。大鏡（紀伝体・歴史物語）との形式の違いで問われる。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
+      "追検証URL未取得: 教科書水準の通説にもとづく記述で、所蔵機関・公的機関の公開ページは未参照（画像が無く ColBase 等に該当ページを特定できていない項目）"
     ],
     "examTags": [],
     "status": "draft"
@@ -1298,7 +1310,8 @@
     "examNote": "「律宗＝叡尊・忍性＝北山十八間戸」。鎌倉新仏教の6人（法然・親鸞・一遍・日蓮・栄西・道元）と旧仏教側の改革者を分けて覚える。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
+      "追検証URL未取得: 教科書水準の通説にもとづく記述で、所蔵機関・公的機関の公開ページは未参照（画像が無く ColBase 等に該当ページを特定できていない項目）"
     ],
     "examTags": [],
     "status": "draft"
@@ -1347,7 +1360,8 @@
     "examNote": "「伊勢神道＝度会家行（鎌倉）」「吉田神道＝吉田兼倶（室町）」の対応が頻出。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
+      "追検証URL未取得: 教科書水準の通説にもとづく記述で、所蔵機関・公的機関の公開ページは未参照（画像が無く ColBase 等に該当ページを特定できていない項目）"
     ],
     "examTags": [],
     "status": "draft"

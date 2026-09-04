@@ -3,11 +3,23 @@
     "id": "shakoki-dogu",
     "orderIndex": 20,
     "pairs": [
-      { "left": "土偶", "right": "縄文時代の呪術（豊穣・安産の祈り）", "kind": "作品×用途" },
-      { "left": "遮光器土偶", "right": "青森県亀ヶ岡遺跡", "kind": "作品×出土地・所在地" },
-      { "left": "土偶", "right": "土製", "kind": "作品×技法" }
+      {
+        "left": "土偶",
+        "right": "縄文時代の呪術（豊穣・安産の祈り）",
+        "kind": "作品×用途"
+      },
+      {
+        "left": "遮光器土偶",
+        "right": "青森県亀ヶ岡遺跡",
+        "kind": "作品×出土地・所在地"
+      },
+      {
+        "left": "土偶",
+        "right": "土製",
+        "kind": "作品×技法"
+      }
     ],
-    "artist": null,
+    "artist": "不明",
     "patron": null,
     "style": "土偶（縄文晩期）",
     "religion": "呪術・信仰（縄文時代の精霊崇拝）",
@@ -27,16 +39,20 @@
       },
       {
         "slot": "other",
-        "text": "目がゴーグル（遮光器）のような形で表される"
+        "text": "東北地方の縄文晩期の文化（亀ヶ岡文化）を代表する遺物である"
       },
       {
         "slot": "other",
-        "text": "女性を表すとされる呪術的な土製の人形である",
+        "text": "豊穣や安産を祈る呪術に用いられたと考えられている",
         "shared": []
       },
       {
-        "slot": "other",
-        "text": "片脚を欠いた状態で発見された"
+        "slot": "technique",
+        "text": "土を焼いてつくられている",
+        "shared": [
+          "kaen-doki",
+          "keiko-bujin-haniwa"
+        ]
       },
       {
         "slot": "category",
@@ -95,7 +111,8 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）原始文化の項",
-      "東京国立博物館展示"
+      "東京国立博物館展示",
+      "画像出典ページ（Wikimedia Commons、亀ヶ岡遺跡出土・東京国立博物館展示）: https://commons.wikimedia.org/wiki/File:%E4%BA%80%E3%83%B6%E5%B2%A1%E9%81%BA%E8%B7%A1%E5%87%BA%E5%9C%9F_%E9%81%AE%E5%85%89%E5%99%A8%E5%9C%9F%E5%81%B6.JPG"
     ],
     "examTags": [
       "frequent"
@@ -106,11 +123,23 @@
     "id": "kaen-doki",
     "orderIndex": 10,
     "pairs": [
-      { "left": "火焔型土器", "right": "新潟県笹山遺跡（信濃川流域）", "kind": "作品×出土地・所在地" },
-      { "left": "縄文土器", "right": "煮炊き・貯蔵（深鉢形）", "kind": "作品×用途" },
-      { "left": "火焔型土器", "right": "縄文時代中期", "kind": "作品×時代" }
+      {
+        "left": "火焔型土器",
+        "right": "新潟県笹山遺跡（信濃川流域）",
+        "kind": "作品×出土地・所在地"
+      },
+      {
+        "left": "縄文土器",
+        "right": "煮炊き・貯蔵（深鉢形）",
+        "kind": "作品×用途"
+      },
+      {
+        "left": "火焔型土器",
+        "right": "縄文時代中期",
+        "kind": "作品×時代"
+      }
     ],
-    "artist": null,
+    "artist": "不明",
     "patron": null,
     "style": "縄文土器（火焔型）",
     "religion": null,
@@ -130,15 +159,11 @@
       },
       {
         "slot": "other",
-        "text": "縁に燃え上がる炎のような大きな突起がある"
-      },
-      {
-        "slot": "category",
-        "text": "深鉢形の土器である"
+        "text": "信濃川の流域を中心につくられた"
       },
       {
         "slot": "other",
-        "text": "実用（煮炊き）に使われたと考えられている"
+        "text": "煮炊きなどの実用に使われたと考えられている"
       },
       {
         "slot": "category",
@@ -167,8 +192,8 @@
         "verifiedFalse": true
       },
       {
-        "text": "簡素で装飾のない実用本位の土器である",
-        "why": "実際は縁に燃え上がる炎のような大きな突起を持つ装飾性の高い土器。様式（装飾性）の反転",
+        "text": "瀬戸内海の沿岸を中心につくられた",
+        "why": "信濃川の流域（新潟県）を中心につくられた。分布地域ずらし",
         "verifiedFalse": true
       }
     ],
@@ -197,7 +222,8 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）原始文化の項",
-      "十日町市博物館展示"
+      "十日町市博物館展示",
+      "画像出典ページ（Wikimedia Commons、笹山遺跡出土・十日町市博物館展示）: https://commons.wikimedia.org/wiki/File:%E7%AC%B9%E5%B1%B1%E9%81%BA%E8%B7%A1%E5%87%BA%E5%9C%9F_%E7%81%AB%E7%84%94%E5%9E%8B%E5%9C%9F%E5%99%A8_(%E6%B7%B1%E9%89%A2%E5%BD%A2)_(%E5%9B%BD%E5%AE%9D%E6%8C%87%E5%AE%9A%E7%95%AA%E5%8F%B71).JPG"
     ],
     "examTags": [
       "frequent"
@@ -208,11 +234,23 @@
     "id": "keiko-bujin-haniwa",
     "orderIndex": 50,
     "pairs": [
-      { "left": "埴輪", "right": "古墳の墳丘に並べる", "kind": "作品×用途" },
-      { "left": "挂甲の武人", "right": "群馬県太田市", "kind": "作品×出土地・所在地" },
-      { "left": "形象埴輪", "right": "人物・動物・家をかたどる", "kind": "語句×語句" }
+      {
+        "left": "埴輪",
+        "right": "古墳の墳丘に並べる",
+        "kind": "作品×用途"
+      },
+      {
+        "left": "挂甲の武人",
+        "right": "群馬県太田市",
+        "kind": "作品×出土地・所在地"
+      },
+      {
+        "left": "形象埴輪",
+        "right": "人物・動物・家をかたどる",
+        "kind": "語句×語句"
+      }
     ],
-    "artist": null,
+    "artist": "不明",
     "patron": null,
     "style": "形象埴輪（人物埴輪）",
     "religion": null,
@@ -232,15 +270,19 @@
       },
       {
         "slot": "other",
-        "text": "挂甲（小札を綴った甲冑）を身につけた武人を表す"
-      },
-      {
-        "slot": "category",
-        "text": "人物埴輪（形象埴輪）である"
+        "text": "古墳の墳丘の上や周囲に並べられた土製品である"
       },
       {
         "slot": "other",
-        "text": "衝角付冑をかぶり、大刀・弓矢を持つ姿である"
+        "text": "6世紀の東国の武人の武装を知る資料とされる"
+      },
+      {
+        "slot": "technique",
+        "text": "土を焼いてつくられている",
+        "shared": [
+          "shakoki-dogu",
+          "kaen-doki"
+        ]
       },
       {
         "slot": "category",
@@ -249,8 +291,8 @@
     ],
     "falseStatements": [
       {
-        "text": "円筒埴輪である",
-        "why": "人物を表した形象埴輪（人物埴輪）。円筒埴輪との種別ずらし",
+        "text": "鉄製で、銘文が金象嵌で表されている",
+        "why": "土を焼いてつくった埴輪で銘文はない。稲荷山古墳出土鉄剣との材質・内容ずらし",
         "verifiedFalse": true
       },
       {
@@ -264,8 +306,8 @@
         "verifiedFalse": true
       },
       {
-        "text": "女性の巫女を表す",
-        "why": "甲冑・武具を身につけた男性の武人を表す。内容ずらし",
+        "text": "古墳の埋葬施設に副葬品として納められた",
+        "why": "埴輪は墳丘の上や周囲に並べられた。石室内に納める副葬品との、置かれた場所のずらし",
         "verifiedFalse": true
       },
       {
@@ -299,7 +341,8 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）原始文化の項",
-      "東京国立博物館展示"
+      "東京国立博物館展示",
+      "画像出典ページ（Wikimedia Commons、群馬県太田市飯塚町出土・東京国立博物館蔵 J-36697）: https://commons.wikimedia.org/wiki/File:%E5%A4%AA%E7%94%B0%E5%B8%82%E9%A3%AF%E5%A1%9A%E7%94%BA%E5%87%BA%E5%9C%9F_%E5%9F%B4%E8%BC%AA_%E6%8C%82%E7%94%B2%E3%81%AE%E6%AD%A6%E4%BA%BA.JPG"
     ],
     "examTags": [
       "frequent"
@@ -310,11 +353,23 @@
     "id": "kesadasuki-dotaku",
     "orderIndex": 30,
     "pairs": [
-      { "left": "銅鐸", "right": "弥生時代の農耕祭祀", "kind": "作品×用途" },
-      { "left": "銅鐸", "right": "青銅製（鋳造）", "kind": "作品×技法" },
-      { "left": "袈裟襷文銅鐸", "right": "広島県黒川遺跡", "kind": "作品×出土地・所在地" }
+      {
+        "left": "銅鐸",
+        "right": "弥生時代の農耕祭祀",
+        "kind": "作品×用途"
+      },
+      {
+        "left": "銅鐸",
+        "right": "青銅製（鋳造）",
+        "kind": "作品×技法"
+      },
+      {
+        "left": "袈裟襷文銅鐸",
+        "right": "広島県黒川遺跡",
+        "kind": "作品×出土地・所在地"
+      }
     ],
-    "artist": null,
+    "artist": "不明",
     "patron": null,
     "style": "銅鐸（袈裟襷文）",
     "religion": "農耕祭祀",
@@ -330,7 +385,7 @@
       },
       {
         "slot": "other",
-        "text": "袈裟や襷のような文様（袈裟襷文）で表面が区画される"
+        "text": "地中に埋められた状態で見つかることが多い"
       },
       {
         "slot": "category",
@@ -398,7 +453,7 @@
     "sources": [
       "高校教科書（山川『詳説日本史』）原始文化の項",
       "広島県立歴史民俗資料館展示",
-      "Wikimedia Commons（画像ファイルの記載情報。撮影者による作品情報。黒川遺跡出土・広島県立歴史民俗資料館展示）"
+      "画像出典ページ（Wikimedia Commons、黒川遺跡出土・広島県立歴史民俗資料館展示）: https://commons.wikimedia.org/wiki/File:%E9%BB%92%E5%B7%9D%E9%81%BA%E8%B7%A1%E5%87%BA%E5%9C%9F_%E8%A2%88%E8%A3%9F%E8%A5%B7%E6%96%87%E9%8A%85%E9%90%B8.JPG"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -407,8 +462,16 @@
     "id": "zenpokoenfun",
     "orderIndex": 40,
     "pairs": [
-      { "left": "前方後円墳", "right": "大和政権の首長の墓", "kind": "語句×語句" },
-      { "left": "大仙陵古墳（仁徳天皇陵）", "right": "大阪府堺市", "kind": "作品×出土地・所在地" }
+      {
+        "left": "前方後円墳",
+        "right": "大和政権の首長の墓",
+        "kind": "語句×語句"
+      },
+      {
+        "left": "大仙陵古墳（仁徳天皇陵）",
+        "right": "大阪府堺市",
+        "kind": "作品×出土地・所在地"
+      }
     ],
     "kind": "concept",
     "artist": null,
@@ -465,7 +528,8 @@
     "examNote": "単独出題より、埴輪・古墳文化のリード文や誤文の素材として使う（画像なし項目）。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）原始文化の項"
+      "高校教科書（山川『詳説日本史』）原始文化の項",
+      "追検証用の公開URLなし（教科書水準の通説として記述。所蔵機関・一次資料の該当ページは未参照）"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -474,8 +538,16 @@
     "id": "kaizuka-jomon",
     "orderIndex": 5,
     "pairs": [
-      { "left": "大森貝塚", "right": "モース", "kind": "作品×人物" },
-      { "left": "貝塚", "right": "縄文時代の生活跡", "kind": "語句×語句" }
+      {
+        "left": "大森貝塚",
+        "right": "モース",
+        "kind": "作品×人物"
+      },
+      {
+        "left": "貝塚",
+        "right": "縄文時代の生活跡",
+        "kind": "語句×語句"
+      }
     ],
     "kind": "concept",
     "artist": null,
@@ -529,7 +601,8 @@
     "examNote": "単独出題より、縄文文化のリード文や誤文の素材として使う（画像なし項目）。モースと大森貝塚の組み合わせで問われやすい。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）原始文化の項"
+      "高校教科書（山川『詳説日本史』）原始文化の項",
+      "追検証用の公開URLなし（教科書水準の通説として記述。所蔵機関・一次資料の該当ページは未参照）"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -539,8 +612,16 @@
     "kind": "concept",
     "orderIndex": 22,
     "pairs": [
-      { "left": "抜歯", "right": "縄文時代の通過儀礼", "kind": "語句×語句" },
-      { "left": "屈葬", "right": "縄文時代の埋葬", "kind": "語句×語句" }
+      {
+        "left": "抜歯",
+        "right": "縄文時代の通過儀礼",
+        "kind": "語句×語句"
+      },
+      {
+        "left": "屈葬",
+        "right": "縄文時代の埋葬",
+        "kind": "語句×語句"
+      }
     ],
     "artist": null,
     "patron": null,
@@ -551,13 +632,31 @@
     "holder": null,
     "subject": null,
     "facts": [
-      { "slot": "other", "text": "成人などの通過儀礼として歯を抜く風習である" },
-      { "slot": "other", "text": "縄文時代の人骨から確認される", "shared": [] },
-      { "slot": "other", "text": "死者を手足を折り曲げて葬る屈葬もあわせて行われた" }
+      {
+        "slot": "other",
+        "text": "成人などの通過儀礼として歯を抜く風習である"
+      },
+      {
+        "slot": "other",
+        "text": "縄文時代の人骨から確認される",
+        "shared": []
+      },
+      {
+        "slot": "other",
+        "text": "死者を手足を折り曲げて葬る屈葬もあわせて行われた"
+      }
     ],
     "falseStatements": [
-      { "text": "弥生時代に大陸から伝わった風習である", "why": "抜歯は縄文時代の習俗。時代ずらし", "verifiedFalse": true },
-      { "text": "古墳の副葬品の一種である", "why": "抜歯は人骨に残る風習であり副葬品ではない。内容ずらし", "verifiedFalse": true }
+      {
+        "text": "弥生時代に大陸から伝わった風習である",
+        "why": "抜歯は縄文時代の習俗。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "古墳の副葬品の一種である",
+        "why": "抜歯は人骨に残る風習であり副葬品ではない。内容ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "抜歯・屈葬",
     "reading": "ばっし・くっそう",
@@ -576,7 +675,8 @@
     "examNote": "単独出題より、縄文文化のリード文・誤文の素材として使う（画像なし項目）。「土偶・抜歯・屈葬＝縄文」でまとめて覚える。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）原始文化の項"
+      "高校教科書（山川『詳説日本史』）原始文化の項",
+      "追検証用の公開URLなし（教科書水準の通説として記述。所蔵機関・一次資料の該当ページは未参照）"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -586,8 +686,16 @@
     "kind": "concept",
     "orderIndex": 28,
     "pairs": [
-      { "left": "石包丁", "right": "穂首刈り", "kind": "作品×用途" },
-      { "left": "石包丁", "right": "磨製石器", "kind": "作品×技法" }
+      {
+        "left": "石包丁",
+        "right": "穂首刈り",
+        "kind": "作品×用途"
+      },
+      {
+        "left": "石包丁",
+        "right": "磨製石器",
+        "kind": "作品×技法"
+      }
     ],
     "artist": null,
     "patron": null,
@@ -598,13 +706,31 @@
     "holder": null,
     "subject": null,
     "facts": [
-      { "slot": "other", "text": "稲の穂を摘み取る穂首刈りに用いた" },
-      { "slot": "other", "text": "磨いてつくった石器（磨製石器）である" },
-      { "slot": "era", "text": "弥生時代の農具である", "shared": [] }
+      {
+        "slot": "other",
+        "text": "稲の穂を摘み取る穂首刈りに用いた"
+      },
+      {
+        "slot": "other",
+        "text": "磨いてつくった石器（磨製石器）である"
+      },
+      {
+        "slot": "era",
+        "text": "弥生時代の農具である",
+        "shared": []
+      }
     ],
     "falseStatements": [
-      { "text": "縄文時代の狩猟具である", "why": "弥生時代の農具（収穫具）。時代・用途ずらし", "verifiedFalse": true },
-      { "text": "青銅でつくられた祭器である", "why": "磨製石器の農具。銅鐸など青銅祭器との材質・用途ずらし", "verifiedFalse": true }
+      {
+        "text": "縄文時代の狩猟具である",
+        "why": "弥生時代の農具（収穫具）。時代・用途ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "青銅でつくられた祭器である",
+        "why": "磨製石器の農具。銅鐸など青銅祭器との材質・用途ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "石包丁",
     "reading": "いしぼうちょう",
@@ -623,18 +749,34 @@
     "examNote": "単独出題より、弥生文化のリード文・誤文の素材として使う（画像なし項目）。「石包丁＝穂首刈り」の対応が頻出。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）原始文化の項"
+      "高校教科書（山川『詳説日本史』）原始文化の項",
+      "追検証用の公開URLなし（教科書水準の通説として記述。所蔵機関・一次資料の該当ページは未参照）"
     ],
     "examTags": [],
-    "status": "reviewed"
+    "status": "reviewed",
+    "image": {
+      "file": "ishibocho.jpg",
+      "credit": "撮影: KKPCW, 2020年2月2日。名古屋市見晴台考古資料館 展示",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stone_knife_of_Miharashidai_ruins.jpg",
+      "sourceName": "Wikimedia Commons"
+    }
   },
   {
     "id": "kangou-shuraku",
     "kind": "concept",
     "orderIndex": 32,
     "pairs": [
-      { "left": "環濠集落", "right": "吉野ヶ里遺跡（佐賀県）", "kind": "作品×出土地・所在地" },
-      { "left": "高地性集落", "right": "戦いへの備え", "kind": "語句×語句" }
+      {
+        "left": "環濠集落",
+        "right": "吉野ヶ里遺跡（佐賀県）",
+        "kind": "作品×出土地・所在地"
+      },
+      {
+        "left": "高地性集落",
+        "right": "戦いへの備え",
+        "kind": "語句×語句"
+      }
     ],
     "artist": null,
     "patron": null,
@@ -645,13 +787,30 @@
     "holder": null,
     "subject": null,
     "facts": [
-      { "slot": "other", "text": "周囲に濠をめぐらせた弥生時代の集落である" },
-      { "slot": "other", "text": "佐賀県の吉野ヶ里遺跡が代表例として知られる" },
-      { "slot": "other", "text": "むらどうしの争いがあったことを示すと考えられている" }
+      {
+        "slot": "other",
+        "text": "周囲に濠をめぐらせた弥生時代の集落である"
+      },
+      {
+        "slot": "other",
+        "text": "佐賀県の吉野ヶ里遺跡が代表例として知られる"
+      },
+      {
+        "slot": "other",
+        "text": "むらどうしの争いがあったことを示すと考えられている"
+      }
     ],
     "falseStatements": [
-      { "text": "縄文時代を代表する集落の形である", "why": "環濠集落は弥生時代の集落。縄文の集落（三内丸山遺跡など）との時代ずらし", "verifiedFalse": true },
-      { "text": "古墳時代の豪族の居館を指す", "why": "弥生時代の濠をめぐらせた集落を指す。時代・内容ずらし", "verifiedFalse": true }
+      {
+        "text": "縄文時代を代表する集落の形である",
+        "why": "環濠集落は弥生時代の集落。縄文の集落（三内丸山遺跡など）との時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "古墳時代の豪族の居館を指す",
+        "why": "弥生時代の濠をめぐらせた集落を指す。時代・内容ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "環濠集落",
     "reading": "かんごうしゅうらく",
@@ -670,7 +829,8 @@
     "examNote": "単独出題より、弥生文化のリード文・誤文の素材として使う（画像なし項目）。「環濠集落＝吉野ヶ里」の対応が頻出。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）原始文化の項"
+      "高校教科書（山川『詳説日本史』）原始文化の項",
+      "追検証用の公開URLなし（教科書水準の通説として記述。所蔵機関・一次資料の該当ページは未参照）"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -680,9 +840,21 @@
     "kind": "concept",
     "orderIndex": 34,
     "pairs": [
-      { "left": "甕棺墓", "right": "北部九州", "kind": "作品×出土地・所在地" },
-      { "left": "支石墓", "right": "朝鮮半島の影響", "kind": "語句×語句" },
-      { "left": "支石墓", "right": "北部九州", "kind": "作品×出土地・所在地" }
+      {
+        "left": "甕棺墓",
+        "right": "北部九州",
+        "kind": "作品×出土地・所在地"
+      },
+      {
+        "left": "支石墓",
+        "right": "朝鮮半島の影響",
+        "kind": "語句×語句"
+      },
+      {
+        "left": "支石墓",
+        "right": "北部九州",
+        "kind": "作品×出土地・所在地"
+      }
     ],
     "artist": null,
     "patron": null,
@@ -693,13 +865,30 @@
     "holder": null,
     "subject": null,
     "facts": [
-      { "slot": "other", "text": "大型の土器を棺として用いる弥生時代の墓である" },
-      { "slot": "other", "text": "北部九州を中心に分布する" },
-      { "slot": "other", "text": "副葬品の多い墓があり、身分の差が生まれたことを示す" }
+      {
+        "slot": "other",
+        "text": "大型の土器を棺として用いる弥生時代の墓である"
+      },
+      {
+        "slot": "other",
+        "text": "北部九州を中心に分布する"
+      },
+      {
+        "slot": "other",
+        "text": "副葬品の多い墓があり、身分の差が生まれたことを示す"
+      }
     ],
     "falseStatements": [
-      { "text": "縄文時代の埋葬方法である", "why": "甕棺墓は弥生時代の墓。時代ずらし", "verifiedFalse": true },
-      { "text": "近畿地方を中心に分布する", "why": "北部九州を中心に分布する。地域ずらし", "verifiedFalse": true }
+      {
+        "text": "縄文時代の埋葬方法である",
+        "why": "甕棺墓は弥生時代の墓。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "近畿地方を中心に分布する",
+        "why": "北部九州を中心に分布する。地域ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "甕棺墓",
     "reading": "かめかんぼ",
@@ -718,18 +907,34 @@
     "examNote": "単独出題より、弥生文化のリード文・誤文の素材として使う（画像なし項目）。「甕棺墓＝北部九州」の対応が頻出。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）原始文化の項"
+      "高校教科書（山川『詳説日本史』）原始文化の項",
+      "追検証用の公開URLなし（教科書水準の通説として記述。所蔵機関・一次資料の該当ページは未参照）"
     ],
     "examTags": [],
-    "status": "reviewed"
+    "status": "reviewed",
+    "image": {
+      "file": "kamekan-bo.jpg",
+      "credit": "撮影: PHGCOM, 2007年7月2日。Musée Guimet（パリ）所蔵",
+      "license": "CC BY-SA 3.0 / GFDL",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:GiantYayoiFuneraryJar.jpg",
+      "sourceName": "Wikimedia Commons"
+    }
   },
   {
     "id": "fukusohin-henka",
     "kind": "concept",
     "orderIndex": 45,
     "pairs": [
-      { "left": "古墳前期の副葬品", "right": "銅鏡・玉・腕輪形石製品", "kind": "語句×語句" },
-      { "left": "古墳中・後期の副葬品", "right": "鉄製の武器・武具・馬具", "kind": "語句×語句" }
+      {
+        "left": "古墳前期の副葬品",
+        "right": "銅鏡・玉・腕輪形石製品",
+        "kind": "語句×語句"
+      },
+      {
+        "left": "古墳中・後期の副葬品",
+        "right": "鉄製の武器・武具・馬具",
+        "kind": "語句×語句"
+      }
     ],
     "artist": null,
     "patron": null,
@@ -740,13 +945,34 @@
     "holder": null,
     "subject": null,
     "facts": [
-      { "slot": "other", "text": "古墳前期には銅鏡・玉・腕輪形石製品など呪術的な品が多い" },
-      { "slot": "other", "text": "古墳中期以降は鉄製の武器・武具や馬具が増える" },
-      { "slot": "era", "text": "古墳時代の遺物である", "shared": ["keiko-bujin-haniwa", "zenpokoenfun"] }
+      {
+        "slot": "other",
+        "text": "古墳前期には銅鏡・玉・腕輪形石製品など呪術的な品が多い"
+      },
+      {
+        "slot": "other",
+        "text": "古墳中期以降は鉄製の武器・武具や馬具が増える"
+      },
+      {
+        "slot": "era",
+        "text": "古墳時代の遺物である",
+        "shared": [
+          "keiko-bujin-haniwa",
+          "zenpokoenfun"
+        ]
+      }
     ],
     "falseStatements": [
-      { "text": "前期の副葬品は馬具が中心である", "why": "馬具が増えるのは中期以降。前期は銅鏡・玉など呪術的な品が中心。時期ずらし", "verifiedFalse": true },
-      { "text": "副葬品はすべて墳丘の上に並べられた", "why": "墳丘に並べられたのは埴輪。副葬品は石室内に納められた。内容ずらし", "verifiedFalse": true }
+      {
+        "text": "前期の副葬品は馬具が中心である",
+        "why": "馬具が増えるのは中期以降。前期は銅鏡・玉など呪術的な品が中心。時期ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "副葬品はすべて墳丘の上に並べられた",
+        "why": "墳丘に並べられたのは埴輪。副葬品は石室内に納められた。内容ずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "古墳の副葬品の変化",
     "reading": "こふんのふくそうひんのへんか",
@@ -765,7 +991,8 @@
     "examNote": "単独出題より、古墳文化のリード文・誤文の素材として使う（画像なし項目）。「副葬品＝石室の中」「埴輪＝墳丘の上」の区別に注意。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）原始文化の項"
+      "高校教科書（山川『詳説日本史』）原始文化の項",
+      "追検証用の公開URLなし（教科書水準の通説として記述。所蔵機関・一次資料の該当ページは未参照）"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -774,11 +1001,23 @@
     "id": "inariyama-tekken",
     "orderIndex": 55,
     "pairs": [
-      { "left": "稲荷山古墳出土鉄剣", "right": "埼玉県", "kind": "作品×出土地・所在地" },
-      { "left": "江田船山古墳出土鉄刀", "right": "熊本県", "kind": "作品×出土地・所在地" },
-      { "left": "獲加多支鹵大王", "right": "ワカタケル大王（雄略天皇とされる）", "kind": "語句×語句" }
+      {
+        "left": "稲荷山古墳出土鉄剣",
+        "right": "埼玉県",
+        "kind": "作品×出土地・所在地"
+      },
+      {
+        "left": "江田船山古墳出土鉄刀",
+        "right": "熊本県",
+        "kind": "作品×出土地・所在地"
+      },
+      {
+        "left": "獲加多支鹵大王",
+        "right": "ワカタケル大王（雄略天皇とされる）",
+        "kind": "語句×語句"
+      }
     ],
-    "artist": null,
+    "artist": "不明",
     "patron": null,
     "style": "銘文をもつ鉄剣（金象嵌）",
     "religion": null,
@@ -796,19 +1035,57 @@
           "fukusohin-henka"
         ]
       },
-      { "slot": "location", "text": "埼玉県の稲荷山古墳で出土した" },
-      { "slot": "technique", "text": "鉄製で、銘文が金象嵌で表されている" },
-      { "slot": "other", "text": "銘文に「獲加多支鹵大王」（ワカタケル大王）の名がみえる" },
-      { "slot": "other", "text": "熊本県の江田船山古墳出土の鉄刀にも同じ大王の名が読める" },
-      { "slot": "other", "text": "古墳の埋葬施設に副葬品として納められた" },
-      { "slot": "category", "text": "国宝に指定されている" }
+      {
+        "slot": "location",
+        "text": "埼玉県の稲荷山古墳で出土した"
+      },
+      {
+        "slot": "technique",
+        "text": "鉄製で、銘文が金象嵌で表されている"
+      },
+      {
+        "slot": "other",
+        "text": "銘文に「獲加多支鹵大王」（ワカタケル大王）の名がみえる"
+      },
+      {
+        "slot": "other",
+        "text": "熊本県の江田船山古墳出土の鉄刀にも同じ大王の名が読める"
+      },
+      {
+        "slot": "other",
+        "text": "古墳の埋葬施設に副葬品として納められた"
+      },
+      {
+        "slot": "category",
+        "text": "国宝に指定されている"
+      }
     ],
     "falseStatements": [
-      { "text": "熊本県の江田船山古墳から出土した", "why": "埼玉県の稲荷山古墳から出土した鉄剣。江田船山古墳（熊本県）から出土したのは鉄刀で、所在の入れ替えずらし", "verifiedFalse": true },
-      { "text": "弥生時代の遺物である", "why": "古墳時代（5世紀後半）の遺物。時代ずらし", "verifiedFalse": true },
-      { "text": "青銅製の祭器である", "why": "鉄製の剣（武器）で、古墳の埋葬施設に納められた副葬品。銅鐸など青銅祭器との材質・用途ずらし", "verifiedFalse": true },
-      { "text": "銘文をもたない無文の剣である", "why": "表裏に金象嵌の銘文があり、そこに大王の名が読める。史実ずらし", "verifiedFalse": true },
-      { "text": "墳丘の上や周囲に並べられた埴輪の一種である", "why": "古墳の埋葬施設に納められた副葬品。墳丘に並べられたのは埴輪で、置かれた場所・種別のずらし", "verifiedFalse": true }
+      {
+        "text": "熊本県の江田船山古墳から出土した",
+        "why": "埼玉県の稲荷山古墳から出土した鉄剣。江田船山古墳（熊本県）から出土したのは鉄刀で、所在の入れ替えずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "弥生時代の遺物である",
+        "why": "古墳時代（5世紀後半）の遺物。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "青銅製の祭器である",
+        "why": "鉄製の剣（武器）で、古墳の埋葬施設に納められた副葬品。銅鐸など青銅祭器との材質・用途ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "銘文をもたない無文の剣である",
+        "why": "表裏に金象嵌の銘文があり、そこに大王の名が読める。史実ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "墳丘の上や周囲に並べられた埴輪の一種である",
+        "why": "古墳の埋葬施設に納められた副葬品。墳丘に並べられたのは埴輪で、置かれた場所・種別のずらし",
+        "verifiedFalse": true
+      }
     ],
     "title": "稲荷山古墳出土鉄剣",
     "reading": "いなりやまこふんしゅつどてっけん",
@@ -845,7 +1122,7 @@
     "sources": [
       "高校教科書（山川『詳説日本史』）原始文化の項",
       "埼玉県立さきたま史跡の博物館展示",
-      "Wikimedia Commons（画像ファイルの記載情報。撮影者による作品情報。稲荷山古墳出土鉄剣・同館展示）"
+      "画像出典ページ（Wikimedia Commons、稲荷山古墳出土・埼玉県立さきたま史跡の博物館展示）: https://commons.wikimedia.org/wiki/File:Inariyama_sword.JPG"
     ],
     "examTags": [
       "frequent"

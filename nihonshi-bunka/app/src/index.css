@@ -19,6 +19,9 @@
   --radius-button: 12px;
   --radius-sheet: 20px;
 
+  /* M2-44: タブバーの高さ（padding-bottom の確保に使う。実際の描画高さの目安値）。 */
+  --tabbar-height: 60px;
+
   --font-ui: system-ui, -apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
   --font-caption: 'Shippori Mincho B1', 'Hiragino Mincho ProN', serif;
 
