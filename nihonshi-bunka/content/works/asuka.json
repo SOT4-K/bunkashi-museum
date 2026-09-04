@@ -692,5 +692,290 @@
     ],
     "examTags": [],
     "status": "reviewed"
+  },
+  {
+    "id": "shotoku-taishi",
+    "kind": "person",
+    "orderIndex": 5,
+    "pairs": [
+      { "left": "厩戸王（聖徳太子）", "right": "三経義疏", "kind": "person-text" },
+      { "left": "厩戸王（聖徳太子）", "right": "四天王寺・法隆寺（斑鳩寺）", "kind": "person-temple" },
+      { "left": "蘇我馬子", "right": "飛鳥寺（法興寺）", "kind": "person-temple" }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "仏教",
+    "periodLabel": "飛鳥時代（6世紀末〜7世紀前半）",
+    "eraNote": "推古天皇のもとで蘇我馬子とともに政治にあたった厩戸王（聖徳太子）は、仏教を厚く信仰して四天王寺や斑鳩の法隆寺を建てたと伝えられ、仏典の注釈書『三経義疏』を著したとされる。豪族が氏寺を営む動きとあわせて、日本最初の仏教文化の担い手となった。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      { "slot": "other", "text": "推古天皇のもとで蘇我馬子とともに政治にあたった" },
+      { "slot": "other", "text": "仏教を厚く信仰し、四天王寺・法隆寺を建てたと伝えられる" },
+      { "slot": "other", "text": "『三経義疏』を著したとされる" }
+    ],
+    "falseStatements": [
+      { "text": "飛鳥寺（法興寺）を建てた人物である", "why": "飛鳥寺（法興寺）を建てたのは蘇我馬子。人物ずらし", "verifiedFalse": true },
+      { "text": "奈良時代に東大寺の大仏造立を命じた", "why": "大仏造立を命じたのは聖武天皇（天平文化）。人物・時代ずらし", "verifiedFalse": true }
+    ],
+    "title": "厩戸王（聖徳太子）",
+    "reading": "うまやとおう（しょうとくたいし）",
+    "era": "asuka",
+    "category": "person",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "推古朝の政治と仏教興隆の中心人物",
+      "四天王寺・法隆寺（斑鳩寺）を建てたと伝える",
+      "『三経義疏』を著したとされる",
+      "蘇我馬子＝飛鳥寺（法興寺）と区別する"
+    ],
+    "explanation": "推古天皇のもとで蘇我馬子とともに政治にあたった人物。仏教を厚く信仰し、四天王寺や斑鳩の法隆寺を建てたと伝えられる。法華経・維摩経・勝鬘経の注釈書『三経義疏』を著したとされ、日本最初の仏教文化の中心にあった。",
+    "examNote": "単独出題より、飛鳥文化のリード文・誤文（寺院の建立者の入替）の素材として使う（画像なし項目）。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）飛鳥文化の項"
+    ],
+    "examTags": [],
+    "status": "reviewed"
+  },
+  {
+    "id": "sangyo-gisho",
+    "kind": "text",
+    "orderIndex": 8,
+    "pairs": [
+      { "left": "三経義疏", "right": "厩戸王（聖徳太子）", "kind": "text-author" },
+      { "left": "三経義疏", "right": "法華経・維摩経・勝鬘経の注釈", "kind": "term-pair" }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "仏教",
+    "periodLabel": "飛鳥時代（7世紀前半）",
+    "eraNote": "『三経義疏』は、法華経・維摩経・勝鬘経という三つの経典の注釈書で、厩戸王（聖徳太子）の著作と伝えられる。仏教が単なる新来の信仰ではなく、教学として受けとめられていたことを示す飛鳥文化の代表的な書物である。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      { "slot": "other", "text": "法華経・維摩経・勝鬘経の三つの経典の注釈書である" },
+      { "slot": "other", "text": "厩戸王（聖徳太子）の著作と伝えられる" }
+    ],
+    "falseStatements": [
+      { "text": "最澄が著した天台宗の教義書である", "why": "厩戸王（聖徳太子）の著作と伝えられる飛鳥時代の書。最澄は『顕戒論』などで時代・人物ずらし", "verifiedFalse": true },
+      { "text": "日本最古の勅撰漢詩集である", "why": "経典の注釈書。勅撰漢詩集は『凌雲集』など（弘仁・貞観文化）で内容・時代ずらし", "verifiedFalse": true }
+    ],
+    "title": "三経義疏",
+    "reading": "さんぎょうぎしょ",
+    "era": "asuka",
+    "category": "literature",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "法華経・維摩経・勝鬘経の注釈書",
+      "厩戸王（聖徳太子）の著作と伝えられる",
+      "飛鳥文化の代表的な書物"
+    ],
+    "explanation": "法華経・維摩経・勝鬘経の三つの経典についての注釈書。厩戸王（聖徳太子）が著したと伝えられ、伝来まもない仏教が教学として研究されていたことを示す。飛鳥文化の書物として教科書に必ず挙げられる。",
+    "examNote": "単独出題より、飛鳥文化のリード文・誤文（著者の入替）の素材として使う（画像なし項目）。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）飛鳥文化の項"
+    ],
+    "examTags": [],
+    "status": "reviewed"
+  },
+  {
+    "id": "asukadera-shitennoji",
+    "kind": "concept",
+    "orderIndex": 12,
+    "pairs": [
+      { "left": "飛鳥寺（法興寺）", "right": "蘇我馬子", "kind": "work-person" },
+      { "left": "四天王寺", "right": "厩戸王（聖徳太子）", "kind": "work-person" },
+      { "left": "法隆寺（斑鳩寺）", "right": "厩戸王（聖徳太子）", "kind": "work-person" }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "氏寺・寺院の建立",
+    "religion": "仏教",
+    "periodLabel": "飛鳥時代（6世紀末〜7世紀前半）",
+    "eraNote": "仏教の受容とともに、豪族は古墳に代わって氏寺を建てて権威を示すようになった。蘇我馬子が建てた飛鳥寺（法興寺）は日本最初の本格的寺院とされ、厩戸王（聖徳太子）は四天王寺や斑鳩の法隆寺を建てたと伝えられる。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      { "slot": "other", "text": "飛鳥寺（法興寺）は蘇我馬子が建てた日本最初の本格的寺院とされる" },
+      { "slot": "other", "text": "四天王寺・法隆寺は厩戸王（聖徳太子）が建てたと伝えられる" },
+      { "slot": "other", "text": "豪族は古墳に代わって氏寺を建て、一族の権威を示した" }
+    ],
+    "falseStatements": [
+      { "text": "飛鳥寺は厩戸王（聖徳太子）が建てた", "why": "飛鳥寺（法興寺）は蘇我馬子の建立。建立者の入れ替えずらし", "verifiedFalse": true },
+      { "text": "四天王寺は奈良時代に聖武天皇が建てた", "why": "四天王寺は飛鳥時代に厩戸王が建てたと伝えられる。人物・時代ずらし", "verifiedFalse": true }
+    ],
+    "title": "飛鳥時代の寺院と建立者",
+    "reading": "あすかじだいのじいんとこんりゅうしゃ",
+    "era": "asuka",
+    "category": "other",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "飛鳥寺（法興寺）＝蘇我馬子",
+      "四天王寺＝厩戸王（聖徳太子）",
+      "法隆寺（斑鳩寺）＝厩戸王（聖徳太子）",
+      "古墳に代わる氏寺の造営"
+    ],
+    "explanation": "仏教の受容とともに、豪族は古墳に代わって氏寺を建てるようになった。蘇我馬子が建てた飛鳥寺（法興寺）は日本最初の本格的な伽藍をもつ寺院とされ、厩戸王（聖徳太子）は難波の四天王寺と斑鳩の法隆寺を建てたと伝えられる。",
+    "examNote": "単独出題より、飛鳥文化のリード文・誤文の素材として使う（画像なし項目）。「寺院×建立者」の組合せが最頻出。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）飛鳥文化の項"
+    ],
+    "examTags": [],
+    "status": "reviewed"
+  },
+  {
+    "id": "garan-haichi",
+    "kind": "concept",
+    "orderIndex": 14,
+    "pairs": [
+      { "left": "飛鳥寺式伽藍配置", "right": "塔を三方の金堂が囲む", "kind": "term-pair" },
+      { "left": "四天王寺式伽藍配置", "right": "塔と金堂が南北に一直線に並ぶ", "kind": "term-pair" },
+      { "left": "法隆寺式伽藍配置", "right": "塔と金堂が東西に並ぶ", "kind": "term-pair" },
+      { "left": "若草伽藍跡", "right": "法隆寺再建をめぐる論争", "kind": "term-pair" }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "伽藍配置",
+    "religion": "仏教",
+    "periodLabel": "飛鳥時代（7世紀）",
+    "eraNote": "寺院の主要な建物の並べ方（伽藍配置）は時代とともに変化し、塔を中心とする飛鳥寺式から、塔と金堂を南北に並べる四天王寺式、東西に並べる法隆寺式へと移った。塔よりも金堂が重んじられていく流れを示すものとして扱われる。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      { "slot": "other", "text": "飛鳥寺式は塔を中心に三方を金堂が囲む配置である" },
+      { "slot": "other", "text": "四天王寺式は南から中門・塔・金堂・講堂が一直線に並ぶ" },
+      { "slot": "other", "text": "法隆寺式は塔と金堂が東西に並ぶ" },
+      { "slot": "other", "text": "法隆寺の境内では若草伽藍跡が見つかっている" }
+    ],
+    "falseStatements": [
+      { "text": "四天王寺式は塔と金堂が東西に並ぶ配置である", "why": "東西に並ぶのは法隆寺式。四天王寺式は南北一直線。配置の入れ替えずらし", "verifiedFalse": true },
+      { "text": "伽藍配置は鎌倉時代に大陸から伝わった", "why": "伽藍配置は仏教伝来以来の寺院建築の形式で、飛鳥時代から見られる。時代ずらし", "verifiedFalse": true }
+    ],
+    "title": "伽藍配置（飛鳥寺式・四天王寺式・法隆寺式）",
+    "reading": "がらんはいち",
+    "era": "asuka",
+    "category": "other",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "飛鳥寺式＝塔を三方の金堂が囲む",
+      "四天王寺式＝南北に一直線",
+      "法隆寺式＝塔と金堂が東西に並ぶ",
+      "若草伽藍跡と法隆寺再建論争"
+    ],
+    "explanation": "寺院の中心となる塔・金堂・講堂などの並べ方を伽藍配置という。塔を三方の金堂が囲む飛鳥寺式、中門から塔・金堂・講堂が南北一直線に並ぶ四天王寺式、塔と金堂が東西に並ぶ法隆寺式があり、塔よりも金堂（本尊を安置する堂）が重んじられていく変化を示す。法隆寺の境内では創建時のものとされる若草伽藍跡が見つかっている。",
+    "examNote": "単独出題より、飛鳥文化のリード文・図版問題の素材として使う（画像なし項目）。配置の入れ替えが誤文の定番。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）飛鳥文化の項"
+    ],
+    "examTags": [],
+    "status": "reviewed"
+  },
+  {
+    "id": "hokugi-nancho-yoshiki",
+    "kind": "concept",
+    "orderIndex": 35,
+    "pairs": [
+      { "left": "北魏様式（止利様式）", "right": "法隆寺金堂釈迦三尊像", "kind": "style-work" },
+      { "left": "南朝様式", "right": "法隆寺百済観音像・中宮寺半跏思惟像", "kind": "style-work" }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "北魏様式・南朝様式",
+    "religion": "仏教",
+    "periodLabel": "飛鳥時代（7世紀）",
+    "eraNote": "飛鳥文化の彫刻には二つの様式の系統がある。中国北朝の北魏に由来し、正面性が強く杏仁形の目とアルカイックスマイルをもつ北魏様式（止利様式）と、南朝や朝鮮半島に由来する細身でやわらかな南朝様式である。作品と様式の対応が試験で繰り返し問われる。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      { "slot": "style", "text": "北魏様式（止利様式）は正面性が強く、杏仁形の目とアルカイックスマイルが特徴である" },
+      { "slot": "style", "text": "南朝様式は細身でやわらかな表情をもつ" },
+      { "slot": "other", "text": "北魏様式の代表は鞍作鳥の作とされる像である", "shared": ["horyuji-shaka-sanzon", "tori-busshi"] }
+    ],
+    "falseStatements": [
+      { "text": "南朝様式は正面性が強く杏仁形の目をもつ", "why": "正面性・杏仁形の目は北魏様式（止利様式）の特徴。様式の入れ替えずらし", "verifiedFalse": true },
+      { "text": "北魏様式は寄木造の技法とともに国風文化で完成した", "why": "北魏様式は飛鳥文化の彫刻様式。寄木造・定朝様は国風文化で時代ずらし", "verifiedFalse": true }
+    ],
+    "title": "北魏様式と南朝様式",
+    "reading": "ほくぎようしきとなんちょうようしき",
+    "era": "asuka",
+    "category": "other",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "北魏様式＝正面性が強い・杏仁形の目・アルカイックスマイル",
+      "南朝様式＝細身でやわらかな表情",
+      "様式と作品の対応が頻出",
+      "止利様式＝北魏様式の別名"
+    ],
+    "explanation": "飛鳥文化の彫刻は、中国北朝の北魏に由来する様式と、南朝や朝鮮半島に由来する様式の二系統に分けられる。前者は正面から見ることを強く意識した硬い表情、杏仁形（アーモンド形）の目、アルカイックスマイルが特徴で、鞍作鳥（止利仏師）が確立したことから止利様式とも呼ばれる。後者は細身でやわらかな作風をもつ。",
+    "examNote": "単独出題より、飛鳥文化のリード文・誤文（様式の入替）の素材として使う（画像なし項目）。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）飛鳥文化の項"
+    ],
+    "examTags": [],
+    "status": "reviewed"
+  },
+  {
+    "id": "tenjukoku-shucho",
+    "kind": "concept",
+    "orderIndex": 45,
+    "pairs": [
+      { "left": "天寿国繡帳", "right": "中宮寺", "kind": "work-holder" },
+      { "left": "天寿国繡帳", "right": "刺繡（繡帳）", "kind": "work-technique" }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "刺繡（染織工芸）",
+    "religion": "仏教",
+    "periodLabel": "飛鳥時代（7世紀）",
+    "eraNote": "中宮寺に伝わる天寿国繡帳は、厩戸王（聖徳太子）の死を悼んで妃が作らせたと伝えられる刺繡の遺品で、太子が往生したとされる天寿国のようすを表す。木製の厨子や金銅の仏具とならぶ飛鳥文化の工芸の代表例である。",
+    "holder": "中宮寺",
+    "subject": null,
+    "facts": [
+      { "slot": "other", "text": "中宮寺に伝わる刺繡の遺品である" },
+      { "slot": "other", "text": "厩戸王（聖徳太子）の死を悼んで作られたと伝えられる" },
+      { "slot": "technique", "text": "刺繡による工芸品である" }
+    ],
+    "falseStatements": [
+      { "text": "法隆寺に伝わる宮殿形の厨子である", "why": "中宮寺に伝わる刺繡の遺品。玉虫厨子との内容・所在ずらし", "verifiedFalse": true },
+      { "text": "正倉院に伝わる天平文化の宝物である", "why": "中宮寺に伝わる飛鳥文化の工芸。所在・時代ずらし", "verifiedFalse": true }
+    ],
+    "title": "天寿国繡帳",
+    "reading": "てんじゅこくしゅうちょう",
+    "era": "asuka",
+    "category": "other",
+    "location": "中宮寺（奈良）",
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "飛鳥文化の刺繡工芸",
+      "中宮寺に伝わる",
+      "厩戸王の死を悼んで作られたと伝える",
+      "玉虫厨子とならぶ工芸の代表例"
+    ],
+    "explanation": "中宮寺に伝わる刺繡の遺品。厩戸王（聖徳太子）の死を悼み、その妃が太子の往生した天寿国のようすを刺繡させたと伝えられる。現存するのは断片だが、飛鳥時代の染織工芸と信仰を伝える資料として扱われる。",
+    "examNote": "単独出題より、飛鳥文化のリード文・誤文の素材として使う（画像なし項目）。「玉虫厨子＝法隆寺」「天寿国繡帳＝中宮寺」の所在の対応が頻出。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）飛鳥文化の項"
+    ],
+    "examTags": [],
+    "status": "reviewed"
   }
 ]

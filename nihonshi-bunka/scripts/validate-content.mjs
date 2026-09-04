@@ -264,7 +264,10 @@ function validatePassages({ worksById, hasImageAsset, hasThemeSetAsset, eraIds, 
               errors.push(`${label} / ${underline.key}: workIds "${workId}" は存在しない作品`)
               continue
             }
-            if (hasImageAsset(work)) hasGeneratable = true
+            // M2-16: 画像で出題できる（Q1/Q2/Q9等）か、文字問題の素材にできる（kind:
+            // person/text/concept。Q4/Q10/Q13等）かのどちらかがあれば「生成できる可能性がある」
+            // とみなす（実際に生成できるかは実行時判断。上のコメント参照）。
+            if (hasThemeSetAsset(work)) hasGeneratable = true
             // 下線先作品の答えが本文に書かれていないか（図版問題の答えが本文に出ているのを防ぐ。
             // mock-exam-analysis.md 7章の指摘）。text 全体（マーカー記法込み）に、workIds が
             // 参照する作品の title が部分文字列として含まれていたらエラー。
@@ -277,7 +280,7 @@ function validatePassages({ worksById, hasImageAsset, hasThemeSetAsset, eraIds, 
         }
         if (!hasGeneratable) {
           errors.push(
-            `${label} / ${underline.key}: workIds のどれも画像で出題できない（kind が artifact でない、manifest.json に無い、または画像実体が無い）`,
+            `${label} / ${underline.key}: workIds のどれも設問を生成できない（画像で出題できず、kind も artifact のまま＝文字問題の素材にもできない）`,
           )
         }
 
@@ -433,6 +436,24 @@ function main() {
       }
       if ('subject' in work && work.subject !== null && typeof work.subject !== 'string') {
         errors.push(`${label}: subject は string か null である必要がある`)
+      }
+
+      // pairs（語句の組合せ問題 T1/Q13 の素材）・orderIndex（年代順並べ替え T7/Q14）は
+      // M2-16 で追加した任意フィールド（writer が M2-17 で投入中）。型チェックのみ、
+      // 無くてもエラー・警告にしない（無い作品は Q13/Q14 が自然にスキップされる設計）。
+      if ('pairs' in work && work.pairs !== undefined) {
+        if (!Array.isArray(work.pairs)) {
+          errors.push(`${label}: pairs は配列である必要がある`)
+        } else {
+          work.pairs.forEach((p, i) => {
+            if (!p || typeof p.a !== 'string' || !p.a || typeof p.b !== 'string' || !p.b) {
+              errors.push(`${label}: pairs[${i}] は非空の a・b（string）を持つ必要がある`)
+            }
+          })
+        }
+      }
+      if ('orderIndex' in work && work.orderIndex !== undefined && typeof work.orderIndex !== 'number') {
+        errors.push(`${label}: orderIndex は number である必要がある`)
       }
 
       // id の重複

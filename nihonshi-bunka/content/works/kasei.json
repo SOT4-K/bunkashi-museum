@@ -3217,5 +3217,670 @@
     ],
     "examTags": [],
     "status": "draft"
+  },
+  {
+    "id": "kyokutei-bakin",
+    "orderIndex": 1814,
+    "pairs": [
+      {
+        "left": "曲亭馬琴",
+        "right": "読本",
+        "kind": "person-genre"
+      }
+    ],
+    "artist": "曲亭馬琴",
+    "patron": null,
+    "style": "読本",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "text",
+    "periodLabel": "江戸時代後期（19世紀前半、化政期）",
+    "eraNote": "江戸時代後期、化政文化の文学。出版と貸本屋の発達によって長編の物語が庶民にも読まれるようになり、歴史や伝説に取材して勧善懲悪を説く読本が人気を集めた。曲亭馬琴の『南総里見八犬伝』はその代表である。",
+    "facts": [
+      {
+        "slot": "style",
+        "text": "読本の作者である"
+      },
+      {
+        "slot": "era",
+        "text": "化政文化の人物",
+        "shared": [
+          "jippensha-ikku",
+          "tamenaga-shunsui",
+          "rai-sanyo",
+          "hirata-atsutane",
+          "honda-toshiaki"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "代表作は『南総里見八犬伝』"
+      },
+      {
+        "slot": "other",
+        "text": "勧善懲悪の長編物語を書いた"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "滑稽本の作者である",
+        "why": "読本の作者。十返舎一九・式亭三馬の滑稽本との分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "代表作は『東海道中膝栗毛』である",
+        "why": "『東海道中膝栗毛』は十返舎一九の滑稽本。作品の取り違え",
+        "verifiedFalse": true
+      },
+      {
+        "text": "元禄期の浮世草子の作者である",
+        "why": "化政期の読本の作者。井原西鶴との時代・分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "天保の改革で処罰された",
+        "why": "天保の改革で処罰されたのは人情本の為永春水。人物ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "曲亭馬琴（読本）",
+    "reading": "きょくていばきん",
+    "era": "kasei",
+    "category": "other",
+    "location": "江戸",
+    "author": "曲亭馬琴",
+    "technique": "読本（長編の小説）",
+    "keyPoints": [
+      "化政文化",
+      "読本の作者",
+      "代表作『南総里見八犬伝』",
+      "歴史・伝説に取材した勧善懲悪の長編"
+    ],
+    "explanation": "曲亭馬琴は、歴史や伝説に取材し、勧善懲悪を説く長編の読本を書いた作者で、『南総里見八犬伝』は二十八年をかけて完結した代表作である。読本は絵よりも文章を主とする小説で、貸本屋を通じて庶民にも広く読まれた。化政期には読本の物語が浮世絵の題材にもなった。",
+    "examNote": "化政期の文学は「読本＝曲亭馬琴」「滑稽本＝十返舎一九・式亭三馬」「人情本＝為永春水」の分野と作者の組合せが頻出。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）化政文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "jippensha-ikku",
+    "orderIndex": 1802,
+    "pairs": [
+      {
+        "left": "十返舎一九",
+        "right": "滑稽本",
+        "kind": "person-genre"
+      }
+    ],
+    "artist": "十返舎一九",
+    "patron": null,
+    "style": "滑稽本",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "text",
+    "periodLabel": "江戸時代後期（19世紀前半、化政期）",
+    "eraNote": "江戸時代後期、化政文化の文学。街道の整備と旅の流行を背景に、庶民の旅や町のくらしをおかしみをこめて描く滑稽本が人気を集めた。十返舎一九の『東海道中膝栗毛』はその代表で、風景版画の流行と同じ「旅」の時代を映している。",
+    "facts": [
+      {
+        "slot": "style",
+        "text": "滑稽本の作者である"
+      },
+      {
+        "slot": "era",
+        "text": "化政文化の人物",
+        "shared": [
+          "kyokutei-bakin",
+          "tamenaga-shunsui",
+          "rai-sanyo",
+          "hirata-atsutane",
+          "honda-toshiaki"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "代表作は『東海道中膝栗毛』"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "読本の作者である",
+        "why": "滑稽本の作者。曲亭馬琴の読本との分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "代表作は『南総里見八犬伝』である",
+        "why": "『南総里見八犬伝』は曲亭馬琴の読本。作品の取り違え",
+        "verifiedFalse": true
+      },
+      {
+        "text": "寛政の改革で処罰された",
+        "why": "寛政の改革で処罰されたのは洒落本の山東京伝・黄表紙の恋川春町。人物ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "十返舎一九（滑稽本）",
+    "reading": "じっぺんしゃいっく",
+    "era": "kasei",
+    "category": "other",
+    "location": "江戸",
+    "author": "十返舎一九",
+    "technique": "滑稽本（小説）",
+    "keyPoints": [
+      "化政文化",
+      "滑稽本の作者",
+      "代表作『東海道中膝栗毛』",
+      "旅の流行を背景とする"
+    ],
+    "explanation": "十返舎一九は、江戸の町人が東海道を旅するようすを笑いをまじえて描いた『東海道中膝栗毛』で人気を得た滑稽本の作者である。滑稽本は庶民のくらしや旅を軽い調子で描く小説で、同じ時期に街道の宿場を描いた風景版画が流行したことと合わせて、旅が庶民のものになった化政期の世相を示す。",
+    "examNote": "「滑稽本＝十返舎一九『東海道中膝栗毛』・式亭三馬『浮世風呂』」。読本（曲亭馬琴）と分野を混同しないこと。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）化政文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "tamenaga-shunsui",
+    "orderIndex": 1832,
+    "pairs": [
+      {
+        "left": "為永春水",
+        "right": "人情本",
+        "kind": "person-genre"
+      }
+    ],
+    "artist": "為永春水",
+    "patron": null,
+    "style": "人情本",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "text",
+    "periodLabel": "江戸時代後期（19世紀前半、化政期〜天保期）",
+    "eraNote": "江戸時代後期、化政文化の文学。町人の恋愛や人情を描く人情本が女性を含む読者に広く読まれたが、天保の改革では風俗を乱すものとして取り締まられ、為永春水が処罰された。出版が政治の統制を受けた例である。",
+    "facts": [
+      {
+        "slot": "style",
+        "text": "人情本の作者である"
+      },
+      {
+        "slot": "era",
+        "text": "化政文化の人物",
+        "shared": [
+          "kyokutei-bakin",
+          "jippensha-ikku",
+          "rai-sanyo",
+          "hirata-atsutane",
+          "honda-toshiaki"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "天保の改革で処罰された"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "寛政の改革で処罰された",
+        "why": "寛政の改革で処罰されたのは洒落本の山東京伝ら。人情本の取り締まりは天保の改革。出来事ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "読本の作者である",
+        "why": "人情本の作者。曲亭馬琴との分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "元禄期の作者である",
+        "why": "19世紀前半の作者。時代ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "為永春水（人情本）",
+    "reading": "ためながしゅんすい",
+    "era": "kasei",
+    "category": "other",
+    "location": "江戸",
+    "author": "為永春水",
+    "technique": "人情本（小説）",
+    "keyPoints": [
+      "化政文化",
+      "人情本の作者",
+      "町人の恋愛や人情を描いた",
+      "天保の改革で処罰された"
+    ],
+    "explanation": "為永春水は、町人の恋愛と人情を細やかに描く人情本で人気を得た作者である。人情本は女性を含む広い読者に読まれたが、風俗を乱すものとして天保の改革の取り締まりを受け、春水は処罰された。寛政の改革で洒落本・黄表紙が弾圧されたのと同じく、出版と政治の関係を示す例として問われる。",
+    "examNote": "「洒落本・黄表紙＝寛政の改革」「人情本＝天保の改革」と、弾圧された文学と改革の対応を取り違えない。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）化政文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "terakoya",
+    "orderIndex": 1820,
+    "pairs": [
+      {
+        "left": "寺子屋",
+        "right": "庶民の子どもの教育",
+        "kind": "institution-role"
+      }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "concept",
+    "periodLabel": "江戸時代後期（19世紀前半、化政期に普及）",
+    "eraNote": "江戸時代後期、化政文化の教育。都市だけでなく村々にも寺子屋が開かれ、庶民の子どもが読み・書き・そろばんを学んだ。文字を読める人が増えたことが、読本や滑稽本など出版物が庶民にまで広がる土台になった。",
+    "facts": [
+      {
+        "slot": "style",
+        "text": "庶民の子どもが学んだ教育機関"
+      },
+      {
+        "slot": "era",
+        "text": "化政期に広く普及した教育機関",
+        "shared": [
+          "hanko"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "読み・書き・そろばんを教えた"
+      },
+      {
+        "slot": "other",
+        "text": "出版物が庶民に広がる土台となった"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "藩士の子弟を教育する学校である",
+        "why": "それは藩校。対象ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "幕府が直轄した学問所である",
+        "why": "幕府直轄は昌平坂学問所。主体ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "蘭学を専門に教えた私塾である",
+        "why": "読み・書き・そろばんを教えた庶民の教育機関。内容ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "寺子屋",
+    "reading": "てらこや",
+    "era": "kasei",
+    "category": "other",
+    "location": "全国",
+    "author": null,
+    "technique": "教育機関",
+    "keyPoints": [
+      "化政文化の時期に全国へ普及",
+      "庶民の子どもが学ぶ",
+      "読み・書き・そろばん",
+      "藩校（藩士の子弟）と対で問われる"
+    ],
+    "explanation": "寺子屋は、僧侶・神職・浪人などが師匠となって庶民の子どもに読み・書き・そろばんを教えた教育機関で、化政期には都市だけでなく村々にも広がった。文字を読み書きできる人が増えたことが、読本や滑稽本、錦絵といった出版物が地方の庶民にまで届く土台になった。",
+    "examNote": "「寺子屋＝庶民」「藩校＝藩士の子弟」「昌平坂学問所＝幕府直轄」。化政文化が地方・庶民へ広がった理由として問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）化政文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "honda-toshiaki",
+    "orderIndex": 1798,
+    "pairs": [
+      {
+        "left": "本多利明",
+        "right": "『経世秘策』",
+        "kind": "person-text"
+      }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "経世論",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "person",
+    "periodLabel": "江戸時代後期（18世紀末〜19世紀初め）",
+    "eraNote": "江戸時代後期、化政文化の学問。蘭学によって西洋の事情が知られるようになると、国のあり方を論じる経世論が現れた。本多利明は『経世秘策』などで、開国して貿易を行い、蝦夷地を開発して国を富ませるべきだと説いた。",
+    "facts": [
+      {
+        "slot": "style",
+        "text": "経世論を説いた学者"
+      },
+      {
+        "slot": "era",
+        "text": "化政文化の人物",
+        "shared": [
+          "kyokutei-bakin",
+          "jippensha-ikku",
+          "tamenaga-shunsui",
+          "rai-sanyo",
+          "hirata-atsutane"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "著書は『経世秘策』『西域物語』"
+      },
+      {
+        "slot": "other",
+        "text": "貿易と蝦夷地の開発による富国を説いた"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "著書は『自然真営道』である",
+        "why": "『自然真営道』は安藤昌益（宝暦・天明期）。著作・人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "鎖国を守り貿易を禁じるべきだと説いた",
+        "why": "開国して貿易を行い国を富ませることを説いた。主張の反転",
+        "verifiedFalse": true
+      },
+      {
+        "text": "国学を大成した",
+        "why": "経世論の学者。本居宣長との分野ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "本多利明（『経世秘策』）",
+    "reading": "ほんだとしあき",
+    "era": "kasei",
+    "category": "other",
+    "location": "—",
+    "author": null,
+    "technique": "経世論",
+    "keyPoints": [
+      "化政期の学問",
+      "『経世秘策』『西域物語』を著した",
+      "開国と貿易による富国を説いた",
+      "蝦夷地の開発を主張"
+    ],
+    "explanation": "本多利明は西洋の事情を学んだうえで、国を富ませるには外国と貿易を行い、蝦夷地を開発して資源を得るべきだと説いた経世家である。『経世秘策』『西域物語』などにその主張が記されている。蘭学が政治や経済のあり方を論じる議論に及んだ例として、化政期の学問の広がりを示す。",
+    "examNote": "化政期の経世家は「本多利明＝『経世秘策』（開国・貿易）」「佐藤信淵」「海保青陵」と、人物と主張・著書の組合せで問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）化政文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "hirata-atsutane",
+    "orderIndex": 1810,
+    "pairs": [
+      {
+        "left": "平田篤胤",
+        "right": "復古神道",
+        "kind": "person-school"
+      }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "国学",
+    "religion": "復古神道",
+    "holder": null,
+    "subject": null,
+    "kind": "person",
+    "periodLabel": "江戸時代後期（19世紀前半、1776〜1843年）",
+    "eraNote": "江戸時代後期、化政文化の学問と神道。本居宣長の国学を受けついだ平田篤胤は、仏教や儒教が入る前の日本古来の道に立ち返るべきだとする復古神道を唱えた。その思想は地方の豪農や神職に広まり、幕末の尊王攘夷運動に影響を与えた。",
+    "facts": [
+      {
+        "slot": "religion",
+        "text": "復古神道を唱えた"
+      },
+      {
+        "slot": "era",
+        "text": "化政文化の人物",
+        "shared": [
+          "kyokutei-bakin",
+          "jippensha-ikku",
+          "tamenaga-shunsui",
+          "rai-sanyo",
+          "honda-toshiaki"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "本居宣長の国学を受けついだ"
+      },
+      {
+        "slot": "other",
+        "text": "幕末の尊王攘夷運動に影響を与えた"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "垂加神道を唱えた",
+        "why": "垂加神道は山崎闇斎（江戸前期）。人物・時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "『古事記伝』を著した",
+        "why": "『古事記伝』は本居宣長。著作の取り違え",
+        "verifiedFalse": true
+      },
+      {
+        "text": "蘭学者である",
+        "why": "国学者。杉田玄白ら蘭学との分野ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "平田篤胤（復古神道）",
+    "reading": "ひらたあつたね",
+    "era": "kasei",
+    "category": "other",
+    "location": "—",
+    "author": null,
+    "technique": "国学・神道",
+    "keyPoints": [
+      "化政期の学問",
+      "本居宣長の国学を受けついだ",
+      "復古神道を唱えた",
+      "幕末の尊王攘夷運動に影響"
+    ],
+    "explanation": "平田篤胤は本居宣長の学問を受けつぎ、仏教や儒教が伝わる前の日本古来の道に立ち返ることを説く復古神道を唱えた。その思想は地方の豪農や神職に受け入れられて広がり、幕末の尊王攘夷運動を支える考え方の一つとなった。国学が学問から政治的な思想へ展開したことを示す。",
+    "examNote": "神道は「伊勢神道＝度会家行」「吉田神道＝吉田兼倶」「垂加神道＝山崎闇斎」「復古神道＝平田篤胤」の対応で問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）化政文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "siebold-narutakijuku",
+    "orderIndex": 1824,
+    "pairs": [
+      {
+        "left": "シーボルト",
+        "right": "鳴滝塾",
+        "kind": "person-institution"
+      }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "蘭学",
+    "holder": null,
+    "subject": null,
+    "kind": "person",
+    "periodLabel": "江戸時代後期（19世紀前半、文政年間）",
+    "eraNote": "江戸時代後期、化政文化の学問。長崎の出島に来たドイツ人医師シーボルトは、郊外に鳴滝塾を開いて日本人に西洋医学を教え、多くの蘭学者を育てた。のちに国外に持ち出せない地図を持っていたことが発覚し、国外追放となった（シーボルト事件）。",
+    "facts": [
+      {
+        "slot": "style",
+        "text": "長崎で西洋医学を教えた"
+      },
+      {
+        "slot": "era",
+        "text": "化政文化の人物",
+        "shared": [
+          "kyokutei-bakin",
+          "hirata-atsutane",
+          "rai-sanyo",
+          "honda-toshiaki"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "長崎郊外に鳴滝塾を開いた"
+      },
+      {
+        "slot": "other",
+        "text": "シーボルト事件で国外追放となった"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "大坂に適塾を開いた",
+        "why": "適塾は緒方洪庵が大坂に開いた蘭学の塾。人物・地名ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "『解体新書』を翻訳した",
+        "why": "翻訳は杉田玄白・前野良沢ら（宝暦・天明期）。人物・時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "蛮社の獄で処罰された",
+        "why": "蛮社の獄で処罰されたのは渡辺崋山・高野長英。出来事ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "シーボルトと鳴滝塾",
+    "reading": "シーボルトとなるたきじゅく",
+    "era": "kasei",
+    "category": "other",
+    "location": "長崎",
+    "author": null,
+    "technique": "西洋医学の教育",
+    "keyPoints": [
+      "化政期の洋学",
+      "長崎郊外に鳴滝塾を開いた",
+      "日本人に西洋医学を教えた",
+      "シーボルト事件で国外追放"
+    ],
+    "explanation": "シーボルトはオランダ商館の医師として長崎に来たドイツ人で、郊外に鳴滝塾を開いて日本人に西洋医学を教え、高野長英ら多くの蘭学者を育てた。のちに国外への持ち出しが禁じられていた日本地図を所持していたことが問題となり、国外追放となった（シーボルト事件）。洋学が広がる一方で幕府の統制も強まったことを示す。",
+    "examNote": "洋学の塾は「鳴滝塾＝シーボルト＝長崎」「適塾＝緒方洪庵＝大坂」「芝蘭堂＝大槻玄沢＝江戸」の対応で問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）化政文化・洋学の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "rai-sanyo",
+    "orderIndex": 1827,
+    "pairs": [
+      {
+        "left": "頼山陽",
+        "right": "『日本外史』",
+        "kind": "person-text"
+      }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "史論",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "person",
+    "periodLabel": "江戸時代後期（19世紀前半、1780〜1832年）",
+    "eraNote": "江戸時代後期、化政文化の学問。武家の興亡を漢文で描いた『日本外史』が広く読まれ、天皇を尊ぶ考え方を人々に印象づけた。国学や水戸学とともに、幕末の尊王思想の広がりを支えた著作として扱われる。",
+    "facts": [
+      {
+        "slot": "style",
+        "text": "史論・歴史書を著した"
+      },
+      {
+        "slot": "era",
+        "text": "化政文化の人物",
+        "shared": [
+          "kyokutei-bakin",
+          "jippensha-ikku",
+          "hirata-atsutane",
+          "honda-toshiaki"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "著書は『日本外史』"
+      },
+      {
+        "slot": "other",
+        "text": "幕末の尊王思想に影響を与えた"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "著書は『読史余論』である",
+        "why": "『読史余論』は新井白石（元禄・正徳期）。著作・人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "国学を大成した",
+        "why": "漢文の史論を著した学者。本居宣長との分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "蛮社の獄で処罰された",
+        "why": "蛮社の獄で処罰されたのは渡辺崋山・高野長英。出来事ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "頼山陽（『日本外史』）",
+    "reading": "らいさんよう",
+    "era": "kasei",
+    "category": "other",
+    "location": "—",
+    "author": null,
+    "technique": "史論（漢文の歴史書）",
+    "keyPoints": [
+      "化政期の学問",
+      "『日本外史』を著した",
+      "武家の興亡を漢文で描いた",
+      "幕末の尊王思想に影響"
+    ],
+    "explanation": "頼山陽は武家の興亡を物語のように漢文で描いた『日本外史』を著し、この書は広く読まれて天皇を尊ぶ考え方を人々に印象づけた。国学や水戸学とならんで幕末の尊王思想の広がりを支えた著作として扱われる。歴史書としては、元禄・正徳期の新井白石『読史余論』と対比される。",
+    "examNote": "史論は「新井白石＝『読史余論』（元禄・正徳期）」「頼山陽＝『日本外史』（化政期）」の対応で問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）化政文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
   }
 ]

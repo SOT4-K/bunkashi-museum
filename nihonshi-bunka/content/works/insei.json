@@ -546,6 +546,11 @@
   },
   {
     "id": "fujiwara-kiyohira",
+    "orderIndex": 1105,
+    "pairs": [
+      { "kind": "人物×事績", "left": "藤原清衡", "right": "中尊寺（金色堂）の建立" },
+      { "kind": "人物×拠点", "left": "藤原清衡", "right": "平泉（陸奥国）" }
+    ],
     "kind": "person",
     "artist": null,
     "patron": null,
