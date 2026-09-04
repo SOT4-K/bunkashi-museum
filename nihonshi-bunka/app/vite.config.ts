@@ -68,5 +68,12 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./src/setupTests.ts'],
+    // M2-16 補修: content/works/ を writer が並行して増やし続けるため、全作品×全seedを
+    // 回す realdata プロパティテスト（combos.test.ts・newTypes.realdata.test.ts・
+    // pairsOrder.realdata.test.ts 等）が既定の 5000ms を超えることがある（full suite 実行時は
+    // 他ファイルとの CPU 競合でさらに伸びる。2026-09-04 実測、works 173→208+件の増加中）。
+    // 個別の it() に timeout を足していくと今後増える realdata テストの度に同じ対応が要るため、
+    // ここで既定値を底上げする。
+    testTimeout: 20000,
   },
 })
