@@ -16,11 +16,15 @@ const PROMPTS: Record<Question['type'], string> = {
   q8: '作者（建立者）と様式（宗教背景）の組合せとして正しいものは？',
   q9: '条件に合う作品は？',
   q10: '次の2つの記述の正誤の組合せとして正しいものは？',
+  q12: '最も適切なものは？',
 }
 
 const Q4_REVERSED_PROMPT = 'この作品に関する記述として最も不適切なものは？'
 
+/** 設問文。ask.stem（writer 手書き。8章「二段構え」・9章）があれば、それを最優先でそのまま使う
+ *  （既存の自動合成 conditionText 等は使わない）。 */
 function promptFor(question: Question): string {
+  if (question.stem) return question.stem
   if (question.type === 'q4' && question.reversed) return Q4_REVERSED_PROMPT
   if (question.type === 'q9' && question.conditionText) return `${question.conditionText}を選べ`
   return PROMPTS[question.type]
@@ -148,13 +152,21 @@ export function QuestionCard({
             ? (question.choiceCombos ?? []).map((c) => c.text)
             : question.type === 'q10'
               ? (question.choicePairLabels ?? [])
-              : question.choiceWorks.map((w) => w.title)
+              : question.type === 'q12'
+                ? (question.choiceQ12 ?? []).map((s) => s.text)
+                : question.choiceWorks.map((w) => w.title)
+
+  // Q12（画像なし文字4択。9章「画像リード型セット」）はリード文自体が画像なので、
+  // 設問ごとのヒーロー画像は出さない（そもそも question.work の画像＝答えではないことが多い）。
+  const showHeroImage = question.type !== 'q12'
 
   return (
     <div>
-      <button type="button" className={styles.hero} onClick={() => setLightboxWork(question.work)} aria-label="この画像を拡大表示">
-        <WorkImage mono src={imageSrc(question.work)} alt="作品" />
-      </button>
+      {showHeroImage && (
+        <button type="button" className={styles.hero} onClick={() => setLightboxWork(question.work)} aria-label="この画像を拡大表示">
+          <WorkImage mono src={imageSrc(question.work)} alt="作品" />
+        </button>
+      )}
       <p className={styles.prompt}>{promptFor(question)}</p>
       {question.type === 'q10' && question.statementPair && (
         <div className={styles.statementPairBlock} data-testid="statement-pair">

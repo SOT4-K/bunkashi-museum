@@ -10,6 +10,8 @@ import styles from './ThemeSetScreen.module.css'
 import learnStyles from './LearnScreen.module.css'
 import { QuestionCard } from './QuestionCard'
 import { AnswerSheet } from './AnswerSheet'
+import { WorkImage } from './WorkImage'
+import { imageSrc } from '../utils/image'
 import { buildThemeSetQuestions } from '../engine/themeSet'
 import { splitPassageText } from '../engine/passage'
 import { todayIso } from '../engine/srs'
@@ -48,6 +50,14 @@ export function ThemeSetScreen({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const themeQuestions = useMemo(() => buildThemeSetQuestions(passage, pool, eras), [passage.id])
   const segments = useMemo(() => splitPassageText(passage.text), [passage.text])
+  // 9章「画像リード型セット」: kind === "image" のとき、リード文の代わりに参照画像1〜2枚を表示する。
+  const isImageLead = passage.kind === 'image'
+  const leadWorks = useMemo(() => {
+    if (!isImageLead || !passage.leadWorkIds) return []
+    const byId = new Map(pool.map((w) => [w.id, w]))
+    return passage.leadWorkIds.map((id) => byId.get(id)).filter((w): w is Work => Boolean(w))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [passage.id, isImageLead])
   // 下線 key → 下線部の文言（下線部に結んだ問題文の冒頭「下線部○に関して」に使う）
   const underlineTextByKey = useMemo(() => {
     const map = new Map<string, string>()
@@ -144,6 +154,15 @@ export function ThemeSetScreen({
         <div className={styles.header}>
           <div className={`${styles.title} caption-bold`}>{passage.title}</div>
         </div>
+        {isImageLead && leadWorks.length > 0 && (
+          <div className={styles.leadImageGrid} data-testid="lead-image-grid">
+            {leadWorks.map((w) => (
+              <div className={styles.leadImageItem} key={w.id}>
+                <WorkImage mono src={imageSrc(w)} alt="作品" />
+              </div>
+            ))}
+          </div>
+        )}
         <div className={styles.readPanel} data-testid="passage-read-panel">
           {segments.map((seg, i) =>
             seg.type === 'underline' ? (
@@ -213,6 +232,15 @@ export function ThemeSetScreen({
 
       {contextOpen && (
         <div className={styles.contextPanel} data-testid="context-panel">
+          {isImageLead && leadWorks.length > 0 && (
+            <div className={styles.leadImageGrid} data-testid="lead-image-grid-context">
+              {leadWorks.map((w) => (
+                <div className={styles.leadImageItem} key={w.id}>
+                  <WorkImage mono src={imageSrc(w)} alt="作品" />
+                </div>
+              ))}
+            </div>
+          )}
           {segments.map((seg, i) =>
             seg.type === 'underline' ? (
               <mark key={i} className={seg.key === current.underlineKey ? styles.underlineCurrent : styles.underline}>

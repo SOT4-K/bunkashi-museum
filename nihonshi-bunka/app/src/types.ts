@@ -124,22 +124,39 @@ export interface Era {
 
 // --- リード文＋下線部（テーマセット。decisions.md 2026-09-04「模試型」） ---
 
-/** 下線部から出す設問の希望（mock-exam-analysis.md 7章「修正の仕様」）。省略時は engine が
- *  優先順位（Q9→Q10→Q8→Q4→Q1）で決める。指定した type/slot で生成できなければ次善に落ちる
- *  （必ず値を返す。エラーにしない）。 */
+/** 下線部から出す設問の希望（mock-exam-analysis.md 7章「修正の仕様」・8章「二段構え」・
+ *  9章「画像リード型セット」）。省略時は engine が優先順位（Q9→Q10→Q8→Q4→Q1）で決める。
+ *  指定した type/slot で生成できなければ次善に落ちる（必ず値を返す。エラーにしない）。
+ *  stem/answerId/distractorIds/answerText/distractorTexts は writer が手書きする
+ *  「二段構え」設問（8章）・画像リード型（9章）用（すべて省略可＝後方互換。旧スキーマの
+ *  下線は今までどおり engine が自動合成する）。 */
 export interface PassageUnderlineAsk {
-  /** Q9 の条件スロット（engine/q9.ts の Q9Slot のうち ask で指定できるもの＋subject）。 */
-  slot: 'holder' | 'artist' | 'technique' | 'era' | 'subject'
-  /** q11 は M3 候補で未実装（生成できないので次善に落ちる）。 */
-  type: 'q9' | 'q10' | 'q4' | 'q11'
+  /** Q9 の条件スロット（engine/q9.ts の Q9Slot のうち ask で指定できるもの＋subject）。
+   *  8章の二段構えデータでは省略されることが多い（stem に既に書かれているため）。 */
+  slot?: 'holder' | 'artist' | 'technique' | 'era' | 'subject'
+  /** q11 は M3 候補で未実装（生成できないので次善に落ちる）。q12 は画像リード型の文字4択（9章）。 */
+  type: 'q9' | 'q10' | 'q4' | 'q11' | 'q12'
+  /** writer が書いた設問文をそのまま使う（「〜はどれか」で完結。engine の自動合成 conditionText は使わない）。 */
+  stem?: string
+  /** q9 の正解作品 id（writer 指定）。pool に無ければ生成失敗として扱い次善にフォールバックする。 */
+  answerId?: string
+  /** q9 の誤答作品 id（3件。不足時のみ engine が同カテゴリ・近い時代ロジックで補充する）。 */
+  distractorIds?: string[]
+  /** q12 の正解の文（画像なし文字4択）。 */
+  answerText?: string
+  /** q12 の誤答の文（3件、writer 指定。engine は何も合成しない）。 */
+  distractorTexts?: string[]
 }
 
 /** リード文中の1つの下線部。text 内の `[[key|下線テキスト]]` マーカーに対応する。 */
 export interface PassageUnderline {
   key: string
-  /** この下線から出題する作品（先頭から見て、出題プールにある最初の作品を対象にする） */
+  /** この下線から出題する作品（先頭から見て、出題プールにある最初の作品を対象にする）。
+   *  kind: "image" の passage では省略可（leadWorkIds を対象にする。9章）。 */
   workIds: string[]
   note?: string
+  /** 下線の性質（8章「二段構え」。作品を一意に決めない一段外した手がかりの種別）。 */
+  anchorKind?: 'temple' | 'hall' | 'person' | 'event' | 'school' | 'style' | 'institution'
   /** この下線から出したい設問の型・条件スロット（省略可）。M2-09〜11 修正の仕様。 */
   ask?: PassageUnderlineAsk
 }
@@ -148,7 +165,11 @@ export interface Passage {
   id: string
   era: string
   title: string
-  /** `[[key|下線テキスト]]` マーカーを含む本文（200〜400字目安） */
+  /** 省略時は "text"（既存の全文リード）。"image" は画像リード型（9章。leadWorkIds が参照画像）。 */
+  kind?: 'text' | 'image'
+  /** kind: "image" のときのリード画像（出題プールにある作品、1〜2枚）。 */
+  leadWorkIds?: string[]
+  /** `[[key|下線テキスト]]` マーカーを含む本文（200〜400字目安）。kind: "image" では画像の説明文。 */
   text: string
   sources: string[]
   underlines: PassageUnderline[]
@@ -166,8 +187,12 @@ export interface Passage {
  *   decisions.md 2026-09-04（模試型テーマセット）は「Q8 2文正誤」と表現しているが、
  *   既存 Q8 の型・挙動を変えると自由出題側が壊れるため、新しい型番号 q10 として追加した
  *   （テーマセットのみで使用。命名の妥当性はオーナー確認事項として報告する）。
+ * Q12: 画像なし、文字4択（mock-exam-analysis.md 9章「画像リード型セット」）。
+ *   passage.kind === "image" のリード画像について「作者は？」「主人公は？」のように
+ *   様々な属性を問う。stem・answerText・distractorTexts はすべて writer 手書き
+ *   （engine は選択肢の並びのシャッフルのみ行う）。テーマセット専用。
  */
-export type QuestionType = 'q1' | 'q2' | 'q3' | 'q4' | 'q6' | 'q8' | 'q9' | 'q10'
+export type QuestionType = 'q1' | 'q2' | 'q3' | 'q4' | 'q6' | 'q8' | 'q9' | 'q10' | 'q12'
 
 /** Q9 の条件スロット（作者・時代文化・所蔵・様式・製法）。engine/q9.ts が生成ロジックを持つ
  *  （型はここで定義し、q9.ts から re-export する。types.ts が engine に依存しないため）。 */
@@ -213,12 +238,18 @@ export interface Question {
   isRetry?: boolean
   type: QuestionType
   work: Work
+  /** writer が手書きした設問文（下線の ask.stem。8章「二段構え」・9章）。あれば PROMPTS の
+   *  自動合成テキストより優先してそのまま表示する（既存 conditionText 合成は使わない）。 */
+  stem?: string
   /** 選択肢（4件、シャッフル済み）。Q2 は era id の配列を choices として扱う。Q9 も Work の画像4枚 */
   choiceWorks: Work[]
   /** Q2 のときの選択肢（era id）。Q1/Q3 のときは undefined */
   choiceEras?: Era[]
   /** Q4 のときの選択肢（4件、シャッフル済み） */
   choiceStatements?: StatementOption[]
+  /** Q12（画像なし文字4択。9章）のときの選択肢（4件、シャッフル済み）。answerText/distractorTexts
+   *  をそのまま StatementOption 化したもの（why は使わない＝常に null）。 */
+  choiceQ12?: StatementOption[]
   /** Q6 のときの選択肢（4件、シャッフル済み） */
   choiceEraItems?: EraItemOption[]
   /** Q8 のときの選択肢（4件、シャッフル済み） */
@@ -262,6 +293,7 @@ export interface ItemProgress {
   q8?: SrsCell
   q9?: SrsCell
   q10?: SrsCell
+  q12?: SrsCell
   discoveredAt: string | null
   masteredAt: string | null
 }

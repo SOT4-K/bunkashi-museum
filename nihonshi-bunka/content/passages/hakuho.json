@@ -3,7 +3,7 @@
     "id": "hakuho-01",
     "era": "hakuho",
     "title": "律令国家の形成と白鳳の造営",
-    "text": "大化改新のあと、天武・持統天皇の頃にかけて、律令国家の形成と歩調を合わせるように白鳳文化が栄えた。天武天皇の発願で造営が始まった[[a|薬師寺金堂]]には、唐初期の様式にインドのグプタ様式の影響も加わった、若々しく清新な三尊像が安置される。同じ伽藍に残る塔は、各層に[[b|裳階]]と呼ばれる小さな屋根を付けたため、三重でありながら六重に見え、「凍れる音楽」と評される。大化改新にかかわった蘇我倉山田石川麻呂が建てた山田寺の本尊は、鎌倉時代に僧兵によって[[c|興福寺]]へ移されたのち、火災で頭部だけを残して失われた。絵画では、明日香村の[[d|高松塚古墳]]の石室に極彩色の男女群像と四神が描かれ、法隆寺金堂の内壁にも唐やインドの影響を受けた仏教絵画が描かれたが、[[e|1949年の火災]]で大部分が焼損した。",
+    "text": "大化改新ののち、天智天皇や天武・持統天皇のもとで律令国家の形づくりが進み、これと歩調をあわせるように白鳳文化が栄えた。[[a|天武天皇]]は皇后（のちの持統天皇）の病気平癒を祈って寺の造営を発願し、その事業は持統・文武の三代にわたって続けられた。[[b|この寺の伽藍]]には、いまも創建期の姿を伝える建物が残っている。大化改新にかかわった[[c|蘇我倉山田石川麻呂]]も、飛鳥の地に自らの寺を営んだ。絵画では、明日香村にある終末期の[[d|高松塚古墳]]が1972年に調査され、石室の内部から注目すべき発見があった。また[[e|1949年]]には斑鳩の古寺の堂内で火災が起こり、内壁に描かれていた仏教絵画の大部分が失われて、翌年の文化財保護法制定の契機となった。文学では柿本人麻呂や額田王が力強い歌を残している。",
     "sources": [
       "高校教科書（山川『詳説日本史』）白鳳文化の項",
       "薬師寺公式サイト",
@@ -13,33 +13,132 @@
     "underlines": [
       {
         "key": "a",
+        "anchorKind": "person",
         "workIds": ["yakushi-sanzon-yakushiji"],
-        "ask": { "slot": "holder", "type": "q9" },
-        "note": "所蔵条件（薬師寺金堂）。同じ薬師寺の東塔とは holder 文字列が異なる"
+        "ask": {
+          "type": "q9",
+          "stem": "下線部aの天皇が発願した寺の金堂に安置され、インドのグプタ様式の影響を受けたとされる銅造の三尊像はどれか",
+          "answerId": "yakushi-sanzon-yakushiji",
+          "distractorIds": ["yamadadera-butsuzu", "horyuji-shaka-sanzon", "kanshinji-nyoirin-kannon"]
+        },
+        "note": "二段: 下線＝発願者／設問＝安置の堂と様式・材質。誤答の yamadadera-butsuzu は同じ白鳳の銅造仏（Aのみ）、horyuji-shaka-sanzon は銅造の三尊像（Bのみ）"
       },
       {
         "key": "b",
+        "anchorKind": "temple",
         "workIds": ["yakushiji-toto"],
-        "ask": { "slot": "technique", "type": "q10" },
-        "note": "2文正誤で層数（三重塔／五重塔）と発願者（天武／聖武）の取り違えを突く"
+        "ask": {
+          "type": "q10",
+          "stem": "下線部bに残る次の建物（画像）について述べたA・Bの文の正誤の組合せとして正しいものはどれか",
+          "answerId": "yakushiji-toto"
+        },
+        "note": "画像を出す型。層数（三重／五重）と発願者（天武／聖武）の取り違えを突く。本文に裳階・層数を書いていない"
       },
       {
         "key": "c",
+        "anchorKind": "person",
         "workIds": ["yamadadera-butsuzu"],
-        "ask": { "slot": "holder", "type": "q9" },
-        "note": "所蔵条件（興福寺国宝館）。建立の山田寺と現在の所在の区別が頻出"
+        "ask": {
+          "type": "q9",
+          "stem": "下線部cの人物が営んだ寺の講堂本尊として685年に完成し、のちに興福寺へ移されて火災により頭部だけが残った像はどれか",
+          "answerId": "yamadadera-butsuzu",
+          "distractorIds": ["yakushi-sanzon-yakushiji", "horyuji-shaka-sanzon", "kamakura-daibutsu"]
+        },
+        "note": "二段: 下線＝建立者／設問＝完成年と移座・焼損。誤答は同じ銅造仏でそろえる"
       },
       {
         "key": "d",
+        "anchorKind": "event",
         "workIds": ["takamatsuzuka-heki"],
-        "ask": { "slot": "subject", "type": "q4" },
-        "note": "主題（女子群像・四神）で関連記述。キトラ古墳（天文図）との区別"
+        "ask": {
+          "type": "q4",
+          "stem": "下線部dの石室に描かれていた次の壁画（画像）について述べた文として最も適切なものはどれか",
+          "answerId": "takamatsuzuka-heki"
+        },
+        "note": "画像を出す型なので下線は古墳名でよい。キトラ古墳（天文図）との区別が誤文の軸。本文に群像・四神を書いていない"
       },
       {
         "key": "e",
+        "anchorKind": "event",
         "workIds": ["horyuji-kondo-heki"],
-        "ask": { "slot": "holder", "type": "q10" },
-        "note": "2文正誤。1949年焼損と文化財保護法制定の契機がセットで問われる"
+        "ask": {
+          "type": "q10",
+          "stem": "下線部eの火災で失われた次の壁画（画像）について述べたA・Bの文の正誤の組合せとして正しいものはどれか",
+          "answerId": "horyuji-kondo-heki"
+        },
+        "note": "画像を出す型。所在（法隆寺金堂／高松塚古墳）と焼損の時期のずらしが誤文の軸"
+      }
+    ]
+  },
+  {
+    "id": "hakuho-image-01",
+    "era": "hakuho",
+    "kind": "image",
+    "title": "石室の壁に残された群像",
+    "leadWorkIds": ["takamatsuzuka-heki"],
+    "text": "(1)は、色あざやかな衣をまとった女性たちが列をなして立つ[[a|場面]]である。この絵は、[[b|終末期の古墳]]の[[c|石室]]の壁に、漆喰を下地として極彩色で描かれた。[[d|1972年の発掘調査]]で見つかり、鮮やかな色を保ったまま人物の姿が現れたことで大きな注目を集めた。同じ石室には、男性の一団や、方位を守るとされる[[e|四神]]のうち青竜・白虎などもあわせて描かれている。",
+    "sources": [
+      "高校教科書（山川『詳説日本史』）白鳳文化の項",
+      "文化庁の当該壁画に関する公式ページ（出典の正式名称は works の takamatsuzuka-heki の sources を参照。作品名を本文側に漏らさないためここでは書名を伏せる）"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "event",
+        "workIds": ["takamatsuzuka-heki"],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部aをふくむこの壁画について述べたA・Bの文の正誤の組合せとして正しいものはどれか",
+          "answerId": "takamatsuzuka-heki"
+        },
+        "note": "リード画像そのものを問う型。所在・発見年・時代のずらしを軸にする（四神とキトラの対比は e に回す）"
+      },
+      {
+        "key": "b",
+        "anchorKind": "event",
+        "workIds": ["takamatsuzuka-heki"],
+        "ask": {
+          "type": "q12",
+          "stem": "下線部bがある都道府県として最も適切なものはどれか",
+          "answerText": "奈良県",
+          "distractorTexts": ["京都府", "大阪府", "福岡県"]
+        },
+        "note": "説明文に県名・村名を書いていないので本文からは解けない。福岡県は九州の装飾古墳との取り違えを誘う"
+      },
+      {
+        "key": "c",
+        "anchorKind": "event",
+        "workIds": ["yakushiji-toto"],
+        "ask": {
+          "type": "q9",
+          "stem": "下線部cに壁画が描かれたのと同じ文化のもとで造られ、各層に裳階を付けたため六重に見える塔はどれか",
+          "answerId": "yakushiji-toto",
+          "distractorIds": ["muroji-gojunoto", "daigoji-gojunoto", "engakuji-shariden"]
+        },
+        "note": "このセットで時代（era）を条件にする設問はこの1問だけ。二段: 同じ文化（A）＋裳階（B）。誤答は同じ木造の塔・木造建築でそろえる"
+      },
+      {
+        "key": "d",
+        "anchorKind": "event",
+        "workIds": ["takamatsuzuka-heki"],
+        "ask": {
+          "type": "q12",
+          "stem": "下線部dで見つかったこの壁画が描かれた時期の文化の名称として最も適切なものはどれか",
+          "answerText": "白鳳文化",
+          "distractorTexts": ["飛鳥文化", "天平文化", "弘仁・貞観文化"]
+        },
+        "note": "説明文に文化名・年代を書いていない。誤答は前後に隣接する3文化"
+      },
+      {
+        "key": "e",
+        "anchorKind": "event",
+        "workIds": ["takamatsuzuka-heki"],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部eなどが描かれたこの壁画について述べた文として最も適切なものはどれか",
+          "answerId": "takamatsuzuka-heki"
+        },
+        "note": "キトラ古墳（精密な天文図）との取り違えを誤文の軸にする"
       }
     ]
   }

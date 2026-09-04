@@ -1,39 +1,154 @@
 [
   {
-    "id": "insei-jodokyo-emaki",
+    "id": "insei-01",
     "era": "insei",
-    "title": "絵巻物の全盛と地方へ広がる浄土教",
-    "text": "平安時代後期、白河・鳥羽・後白河の三上皇による院政のもとでは、院や貴族の文化が地方へ広がる一方、台頭してきた武士や庶民の生活も文化に取り込まれた。絵画では大和絵と詞書を組み合わせた絵巻物が全盛期を迎え、[[a|鳥羽僧正覚猷]]の筆と伝えられる作品では、[[b|動物を擬人化して人間社会を風刺する]]手法が、彩色を用いず墨の線だけで描く白描によって表された。浄土教の信仰は奥州藤原氏を中心に地方へ深く浸透し、清衡の娘徳姫が亡き夫の菩提を弔って建てた福島の[[c|願成寺]]や、九州最古の木造建築とされる大分の[[d|富貴寺]]など、地方の寺に阿弥陀堂が営まれた。後白河上皇は流行の今様を集めて『梁塵秘抄』を編み、田楽・猿楽などの芸能も貴族に愛好された。",
+    "title": "院政の世と、地方へ広がる阿弥陀の信仰",
+    "text": "11世紀末、白河上皇は位を退いたのちも院で政務をとりつづけ、院政が始まった。院や貴族は六勝寺と呼ばれる御願寺を相次いで造営し、熊野や高野への参詣を重ねた。都では詞書と絵を交互に連ねる絵巻物が数多く作られ、そのなかには、のちに京都栂尾の[[a|高山寺]]に伝えられたものもある。武士や庶民の姿は文学にも取り込まれて説話集や歴史物語が書かれ、後白河上皇は流行の今様を集めさせた。一方、阿弥陀仏の救いを願う信仰は都をこえて広がり、陸奥では前九年・後三年の合戦を経て平泉を拠点とした[[b|藤原清衡]]が、金や馬の富を背景に中尊寺を営んだ。信仰は[[c|九州にも及び]]、豊後の寺にも堂が建てられている。こうして[[d|浄土往生を願う信仰]]は、地方の豪族の発願によって各地に形を残した。",
     "sources": [
-      "高校教科書（山川『詳説日本史』）院政期の文化の項",
-      "work/nihonshi-bunka/content/eras.json（insei の detail・items）",
-      "work/nihonshi-bunka/content/works/insei.json（choju-giga-sumo / shiramizu-amidado / fukiji-odo の facts・explanation）"
+      "1〜2文目（白河上皇の院政・六勝寺・熊野詣）: content/eras.json の insei（detail・items）",
+      "3文目（絵巻物の全盛／高山寺への伝来）: content/eras.json の insei（detail）、content/works/insei.json の choju-giga-sumo（facts の location「高山寺に伝来した」）",
+      "4文目（説話・歴史物語・今様）: content/works/insei.json の konjaku-monogatarishu / okagami / ryojin-hisho（facts）",
+      "5文目（浄土教の地方への浸透・藤原清衡・平泉・中尊寺）: content/works/insei.json の fujiwara-kiyohira（facts・explanation）",
+      "6〜7文目（九州への広がり・地方の豪族の発願）: content/works/insei.json の fukiji-odo / shiramizu-amidado（facts・explanation）",
+      "高校教科書（山川『詳説日本史』）院政期の文化の項"
     ],
     "underlines": [
       {
         "key": "a",
-        "workIds": ["choju-giga-sumo"],
-        "ask": { "slot": "artist", "type": "q9" },
-        "note": "作者条件。「下線部aの人物の筆と伝えられる絵巻はどれか」。実際には複数筆者による制作と考えられ、教科書も「伝」を付す"
+        "anchorKind": "temple",
+        "workIds": [
+          "choju-giga-sumo"
+        ],
+        "ask": {
+          "type": "q9",
+          "stem": "下線部aの高山寺に伝えられ、鳥羽僧正覚猷の筆と伝えられてきた絵画作品はどれか。",
+          "answerId": "choju-giga-sumo",
+          "distractorIds": [
+            "takamatsuzuka-heki",
+            "horyuji-kondo-heki",
+            "fujin-raijin-sotatsu"
+          ]
+        },
+        "note": "二段構え: A=高山寺（伝来先の寺院）／B=伝承筆者（鳥羽僧正覚猷）。誤答はいずれも絵画で、AもBも満たさない同カテゴリ。作品の図様と技法（works の subject・technique にあたる語）はリード文に書いていない"
       },
       {
         "key": "b",
-        "workIds": ["choju-giga-sumo"],
-        "ask": { "slot": "subject", "type": "q10" },
-        "note": "主題条件＋2文正誤。画像を出して「白描（彩色なし）である／鎌倉文化の作品である」等の正誤を問う想定"
+        "anchorKind": "person",
+        "workIds": [
+          "shiramizu-amidado"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部bの人物の娘が、亡き夫の菩提を弔って1160年に建てたと伝えられる次の阿弥陀堂について述べた文A・Bの正誤の組合せとして正しいものはどれか。",
+          "answerId": "shiramizu-amidado"
+        },
+        "note": "二段構え: A=藤原清衡（人物）／B=娘の発願・1160年。画像を出す型なので所在（願成寺・いわき）はリード文に出していない。A/B文は falseStatements の『岩手県にある』『清衡本人が建立した』『全体が金箔で覆われている』が5パターンに沿う"
       },
       {
         "key": "c",
-        "workIds": ["shiramizu-amidado"],
-        "ask": { "slot": "holder", "type": "q9" },
-        "note": "所在条件。「下線部cの願成寺に伝わる阿弥陀堂建築はどれか」。作品名は本文に出していない"
+        "anchorKind": "event",
+        "workIds": [
+          "fukiji-odo"
+        ],
+        "ask": {
+          "type": "q9",
+          "stem": "下線部cに関して、豊後国（大分県）の富貴寺に建てられ、九州最古の木造建築とされる仏堂はどれか。",
+          "answerId": "fukiji-odo",
+          "distractorIds": [
+            "shiramizu-amidado",
+            "byodoin-hoo-do",
+            "engakuji-shariden"
+          ]
+        },
+        "note": "二段構え: A=九州への浄土教の広がり（出来事）／B=富貴寺・九州最古の木造建築。誤答の shiramizu-amidado は同じ院政期の地方の浄土教建築（Aのみ満たす）、byodoin-hoo-do は同系統だが国風、engakuji-shariden は時代・様式が異なる"
       },
       {
         "key": "d",
-        "workIds": ["fukiji-odo"],
-        "ask": { "slot": "holder", "type": "q4" },
-        "note": "所在条件＋関連記述。falseStatements に「福島県にある」「金箔で覆われている」等があり不適切選択型に向く"
+        "anchorKind": "institution",
+        "workIds": [
+          "fukiji-odo"
+        ],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部dにもとづいて地方に建てられた、次の写真の仏堂について述べた文として最も不適切なものはどれか。",
+          "answerId": "fukiji-odo"
+        },
+        "note": "c（画像を伏せて選ばせる型）より後に置く。falseStatements に『中尊寺金色堂と同じく金箔で覆われている』『福島県にある』など所在・属性の入れ替え型がそろう"
       }
-    ]
+    ],
+    "notes": "この区分で画像を出題できるのは choju-giga-sumo / fukiji-odo / shiramizu-amidado の3件（research/m2-playable-works-2026-09-04.md）。4問にするため fukiji-odo を2度使うが、画像を伏せる型（c）を画像を出す型（d）より先に置いて答えが漏れないようにしている。"
+  },
+  {
+    "id": "insei-image-01",
+    "era": "insei",
+    "kind": "image",
+    "title": "ある絵巻の一場面から",
+    "leadWorkIds": [
+      "choju-giga-sumo"
+    ],
+    "text": "(1)は、兎と蛙が組み合って相撲を取り、猿がそばで身をよじって声をあげる場面である。同じ巻には、動物たちが水遊びや弓の競技に興じ、[[a|法会をまねて経を読む]]姿も描かれている。全4巻からなるこの絵巻は、[[b|京都の郊外にある山寺]]に伝えられてきた。[[c|人の世のふるまいを動物に置きかえて笑うこの趣向]]は、貴族だけでなく武士や庶民の姿までが文化に取り込まれていった時期の空気を伝える。[[d|その筆者]]としては古くから一人の高僧の名が語られてきたが、画風の違いから複数の手によるものと考えられている。",
+    "sources": [
+      "1〜3文目（場面・全4巻・伝来先）: content/works/insei.json の choju-giga-sumo（subject・facts・keyPoints）",
+      "4文目（武士・庶民の姿が文化に取り込まれた時期）: content/eras.json の insei（detail）",
+      "5文目（伝承筆者と複数筆者説）: content/works/insei.json の choju-giga-sumo（explanation・examNote）"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "event",
+        "ask": {
+          "type": "q10",
+          "stem": "下線部aのような場面を含むこの絵巻について述べた文A・Bの正誤の組合せとして正しいものはどれか。",
+          "answerId": "choju-giga-sumo"
+        },
+        "note": "説明文に技法（works の technique にあたる語）と時代を書いていないので、A/B文はそこを突ける。falseStatements の『彩色をほどこした濃絵である』『鎌倉文化の作品である』が該当"
+      },
+      {
+        "key": "b",
+        "anchorKind": "temple",
+        "ask": {
+          "type": "q12",
+          "stem": "下線部bにあたる、この絵巻が伝えられてきた寺院として最も適切なものはどれか。",
+          "answerText": "高山寺",
+          "distractorTexts": [
+            "六波羅蜜寺",
+            "円覚寺",
+            "醍醐寺"
+          ]
+        },
+        "note": "誤答は同カテゴリ（いずれも本アプリの作品が伝わる寺院）でそろえた"
+      },
+      {
+        "key": "c",
+        "anchorKind": "event",
+        "ask": {
+          "type": "q9",
+          "stem": "下線部cの趣向がとられたこの絵巻と同じ時期に、豊後国（大分県）に建てられた仏堂として最も適切なものはどれか。",
+          "answerId": "fukiji-odo",
+          "distractorIds": [
+            "byodoin-hoo-do",
+            "engakuji-shariden",
+            "muroji-gojunoto"
+          ]
+        },
+        "note": "時代条件だけでは byodoin-hoo-do（国風）と紛れやすいので、所在（豊後国）を足して一意にしている。同区分の shiramizu-amidado は正解が2つになるため誤答に入れない"
+      },
+      {
+        "key": "d",
+        "anchorKind": "person",
+        "ask": {
+          "type": "q12",
+          "stem": "下線部dについて、この絵巻の筆者と古くから伝えられてきた人物として最も適切なものはどれか。",
+          "answerText": "鳥羽僧正覚猷",
+          "distractorTexts": [
+            "藤原隆能",
+            "雪舟",
+            "狩野元信"
+          ]
+        },
+        "note": "誤答は絵師でそろえた。藤原隆能は源氏物語絵巻の伝承筆者（choju-giga-sumo の falseStatements にある取り違え型）"
+      }
+    ],
+    "notes": "mock-exam-analysis.md 9章の画像リード型。説明文には作品名・作者名・技法・時代を書かず、描かれている内容と伝来のみを書いている。盲検は『説明文だけで作者・作品名が確定しないこと』に置き換えて適用（b・dは説明文からは決まらない）。"
   }
 ]

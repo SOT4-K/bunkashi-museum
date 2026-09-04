@@ -115,3 +115,45 @@ describe('ThemeSetScreen', () => {
     expect(screen.queryByTestId('passage-read-panel')).not.toBeInTheDocument()
   })
 })
+
+// 9章「画像リード型セット」: kind: "image" のテーマセット。
+describe('ThemeSetScreen: kind: "image"（9章「画像リード型セット」）', () => {
+  const imagePassage: Passage = {
+    id: 'image-passage',
+    era: 'tenpyo',
+    title: '踊念仏の絵巻',
+    kind: 'image',
+    leadWorkIds: ['h1'],
+    text: '(1)は僧が道場で[[a|踊念仏]]を行う場面。',
+    sources: ['出典Y'],
+    underlines: [
+      {
+        key: 'a',
+        workIds: [],
+        ask: {
+          type: 'q12',
+          stem: 'この絵巻の主人公として最も適切なものはどれか',
+          answerText: '空也上人',
+          distractorTexts: ['一遍上人', '法然', '親鸞'],
+        },
+      },
+    ],
+  }
+
+  it('読解フェーズにリード画像が表示される', () => {
+    render(
+      <ThemeSetScreen passage={imagePassage} pool={pool} eras={testEras} onAnswer={noopAnswer} onFinish={() => {}} />,
+    )
+    expect(screen.getByTestId('lead-image-grid')).toBeInTheDocument()
+  })
+
+  it('「問題へ」を押すと、stem がそのまま設問文として表示される（q12・画像なし文字4択）', () => {
+    render(
+      <ThemeSetScreen passage={imagePassage} pool={pool} eras={testEras} onAnswer={noopAnswer} onFinish={() => {}} />,
+    )
+    startQuiz()
+    expect(screen.getByText('この絵巻の主人公として最も適切なものはどれか')).toBeInTheDocument()
+    const buttons = screen.getAllByTestId('choice-button')
+    expect(buttons).toHaveLength(4)
+  })
+})

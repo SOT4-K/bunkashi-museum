@@ -12,14 +12,16 @@
 //   - セット内に Q10 を1問以上・Q9 を1問以上（生成後、無ければ生成可能な下線を探して強制的に作り直す）
 //  生成できない下線（対象作品が出題プールに無い）はスキップし、console.warn で知らせる
 //  （エラーにしない。M2 チケット「進め方」）。
-import { buildChoices, type RandomFn } from './distractors'
-import { buildQuestion } from './session'
+import { buildChoices, shuffle, type RandomFn } from './distractors'
+import { buildQuestion, selectReviewCandidates } from './session'
 import { generateStatementQuestion } from './statements'
 import { generateComboQuestion } from './combos'
-import { generateQ9Question, type Q9Slot } from './q9'
+import { generateQ9Question, generateQ9QuestionFromIds, type Q9Slot } from './q9'
+import { generateQ12Question } from './q12'
 import { generateStatementPairQuestion } from './statementPair'
 import { pickUnderlineTargetId } from './passage'
-import type { Era, Passage, PassageUnderline, Question, QuestionType, Work } from '../types'
+import { isItemMastered } from './srs'
+import type { Era, Passage, PassageUnderline, PassageUnderlineAsk, ProgressState, Question, QuestionType, Work } from '../types'
 
 const defaultRandom: RandomFn = () => Math.random()
 
@@ -29,8 +31,9 @@ export interface ThemeQuestion {
 }
 
 export interface ThemeBuildOptions {
-  /** この下線の ask（省略時は engine が優先順位で決める）。 */
-  ask?: { slot?: string; type?: string }
+  /** この下線の ask（省略時は engine が優先順位で決める）。8章「二段構え」・9章「画像リード型」の
+   *  stem/answerId/distractorIds/answerText/distractorTexts も含む。 */
+  ask?: PassageUnderlineAsk
   /** true のとき Q9 の era スロットを試さない（1セットに1問までの制約）。 */
   avoidEraSlot?: boolean
   /** この型はできれば避ける（直前の設問と同じ型で連続させないため）。生成できる型が
@@ -52,6 +55,14 @@ function isQ9Slot(value: string | undefined): value is Q9Slot {
   return value === 'holder' || value === 'artist' || value === 'technique' || value === 'era' || value === 'style'
 }
 
+/** ask.stem を BuildResult の question に付与する。8章「二段構え」: ask.type で明示的に
+ *  指定した型が実際に生成できたときだけ使う（次善の型にフォールバックしたときは、
+ *  stem がその型の文面と噛み合わないため付けない）。 */
+function withStem(result: BuildResult | null, stem: string | undefined): BuildResult | null {
+  if (!result || !stem) return result
+  return { ...result, question: { ...result.question, stem } }
+}
+
 /** 1作品に対して、優先順位（＋ ask・avoid オプション）に従って生成できる最初の設問を作る。q1 は必ず生成できる保険。 */
 function buildThemeQuestionForWorkWithMeta(
   work: Work,
@@ -66,6 +77,27 @@ function buildThemeQuestionForWorkWithMeta(
 
   const tryQ9 = (): BuildResult | null => {
     if (avoidQ9) return null
+    // 8章「二段構え」: writer が answerId/distractorIds を指定していれば、それを最優先で
+    // 使う（algorithmic な条件選定は試さない）。answerId が pool に無い・distractorIds が
+    // 不足で埋まらない場合は null（＝生成失敗）とし、呼び出し側で次善の型にフォールバックさせる。
+    if (ask?.answerId) {
+      const explicit = generateQ9QuestionFromIds(pool, ask.answerId, ask.distractorIds, eras, rng)
+      if (!explicit) return null
+      const { items, correctIndex } = buildChoices(explicit.correctWork, explicit.distractorWorks, rng)
+      return {
+        question: {
+          type: 'q9',
+          work,
+          choiceWorks: items,
+          correctIndex,
+          isReview: false,
+          conditionText: explicit.conditionText,
+          reversed: explicit.reversed,
+          q9Slot: explicit.slot,
+        },
+        q9Slot: explicit.slot,
+      }
+    }
     const data = generateQ9Question(work, pool, eras, rng, { avoidSlots: avoidSlotsForQ9, preferredSlot: askSlot })
     if (!data) return null
     const { items, correctIndex } = buildChoices(data.correctWork, data.distractorWorks, rng)
@@ -125,18 +157,32 @@ function buildThemeQuestionForWorkWithMeta(
     }
   }
 
+  // Q12（画像なし文字4択。9章「画像リード型セット」）: ask.answerText/distractorTexts が
+  // そろっているときだけ生成できる。writer 手書きのため engine は選択肢の合成をしない。
+  const tryQ12 = (): BuildResult | null => {
+    const data = generateQ12Question(ask, rng)
+    if (!data) return null
+    return {
+      question: { type: 'q12', work, choiceWorks: [], choiceQ12: data.choices, correctIndex: data.correctIndex, isReview: false },
+    }
+  }
+
   const q1Fallback = (): BuildResult => ({ question: buildQuestion(work, 'q1', pool, eras, false, rng) })
 
   // ask.type があれば最優先で試す（生成できなければ次善の優先順位に落ちる）。
+  // ask.stem があれば、実際にその型が生成できたときだけそのまま設問文として使う。
   // q11 は M3 候補で未実装のため、常に次善に落ちる。
   if (ask?.type === 'q9') {
-    const r = tryQ9()
+    const r = withStem(tryQ9(), ask.stem)
     if (r) return r
   } else if (ask?.type === 'q10') {
-    const r = tryQ10()
+    const r = withStem(tryQ10(), ask.stem)
     if (r) return r
   } else if (ask?.type === 'q4') {
-    const r = tryQ4() ?? tryQ4Reversed()
+    const r = withStem(tryQ4() ?? tryQ4Reversed(), ask.stem)
+    if (r) return r
+  } else if (ask?.type === 'q12') {
+    const r = withStem(tryQ12(), ask.stem)
     if (r) return r
   }
 
@@ -209,6 +255,20 @@ function reorderToAvoidConsecutiveSameType(items: BuiltItem[]): BuiltItem[] {
 }
 
 /**
+ * 下線の対象作品 id を決める。通常は underline.workIds（先頭から見て pool にある最初の id）。
+ * 9章「画像リード型セット」: passage.kind === "image" では下線に workIds が無くてもよく、
+ * その場合は passage.leadWorkIds（リード画像。先頭から見て pool にある最初の id）を対象にする。
+ */
+export function pickThemeTargetId(underline: PassageUnderline, passage: Passage, availableIds: Set<string>): string | null {
+  const fromUnderline = pickUnderlineTargetId(underline, availableIds)
+  if (fromUnderline) return fromUnderline
+  if (passage.kind === 'image' && passage.leadWorkIds && passage.leadWorkIds.length > 0) {
+    return passage.leadWorkIds.find((id) => availableIds.has(id)) ?? null
+  }
+  return null
+}
+
+/**
  * passage の下線部ごとに図版問題を組み立てる。対象作品が pool（出題プール）に無い下線はスキップする。
  * pool は「出題に使える作品」（画像あり・kind が artifact のもの）を渡す想定
  * （content.ts の playableWorks。person/text/concept は自動的に対象から外れる）。
@@ -225,7 +285,7 @@ export function buildThemeSetQuestions(passage: Passage, pool: Work[], eras: Era
   const q9UsedWorkIds = new Set<string>()
 
   for (const underline of passage.underlines) {
-    const targetId = pickUnderlineTargetId(underline, availableIds)
+    const targetId = pickThemeTargetId(underline, passage, availableIds)
     const target = targetId ? byId.get(targetId) : undefined
     if (!target) {
       console.warn(
@@ -286,4 +346,64 @@ export function buildThemeSetQuestions(passage: Passage, pool: Work[], eras: Era
     underlineKey: underline.key,
     question: { ...result.question, passageId: passage.id, underlineKey: underline.key },
   }))
+}
+
+/** passage の下線が対象にする作品 id（重複除去）。「学習を始める」のセット選定（下記）で使う。 */
+function passageTargetWorkIds(passage: Passage, pool: Work[]): Set<string> {
+  const availableIds = new Set(pool.map((w) => w.id))
+  const ids = new Set<string>()
+  for (const underline of passage.underlines) {
+    const id = pickThemeTargetId(underline, passage, availableIds)
+    if (id) ids.add(id)
+  }
+  return ids
+}
+
+/**
+ * 「学習を始める」（フリー出題）のテーマセット化。mock-exam-analysis.md 9章「『学習を始める』
+ * （フリー出題）のテーマセット化（M2-13）」:
+ *  ①SRS の期限が来た作品を含むセットを優先 ②残りは習熟の低い区分（eras.json の weight は
+ *  平均習熟率の算出には使わない。区分内の所蔵率が低いものを優先する）から選ぶ。
+ *  どのセットにも入っていない期限到来作品は、ここでは選ばない（呼び出し側が
+ *  テーマセット消化後に通常の自由出題セッションを続けることで、SRS の due 判定に従って
+ *  自然に単独出題される。buildSession は毎回その時点の progress を見るため、テーマセットで
+ *  既に答えた作品は正解なら due から外れ、誤答ならそのまま due に残る＝二重の特別扱いは不要）。
+ */
+export function selectLearnThemeSets(
+  passages: Passage[],
+  pool: Work[],
+  eras: Era[],
+  progress: ProgressState,
+  today: string,
+  count = 3,
+  rng: RandomFn = defaultRandom,
+): Passage[] {
+  if (passages.length === 0 || count <= 0) return []
+
+  const dueWorkIds = new Set(selectReviewCandidates(pool, progress, today, rng, eras).map((p) => p.work.id))
+
+  const scored = passages.map((passage) => {
+    const targetIds = [...passageTargetWorkIds(passage, pool)]
+    const dueCount = targetIds.filter((id) => dueWorkIds.has(id)).length
+    const eraWorks = pool.filter((w) => w.era === passage.era)
+    const masteredCount = eraWorks.filter((w) => {
+      const item = progress.items[w.id]
+      return item ? isItemMastered(item) : false
+    }).length
+    const masteryRatio = eraWorks.length > 0 ? masteredCount / eraWorks.length : 1
+    return { passage, dueCount, masteryRatio }
+  })
+
+  // ①期限到来作品を含むセットを優先（dueCount 降順。同点はシャッフルで多様性を持たせる）
+  const withDue = shuffle(
+    scored.filter((s) => s.dueCount > 0),
+    rng,
+  ).sort((a, b) => b.dueCount - a.dueCount)
+  // ②残りは習熟の低い区分から（masteryRatio 昇順）
+  const withoutDue = shuffle(
+    scored.filter((s) => s.dueCount === 0),
+    rng,
+  ).sort((a, b) => a.masteryRatio - b.masteryRatio)
+
+  return [...withDue, ...withoutDue].slice(0, count).map((s) => s.passage)
 }

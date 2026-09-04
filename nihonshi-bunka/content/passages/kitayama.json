@@ -1,60 +1,76 @@
 [
   {
-    "id": "kitayama-yoshimitsu",
+    "id": "kitayama-01",
     "era": "kitayama",
-    "title": "足利義満の時代と北山の山荘",
-    "text": "南北朝の合一によって幕府の権力が安定した室町時代前期、3代将軍足利義満の頃の文化は、義満が京都の北山に営んだ山荘にちなんで[[a|北山文化]]と呼ばれる。義満は五山・十刹の制を整えて臨済宗を保護し、義堂周信・絶海中津ら禅僧による漢詩文（五山文学）が栄え、日明貿易（勘合貿易）を通じて明の文化も入った。観阿弥・世阿弥父子は義満の保護のもとで能を大成し、世阿弥は能楽論書『風姿花伝』を著した。義満の死後、この山荘は禅寺となって[[b|鹿苑寺]]と称し、その中心建物が受け継がれている。建物は初層に寝殿造風、三層に禅宗様の仏堂を用いる[[c|異なる様式を重ねた三層の構造]]をとり、上の二層の外壁を[[d|金箔]]で覆うその姿には、公家文化と武家文化が融合し、大陸の禅宗文化を取り入れた時代の性格がよく表れている。",
+    "title": "足利義満の権勢と、大陸から来た文化",
+    "text": "南北朝の合一によって幕府の権力が安定した室町時代前期、3代将軍[[a|足利義満]]の頃には、公家文化と武家文化の融合が進んだ。義満は[[b|五山・十刹の制]]を整えて臨済宗を保護し、その禅僧たちは漢詩文をつくり、幕府の外交や学問の担い手ともなった。猿楽から能を大成した[[c|観阿弥・世阿弥]]父子も義満の保護のもとで活躍し、世阿弥は能楽論書『風姿花伝』を著している。義満は明との国交を開いて[[d|日明貿易]]を始め、勘合を用いる朝貢の形式のもとで、生糸や銅銭とともに大陸の文物がもたらされた。義満は将軍職を子に譲ったのちも実権を握り、出家してからも政治の中心にありつづけた。この時期の文化は、義満が晩年を過ごした京都の地名にちなんで北山文化と呼ばれる。",
     "sources": [
-      "高校教科書（山川『詳説日本史』）北山文化の項",
-      "work/nihonshi-bunka/content/eras.json（kitayama の detail・items）",
-      "work/nihonshi-bunka/content/works/kitayama.json（kinkaku の facts・explanation、zeami / gozan-bungaku / nichimin-boeki の eraNote）"
+      "1文目（南北朝の合一・公家文化と武家文化の融合）: content/eras.json の kitayama（detail）",
+      "2文目（五山・十刹の制と五山文学）: content/works/kitayama.json の gozan-bungaku（facts・explanation）、content/eras.json の kitayama（items）",
+      "3文目（観阿弥・世阿弥と義満の保護・風姿花伝）: content/works/kitayama.json の zeami（facts・keyPoints）",
+      "4文目（日明貿易・勘合・朝貢形式・輸入品）: content/works/kitayama.json の nichimin-boeki（facts・explanation）",
+      "5〜6文目（義満の権勢と北山の地名に由来する呼称）: content/eras.json の kitayama（detail）、content/works/kitayama.json の kinkaku（eraNote）",
+      "高校教科書（山川『詳説日本史』）北山文化の項"
     ],
     "underlines": [
       {
         "key": "a",
+        "anchorKind": "person",
         "workIds": [
           "kinkaku"
         ],
         "ask": {
-          "slot": "era",
-          "type": "q9"
+          "type": "q9",
+          "stem": "下線部aの人物が京都の北山に営んだ山荘の中心建物で、その死後に鹿苑寺と称した寺に受け継がれた建築はどれか。",
+          "answerId": "kinkaku",
+          "distractorIds": [
+            "ginkaku",
+            "byodoin-hoo-do",
+            "engakuji-shariden"
+          ]
         },
-        "note": "時代条件（1セットに1問まで）。「下線部aの文化の時期につくられた建築はどれか」"
+        "note": "二段構え: A=足利義満（人物）／B=北山の山荘・鹿苑寺。誤答の ginkaku は別の将軍が営んだ山荘の中心建物（Bの形だけを満たす）。外観にあたる語（works の technique）はリード文に書いていない"
       },
       {
         "key": "b",
+        "anchorKind": "institution",
         "workIds": [
           "kinkaku"
         ],
         "ask": {
-          "slot": "holder",
-          "type": "q10"
+          "type": "q10",
+          "stem": "下線部bのもとで保護された禅宗の様式を上層に用いた、次の写真の建築について述べた文A・Bの正誤の組合せとして正しいものはどれか。",
+          "answerId": "kinkaku"
         },
-        "note": "所在条件＋2文正誤。画像を出して「足利義満が営んだ山荘の建物である／東山文化の代表建築である（誤）」等を問う想定"
+        "note": "二段構え: A=五山・十刹の制（制度）／B=禅宗様を上層に用いた建築。画像を出す型。falseStatements に『足利義政が建てた』『東山文化の代表建築である』『書院造の代表建築である』『枯山水庭園を伴う』がそろう"
       },
       {
         "key": "c",
+        "anchorKind": "person",
         "workIds": [
           "kinkaku"
         ],
         "ask": {
-          "slot": "technique",
-          "type": "q4"
+          "type": "q4",
+          "stem": "下線部cの父子が保護を受けた将軍が京都の北山に営んだ、次の写真の建築について述べた文として最も適切なものはどれか。",
+          "answerId": "kinkaku"
         },
-        "note": "様式条件＋関連記述。falseStatements に「書院造の代表」「枯山水を伴う」など様式の入れ替え型がそろう"
+        "note": "二段構え: A=観阿弥・世阿弥（人物）／B=その保護者である将軍が北山に営んだ建物。画像を出す型。正文は『寝殿造風と禅宗様を組み合わせた構造』『足利義満の山荘の一部』、誤文は『足利義政が建てた』『書院造の代表建築である』が使える"
       },
       {
         "key": "d",
+        "anchorKind": "event",
         "workIds": [
           "kinkaku"
         ],
         "ask": {
-          "slot": "technique",
-          "type": "q9"
+          "type": "q10",
+          "stem": "下線部dによって明の文物が入った頃に営まれた、次の写真の建築について述べた文A・Bの正誤の組合せとして正しいものはどれか。",
+          "answerId": "kinkaku"
         },
-        "note": "技法条件。「下線部dのように外壁を金箔で覆った建築はどれか」"
+        "note": "画像を出す型。bと同じ型だが下線（制度／貿易）とA・B文の観点が異なる。falseStatements の『応仁の乱後に建立された』『東山文化の代表建築である』など時代の入れ替え型を当てる"
       }
     ],
-    "notes": "この区分で画像を出題できる作品は kinkaku のみ（research/m2-image-log-B.md）。mock-exam-analysis.md 7章の想定にしたがい、同一作品に対して所在・様式・技法・時代と角度の異なる4つの問いを立てて4問構成にしている。作品名そのものは本文に出していない。"
+    "notes": "この区分で画像を出題できるのは kinkaku のみ（research/m2-playable-works-2026-09-04.md）。同一作品に対して人物（義満）・制度（五山十刹）・人物（観阿弥世阿弥）・出来事（日明貿易）と、下線の種類と足す属性を変えて4問にしている。画像を伏せて選ばせる型（q9）は先頭のaだけに置き、以降は画像を出す型にした（同じ作品なので、画像を先に見せると後続のq9の答えが割れるため）。"
   }
 ]

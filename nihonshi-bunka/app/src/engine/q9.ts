@@ -202,3 +202,54 @@ export function generateQ9Question(
 ): Q9QuestionData | null {
   return opts.reversed ? generateReversed(target, pool, eras, rng, opts) : generateNormal(target, pool, eras, rng, opts)
 }
+
+/**
+ * 8章「二段構え」: writer が answerId/distractorIds を直接指定した Q9。stem が既に
+ * 「〜はどれか」で完結しているため conditionText は使わない（空文字を返す）。
+ * distractorIds が3件そろわなければ、同カテゴリ・近い時代の候補（q9.ts 既存ロジック）で
+ * 不足分だけ補充する。answerId が pool に見つからなければ null（呼び出し側で次善にフォールバック）。
+ */
+export function generateQ9QuestionFromIds(
+  pool: Work[],
+  answerId: string,
+  distractorIds: string[] | undefined,
+  eras: Era[],
+  rng: RandomFn,
+): Q9QuestionData | null {
+  const correctWork = pool.find((w) => w.id === answerId)
+  if (!correctWork) return null
+
+  const byId = new Map(pool.map((w) => [w.id, w]))
+  const explicit: Work[] = []
+  const seen = new Set<string>([correctWork.id])
+  for (const id of distractorIds ?? []) {
+    const w = byId.get(id)
+    if (!w || seen.has(w.id)) continue
+    explicit.push(w)
+    seen.add(w.id)
+  }
+
+  let distractorWorks = explicit.slice(0, 3)
+  if (distractorWorks.length < 3) {
+    const eraOrderIndex = eraOrderIndexOf(eras)
+    const near = nearbyCandidates(correctWork, pool, eraOrderIndex).filter((w) => !seen.has(w.id))
+    const need = 3 - distractorWorks.length
+    const window = shuffle(near.slice(0, Math.max(need, 6)), rng)
+    for (const w of window) {
+      if (distractorWorks.length >= 3) break
+      distractorWorks.push(w)
+      seen.add(w.id)
+    }
+  }
+  if (distractorWorks.length < 3) return null
+
+  return {
+    reversed: false,
+    // slot は「1セットに1問まで」の era 判定にのみ使う内部情報。二段構えの条件は stem に
+    // 既に書かれているため、era 以外の任意の値でよい。
+    slot: 'artist',
+    conditionText: '',
+    correctWork,
+    distractorWorks,
+  }
+}

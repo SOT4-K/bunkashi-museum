@@ -1,44 +1,80 @@
 [
   {
-    "id": "higashiyama-yoshimasa",
+    "id": "higashiyama-01",
     "era": "higashiyama",
-    "title": "応仁の乱後の東山山荘と侘びの美",
-    "text": "応仁の乱（1467〜77年）で京都が荒廃するなか、8代将軍足利義政は京都の東山に山荘を営み、禅の精神にもとづく簡素で幽玄・侘びを重んじる文化が育った。これを[[a|東山文化]]という。のちに慈照寺となるこの山荘の中心建物は、金箔を張らない簡素な二層の楼閣で、初層に住宅風の意匠、上層に[[b|禅宗様]]を用いる。同じ境内の持仏堂に設けられた四畳半の座敷は、畳を敷きつめ、床の間・違い棚・明障子をそなえた[[c|書院造]]の起源とされ、のちの和風住宅の原型となった。庭園では、水を用いず白砂と石組だけで山水を象徴的に表す[[d|枯山水]]が発達し、京都の[[e|龍安寺]]にその代表例が伝わる。絵画では雪舟が明で学んだ水墨画を大成し、茶の湯では村田珠光が侘び茶を始めた。",
+    "title": "戦乱ののち、東山に退いた将軍",
+    "text": "[[a|応仁の乱]]（1467〜77年）で京都の市街は焼け、公家や僧の多くは領地や大名を頼って地方へ下っていった。8代将軍足利義政は政務から退き、乱ののちに京都の東山へ移って、そこで日を送った。禅の精神は生活の場にも及び、[[b|寺院の方丈の前に、禅の精神を映した庭を営む]]試みや、茶をたてて客を迎える集まりが広まっていく。[[c|村田珠光]]は、豪華な道具を並べる茶に対して、簡素な道具と静かな心をたっとぶ茶のあり方を説いた。明に渡って画技を学んだ雪舟は帰国後に日本的な水墨画を大成し、宗祇は正風連歌を確立し、庶民や下級武士を主人公とする短編物語も読まれた。応仁の乱によって文化が地方や庶民にまで行きわたったこの時期の文化を[[d|東山文化]]という。",
     "sources": [
-      "高校教科書（山川『詳説日本史』）東山文化の項",
-      "work/nihonshi-bunka/content/eras.json（higashiyama の detail・items）",
-      "work/nihonshi-bunka/content/works/higashiyama.json（ginkaku / togudo-doujinsai / ryoanji-sekitei の facts・explanation）"
+      "1文目（応仁の乱と公家・僧の地方下向）: content/eras.json の higashiyama（detail）",
+      "2文目（足利義政と東山の山荘）: content/works/higashiyama.json の ginkaku（patron・eraNote）",
+      "3文目（禅の精神が生活文化に及ぶ・方丈前庭の庭園・茶の集まり）: content/works/higashiyama.json の ryoanji-sekitei（eraNote）、murata-juko（eraNote）",
+      "4文目（村田珠光の侘び茶）: content/works/higashiyama.json の murata-juko（facts・explanation）",
+      "5文目（雪舟・宗祇・御伽草子）: content/works/higashiyama.json の sesshu / otogizoshi（facts）、content/eras.json の higashiyama（detail・items）",
+      "6文目（文化の地方・庶民への広がり）: content/eras.json の higashiyama（detail）",
+      "高校教科書（山川『詳説日本史』）東山文化の項"
     ],
     "underlines": [
       {
         "key": "a",
-        "workIds": ["ginkaku"],
-        "ask": { "slot": "era", "type": "q9" },
-        "note": "時代条件（1セットに1問まで）。「下線部aの文化を代表する建築はどれか」"
+        "anchorKind": "event",
+        "workIds": [
+          "ginkaku"
+        ],
+        "ask": {
+          "type": "q9",
+          "stem": "下線部aののち、足利義政が京都の東山に営んだ山荘の中心建物で、その死後に慈照寺となった寺に受け継がれた建築はどれか。",
+          "answerId": "ginkaku",
+          "distractorIds": [
+            "kinkaku",
+            "engakuji-shariden",
+            "shokintei-katsura"
+          ]
+        },
+        "note": "二段構え: A=応仁の乱（出来事）／B=東山の山荘の中心建物・慈照寺。誤答の kinkaku は別の将軍の山荘の中心建物（Bの形だけを満たす）。外観にあたる語（works の technique）はリード文に書いていない"
       },
       {
         "key": "b",
-        "workIds": ["ginkaku"],
-        "ask": { "slot": "technique", "type": "q10" },
-        "note": "様式条件＋2文正誤。禅宗様は鎌倉区分の禅宗様建築（engakuji-shariden）とも重なるため画像を出す型に限る。「金箔を張らない簡素な外観／足利義満が建てた（誤）」等を問う想定"
+        "anchorKind": "style",
+        "workIds": [
+          "ryoanji-sekitei"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部bに関して、京都の龍安寺の方丈の前に営まれた次の庭園について述べた文A・Bの正誤の組合せとして正しいものはどれか。",
+          "answerId": "ryoanji-sekitei"
+        },
+        "note": "二段構え: A=方丈の前庭に禅の精神を映す造園（様式）／B=龍安寺。画像を出す型。falseStatements に『池泉回遊式庭園である』『夢窓疎石が作庭したことが確定している』『足利義満の時代に造られた』がある。作庭者・年代は諸説あるため断定する文は正文にしない"
       },
       {
         "key": "c",
-        "workIds": ["togudo-doujinsai"],
-        "ask": { "slot": "technique", "type": "q4" },
-        "note": "様式条件＋関連記述。同区分の楼閣建築（ginkaku）の初層も書院造風のため、画像を出さない条件型（q9）には使わない"
+        "anchorKind": "person",
+        "workIds": [
+          "togudo-doujinsai"
+        ],
+        "ask": {
+          "type": "q9",
+          "stem": "下線部cが説いた茶のあり方にも通じる、足利義政が山荘に建てた持仏堂で、四畳半の座敷を備えた建築はどれか。",
+          "answerId": "togudo-doujinsai",
+          "distractorIds": [
+            "ginkaku",
+            "shokintei-katsura",
+            "kinkaku"
+          ]
+        },
+        "note": "二段構え: A=村田珠光（人物）／B=義政の持仏堂・四畳半の座敷。誤答の ginkaku は同じ山荘に建つ別の建物（Aの側だけを満たす）、shokintei-katsura は簡素な座敷をもつ後世の建築（Bの側だけを部分的に満たす）。様式名（works の technique にあたる語）はリード文に書いていない"
       },
       {
         "key": "d",
-        "workIds": ["ryoanji-sekitei"],
-        "ask": { "slot": "technique", "type": "q10" },
-        "note": "技法条件＋2文正誤。作庭者・年代は諸説あり確定していないので、年代を断定する文は出さない"
-      },
-      {
-        "key": "e",
-        "workIds": ["ryoanji-sekitei"],
-        "ask": { "slot": "holder", "type": "q9" },
-        "note": "所在条件。「下線部eの寺に伝わる庭園はどれか」。庭園の作品名は本文に出していない"
+        "anchorKind": "style",
+        "workIds": [
+          "ginkaku"
+        ],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部dを代表する建築とされる、次の写真の建物について述べた文として最も不適切なものはどれか。",
+          "answerId": "ginkaku"
+        },
+        "note": "画像を出す型。aで画像を伏せて選ばせたあとに置く。falseStatements に『足利義満が建てた』『北山文化の代表建築である』『外壁全体が金箔で覆われている』がそろう"
       }
     ]
   }

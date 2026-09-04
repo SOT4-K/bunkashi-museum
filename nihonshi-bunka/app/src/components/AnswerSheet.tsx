@@ -221,6 +221,20 @@ export function AnswerSheet({
         </div>
       )}
 
+      {question.type === 'q12' && question.choiceQ12 && question.choiceQ12.length > 0 && (
+        <div>
+          <div className={styles.sectionLabel}>4つの選択肢</div>
+          <div className={styles.statementList}>
+            {question.choiceQ12.map((s, i) => (
+              <div className={styles.statementItem} key={i}>
+                <span className={s.correct ? styles.statementCorrect : styles.statementWrong}>{s.correct ? '○ 正しい' : '× 誤り'}</span>
+                <span className={styles.statementText}>{s.text}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {question.type === 'q8' && question.choiceCombos && question.choiceCombos.length > 0 && (
         <div>
           <div className={styles.sectionLabel}>4つの組合せ</div>

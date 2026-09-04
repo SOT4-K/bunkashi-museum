@@ -6,7 +6,7 @@
 // 起きない。validate-content.mjs 側の「直接実行時のみ main() を呼ぶ」ガード参照）。
 import { describe, expect, it } from 'vitest'
 // @ts-expect-error 型定義の無いプレーン .mjs スクリプトを直接 import する
-import { workTitleLeaksInText, invalidAskFields } from '../../../../scripts/validate-content.mjs'
+import { workTitleLeaksInText, invalidAskFields, answerLeaksInUnderlineText } from '../../../../scripts/validate-content.mjs'
 
 describe('workTitleLeaksInText（下線先作品の答えが本文に書かれていないかのチェック）', () => {
   it('本文に作品名がそのまま含まれていれば true', () => {
@@ -26,7 +26,7 @@ describe('workTitleLeaksInText（下線先作品の答えが本文に書かれ�
   })
 })
 
-describe('invalidAskFields（underlines[].ask の値検証）', () => {
+describe('invalidAskFields（underlines[].ask の値検証。8章「二段構え」で slot は省略可になった）', () => {
   it('slot・type とも許可された値なら空配列', () => {
     expect(invalidAskFields({ slot: 'holder', type: 'q9' })).toEqual([])
     expect(invalidAskFields({ slot: 'artist', type: 'q9' })).toEqual([])
@@ -35,6 +35,14 @@ describe('invalidAskFields（underlines[].ask の値検証）', () => {
     expect(invalidAskFields({ slot: 'subject', type: 'q4' })).toEqual([])
     expect(invalidAskFields({ slot: 'holder', type: 'q10' })).toEqual([])
     expect(invalidAskFields({ slot: 'holder', type: 'q11' })).toEqual([])
+  })
+
+  it('q12（9章）は type として有効', () => {
+    expect(invalidAskFields({ type: 'q12', answerText: 'x', distractorTexts: ['a', 'b', 'c'] })).toEqual([])
+  })
+
+  it('slot が無くても type さえあれば有効（8章の二段構えデータは stem に条件を書くため slot を省略することが多い）', () => {
+    expect(invalidAskFields({ type: 'q9', stem: 'x', answerId: 'w1' })).toEqual([])
   })
 
   it('type が不正な値なら "type" を含む', () => {
@@ -49,8 +57,30 @@ describe('invalidAskFields（underlines[].ask の値検証）', () => {
     expect(invalidAskFields({ slot: 'bogus', type: 'q99' })).toEqual(['type', 'slot'])
   })
 
-  it('ask が無い・空オブジェクトなら両方不正', () => {
-    expect(invalidAskFields(null)).toEqual(['type', 'slot'])
-    expect(invalidAskFields({})).toEqual(['type', 'slot'])
+  it('ask が無い・空オブジェクトなら type のみ不正（slot は省略可になったため）', () => {
+    expect(invalidAskFields(null)).toEqual(['type'])
+    expect(invalidAskFields({})).toEqual(['type'])
+  })
+})
+
+describe('answerLeaksInUnderlineText（8章「二段構え」: 下線に答えの材質・図様・作品名を書かない、の機械検査）', () => {
+  const work = { title: '広隆寺弥勒菩薩半跏思惟像', technique: '赤松の一木造', subject: null }
+
+  it('下線の文に作品名がそのまま含まれていれば "title" を含む', () => {
+    expect(answerLeaksInUnderlineText(work, '広隆寺弥勒菩薩半跏思惟像で知られる寺院')).toEqual(['title'])
+  })
+
+  it('下線の文に technique がそのまま含まれていれば "technique" を含む', () => {
+    expect(answerLeaksInUnderlineText(work, '赤松の一木造の仏像を安置する寺院')).toEqual(['technique'])
+  })
+
+  it('下線が寺院名など、答えの手がかりを含まなければ空配列', () => {
+    expect(answerLeaksInUnderlineText(work, '広隆寺')).toEqual([])
+  })
+
+  it('work や underlineText が無ければ空配列（例外を投げない）', () => {
+    expect(answerLeaksInUnderlineText(null, '本文')).toEqual([])
+    expect(answerLeaksInUnderlineText(work, '')).toEqual([])
+    expect(answerLeaksInUnderlineText(work, undefined)).toEqual([])
   })
 })

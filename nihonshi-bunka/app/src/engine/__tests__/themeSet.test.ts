@@ -1,7 +1,8 @@
 import { describe, expect, it, vi } from 'vitest'
-import { buildThemeQuestionForWork, buildThemeSetQuestions } from '../themeSet'
+import { buildThemeQuestionForWork, buildThemeSetQuestions, selectLearnThemeSets } from '../themeSet'
+import { createItemProgress } from '../srs'
 import { makeWork, seededRandom, testEras } from './testFixtures'
-import type { Passage, Work } from '../../types'
+import type { Passage, ProgressState, Work } from '../../types'
 
 // Q9（artist条件）が生成できる作品群。
 const targetWithArtist = makeWork({ id: 't1', era: 'tenpyo', category: 'painting', artist: '葛飾北斎' })
@@ -279,5 +280,189 @@ describe('セット内に Q9・Q10 を1問以上保証する（修正の仕様 M
     expect(q10Item).toBeDefined()
     // Q10 を生成できるのは g1（下線 a）だけなので、そこが差し替えられているはず。
     expect(q10Item?.underlineKey).toBe('a')
+  })
+})
+
+// 8章「二段構え」: ask.stem・answerId・distractorIds（writer 手書き）のテスト。
+describe('8章「二段構え」: ask.stem・answerId・distractorIds', () => {
+  const kondo = richWork({ id: 'kondo', era: 'tenpyo', category: 'sculpture', holder: '興福寺', artist: '運慶' })
+  const other1 = makeWork({ id: 'other1', era: 'hakuho', category: 'sculpture', holder: '東大寺', artist: '快慶' })
+  const other2 = makeWork({ id: 'other2', era: 'asuka', category: 'sculpture', holder: '東寺', artist: '快慶' })
+  const other3 = makeWork({ id: 'other3', era: 'konin-jogan', category: 'sculpture', holder: '唐招提寺', artist: '快慶' })
+  const stemPool: Work[] = [kondo, other1, other2, other3]
+
+  it('ask.type が実際に生成できたとき、ask.stem がそのまま question.stem になる', () => {
+    const passage: Passage = {
+      id: 'stem-p',
+      era: 'tenpyo',
+      title: '二段構えテスト',
+      text: '本文。[[a|下線]]。',
+      sources: ['x'],
+      underlines: [
+        {
+          key: 'a',
+          workIds: ['kondo'],
+          ask: { type: 'q9', stem: '下線部aの北円堂に安置され、運慶が製作した彫刻はどれか', answerId: 'kondo', distractorIds: ['other1', 'other2', 'other3'] },
+        },
+      ],
+    }
+    const result = buildThemeSetQuestions(passage, stemPool, testEras, seededRandom(1))
+    expect(result).toHaveLength(1)
+    expect(result[0].question.type).toBe('q9')
+    expect(result[0].question.stem).toBe('下線部aの北円堂に安置され、運慶が製作した彫刻はどれか')
+    // answerId が示す作品（kondo）が選択肢に含まれる（正解の作品）
+    expect(result[0].question.choiceWorks.some((w) => w.id === 'kondo')).toBe(true)
+    expect(result[0].question.choiceWorks[result[0].question.correctIndex].id).toBe('kondo')
+  })
+
+  it('answerId が pool に無ければ、stem を付けずに次善の型にフォールバックする', () => {
+    const passage: Passage = {
+      id: 'stem-fallback-p',
+      era: 'tenpyo',
+      title: '二段構えフォールバックテスト',
+      text: '本文。[[a|下線]]。',
+      sources: ['x'],
+      underlines: [
+        {
+          key: 'a',
+          workIds: ['kondo'],
+          ask: { type: 'q9', stem: '存在しない作品を指す stem', answerId: 'not-in-pool' },
+        },
+      ],
+    }
+    const result = buildThemeSetQuestions(passage, stemPool, testEras, seededRandom(1))
+    expect(result).toHaveLength(1)
+    expect(result[0].question.type).not.toBe('q1') // kondo は q10/q8/q4 も生成できるため q1 まで落ちないはず
+    expect(result[0].question.stem).toBeUndefined()
+  })
+
+  it('distractorIds が不足していれば、既存の同カテゴリ・近い時代ロジックで補充する', () => {
+    const passage: Passage = {
+      id: 'stem-partial-p',
+      era: 'tenpyo',
+      title: '不足補充テスト',
+      text: '本文。[[a|下線]]。',
+      sources: ['x'],
+      underlines: [{ key: 'a', workIds: ['kondo'], ask: { type: 'q9', stem: 's', answerId: 'kondo', distractorIds: ['other1'] } }],
+    }
+    const result = buildThemeSetQuestions(passage, stemPool, testEras, seededRandom(1))
+    expect(result).toHaveLength(1)
+    expect(result[0].question.type).toBe('q9')
+    expect(result[0].question.choiceWorks).toHaveLength(4)
+  })
+})
+
+// 9章「画像リード型セット」: kind: "image" のテーマセット。
+describe('9章「画像リード型セット」: kind: "image"・leadWorkIds・q12', () => {
+  const leadWork = makeWork({ id: 'lead1', era: 'tenpyo', category: 'painting' })
+  const imagePool: Work[] = [leadWork, makeWork({ id: 'other-lead', era: 'hakuho', category: 'painting' })]
+
+  it('kind: "image" で下線の workIds が空でも、leadWorkIds を対象にする', () => {
+    const passage: Passage = {
+      id: 'image-p',
+      era: 'tenpyo',
+      title: '画像リードテスト',
+      kind: 'image',
+      leadWorkIds: ['lead1'],
+      text: '(1)は僧が道場で[[a|踊念仏]]を行う場面。',
+      sources: ['x'],
+      underlines: [
+        {
+          key: 'a',
+          workIds: [],
+          ask: { type: 'q12', stem: 'この絵巻の主人公として最も適切なものはどれか', answerText: '空也上人', distractorTexts: ['一遍上人', '法然', '親鸞'] },
+        },
+      ],
+    }
+    const result = buildThemeSetQuestions(passage, imagePool, testEras, seededRandom(1))
+    expect(result).toHaveLength(1)
+    expect(result[0].question.type).toBe('q12')
+    expect(result[0].question.work.id).toBe('lead1')
+    expect(result[0].question.stem).toBe('この絵巻の主人公として最も適切なものはどれか')
+    expect(result[0].question.choiceQ12).toHaveLength(4)
+  })
+
+  it('q12 の answerText/distractorTexts が無ければ、次善（q1 等）にフォールバックする', () => {
+    const passage: Passage = {
+      id: 'image-fallback-p',
+      era: 'tenpyo',
+      title: '画像リード不足テスト',
+      kind: 'image',
+      leadWorkIds: ['lead1'],
+      text: '(1)は[[a|場面]]。',
+      sources: ['x'],
+      underlines: [{ key: 'a', workIds: [], ask: { type: 'q12', stem: 's' } }],
+    }
+    const result = buildThemeSetQuestions(passage, imagePool, testEras, seededRandom(1))
+    expect(result).toHaveLength(1)
+    expect(result[0].question.type).not.toBe('q12')
+    expect(result[0].question.work.id).toBe('lead1')
+  })
+})
+
+// 9章「『学習を始める』のテーマセット化（M2-13）」
+describe('selectLearnThemeSets（「学習を始める」のテーマセット選定）', () => {
+  const today = '2026-09-04'
+  const w1 = makeWork({ id: 'lw1', era: 'tenpyo', category: 'sculpture' })
+  const w2 = makeWork({ id: 'lw2', era: 'hakuho', category: 'sculpture' })
+  const w3 = makeWork({ id: 'lw3', era: 'asuka', category: 'sculpture' })
+  const w4 = makeWork({ id: 'lw4', era: 'konin-jogan', category: 'sculpture' })
+  const learnPool: Work[] = [w1, w2, w3, w4]
+
+  const passageA: Passage = {
+    id: 'learn-a',
+    era: 'tenpyo',
+    title: 'A',
+    text: '本文。[[a|A]]',
+    sources: ['x'],
+    underlines: [{ key: 'a', workIds: ['lw1'] }],
+  }
+  const passageB: Passage = {
+    id: 'learn-b',
+    era: 'hakuho',
+    title: 'B',
+    text: '本文。[[a|A]]',
+    sources: ['x'],
+    underlines: [{ key: 'a', workIds: ['lw2'] }],
+  }
+  const passageC: Passage = {
+    id: 'learn-c',
+    era: 'asuka',
+    title: 'C',
+    text: '本文。[[a|A]]',
+    sources: ['x'],
+    underlines: [{ key: 'a', workIds: ['lw3'] }],
+  }
+
+  function emptyProgress(): ProgressState {
+    return { version: 2, xp: 0, level: 1, streak: { count: 0, lastDate: null }, items: {}, bosses: {}, newToday: { date: today, count: 0 } }
+  }
+
+  it('空配列を渡せば空配列', () => {
+    expect(selectLearnThemeSets([], learnPool, testEras, emptyProgress(), today)).toEqual([])
+  })
+
+  it('count 以下しか passages が無くても落ちない（重複せず全件以下を返す）', () => {
+    const result = selectLearnThemeSets([passageA], learnPool, testEras, emptyProgress(), today, 3)
+    expect(result).toHaveLength(1)
+  })
+
+  it('SRS の期限が来た作品を含むセットを優先する', () => {
+    const progress = emptyProgress()
+    // lw2（passageB の対象）だけ期限到来にする
+    progress.items['lw2'] = createItemProgress(today)
+    const result = selectLearnThemeSets([passageA, passageB, passageC], learnPool, testEras, progress, today, 1)
+    expect(result).toHaveLength(1)
+    expect(result[0].id).toBe('learn-b')
+  })
+
+  it('期限到来作品が無ければ、count 件を返す（習熟の低い区分から）', () => {
+    const result = selectLearnThemeSets([passageA, passageB, passageC], learnPool, testEras, emptyProgress(), today, 2)
+    expect(result).toHaveLength(2)
+  })
+
+  it('count を超えない', () => {
+    const result = selectLearnThemeSets([passageA, passageB, passageC], learnPool, testEras, emptyProgress(), today, 2)
+    expect(result.length).toBeLessThanOrEqual(2)
   })
 })

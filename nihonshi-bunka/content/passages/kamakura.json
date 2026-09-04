@@ -1,69 +1,81 @@
 [
   {
-    "id": "kamakura-chokoku-kenchiku",
+    "id": "kamakura-01",
     "era": "kamakura",
-    "title": "写実の彫刻と、並び立つ三つの建築様式",
-    "text": "鎌倉時代の文化は、伝統を守る京都の公家文化と、武士や庶民に支持された素朴で力強い鎌倉の武家文化という二つの中心をもち、宋・元との交流によって禅宗や宋学が新しく加わった。彫刻では運慶・快慶ら慶派が写実的な作風を確立し、[[a|瞳に水晶をはめこむ玉眼]]の技法が広く用いられた。運慶の子[[b|康勝]]も、実在の僧の姿を写した肖像彫刻を手がけている。鎌倉の[[c|高徳院]]では、民間の勧進によって銅を鋳た露座の大仏が造られた。建築では、東大寺の再建に用いられた大仏様、宋から伝えられ禅寺に用いられた[[d|禅宗様]]、平安以来の伝統をひく[[e|和様]]が並び立った。仏教では法然・親鸞・一遍・日蓮・栄西・道元による鎌倉新仏教もおこった。",
+    "title": "南都の再建と、鎌倉に入った新しい信仰",
+    "text": "鎌倉時代の文化は、伝統を守る京都の公家と、武士や庶民に支持された鎌倉の武家という二つの中心をもち、宋・元との交流によって新しい要素が加わった。焼失した東大寺の再建にともなって新しい建築様式が用いられ、彫刻では運慶・快慶らの一門が写実を重んじる作風を確立した。その系譜をひく仏師たちは、京都の[[a|六波羅蜜寺]]をはじめ、京と鎌倉の寺々で造像を続けている。鎌倉では13世紀半ば、[[b|民間からの寄進を集めた造像]]が進められたと伝えられる。宋・元との往来を通じて[[c|禅宗]]が伝えられ、幕府や公家の帰依を受けて鎌倉に禅寺が開かれた。京都では、かつて[[d|平清盛]]が後白河法皇のために建てた堂が、今日まで受け継がれている。仏教では法然・親鸞・一遍・日蓮・栄西・道元による鎌倉新仏教もおこり、旧仏教の側でも改革が進んだ。",
     "sources": [
-      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
-      "work/nihonshi-bunka/content/eras.json（kamakura の detail・items）",
-      "work/nihonshi-bunka/content/works/kamakura.json（kuya-shonin-zo / kamakura-daibutsu / engakuji-shariden / sanjusangendo-hondo の facts・explanation）"
+      "1文目（公家と武家の二つの中心・宋元との交流）: content/eras.json の kamakura（detail）",
+      "2文目（東大寺再建と大仏様・慶派の写実）: content/eras.json の kamakura（detail）",
+      "3文目（六波羅蜜寺）: content/works/kamakura.json の kuya-shonin-zo（holder・facts の location）",
+      "4文目（13世紀半ば・民間の勧進による造像）: content/works/kamakura.json の kamakura-daibutsu（patron・periodLabel・facts）",
+      "5文目（禅宗の伝来と幕府の帰依・鎌倉の禅寺）: content/works/kamakura.json の engakuji-shariden（eraNote・holder）、content/eras.json の kamakura（detail）",
+      "6文目（平清盛が後白河法皇のために建てた堂）: content/works/kamakura.json の sanjusangendo-hondo（patron・facts・eraNote）",
+      "7文目（鎌倉新仏教と旧仏教の改革）: content/eras.json の kamakura（detail）",
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項"
     ],
     "underlines": [
       {
         "key": "a",
+        "anchorKind": "temple",
         "workIds": [
           "kuya-shonin-zo"
         ],
         "ask": {
-          "slot": "technique",
-          "type": "q10"
+          "type": "q9",
+          "stem": "下線部aの六波羅蜜寺に伝わり、運慶の四男である康勝が製作した彫刻はどれか。",
+          "answerId": "kuya-shonin-zo",
+          "distractorIds": [
+            "byodoin-amida-nyorai",
+            "kamakura-daibutsu",
+            "toji-fudo-myoo"
+          ]
         },
-        "note": "技法条件＋2文正誤。画像を出して「木造彩色・玉眼である／運慶の作である（誤）」等の正誤を問う想定"
+        "note": "二段構え: A=六波羅蜜寺（寺院）／B=康勝の作。誤答はすべて彫刻。byodoin-amida-nyorai は作者（定朝）が明らかな像でBだけを部分的に満たし、kamakura-daibutsu は同時代・同カテゴリ。作品の姿・材質にあたる語はリード文に書いていない"
       },
       {
         "key": "b",
-        "workIds": [
-          "kuya-shonin-zo"
-        ],
-        "ask": {
-          "slot": "artist",
-          "type": "q9"
-        },
-        "note": "作者条件。「下線部bの人物が製作した彫刻はどれか」。作品名は本文に出していない"
-      },
-      {
-        "key": "c",
+        "anchorKind": "event",
         "workIds": [
           "kamakura-daibutsu"
         ],
         "ask": {
-          "slot": "holder",
-          "type": "q4"
+          "type": "q10",
+          "stem": "下線部bによって造られ、鎌倉の高徳院に伝わる次の阿弥陀如来像について述べた文A・Bの正誤の組合せとして正しいものはどれか。",
+          "answerId": "kamakura-daibutsu"
         },
-        "note": "所在条件＋関連記述。artist は不詳のため ask に使わない。falseStatements に東大寺盧舎那仏との混同型がある"
+        "note": "二段構え: A=民間の寄進による造像（出来事）／B=高徳院・阿弥陀如来。画像を出す型。falseStatements に『東大寺盧舎那仏像である』『大仏殿の中に安置されている』『尊格は釈迦如来である』があり、奈良の大仏との混同型が使える。リード文には尊格も技法にあたる語も書いていない"
       },
       {
-        "key": "d",
+        "key": "c",
+        "anchorKind": "institution",
         "workIds": [
           "engakuji-shariden"
         ],
         "ask": {
-          "slot": "technique",
-          "type": "q10"
+          "type": "q9",
+          "stem": "下線部cの寺院として鎌倉に開かれた円覚寺に伝わり、宋から伝えられた様式で建てられた仏堂はどれか。",
+          "answerId": "engakuji-shariden",
+          "distractorIds": [
+            "sanjusangendo-hondo",
+            "ginkaku",
+            "byodoin-hoo-do"
+          ]
         },
-        "note": "様式条件＋2文正誤。禅宗様の建築（銀閣も上層が禅宗様）と画像上・条件文だけでは区別しにくいため、画像を出すq10に変更（reviewer指摘[中]-5, 2026-09-04 M2-11）"
+        "note": "二段構え: A=禅宗（宗派）／B=円覚寺・宋から伝わった様式。誤答の ginkaku は上層に同じ様式を用いる建築（Bのみを部分的に満たす）、sanjusangendo-hondo は同時代の別様式。様式名そのものはリード文に書いていない"
       },
       {
-        "key": "e",
+        "key": "d",
+        "anchorKind": "person",
         "workIds": [
           "sanjusangendo-hondo"
         ],
         "ask": {
-          "slot": "technique",
-          "type": "q10"
+          "type": "q4",
+          "stem": "下線部dの人物が後白河法皇のために建てた、次の写真の堂について述べた文として最も適切なものはどれか。",
+          "answerId": "sanjusangendo-hondo"
         },
-        "note": "様式条件＋2文正誤。当初の建立は院政期（1164年）、現存建物は鎌倉再建（1266年）という年代の扱いに注意"
+        "note": "二段構え: A=平清盛（人物）／B=後白河法皇のための造営。画像を出す型。正文は facts の style（伝統的な様式の代表）と『本尊の千手観音坐像を中心に千体の像を安置』、誤文は『禅宗様の代表建築である』『運慶が建立を発願した』などが使える。当初建立（1164年）と現存建物（1266年再建）の年代差はリード文で断定していないので、そこも問える"
       }
     ]
   }

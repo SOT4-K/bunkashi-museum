@@ -52,3 +52,24 @@
   color: var(--text-dim);
   line-height: 1.6;
 }
+
+/* 9章「画像リード型セット」: kind === "image" のリード画像（1〜2枚）。 */
+.leadImageGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+}
+
+.leadImageItem {
+  border-radius: var(--radius-image);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  flex-shrink: 0;
+}
+
+.leadImageItem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}

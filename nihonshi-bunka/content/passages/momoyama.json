@@ -1,40 +1,78 @@
 [
   {
-    "id": "momoyama-shokuho",
+    "id": "momoyama-01",
     "era": "momoyama",
-    "title": "織豊政権と天守をもつ城",
-    "text": "織田信長・豊臣秀吉が全国統一を進めた安土桃山時代には、新興の大名や南蛮貿易などで富を得た豪商の力を背景に、豪壮で華麗な文化が生まれた。建築では、信長の安土城や秀吉の大坂城のように、高くそびえる[[a|天守を中心とする城郭]]が各地に築かれ、城内の書院は狩野永徳・狩野山楽・長谷川等伯らが金地に濃い色を用いて描く濃絵の障壁画で飾られた。外壁を[[b|白漆喰で塗り籠める]]手法や、大天守と小天守を渡櫓で結ぶ[[c|連立式の構成]]をとる城も現れた。千利休は村田珠光以来の侘び茶を大成し、出雲阿国が始めたかぶき踊りはのちの歌舞伎のもととなった。ポルトガル・スペイン人の来航によってキリスト教や活字印刷術などの南蛮文化も入り、こうした現世的で人間中心の性格をもつ文化を[[d|桃山文化]]と呼ぶ。",
+    "title": "織豊政権と、大名たちの居城",
+    "text": "織田信長・豊臣秀吉が全国統一を進めた時代には、新興の大名や、南蛮貿易などで富を得た豪商の力を背景に、豪壮で華麗な文化が生まれた。[[a|信長は近江の安土に、秀吉は大坂に城を築き]]、政治の拠点とするとともに自らの権威を示した。城内の書院は、狩野永徳・狩野山楽・長谷川等伯らが金地に濃い色を用いて描く濃絵の障壁画で飾られた。[[b|関ヶ原の戦い]]ののちも大名の居城の造営は続き、旧来の城を大きく改めて一族の力を示す者もいた。[[c|城の建築は、この時代の気風を最もよく示すもの]]とされる。千利休は村田珠光以来の侘び茶を大成し、出雲阿国が始めたかぶき踊りは人々の人気を集めた。ポルトガル・スペイン人の来航によってキリスト教や活字印刷術などの南蛮文化も入り、[[d|仏教の影響が薄れ、現世的で人間中心の性格をもつ文化]]が広がった。",
     "sources": [
-      "高校教科書（山川『詳説日本史』）桃山文化の項",
-      "work/nihonshi-bunka/content/eras.json（momoyama の detail・items）",
-      "work/nihonshi-bunka/content/works/momoyama.json（himeji-jo の facts・explanation、noe-shohekiga / sen-no-rikyu / izumo-no-okuni / kirishitan-ban の eraNote）"
+      "1文目（新興大名・豪商の富を背景とする豪壮な文化）: content/eras.json の momoyama（detail）",
+      "2文目（安土城・大坂城）: content/eras.json の momoyama（detail）、content/works/momoyama.json の himeji-jo（examNote・falseStatements）",
+      "3文目（濃絵の障壁画と画家）: content/works/momoyama.json の noe-shohekiga（facts・explanation）",
+      "4文目（関ヶ原の戦いののちの居城造営・大改修）: content/works/momoyama.json の himeji-jo（periodLabel・facts・explanation）",
+      "5文目（城郭建築が時代を代表する）: content/eras.json の momoyama（detail・items）",
+      "6文目（千利休・出雲阿国）: content/works/momoyama.json の sen-no-rikyu / izumo-no-okuni（facts）",
+      "7文目（南蛮文化・現世的で人間中心の性格）: content/works/momoyama.json の kirishitan-ban（facts・eraNote）、content/eras.json の momoyama（detail）",
+      "高校教科書（山川『詳説日本史』）桃山文化の項"
     ],
     "underlines": [
       {
         "key": "a",
-        "workIds": ["himeji-jo"],
-        "ask": { "slot": "technique", "type": "q9" },
-        "note": "様式条件。「下線部aにあたる建築として最も適切なものはどれか」。holder が無い（城のため所蔵者の概念がない）ので holder は ask に使わない"
+        "anchorKind": "event",
+        "workIds": [
+          "himeji-jo"
+        ],
+        "ask": {
+          "type": "q9",
+          "stem": "下線部aと同じころに築かれ、関ヶ原の戦いののち播磨に入った池田輝政の大改修によって現在の姿となった城はどれか。",
+          "answerId": "himeji-jo",
+          "distractorIds": [
+            "shokintei-katsura",
+            "yomeimon-nikko",
+            "ginkaku"
+          ]
+        },
+        "note": "二段構え: A=信長・秀吉の築城（出来事）／B=池田輝政の大改修。誤答は近世の建築でそろえた。城の外観にあたる語（works の technique）はリード文に書いていない。この区分は画像を出題できる作品が himeji-jo のみのため、画像を伏せて選ばせる型はこの1問に限り、以降は画像を出す型にしている"
       },
       {
         "key": "b",
-        "workIds": ["himeji-jo"],
-        "ask": { "slot": "technique", "type": "q10" },
-        "note": "技法条件＋2文正誤。画像を出して「白漆喰総塗籠で白鷺城とも呼ばれる／黒漆塗りの外観で知られる（誤）」等を問う想定"
+        "anchorKind": "event",
+        "workIds": [
+          "himeji-jo"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部bののちに大改修が行われた、次の写真の城について述べた文A・Bの正誤の組合せとして正しいものはどれか。",
+          "answerId": "himeji-jo"
+        },
+        "note": "画像を出す型。falseStatements に『織田信長が築いた安土城である』『豊臣秀吉が築いた大坂城である』『黒漆塗りの外観で知られる』がそろい、正文は facts の外観・構成・大改修の3項目が使える"
       },
       {
         "key": "c",
-        "workIds": ["himeji-jo"],
-        "ask": { "slot": "technique", "type": "q4" },
-        "note": "構成条件＋関連記述。falseStatements に安土城・大坂城との入れ替え型、江戸中期新築の年代型がそろう"
+        "anchorKind": "style",
+        "workIds": [
+          "himeji-jo"
+        ],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部cに関して、この時代に確立した城郭建築の様式を伝える次の写真の城について述べた文として最も不適切なものはどれか。",
+          "answerId": "himeji-jo"
+        },
+        "note": "画像を出す型。falseStatements の『江戸時代中期に新築された』や、城郭ではなく御殿建築とする属性の反転型が使える"
       },
       {
         "key": "d",
-        "workIds": ["himeji-jo"],
-        "ask": { "slot": "era", "type": "q9" },
-        "note": "時代条件（1セットに1問まで）。「下線部dの時期の様式を伝える建築はどれか」。現存天守は1601〜1609年の池田輝政による大改修によるもので、桃山文化の城郭様式を伝える扱い"
+        "anchorKind": "style",
+        "workIds": [
+          "himeji-jo"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部dの文化のもとで整えられた、次の写真の城について述べた文A・Bの正誤の組合せとして正しいものはどれか。",
+          "answerId": "himeji-jo"
+        },
+        "note": "bと同じ型だが下線（出来事／文化の性格）とA・B文の観点が異なる。現存する建物は1601〜1609年の大改修によるもので、桃山文化の城郭様式を伝えるという扱い（periodLabel）を前提にする"
       }
     ],
-    "notes": "この区分で画像を出題できる作品は himeji-jo のみ（research/m2-image-log-B.md）。mock-exam-analysis.md 7章の想定にしたがい、同一作品に対して様式・技法・構成・時代と角度の異なる4つの問いを立てて4問構成にしている。作品名そのものは本文に出していない。"
+    "notes": "この区分で画像を出題できるのは himeji-jo のみ（research/m2-playable-works-2026-09-04.md）。同一作品に対して出来事（信長・秀吉の築城）・出来事（関ヶ原の戦い）・様式（城郭建築）・文化の性格と、下線の種類と足す属性を変えて4問にしている。"
   }
 ]

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { generateQ9Question } from '../q9'
+import { generateQ9Question, generateQ9QuestionFromIds } from '../q9'
 import { makeWork, seededRandom, testEras } from './testFixtures'
 import type { Work } from '../../types'
 
@@ -149,5 +149,38 @@ describe('avoidSlots / preferredSlot オプション（修正の仕様: ask.slot
     // hokusai1 は style を持たないので、preferredSlot: style は使えず artist に落ちる
     const result = generateQ9Question(hokusai1, artistPool, testEras, seededRandom(1), { preferredSlot: 'style' })
     expect(result?.slot).toBe('artist')
+  })
+})
+
+// 8章「二段構え」: writer が answerId/distractorIds を直接指定するデータ形。
+describe('generateQ9QuestionFromIds（8章「二段構え」: writer 指定の answerId/distractorIds）', () => {
+  it('distractorIds が3件そろっていれば、そのまま使う（algorithmic な選定はしない）', () => {
+    const result = generateQ9QuestionFromIds(multiSlotPool, 'ms1', ['ms2', 'ms3', 'ms4'], testEras, seededRandom(1))
+    expect(result).not.toBeNull()
+    expect(result!.correctWork.id).toBe('ms1')
+    expect(result!.conditionText).toBe('') // stem 側で表示するため conditionText は使わない
+    expect(new Set(result!.distractorWorks.map((w) => w.id))).toEqual(new Set(['ms2', 'ms3', 'ms4']))
+  })
+
+  it('distractorIds が不足していれば、同カテゴリ・近い時代のロジックで不足分を補充する', () => {
+    const result = generateQ9QuestionFromIds(multiSlotPool, 'ms1', ['ms2'], testEras, seededRandom(1))
+    expect(result).not.toBeNull()
+    expect(result!.distractorWorks).toHaveLength(3)
+    expect(result!.distractorWorks.some((w) => w.id === 'ms2')).toBe(true)
+    // 補充分は multiSlotPool の残り（ms3/ms4）から選ばれる
+    for (const w of result!.distractorWorks) {
+      expect(['ms2', 'ms3', 'ms4']).toContain(w.id)
+    }
+  })
+
+  it('answerId が pool に無ければ null（生成失敗として扱い、呼び出し側で次善にフォールバックする）', () => {
+    const result = generateQ9QuestionFromIds(multiSlotPool, 'not-in-pool', ['ms2', 'ms3', 'ms4'], testEras, seededRandom(1))
+    expect(result).toBeNull()
+  })
+
+  it('distractorIds を省略しても補充ロジックだけで3件そろえば生成できる', () => {
+    const result = generateQ9QuestionFromIds(multiSlotPool, 'ms1', undefined, testEras, seededRandom(1))
+    expect(result).not.toBeNull()
+    expect(result!.distractorWorks).toHaveLength(3)
   })
 })

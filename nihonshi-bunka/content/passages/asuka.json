@@ -2,8 +2,8 @@
   {
     "id": "asuka-01",
     "era": "asuka",
-    "title": "推古朝の仏教文化と二つの様式",
-    "text": "6世紀末から7世紀前半、推古天皇のもとで厩戸王（聖徳太子）や蘇我馬子が政治を進めた時代に、日本で最初の仏教文化が花開いた。渡来系の[[a|鞍作鳥（止利仏師）]]は中国の北魏様式を受けた正面性の強い作風を確立し、その作と銘文に記される本尊が法隆寺の金堂に伝わる。これに対して、細身で背が高く優美な[[b|南朝様式]]の木彫像も作られた。秦氏の氏寺である[[c|広隆寺]]には赤松の一木造の像が、聖徳太子ゆかりの尼寺である[[d|中宮寺]]には樟材の像が伝わり、いずれも片足を組んで頬に指をあてる半跏思惟の姿をとる。工芸では、金銅の透かし彫り金具の下に[[e|玉虫の羽を敷きつめた装飾]]をもつ宮殿形の厨子が法隆寺に伝わり、側面には捨身飼虎図などの説話画が描かれている。",
+    "title": "推古朝の政治と最初の仏教文化",
+    "text": "7世紀の初め、推古天皇のもとで[[a|厩戸王（聖徳太子）]]と蘇我馬子が政治にあたった時代に、日本で最初の仏教文化である飛鳥文化が花開いた。蘇我馬子は自らの氏寺として飛鳥寺（法興寺）を建て、有力な豪族もあいついで寺を営んだ。斑鳩に建てられた[[b|法隆寺]]には、この時期の仏像や仏具が数多く伝えられている。渡来系氏族を率いた[[c|秦河勝]]も、みずからの氏寺を建てて仏像を伝えたという。聖徳太子ゆかりの尼寺である[[d|中宮寺]]にも像が残る。彫刻の制作は渡来人の子孫である仏師が担い、その様式には中国の北魏の様式を受けた系統と、[[e|中国南朝の様式]]を受けた柔和な系統の二つがあった。高句麗の僧曇徴が紙・墨の製法を伝えたことにも示されるように、大陸や半島の文物が仏教とともに流れこんだ点も、この文化の特色である。",
     "sources": [
       "高校教科書（山川『詳説日本史』）飛鳥文化の項",
       "法隆寺公式サイト"
@@ -11,33 +11,61 @@
     "underlines": [
       {
         "key": "a",
+        "anchorKind": "person",
         "workIds": ["horyuji-shaka-sanzon"],
-        "ask": { "slot": "artist", "type": "q9" },
-        "note": "作者条件（鞍作鳥）で選ばせる。飛鳥で artist をもつのはこの作品のみ"
+        "ask": {
+          "type": "q9",
+          "stem": "下線部aの人物の病気平癒と没後の冥福を祈って造られたと光背の銘文に記され、鞍作鳥（止利仏師）の作とされる像はどれか",
+          "answerId": "horyuji-shaka-sanzon",
+          "distractorIds": ["kudara-kannon", "koryuji-miroku", "yakushi-sanzon-yakushiji"]
+        },
+        "note": "二段: 下線＝人物／設問＝銘文と作者。誤答の kudara-kannon は同じ寺（Aのみ）、yakushi-sanzon-yakushiji は同形式の銅造三尊像（Bのみ）"
       },
       {
         "key": "b",
-        "workIds": ["kudara-kannon"],
-        "ask": { "slot": "technique", "type": "q4" },
-        "note": "南朝様式・樟の一木造・水瓶を持つ立像。関連記述で様式と技法を問う"
+        "anchorKind": "temple",
+        "workIds": ["tamamushi-zushi"],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部bの寺院に伝わる次の工芸品について述べた文として最も適切なものはどれか",
+          "answerId": "tamamushi-zushi"
+        },
+        "note": "画像を出す型なので下線は寺院でよい（8章5項）。本文に材質・装飾・図様を書いていない"
       },
       {
         "key": "c",
+        "anchorKind": "person",
         "workIds": ["koryuji-miroku"],
-        "ask": { "slot": "holder", "type": "q9" },
-        "note": "所蔵条件（広隆寺）。赤松の一木造で中宮寺像と対にして覚えさせる"
+        "ask": {
+          "type": "q9",
+          "stem": "下線部cが建てたと伝える氏寺に伝わり、赤松の一木造で作られた菩薩像はどれか",
+          "answerId": "koryuji-miroku",
+          "distractorIds": ["chuguji-hanka-shiyui", "kudara-kannon", "kanshinji-nyoirin-kannon"]
+        },
+        "note": "二段: 下線＝人物（氏寺は設問側で参照）／設問＝材質。誤答は同じ姿の像・同じ木彫の菩薩像でそろえる"
       },
       {
         "key": "d",
+        "anchorKind": "temple",
         "workIds": ["chuguji-hanka-shiyui"],
-        "ask": { "slot": "holder", "type": "q10" },
-        "note": "2文正誤で材質（樟）と所蔵（中宮寺）の取り違えを突く"
+        "ask": {
+          "type": "q10",
+          "stem": "下線部dの寺に伝わる次の像（画像）について述べたA・Bの文の正誤の組合せとして正しいものはどれか",
+          "answerId": "chuguji-hanka-shiyui"
+        },
+        "note": "画像を出す型。材質と所在（この像／koryuji-miroku）の取り違えを突く"
       },
       {
         "key": "e",
-        "workIds": ["tamamushi-zushi"],
-        "ask": { "slot": "technique", "type": "q9" },
-        "note": "技法条件（木製・金銅金具・玉虫の羽）。正倉院宝物との時代混同に注意"
+        "anchorKind": "style",
+        "workIds": ["kudara-kannon"],
+        "ask": {
+          "type": "q9",
+          "stem": "下線部eの様式を受けたとされ、水瓶を手にする木彫の菩薩像はどれか",
+          "answerId": "kudara-kannon",
+          "distractorIds": ["horyuji-shaka-sanzon", "koryuji-miroku", "chuguji-hanka-shiyui"]
+        },
+        "note": "二段: 下線＝様式（A）／設問＝持物と材質（B）。誤答は A のみ（koryuji・chuguji＝同じ系統の木彫）と、同じ寺だが銅造の horyuji-shaka-sanzon。盲検対策で stem に寺名を出していない"
       }
     ]
   }

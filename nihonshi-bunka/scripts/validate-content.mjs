@@ -51,9 +51,10 @@ const VALID_STATUS = new Set(['draft', 'reviewed'])
 const VALID_KINDS = new Set(['artifact', 'person', 'text', 'concept'])
 
 // underlines[].ask（下線から出したい設問の型・条件スロット。省略可）。
-// app/src/types.ts の PassageUnderlineAsk と揃える（M2-09〜11 修正の仕様）。
+// app/src/types.ts の PassageUnderlineAsk と揃える（M2-09〜11 修正の仕様・8章「二段構え」・9章）。
 const VALID_ASK_SLOTS = new Set(['holder', 'artist', 'technique', 'era', 'subject'])
-const VALID_ASK_TYPES = new Set(['q9', 'q10', 'q4', 'q11'])
+const VALID_ASK_TYPES = new Set(['q9', 'q10', 'q4', 'q11', 'q12'])
+const VALID_PASSAGE_KINDS = new Set(['text', 'image'])
 
 // 純関数として export し、app/src 側の Vitest から直接検証できるようにする
 // （このファイル自体は node scripts/validate-content.mjs として直接実行する想定だが、
@@ -66,14 +67,31 @@ export function workTitleLeaksInText(work, text) {
   return Boolean(work && work.title && typeof text === 'string' && text.includes(work.title))
 }
 
-/** underlines[].ask の値が正しいか（slot/type が許可された列挙値か）。
- *  不正な項目名の配列（'slot' | 'type'）を返す。問題無ければ空配列。 */
+/** underlines[].ask の値が正しいか（type が許可された列挙値か。slot は8章「二段構え」から
+ *  省略可になった＝ある場合だけ列挙値を検査する）。不正な項目名の配列（'slot' | 'type'）を返す。
+ *  問題無ければ空配列。 */
 export function invalidAskFields(ask) {
-  if (!ask || typeof ask !== 'object') return ['type', 'slot']
+  if (!ask || typeof ask !== 'object') return ['type']
   const invalid = []
   if (!ask.type || !VALID_ASK_TYPES.has(ask.type)) invalid.push('type')
-  if (!ask.slot || !VALID_ASK_SLOTS.has(ask.slot)) invalid.push('slot')
+  if ('slot' in ask && ask.slot != null && !VALID_ASK_SLOTS.has(ask.slot)) invalid.push('slot')
   return invalid
+}
+
+/** 下線の文（本文中の該当 [[key|...]] マーカーの中身）に、work の title/technique/subject が
+ *  部分文字列として含まれているか。8章「二段構え」: 下線は一段外した手がかりで、
+ *  答え（作品の材質・図様・作品名）を下線自体に書いてはいけない、の機械検査。
+ *  含まれていたフィールド名の配列（'title' | 'technique' | 'subject'）を返す。無ければ空配列。 */
+export function answerLeaksInUnderlineText(work, underlineText) {
+  if (!work || typeof underlineText !== 'string' || !underlineText) return []
+  const leaked = []
+  for (const field of ['title', 'technique', 'subject']) {
+    const value = work[field]
+    if (value && typeof value === 'string' && underlineText.includes(value)) {
+      leaked.push(field)
+    }
+  }
+  return leaked
 }
 
 // リード文の下線マーカー。app/src/engine/passage.ts の UNDERLINE_MARKER と揃える
@@ -95,17 +113,36 @@ function extractUnderlineKeys(text) {
   return keys
 }
 
+/** text 内の `[[key|value]]` マーカーから key → value（下線部の文言）の対応表を作る。 */
+function underlineTextByKey(text) {
+  const map = new Map()
+  const re = new RegExp(UNDERLINE_MARKER)
+  let match
+  while ((match = re.exec(text))) {
+    map.set(match[1], match[2])
+  }
+  return map
+}
+
 // content/passages/<era>.json（リード文＋下線部→図版問題。M2 チケット「テーマセット」）の検証。
-//  各要素 {id, era, title, text, sources, underlines:[{key, workIds, note?, ask?}]}。
+//  各要素 {id, era, title, text, sources, underlines:[{key, workIds, note?, anchorKind?, ask?}],
+//   kind?: "text"|"image", leadWorkIds?}。
 //  - text 内の [[key|...]] マーカーと underlines[].key が過不足なく一致すること
-//  - workIds が実在する作品 id であり、かつその作品が画像を持つ（kind: artifact/省略 かつ
-//    manifest.json にエントリがあり画像実体が content/images/ にある）こと（満たさなければエラー。
-//    「生成できない下線」を公開させないため）
+//  - kind が省略時 "text": workIds が実在する作品 id であり、かつその作品が画像を持つ
+//    （kind: artifact/省略 かつ manifest.json にエントリがあり画像実体が content/images/ にある）
+//    こと（満たさなければエラー。「生成できない下線」を公開させないため）
+//  - kind: "image"（9章「画像リード型セット」）: leadWorkIds が1件以上、すべて画像を持つ作品で
+//    あること。underlines[].workIds は省略・空でもよい（leadWorkIds を対象にする）
 //  - text（マーカー記法込みの全文）に、workIds が参照する作品の title が部分文字列として
 //    含まれていたらエラー（下線先作品の答えが本文に書かれているのを機械的に防ぐ。
 //    mock-exam-analysis.md 7章の修正の仕様）
-//  - underlines[].ask（省略可）: slot が holder/artist/technique/era/subject、
-//    type が q9/q10/q4/q11 のいずれかであること（不正な値はエラー）
+//  - underlines[].ask（省略可）: type が q9/q10/q4/q11/q12、slot（あれば）が
+//    holder/artist/technique/era/subject のいずれかであること（不正な値はエラー）
+//  - ask.answerId/distractorIds（8章「二段構え」）: 出題プールにある playable な作品 id で
+//    重複が無いこと。下線の文（[[key|...]] の中身）に answerId が指す作品の
+//    title/technique/subject が部分文字列として含まれていたらエラー（二段構えの原則違反。
+//    材質・図様・作品名を下線に書かない）
+//  - ask.type === 'q12'（9章）: answerText と distractorTexts（3件）が必須
 //  - 下線は1passageにつき3〜5個、text は200〜400字程度（目安。文字数は警告のみ）
 function validatePassages({ worksById, hasImageAsset, eraIds, errors, warnings }) {
   if (!existsSync(passagesDir)) {
@@ -159,6 +196,32 @@ function validatePassages({ worksById, hasImageAsset, eraIds, errors, warnings }
         warnings.push(`${label}: 下線が ${passage.underlines.length} 個（目安 3〜5 個）`)
       }
 
+      // kind（省略時 "text"）・leadWorkIds（9章「画像リード型セット」）
+      const passageKind = 'kind' in passage ? passage.kind : 'text'
+      if ('kind' in passage && !VALID_PASSAGE_KINDS.has(passage.kind)) {
+        errors.push(`${label}: kind "${passage.kind}" は text/image のいずれかである必要がある`)
+      }
+      const isImageLead = passageKind === 'image'
+      let leadWorksOk = false
+      if (isImageLead) {
+        if (!Array.isArray(passage.leadWorkIds) || passage.leadWorkIds.length === 0) {
+          errors.push(`${label}: kind が "image" のとき leadWorkIds が1件以上必要`)
+        } else {
+          for (const id of passage.leadWorkIds) {
+            const work = worksById.get(id)
+            if (!work) {
+              errors.push(`${label}: leadWorkIds "${id}" は存在しない作品`)
+              continue
+            }
+            if (!hasImageAsset(work)) {
+              errors.push(`${label}: leadWorkIds "${id}" は画像で出題できない（manifest.json に無い、または画像実体が無い）`)
+              continue
+            }
+            leadWorksOk = true
+          }
+        }
+      }
+
       // text 内マーカーと underlines[].key の過不足一致
       const textKeys = extractUnderlineKeys(passage.text)
       const textKeySet = new Set(textKeys)
@@ -180,30 +243,35 @@ function validatePassages({ worksById, hasImageAsset, eraIds, errors, warnings }
       }
 
       // underlines[].workIds の検証
+      const underlineTexts = underlineTextByKey(passage.text)
       for (const underline of passage.underlines) {
         if (!underline.key) {
           errors.push(`${label}: underlines に key の無い要素がある`)
           continue
         }
-        if (!Array.isArray(underline.workIds) || underline.workIds.length === 0) {
-          errors.push(`${label} / ${underline.key}: workIds が無いか空`)
+        const hasOwnWorkIds = Array.isArray(underline.workIds) && underline.workIds.length > 0
+        // kind: "image" の下線は workIds を省略・空にでき、その場合は leadWorkIds を対象にする（9章）。
+        if (!hasOwnWorkIds && !(isImageLead && leadWorksOk)) {
+          errors.push(`${label} / ${underline.key}: workIds が無いか空（kind が "image" で leadWorkIds が有効な場合を除く）`)
           continue
         }
-        let hasGeneratable = false
-        for (const workId of underline.workIds) {
-          const work = worksById.get(workId)
-          if (!work) {
-            errors.push(`${label} / ${underline.key}: workIds "${workId}" は存在しない作品`)
-            continue
-          }
-          if (hasImageAsset(work)) hasGeneratable = true
-          // 下線先作品の答えが本文に書かれていないか（図版問題の答えが本文に出ているのを防ぐ。
-          // mock-exam-analysis.md 7章の指摘）。text 全体（マーカー記法込み）に、workIds が
-          // 参照する作品の title が部分文字列として含まれていたらエラー。
-          if (workTitleLeaksInText(work, passage.text)) {
-            errors.push(
-              `${label} / ${underline.key}: 本文に workIds "${workId}" の作品名 "${work.title}" がそのまま含まれている（図版問題の答えが本文に出てしまう）`,
-            )
+        let hasGeneratable = isImageLead && leadWorksOk && !hasOwnWorkIds
+        if (hasOwnWorkIds) {
+          for (const workId of underline.workIds) {
+            const work = worksById.get(workId)
+            if (!work) {
+              errors.push(`${label} / ${underline.key}: workIds "${workId}" は存在しない作品`)
+              continue
+            }
+            if (hasImageAsset(work)) hasGeneratable = true
+            // 下線先作品の答えが本文に書かれていないか（図版問題の答えが本文に出ているのを防ぐ。
+            // mock-exam-analysis.md 7章の指摘）。text 全体（マーカー記法込み）に、workIds が
+            // 参照する作品の title が部分文字列として含まれていたらエラー。
+            if (workTitleLeaksInText(work, passage.text)) {
+              errors.push(
+                `${label} / ${underline.key}: 本文に workIds "${workId}" の作品名 "${work.title}" がそのまま含まれている（図版問題の答えが本文に出てしまう）`,
+              )
+            }
           }
         }
         if (!hasGeneratable) {
@@ -214,14 +282,61 @@ function validatePassages({ worksById, hasImageAsset, eraIds, errors, warnings }
 
         // ask（下線から出したい設問の型・条件スロット。省略可）。値が不正ならエラー。
         if ('ask' in underline && underline.ask != null) {
-          const invalid = invalidAskFields(underline.ask)
+          const ask = underline.ask
+          const invalid = invalidAskFields(ask)
           if (invalid.includes('type')) {
-            errors.push(`${label} / ${underline.key}: ask.type "${underline.ask.type}" は q9/q10/q4/q11 のいずれかである必要がある`)
+            errors.push(`${label} / ${underline.key}: ask.type "${ask.type}" は q9/q10/q4/q11/q12 のいずれかである必要がある`)
           }
           if (invalid.includes('slot')) {
             errors.push(
-              `${label} / ${underline.key}: ask.slot "${underline.ask.slot}" は holder/artist/technique/era/subject のいずれかである必要がある`,
+              `${label} / ${underline.key}: ask.slot "${ask.slot}" は holder/artist/technique/era/subject のいずれかである必要がある`,
             )
+          }
+
+          // 8章「二段構え」: answerId/distractorIds は出題プールにある playable な作品 id で、
+          // 重複が無いこと。
+          if ('answerId' in ask && ask.answerId != null) {
+            const answerWork = worksById.get(ask.answerId)
+            if (!answerWork || !hasImageAsset(answerWork)) {
+              errors.push(`${label} / ${underline.key}: ask.answerId "${ask.answerId}" は出題プールにある作品である必要がある`)
+            }
+            // 下線の文に answerId が指す作品の title/technique/subject が含まれていないか
+            // （8章: 材質・図様・作品名は下線に書かない、の機械検査）。
+            if (answerWork) {
+              const underlineText = underlineTexts.get(underline.key) ?? ''
+              const leaked = answerLeaksInUnderlineText(answerWork, underlineText)
+              for (const field of leaked) {
+                errors.push(
+                  `${label} / ${underline.key}: 下線の文に answerId "${ask.answerId}" の ${field}「${answerWork[field]}」が含まれている（二段構えの原則違反。下線は一段外した手がかりにする）`,
+                )
+              }
+            }
+          }
+          if (Array.isArray(ask.distractorIds)) {
+            const seen = new Set()
+            for (const id of ask.distractorIds) {
+              if (seen.has(id)) {
+                errors.push(`${label} / ${underline.key}: ask.distractorIds に重複がある: ${id}`)
+              }
+              seen.add(id)
+              const w = worksById.get(id)
+              if (!w || !hasImageAsset(w)) {
+                errors.push(`${label} / ${underline.key}: ask.distractorIds "${id}" は出題プールにある作品である必要がある`)
+              }
+            }
+            if (ask.answerId && ask.distractorIds.includes(ask.answerId)) {
+              errors.push(`${label} / ${underline.key}: ask.distractorIds に answerId と同じ作品 "${ask.answerId}" が含まれている`)
+            }
+          }
+
+          // 9章「画像リード型セット」: q12 は answerText・distractorTexts（3件）が必須。
+          if (ask.type === 'q12') {
+            if (!ask.answerText || typeof ask.answerText !== 'string') {
+              errors.push(`${label} / ${underline.key}: ask.type が "q12" のとき answerText が必要`)
+            }
+            if (!Array.isArray(ask.distractorTexts) || ask.distractorTexts.length !== 3) {
+              errors.push(`${label} / ${underline.key}: ask.type が "q12" のとき distractorTexts は3件必要`)
+            }
           }
         }
       }
