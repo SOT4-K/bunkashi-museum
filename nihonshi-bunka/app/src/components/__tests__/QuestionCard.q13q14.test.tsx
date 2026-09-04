@@ -64,11 +64,15 @@ describe('QuestionCard: Q13（語句の組合せ。T1。M2-16）', () => {
     expect(container.querySelector('[aria-label="この画像を拡大表示"][class*="hero"]')).toBeNull()
   })
 
-  it('画像を持つ対象（kind: artifact）ではヒーロー画像を出す', () => {
-    const question = makeQ13Question({ work: artifactWork })
-    const { container } = render(<QuestionCard question={question} answered={null} onChoice={() => {}} onUnknown={() => {}} />)
-    expect(container.querySelector('[aria-label="この画像を拡大表示"][class*="hero"]')).not.toBeNull()
-  })
+  it(
+    'M2-99再検証の指摘: 画像を持つ対象（kind: artifact）でもQ13はヒーロー画像を出さない' +
+      '（Q12と同じく文字だけで答える設問のため、画像を見せると認識だけで解けてしまう）',
+    () => {
+      const question = makeQ13Question({ work: artifactWork })
+      const { container } = render(<QuestionCard question={question} answered={null} onChoice={() => {}} onUnknown={() => {}} />)
+      expect(container.querySelector('[aria-label="この画像を拡大表示"][class*="hero"]')).toBeNull()
+    },
+  )
 
   it('reversed のとき「誤っている組合せはどれか」の文言を表示する', () => {
     const question = makeQ13Question({ reversed: true })

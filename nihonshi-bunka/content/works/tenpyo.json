@@ -13,7 +13,7 @@
     "religion": "仏教（法相宗・藤原氏の氏寺興福寺）",
     "periodLabel": "奈良時代（8世紀前半、天平6年＝734年）",
     "eraNote": "奈良時代（8世紀）、聖武天皇のころに栄えた天平文化の彫刻。天平文化は遣唐使がもたらした唐の様式を受け、鎮護国家の思想のもとで大寺院の造営と仏像制作が盛んになった。阿修羅像は光明皇后が母・橘三千代の一周忌に建立した興福寺西金堂の像で、天平彫刻を代表する乾漆像である。",
-    "holder": "興福寺（もと西金堂、現国宝館）",
+    "holder": "興福寺",
     "subject": null,
     "facts": [
       {
@@ -74,7 +74,8 @@
         "slot": "location",
         "text": "興福寺にある",
         "shared": [
-          "judai-deshi-kofukuji"
+          "judai-deshi-kofukuji",
+          "yamadadera-butsuzu"
         ]
       }
     ],
@@ -145,7 +146,7 @@
     "examTags": [
       "frequent"
     ],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "judai-deshi-kofukuji",
@@ -160,7 +161,7 @@
     "religion": "仏教（法相宗・藤原氏の氏寺興福寺）",
     "periodLabel": "奈良時代（8世紀前半、天平6年＝734年）",
     "eraNote": "奈良時代（8世紀）、聖武天皇のころに栄えた天平文化の彫刻。天平文化では遣唐使がもたらした唐の様式を受けて、乾漆・塑像の技法による写実的な仏像が多く作られた。十大弟子像は光明皇后が建立した興福寺西金堂に八部衆像とともに安置された乾漆像で、釈迦の弟子たちの個性を描き分けた天平彫刻の代表作である。",
-    "holder": "興福寺（もと西金堂、現国宝館）",
+    "holder": "興福寺",
     "subject": null,
     "facts": [
       {
@@ -221,7 +222,8 @@
         "slot": "location",
         "text": "興福寺にある",
         "shared": [
-          "ashura-kofukuji"
+          "ashura-kofukuji",
+          "yamadadera-butsuzu"
         ]
       }
     ],
@@ -290,7 +292,7 @@
       "画像出典ページ（Wikimedia Commons、飛鳥園編『東洋美術』奈良時代特輯 1933年）: https://commons.wikimedia.org/wiki/File:FURUNA_Kofukuji.JPG"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "shukongoshin-todaiji",
@@ -428,7 +430,7 @@
     "examTags": [
       "frequent"
     ],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "shitenno-kaidando",
@@ -564,7 +566,7 @@
     "examTags": [
       "frequent"
     ],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "fukukensaku-todaiji",
@@ -677,7 +679,7 @@
       "東大寺法華堂（三月堂）の本尊",
       "三目八臂・銀製の宝冠"
     ],
-    "explanation": "東大寺法華堂の本尊。額に第三の目をもち、八本の腕で羂索（投げ縄）などを持つ。乾漆像で高さ3.6mを超える大作。宝石で飾られた銀製の宝冠も名高い。",
+    "explanation": "東大寺法華堂の本尊。額に第三の目をもち、八本の腕で羂索（投げ縄）などを持つ。乾漆像で高さ3.6mを超える大作。宝石で飾られた銀製の宝冠も名高い（掲載写真は頭部・宝冠の部分）。",
     "examNote": "法華堂の像は「本尊＝不空羂索観音（乾漆）」「秘仏＝執金剛神（塑像）」「脇侍＝日光・月光菩薩（塑像）」と技法ごとに整理する。",
     "confusables": [
       {
@@ -702,7 +704,7 @@
       "画像出典ページ（Wikimedia Commons、小川晴暘撮影『東洋美術』特輯4号 1933年）: https://commons.wikimedia.org/wiki/File:Amoghapasa_Fuku_Kensaku_Kannon_Hokkedo.JPG"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "ganjin-toshodaiji",
@@ -843,7 +845,7 @@
     "examTags": [
       "frequent"
     ],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "torige-ritsujo-byobu",
@@ -1107,7 +1109,7 @@
       "画像出典ページ（Wikimedia Commons、審美書院『日本美術精華』第2巻 1899-1908年）: https://commons.wikimedia.org/wiki/File:Goddess_of_Fortune_(Japan).jpg"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "shosoin-hoko",
@@ -1169,7 +1171,8 @@
         "shared": [
           "fukukensaku-todaiji",
           "shitenno-kaidando",
-          "shukongoshin-todaiji"
+          "shukongoshin-todaiji",
+          "kongorikishi-todaiji"
         ]
       },
       {
@@ -1185,7 +1188,7 @@
       },
       {
         "text": "寄棟造の金堂である",
-        "why": "校倉造の倉庫。唐招提寺金堂との様式・用途ずらし",
+        "why": "正倉院正倉は屋根は寄棟造だが、宝物を納める倉庫であって金堂（仏を安置する堂）ではない。唐招提寺金堂との用途ずらし",
         "verifiedFalse": true
       },
       {
@@ -1240,7 +1243,7 @@
     "examTags": [
       "frequent"
     ],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "toshodaiji-kondo",
@@ -1305,7 +1308,10 @@
       },
       {
         "slot": "style",
-        "text": "寄棟造・本瓦葺である"
+        "text": "寄棟造・本瓦葺である",
+        "shared": [
+          "shosoin-hoko"
+        ]
       },
       {
         "slot": "religion",
@@ -1375,7 +1381,7 @@
     "examTags": [
       "frequent"
     ],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "nanto-rokushu",

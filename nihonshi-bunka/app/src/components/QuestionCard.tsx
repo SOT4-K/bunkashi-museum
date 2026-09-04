@@ -168,8 +168,14 @@ export function QuestionCard({
   // ヒーロー画像を出さない（プレースホルダ SVG が作品名を描くため答えが分かってしまう。
   // kind ではなく hasRealImage で判定すると、画像取得前の artifact 作品（プレースホルダ表示中）
   // まで隠れてしまい既存の挙動が変わるため、判定は kind だけを見る）。Q14 は複数作品を束ねる
-  // 仮の work のため常に出さない。
-  const showHeroImage = question.type !== 'q12' && question.type !== 'q14' && (question.work.kind ?? 'artifact') === 'artifact'
+  // 仮の work のため常に出さない。Q13（語句の組合せ）はQ12と同じく画像なし文字問題として
+  // 設計されており（M2-99再検証・群A報告で「Q13が画像を出したまま出題される」と指摘）、
+  // 作品を見せると認識だけで解けてしまう組（技法・様式など）があるため出さない。
+  const showHeroImage =
+    question.type !== 'q12' &&
+    question.type !== 'q13' &&
+    question.type !== 'q14' &&
+    (question.work.kind ?? 'artifact') === 'artifact'
 
   return (
     <div>
