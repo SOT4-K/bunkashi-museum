@@ -746,5 +746,420 @@
     ],
     "examTags": [],
     "status": "reviewed"
+  },
+  {
+    "id": "kana-zoshi",
+    "orderIndex": 1630,
+    "pairs": [
+      {
+        "left": "仮名草子",
+        "right": "庶民向けの仮名書きの読み物",
+        "kind": "text-genre"
+      }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "仮名草子",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "text",
+    "periodLabel": "江戸時代初期（17世紀前半、寛永期）",
+    "eraNote": "江戸時代初期、寛永期の文化の文芸。出版が始まったこの時期、京都を中心に仮名を用いた教訓的・娯楽的な読み物が刊行され、武士や上層町人だけでなく庶民にも読み物が広がった。のちの元禄期、井原西鶴の浮世草子へとつながる。",
+    "facts": [
+      {
+        "slot": "style",
+        "text": "仮名書きの読み物である"
+      },
+      {
+        "slot": "era",
+        "text": "寛永期の文化の文芸",
+        "shared": [
+          "teimon-haikai"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "教訓や娯楽を内容とし、庶民にも読まれた"
+      },
+      {
+        "slot": "other",
+        "text": "元禄期の浮世草子（井原西鶴）に先立つ"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "井原西鶴が始めた",
+        "why": "西鶴は元禄期の浮世草子の創始者。仮名草子はそれ以前の読み物。人物・時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "化政期の滑稽本である",
+        "why": "寛永期の読み物。十返舎一九らの滑稽本との時代・分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "俳諧の一流派である",
+        "why": "散文の読み物。貞門俳諧との分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "漢文で書かれた学術書である",
+        "why": "仮名を用いた読み物。分野ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "仮名草子",
+    "reading": "かなぞうし",
+    "era": "kanei",
+    "category": "other",
+    "location": "—",
+    "author": null,
+    "technique": "仮名書きの読み物（散文）",
+    "keyPoints": [
+      "寛永期の文化",
+      "仮名で書かれた教訓的・娯楽的な読み物",
+      "出版の始まりとともに庶民に広がった",
+      "元禄期の浮世草子（井原西鶴）の前段階"
+    ],
+    "explanation": "仮名草子は、江戸時代の初めに京都を中心に出版された、仮名を用いた読み物をいう。教訓や娯楽を内容とし、木版印刷の普及によって武士や上層町人だけでなく庶民にも読まれた。この流れを受けて、元禄期には井原西鶴が現世の姿をありのままに描く浮世草子を生み出す。",
+    "examNote": "「仮名草子（寛永期）→浮世草子（元禄期・井原西鶴）」の順序で問われる。読み物の名称と時期をセットで覚える。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）寛永期の文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "nakae-toju",
+    "orderIndex": 1640,
+    "pairs": [
+      {
+        "left": "中江藤樹",
+        "right": "陽明学",
+        "kind": "person-school"
+      }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "陽明学",
+    "holder": null,
+    "subject": null,
+    "kind": "person",
+    "periodLabel": "江戸時代初期（17世紀前半、1608〜1648年）",
+    "eraNote": "江戸時代初期、寛永期の文化の学問。幕府が朱子学を重んじる一方で、儒学には他の学派も生まれた。中江藤樹は知と行の一致を説く陽明学を学び、近江で門人を教えたことから近江聖人と呼ばれた。",
+    "facts": [
+      {
+        "slot": "religion",
+        "text": "陽明学を学んだ儒学者"
+      },
+      {
+        "slot": "era",
+        "text": "寛永期の文化の人物",
+        "shared": [
+          "hayashi-razan",
+          "sakaida-kakiemon",
+          "honami-koetsu",
+          "takuan-shie"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "近江聖人と呼ばれた"
+      },
+      {
+        "slot": "other",
+        "text": "門人に熊沢蕃山がいる"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "朱子学者である",
+        "why": "陽明学を学んだ。林羅山ら朱子学者との学派ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "幕府の儒官として4代の将軍に仕えた",
+        "why": "4代の将軍に仕えたのは林羅山。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "国学者である",
+        "why": "儒学（陽明学）の学者。本居宣長ら国学者との分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "化政期の学者である",
+        "why": "江戸時代初期（17世紀前半）の学者。時代ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "中江藤樹（陽明学）",
+    "reading": "なかえとうじゅ",
+    "era": "kanei",
+    "category": "other",
+    "location": "近江（滋賀県）",
+    "author": null,
+    "technique": "陽明学（儒学の一派）",
+    "keyPoints": [
+      "寛永期の文化",
+      "日本における陽明学の祖",
+      "近江聖人と呼ばれた",
+      "門人に熊沢蕃山"
+    ],
+    "explanation": "中江藤樹は、知ることと行うことの一致を重んじる陽明学を学び、故郷の近江で門人を教えた儒学者で、近江聖人と呼ばれた。幕府が官学として重んじた朱子学に対し、陽明学は現実の行動を重んじる立場をとる。門人の熊沢蕃山は岡山藩に仕えて藩政に加わった。",
+    "examNote": "「林羅山＝朱子学」「中江藤樹＝陽明学」「伊藤仁斎＝古義学（元禄期）」と、儒学の学派と人物の対応が組合せ問題で問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）寛永期の文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "gongen-zukuri",
+    "orderIndex": 1636,
+    "pairs": [
+      {
+        "left": "権現造",
+        "right": "日光東照宮",
+        "kind": "style-architecture"
+      }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "権現造",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "concept",
+    "periodLabel": "江戸時代初期（17世紀前半、寛永期）",
+    "eraNote": "江戸時代初期、寛永期の文化の建築様式。徳川家康を神としてまつる社の造営を通じて広まり、幕府の権威を示す豪壮な社殿の形式となった。同じ時期の数寄屋造と対照的な流れをなす。",
+    "facts": [
+      {
+        "slot": "style",
+        "text": "本殿と拝殿を石の間でつなぐ神社建築の様式"
+      },
+      {
+        "slot": "era",
+        "text": "寛永期の文化の建築様式",
+        "shared": [
+          "sukiya-zukuri"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "日光東照宮がその代表とされる"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "茶室の意匠を住宅に取り入れた様式である",
+        "why": "それは数寄屋造。様式ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "禅宗寺院の仏殿の様式である",
+        "why": "神社建築の様式。禅宗様との分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "室町時代に成立した住宅の様式である",
+        "why": "住宅の様式は書院造（室町時代）。分野・時代ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "権現造",
+    "reading": "ごんげんづくり",
+    "era": "kanei",
+    "category": "other",
+    "location": "—",
+    "author": null,
+    "technique": "神社建築の様式",
+    "keyPoints": [
+      "寛永期の文化",
+      "本殿と拝殿を石の間でつないで一体とする神社建築の様式",
+      "日光東照宮が代表",
+      "数寄屋造（桂離宮）と対で問われる"
+    ],
+    "explanation": "権現造は、本殿と拝殿を石の間と呼ばれる部分でつないで一体の建物とする神社建築の様式で、徳川家康を神（東照大権現）としてまつる日光東照宮がその代表とされる。極彩色の彫刻で飾られた豪壮な社殿は幕府の権威を示し、装飾を抑えた数寄屋造の桂離宮と対照的な、寛永期のもう一つの建築の流れをなす。",
+    "examNote": "「権現造＝日光東照宮＝徳川家光」「数寄屋造＝桂離宮＝八条宮家」の組合せが空欄補充・組合せ問題の定番。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）寛永期の文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "sukiya-zukuri",
+    "orderIndex": 1620,
+    "pairs": [
+      {
+        "left": "数寄屋造",
+        "right": "桂離宮",
+        "kind": "style-architecture"
+      }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "数寄屋造",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "concept",
+    "periodLabel": "江戸時代初期（17世紀前半、寛永期）",
+    "eraNote": "江戸時代初期、寛永期の文化の建築様式。茶室の意匠を住宅に取り入れた簡素で洗練された造りで、朝廷・公家や上層町人の伝統的な美意識を背景に発達した。幕府の権威を示す権現造と対照的な流れをなす。",
+    "facts": [
+      {
+        "slot": "style",
+        "text": "茶室の意匠を住宅に取り入れた建築の様式"
+      },
+      {
+        "slot": "era",
+        "text": "寛永期の文化の建築様式",
+        "shared": [
+          "gongen-zukuri"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "桂離宮がその代表とされる"
+      },
+      {
+        "slot": "other",
+        "text": "素木を生かした簡素な意匠を特徴とする"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "本殿と拝殿を石の間でつなぐ神社建築の様式である",
+        "why": "それは権現造。様式ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "極彩色の彫刻で覆うことを特徴とする",
+        "why": "素木を生かした簡素な意匠。内容ずらし（日光東照宮との混同）",
+        "verifiedFalse": true
+      },
+      {
+        "text": "桃山文化を代表する城郭建築の様式である",
+        "why": "住宅建築の様式。分野ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "数寄屋造",
+    "reading": "すきやづくり",
+    "era": "kanei",
+    "category": "other",
+    "location": "—",
+    "author": null,
+    "technique": "住宅建築の様式",
+    "keyPoints": [
+      "寛永期の文化",
+      "茶室の意匠を住宅に取り入れた様式",
+      "素木を生かした簡素で洗練された意匠",
+      "桂離宮が代表。権現造（日光東照宮）と対で問われる"
+    ],
+    "explanation": "数寄屋造は、茶室の意匠を住宅建築に取り入れた様式で、素木の柱や簡素な障子など装飾を抑えた洗練された造りを特徴とする。書院造に茶室の要素を加えたものと説明され、八条宮家が京都の郊外に営んだ桂離宮がその代表とされる。極彩色の彫刻で飾られた権現造の日光東照宮と対比して覚える。",
+    "examNote": "「数寄屋造＝桂離宮＝公家」「権現造＝日光東照宮＝幕府」。様式と建築の組合せは空欄補充で頻出。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）寛永期の文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "takuan-shie",
+    "orderIndex": 1629,
+    "pairs": [
+      {
+        "left": "沢庵",
+        "right": "紫衣事件",
+        "kind": "person-event"
+      }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": "臨済宗",
+    "holder": null,
+    "subject": null,
+    "kind": "person",
+    "periodLabel": "江戸時代初期（17世紀前半、寛永期）",
+    "eraNote": "江戸時代初期、寛永期の宗教と幕府の関係を示す出来事。幕府は禁中並公家諸法度によって朝廷を統制し、天皇が高僧に与える紫衣の勅許を無効とした。これに抗議した大徳寺の僧沢庵らが処罰され、幕府の法度が朝廷の伝統に優先することが示された。",
+    "facts": [
+      {
+        "slot": "religion",
+        "text": "大徳寺の僧である"
+      },
+      {
+        "slot": "era",
+        "text": "寛永期の人物",
+        "shared": [
+          "hayashi-razan",
+          "nakae-toju",
+          "honami-koetsu"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "紫衣事件で幕府に抗議して処罰された"
+      },
+      {
+        "slot": "other",
+        "text": "幕府が朝廷の紫衣の勅許を無効としたことが事件の発端"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "朱子学者である",
+        "why": "臨済宗の僧。林羅山ら儒学者との分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "浄土真宗の僧である",
+        "why": "大徳寺（臨済宗）の僧。宗派ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "元禄期の僧である",
+        "why": "紫衣事件は江戸時代初期（寛永期）の出来事。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "幕府の政策に従って紫衣を返上した",
+        "why": "幕府の処置に抗議して処罰された。内容ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "沢庵と紫衣事件",
+    "reading": "たくあんとしえじけん",
+    "era": "kanei",
+    "category": "other",
+    "location": "大徳寺（京都）",
+    "author": null,
+    "technique": "—",
+    "keyPoints": [
+      "寛永期",
+      "大徳寺の僧・沢庵",
+      "幕府が天皇による紫衣の勅許を無効とした（紫衣事件）",
+      "抗議した沢庵らが処罰された"
+    ],
+    "explanation": "幕府は禁中並公家諸法度で朝廷を統制し、天皇が高僧に紫の衣を許す勅許を幕府の許可なく行えないものとした。これに従って以前の勅許が無効とされると、大徳寺の僧沢庵らが抗議し、処罰されて流された。幕府の法度が朝廷の伝統的な権限に優先することを示した出来事で、寛永期の宗教と政治の関係を示す事件として扱われる。",
+    "examNote": "紫衣事件は文化史の大問でも寛永期のリード文の題材になる。「沢庵＝大徳寺＝紫衣事件」で覚える。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）江戸幕府の朝廷統制・寛永期の文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
   }
 ]

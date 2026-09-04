@@ -98,6 +98,25 @@ export interface Work {
   holder?: string | null
   /** 絵巻・絵図などの主題（誰の物語か、何の場面か）。null 可 */
   subject?: string | null
+  /** 語句の組合せ問題（T1/Q13）の素材。人物×技法・書物×作者・様式×建築・原料×産地など、
+   *  この作品について正しいと言える組を1件以上持てる（M2-16。research/nichidai-past-exams-analysis.md
+   *  2・5章）。writer が投入中のフィールドのため、無い作品では Q13 は自然にスキップされる
+   *  （engine/pairs.ts が null を返し、themeSet.ts が次善の型にフォールバックする）。 */
+  pairs?: WorkPair[]
+  /** 制作年代順（小さいほど古い）。年代順並べ替え問題（T7/Q14）に使う（M2-16）。
+   *  writer が投入中のフィールドのため、無い/同一区分に3件そろわない場合は Q14 は
+   *  自然にスキップされる（engine/order.ts が null を返す）。 */
+  orderIndex?: number
+}
+
+/** Work.pairs の1件。a・b が「正しい組」。engine/pairs.ts が生成ロジックを持つ。 */
+export interface WorkPair {
+  /** 組の左側（人物・書物・様式・原料など） */
+  a: string
+  /** 組の右側（技法・作者・建築・産地など） */
+  b: string
+  /** 表示用ラベル（例: "仏師×製法"）。省略可、現状は設問文には使わない（将来の拡張用）。 */
+  label?: string
 }
 
 /** eras.json の items[].category（自由記述に近いが代表的な値）。 */
@@ -134,8 +153,9 @@ export interface PassageUnderlineAsk {
   /** Q9 の条件スロット（engine/q9.ts の Q9Slot のうち ask で指定できるもの＋subject）。
    *  8章の二段構えデータでは省略されることが多い（stem に既に書かれているため）。 */
   slot?: 'holder' | 'artist' | 'technique' | 'era' | 'subject'
-  /** q11 は M3 候補で未実装（生成できないので次善に落ちる）。q12 は画像リード型の文字4択（9章）。 */
-  type: 'q9' | 'q10' | 'q4' | 'q11' | 'q12'
+  /** q11 は M3 候補で未実装（生成できないので次善に落ちる）。q12 は画像リード型の文字4択（9章）。
+   *  q13 は語句の組合せ（T1。M2-16、engine/pairs.ts）。 */
+  type: 'q9' | 'q10' | 'q4' | 'q11' | 'q12' | 'q13'
   /** writer が書いた設問文をそのまま使う（「〜はどれか」で完結。engine の自動合成 conditionText は使わない）。 */
   stem?: string
   /** q9 の正解作品 id（writer 指定）。pool に無ければ生成失敗として扱い次善にフォールバックする。 */
@@ -149,7 +169,9 @@ export interface PassageUnderlineAsk {
   /** type: 'q4' のとき、「最も不適切なもの」（正文3＋誤文1、誤文が正解）を出すなら true。
    *  reviewer 指摘 [重大]-1（2026-09-04 M2-14）: これが無いと通常型（正文1＋誤文3）が
    *  常に先に試されて必ず成功するため、stem が「最も不適切なものはどれか」でも
-   *  正解フラグは適切な（正しい）文に付いてしまい、採点が反転する。 */
+   *  正解フラグは適切な（正しい）文に付いてしまい、採点が反転する。
+   *  type: 'q13' のときは「誤っている組合せはどれか」（正しい組合せ3件＋偽の組合せ1件、
+   *  偽の組合せが正解）を出す（M2-16）。 */
   reversed?: boolean
 }
 
@@ -197,8 +219,15 @@ export interface Passage {
  *   passage.kind === "image" のリード画像について「作者は？」「主人公は？」のように
  *   様々な属性を問う。stem・answerText・distractorTexts はすべて writer 手書き
  *   （engine は選択肢の並びのシャッフルのみ行う）。テーマセット専用。
+ * Q13: 語句の組合せ（T1。mock-exam-analysis.md 2・5章。M2-16）。人物×技法・書物×作者・
+ *   様式×建築・原料×産地などの正しい組を1つ選ぶ（reversed のときは誤った組を1つ選ぶ）。
+ *   work.pairs を素材にする（engine/pairs.ts）。テーマセット専用。
+ * Q14: 年代順並べ替え（T7。mock-exam-analysis.md 2・5章。M2-16）。work.orderIndex を持つ
+ *   作品3件の正しい制作順を4択（順序の並びの文字列）から選ぶ（engine/order.ts）。
+ *   テーマセット専用。3セットに1問の頻度で追加する想定（themeSet.ts の
+ *   appendOrderQuestionIfDue）。
  */
-export type QuestionType = 'q1' | 'q2' | 'q3' | 'q4' | 'q6' | 'q8' | 'q9' | 'q10' | 'q12'
+export type QuestionType = 'q1' | 'q2' | 'q3' | 'q4' | 'q6' | 'q8' | 'q9' | 'q10' | 'q12' | 'q13' | 'q14'
 
 /** Q9 の条件スロット（作者・時代文化・所蔵・様式・製法）。engine/q9.ts が生成ロジックを持つ
  *  （型はここで定義し、q9.ts から re-export する。types.ts が engine に依存しないため）。 */
@@ -251,7 +280,8 @@ export interface Question {
   choiceWorks: Work[]
   /** Q2 のときの選択肢（era id）。Q1/Q3 のときは undefined */
   choiceEras?: Era[]
-  /** Q4 のときの選択肢（4件、シャッフル済み） */
+  /** Q4 のときの選択肢（4件、シャッフル済み）。Q14（年代順並べ替え）のときは、
+   *  順序の並び（「A → B → C」）を text に入れて流用する（M2-16）。 */
   choiceStatements?: StatementOption[]
   /** Q12（画像なし文字4択。9章）のときの選択肢（4件、シャッフル済み）。answerText/distractorTexts
    *  をそのまま StatementOption 化したもの（why は使わない＝常に null）。 */
@@ -264,6 +294,12 @@ export interface Question {
   choicePairLabels?: string[]
   /** Q10 のときの2文（A・B） */
   statementPair?: { sentenceA: StatementPairSentence; sentenceB: StatementPairSentence }
+  /** Q13（語句の組合せ）のときの選択肢（4件、シャッフル済み） */
+  choiceWordPairs?: ComboOption[]
+  /** Q14（年代順並べ替え）のとき、表示する作品（画像）とラベル（A/B/C…）。表示順は
+   *  正解の年代順とは無関係（シャッフル済み）。選択肢自体は choiceStatements に入る
+   *  （テキストが「A → B → C」のような順序の並び）。 */
+  orderItems?: { label: string; work: Work }[]
   /** Q9 の出題文（例:「作者が葛飾北斎であるもの」）。Q4 reversed のときは「最も不適切なもの」の意 */
   conditionText?: string
   /** Q9 のとき実際に使われた条件スロット。自由出題で era 条件を連続させないための内部情報
@@ -300,6 +336,10 @@ export interface ItemProgress {
   q9?: SrsCell
   q10?: SrsCell
   q12?: SrsCell
+  /** q13（語句の組合せ）・q14（年代順並べ替え）はテーマセット専用（M2-16）。q10/q12 と同様、
+   *  「所蔵」の判定（q1〜q3の3方向）には使わない。 */
+  q13?: SrsCell
+  q14?: SrsCell
   discoveredAt: string | null
   masteredAt: string | null
 }
