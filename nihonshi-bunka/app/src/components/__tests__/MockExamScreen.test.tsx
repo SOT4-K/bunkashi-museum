@@ -67,6 +67,30 @@ describe('MockExamScreen', () => {
     expect(screen.getByText('下線B')).toBeInTheDocument()
   })
 
+  it(
+    'M2-99reviewer指摘（重大1）の回帰テスト: quizフェーズで「下線部○に関して」が出て、' +
+      '「リード文を見返す」からリード文を再表示できる',
+    () => {
+      render(<MockExamScreen sections={sections} eras={testEras} onAnswer={noopAnswer} onFinish={() => {}} />)
+
+      fireEvent.click(screen.getByTestId('mock-exam-start-quiz'))
+
+      // 下線部プロンプトが出る（ThemeSetScreenと同じ挙動）
+      expect(screen.getByTestId('mock-exam-underline-prompt')).toHaveTextContent('下線部aに関して: 下線A')
+
+      // リード文パネルは既定で閉じている
+      expect(screen.queryByTestId('mock-exam-context-panel')).not.toBeInTheDocument()
+
+      // トグルで開閉できる
+      fireEvent.click(screen.getByTestId('mock-exam-context-toggle'))
+      expect(screen.getByTestId('mock-exam-context-panel')).toBeInTheDocument()
+      expect(within(screen.getByTestId('mock-exam-context-panel')).getByText('下線A')).toBeInTheDocument()
+
+      fireEvent.click(screen.getByTestId('mock-exam-context-toggle'))
+      expect(screen.queryByTestId('mock-exam-context-panel')).not.toBeInTheDocument()
+    },
+  )
+
   it('全問終了で結果画面に型別正答率と20点満点のスコアを表示する', () => {
     render(<MockExamScreen sections={sections} eras={testEras} onAnswer={noopAnswer} onFinish={() => {}} />)
 

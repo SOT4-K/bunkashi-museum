@@ -81,6 +81,7 @@ export function MockExamScreen({
   const [phase, setPhase] = useState<Phase>(total > 0 ? 'read' : 'done')
   const [answered, setAnswered] = useState<AnsweredState | null>(null)
   const [showSheet, setShowSheet] = useState(false)
+  const [contextOpen, setContextOpen] = useState(false)
   const [correctCount, setCorrectCount] = useState(0)
   const [typeStats, setTypeStats] = useState<Partial<Record<QuestionType, { correct: number; total: number }>>>({})
   const [secondsLeft, setSecondsLeft] = useState(MOCK_EXAM_TIME_SECONDS)
@@ -101,6 +102,17 @@ export function MockExamScreen({
   const current = flat[index]
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const segments = useMemo(() => (current ? splitPassageText(current.passage.text) : []), [current?.passage.id])
+  // M2-99 reviewer指摘（2026-09-04 再検証・重大1）: quizフェーズにリード文を見返す手段が
+  // 無く「下線部aに関して」の下線部の文言も出ていなかった（ThemeSetScreenでオーナーが
+  // 9/4に指摘し直した欠陥がMockExamScreenで再発）。ThemeSetScreenと同じcontextPanel/
+  // underlinePromptを移植する。
+  const underlineTextByKey = useMemo(() => {
+    const map = new Map<string, string>()
+    for (const seg of segments) {
+      if (seg.type === 'underline') map.set(seg.key, seg.value)
+    }
+    return map
+  }, [segments])
 
   function handleStartQuiz() {
     setPhase('quiz')
@@ -145,6 +157,7 @@ export function MockExamScreen({
     }
     setAnswered(null)
     setShowSheet(false)
+    setContextOpen(false)
     const nextIndex = index + 1
     if (nextIndex >= total) {
       setIndex(nextIndex)
@@ -236,6 +249,8 @@ export function MockExamScreen({
 
   // phase === 'quiz'
   const isLast = index === total - 1
+  const isRealUnderline = Boolean(current && underlineTextByKey.has(current.underlineKey))
+  const underlineLabel = current ? (underlineTextByKey.get(current.underlineKey) ?? '') : ''
 
   return (
     <div className={learnStyles.screen}>
@@ -257,6 +272,35 @@ export function MockExamScreen({
           ))}
         </span>
       </div>
+
+      <button
+        type="button"
+        className={themeStyles.contextToggle}
+        onClick={() => setContextOpen((v) => !v)}
+        data-testid="mock-exam-context-toggle"
+      >
+        {contextOpen ? 'リード文を閉じる' : 'リード文を見返す'}
+      </button>
+
+      {contextOpen && (
+        <div className={themeStyles.contextPanel} data-testid="mock-exam-context-panel">
+          {segments.map((seg, i) =>
+            seg.type === 'underline' ? (
+              <mark key={i} className={seg.key === current.underlineKey ? themeStyles.underlineCurrent : themeStyles.underline}>
+                {seg.value}
+              </mark>
+            ) : (
+              <span key={i}>{seg.value}</span>
+            ),
+          )}
+        </div>
+      )}
+
+      {isRealUnderline && (
+        <p className={themeStyles.underlinePrompt} data-testid="mock-exam-underline-prompt">
+          下線部{current.underlineKey}に関して: {underlineLabel}
+        </p>
+      )}
 
       <QuestionCard question={current.question} answered={answered} onChoice={handleChoice} onUnknown={handleUnknown} />
 
