@@ -1,14 +1,16 @@
 // 文化別練習の出題画面。M2-22。progress の answer()/startSession() は一切呼ばない
 // （経験値・図鑑・SRSを更新しない、という要件をこの1点で担保する）。誤答した作品は
 // セッション内でのみ型を変えて再出題する（1作品1回まで。LearnScreen と同じパターン）。
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import styles from './LearnScreen.module.css'
 import practiceStyles from './CultureListScreen.module.css'
 import { QuestionCard } from './QuestionCard'
 import { AnswerSheet } from './AnswerSheet'
+import { LeadPanel } from './LeadPanel'
 import { buildPracticeSession, requeuePracticeQuestion } from '../engine/practiceSession'
+import { findLeadContextForWork } from '../engine/leadContext'
 import type { MissSelection } from '../engine/explain'
-import type { AnswerKind, Era, Question, Work } from '../types'
+import type { AnswerKind, Era, Passage, Question, Work } from '../types'
 
 interface AnsweredState {
   selection: MissSelection
@@ -21,6 +23,7 @@ export function PracticeSessionScreen({
   pool,
   imagePool,
   eras,
+  passages,
   onFinish,
 }: {
   eraId: string
@@ -30,6 +33,10 @@ export function PracticeSessionScreen({
   /** 画像で出題できる作品だけ（content.ts の playableWorks）。 */
   imagePool: Work[]
   eras: Era[]
+  /** M2-42「全モードで同じ」: リード文ボタンの best-effort な文脈解決に使う。省略時はボタンを出さない
+   *  （engine/leadContext.ts。文化別練習は元々 passage を経由せず作品単体から出題するため、
+   *  ここでは事後的に「この作品を対象にする最初の下線」を逆引きする）。 */
+  passages?: Passage[]
   onFinish: () => void
 }) {
   const startedRef = useRef(false)
@@ -57,6 +64,10 @@ export function PracticeSessionScreen({
   const current = queue[index]
   const total = queue.length
   const done = total > 0 && index >= total
+  const leadContext = useMemo(
+    () => (current && passages ? findLeadContextForWork(current.work.id, passages, pool) : null),
+    [current, passages, pool],
+  )
 
   function handleResult(answer: AnswerKind, selection: MissSelection) {
     if (!current) return
@@ -145,6 +156,8 @@ export function PracticeSessionScreen({
           ))}
         </span>
       </div>
+
+      <LeadPanel passage={leadContext?.passage} underlineKey={leadContext?.underlineKey} pool={pool} />
 
       <QuestionCard question={current} answered={answered} onChoice={handleChoice} onUnknown={handleUnknown} />
 

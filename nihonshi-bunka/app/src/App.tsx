@@ -2,22 +2,18 @@ import { useState } from 'react'
 import styles from './App.module.css'
 import { TabBar } from './components/TabBar'
 import { HomeScreen } from './components/HomeScreen'
-import { LearnScreen } from './components/LearnScreen'
 import { CultureListScreen } from './components/CultureListScreen'
 import { PracticeSessionScreen } from './components/PracticeSessionScreen'
-import { RandomLearnScreen } from './components/RandomLearnScreen'
 import { MockExamScreen } from './components/MockExamScreen'
 import { MissReviewScreen } from './components/MissReviewScreen'
 import { MuseumScreen } from './components/MuseumScreen'
 import { StatsScreen } from './components/StatsScreen'
-import { ThemeSetScreen } from './components/ThemeSetScreen'
+import { ConfirmDialog } from './components/ConfirmDialog'
 import { useProgressStore } from './store/useProgressStore'
 import { eras, works, playableWorks, themeSetPool, passages, worksById } from './content'
 import { todayIso } from './engine/srs'
-import { buildRandomLearnSession, type RandomLearnItem } from './engine/randomLearn'
-import { buildMockExam, type MockExamSection } from './engine/mockExam'
+import { buildMockExam, type MockExamItem } from './engine/mockExam'
 import { buildMissReviewSession, type MissReviewItem } from './engine/missLog'
-import type { Passage } from './types'
 
 // タブ遷移は React state のみで行い、history.pushState は使わない。
 // そのため iOS のスワイプ戻るジェスチャーで戻れる「前の画面」が無く、
@@ -26,54 +22,61 @@ export type TabId = 'home' | 'learn' | 'museum' | 'stats'
 
 export default function App() {
   const [tab, setTab] = useState<TabId>('home')
-  const [activeThemeSet, setActiveThemeSet] = useState<Passage | null>(null)
-  // ランダム学習（M2-21。ホームの「学習を始める」）の10問セット。
-  const [activeRandomLearn, setActiveRandomLearn] = useState<RandomLearnItem[] | null>(null)
-  // ランダム学習が1問も作れなかったとき（passages 未投入など）のフォールバック。
-  const [activeFreeSession, setActiveFreeSession] = useState(false)
-  // 本番モード（M2-20）。
-  const [activeMockExam, setActiveMockExam] = useState<MockExamSection[] | null>(null)
+  // 本番モード（M2-20 → M2-45 でランダム学習を統合）。
+  const [activeMockExam, setActiveMockExam] = useState<MockExamItem[] | null>(null)
   // 間違いノート復習（M2-23）。
   const [activeMissReview, setActiveMissReview] = useState<MissReviewItem[] | null>(null)
   // 学習タブ（文化別練習。M2-22）: 選択中の文化。null なら文化一覧を表示する。
   const [practiceEraId, setPracticeEraId] = useState<string | null>(null)
-  const { progress, startSession, answer, dailyNewRemaining, importProgress, recordMiss, recordMissReviewOutcome } =
+  // M2-47: 学習中（本番モード・文化別練習・間違い復習のいずれか）にタブを押したときの確認待ち。
+  const [pendingLeave, setPendingLeave] = useState(false)
+  const { progress, startSession, answer, importProgress, resetProgress, recordMiss, recordMissReviewOutcome } =
     useProgressStore()
 
-  /**
-   * 「学習を始める」（M2-21）: 全15文化の下線プールからランダムに10問（本番配分・SRS優先）。
-   * 1問も作れなければ（passages 未投入等）自由出題（旧 buildSession）にフォールバックする。
-   */
-  function goLearn() {
-    const today = todayIso()
-    const items = buildRandomLearnSession(passages, themeSetPool, playableWorks, eras, progress, today)
-    startSession(today)
-    if (items.length > 0) {
-      setActiveRandomLearn(items)
+  const hasActiveSession = Boolean(activeMockExam || activeMissReview || practiceEraId)
+
+  /** M2-47: 学習中にタブ（ホーム含む）を押したら確認する。「はい」なら記録せず中止。 */
+  function handleTabChange(next: TabId) {
+    if (hasActiveSession) {
+      setPendingLeave(true)
       return
     }
-    setActiveFreeSession(true)
+    setTab(next)
   }
 
-  function goThemeSet(passage: Passage) {
-    startSession(todayIso())
-    setActiveThemeSet(passage)
+  function confirmLeave() {
+    setActiveMockExam(null)
+    setActiveMissReview(null)
+    setPracticeEraId(null)
+    setPendingLeave(false)
+    setTab('home')
   }
 
-  /** 本番モード（M2-20）。作れなければ何もしない（passages が少なすぎる等）。 */
+  function cancelLeave() {
+    setPendingLeave(false)
+  }
+
+  /** 本番モード（M2-20 → M2-45: 全15文化・重み付き抽選）。作れなければ何もしない（passages が無い等）。 */
   function goMockExam() {
-    const items = buildMockExam(passages, themeSetPool, playableWorks, eras)
+    const today = todayIso()
+    const items = buildMockExam(passages, themeSetPool, playableWorks, eras, progress, today)
     if (items.length === 0) return
-    startSession(todayIso())
+    startSession(today)
     setActiveMockExam(items)
   }
 
-  /** 間違いノート復習（M2-23）。0件なら HomeScreen 側でボタンが disabled のため呼ばれない想定だが念のため防御する。 */
+  /** 間違いノート復習（M2-23）。0件なら HomeScreen 側でボタンを出さないため呼ばれない想定だが念のため防御する。 */
   function goMissReview() {
     const items = buildMissReviewSession(progress.missLog, worksById, themeSetPool, playableWorks, eras)
     if (items.length === 0) return
     startSession(todayIso())
     setActiveMissReview(items)
+  }
+
+  /** 進捗リセット（M2-46）。確定後はホームへ戻る。 */
+  function handleResetProgress() {
+    resetProgress()
+    setTab('home')
   }
 
   const sharedOnAnswer = (
@@ -87,55 +90,31 @@ export default function App() {
     return { xpGained: result.xpGained, isNewDiscovery: result.isNewDiscovery, isNewlyMastered: result.isNewlyMastered }
   }
 
-  if (activeThemeSet) {
-    return (
-      <div className={styles.app}>
-        <main className={styles.main}>
-          <ThemeSetScreen
-            key={activeThemeSet.id}
-            passage={activeThemeSet}
-            pool={themeSetPool}
-            imagePool={playableWorks}
-            eras={eras}
-            onAnswer={sharedOnAnswer}
-            onFinish={() => setActiveThemeSet(null)}
-          />
-        </main>
-        <TabBar active={tab} onChange={setTab} />
-      </div>
-    )
-  }
-
-  if (activeRandomLearn) {
-    return (
-      <div className={styles.app}>
-        <main className={styles.main}>
-          <RandomLearnScreen
-            items={activeRandomLearn}
-            eras={eras}
-            onAnswer={sharedOnAnswer}
-            onMiss={(workId, type, passageId, underlineKey) => recordMiss(workId, type, todayIso(), passageId, underlineKey)}
-            onFinish={() => setActiveRandomLearn(null)}
-          />
-        </main>
-        <TabBar active={tab} onChange={setTab} />
-      </div>
-    )
-  }
+  const leaveDialog = pendingLeave && (
+    <ConfirmDialog
+      message="中止してホームに戻りますか？"
+      confirmLabel="はい"
+      cancelLabel="いいえ"
+      onConfirm={confirmLeave}
+      onCancel={cancelLeave}
+    />
+  )
 
   if (activeMockExam) {
     return (
       <div className={styles.app}>
         <main className={styles.main}>
           <MockExamScreen
-            sections={activeMockExam}
+            items={activeMockExam}
+            pool={themeSetPool}
             eras={eras}
             onAnswer={sharedOnAnswer}
             onMiss={(workId, type, passageId, underlineKey) => recordMiss(workId, type, todayIso(), passageId, underlineKey)}
             onFinish={() => setActiveMockExam(null)}
           />
         </main>
-        <TabBar active={tab} onChange={setTab} />
+        <TabBar active={tab} onChange={handleTabChange} />
+        {leaveDialog}
       </div>
     )
   }
@@ -147,31 +126,15 @@ export default function App() {
           <MissReviewScreen
             items={activeMissReview}
             eras={eras}
+            pool={themeSetPool}
+            passages={passages}
             onAnswer={sharedOnAnswer}
             onOutcome={recordMissReviewOutcome}
             onFinish={() => setActiveMissReview(null)}
           />
         </main>
-        <TabBar active={tab} onChange={setTab} />
-      </div>
-    )
-  }
-
-  if (activeFreeSession) {
-    return (
-      <div className={styles.app}>
-        <main className={styles.main}>
-          <LearnScreen
-            works={playableWorks}
-            eras={eras}
-            progress={progress}
-            onAnswer={sharedOnAnswer}
-            onStartSession={startSession}
-            dailyNewRemaining={dailyNewRemaining}
-            onFinish={() => setActiveFreeSession(false)}
-          />
-        </main>
-        <TabBar active={tab} onChange={setTab} />
+        <TabBar active={tab} onChange={handleTabChange} />
+        {leaveDialog}
       </div>
     )
   }
@@ -184,11 +147,7 @@ export default function App() {
             works={playableWorks}
             eras={eras}
             progress={progress}
-            today={todayIso()}
-            dailyNewRemaining={dailyNewRemaining()}
-            onStart={goLearn}
-            themeSets={passages}
-            onStartThemeSet={goThemeSet}
+            hasMockExam={passages.length > 0}
             onStartMockExam={goMockExam}
             onStartMissReview={goMissReview}
             missLogCount={progress.missLog.length}
@@ -202,19 +161,21 @@ export default function App() {
               pool={themeSetPool}
               imagePool={playableWorks}
               eras={eras}
+              passages={passages}
               onFinish={() => setPracticeEraId(null)}
             />
           ) : (
             <CultureListScreen works={playableWorks} eras={eras} progress={progress} onSelectEra={setPracticeEraId} />
           ))}
         {tab === 'museum' && (
-          <MuseumScreen works={works} eras={eras} progress={progress} onStart={goLearn} />
+          <MuseumScreen works={works} eras={eras} progress={progress} onStart={goMockExam} />
         )}
         {tab === 'stats' && (
-          <StatsScreen works={works} eras={eras} progress={progress} onImport={importProgress} />
+          <StatsScreen works={works} eras={eras} progress={progress} onImport={importProgress} onReset={handleResetProgress} />
         )}
       </main>
-      <TabBar active={tab} onChange={setTab} />
+      <TabBar active={tab} onChange={handleTabChange} />
+      {leaveDialog}
     </div>
   )
 }

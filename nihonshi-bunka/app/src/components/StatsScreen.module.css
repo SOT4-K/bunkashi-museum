@@ -117,3 +117,20 @@
   font-size: 15px;
   color: var(--gunjo);
 }
+
+/* M2-46: 進捗リセット（破壊的操作）。 */
+.resetButton {
+  min-height: 48px;
+  width: 100%;
+  border-radius: var(--radius-button);
+  border: 1px solid var(--shu);
+  color: var(--shu);
+  font-size: 15px;
+}
+
+.exportLink {
+  align-self: flex-start;
+  min-height: 36px;
+  font-size: 13px;
+  color: var(--gunjo);
+}

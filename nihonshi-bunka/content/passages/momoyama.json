@@ -12,7 +12,9 @@
       "5文目（城郭建築が時代を代表する）: content/eras.json の momoyama（detail・items）",
       "6文目（千利休・出雲阿国）: content/works/momoyama.json の sen-no-rikyu / izumo-no-okuni（facts）",
       "7文目（南蛮文化・現世的で人間中心の性格）: content/works/momoyama.json の kirishitan-ban（facts・eraNote）、content/eras.json の momoyama（detail）",
-      "高校教科書（山川『詳説日本史』）桃山文化の項"
+      "高校教科書（山川『詳説日本史』）桃山文化の項",
+      "図版の同定URL（下線a〜d、いずれも姫路城）: https://commons.wikimedia.org/wiki/File:Ch%C3%A2teau_de_Himeji01.jpg",
+      "リード文の歴史記述そのものは教科書水準の通説で、一次資料・公的機関の公開ページは未参照（追検証URL未取得）"
     ],
     "underlines": [
       {
@@ -44,7 +46,7 @@
           "stem": "下線部bののちに大改修が行われた、次の写真の城について述べた文A・Bの正誤の組合せとして正しいものはどれか。",
           "answerId": "himeji-jo"
         },
-        "note": "画像を出す型。falseStatements に『織田信長が築いた安土城である』『豊臣秀吉が築いた大坂城である』『黒漆塗りの外観で知られる』がそろい、正文は facts の外観・構成・大改修の3項目が使える"
+        "note": "画像を出す型。falseStatements に『織田信長が築いた安土城である』『豊臣秀吉が築いた大坂城である』『徳川家康が江戸に築いた城である』がそろい、正文は facts の大改修・現存天守の年代・所在の3項目が使える（M2-41 で外観・天守の構成にもとづく正文と誤文を知識ベースのものに差し替えた）"
       },
       {
         "key": "c",
@@ -58,7 +60,7 @@
           "answerId": "himeji-jo",
           "reversed": true
         },
-        "note": "画像を出す型。falseStatements の『江戸時代中期に新築された』や、城郭ではなく御殿建築とする属性の反転型が使える"
+        "note": "画像を出す型。falseStatements の『江戸時代中期に新築された』『豊臣秀吉の死後に取り壊された』など、時代・来歴の入れ替え型が使える（M2-41 で外観にもとづく誤文をデータ側から外した）"
       },
       {
         "key": "d",
@@ -89,7 +91,9 @@
       "Ｄ（千利休と草庵の茶室・出雲阿国のかぶき踊り）: content/works/momoyama.json の sen-no-rikyu / myokian-taian / izumo-no-okuni（facts）",
       "Ｅ（南蛮文化・現世的で人間中心の性格）: content/works/momoyama.json の kirishitan-ban（facts・eraNote）、content/eras.json の momoyama（detail）",
       "高校教科書（山川『詳説日本史』）桃山文化の項",
-      "形式: research/nichidai-past-exams-analysis.md 1章「文化伏せ型（2016・2025）」"
+      "形式: research/nichidai-past-exams-analysis.md 1章「文化伏せ型（2016・2025）」",
+      "図版の同定URL（下線a・c・e、いずれも姫路城）: https://commons.wikimedia.org/wiki/File:Ch%C3%A2teau_de_Himeji01.jpg",
+      "Ａ〜Ｅの歴史記述そのものは教科書水準の通説で、一次資料・公的機関の公開ページは未参照（追検証URL未取得）"
     ],
     "underlines": [
       {
@@ -139,7 +143,7 @@
           "stem": "下線部cの建て方を伝える次の写真の建物について述べた文A・Bの正誤の組合せとして正しいものはどれか。",
           "answerId": "himeji-jo"
         },
-        "note": "画像を出す型。falseStatements の『織田信長が築いた安土城である』『豊臣秀吉が築いた大坂城である』『黒漆塗りの外観で知られる』が作品・属性の入れ替え型としてそろう"
+        "note": "画像を出す型。falseStatements の『織田信長が築いた安土城である』『豊臣秀吉が築いた大坂城である』『豊臣秀吉の死後に取り壊された』が作品・事実の入れ替え型としてそろう（M2-41 で『黒漆塗りの外観で知られる』＝写真を見れば真偽が分かる文を差し替えた）"
       },
       {
         "key": "d",

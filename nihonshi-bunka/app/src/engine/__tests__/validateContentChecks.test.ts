@@ -6,12 +6,7 @@
 // 起きない。validate-content.mjs 側の「直接実行時のみ main() を呼ぶ」ガード参照）。
 import { describe, expect, it } from 'vitest'
 // @ts-expect-error 型定義の無いプレーン .mjs スクリプトを直接 import する
-import {
-  workTitleLeaksInText,
-  invalidAskFields,
-  answerLeaksInUnderlineText,
-  findAppearanceWords,
-} from '../../../../scripts/validate-content.mjs'
+import { workTitleLeaksInText, invalidAskFields, answerLeaksInUnderlineText, findAppearanceWords } from '../../../../scripts/validate-content.mjs'
 
 describe('workTitleLeaksInText（下線先作品の答えが本文に書かれていないかのチェック）', () => {
   it('本文に作品名がそのまま含まれていれば true', () => {

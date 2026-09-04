@@ -698,7 +698,8 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）天平文化の項",
-      "東大寺公式サイト"
+      "東大寺公式サイト",
+      "画像出典ページ（Wikimedia Commons、小川晴暘撮影『東洋美術』特輯4号 1933年）: https://commons.wikimedia.org/wiki/File:Amoghapasa_Fuku_Kensaku_Kannon_Hokkedo.JPG"
     ],
     "examTags": [],
     "status": "draft"
@@ -711,7 +712,7 @@
       { "left": "鑑真和上像", "right": "唐招提寺", "kind": "作品×所蔵" },
       { "left": "鑑真", "right": "戒律を伝えた唐の僧", "kind": "人物×事績" }
     ],
-    "artist": null,
+    "artist": "不明",
     "patron": null,
     "style": "肖像彫刻",
     "religion": "律宗（戒律）",
@@ -776,7 +777,7 @@
       },
       {
         "slot": "other",
-        "text": "目を閉じた坐像である"
+        "text": "東大寺に戒壇を設けた僧の姿を写したものである"
       }
     ],
     "falseStatements": [
@@ -836,7 +837,8 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）天平文化の項",
-      "唐招提寺公式サイト"
+      "唐招提寺公式サイト",
+      "画像出典ページ（Wikimedia Commons、今泉篤男ほか『日本の彫刻4 天平時代』1952年）: https://commons.wikimedia.org/wiki/File:Toshodaiji_Ganjin.jpg"
     ],
     "examTags": [
       "frequent"
@@ -850,7 +852,7 @@
       { "left": "鳥毛立女屏風", "right": "正倉院", "kind": "作品×所蔵" },
       { "left": "鳥毛立女屏風", "right": "もとは鳥の羽毛を貼った屏風", "kind": "作品×技法" }
     ],
-    "artist": null,
+    "artist": "不明",
     "patron": null,
     "style": "唐風の樹下美人図",
     "religion": null,
@@ -909,8 +911,8 @@
         "text": "もとは鳥の羽毛が貼られていた"
       },
       {
-        "slot": "technique",
-        "text": "六扇の屏風である"
+        "slot": "location",
+        "text": "聖武天皇の遺品を納めた宝物のひとつである"
       }
     ],
     "falseStatements": [
@@ -970,7 +972,8 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）天平文化の項",
-      "宮内庁正倉院宝物検索"
+      "宮内庁正倉院宝物検索",
+      "画像出典ページ（Wikimedia Commons、東京帝室博物館『帝国美術資料』第3集 1921-22年）: https://commons.wikimedia.org/wiki/File:Teikokubijutsushiryo1922-zu03-torige.jpg"
     ],
     "examTags": [
       "frequent"
@@ -984,7 +987,7 @@
       { "left": "吉祥天像", "right": "薬師寺", "kind": "作品×所蔵" },
       { "left": "吉祥天像", "right": "麻布着色", "kind": "作品×技法" }
     ],
-    "artist": null,
+    "artist": "不明",
     "patron": null,
     "style": "唐風の仏画",
     "religion": null,
@@ -1055,8 +1058,8 @@
         "verifiedFalse": true
       },
       {
-        "text": "屏風である",
-        "why": "一枚の独立した画像。形式ずらし",
+        "text": "もとは鳥の羽毛が貼られていた",
+        "why": "羽毛が貼られていたのは正倉院の鳥毛立女屏風。技法・所在ずらし",
         "verifiedFalse": true
       },
       {
@@ -1100,7 +1103,8 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）天平文化の項",
-      "薬師寺公式サイト"
+      "薬師寺公式サイト",
+      "画像出典ページ（Wikimedia Commons、審美書院『日本美術精華』第2巻 1899-1908年）: https://commons.wikimedia.org/wiki/File:Goddess_of_Fortune_(Japan).jpg"
     ],
     "examTags": [],
     "status": "draft"
@@ -1112,7 +1116,7 @@
       { "left": "正倉院宝庫", "right": "校倉造・高床式", "kind": "作品×技法" },
       { "left": "正倉院宝庫", "right": "東大寺境内", "kind": "作品×所蔵" }
     ],
-    "artist": null,
+    "artist": "不明",
     "patron": null,
     "style": "校倉造",
     "religion": null,
@@ -1156,8 +1160,8 @@
         "text": "校倉造である"
       },
       {
-        "slot": "style",
-        "text": "高床式の倉庫である"
+        "slot": "other",
+        "text": "宮内庁が管理している"
       },
       {
         "slot": "location",
@@ -1230,7 +1234,8 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）天平文化の項",
-      "宮内庁正倉院公式サイト"
+      "宮内庁正倉院公式サイト",
+      "画像出典ページ（Wikimedia Commons、撮影 あずきごはん 2020年、CC BY-SA 4.0）: https://commons.wikimedia.org/wiki/File:Shosin-shouso.jpg"
     ],
     "examTags": [
       "frequent"
@@ -1244,7 +1249,7 @@
       { "left": "唐招提寺金堂", "right": "寄棟造・本瓦葺", "kind": "作品×技法" },
       { "left": "唐招提寺", "right": "鑑真", "kind": "作品×人物" }
     ],
-    "artist": null,
+    "artist": "不明",
     "patron": null,
     "style": "天平建築（寄棟造・本瓦葺）",
     "religion": "律宗（戒律）",
@@ -1303,8 +1308,8 @@
         "text": "寄棟造・本瓦葺である"
       },
       {
-        "slot": "other",
-        "text": "正面に8本の円柱が並ぶ"
+        "slot": "religion",
+        "text": "戒律を重んじる律宗の寺の本堂である"
       }
     ],
     "falseStatements": [
@@ -1364,7 +1369,8 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）天平文化の項",
-      "唐招提寺公式サイト"
+      "唐招提寺公式サイト",
+      "画像出典ページ（Wikimedia Commons、撮影 Naokijp 2018年、CC BY-SA 4.0）: https://commons.wikimedia.org/wiki/File:Toshodai-ji,_Golden_Hall_01.jpg"
     ],
     "examTags": [
       "frequent"
@@ -1413,7 +1419,8 @@
     "examNote": "単独出題より、天平文化のリード文・誤文の素材として使う（画像なし項目）。六宗の名を1つ入れ替える誤文が定番。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）天平文化の項"
+      "高校教科書（山川『詳説日本史』）天平文化の項",
+      "追検証用の公開URLなし（教科書水準の通説として記述。所蔵機関・一次資料の該当ページは未参照）"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -1462,7 +1469,8 @@
     "examNote": "単独出題より、天平文化のリード文・誤文の素材として使う（画像なし項目）。年号と人物の組合せが頻出。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）天平文化の項"
+      "高校教科書（山川『詳説日本史』）天平文化の項",
+      "追検証用の公開URLなし（教科書水準の通説として記述。所蔵機関・一次資料の該当ページは未参照）"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -1510,7 +1518,8 @@
     "examNote": "単独出題より、天平文化のリード文・誤文（人物の入替）の素材として使う（画像なし項目）。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）天平文化の項"
+      "高校教科書（山川『詳説日本史』）天平文化の項",
+      "追検証用の公開URLなし（教科書水準の通説として記述。所蔵機関・一次資料の該当ページは未参照）"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -1557,7 +1566,8 @@
     "examNote": "単独出題より、天平文化のリード文・誤文の素材として使う（画像なし項目）。「悲田院・施薬院＝光明皇后」の対応が頻出。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）天平文化の項"
+      "高校教科書（山川『詳説日本史』）天平文化の項",
+      "追検証用の公開URLなし（教科書水準の通説として記述。所蔵機関・一次資料の該当ページは未参照）"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -1605,7 +1615,8 @@
     "examNote": "単独出題より、天平文化のリード文・空欄補充の素材として使う（画像なし項目）。成立年と編者の組合せが頻出。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）天平文化の項"
+      "高校教科書（山川『詳説日本史』）天平文化の項",
+      "追検証用の公開URLなし（教科書水準の通説として記述。所蔵機関・一次資料の該当ページは未参照）"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -1652,7 +1663,8 @@
     "examNote": "単独出題より、天平文化のリード文・誤文の素材として使う（画像なし項目）。『古事記』『日本書紀』との性格の違いが問われる。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）天平文化の項"
+      "高校教科書（山川『詳説日本史』）天平文化の項",
+      "追検証用の公開URLなし（教科書水準の通説として記述。所蔵機関・一次資料の該当ページは未参照）"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -1701,7 +1713,8 @@
     "examNote": "単独出題より、天平文化のリード文・誤文の素材として使う（画像なし項目）。「『万葉集』＝天平／『古今和歌集』＝国風（最初の勅撰）」の区別が最頻出。",
     "confusables": [],
     "sources": [
-      "高校教科書（山川『詳説日本史』）天平文化の項"
+      "高校教科書（山川『詳説日本史』）天平文化の項",
+      "追検証用の公開URLなし（教科書水準の通説として記述。所蔵機関・一次資料の該当ページは未参照）"
     ],
     "examTags": [],
     "status": "reviewed"

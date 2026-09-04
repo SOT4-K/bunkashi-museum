@@ -49,3 +49,44 @@ describe('MissReviewScreen', () => {
     expect(onFinish).toHaveBeenCalled()
   })
 })
+
+describe('MissReviewScreen（M2-42: リード文ボタンの best-effort な文脈解決）', () => {
+  beforeEach(() => {
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] })
+  })
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
+  it('pool/passages を渡さなければリード文ボタンを出さない（既存呼び出し元互換）', () => {
+    render(<MissReviewScreen items={items} eras={testEras} onAnswer={noopAnswer} onOutcome={() => {}} onFinish={() => {}} />)
+    expect(screen.queryByTestId('lead-button')).not.toBeInTheDocument()
+  })
+
+  it('出題対象を下線に持つ passage があれば、リード文ボタンから全文を見られる', () => {
+    const passages = [
+      {
+        id: 'miss-review-lead',
+        era: 'tenpyo',
+        title: '天平のリード文',
+        text: '本文。[[a|mr1への言及]]という記述である。',
+        sources: ['x'],
+        underlines: [{ key: 'a', workIds: ['mr1'] }],
+      },
+    ]
+    render(
+      <MissReviewScreen
+        items={items}
+        eras={testEras}
+        onAnswer={noopAnswer}
+        onOutcome={() => {}}
+        onFinish={() => {}}
+        pool={[w1, w2]}
+        passages={passages}
+      />,
+    )
+    expect(screen.getByTestId('lead-button')).toBeInTheDocument()
+    fireEvent.click(screen.getByTestId('lead-button'))
+    expect(screen.getByTestId('lead-sheet-text')).toHaveTextContent('mr1への言及')
+  })
+})
