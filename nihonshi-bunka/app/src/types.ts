@@ -196,6 +196,11 @@ export interface Passage {
   id: string
   era: string
   title: string
+  /** reviewer 指摘（2026-09-04 波1統合検証・群C [重大1]）: works と違い passage には元々
+   *  status が無く、isPassagePublishable は下線の画像有無しか見ていなかった＝reviewer
+   *  未検証のリード文・設問がそのまま本番ビルドに載る安全網の穴だった。省略時は
+   *  "reviewed"（既存passageとの後方互換）。新規執筆時は明示的に "draft" にする。 */
+  status?: Status
   /** 省略時は "text"（既存の全文リード）。"image" は画像リード型（9章。leadWorkIds が参照画像）。 */
   kind?: 'text' | 'image'
   /** kind: "image" のときのリード画像（出題プールにある作品、1〜2枚）。 */

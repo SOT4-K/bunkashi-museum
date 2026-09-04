@@ -72,6 +72,9 @@ function buildFakeCandidates(chosen: Candidate, target: Work, pool: Work[], rng:
       const key = `${c.left} ${c.right}`
       if (seen.has(key)) continue
       seen.add(key)
+      // reviewer指摘（2026-09-04 波1事実検証・群A [中4]）: leftとrightが同じ語になる
+      // 「法隆寺金堂釈迦三尊像・法隆寺金堂釈迦三尊像」のような自明に破綻した誤答を防ぐ
+      if (c.left === c.right) continue
       if (isRealCombo(pool, c.left, c.right)) continue
       out.push(c)
     }

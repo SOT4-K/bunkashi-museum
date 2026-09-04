@@ -887,7 +887,7 @@
       { "kind": "様式×建築", "left": "大仏様", "right": "東大寺南大門" }
     ],
     "artist": "運慶・快慶",
-    "patron": "重源（東大寺再建の大勧進）",
+    "patron": "東大寺（重源の再建事業にともなう造像）",
     "style": "写実的な鎌倉彫刻（慶派）",
     "religion": "仏教（南大門の門守護神）",
     "holder": "東大寺南大門（奈良県奈良市）",
@@ -904,7 +904,7 @@
     "falseStatements": [
       { "text": "定朝の作である", "why": "定朝は平等院鳳凰堂阿弥陀如来像（国風文化）の作者。人物・時代の入れ替え", "verifiedFalse": true },
       { "text": "天平文化の作品である", "why": "鎌倉時代（1203年）の作。時代の入れ替え", "verifiedFalse": true },
-      { "text": "銅造の大仏である", "why": "木造（寄木造）の巨像。技法の入れ替え", "verifiedFalse": true },
+      { "text": "銅造の大仏である", "why": "寄木造の巨像。技法の入れ替え", "verifiedFalse": true },
       { "text": "法隆寺金堂に安置されている", "why": "東大寺南大門に安置されている。所在の入れ替え", "verifiedFalse": true },
       { "text": "康勝が一人で造った", "why": "運慶・快慶らの一門による造像。人物の入れ替え", "verifiedFalse": true }
     ],
@@ -914,7 +914,7 @@
     "category": "sculpture",
     "location": "東大寺南大門（奈良県奈良市）",
     "author": "運慶・快慶",
-    "technique": "木造（寄木造）",
+    "technique": "寄木造",
     "keyPoints": [
       "鎌倉文化を代表する写実的な彫刻",
       "運慶・快慶らの作（1203年）",

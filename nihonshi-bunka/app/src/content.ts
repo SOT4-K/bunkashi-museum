@@ -72,8 +72,12 @@ export function worksByEra(eraId: string): Work[] {
 }
 
 /**
- * passage 自体は status を持たない（M2 は素材となる作品側の status で事実上の検証を管理する設計）。
- * ただし全下線が reviewed 作品を持たない passage をそのまま公開すると、下線の大半が
+ * Hayato 修正（2026-09-04 波1統合検証・reviewer群C [重大1]）: passage には元々 status が
+ * 無く、下線の画像有無しか見ていなかった＝reviewer 未検証のリード文・設問がそのまま
+ * 本番ビルドに載る安全網の穴だった（新規4区分の文化伏せ型2本目が実際にこの穴を素通り
+ * することを実測で確認）。status: "draft" の passage は works と同様に本番から除外する
+ * （省略時は既存passageとの後方互換のため "reviewed" 扱い）。
+ * 以下、既存のコメント: ただし全下線が reviewed 作品を持たない passage をそのまま公開すると、下線の大半が
  * buildThemeSetQuestions でスキップされ「図版問題を作れなかった」行き止まりになる
  * （reviewer 指摘・群B/群C 共通、2026-09-04）。本番ビルドでは
  * workIds を持つ下線について、1つ以上が playableWorks に含まれる passage のみ公開する
@@ -98,6 +102,7 @@ const themeSetPoolById = new Set(themeSetPool.map((w) => w.id))
 
 function isPassagePublishable(passage: Passage): boolean {
   if (shouldIncludeDraft()) return true
+  if ((passage.status ?? 'reviewed') !== 'reviewed') return false
   if (passage.kind === 'image' && !(passage.leadWorkIds ?? []).some((id) => playableWorksById.has(id))) {
     return false
   }

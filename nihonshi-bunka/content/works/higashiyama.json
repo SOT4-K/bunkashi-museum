@@ -556,7 +556,7 @@
     "facts": [
       { "slot": "other", "text": "正風連歌を確立した" },
       { "slot": "other", "text": "『新撰菟玖波集』を編んだ" },
-      { "slot": "other", "text": "弟子とよんだ『水無瀬三吟百韻』が知られる" }
+      { "slot": "other", "text": "弟子とともによんだ『水無瀬三吟百韻』が知られる" }
     ],
     "falseStatements": [
       { "text": "菟玖波集を編んだ", "why": "菟玖波集を編んだのは二条良基（南北朝期）。人物・作品の入れ替え", "verifiedFalse": true },

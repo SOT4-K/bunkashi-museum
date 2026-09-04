@@ -2024,8 +2024,8 @@
       "sourceName": ""
     },
     "sources": [
-      "高校日本史の資料集（図版）",
-      "皇居三の丸尚蔵館 収蔵品紹介"
+      "皇居三の丸尚蔵館 収蔵品紹介",
+      "高校日本史の資料集（図版）"
     ],
     "examTags": [],
     "status": "reviewed"
@@ -2785,7 +2785,8 @@
       },
       {
         "slot": "other",
-        "text": "賀茂真淵に学んだ"
+        "text": "賀茂真淵に学んだ",
+        "shared": ["hanawa-hokiichi"]
       }
     ],
     "falseStatements": [
@@ -2998,9 +2999,9 @@
     "orderIndex": 1790,
     "pairs": [
       {
-        "left": "洒落本",
-        "right": "山東京伝",
-        "kind": "genre-person"
+        "left": "山東京伝",
+        "right": "洒落本",
+        "kind": "person-genre"
       }
     ],
     "artist": "山東京伝",
@@ -3031,7 +3032,8 @@
       },
       {
         "slot": "other",
-        "text": "寛政の改革で取り締まられ、作者が処罰された"
+        "text": "寛政の改革で取り締まられ、作者が処罰された",
+        "shared": ["kibyoshi"]
       }
     ],
     "falseStatements": [
@@ -3080,9 +3082,9 @@
     "orderIndex": 1775,
     "pairs": [
       {
-        "left": "黄表紙",
-        "right": "恋川春町",
-        "kind": "genre-person"
+        "left": "恋川春町",
+        "right": "黄表紙",
+        "kind": "person-genre"
       }
     ],
     "artist": "恋川春町",
@@ -3113,7 +3115,8 @@
       },
       {
         "slot": "other",
-        "text": "寛政の改革で取り締まられた"
+        "text": "寛政の改革で取り締まられた",
+        "shared": ["share-bon"]
       }
     ],
     "falseStatements": [
@@ -3857,7 +3860,8 @@
       },
       {
         "slot": "other",
-        "text": "幕末の尊王攘夷運動に影響を与えた"
+        "text": "幕末の尊王攘夷運動に影響を与えた",
+        "shared": ["rai-sanyo"]
       }
     ],
     "falseStatements": [
@@ -4023,7 +4027,8 @@
       },
       {
         "slot": "other",
-        "text": "幕末の尊王思想に影響を与えた"
+        "text": "幕末の尊王思想に影響を与えた",
+        "shared": ["hirata-atsutane"]
       }
     ],
     "falseStatements": [
