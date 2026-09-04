@@ -1,6 +1,12 @@
 [
   {
     "id": "horyuji-shaka-sanzon",
+    "orderIndex": 20,
+    "pairs": [
+      { "left": "法隆寺金堂釈迦三尊像", "right": "鞍作鳥（止利仏師）", "kind": "work-artist" },
+      { "left": "法隆寺金堂釈迦三尊像", "right": "北魏様式（止利様式）", "kind": "work-style" },
+      { "left": "法隆寺金堂釈迦三尊像", "right": "銅造（金銅仏）", "kind": "work-technique" }
+    ],
     "artist": "鞍作鳥（止利仏師）",
     "patron": null,
     "style": "金銅仏（北魏様式・止利様式）",
@@ -113,6 +119,12 @@
   },
   {
     "id": "koryuji-miroku",
+    "orderIndex": 30,
+    "pairs": [
+      { "left": "広隆寺弥勒菩薩半跏思惟像", "right": "赤松の一木造", "kind": "work-technique" },
+      { "left": "広隆寺", "right": "秦河勝（秦氏の氏寺）", "kind": "work-person" },
+      { "left": "半跏思惟像", "right": "広隆寺・中宮寺", "kind": "term-pair" }
+    ],
     "artist": null,
     "patron": "秦河勝",
     "style": "木彫像（南朝様式に近い一木造）",
@@ -221,6 +233,12 @@
   },
   {
     "id": "chuguji-hanka-shiyui",
+    "orderIndex": 40,
+    "pairs": [
+      { "left": "中宮寺半跏思惟像", "right": "樟（クスノキ）材", "kind": "work-technique" },
+      { "left": "中宮寺", "right": "聖徳太子ゆかりの尼寺", "kind": "work-holder" },
+      { "left": "中宮寺半跏思惟像", "right": "南朝系統のやわらかな作風", "kind": "work-style" }
+    ],
     "artist": null,
     "patron": null,
     "style": "木彫像（南朝様式に近い一木造）",
@@ -329,6 +347,12 @@
   },
   {
     "id": "tamamushi-zushi",
+    "orderIndex": 50,
+    "pairs": [
+      { "left": "玉虫厨子", "right": "法隆寺", "kind": "work-holder" },
+      { "left": "玉虫厨子", "right": "捨身飼虎図（説話画）", "kind": "work-subject" },
+      { "left": "玉虫厨子", "right": "玉虫の羽・金銅透かし彫り金具", "kind": "work-technique" }
+    ],
     "artist": null,
     "patron": null,
     "style": "工芸（厨子・飛鳥様式）",
@@ -425,6 +449,12 @@
   },
   {
     "id": "kudara-kannon",
+    "orderIndex": 60,
+    "pairs": [
+      { "left": "法隆寺百済観音像", "right": "南朝様式", "kind": "work-style" },
+      { "left": "法隆寺百済観音像", "right": "樟の一木造", "kind": "work-technique" },
+      { "left": "法隆寺百済観音像", "right": "水瓶を持つ観音菩薩", "kind": "work-subject" }
+    ],
     "artist": null,
     "patron": null,
     "style": "木彫像（南朝様式）",
@@ -536,6 +566,12 @@
   {
     "id": "tori-busshi",
     "kind": "person",
+    "orderIndex": 15,
+    "pairs": [
+      { "left": "鞍作鳥（止利仏師）", "right": "法隆寺金堂釈迦三尊像", "kind": "person-work" },
+      { "left": "鞍作鳥（止利仏師）", "right": "北魏様式（止利様式）", "kind": "person-style" },
+      { "left": "鞍作鳥（止利仏師）", "right": "飛鳥大仏（飛鳥寺釈迦如来像）", "kind": "person-work" }
+    ],
     "artist": null,
     "patron": null,
     "style": null,
@@ -597,6 +633,11 @@
   {
     "id": "donchou-kanroku",
     "kind": "person",
+    "orderIndex": 10,
+    "pairs": [
+      { "left": "曇徴", "right": "高句麗／紙・墨の製法", "kind": "person-item" },
+      { "left": "観勒", "right": "百済／暦法", "kind": "person-item" }
+    ],
     "artist": null,
     "patron": null,
     "style": null,

@@ -1,6 +1,12 @@
 [
   {
     "id": "shakoki-dogu",
+    "orderIndex": 20,
+    "pairs": [
+      { "left": "土偶", "right": "縄文時代の呪術（豊穣・安産の祈り）", "kind": "work-use" },
+      { "left": "遮光器土偶", "right": "青森県亀ヶ岡遺跡", "kind": "work-place" },
+      { "left": "土偶", "right": "土製", "kind": "work-technique" }
+    ],
     "artist": null,
     "patron": null,
     "style": "土偶（縄文晩期）",
@@ -98,6 +104,12 @@
   },
   {
     "id": "kaen-doki",
+    "orderIndex": 10,
+    "pairs": [
+      { "left": "火焔型土器", "right": "新潟県笹山遺跡（信濃川流域）", "kind": "work-place" },
+      { "left": "縄文土器", "right": "煮炊き・貯蔵（深鉢形）", "kind": "work-use" },
+      { "left": "火焔型土器", "right": "縄文時代中期", "kind": "work-era" }
+    ],
     "artist": null,
     "patron": null,
     "style": "縄文土器（火焔型）",
@@ -194,6 +206,12 @@
   },
   {
     "id": "keiko-bujin-haniwa",
+    "orderIndex": 50,
+    "pairs": [
+      { "left": "埴輪", "right": "古墳の墳丘に並べる", "kind": "work-use" },
+      { "left": "挂甲の武人", "right": "群馬県太田市", "kind": "work-place" },
+      { "left": "形象埴輪", "right": "人物・動物・家をかたどる", "kind": "term-pair" }
+    ],
     "artist": null,
     "patron": null,
     "style": "形象埴輪（人物埴輪）",
@@ -290,6 +308,12 @@
   },
   {
     "id": "kesadasuki-dotaku",
+    "orderIndex": 30,
+    "pairs": [
+      { "left": "銅鐸", "right": "弥生時代の農耕祭祀", "kind": "work-use" },
+      { "left": "銅鐸", "right": "青銅製（鋳造）", "kind": "work-technique" },
+      { "left": "袈裟襷文銅鐸", "right": "広島県黒川遺跡", "kind": "work-place" }
+    ],
     "artist": null,
     "patron": null,
     "style": "銅鐸（袈裟襷文）",
@@ -381,6 +405,11 @@
   },
   {
     "id": "zenpokoenfun",
+    "orderIndex": 40,
+    "pairs": [
+      { "left": "前方後円墳", "right": "大和政権の首長の墓", "kind": "term-pair" },
+      { "left": "大仙陵古墳（仁徳天皇陵）", "right": "大阪府堺市", "kind": "work-place" }
+    ],
     "kind": "concept",
     "artist": null,
     "patron": null,
@@ -443,6 +472,11 @@
   },
   {
     "id": "kaizuka-jomon",
+    "orderIndex": 5,
+    "pairs": [
+      { "left": "大森貝塚", "right": "モース", "kind": "work-person" },
+      { "left": "貝塚", "right": "縄文時代の生活跡", "kind": "term-pair" }
+    ],
     "kind": "concept",
     "artist": null,
     "patron": null,
@@ -493,6 +527,290 @@
     ],
     "explanation": "縄文時代の人々が食べた貝の殻や動物の骨、土器の破片などを捨て続けた場所が層をなして残ったもの。代表例の大森貝塚は、1877年に来日した動物学者モースが発見・発掘したことで知られる。",
     "examNote": "単独出題より、縄文文化のリード文や誤文の素材として使う（画像なし項目）。モースと大森貝塚の組み合わせで問われやすい。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）原始文化の項"
+    ],
+    "examTags": [],
+    "status": "reviewed"
+  },
+  {
+    "id": "basshi-jomon",
+    "kind": "concept",
+    "orderIndex": 22,
+    "pairs": [
+      { "left": "抜歯", "right": "縄文時代の通過儀礼", "kind": "term-pair" },
+      { "left": "屈葬", "right": "縄文時代の埋葬", "kind": "term-pair" }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "抜歯・屈葬（縄文の習俗）",
+    "religion": "呪術・信仰（縄文時代）",
+    "periodLabel": "縄文時代",
+    "eraNote": "縄文時代の人々は、成人などの節目に歯を抜く抜歯の風習をもち、死者は手足を折り曲げた屈葬の姿で葬られることが多かった。土偶とともに、当時の呪術的な信仰や集団のきまりを示す資料として扱われる。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      { "slot": "other", "text": "成人などの通過儀礼として歯を抜く風習である" },
+      { "slot": "other", "text": "縄文時代の人骨から確認される", "shared": [] },
+      { "slot": "other", "text": "死者を手足を折り曲げて葬る屈葬もあわせて行われた" }
+    ],
+    "falseStatements": [
+      { "text": "弥生時代に大陸から伝わった風習である", "why": "抜歯は縄文時代の習俗。時代ずらし", "verifiedFalse": true },
+      { "text": "古墳の副葬品の一種である", "why": "抜歯は人骨に残る風習であり副葬品ではない。内容ずらし", "verifiedFalse": true }
+    ],
+    "title": "抜歯・屈葬",
+    "reading": "ばっし・くっそう",
+    "era": "genshi",
+    "category": "other",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "縄文時代の習俗",
+      "成人などの通過儀礼として歯を抜く",
+      "屈葬（手足を折り曲げた埋葬）",
+      "土偶とならぶ呪術・信仰の資料"
+    ],
+    "explanation": "縄文時代の人々は、成人や結婚などの節目に特定の歯を抜く抜歯の風習をもっていた。また死者は手足を折り曲げた屈葬の姿で葬られることが多く、いずれも当時の呪術的な信仰や集団のきまりを知る手がかりとされる。",
+    "examNote": "単独出題より、縄文文化のリード文・誤文の素材として使う（画像なし項目）。「土偶・抜歯・屈葬＝縄文」でまとめて覚える。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）原始文化の項"
+    ],
+    "examTags": [],
+    "status": "reviewed"
+  },
+  {
+    "id": "ishibocho",
+    "kind": "concept",
+    "orderIndex": 28,
+    "pairs": [
+      { "left": "石包丁", "right": "穂首刈り", "kind": "work-use" },
+      { "left": "石包丁", "right": "磨製石器", "kind": "work-technique" }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "磨製石器（農具）",
+    "religion": null,
+    "periodLabel": "弥生時代",
+    "eraNote": "弥生時代には大陸から水稲耕作が伝わり、収穫には稲の穂だけを摘み取る石包丁が用いられた。木製の田下駄・鍬・鋤などとともに、水田稲作の広まりを示す道具として教科書で扱われる。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      { "slot": "other", "text": "稲の穂を摘み取る穂首刈りに用いた" },
+      { "slot": "other", "text": "磨いてつくった石器（磨製石器）である" },
+      { "slot": "era", "text": "弥生時代の農具である", "shared": [] }
+    ],
+    "falseStatements": [
+      { "text": "縄文時代の狩猟具である", "why": "弥生時代の農具（収穫具）。時代・用途ずらし", "verifiedFalse": true },
+      { "text": "青銅でつくられた祭器である", "why": "磨製石器の農具。銅鐸など青銅祭器との材質・用途ずらし", "verifiedFalse": true }
+    ],
+    "title": "石包丁",
+    "reading": "いしぼうちょう",
+    "era": "genshi",
+    "category": "other",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "弥生時代の収穫具",
+      "穂首刈りに用いる",
+      "磨製石器",
+      "田下駄・木製農具とセットで覚える"
+    ],
+    "explanation": "弥生時代、水稲耕作の広まりとともに用いられた磨製石器の収穫具。稲の穂の部分だけを摘み取る「穂首刈り」に使われた。田下駄や木製の鍬・鋤とともに、弥生の農具として図版でも問われる。",
+    "examNote": "単独出題より、弥生文化のリード文・誤文の素材として使う（画像なし項目）。「石包丁＝穂首刈り」の対応が頻出。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）原始文化の項"
+    ],
+    "examTags": [],
+    "status": "reviewed"
+  },
+  {
+    "id": "kangou-shuraku",
+    "kind": "concept",
+    "orderIndex": 32,
+    "pairs": [
+      { "left": "環濠集落", "right": "吉野ヶ里遺跡（佐賀県）", "kind": "work-place" },
+      { "left": "高地性集落", "right": "戦いへの備え", "kind": "term-pair" }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "環濠集落",
+    "religion": null,
+    "periodLabel": "弥生時代",
+    "eraNote": "弥生時代には、周囲に濠をめぐらせた環濠集落や、見晴らしのよい丘の上に営まれた高地性集落が現れた。むらどうしの争いが起きていたことを示し、やがて小さな国が生まれていく過程を伝える。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      { "slot": "other", "text": "周囲に濠をめぐらせた弥生時代の集落である" },
+      { "slot": "other", "text": "佐賀県の吉野ヶ里遺跡が代表例として知られる" },
+      { "slot": "other", "text": "むらどうしの争いがあったことを示すと考えられている" }
+    ],
+    "falseStatements": [
+      { "text": "縄文時代を代表する集落の形である", "why": "環濠集落は弥生時代の集落。縄文の集落（三内丸山遺跡など）との時代ずらし", "verifiedFalse": true },
+      { "text": "古墳時代の豪族の居館を指す", "why": "弥生時代の濠をめぐらせた集落を指す。時代・内容ずらし", "verifiedFalse": true }
+    ],
+    "title": "環濠集落",
+    "reading": "かんごうしゅうらく",
+    "era": "genshi",
+    "category": "other",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "弥生時代の集落",
+      "周囲に濠をめぐらせる",
+      "佐賀県吉野ヶ里遺跡が代表例",
+      "むらどうしの争いを示す"
+    ],
+    "explanation": "弥生時代、周囲に濠をめぐらせて営まれた集落。佐賀県の吉野ヶ里遺跡が代表例で、物見やぐらの跡なども見つかっている。丘の上に営まれた高地性集落とともに、この時代にむらどうしの争いがあったことを示す。",
+    "examNote": "単独出題より、弥生文化のリード文・誤文の素材として使う（画像なし項目）。「環濠集落＝吉野ヶ里」の対応が頻出。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）原始文化の項"
+    ],
+    "examTags": [],
+    "status": "reviewed"
+  },
+  {
+    "id": "kamekan-bo",
+    "kind": "concept",
+    "orderIndex": 34,
+    "pairs": [
+      { "left": "甕棺墓", "right": "北部九州", "kind": "work-place" },
+      { "left": "支石墓", "right": "朝鮮半島の影響", "kind": "term-pair" }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "甕棺墓・支石墓",
+    "religion": null,
+    "periodLabel": "弥生時代",
+    "eraNote": "弥生時代の墓には地域ごとの特色があり、北部九州では大型の土器を棺として用いる甕棺墓が発達した。支石墓や墳丘墓とともに、身分の差が生まれつつあった社会のようすを伝える。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      { "slot": "other", "text": "大型の土器を棺として用いる弥生時代の墓である" },
+      { "slot": "other", "text": "北部九州を中心に分布する" },
+      { "slot": "other", "text": "副葬品の多い墓があり、身分の差が生まれたことを示す" }
+    ],
+    "falseStatements": [
+      { "text": "縄文時代の埋葬方法である", "why": "甕棺墓は弥生時代の墓。時代ずらし", "verifiedFalse": true },
+      { "text": "近畿地方を中心に分布する", "why": "北部九州を中心に分布する。地域ずらし", "verifiedFalse": true }
+    ],
+    "title": "甕棺墓",
+    "reading": "かめかんぼ",
+    "era": "genshi",
+    "category": "other",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "弥生時代の墓",
+      "大型の土器を棺に用いる",
+      "北部九州を中心に分布",
+      "副葬品から身分差がうかがえる"
+    ],
+    "explanation": "弥生時代、大型の土器を棺として遺体を納めた墓。北部九州を中心に分布し、鏡や剣などの副葬品を多くもつ墓もあることから、この時期に身分の差が生まれつつあったことを示す資料とされる。",
+    "examNote": "単独出題より、弥生文化のリード文・誤文の素材として使う（画像なし項目）。「甕棺墓＝北部九州」の対応が頻出。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）原始文化の項"
+    ],
+    "examTags": [],
+    "status": "reviewed"
+  },
+  {
+    "id": "fukusohin-henka",
+    "kind": "concept",
+    "orderIndex": 45,
+    "pairs": [
+      { "left": "古墳前期の副葬品", "right": "銅鏡・玉・腕輪形石製品", "kind": "term-pair" },
+      { "left": "古墳中・後期の副葬品", "right": "鉄製の武器・武具・馬具", "kind": "term-pair" }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "古墳の副葬品",
+    "religion": null,
+    "periodLabel": "古墳時代（3〜6世紀）",
+    "eraNote": "古墳の石室に納められた副葬品は、時期によって性格が変わる。前期には銅鏡や玉、腕輪形石製品など呪術的なものが多く、中期以降は鉄製の武器・武具や馬具が増え、被葬者の性格が司祭者的なものから武人的なものへ移ったと説明される。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      { "slot": "other", "text": "古墳前期には銅鏡・玉・腕輪形石製品など呪術的な品が多い" },
+      { "slot": "other", "text": "古墳中期以降は鉄製の武器・武具や馬具が増える" },
+      { "slot": "era", "text": "古墳時代の遺物である", "shared": ["keiko-bujin-haniwa", "zenpokoenfun"] }
+    ],
+    "falseStatements": [
+      { "text": "前期の副葬品は馬具が中心である", "why": "馬具が増えるのは中期以降。前期は銅鏡・玉など呪術的な品が中心。時期ずらし", "verifiedFalse": true },
+      { "text": "副葬品はすべて墳丘の上に並べられた", "why": "墳丘に並べられたのは埴輪。副葬品は石室内に納められた。内容ずらし", "verifiedFalse": true }
+    ],
+    "title": "古墳の副葬品の変化",
+    "reading": "こふんのふくそうひんのへんか",
+    "era": "genshi",
+    "category": "other",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "前期＝銅鏡・玉・腕輪形石製品（呪術的）",
+      "中期以降＝鉄製武器・武具・馬具（武人的）",
+      "石室内に納められる（埴輪は墳丘に並べる）",
+      "被葬者の性格の変化を示す"
+    ],
+    "explanation": "古墳の石室に納められた副葬品は時期によって性格が変わる。前期は銅鏡・玉・腕輪形石製品など呪術的な品が中心で、被葬者が司祭者的な性格をもったことを示す。中期以降は鉄製の武器・武具や馬具が増え、武人的な性格が強まったと説明される。",
+    "examNote": "単独出題より、古墳文化のリード文・誤文の素材として使う（画像なし項目）。「副葬品＝石室の中」「埴輪＝墳丘の上」の区別に注意。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）原始文化の項"
+    ],
+    "examTags": [],
+    "status": "reviewed"
+  },
+  {
+    "id": "inariyama-tekken",
+    "kind": "concept",
+    "orderIndex": 55,
+    "pairs": [
+      { "left": "稲荷山古墳出土鉄剣", "right": "埼玉県", "kind": "work-place" },
+      { "left": "江田船山古墳出土鉄刀", "right": "熊本県", "kind": "work-place" },
+      { "left": "獲加多支鹵大王", "right": "ワカタケル大王（雄略天皇とされる）", "kind": "term-pair" }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "銘文をもつ鉄剣・鉄刀",
+    "religion": null,
+    "periodLabel": "古墳時代（5世紀後半）",
+    "eraNote": "埼玉県の稲荷山古墳から出土した鉄剣と、熊本県の江田船山古墳から出土した鉄刀には、いずれも「獲加多支鹵大王（ワカタケル大王）」と読める銘文が刻まれている。関東と九州の両方に大和政権の支配が及んでいたことを示す資料として、図版でもよく取り上げられる。",
+    "holder": null,
+    "subject": null,
+    "facts": [
+      { "slot": "other", "text": "稲荷山古墳（埼玉県）の鉄剣に銘文が刻まれている" },
+      { "slot": "other", "text": "江田船山古墳（熊本県）の鉄刀にも同じ大王の名が読める" },
+      { "slot": "other", "text": "「獲加多支鹵大王」はワカタケル大王（雄略天皇とされる）と読まれる" },
+      { "slot": "other", "text": "大和政権の支配が関東から九州に及んでいたことを示す" }
+    ],
+    "falseStatements": [
+      { "text": "稲荷山古墳は熊本県にある", "why": "稲荷山古墳は埼玉県、江田船山古墳が熊本県。所在の入れ替えずらし", "verifiedFalse": true },
+      { "text": "銘文は弥生時代のものである", "why": "古墳時代（5世紀後半）の鉄剣・鉄刀の銘文。時代ずらし", "verifiedFalse": true }
+    ],
+    "title": "稲荷山古墳出土鉄剣・江田船山古墳出土鉄刀",
+    "reading": "いなりやまこふんしゅつどてっけん・えたふなやまこふんしゅつどてっとう",
+    "era": "genshi",
+    "category": "other",
+    "location": null,
+    "author": null,
+    "technique": null,
+    "keyPoints": [
+      "5世紀後半の銘文をもつ鉄剣・鉄刀",
+      "稲荷山古墳＝埼玉県、江田船山古墳＝熊本県",
+      "「獲加多支鹵大王」＝ワカタケル大王",
+      "大和政権の支配の広がりを示す"
+    ],
+    "explanation": "埼玉県の稲荷山古墳から出土した鉄剣と、熊本県の江田船山古墳から出土した鉄刀には、ともに「獲加多支鹵大王」と読める銘文がある。ワカタケル大王（雄略天皇とされる）を指すと考えられ、5世紀後半に大和政権の支配が関東から九州にまで及んでいたことを示す。",
+    "examNote": "単独出題より、古墳文化のリード文・誤文の素材として使う（画像なし項目）。所在（埼玉／熊本）の入れ替えが誤文の定番。",
     "confusables": [],
     "sources": [
       "高校教科書（山川『詳説日本史』）原始文化の項"

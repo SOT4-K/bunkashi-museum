@@ -151,5 +151,86 @@
       }
     ],
     "notes": "mock-exam-analysis.md 9章の画像リード型。説明文には作品名・作者名・技法・時代を書かず、描かれている内容と伝来のみを書いている。盲検は『説明文だけで作者・作品名が確定しないこと』に置き換えて適用（b・dは説明文からは決まらない）。"
+  },
+  {
+    "id": "insei-02",
+    "era": "insei",
+    "title": "この文化を当てる — 絵巻と地方の阿弥陀堂",
+    "text": "Ａ この文化は、天皇が位を退いて上皇となったのちも、みずから政務をとりつづけた時期に栄えた。　Ｂ この文化のもとで、上皇や后は京都に御願寺を次々と造営し、熊野や高野への参詣をたびたび行った。　Ｃ この文化では、[[a|貴族の世界に武士や庶民の姿が取り込まれ]]、笑いや驚きをまじえた絵巻や説話が数多く生まれた。　Ｄ この文化のころ、[[b|陸奥の平泉を拠点とした一族]]は、金や馬の富を背景に寺院を営み、その一族にゆかりの堂が奥州にも残された。　Ｅ この文化では、[[c|念仏によって死後に極楽へ生まれ変わることを願う教え]]が都をこえ、東北から九州まで地方の豪族に広がった。　Ｆ この文化ののち、[[d|朝廷内部の争いに武士が動員され]]、やがて武家の政権が生まれた。",
+    "sources": [
+      "Ａ・Ｂ（上皇の政務・御願寺の造営・熊野詣）: content/eras.json の insei（detail・items）",
+      "Ｃ（武士や庶民の姿が文化に取り込まれる・絵巻物と説話）: content/eras.json の insei（detail）、content/works/insei.json の choju-giga-sumo / konjaku-monogatarishu（facts）",
+      "Ｄ（平泉を拠点とした奥州藤原氏・金や馬の富・寺院の造営）: content/works/insei.json の fujiwara-kiyohira（facts・explanation）、shiramizu-amidado（facts）",
+      "Ｅ（浄土教の地方への浸透）: content/works/insei.json の fukiji-odo / shiramizu-amidado（eraNote・facts）",
+      "Ｆ（院政期ののち武士が台頭し武家政権が生まれる）: content/eras.json の insei（detail）",
+      "高校教科書（山川『詳説日本史』）院政期の文化の項",
+      "形式: research/nichidai-past-exams-analysis.md 1章「文化伏せ型（2016・2025）」"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "event",
+        "workIds": [
+          "choju-giga-sumo"
+        ],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部aの傾向を示す、次の絵巻について述べた文として最も不適切なものはどれか。",
+          "answerId": "choju-giga-sumo",
+          "reversed": true
+        },
+        "note": "二段構え: A=武士や庶民の姿が文化に取り込まれた傾向（出来事）／B=画像で示す絵巻。1本目（insei-01）は同じ作品を q9 で出しているので、ここでは画像を出す型にして重複を避けた。falseStatements の『彩色をほどこした濃絵である』『鎌倉文化の作品である』『藤原隆能の作である』が使える"
+      },
+      {
+        "key": "b",
+        "anchorKind": "person",
+        "workIds": [
+          "shiramizu-amidado"
+        ],
+        "ask": {
+          "type": "q9",
+          "stem": "下線部bの一族の初代の娘が建てたと伝えられ、阿字池をへだてて建つ庭園を伴う仏堂はどれか。",
+          "answerId": "shiramizu-amidado",
+          "distractorIds": [
+            "fukiji-odo",
+            "byodoin-hoo-do",
+            "engakuji-shariden"
+          ]
+        },
+        "note": "二段構え: A=奥州藤原氏（一族）／B=初代の娘の建立・阿字池の庭園。1本目は同じ作品を『娘の発願・1160年』の条件で q10 に使っているので、ここでは庭園を足す条件に変えた。誤答の fukiji-odo は同じ院政期の地方の阿弥陀堂（Aだけを部分的に満たす）"
+      },
+      {
+        "key": "c",
+        "anchorKind": "institution",
+        "workIds": [
+          "fukiji-odo"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部cが地方に広がったことを示す次の仏堂について述べた文A・Bの正誤の組合せとして正しいものはどれか。",
+          "answerId": "fukiji-odo"
+        },
+        "note": "二段構え: A=浄土教（教え）／B=画像で示す地方の仏堂。1本目は同じ作品を q9・q4 で出しているので型を変えた。falseStatements の『中尊寺金色堂と同じく金箔で覆われている』『福島県にある阿弥陀堂である』が所在・属性の入れ替え型として使える"
+      },
+      {
+        "key": "d",
+        "anchorKind": "event",
+        "workIds": [
+          "shiramizu-amidado"
+        ],
+        "ask": {
+          "type": "q12",
+          "stem": "Ａ〜Ｆが述べているこの文化の名称として最も適切なものはどれか。",
+          "answerText": "院政期の文化",
+          "distractorTexts": [
+            "国風文化",
+            "弘仁・貞観文化",
+            "鎌倉文化"
+          ]
+        },
+        "note": "文化伏せ型の要となる問い（nichidai-past-exams-analysis.md 1章・5.3）。誤答は隣接する時代の文化名でそろえた。bで画像を出したあとなので、この問い自体は画像に依存しない"
+      }
+    ],
+    "notes": "2本目のセット（M2-15）。nichidai-past-exams-analysis.md の「文化伏せ型」（2016・2025年）に合わせ、『この文化は…』で始まるＡ〜Ｆの手がかり文から文化を推測させる形にした。1本目（insei-01）と下線・型が重ならないよう、下線は別の手がかり（庶民の台頭／奥州藤原氏／浄土教の地方伝播）にし、同じ作品でも設問の型と足す属性を変えている。"
   }
 ]

@@ -12,7 +12,7 @@ import { QuestionCard } from './QuestionCard'
 import { AnswerSheet } from './AnswerSheet'
 import { WorkImage } from './WorkImage'
 import { imageSrc } from '../utils/image'
-import { buildThemeSetQuestions } from '../engine/themeSet'
+import { appendOrderQuestionIfDue, buildThemeSetQuestions } from '../engine/themeSet'
 import { splitPassageText } from '../engine/passage'
 import { todayIso } from '../engine/srs'
 import type { MissSelection } from '../engine/explain'
@@ -30,12 +30,21 @@ type Phase = 'read' | 'quiz' | 'done'
 export function ThemeSetScreen({
   passage,
   pool,
+  imagePool = pool,
+  setIndex = 0,
   eras,
   onAnswer,
   onFinish,
 }: {
   passage: Passage
+  /** 出題対象・素材にできる作品（画像あり artifact ＋ 画像なし person/text/concept。M2-16）。 */
   pool: Work[]
+  /** 画像で出題できる作品だけ（Q1/Q2/Q9 の対象・distractor、年代順並べ替えの候補）。
+   *  省略時は pool と同じ（既存呼び出しとの後方互換）。 */
+  imagePool?: Work[]
+  /** 「学習を始める」等で連続提示するテーマセットの通し番号（0始まり）。3セットに1問の
+   *  年代順並べ替え（M2-16）の頻度判定に使う。省略時は0（毎回1本目扱い＝並べ替えは出ない）。 */
+  setIndex?: number
   eras: Era[]
   onAnswer: (
     workId: string,
@@ -47,8 +56,11 @@ export function ThemeSetScreen({
   onFinish: () => void
 }) {
   const today = todayIso()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const themeQuestions = useMemo(() => buildThemeSetQuestions(passage, pool, eras), [passage.id])
+  const themeQuestions = useMemo(() => {
+    const base = buildThemeSetQuestions(passage, pool, eras, undefined, imagePool)
+    return appendOrderQuestionIfDue(base, setIndex, imagePool)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [passage.id, setIndex])
   const segments = useMemo(() => splitPassageText(passage.text), [passage.text])
   // 9章「画像リード型セット」: kind === "image" のとき、リード文の代わりに参照画像1〜2枚を表示する。
   const isImageLead = passage.kind === 'image'
@@ -203,6 +215,9 @@ export function ThemeSetScreen({
 
   // phase === 'quiz'
   const isLast = index === total - 1
+  // M2-16: 年代順並べ替え（appendOrderQuestionIfDue が追加する underlineKey: 'order'）は
+  // 本文の下線に対応しないため「下線部○に関して」を出さない。
+  const isRealUnderline = Boolean(current && underlineTextByKey.has(current.underlineKey))
   const underlineLabel = current ? (underlineTextByKey.get(current.underlineKey) ?? '') : ''
 
   return (
@@ -253,9 +268,11 @@ export function ThemeSetScreen({
         </div>
       )}
 
-      <p className={styles.underlinePrompt} data-testid="underline-prompt">
-        下線部{current.underlineKey}に関して: {underlineLabel}
-      </p>
+      {isRealUnderline && (
+        <p className={styles.underlinePrompt} data-testid="underline-prompt">
+          下線部{current.underlineKey}に関して: {underlineLabel}
+        </p>
+      )}
 
       <QuestionCard question={current.question} answered={answered} onChoice={handleChoice} onUnknown={handleUnknown} />
 

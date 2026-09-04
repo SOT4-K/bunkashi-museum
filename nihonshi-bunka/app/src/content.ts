@@ -51,6 +51,18 @@ export const works: Work[] = shouldIncludeDraft()
  */
 export const playableWorks: Work[] = works.filter((w) => hasRealImage(w) && (w.kind ?? 'artifact') === 'artifact')
 
+/**
+ * テーマセットの出題対象・素材プール（M2-16）。画像がある artifact（= playableWorks）に加え、
+ * 画像を持たない person/text/concept も含める（語句組合せ・2文正誤・4択・適切/不適切な文の
+ * 出題対象に戻す。research/nichidai-past-exams-analysis.md 5章）。ただし「画像→名前」を
+ * 問う型（Q1/Q2/Q9等）の対象・distractor には使わない（そちらは playableWorks を
+ * imagePool として別に渡す。engine/themeSet.ts の buildThemeSetQuestions 参照）。
+ */
+export const themeSetPool: Work[] = works.filter((w) => {
+  const kind = w.kind ?? 'artifact'
+  return kind === 'artifact' ? hasRealImage(w) : true
+})
+
 export const worksById: Record<string, Work> = Object.fromEntries(works.map((w) => [w.id, w]))
 
 export const erasById: Record<string, Era> = Object.fromEntries(eras.map((e) => [e.id, e]))
@@ -74,8 +86,15 @@ export function worksByEra(eraId: string): Work[] {
  * 食い違い。テストは DEV 扱いで shouldIncludeDraft() が早期 true を返すため気づけなかった）。
  * workIds が無い／空の下線は「作品に依存しない」として素通しする。
  * また kind: "image" 自体の画像依存は leadWorkIds 側で判定する。
+ *
+ * M2-16: 画像なし項目（kind: person/text/concept）を文字問題の対象に戻したため、
+ * 下線が生成できるかどうかは playableWorks（画像あり）だけでなく themeSetPool
+ * （画像なし項目も含む）で判定する（画像なし項目だけを指す下線を持つ passage が
+ * 本番ビルドで丸ごと非公開になってしまうのを防ぐ）。leadWorkIds（kind: "image" の
+ * リード画像）は引き続き画像が必須なので playableWorks のまま判定する。
  */
 const playableWorksById = new Set(playableWorks.map((w) => w.id))
+const themeSetPoolById = new Set(themeSetPool.map((w) => w.id))
 
 function isPassagePublishable(passage: Passage): boolean {
   if (shouldIncludeDraft()) return true
@@ -84,7 +103,7 @@ function isPassagePublishable(passage: Passage): boolean {
   }
   return passage.underlines.every((u) => {
     if (!u.workIds || u.workIds.length === 0) return true
-    return u.workIds.some((id) => playableWorksById.has(id))
+    return u.workIds.some((id) => themeSetPoolById.has(id))
   })
 }
 

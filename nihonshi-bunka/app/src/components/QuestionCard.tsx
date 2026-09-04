@@ -3,7 +3,7 @@ import styles from './LearnScreen.module.css'
 import { WorkImage } from './WorkImage'
 import { ImageLightbox } from './ImageLightbox'
 import { ExpandIcon } from './icons'
-import { imageSrc } from '../utils/image'
+import { hasRealImage, imageSrc } from '../utils/image'
 import type { MissSelection } from '../engine/explain'
 import type { Question, Work } from '../types'
 
@@ -17,15 +17,19 @@ const PROMPTS: Record<Question['type'], string> = {
   q9: '条件に合う作品は？',
   q10: '次の2つの記述の正誤の組合せとして正しいものは？',
   q12: '最も適切なものは？',
+  q13: '正しい組合せはどれか？',
+  q14: '正しい制作順はどれか？',
 }
 
 const Q4_REVERSED_PROMPT = 'この作品に関する記述として最も不適切なものは？'
+const Q13_REVERSED_PROMPT = '誤っている組合せはどれか？'
 
 /** 設問文。ask.stem（writer 手書き。8章「二段構え」・9章）があれば、それを最優先でそのまま使う
  *  （既存の自動合成 conditionText 等は使わない）。 */
 function promptFor(question: Question): string {
   if (question.stem) return question.stem
   if (question.type === 'q4' && question.reversed) return Q4_REVERSED_PROMPT
+  if (question.type === 'q13' && question.reversed) return Q13_REVERSED_PROMPT
   if (question.type === 'q9' && question.conditionText) return `${question.conditionText}を選べ`
   return PROMPTS[question.type]
 }
@@ -144,7 +148,7 @@ export function QuestionCard({
   const choiceLabels =
     question.type === 'q2'
       ? (question.choiceEras ?? []).map((e) => e.name)
-      : question.type === 'q4'
+      : question.type === 'q4' || question.type === 'q14'
         ? (question.choiceStatements ?? []).map((s) => s.text)
         : question.type === 'q6'
           ? (question.choiceEraItems ?? []).map((it) => it.text)
@@ -154,11 +158,15 @@ export function QuestionCard({
               ? (question.choicePairLabels ?? [])
               : question.type === 'q12'
                 ? (question.choiceQ12 ?? []).map((s) => s.text)
-                : question.choiceWorks.map((w) => w.title)
+                : question.type === 'q13'
+                  ? (question.choiceWordPairs ?? []).map((c) => c.text)
+                  : question.choiceWorks.map((w) => w.title)
 
   // Q12（画像なし文字4択。9章「画像リード型セット」）はリード文自体が画像なので、
   // 設問ごとのヒーロー画像は出さない（そもそも question.work の画像＝答えではないことが多い）。
-  const showHeroImage = question.type !== 'q12'
+  // Q13/Q14 は work が画像を持たない対象（kind: person/text/concept）や、複数作品を代表する
+  // 仮のものであることがあるため、実画像が無ければヒーロー画像を出さない（M2-16）。
+  const showHeroImage = question.type !== 'q12' && question.type !== 'q14' && hasRealImage(question.work)
 
   return (
     <div>
@@ -172,6 +180,16 @@ export function QuestionCard({
         <div className={styles.statementPairBlock} data-testid="statement-pair">
           <p>A: {question.statementPair.sentenceA.text}</p>
           <p>B: {question.statementPair.sentenceB.text}</p>
+        </div>
+      )}
+      {question.type === 'q14' && question.orderItems && (
+        <div className={styles.orderImageRow} data-testid="order-items">
+          {question.orderItems.map((item) => (
+            <div className={styles.orderImageItem} key={item.work.id}>
+              <WorkImage mono src={imageSrc(item.work)} alt={item.label} />
+              <span className={styles.orderImageLabel}>{item.label}</span>
+            </div>
+          ))}
         </div>
       )}
       <div className={styles.choiceList}>

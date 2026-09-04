@@ -53,7 +53,8 @@ const VALID_KINDS = new Set(['artifact', 'person', 'text', 'concept'])
 // underlines[].ask（下線から出したい設問の型・条件スロット。省略可）。
 // app/src/types.ts の PassageUnderlineAsk と揃える（M2-09〜11 修正の仕様・8章「二段構え」・9章）。
 const VALID_ASK_SLOTS = new Set(['holder', 'artist', 'technique', 'era', 'subject'])
-const VALID_ASK_TYPES = new Set(['q9', 'q10', 'q4', 'q11', 'q12'])
+// q13（語句の組合せ。M2-16）は app/src/types.ts の PassageUnderlineAsk.type に追加した。
+const VALID_ASK_TYPES = new Set(['q9', 'q10', 'q4', 'q11', 'q12', 'q13'])
 const VALID_PASSAGE_KINDS = new Set(['text', 'image'])
 
 // 純関数として export し、app/src 側の Vitest から直接検証できるようにする
@@ -144,7 +145,7 @@ function underlineTextByKey(text) {
 //    材質・図様・作品名を下線に書かない）
 //  - ask.type === 'q12'（9章）: answerText と distractorTexts（3件）が必須
 //  - 下線は1passageにつき3〜5個、text は200〜400字程度（目安。文字数は警告のみ）
-function validatePassages({ worksById, hasImageAsset, eraIds, errors, warnings }) {
+function validatePassages({ worksById, hasImageAsset, hasThemeSetAsset, eraIds, errors, warnings }) {
   if (!existsSync(passagesDir)) {
     // M2 コンテンツ投入前は無くてもよい（エラーにしない）
     return
@@ -337,8 +338,9 @@ function validatePassages({ worksById, hasImageAsset, eraIds, errors, warnings }
               `${label} / ${underline.key}: ask.stem に「不適切」が含まれるが ask.reversed が true でない（正解が反転する）`,
             )
           }
-          if (ask.reversed && ask.type !== 'q4') {
-            errors.push(`${label} / ${underline.key}: ask.reversed は ask.type が "q4" のときのみ使える`)
+          // q13（語句の組合せ。M2-16）も reversed（「誤っている組合せはどれか」）を持てる。
+          if (ask.reversed && ask.type !== 'q4' && ask.type !== 'q13') {
+            errors.push(`${label} / ${underline.key}: ask.reversed は ask.type が "q4"/"q13" のときのみ使える`)
           }
 
           // 9章「画像リード型セット」: q12 は answerText・distractorTexts（3件）が必須。
@@ -531,7 +533,21 @@ function main() {
     return existsSync(join(imagesDir, entry.file))
   }
 
-  validatePassages({ worksById, hasImageAsset, eraIds, errors, warnings })
+  // M2-16: 画像を持たない項目（kind: person/text/concept）を文字問題（語句組合せ・2文正誤・
+  // 4択・適切/不適切な文）の下線先に戻したため、「画像で出題できる」以外にも
+  // 「文字問題の素材にできる」（= app/src/content.ts の themeSetPool と同じ判定）を
+  // 生成可否の判定に加える。画像が要る型（Q9・Q1）は engine 側が imagePool だけを見るため、
+  // ここでの緩和は「そのどちらの型かは分からないが、何かは生成できる可能性がある」を
+  // ブロックしないためのもの（実際に生成できるかは buildThemeSetQuestions が実行時に判断し、
+  // 生成できなければ console.warn でスキップする。M2 チケット「進め方」どおり）。
+  function hasThemeSetAsset(work) {
+    if (!work || !work.id) return false
+    const kind = 'kind' in work ? work.kind : 'artifact'
+    const isArtifactKind = kind === 'artifact' || !VALID_KINDS.has(kind)
+    return isArtifactKind ? hasImageAsset(work) : true
+  }
+
+  validatePassages({ worksById, hasImageAsset, hasThemeSetAsset, eraIds, errors, warnings })
 
   if (warnings.length > 0) {
     console.warn(`content の警告 ${warnings.length} 件:`)

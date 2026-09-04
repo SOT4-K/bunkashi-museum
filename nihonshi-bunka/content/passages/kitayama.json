@@ -72,5 +72,104 @@
       }
     ],
     "notes": "この区分で画像を出題できるのは kinkaku のみ（research/m2-playable-works-2026-09-04.md）。同一作品に対して人物（義満）・制度（五山十刹）・人物（観阿弥世阿弥）・出来事（日明貿易）と、下線の種類と足す属性を変えて4問にしている。画像を伏せて選ばせる型（q9）は先頭のaだけに置き、以降は画像を出す型にした（同じ作品なので、画像を先に見せると後続のq9の答えが割れるため）。"
+  },
+  {
+    "id": "kitayama-02",
+    "era": "kitayama",
+    "title": "この文化を当てる — 将軍の山荘と大陸との交わり",
+    "text": "Ａ この文化は、南北朝の合一によって幕府の力が安定した時期に栄え、その名は[[a|将軍が晩年を過ごした京都北郊の山荘]]の地名に由来する。　Ｂ この文化は、[[b|公家の文化と武家の文化が溶けあった]]ところに特徴があり、将軍が営んだ山荘の建物にもその性格が表れている。　Ｃ この文化では、[[c|猿楽から芸能を大成した父子]]が将軍の保護を受け、幽玄を重んじる舞台芸術と、その心得を説く書物が生まれた。　Ｄ この文化では、[[d|幕府が臨済宗の寺院に定めた格づけの制度]]のもとで、禅僧が漢詩文をつくり、外交や学問の担い手ともなった。　Ｅ この文化のもとでは、[[e|将軍が明の皇帝に使いを送って開いた貿易]]により、大陸の文物と禅の文化がもたらされた。",
+    "sources": [
+      "Ａ（南北朝の合一・文化の名の由来）: content/works/kitayama.json の ashikaga-yoshimitsu（facts）、kinkaku（eraNote・patron）",
+      "Ｂ（公家文化と武家文化の融合）: content/eras.json の kitayama（detail）",
+      "Ｃ（観阿弥・世阿弥と将軍の保護・能楽論書）: content/works/kitayama.json の kanami / zeami / fushikaden（facts）",
+      "Ｄ（五山・十刹の制と五山文学）: content/works/kitayama.json の gozan-jissatsu / gozan-bungaku（facts）",
+      "Ｅ（日明貿易と大陸の文物・禅宗文化）: content/works/kitayama.json の nichimin-boeki（facts・explanation）",
+      "高校教科書（山川『詳説日本史』）北山文化の項",
+      "形式: research/nichidai-past-exams-analysis.md 1章「文化伏せ型（2016・2025）」・2章 T7（年代順並べ替え）"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "hall",
+        "workIds": [
+          "kinkaku"
+        ],
+        "ask": {
+          "type": "q9",
+          "stem": "下線部aの中心にすえられた、初層に寝殿造風、上層に禅宗様を重ねた三層の楼閣はどれか。",
+          "answerId": "kinkaku",
+          "distractorIds": [
+            "ginkaku",
+            "engakuji-shariden",
+            "byodoin-hoo-do"
+          ]
+        },
+        "note": "二段構え: A=将軍の山荘（場所）／B=初層と上層で様式を重ねた三層の構造。1本目（kitayama-01）は A=足利義満・B=鹿苑寺だったので条件を入れ替えた。画像を伏せる型はこの区分で画像を出せる作品が1件しかないため、このセットでも先頭の1問だけに置いている"
+      },
+      {
+        "key": "b",
+        "anchorKind": "style",
+        "workIds": [
+          "kinkaku"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部bの性格を示す、次の写真の建築について述べた文A・Bの正誤の組合せとして正しいものはどれか。",
+          "answerId": "kinkaku"
+        },
+        "note": "画像を出す型。falseStatements の『足利義政が建てた』『東山文化の代表建築である』『枯山水庭園を伴う建築である』が人物・時代・様式の入れ替え型としてそろう"
+      },
+      {
+        "key": "c",
+        "anchorKind": "person",
+        "workIds": [
+          "kinkaku"
+        ],
+        "ask": {
+          "type": "q12",
+          "stem": "下線部cの父子が保護を受けたころの、Ａ〜Ｅが述べているこの文化の名称として最も適切なものはどれか。",
+          "answerText": "北山文化",
+          "distractorTexts": [
+            "東山文化",
+            "鎌倉文化",
+            "桃山文化"
+          ]
+        },
+        "note": "文化伏せ型の要となる問い。誤答は室町〜安土桃山の文化名でそろえた（東山文化との区別が本番でも問われる）。画像に依存しない文字4択なので、画像1件しかないこの区分の反復をやわらげる役割も持たせている"
+      },
+      {
+        "key": "d",
+        "anchorKind": "institution",
+        "workIds": [
+          "kinkaku"
+        ],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部dの制度が整えられたころに営まれた、次の写真の建築について述べた文として最も不適切なものはどれか。",
+          "answerId": "kinkaku",
+          "reversed": true
+        },
+        "note": "画像を出す型。1本目は同じ下線（五山・十刹の制）を q10 で使っているので、こちらは「最も不適切なもの」型にした（reversed）"
+      },
+      {
+        "key": "e",
+        "anchorKind": "event",
+        "workIds": [
+          "kinkaku"
+        ],
+        "ask": {
+          "type": "q12",
+          "stem": "下線部eの開始、南北朝の合一、下線部aの山荘の造営を、古いものから順に並べたものとして最も適切なものはどれか。",
+          "answerText": "南北朝の合一 → 山荘の造営 → 明との貿易の開始",
+          "distractorTexts": [
+            "南北朝の合一 → 明との貿易の開始 → 山荘の造営",
+            "山荘の造営 → 南北朝の合一 → 明との貿易の開始",
+            "明との貿易の開始 → 南北朝の合一 → 山荘の造営"
+          ]
+        },
+        "note": "nichidai-past-exams-analysis.md 2章 T7（年代順並べ替え）。南北朝の合一（1392年）＝ ashikaga-yoshimitsu の facts、山荘の造営（1397年頃）＝ kinkaku の periodLabel、日明貿易の開始（1404年）＝ nichimin-boeki の periodLabel。年号は選択肢に出さず出来事だけで並べさせている"
+      }
+    ],
+    "notes": "2本目のセット（M2-15）。画像を出題できる作品が kinkaku 1件しかない区分なので、5問のうち画像を使うのは3問（q9・q10・q4）に抑え、残る2問は画像に依存しない文字4択（文化名・年代順）にした。q9 は先頭の1問だけ（画像を先に見せると後続の4択の答えが割れるため）。1本目（kitayama-01）とは下線の種類（山荘・融合・父子・制度・貿易）と設問の型の組合せを変えている。"
   }
 ]

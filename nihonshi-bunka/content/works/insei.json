@@ -1,6 +1,12 @@
 [
   {
     "id": "choju-giga-sumo",
+    "orderIndex": 1150,
+    "pairs": [
+      { "kind": "作品×伝承筆者", "left": "鳥獣人物戯画", "right": "伝 鳥羽僧正覚猷" },
+      { "kind": "作品×技法", "left": "鳥獣人物戯画", "right": "白描（墨一色の線描）" },
+      { "kind": "作品×所蔵", "left": "鳥獣人物戯画", "right": "高山寺（京都）" }
+    ],
     "artist": "伝 鳥羽僧正覚猷",
     "patron": null,
     "style": "大和絵（白描画・絵巻物）",
@@ -92,6 +98,11 @@
   },
   {
     "id": "fukiji-odo",
+    "orderIndex": 1170,
+    "pairs": [
+      { "kind": "様式×建築", "left": "阿弥陀堂建築", "right": "富貴寺大堂" },
+      { "kind": "建築×所在", "left": "富貴寺大堂", "right": "豊後国（大分県豊後高田市）" }
+    ],
     "artist": null,
     "patron": null,
     "style": "阿弥陀堂建築（浄土教建築）",
@@ -192,6 +203,11 @@
   },
   {
     "id": "shiramizu-amidado",
+    "orderIndex": 1160,
+    "pairs": [
+      { "kind": "建築×建立者", "left": "白水阿弥陀堂", "right": "徳姫（藤原清衡の娘）" },
+      { "kind": "建築×所在", "left": "白水阿弥陀堂", "right": "陸奥国（福島県いわき市）" }
+    ],
     "artist": null,
     "patron": "徳姫（藤原清衡の娘）",
     "style": "阿弥陀堂建築（浄土教建築）",
@@ -292,6 +308,11 @@
   },
   {
     "id": "konjaku-monogatarishu",
+    "orderIndex": 1120,
+    "pairs": [
+      { "kind": "書物×分類", "left": "今昔物語集", "right": "説話集" },
+      { "kind": "書物×構成", "left": "今昔物語集", "right": "天竺・震旦・本朝の三部" }
+    ],
     "kind": "text",
     "artist": null,
     "patron": null,
@@ -366,6 +387,12 @@
   },
   {
     "id": "okagami",
+    "orderIndex": 1115,
+    "pairs": [
+      { "kind": "書物×分類", "left": "大鏡", "right": "歴史物語" },
+      { "kind": "書物×主題", "left": "大鏡", "right": "藤原道長の栄華" },
+      { "kind": "書物×形式", "left": "大鏡", "right": "老人の対話による紀伝体" }
+    ],
     "kind": "text",
     "artist": null,
     "patron": null,
@@ -440,6 +467,11 @@
   },
   {
     "id": "ryojin-hisho",
+    "orderIndex": 1170,
+    "pairs": [
+      { "kind": "書物×編者", "left": "梁塵秘抄", "right": "後白河上皇" },
+      { "kind": "書物×分類", "left": "梁塵秘抄", "right": "今様（流行歌）の歌謡集" }
+    ],
     "kind": "text",
     "artist": null,
     "patron": null,

@@ -37,10 +37,12 @@ export const QUESTION_TYPE_WEIGHTS: Record<QuestionType, number> = {
   q6: 0.08,
   q8: 0.08,
   q9: 0.2,
-  // q10（2文正誤）・q12（画像なし文字4択）はテーマセット専用（engine/themeSet.ts）。
-  // 自由出題の重みには含めない。
+  // q10（2文正誤）・q12（画像なし文字4択）・q13（語句の組合せ）・q14（年代順並べ替え）は
+  // テーマセット専用（engine/themeSet.ts）。自由出題の重みには含めない。
   q10: 0,
   q12: 0,
+  q13: 0,
+  q14: 0,
 }
 
 export interface SessionPick {
@@ -63,6 +65,8 @@ export function canGenerateType(type: QuestionType, work: Work, pool: Work[], er
       return generateQ9Question(work, pool, eras, PROBE_RANDOM) !== null
     case 'q10':
     case 'q12':
+    case 'q13':
+    case 'q14':
       // テーマセット専用（engine/themeSet.ts）。自由出題では生成しない。
       return false
     default:

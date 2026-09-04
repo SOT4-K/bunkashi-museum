@@ -82,6 +82,36 @@
   font-size: 15px;
 }
 
+/* Q14（年代順並べ替え。M2-16）: 対象の画像をラベル（A/B/C…）付きで一覧表示する
+   （選択はしない、参照用。選択肢自体は choiceList の並びテキストで選ぶ）。 */
+.orderImageRow {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.orderImageItem {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.orderImageItem img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: var(--radius-image);
+  flex-shrink: 0;
+}
+
+.orderImageLabel {
+  font-size: 13px;
+  font-weight: 700;
+}
+
 .choiceList {
   display: flex;
   flex-direction: column;

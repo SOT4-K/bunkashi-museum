@@ -78,5 +78,104 @@
         "note": "画像を出す型。aで画像を伏せて選ばせたあとに置く。falseStatements に『足利義満が建てた』『北山文化の代表建築である』『外壁全体が金箔で覆われている』がそろう"
       }
     ]
+  },
+  {
+    "id": "higashiyama-02",
+    "era": "higashiyama",
+    "title": "この文化を当てる — 大乱ののちの山荘と庭",
+    "text": "Ａ この文化は、[[a|京都の市街を焼いた大乱]]ののち、将軍が政務から退いて京都の東郊に営んだ山荘を中心に育った。　Ｂ この文化では、禅の精神が住まいの中にまで及び、[[b|床の間・違い棚・付書院をそなえた座敷の形式]]が整えられて、のちの和室のもとになった。　Ｃ この文化では、[[c|水を用いず、石と白砂だけで山や水を表す庭]]が、寺の方丈の前に営まれた。　Ｄ この文化のころ、明にわたって画技を学んだ禅僧が日本的な水墨画を大成し、正風連歌や、庶民を主人公とする短編の物語も広まった。　Ｅ この文化では、豪華な道具を並べる茶に対して、[[d|簡素な道具と静かな心をたっとぶ茶]]のあり方が説かれ、のちの茶の湯へとつながった。　Ｆ この文化の名は、[[e|将軍が山荘を営んだ京都の地]]にちなむ。",
+    "sources": [
+      "Ａ（応仁の乱と将軍の隠退・東山の山荘）: content/eras.json の higashiyama（detail）、content/works/higashiyama.json の ginkaku（patron・periodLabel）",
+      "Ｂ（禅の精神が生活文化に及ぶ・書院造の座敷）: content/works/higashiyama.json の shoin-zukuri / togudo-doujinsai（facts）",
+      "Ｃ（枯山水の庭）: content/works/higashiyama.json の karesansui / ryoanji-sekitei（facts・eraNote）",
+      "Ｄ（雪舟の水墨画・宗祇の正風連歌・御伽草子）: content/works/higashiyama.json の sesshu / sogi / otogizoshi（facts）",
+      "Ｅ（侘び茶の創始）: content/works/higashiyama.json の murata-juko（facts・explanation）",
+      "Ｆ（文化の名の由来）: content/works/higashiyama.json の ginkaku（eraNote）",
+      "高校教科書（山川『詳説日本史』）東山文化の項",
+      "形式: research/nichidai-past-exams-analysis.md 1章「文化伏せ型（2016・2025）」・2章 T7（年代順並べ替え）"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "event",
+        "workIds": [
+          "ginkaku"
+        ],
+        "ask": {
+          "type": "q12",
+          "stem": "下線部aと、北山に営まれた山荘の造営、東山に営まれた山荘の造営を、古いものから順に並べたものとして最も適切なものはどれか。",
+          "answerText": "北山の山荘の造営 → 京都を焼いた大乱 → 東山の山荘の造営",
+          "distractorTexts": [
+            "京都を焼いた大乱 → 北山の山荘の造営 → 東山の山荘の造営",
+            "北山の山荘の造営 → 東山の山荘の造営 → 京都を焼いた大乱",
+            "東山の山荘の造営 → 京都を焼いた大乱 → 北山の山荘の造営"
+          ]
+        },
+        "note": "nichidai-past-exams-analysis.md 2章 T7（年代順並べ替え）。北山の山荘（1397年頃、kinkaku の periodLabel）→ 応仁の乱（1467〜77年、higashiyama-01 の本文）→ 東山の山荘（1482年、ginkaku の periodLabel）。北山文化と東山文化の前後関係は本番で頻出"
+      },
+      {
+        "key": "b",
+        "anchorKind": "style",
+        "workIds": [
+          "togudo-doujinsai"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部bをそなえた一室を含む次の建物について述べた文A・Bの正誤の組合せとして正しいものはどれか。",
+          "answerId": "togudo-doujinsai"
+        },
+        "note": "二段構え: A=書院造の座敷の形式（様式）／B=画像で示す建物。1本目（higashiyama-01）は同じ作品を q9 で出しているので画像を出す型にした。falseStatements の『銀閣そのものの別名である』『寝殿造の代表建築である』『足利義満が建立した』が使える"
+      },
+      {
+        "key": "c",
+        "anchorKind": "style",
+        "workIds": [
+          "ryoanji-sekitei"
+        ],
+        "ask": {
+          "type": "q9",
+          "stem": "下線部cのうち、白砂の上に15個の石を大小5群に配した構成で知られる庭園はどれか。",
+          "answerId": "ryoanji-sekitei",
+          "distractorIds": [
+            "kinkaku",
+            "byodoin-hoo-do",
+            "shokintei-katsura"
+          ]
+        },
+        "note": "二段構え: A=枯山水（様式）／B=15個の石を大小5群に配した構成。1本目は同じ作品を q10（画像を出す型）で出しているので、こちらは画像を伏せる型にした。誤答にはこのセットで先に画像が出ていない建築だけを並べている（aで ginkaku、bで togudo-doujinsai の画像が出るため両者を除いた）"
+      },
+      {
+        "key": "d",
+        "anchorKind": "style",
+        "workIds": [
+          "ginkaku"
+        ],
+        "ask": {
+          "type": "q12",
+          "stem": "下線部dのあり方を最初に説き、のちの侘び茶の系譜の祖とされる人物として最も適切なものはどれか。",
+          "answerText": "村田珠光",
+          "distractorTexts": [
+            "千利休",
+            "武野紹鴎",
+            "栄西"
+          ]
+        },
+        "note": "nichidai-past-exams-analysis.md 2章 T3（人物4択）。誤答は同じ茶にかかわる人物でそろえた（利休＝大成、紹鴎＝継承、栄西＝喫茶の伝来）。画像に依存しない文字問題で、本番の配分（文字問題8割）に寄せる役割"
+      },
+      {
+        "key": "e",
+        "anchorKind": "hall",
+        "workIds": [
+          "ginkaku"
+        ],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部eに営まれた山荘の中心建物である、次の写真の建物について述べた文として最も適切なものはどれか。",
+          "answerId": "ginkaku"
+        },
+        "note": "画像を出す型。1本目は同じ作品を q9 と q4（不適切な文）で出しているので、こちらは「最も適切なもの」型にした"
+      }
+    ],
+    "notes": "2本目のセット（M2-15）。『この文化は…』のＡ〜Ｆから文化を推測させる形で、文化名そのものではなく年代順（北山→応仁の乱→東山）を問う設問を置いた（nichidai-past-exams-analysis.md 2章 T7）。1本目（higashiyama-01）と型が重ならないよう、togudo は q9→q10、ryoanji は q10→q9、ginkaku は q9/q4逆→q4 に入れ替えている。"
   }
 ]

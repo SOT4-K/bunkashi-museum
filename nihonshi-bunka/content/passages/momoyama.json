@@ -75,5 +75,103 @@
       }
     ],
     "notes": "この区分で画像を出題できるのは himeji-jo のみ（research/m2-playable-works-2026-09-04.md）。同一作品に対して出来事（信長・秀吉の築城）・出来事（関ヶ原の戦い）・様式（城郭建築）・文化の性格と、下線の種類と足す属性を変えて4問にしている。"
+  },
+  {
+    "id": "momoyama-02",
+    "era": "momoyama",
+    "title": "この文化を当てる — 天守と障壁画",
+    "text": "Ａ この文化は、全国統一を進めた新興の大名の力を背景に生まれ、[[a|大名が政治と軍事の拠点として築いた建物]]が、その富と権威を最もよく示した。　Ｂ この文化では、そうした建物の内部が、[[b|金箔をおいた地に濃い色彩で描く障壁画]]で飾られ、狩野永徳らがこれを手がけた。　Ｃ この文化の建物は、[[c|天守を中心にすえ、内部を書院で構える建て方]]をとり、その姿は江戸時代に入ってからの大改修にも受けつがれた。　Ｄ この文化のころ、[[d|豊臣秀吉に茶頭として仕えた人物]]が簡素な草庵の茶室を完成させ、京都では女性の芸能者が始めた踊りが人気を集めた。　Ｅ この文化には、[[e|ポルトガル人・スペイン人の来航]]によって伝えられた学問や技術も加わり、仏教の影響のうすい人間中心の性格が強まった。",
+    "sources": [
+      "Ａ（新興大名の富を背景とする豪壮な文化・城郭）: content/eras.json の momoyama（detail）、content/works/momoyama.json の himeji-jo（eraNote）",
+      "Ｂ（濃絵の障壁画と狩野永徳）: content/works/momoyama.json の noe-shohekiga / kano-eitoku（facts）",
+      "Ｃ（天守と書院からなる城郭建築・のちの大改修）: content/works/momoyama.json の himeji-jo（facts・periodLabel）",
+      "Ｄ（千利休と草庵の茶室・出雲阿国のかぶき踊り）: content/works/momoyama.json の sen-no-rikyu / myokian-taian / izumo-no-okuni（facts）",
+      "Ｅ（南蛮文化・現世的で人間中心の性格）: content/works/momoyama.json の kirishitan-ban（facts・eraNote）、content/eras.json の momoyama（detail）",
+      "高校教科書（山川『詳説日本史』）桃山文化の項",
+      "形式: research/nichidai-past-exams-analysis.md 1章「文化伏せ型（2016・2025）」"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "hall",
+        "workIds": [
+          "himeji-jo"
+        ],
+        "ask": {
+          "type": "q9",
+          "stem": "下線部aのうち、白漆喰で塗りこめた壁をもち、大天守と三つの小天守を渡櫓で結ぶ構成で知られるものはどれか。",
+          "answerId": "himeji-jo",
+          "distractorIds": [
+            "yomeimon-nikko",
+            "shokintei-katsura",
+            "kinkaku"
+          ]
+        },
+        "note": "二段構え: A=大名の拠点となった建物（場所）／B=白漆喰の壁・連立式の天守群。1本目（momoyama-01）は A=信長と秀吉の築城・B=池田輝政の大改修だったので条件を変えた。画像を出せる作品が1件しかない区分なので、画像を伏せる型はこの先頭1問だけに置く"
+      },
+      {
+        "key": "b",
+        "anchorKind": "style",
+        "workIds": [
+          "himeji-jo"
+        ],
+        "ask": {
+          "type": "q12",
+          "stem": "下線部bのような障壁画が描かれた、Ａ〜Ｅが述べているこの文化の名称として最も適切なものはどれか。",
+          "answerText": "桃山文化",
+          "distractorTexts": [
+            "東山文化",
+            "寛永期の文化",
+            "元禄文化"
+          ]
+        },
+        "note": "文化伏せ型の要となる問い。誤答は前後の時代の文化名でそろえた（寛永期・元禄との区別は本番でも問われる）"
+      },
+      {
+        "key": "c",
+        "anchorKind": "style",
+        "workIds": [
+          "himeji-jo"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部cの建て方を伝える次の写真の建物について述べた文A・Bの正誤の組合せとして正しいものはどれか。",
+          "answerId": "himeji-jo"
+        },
+        "note": "画像を出す型。falseStatements の『織田信長が築いた安土城である』『豊臣秀吉が築いた大坂城である』『黒漆塗りの外観で知られる』が作品・属性の入れ替え型としてそろう"
+      },
+      {
+        "key": "d",
+        "anchorKind": "person",
+        "workIds": [
+          "himeji-jo"
+        ],
+        "ask": {
+          "type": "q12",
+          "stem": "下線部dにあたる人物として最も適切なものはどれか。",
+          "answerText": "千利休",
+          "distractorTexts": [
+            "村田珠光",
+            "武野紹鴎",
+            "栄西"
+          ]
+        },
+        "note": "nichidai-past-exams-analysis.md 2章 T3（人物4択）。誤答は同じ茶にかかわる人物でそろえた（珠光＝創始、紹鴎＝継承、栄西＝喫茶の伝来）。画像に依存しない文字問題で、画像1件しかないこの区分の反復をやわらげる"
+      },
+      {
+        "key": "e",
+        "anchorKind": "event",
+        "workIds": [
+          "himeji-jo"
+        ],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部eのころに整えられた、次の写真の建物について述べた文として最も適切なものはどれか。",
+          "answerId": "himeji-jo"
+        },
+        "note": "画像を出す型。1本目は同じ作品を「最も不適切なもの」型で出しているので、こちらは「最も適切なもの」型にした"
+      }
+    ],
+    "notes": "2本目のセット（M2-15）。画像を出題できる作品が himeji-jo 1件しかない区分なので、5問のうち画像を使うのは3問（q9・q10・q4）に抑え、残る2問は画像に依存しない文字4択（文化名・人物）にした。q9 は先頭の1問だけ。1本目（momoyama-01）とは下線の種類と設問の型の組合せを変えている。"
   }
 ]

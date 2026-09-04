@@ -235,6 +235,38 @@ export function AnswerSheet({
         </div>
       )}
 
+      {question.type === 'q13' && question.choiceWordPairs && question.choiceWordPairs.length > 0 && (
+        <div>
+          <div className={styles.sectionLabel}>4つの組合せ</div>
+          <div className={styles.statementList}>
+            {question.choiceWordPairs.map((c, i) => (
+              <div className={styles.statementItem} key={i}>
+                <span className={c.correct ? styles.statementCorrect : styles.statementWrong}>
+                  {c.correct ? '○' : '×'}
+                </span>
+                <span className={styles.statementText}>{c.text}</span>
+              </div>
+            ))}
+          </div>
+          {question.reversed && <p className={styles.examNote}>この設問は「誤っている組合せ」を選ぶ形式。</p>}
+        </div>
+      )}
+
+      {question.type === 'q14' && question.orderItems && (
+        <div>
+          <div className={styles.sectionLabel}>正しい制作順</div>
+          <div className={styles.statementList}>
+            {question.choiceStatements
+              ?.filter((s) => s.correct)
+              .map((s, i) => (
+                <div className={styles.statementItem} key={i}>
+                  <span className={styles.statementText}>{s.text}</span>
+                </div>
+              ))}
+          </div>
+        </div>
+      )}
+
       {question.type === 'q8' && question.choiceCombos && question.choiceCombos.length > 0 && (
         <div>
           <div className={styles.sectionLabel}>4つの組合せ</div>

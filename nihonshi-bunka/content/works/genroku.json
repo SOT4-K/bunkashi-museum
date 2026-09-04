@@ -746,5 +746,489 @@
     ],
     "examTags": [],
     "status": "reviewed"
+  },
+  {
+    "id": "ito-jinsai",
+    "orderIndex": 1680,
+    "pairs": [
+      {
+        "left": "伊藤仁斎",
+        "right": "古義学",
+        "kind": "person-school"
+      }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "古義学（古学）",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "person",
+    "periodLabel": "江戸時代前期（17世紀後半、元禄期）",
+    "eraNote": "江戸時代前期、元禄文化の学問。幕府が朱子学を重んじる一方で、後世の解釈によらず孔子・孟子の原典に直接立ち返ろうとする古学の立場が現れた。伊藤仁斎は京都で古義学を唱え、町人にも門戸を開いた私塾で多くの門人を育てた。",
+    "facts": [
+      {
+        "slot": "style",
+        "text": "古義学を唱えた儒学者"
+      },
+      {
+        "slot": "era",
+        "text": "元禄文化の人物",
+        "shared": [
+          "seki-takakazu",
+          "miyazaki-yasusada",
+          "yamazaki-ansai",
+          "kitamura-kigin",
+          "ogata-kenzan"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "京都の堀川に私塾（古義堂）を開いた"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "朱子学の官学化を進めた幕府の儒官である",
+        "why": "幕府の儒官は林羅山ら。仁斎は京都の民間の学者。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "陽明学者である",
+        "why": "古義学（古学）の立場。中江藤樹ら陽明学との学派ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "国学者である",
+        "why": "儒学者。本居宣長ら国学との分野ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "伊藤仁斎（古義学）",
+    "reading": "いとうじんさい",
+    "era": "genroku",
+    "category": "other",
+    "location": "京都・堀川",
+    "author": null,
+    "technique": "古義学（儒学の一派）",
+    "keyPoints": [
+      "元禄文化",
+      "古義学（古学）を唱えた儒学者",
+      "京都の堀川に私塾（古義堂）を開いた",
+      "朱子学の解釈によらず孔子・孟子の原典に立ち返る立場"
+    ],
+    "explanation": "伊藤仁斎は、朱子ら後世の解釈を通さずに孔子・孟子の原典そのものを読むべきだと説き、古義学を唱えた儒学者である。京都の堀川に開いた私塾（古義堂）には町人を含む多くの門人が集まった。同じ古学の系統には、のちに古文辞学を唱えた荻生徂徠がいる。",
+    "examNote": "「林羅山＝朱子学」「中江藤樹＝陽明学」「伊藤仁斎＝古義学」「荻生徂徠＝古文辞学」の学派と人物の対応が組合せ問題で頻出。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）元禄文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "yamazaki-ansai",
+    "orderIndex": 1670,
+    "pairs": [
+      {
+        "left": "山崎闇斎",
+        "right": "垂加神道",
+        "kind": "person-school"
+      }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "朱子学（南学）",
+    "religion": "垂加神道",
+    "holder": null,
+    "subject": null,
+    "kind": "person",
+    "periodLabel": "江戸時代前期（17世紀後半）",
+    "eraNote": "江戸時代前期、元禄期の学問と神道。朱子学は幕府の官学のほかに、京学・南学などの系統に分かれて広まった。山崎闇斎は南学の朱子学に神道を結びつけて垂加神道を唱え、のちの尊王思想にも影響を与えた。",
+    "facts": [
+      {
+        "slot": "religion",
+        "text": "垂加神道を唱えた"
+      },
+      {
+        "slot": "style",
+        "text": "南学（土佐で興った朱子学の系統）の学者"
+      },
+      {
+        "slot": "era",
+        "text": "元禄文化の人物",
+        "shared": [
+          "ito-jinsai",
+          "seki-takakazu",
+          "miyazaki-yasusada",
+          "kitamura-kigin",
+          "ogata-kenzan"
+        ]
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "伊勢神道を大成した",
+        "why": "伊勢神道は鎌倉期の度会家行が大成した神道。時代・内容ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "陽明学者である",
+        "why": "朱子学（南学）の立場。学派ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "国学を大成した",
+        "why": "国学の大成は本居宣長（宝暦・天明期）。人物・時代ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "山崎闇斎（垂加神道）",
+    "reading": "やまざきあんさい",
+    "era": "genroku",
+    "category": "other",
+    "location": "—",
+    "author": null,
+    "technique": "朱子学（南学）・神道",
+    "keyPoints": [
+      "元禄期の学問",
+      "南学（朱子学の一系統）の学者",
+      "朱子学と神道を結びつけて垂加神道を唱えた",
+      "のちの尊王思想に影響"
+    ],
+    "explanation": "山崎闇斎は、土佐で興った南学の系統の朱子学を学び、その大義名分の考え方と神道を結びつけて垂加神道を唱えた。神道は中世の伊勢神道、室町期の吉田神道、江戸前期の垂加神道と系統が分かれるため、名称と唱えた人物の対応が問われやすい。",
+    "examNote": "神道は「伊勢神道＝度会家行（鎌倉）」「吉田神道＝吉田兼倶（室町）」「垂加神道＝山崎闇斎（江戸前期）」の対応で覚える。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）元禄文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "seki-takakazu",
+    "orderIndex": 1674,
+    "pairs": [
+      {
+        "left": "関孝和",
+        "right": "和算",
+        "kind": "person-field"
+      }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "和算",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "person",
+    "periodLabel": "江戸時代前期（17世紀後半、元禄期）",
+    "eraNote": "江戸時代前期、元禄文化の学問。商業の発達で計算の需要が高まるなか、日本独自の数学である和算が発達した。関孝和は筆算による代数の計算や円周率の研究を進めて和算を大成し、その門流は江戸時代を通じて受けつがれた。",
+    "facts": [
+      {
+        "slot": "style",
+        "text": "和算を大成した"
+      },
+      {
+        "slot": "era",
+        "text": "元禄文化の人物",
+        "shared": [
+          "ito-jinsai",
+          "yamazaki-ansai",
+          "miyazaki-yasusada",
+          "kitamura-kigin",
+          "ogata-kenzan"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "著書に『発微算法』がある"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "農学者である",
+        "why": "和算（数学）の学者。宮崎安貞（農学）との分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "西洋の数学を翻訳した蘭学者である",
+        "why": "日本独自の数学（和算）を発展させた。分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "化政期の学者である",
+        "why": "元禄期の学者。時代ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "関孝和（和算）",
+    "reading": "せきたかかず",
+    "era": "genroku",
+    "category": "other",
+    "location": "—",
+    "author": null,
+    "technique": "和算（日本独自の数学）",
+    "keyPoints": [
+      "元禄文化",
+      "和算を大成した数学者",
+      "著書『発微算法』",
+      "筆算による代数の計算や円周率の研究"
+    ],
+    "explanation": "関孝和は、日本独自に発達した数学である和算を大成した人物で、筆算による代数の計算法を整え、円周率などの研究も残した。商業の発達によって計算の技術が求められた元禄期の学問の特色を示す。著書に『発微算法』がある。",
+    "examNote": "元禄期の実学は「関孝和＝和算」「宮崎安貞＝農学（『農業全書』）」「吉田光由＝『塵劫記』」など、人物と分野・著書の組合せで問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）元禄文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "miyazaki-yasusada",
+    "orderIndex": 1697,
+    "pairs": [
+      {
+        "left": "宮崎安貞",
+        "right": "『農業全書』",
+        "kind": "person-text"
+      }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "農学",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "person",
+    "periodLabel": "江戸時代前期（17世紀末、元禄期）",
+    "eraNote": "江戸時代前期、元禄文化の学問。新田開発と農業技術の進歩を背景に、実際の農作業に役立つ知識をまとめた農書が著された。宮崎安貞の『農業全書』は日本で最初の体系的な農書とされ、以後の農業の手引きとなった。",
+    "facts": [
+      {
+        "slot": "style",
+        "text": "農学の書物を著した"
+      },
+      {
+        "slot": "era",
+        "text": "元禄文化の人物",
+        "shared": [
+          "ito-jinsai",
+          "yamazaki-ansai",
+          "seki-takakazu",
+          "kitamura-kigin",
+          "ogata-kenzan"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "著書は『農業全書』"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "和算を大成した",
+        "why": "和算は関孝和。分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "著書は『読史余論』である",
+        "why": "『読史余論』は新井白石の史論。著作の取り違え",
+        "verifiedFalse": true
+      },
+      {
+        "text": "化政期に全国を測量した",
+        "why": "全国の測量は伊能忠敬（化政期）。人物・時代ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "宮崎安貞（『農業全書』）",
+    "reading": "みやざきやすさだ",
+    "era": "genroku",
+    "category": "other",
+    "location": "—",
+    "author": null,
+    "technique": "農学（農書）",
+    "keyPoints": [
+      "元禄文化",
+      "『農業全書』を著した",
+      "日本で最初の体系的な農書とされる",
+      "新田開発と農業技術の進歩が背景"
+    ],
+    "explanation": "宮崎安貞は、各地の農村を見て回った経験と中国の農書の知識をもとに『農業全書』を著した。作物ごとの栽培法を体系的にまとめたもので、日本で最初の本格的な農書とされ、江戸時代を通じて農業の手引きとして読まれた。元禄期に学問が実用の分野へ広がったことを示す。",
+    "examNote": "「宮崎安貞＝『農業全書』」。のちの化政期の農書（大蔵永常『広益国産考』）と時代・人物を混同しないこと。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）元禄文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "kitamura-kigin",
+    "orderIndex": 1680,
+    "pairs": [
+      {
+        "left": "北村季吟",
+        "right": "歌学方",
+        "kind": "person-role"
+      }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "古典の研究（歌学）",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "person",
+    "periodLabel": "江戸時代前期（17世紀後半、元禄期）",
+    "eraNote": "江戸時代前期、元禄文化の学問。古典を実証的に研究する動きが進み、和歌や物語の注釈が作られた。北村季吟は幕府の歌学方に任じられ、朝廷の学問であった古典研究が幕府にも取り入れられたことを示す。",
+    "facts": [
+      {
+        "slot": "style",
+        "text": "古典（和歌・物語）を研究した"
+      },
+      {
+        "slot": "era",
+        "text": "元禄文化の人物",
+        "shared": [
+          "ito-jinsai",
+          "yamazaki-ansai",
+          "seki-takakazu",
+          "miyazaki-yasusada",
+          "ogata-kenzan"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "幕府の歌学方となった"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "国学を大成した",
+        "why": "国学の大成は本居宣長（宝暦・天明期）。人物・時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "蕉風俳諧を大成した",
+        "why": "蕉風俳諧は松尾芭蕉。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "浮世草子の作者である",
+        "why": "古典研究の学者。井原西鶴との分野ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "北村季吟（歌学方）",
+    "reading": "きたむらきぎん",
+    "era": "genroku",
+    "category": "other",
+    "location": "—",
+    "author": null,
+    "technique": "古典研究（歌学）",
+    "keyPoints": [
+      "元禄文化",
+      "和歌や物語など古典の注釈・研究",
+      "幕府の歌学方に任じられた",
+      "のちの国学の前段階にあたる古典研究"
+    ],
+    "explanation": "北村季吟は和歌や『源氏物語』などの古典に注釈を加えた学者で、幕府の歌学方に任じられた。それまで朝廷や公家のものであった古典の研究が幕府にも取り入れられたことを示し、この流れはのちに日本の古典から独自の精神を探ろうとする国学へとつながっていく。",
+    "examNote": "「北村季吟＝歌学方」。元禄期の古典研究（契沖・戸田茂睡ら）と、宝暦・天明期の国学（賀茂真淵・本居宣長）は段階が違う。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）元禄文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "ogata-kenzan",
+    "orderIndex": 1700,
+    "pairs": [
+      {
+        "left": "尾形乾山",
+        "right": "陶芸（京焼）",
+        "kind": "person-field"
+      }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "京焼（陶芸）",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "person",
+    "periodLabel": "江戸時代前期〜中期（17世紀末〜18世紀前半）",
+    "eraNote": "江戸時代前期〜中期、元禄文化の工芸。京都では野々村仁清が完成させた色絵の技法が受けつがれ、尾形乾山は仁清に学んで独自の作風の器を作った。兄の尾形光琳が絵付けを手がけた合作も残り、絵画と工芸が結びついた元禄期の京都の文化を示す。",
+    "facts": [
+      {
+        "slot": "style",
+        "text": "京焼の陶工である"
+      },
+      {
+        "slot": "era",
+        "text": "元禄文化の人物",
+        "shared": [
+          "ito-jinsai",
+          "yamazaki-ansai",
+          "seki-takakazu",
+          "miyazaki-yasusada",
+          "kitamura-kigin"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "野々村仁清に陶芸を学んだ"
+      },
+      {
+        "slot": "other",
+        "text": "尾形光琳の弟である"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "肥前・有田焼の陶工である",
+        "why": "京都（京焼）の陶工。酒井田柿右衛門との地域ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "尾形光琳の兄である",
+        "why": "光琳の弟。関係ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "赤絵を完成させた",
+        "why": "赤絵の完成は酒井田柿右衛門（寛永期・有田）。人物ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "尾形乾山（京焼）",
+    "reading": "おがたけんざん",
+    "era": "genroku",
+    "category": "other",
+    "location": "京都",
+    "author": null,
+    "technique": "京焼（陶芸）",
+    "keyPoints": [
+      "元禄文化",
+      "尾形光琳の弟",
+      "野々村仁清に学んだ京焼の陶工",
+      "兄の光琳が絵付けをした合作も残る"
+    ],
+    "explanation": "尾形乾山は尾形光琳の弟で、野々村仁清に陶芸を学び、京都で独自の作風の器を作った陶工である。素朴な形の器に大胆な文様を描いた作品が知られ、兄の光琳が絵付けを手がけた合作も残る。絵画・工芸の両方で活躍した兄弟として、元禄期の京都の文化を代表する。",
+    "examNote": "「野々村仁清＝京焼の色絵」「尾形乾山＝仁清に学ぶ＝光琳の弟」の関係で問われる。有田焼（酒井田柿右衛門）と産地を混同しないこと。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）元禄文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
   }
 ]

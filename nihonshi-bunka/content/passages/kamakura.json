@@ -78,5 +78,105 @@
         "note": "二段構え: A=平清盛（人物）／B=後白河上皇のための造営。画像を出す型。正文は facts の style（伝統的な様式の代表）と『本尊の千手観音坐像を中心に千体の像を安置』、誤文は『禅宗様の代表建築である』『運慶が建立を発願した』などが使える。当初建立（1164年）と現存建物（1266年再建）の年代差はリード文で断定していないので、そこも問える"
       }
     ]
+  },
+  {
+    "id": "kamakura-02",
+    "era": "kamakura",
+    "title": "この文化を当てる — 二つの中心と新しい様式",
+    "text": "Ａ この文化は、伝統を受けつぐ京都の公家と、東国に開かれた武家の政権という二つの中心のもとで育った。　Ｂ この文化のはじめには、平氏の焼打ちで失われた南都の大寺の復興が勧進によって進められ、宋の技術を取り入れた様式が用いられた。　Ｃ この文化では、[[a|運慶にはじまる一門の仏師たち]]が、人のからだつきや衣のしわまで写しとる作風を広めた。　Ｄ この文化のころ、[[b|東国に開かれた幕府の都]]では、民間から広く費用を集めて大きな像が造られたと伝えられる。　Ｅ この文化では、[[c|宋・元との往来]]にともなって新しい宗派とその建築様式が伝えられ、幕府や公家の帰依を受けた寺々が開かれた。　Ｆ 一方で、[[d|千手観音への信仰]]も受けつがれ、京都では焼失した堂がこの時代に再建された。　Ｇ この文化ののち、[[e|南北朝の動乱]]を経て、公家と武家の文化はさらに溶けあっていく。",
+    "sources": [
+      "Ａ（公家と武家の二つの中心）: content/eras.json の kamakura（detail）",
+      "Ｂ（南都焼打ちと東大寺の再建・勧進・宋の技術を取り入れた様式）: content/eras.json の kamakura（detail）、content/works/kamakura.json の chogen / daibutsuyo（facts）",
+      "Ｃ（慶派の写実的な作風）: content/works/kamakura.json の unkei（facts）、kuya-shonin-zo（eraNote）",
+      "Ｄ（鎌倉・民間の勧進による造像）: content/works/kamakura.json の kamakura-daibutsu（patron・facts）",
+      "Ｅ（宋・元との往来による禅宗と禅宗様の伝来・幕府の帰依）: content/works/kamakura.json の engakuji-shariden（eraNote）、eisai（facts）",
+      "Ｆ（千手観音信仰・京都の堂の再建）: content/works/kamakura.json の sanjusangendo-hondo（facts・eraNote）",
+      "Ｇ（南北朝の動乱ののちの公武の文化の融合）: content/eras.json の kitayama（detail）",
+      "高校教科書（山川『詳説日本史』）鎌倉文化の項",
+      "形式: research/nichidai-past-exams-analysis.md 1章「文化伏せ型（2016・2025）」"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "school",
+        "workIds": [
+          "kuya-shonin-zo"
+        ],
+        "ask": {
+          "type": "q9",
+          "stem": "下線部aのうち運慶の四男が造った、市中で念仏を勧めた僧の姿を写す肖像彫刻はどれか。",
+          "answerId": "kuya-shonin-zo",
+          "distractorIds": [
+            "kamakura-daibutsu",
+            "byodoin-amida-nyorai",
+            "kanshinji-nyoirin-kannon"
+          ]
+        },
+        "note": "二段構え: A=慶派の仏師たち（流派）／B=運慶の四男の作・念仏を勧めた僧の肖像。1本目（kamakura-01）は A=六波羅蜜寺・B=康勝だったので、下線側を流派にずらして条件を入れ替えた。誤答はすべて彫刻で、byodoin-amida-nyorai は作者が明らかな像（Bの一部だけを満たす）"
+      },
+      {
+        "key": "b",
+        "anchorKind": "event",
+        "workIds": [
+          "kamakura-daibutsu"
+        ],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部bに造られた次の像について述べた文として最も適切なものはどれか。",
+          "answerId": "kamakura-daibutsu"
+        },
+        "note": "二段構え: A=幕府の都（場所）／B=画像で示す像。1本目は同じ作品を q10 で出しているので型を変えた。正文は facts の『尊格は阿弥陀如来』『露座』、誤文は『東大寺盧舎那仏像である』『天平文化の作品である』が使える"
+      },
+      {
+        "key": "c",
+        "anchorKind": "event",
+        "workIds": [
+          "engakuji-shariden"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部cを通じて伝えられた様式で建てられた次の建物について述べた文A・Bの正誤の組合せとして正しいものはどれか。",
+          "answerId": "engakuji-shariden"
+        },
+        "note": "二段構え: A=宋・元との往来（出来事）／B=画像で示す建物。1本目は同じ作品を q9 で出しているので画像を出す型にした。falseStatements の『大仏様の建築である』『三十三間堂と同じ和様の建築である』『鎌倉時代の建立当初のまま現存する』が使える"
+      },
+      {
+        "key": "d",
+        "anchorKind": "institution",
+        "workIds": [
+          "sanjusangendo-hondo"
+        ],
+        "ask": {
+          "type": "q9",
+          "stem": "下線部dにもとづき、湛慶が造った本尊を中心に千体の観音像を安置する、京都の長大な堂はどれか。",
+          "answerId": "sanjusangendo-hondo",
+          "distractorIds": [
+            "byodoin-hoo-do",
+            "fukiji-odo",
+            "kinkaku"
+          ]
+        },
+        "note": "二段構え: A=千手観音への信仰（信仰）／B=湛慶作の本尊・千体の像。1本目は同じ作品を q4（画像を出す型）で出しているので、こちらでは画像を伏せる型にし、誤答にはこのセットで先に画像が出ていない建築だけを並べた"
+      },
+      {
+        "key": "e",
+        "anchorKind": "event",
+        "workIds": [
+          "kuya-shonin-zo"
+        ],
+        "ask": {
+          "type": "q12",
+          "stem": "Ａ〜Ｇが述べているこの文化の名称として最も適切なものはどれか。",
+          "answerText": "鎌倉文化",
+          "distractorTexts": [
+            "院政期の文化",
+            "北山文化",
+            "国風文化"
+          ]
+        },
+        "note": "文化伏せ型の要となる問い。誤答は前後の時代の文化名でそろえた"
+      }
+    ],
+    "notes": "2本目のセット（M2-15）。『この文化は…』のＡ〜Ｇから文化を推測させる形。1本目（kamakura-01）と下線（六波羅蜜寺・民間の寄進・禅宗・平清盛）が重ならないよう、流派・場所・交流・信仰に下線を移し、同じ作品でも型（q9↔q4、q9↔q10）を入れ替えている。画像を伏せる型（a・d）の誤答には、そのセットで先に画像が出ている作品を入れていない。"
   }
 ]

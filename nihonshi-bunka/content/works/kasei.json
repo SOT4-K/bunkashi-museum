@@ -2563,5 +2563,659 @@
     ],
     "examTags": [],
     "status": "reviewed"
+  },
+  {
+    "id": "motoori-norinaga",
+    "orderIndex": 1798,
+    "pairs": [
+      {
+        "left": "本居宣長",
+        "right": "『古事記伝』",
+        "kind": "person-text"
+      }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "国学",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "person",
+    "periodLabel": "江戸時代中後期（18世紀後半、1730〜1801年）",
+    "eraNote": "江戸時代中後期、宝暦・天明期の文化の学問。儒学や仏教が入る前の日本古来の精神を古典から明らかにしようとする国学が発達し、本居宣長は『古事記』の全文に注釈を加えて国学を大成した。国学はのちの復古神道や尊王思想にも影響を与えた。",
+    "facts": [
+      {
+        "slot": "style",
+        "text": "国学を大成した"
+      },
+      {
+        "slot": "era",
+        "text": "宝暦・天明期の文化の人物",
+        "shared": [
+          "hanawa-hokiichi",
+          "hiraga-gennai",
+          "ando-shoeki"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "『古事記伝』を著した"
+      },
+      {
+        "slot": "other",
+        "text": "賀茂真淵に学んだ"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "蘭学者である",
+        "why": "日本の古典を研究した国学者。杉田玄白ら蘭学との分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "著書は『群書類従』である",
+        "why": "『群書類従』は塙保己一が編集した叢書。著作の取り違え",
+        "verifiedFalse": true
+      },
+      {
+        "text": "元禄期の学者である",
+        "why": "18世紀後半（宝暦・天明期）の学者。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "朱子学を幕府の官学とする基礎を築いた",
+        "why": "それは林羅山（寛永期）。人物・時代ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "本居宣長（『古事記伝』）",
+    "reading": "もとおりのりなが",
+    "era": "horeki-tenmei",
+    "category": "other",
+    "location": "伊勢・松坂（三重県）",
+    "author": null,
+    "technique": "国学",
+    "keyPoints": [
+      "宝暦・天明期の文化",
+      "国学の大成者",
+      "『古事記伝』を著した",
+      "賀茂真淵に学んだ"
+    ],
+    "explanation": "本居宣長は伊勢松坂で医業を営みながら日本の古典を研究し、『古事記』の全文に注釈を加えた『古事記伝』を著して国学を大成した。儒学や仏教が伝わる前の日本人の考え方をとらえようとする学問で、この流れはのちに平田篤胤の復古神道や幕末の尊王攘夷の思想へとつながる。",
+    "examNote": "国学は「契沖→荷田春満→賀茂真淵→本居宣長→平田篤胤」の系譜と著書の対応で問われる。「本居宣長＝『古事記伝』」は必出。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "hanawa-hokiichi",
+    "orderIndex": 1793,
+    "pairs": [
+      {
+        "left": "塙保己一",
+        "right": "『群書類従』",
+        "kind": "person-text"
+      }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "国学",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "person",
+    "periodLabel": "江戸時代中後期（18世紀後半〜19世紀初め）",
+    "eraNote": "江戸時代中後期、宝暦・天明期の文化の学問。国学の発達とともに古典を集めて残す仕事が進み、塙保己一は幕府の援助を受けて和学講談所を開き、古書を分類して収めた『群書類従』を編集した。",
+    "facts": [
+      {
+        "slot": "style",
+        "text": "国学者である"
+      },
+      {
+        "slot": "era",
+        "text": "宝暦・天明期の文化の人物",
+        "shared": [
+          "motoori-norinaga",
+          "hiraga-gennai",
+          "ando-shoeki"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "『群書類従』を編集した"
+      },
+      {
+        "slot": "other",
+        "text": "幕府の援助で和学講談所を開いた"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "著書は『古事記伝』である",
+        "why": "『古事記伝』は本居宣長。著作の取り違え",
+        "verifiedFalse": true
+      },
+      {
+        "text": "蘭学の私塾を開いた",
+        "why": "国学の学問所（和学講談所）。分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "元禄期の学者である",
+        "why": "18世紀後半以降の学者。時代ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "塙保己一（『群書類従』）",
+    "reading": "はなわほきいち",
+    "era": "horeki-tenmei",
+    "category": "other",
+    "location": "江戸",
+    "author": null,
+    "technique": "国学（古典の収集・編集）",
+    "keyPoints": [
+      "宝暦・天明期の文化",
+      "国学者",
+      "『群書類従』を編集した",
+      "幕府の援助で和学講談所を開いた"
+    ],
+    "explanation": "塙保己一は幼くして視力を失いながら国学を修め、散逸しかけていた古典や記録を集めて分類し、『群書類従』として刊行した。幕府の援助を受けて江戸に和学講談所を開き、古典の研究と保存の拠点とした。国学が古典の実証的な研究として広がったことを示す。",
+    "examNote": "「本居宣長＝『古事記伝』」「塙保己一＝『群書類従』・和学講談所」と、国学者と著作・学問所の組合せで問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "hiraga-gennai",
+    "orderIndex": 1770,
+    "pairs": [
+      {
+        "left": "平賀源内",
+        "right": "西洋の学術・画法の紹介",
+        "kind": "person-field"
+      }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "本草学・洋風画",
+    "religion": "蘭学",
+    "holder": null,
+    "subject": null,
+    "kind": "person",
+    "periodLabel": "江戸時代中後期（18世紀後半、1728〜1779年）",
+    "eraNote": "江戸時代中後期、宝暦・天明期の文化の学問と絵画。漢訳洋書の輸入制限がゆるめられて蘭学が広がるなか、平賀源内は本草学や物産のほか西洋の学術・技術に広く通じ、西洋の画法を秋田藩の藩士らに伝えて洋風画の広がりのきっかけをつくった。",
+    "facts": [
+      {
+        "slot": "style",
+        "text": "本草学など西洋の学術に広く通じた"
+      },
+      {
+        "slot": "era",
+        "text": "宝暦・天明期の文化の人物",
+        "shared": [
+          "motoori-norinaga",
+          "hanawa-hokiichi",
+          "ando-shoeki"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "西洋の画法を伝え、秋田蘭画や司馬江漢の洋風画のきっかけをつくった"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "国学者である",
+        "why": "西洋の学術に通じた人物。本居宣長ら国学との分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "『解体新書』を翻訳した",
+        "why": "翻訳は杉田玄白・前野良沢ら。人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "化政期に全国を測量した",
+        "why": "全国の測量は伊能忠敬（化政期）。人物・時代ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "平賀源内",
+    "reading": "ひらがげんない",
+    "era": "horeki-tenmei",
+    "category": "other",
+    "location": "—",
+    "author": null,
+    "technique": "本草学・西洋の学術と画法",
+    "keyPoints": [
+      "宝暦・天明期の文化",
+      "本草学など西洋の学術に広く通じた",
+      "西洋の画法を伝えた",
+      "秋田蘭画（小田野直武）・司馬江漢につながる"
+    ],
+    "explanation": "平賀源内は本草学や物産の研究から出発し、西洋の学術・技術に広く関心を持った人物で、蘭学が本格化した宝暦・天明期を象徴する。西洋の画法を秋田藩の藩士小田野直武に伝え、また司馬江漢もその影響を受けたとされ、洋風画が広がるきっかけをつくった。",
+    "examNote": "洋風画の系譜は「平賀源内→小田野直武（秋田蘭画）・司馬江漢（銅版画）」の順で問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）宝暦・天明期の文化・洋学の項",
+      "秋田県立近代美術館"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "share-bon",
+    "orderIndex": 1790,
+    "pairs": [
+      {
+        "left": "洒落本",
+        "right": "山東京伝",
+        "kind": "genre-person"
+      }
+    ],
+    "artist": "山東京伝",
+    "patron": null,
+    "style": "洒落本",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "text",
+    "periodLabel": "江戸時代中後期（18世紀後半、宝暦・天明期〜寛政期）",
+    "eraNote": "江戸時代中後期、宝暦・天明期の文化の文学。都市の繁栄と出版の発達を背景に、遊里の風俗を会話中心に描く洒落本が流行した。寛政の改革では風俗を乱すとして取り締まりを受け、山東京伝が処罰された。",
+    "facts": [
+      {
+        "slot": "style",
+        "text": "遊里の風俗を会話中心に描いた小説"
+      },
+      {
+        "slot": "era",
+        "text": "宝暦・天明期の文化の文芸",
+        "shared": [
+          "kibyoshi",
+          "senryu-kyoka"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "代表的な作者は山東京伝"
+      },
+      {
+        "slot": "other",
+        "text": "寛政の改革で取り締まられ、作者が処罰された"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "元禄期の浮世草子である",
+        "why": "18世紀後半の小説。井原西鶴の浮世草子との時代・分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "化政期の人情本である",
+        "why": "洒落本は宝暦・天明期。為永春水の人情本（化政期・天保期に処罰）との時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "天保の改革で取り締まられた",
+        "why": "洒落本が取り締まられたのは寛政の改革。天保の改革で処罰されたのは人情本の為永春水。出来事ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "洒落本",
+    "reading": "しゃれぼん",
+    "era": "horeki-tenmei",
+    "category": "other",
+    "location": "江戸",
+    "author": "山東京伝",
+    "technique": "小説（洒落本）",
+    "keyPoints": [
+      "宝暦・天明期の文化",
+      "遊里の風俗を会話中心に描いた小説",
+      "代表的な作者は山東京伝",
+      "寛政の改革で取り締まられ、作者が処罰された"
+    ],
+    "explanation": "洒落本は、遊里に集まる人々のようすを会話を中心に描いた小説で、都市の遊びと出版の発達を背景に流行した。松平定信の寛政の改革では風俗を乱すものとして取り締まりの対象となり、山東京伝が処罰された。出版が政治の統制を受けた例として、黄表紙とともに扱われる。",
+    "examNote": "「洒落本・黄表紙＝寛政の改革で弾圧（山東京伝・恋川春町）」「人情本＝天保の改革で弾圧（為永春水）」と、文学の種類・作者・改革の対応が頻出。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "kibyoshi",
+    "orderIndex": 1775,
+    "pairs": [
+      {
+        "left": "黄表紙",
+        "right": "恋川春町",
+        "kind": "genre-person"
+      }
+    ],
+    "artist": "恋川春町",
+    "patron": null,
+    "style": "黄表紙",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "text",
+    "periodLabel": "江戸時代中後期（18世紀後半、宝暦・天明期）",
+    "eraNote": "江戸時代中後期、宝暦・天明期の文化の文学。絵を主として世相を風刺する絵入りの小説が江戸で流行し、出版の発達と結びついて庶民に広がった。寛政の改革では洒落本とともに取り締まりの対象となった。",
+    "facts": [
+      {
+        "slot": "style",
+        "text": "絵を主とした風刺的な絵入り小説"
+      },
+      {
+        "slot": "era",
+        "text": "宝暦・天明期の文化の文芸",
+        "shared": [
+          "share-bon",
+          "senryu-kyoka"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "代表的な作者は恋川春町"
+      },
+      {
+        "slot": "other",
+        "text": "寛政の改革で取り締まられた"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "化政期の読本である",
+        "why": "宝暦・天明期の絵入り小説。曲亭馬琴の読本（化政期）との時代・分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "元禄期の仮名草子である",
+        "why": "仮名草子は江戸初期の読み物。時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "天保の改革で取り締まられた",
+        "why": "取り締まりを受けたのは寛政の改革。出来事ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "黄表紙",
+    "reading": "きびょうし",
+    "era": "horeki-tenmei",
+    "category": "other",
+    "location": "江戸",
+    "author": "恋川春町",
+    "technique": "小説（絵入りの草双紙）",
+    "keyPoints": [
+      "宝暦・天明期の文化",
+      "絵を主とした風刺的な絵入り小説",
+      "代表的な作者は恋川春町",
+      "寛政の改革で洒落本とともに取り締まられた"
+    ],
+    "explanation": "黄表紙は、絵を主とし、そのすきまに文を書き入れた大人向けの絵入り小説で、世相の風刺や機知を売り物として江戸で流行した。恋川春町の作品が代表とされる。出版が盛んになり庶民が読み物を楽しむようになった宝暦・天明期の文化を示すが、寛政の改革で洒落本とともに取り締まられた。",
+    "examNote": "草双紙の種類（黄表紙・合巻）と時代、弾圧した改革の対応が問われる。「黄表紙＝恋川春町＝寛政の改革」。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "senryu-kyoka",
+    "orderIndex": 1780,
+    "pairs": [
+      {
+        "left": "川柳",
+        "right": "柄井川柳",
+        "kind": "genre-person"
+      },
+      {
+        "left": "狂歌",
+        "right": "大田南畝",
+        "kind": "genre-person"
+      }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "川柳・狂歌",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "text",
+    "periodLabel": "江戸時代中後期（18世紀後半、宝暦・天明期）",
+    "eraNote": "江戸時代中後期、宝暦・天明期の文化の文芸。都市の庶民のあいだで、世相や政治を軽やかに風刺する短い詩歌が流行した。俳諧の形を借りた川柳と、和歌の形を借りた狂歌がその代表で、文化の担い手が庶民に広がったことを示す。",
+    "facts": [
+      {
+        "slot": "style",
+        "text": "世相や政治を風刺した短い詩歌"
+      },
+      {
+        "slot": "era",
+        "text": "宝暦・天明期の文化の文芸",
+        "shared": [
+          "share-bon",
+          "kibyoshi"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "川柳は俳諧の形、狂歌は和歌の形をとる"
+      },
+      {
+        "slot": "other",
+        "text": "柄井川柳・大田南畝らが知られる"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "元禄期に松尾芭蕉が始めた",
+        "why": "芭蕉は元禄期の蕉風俳諧の大成者で別の文芸。人物・時代ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "宮廷で編まれた勅撰和歌集である",
+        "why": "庶民のあいだで流行した風刺の詩歌。分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "寛永期の貞門俳諧の別名である",
+        "why": "貞門俳諧は松永貞徳を祖とする江戸初期の俳諧。時代・内容ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "川柳・狂歌",
+    "reading": "せんりゅう・きょうか",
+    "era": "horeki-tenmei",
+    "category": "other",
+    "location": "江戸",
+    "author": null,
+    "technique": "短詩（川柳・狂歌）",
+    "keyPoints": [
+      "宝暦・天明期の文化",
+      "世相や政治を風刺する短い詩歌",
+      "川柳は俳諧の形、狂歌は和歌の形",
+      "柄井川柳・大田南畝が知られる"
+    ],
+    "explanation": "川柳は俳諧の五七五の形を借りて世相や人情をおかしみをこめて詠むもので、柄井川柳の選による句集から名が広まった。狂歌は和歌の形を借りて政治や世相を風刺するもので、大田南畝らが知られる。どちらも庶民が文芸の担い手になったことを示し、田沼期から寛政の改革にかけての世相を伝える。",
+    "examNote": "「川柳＝柄井川柳」「狂歌＝大田南畝（蜀山人）」の対応で問われる。俳諧（芭蕉・蕪村・一茶）と混同しないこと。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "hanko",
+    "orderIndex": 1770,
+    "pairs": [
+      {
+        "left": "藩校",
+        "right": "藩士の子弟の教育",
+        "kind": "institution-role"
+      }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": null,
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "concept",
+    "periodLabel": "江戸時代中後期（18世紀後半以降）",
+    "eraNote": "江戸時代中後期、宝暦・天明期の文化の教育。藩財政の悪化に対応する藩政改革のなかで、諸藩は人材の育成をめざして藩校（藩学）を設け、藩士の子弟に儒学を中心とする学問と武芸を学ばせた。庶民の教育機関である寺子屋と対で扱われる。",
+    "facts": [
+      {
+        "slot": "style",
+        "text": "諸藩が設けた藩士の子弟のための学校"
+      },
+      {
+        "slot": "era",
+        "text": "宝暦・天明期以降に広がった教育機関",
+        "shared": [
+          "terakoya"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "儒学を中心に学問と武芸を教えた"
+      },
+      {
+        "slot": "other",
+        "text": "藩政改革のなかで人材育成のために設けられた"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "庶民の子どもに読み・書き・そろばんを教えた",
+        "why": "それは寺子屋。対象と内容のずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "幕府が全国に設けた学校である",
+        "why": "各藩が設けた学校。幕府直轄は昌平坂学問所。主体ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "蘭学だけを教える学校である",
+        "why": "儒学を中心とする学問と武芸を教えた。内容ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "藩校",
+    "reading": "はんこう",
+    "era": "horeki-tenmei",
+    "category": "other",
+    "location": "各藩",
+    "author": null,
+    "technique": "教育機関",
+    "keyPoints": [
+      "宝暦・天明期以降に各藩が設立",
+      "藩士の子弟を教育する学校",
+      "儒学を中心に学問と武芸を教えた",
+      "庶民の寺子屋と対で問われる"
+    ],
+    "explanation": "藩校は、諸藩が藩士の子弟を教育するために設けた学校で、儒学を中心とする学問と武芸を教えた。藩財政の立て直しをめざす藩政改革のなかで人材の育成が重視され、18世紀後半以降に各地で設立が進んだ。庶民の子どもが学んだ寺子屋とは対象も内容も異なる。",
+    "examNote": "教育機関は「藩校＝藩士の子弟」「寺子屋＝庶民の子ども」「昌平坂学問所＝幕府直轄」「郷校＝藩士と庶民」の対応で問われる。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "ando-shoeki",
+    "orderIndex": 1755,
+    "pairs": [
+      {
+        "left": "安藤昌益",
+        "right": "『自然真営道』",
+        "kind": "person-text"
+      }
+    ],
+    "artist": null,
+    "patron": null,
+    "style": "社会思想",
+    "religion": null,
+    "holder": null,
+    "subject": null,
+    "kind": "person",
+    "periodLabel": "江戸時代中期（18世紀中頃）",
+    "eraNote": "江戸時代中期、宝暦・天明期の文化の思想。学問が儒学の外へ広がるなか、身分社会そのものを問い直す思想も現れた。安藤昌益は、すべての人が自ら耕して生きる社会を理想とし、武士が農民の生産に依存する当時のしくみを批判した。",
+    "facts": [
+      {
+        "slot": "style",
+        "text": "身分社会を批判した思想家"
+      },
+      {
+        "slot": "era",
+        "text": "宝暦・天明期の文化の人物",
+        "shared": [
+          "motoori-norinaga",
+          "hanawa-hokiichi",
+          "hiraga-gennai"
+        ]
+      },
+      {
+        "slot": "other",
+        "text": "著書は『自然真営道』"
+      },
+      {
+        "slot": "other",
+        "text": "すべての人が耕して生きる社会を理想とした"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "国学を大成した",
+        "why": "国学の大成は本居宣長。分野ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "著書は『経世秘策』である",
+        "why": "『経世秘策』は本多利明（化政期）の著作。著作・人物ずらし",
+        "verifiedFalse": true
+      },
+      {
+        "text": "幕府に仕えた儒官である",
+        "why": "民間の医者・思想家で、身分社会を批判した。立場ずらし",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "安藤昌益（『自然真営道』）",
+    "reading": "あんどうしょうえき",
+    "era": "horeki-tenmei",
+    "category": "other",
+    "location": "陸奥・八戸（青森県）",
+    "author": null,
+    "technique": "社会思想",
+    "keyPoints": [
+      "宝暦・天明期の思想",
+      "『自然真営道』を著した",
+      "すべての人が自ら耕す社会を理想とした",
+      "武士が農民に依存する身分社会を批判"
+    ],
+    "explanation": "安藤昌益は東北で医業を営みながら『自然真営道』を著し、すべての人が自ら田を耕して生きる社会を理想として、武士が農民の生産に依存する当時の身分社会を批判した。儒学の枠を離れて社会のしくみそのものを問い直した思想として、宝暦・天明期の学問の広がりを示す。",
+    "examNote": "「安藤昌益＝『自然真営道』＝身分社会の批判」。化政期の経世家（本多利明・海保青陵）と時代・主張を混同しないこと。",
+    "confusables": [],
+    "sources": [
+      "高校教科書（山川『詳説日本史』）宝暦・天明期の文化の項"
+    ],
+    "examTags": [],
+    "status": "draft"
   }
 ]

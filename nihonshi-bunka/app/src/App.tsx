@@ -7,7 +7,7 @@ import { MuseumScreen } from './components/MuseumScreen'
 import { StatsScreen } from './components/StatsScreen'
 import { ThemeSetScreen } from './components/ThemeSetScreen'
 import { useProgressStore } from './store/useProgressStore'
-import { eras, works, playableWorks, passages } from './content'
+import { eras, works, playableWorks, themeSetPool, passages } from './content'
 import { todayIso } from './engine/srs'
 import { selectLearnThemeSets } from './engine/themeSet'
 import type { Passage } from './types'
@@ -23,6 +23,9 @@ const LEARN_THEME_SET_COUNT = 3
 export default function App() {
   const [tab, setTab] = useState<TabId>('home')
   const [activeThemeSet, setActiveThemeSet] = useState<Passage | null>(null)
+  // 提示中のテーマセットの通し番号（0始まり）。3セットに1問の年代順並べ替え（M2-16。
+  // engine/themeSet.ts の appendOrderQuestionIfDue）の頻度判定に使う。
+  const [activeThemeSetIndex, setActiveThemeSetIndex] = useState(0)
   // 「学習を始める」からのテーマセット連続提示（M2-13）: 残りのセットの待ち行列。
   const [learnQueue, setLearnQueue] = useState<Passage[]>([])
   // true のとき、テーマセットが尽きたら自由出題（LearnScreen）に自動で続ける
@@ -41,6 +44,7 @@ export default function App() {
     if (sets.length > 0) {
       startSession(today)
       setActiveThemeSet(sets[0])
+      setActiveThemeSetIndex(0)
       setLearnQueue(sets.slice(1))
       setInLearnFlow(true)
       return
@@ -51,6 +55,7 @@ export default function App() {
   function goThemeSet(passage: Passage) {
     startSession(todayIso())
     setActiveThemeSet(passage)
+    setActiveThemeSetIndex(0)
     setLearnQueue([])
     setInLearnFlow(false)
   }
@@ -63,6 +68,7 @@ export default function App() {
     if (learnQueue.length > 0) {
       const [next, ...rest] = learnQueue
       setActiveThemeSet(next)
+      setActiveThemeSetIndex((i) => i + 1)
       setLearnQueue(rest)
       return
     }
@@ -80,7 +86,9 @@ export default function App() {
           <ThemeSetScreen
             key={activeThemeSet.id}
             passage={activeThemeSet}
-            pool={playableWorks}
+            pool={themeSetPool}
+            imagePool={playableWorks}
+            setIndex={activeThemeSetIndex}
             eras={eras}
             onAnswer={(workId, type, ans, isReview, today) => {
               const result = answer(workId, type, ans, isReview, today)
