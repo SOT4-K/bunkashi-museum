@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest'
-import { render, screen, fireEvent, within } from '@testing-library/react'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { render, screen, fireEvent, within, act } from '@testing-library/react'
 import { ThemeSetScreen } from '../ThemeSetScreen'
 import { makeWork, testEras } from '../../engine/__tests__/testFixtures'
 import type { Passage, Work } from '../../types'
@@ -49,20 +49,33 @@ describe('ThemeSetScreen', () => {
     expect(screen.queryByTestId('context-panel')).not.toBeInTheDocument()
   })
 
-  it('回答すると解説が出て、最後まで進むと結果画面になる', () => {
-    render(
-      <ThemeSetScreen passage={passage} pool={pool} eras={testEras} onAnswer={noopAnswer} onFinish={() => {}} />,
-    )
-    const choices = screen.getAllByTestId('choice-button')
-    fireEvent.click(choices[0])
+  describe('回答フロー', () => {
+    beforeEach(() => {
+      // 解説シートは回答から少し遅れて出る（LearnScreen と同じ仕様）。setTimeout だけ fake にする。
+      vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] })
+    })
+    afterEach(() => {
+      vi.useRealTimers()
+    })
 
-    const dialog = screen.getByRole('dialog')
-    expect(within(dialog).getByText(/^(◎ 正解|✗ 不正解)/)).toBeInTheDocument()
-    fireEvent.click(within(dialog).getByTestId('next-button'))
+    it('回答すると解説が出て、最後まで進むと結果画面になる', () => {
+      render(
+        <ThemeSetScreen passage={passage} pool={pool} eras={testEras} onAnswer={noopAnswer} onFinish={() => {}} />,
+      )
+      const choices = screen.getAllByTestId('choice-button')
+      fireEvent.click(choices[0])
+      act(() => {
+        vi.advanceTimersByTime(500)
+      })
 
-    const summary = screen.getByTestId('theme-set-summary')
-    expect(within(summary).getByText('正答')).toBeInTheDocument()
-    expect(within(summary).getByText('獲得XP')).toBeInTheDocument()
+      const dialog = screen.getByRole('dialog')
+      expect(within(dialog).getByText(/^(◎ 正解|✗ 不正解)/)).toBeInTheDocument()
+      fireEvent.click(within(dialog).getByTestId('next-button'))
+
+      const summary = screen.getByTestId('theme-set-summary')
+      expect(within(summary).getByText('正答')).toBeInTheDocument()
+      expect(within(summary).getByText('獲得XP')).toBeInTheDocument()
+    })
   })
 
   it('生成できる図版問題が無いリード文は「作れなかった」メッセージを出す', () => {
