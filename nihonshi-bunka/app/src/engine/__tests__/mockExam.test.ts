@@ -1,7 +1,7 @@
 // M2-20 → M2-45: 本番モード（大問IV形式10問）。「学習を始める」（旧 randomLearn.ts）を統合し、
 // 全15文化・重み付き抽選から出題する（旧仕様「kind: image を除外する」は撤廃）。
 import { describe, expect, it } from 'vitest'
-import { buildMockExam, formatCountdown, MOCK_EXAM_SIZE } from '../mockExam'
+import { buildMockExam, discoverableWorks, formatCountdown, MOCK_EXAM_SIZE } from '../mockExam'
 import { createInitialProgress } from '../progress'
 import { makeWork, seededRandom, testEras } from './testFixtures'
 import type { Passage, Work } from '../../types'
@@ -163,6 +163,26 @@ describe('buildMockExam', () => {
       const workIds = items.map((i) => i.question.work.id)
       expect(new Set(workIds).size).toBe(workIds.length)
     }
+  })
+})
+
+describe('discoverableWorks', () => {
+  it('reviewer指摘M2-25⑤の修正: どの下線からも対象にならない作品は含まない', () => {
+    // pool には 12 件あるが、passages が下線に持つのは asuka/hakuho/tenpyo/konin-jogan 各3件
+    // （全12件）。ここでは一部の作品しか下線に持たない passage だけを渡す。
+    const small = textPassage('mp-small', 'asuka', ['mw1', 'mw5'])
+    const result = discoverableWorks([small], pool)
+    const ids = result.map((w) => w.id).sort()
+    expect(ids).toEqual(['mw1', 'mw5'])
+    // mw9（同じ asuka だが下線に無い）は含まれない。
+    expect(ids).not.toContain('mw9')
+  })
+
+  it('全passageを渡せば、下線が対象にする作品を重複なく返す', () => {
+    const result = discoverableWorks(passages, pool)
+    const ids = result.map((w) => w.id)
+    expect(new Set(ids).size).toBe(ids.length)
+    expect(ids.sort()).toEqual(['mw1', 'mw10', 'mw11', 'mw12', 'mw2', 'mw3', 'mw4', 'mw5', 'mw6', 'mw7', 'mw8', 'mw9'])
   })
 })
 

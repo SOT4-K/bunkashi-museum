@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import styles from './App.module.css'
 import { TabBar } from './components/TabBar'
 import { HomeScreen } from './components/HomeScreen'
@@ -10,9 +10,9 @@ import { MuseumScreen } from './components/MuseumScreen'
 import { StatsScreen } from './components/StatsScreen'
 import { ConfirmDialog } from './components/ConfirmDialog'
 import { useProgressStore } from './store/useProgressStore'
-import { eras, works, playableWorks, themeSetPool, passages, worksById } from './content'
+import { eras, playableWorks, themeSetPool, passages, worksById } from './content'
 import { todayIso } from './engine/srs'
-import { buildMockExam, type MockExamItem } from './engine/mockExam'
+import { buildMockExam, discoverableWorks, type MockExamItem } from './engine/mockExam'
 import { buildMissReviewSession, type MissReviewItem } from './engine/missLog'
 
 // タブ遷移は React state のみで行い、history.pushState は使わない。
@@ -55,6 +55,14 @@ export default function App() {
   function cancelLeave() {
     setPendingLeave(false)
   }
+
+  // reviewer指摘M2-25⑤の修正: 図鑑・成績タブの分母は「本番モードで実際に発見されうる作品」
+  // （discoverableWorks）に絞る。works（reviewed全件）をそのまま使うと、どの passage の下線
+  // からも対象にならない作品（文化別練習は経験値・図鑑・SRSを更新しないため発見経路が無い）が
+  // 永久に「未発見」のまま分母に残り続ける。
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- passages/themeSetPool は content.ts の
+  // モジュール定数（実行中に変化しない）ため、空の依存配列で初回のみ計算する
+  const museumWorks = useMemo(() => discoverableWorks(passages, themeSetPool), [])
 
   /** 本番モード（M2-20 → M2-45: 全15文化・重み付き抽選）。作れなければ何もしない（passages が無い等）。 */
   function goMockExam() {
@@ -168,10 +176,10 @@ export default function App() {
             <CultureListScreen works={playableWorks} eras={eras} progress={progress} onSelectEra={setPracticeEraId} />
           ))}
         {tab === 'museum' && (
-          <MuseumScreen works={works} eras={eras} progress={progress} onStart={goMockExam} />
+          <MuseumScreen works={museumWorks} eras={eras} progress={progress} onStart={goMockExam} />
         )}
         {tab === 'stats' && (
-          <StatsScreen works={works} eras={eras} progress={progress} onImport={importProgress} onReset={handleResetProgress} />
+          <StatsScreen works={museumWorks} eras={eras} progress={progress} onImport={importProgress} onReset={handleResetProgress} />
         )}
       </main>
       <TabBar active={tab} onChange={handleTabChange} />

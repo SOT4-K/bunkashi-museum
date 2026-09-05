@@ -21,6 +21,7 @@
 import { weightedSampleWithoutReplacement, eraWeight } from './weighted'
 import { selectReviewCandidates } from './session'
 import { buildThemeQuestionForWork, COMPOSITION_SEQUENCE, pickThemeTargetId } from './themeSet'
+import { generateOrderQuestion } from './order'
 import { excerptSegmentsForUnderline, type PassageSegment } from './passage'
 import type { RandomFn } from './distractors'
 import type { Era, Passage, PassageUnderline, ProgressState, Question, QuestionType, Work } from '../types'
@@ -81,6 +82,25 @@ interface BuiltItem {
   passage: Passage
   underline: PassageUnderline
   question: Question
+}
+
+/**
+ * reviewer指摘M2-25⑤の修正: 図鑑（MuseumScreen）・成績タブ（StatsScreen）の分母が
+ * `works`（reviewed全件）を使っており、どの passage の下線からも対象にならない作品
+ * （＝本番モードで永久に「発見」されえない作品）まで分母に含んでいた
+ * （文化別練習は経験値・図鑑・SRSを更新しないため、discoveredAtの唯一の経路は本番モードの
+ * buildCandidatePoolが対象にする作品だけ）。この関数は「本番モードで実際に発見されうる
+ * 作品」の一覧を返す。App.tsx が works の代わりにこれを MuseumScreen/StatsScreen に渡す。
+ */
+export function discoverableWorks(passages: Passage[], pool: Work[]): Work[] {
+  const seen = new Set<string>()
+  const result: Work[] = []
+  for (const candidate of buildCandidatePool(passages, pool)) {
+    if (seen.has(candidate.work.id)) continue
+    seen.add(candidate.work.id)
+    result.push(candidate.work)
+  }
+  return result
 }
 
 /**
@@ -147,6 +167,49 @@ export function buildMockExam(
         built[i] = { ...b, question: { ...forced, passageId: b.passage.id, underlineKey: b.underline.key } }
         break
       }
+    }
+  }
+
+  // reviewer指摘M2-25②③の修正: 実データでは全下線がask.type明示のため、desiredCategoryの
+  // 'pairs'（Q13）・COMPOSITION_SEQUENCE経由のQ14は事実上発火せず、Q13・Q14が0%になっていた
+  // （analysis 2章T1「語句の組合せ」約22%・T7「年代順」約5%を訓練できていなかった）。
+  // Q9と同じ「最低1問」のbest-effort強制パターンをQ13にも適用する（work.pairsが無い/少ない
+  // 作品ばかりの極端なケースでは諦める。壊れない設計）。
+  if (built.length > 0 && !built.some((b) => b.question.type === 'q13')) {
+    for (let i = 0; i < built.length; i++) {
+      const b = built[i]
+      if (!(b.question.work.pairs && b.question.work.pairs.length > 0)) continue
+      const forced = buildThemeQuestionForWork(b.question.work, pool, eras, rng, { ask: { type: 'q13' } })
+      if (forced && forced.type === 'q13') {
+        built[i] = { ...b, question: { ...forced, passageId: b.passage.id, underlineKey: b.underline.key } }
+        break
+      }
+    }
+  }
+
+  // Q14（年代順並べ替え）: 旧 ThemeSetScreen の appendOrderQuestionIfDue は「3セットに1問」を
+  // 連続提示の通し番号（setIndex）で判定していたが、本番モードは1回ごとに独立した10問セットで
+  // setIndex の概念が無い。同じ約1/3の頻度を rng で近似する（M2-16の意図「3セットに1問」を
+  // 単発の試験生成に翻訳したもの）。generateOrderQuestion が null を返す（orderIndex を持つ
+  // 作品が3件そろわない）ときは何もしない（壊れない設計）。
+  if (built.length > 0 && rng() < 1 / 3) {
+    const orderData = generateOrderQuestion(imagePool, rng, 3, eras)
+    if (orderData) {
+      const lastIndex = built.length - 1
+      const b = built[lastIndex]
+      const nominalWork = orderData.displayItems[0].work
+      const question: Question = {
+        type: 'q14',
+        work: nominalWork,
+        choiceWorks: [],
+        choiceStatements: orderData.choices,
+        correctIndex: orderData.correctIndex,
+        isReview: false,
+        orderItems: orderData.displayItems,
+        passageId: b.passage.id,
+        underlineKey: b.underline.key,
+      }
+      built[lastIndex] = { ...b, question }
     }
   }
 
