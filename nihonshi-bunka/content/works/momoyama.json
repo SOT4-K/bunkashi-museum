@@ -1052,11 +1052,177 @@
       "禁教・鎖国とともに衰えた"
     ],
     "explanation": "ポルトガル人・スペイン人の来航にともない、キリスト教とともに日本に入った文化。活字印刷術によるキリシタン版の刊行、天文学・医学・地理学の知識、パンやカステラといった食べ物、南蛮人の姿や船を描いた南蛮屏風などがその例である。江戸幕府の禁教と鎖国の政策によって、この流れは断たれていった。",
-    "examNote": "「南蛮文化＝ポルトガル・スペイン（桃山）」「蘭学＝オランダ（江戸中期）」を時代と相手国で区別する。",
+    "examNote": "「南蛮文化＝ポルトガル・スペイン（桃山）」「蘭学＝オランダ（江戸中期）」を時代と相手国で区別する。画像は南蛮屏風ではなく、南蛮貿易で輸出された蒔絵・螺鈿の漆器（南蛮漆器）である点に注意。",
     "confusables": [],
     "sources": [
       "高校教科書（山川『詳説日本史』）桃山文化の項",
-      "追検証URL未取得: 教科書水準の通説にもとづく記述で、所蔵機関・公的機関の公開ページは未参照（画像が無く ColBase 等に該当ページを特定できていない項目）"
+      "画像: The Metropolitan Museum of Art（Open Access, CC0） https://www.metmuseum.org/art/collection/search/715076"
+    ],
+    "examTags": [],
+    "status": "draft",
+    "image": {
+      "file": "nanban-coffer.jpg",
+      "credit": "桃山時代末〜江戸初期（16世紀末〜17世紀初め）。The Metropolitan Museum of Art",
+      "license": "CC0 1.0",
+      "sourceUrl": "https://www.metmuseum.org/art/collection/search/715076",
+      "sourceName": "The Metropolitan Museum of Art (Open Access)"
+    }
+  },
+  {
+    "id": "joan-chashitsu",
+    "orderIndex": 1611,
+    "pairs": [
+      { "kind": "茶室×作った人物", "left": "如庵", "right": "織田有楽斎（織田長益）" },
+      { "kind": "茶室×特徴", "left": "如庵", "right": "二畳半台目の茶室" }
+    ],
+    "artist": null,
+    "patron": "織田有楽斎（織田長益）",
+    "style": "草庵風茶室",
+    "religion": null,
+    "holder": "有楽苑（愛知県犬山市）",
+    "subject": null,
+    "periodLabel": "江戸時代初め（17世紀前半、元和年間頃）",
+    "eraNote": "桃山文化の茶の湯の広がり。織田信長の弟にあたる織田有楽斎（織田長益）が建てたと伝えられる茶室で、国宝に指定されている。千利休の弟子ではあるが、待庵とは異なる独自の様式をもつ茶室として知られる。",
+    "facts": [
+      {
+        "slot": "other",
+        "text": "織田有楽斎（織田長益、信長の弟）が建てたと伝えられる"
+      },
+      {
+        "slot": "other",
+        "text": "国宝に指定されている茶室"
+      },
+      {
+        "slot": "other",
+        "text": "現在は愛知県犬山市の有楽苑に移築されている"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "千利休が建てた茶室である",
+        "why": "千利休の作と伝えられる茶室は妙喜庵待庵。如庵は千利休の弟子・織田有楽斎の作。人物の入れ替え",
+        "verifiedFalse": true
+      },
+      {
+        "text": "妙喜庵待庵のことである",
+        "why": "如庵と待庵は別の茶室。如庵は織田有楽斎、待庵は千利休の作とされる",
+        "verifiedFalse": true
+      },
+      {
+        "text": "京都府大山崎町にある",
+        "why": "如庵は現在愛知県犬山市の有楽苑にある（大山崎町にあるのは待庵）。所在の入れ替え",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "如庵",
+    "reading": "じょあん",
+    "era": "momoyama",
+    "category": "architecture",
+    "location": "有楽苑（愛知県犬山市）",
+    "author": "織田有楽斎（織田長益）",
+    "technique": "木造・二畳半台目の草庵風茶室",
+    "keyPoints": [
+      "織田有楽斎（織田長益、信長の弟）が建てたと伝えられる",
+      "国宝の茶室",
+      "千利休の弟子だが、待庵とは異なる独自の茶室",
+      "現在は愛知県犬山市の有楽苑にある"
+    ],
+    "explanation": "織田信長の弟である織田有楽斎（織田長益）が建てたと伝えられる茶室で、国宝に指定されている。千利休の弟子の一人でありながら、千利休の待庵（京都府大山崎町の妙喜庵）とは異なる独自の意匠をもつ茶室として知られ、現在は愛知県犬山市の有楽苑に移築されている。",
+    "examNote": "**如庵は千利休の作である待庵とは別人・別の茶室**（織田有楽斎の作）。桃山文化の茶室の代表＝千利休・待庵という組合せに引きずられて混同しないよう注意。設問では「千利休の弟子が建てた」「待庵とは異なる」という点を明示することが望ましい。",
+    "confusables": [
+      {
+        "id": "myokian-taian",
+        "howToTell": "如庵は織田有楽斎（信長の弟、千利休の弟子）の作。妙喜庵待庵は千利休自身の作と伝えられる。作者が異なる点で見分ける。"
+      }
+    ],
+    "image": {
+      "file": "joan-chashitsu.jpg",
+      "credit": "撮影: Suikotei, 2018年12月16日。愛知県犬山市・有楽苑",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:J%C5%8D-an_(Urakuen).jpg",
+      "sourceName": "Wikimedia Commons"
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）桃山文化・茶の湯の項",
+      "画像と作品同定: Wikimedia Commons https://commons.wikimedia.org/wiki/File:J%C5%8D-an_(Urakuen).jpg"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "daigo-sanboin-teien",
+    "orderIndex": 1613,
+    "pairs": [
+      { "kind": "庭園×造営者", "left": "醍醐寺三宝院庭園", "right": "豊臣秀吉" },
+      { "kind": "庭園×行事", "left": "醍醐寺三宝院庭園", "right": "醍醐の花見（1598年）" }
+    ],
+    "artist": null,
+    "patron": "豊臣秀吉",
+    "style": "池泉回遊式庭園",
+    "religion": "真言宗（醍醐寺）",
+    "holder": "醍醐寺（京都市伏見区）",
+    "subject": null,
+    "periodLabel": "安土桃山時代（16世紀末、1598年頃）",
+    "eraNote": "桃山文化。豊臣秀吉は死の直前の1598年、京都・醍醐寺で盛大な花見（醍醐の花見）を催し、その際に三宝院の庭園の基本設計に自ら関わったと伝えられる。豪壮を好んだ桃山文化を象徴する庭園の一つとされる。",
+    "facts": [
+      {
+        "slot": "patron",
+        "text": "豊臣秀吉が基本設計に関わったと伝えられる"
+      },
+      {
+        "slot": "other",
+        "text": "1598年の醍醐の花見に際して整えられた"
+      },
+      {
+        "slot": "other",
+        "text": "池泉回遊式庭園である"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "足利義満が造営した",
+        "why": "醍醐の花見・三宝院庭園の整備は豊臣秀吉。人物・時代の入れ替え",
+        "verifiedFalse": true
+      },
+      {
+        "text": "枯山水庭園の代表である",
+        "why": "三宝院庭園は池泉回遊式庭園。枯山水の代表は龍安寺石庭（東山文化）。様式の入れ替え",
+        "verifiedFalse": true
+      },
+      {
+        "text": "千利休が設計した茶庭である",
+        "why": "三宝院庭園は豊臣秀吉が関わった庭園。人物の入れ替え",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "醍醐寺三宝院庭園",
+    "reading": "だいごじさんぼういんていえん",
+    "era": "momoyama",
+    "category": "architecture",
+    "location": "醍醐寺（京都市伏見区）",
+    "author": "豊臣秀吉（基本設計に関与と伝えられる）",
+    "technique": "池泉回遊式庭園",
+    "keyPoints": [
+      "豊臣秀吉が基本設計に関わったと伝えられる",
+      "1598年の醍醐の花見に際して整備",
+      "池泉回遊式庭園",
+      "豪壮を好んだ桃山文化を象徴"
+    ],
+    "explanation": "豊臣秀吉が死の直前の1598年に京都・醍醐寺で催した盛大な花見（醍醐の花見）に際し、自ら基本設計に関わったと伝えられる庭園。巨石を配した池泉回遊式庭園で、金箔瓦の建築などとあわせて豪壮を好んだ桃山文化を象徴する遺構の一つとされる。",
+    "examNote": "「醍醐の花見（1598年）＝豊臣秀吉＝醍醐寺三宝院庭園」。枯山水庭園（龍安寺石庭、東山文化）との様式・時代の取り違えに注意。写真は庭園の一角で、著名な巨石「藤戸石」等が写る定番アングルではない点をreviewer確認してほしい。",
+    "confusables": [],
+    "image": {
+      "file": "sanbo-in-teien.jpg",
+      "credit": "撮影: Zairon, 2018年4月11日。京都市伏見区・醍醐寺三宝院",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kyoto_Daigo-ji_Omote-Shoin_Garten_1.jpg",
+      "sourceName": "Wikimedia Commons"
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）桃山文化の項",
+      "画像と作品同定: Wikimedia Commons https://commons.wikimedia.org/wiki/File:Kyoto_Daigo-ji_Omote-Shoin_Garten_1.jpg"
     ],
     "examTags": [],
     "status": "draft"

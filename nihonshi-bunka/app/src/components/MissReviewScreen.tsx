@@ -150,7 +150,12 @@ export function MissReviewScreen({
         </span>
       </div>
 
-      <LeadPanel passage={leadContext?.passage} underlineKey={leadContext?.underlineKey} pool={pool ?? []} />
+      <LeadPanel
+        passage={leadContext?.passage}
+        underlineKey={leadContext?.underlineKey}
+        pool={pool ?? []}
+        raiseAboveConfirmBar={!answered}
+      />
 
       <QuestionCard question={current.question} answered={answered} onChoice={handleChoice} onUnknown={handleUnknown} />
 

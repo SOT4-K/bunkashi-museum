@@ -240,7 +240,12 @@ export function MockExamScreen({
         )}
       </div>
 
-      <LeadPanel passage={current.passage} underlineKey={current.underlineKey} pool={pool} />
+      <LeadPanel
+        passage={current.passage}
+        underlineKey={current.underlineKey}
+        pool={pool}
+        raiseAboveConfirmBar={!answered}
+      />
 
       <QuestionCard question={current.question} answered={answered} onChoice={handleChoice} onUnknown={handleUnknown} />
 

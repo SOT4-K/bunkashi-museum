@@ -76,6 +76,7 @@ describe('App: ホームの「本番モード」（M2-45で全15文化に統合�
     for (let guard = 0; guard < 5; guard++) {
       if (screen.queryByTestId('mock-exam-summary')) break
       fireEvent.click(screen.getAllByTestId('choice-button')[0])
+      fireEvent.click(screen.getByTestId('confirm-answer-button'))
       act(() => {
         vi.advanceTimersByTime(500)
       })

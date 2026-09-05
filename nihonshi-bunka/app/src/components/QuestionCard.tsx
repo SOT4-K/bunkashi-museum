@@ -50,8 +50,59 @@ export function QuestionCard({
   // 出題中の画像は答えのヒントを増やさないため、ライトボックスも常に mono・作品名なしで開く。
   const [lightboxWork, setLightboxWork] = useState<Work | null>(null)
 
+  // M2-53: タップ直後に採点が確定する誤タップ対策として、選択→「回答する」ボタンで確定する
+  // 二段階にする。pendingSelection は「まだ確定していない選択」（枠の強調のみ）で、
+  // 採点（onChoice/onUnknown 呼び出し）は confirm ボタンでのみ行う。設問が変わったら
+  // （＝親が次の問題へ進めたら）選択をリセットする。useEffect ではなく「レンダー中に
+  // 前回の question と比較して setState する」React 推奨パターンで行う（effect 内での
+  // 同期的 setState はカスケード再レンダーを招くため。oxlint react(set-state-in-effect) 参照）。
+  const [pendingSelection, setPendingSelection] = useState<MissSelection | null>(null)
+  const [selectionQuestion, setSelectionQuestion] = useState(question)
+  if (question !== selectionQuestion) {
+    setSelectionQuestion(question)
+    setPendingSelection(null)
+  }
+
+  function selectChoice(index: number) {
+    if (disabled) return
+    setPendingSelection({ kind: 'choice', index })
+  }
+
+  function selectUnknown() {
+    if (disabled) return
+    setPendingSelection({ kind: 'unknown' })
+  }
+
+  function confirmPending() {
+    if (!pendingSelection) return
+    if (pendingSelection.kind === 'unknown') onUnknown()
+    else onChoice(pendingSelection.index)
+  }
+
+  function renderConfirmBar() {
+    if (answered) return null
+    return (
+      <div className={styles.confirmBar}>
+        <button
+          type="button"
+          data-testid="confirm-answer-button"
+          className={styles.confirmButton}
+          disabled={!pendingSelection}
+          onClick={confirmPending}
+        >
+          回答する
+        </button>
+      </div>
+    )
+  }
+
   function classForIndex(index: number, isCorrectOption: boolean): string {
-    if (!answered) return styles.choice
+    if (!answered) {
+      if (pendingSelection?.kind === 'choice' && pendingSelection.index === index) {
+        return `${styles.choice} ${styles.choiceSelected}`
+      }
+      return styles.choice
+    }
     if (isCorrectOption) return `${styles.choice} ${styles.choiceCorrect}`
     if (index === chosenIndex) return `${styles.choice} ${styles.choiceWrong}`
     return `${styles.choice} ${styles.choiceDim}`
@@ -73,8 +124,12 @@ export function QuestionCard({
             const isCorrectOption = index === question.correctIndex
             const isChosenWrong = Boolean(answered) && !isCorrectOption && index === chosenIndex
             const base = styles.imageChoice
+            const isPendingSelected =
+              !answered && pendingSelection?.kind === 'choice' && pendingSelection.index === index
             const extra = !answered
-              ? ''
+              ? isPendingSelected
+                ? styles.imageChoiceSelected
+                : ''
               : isCorrectOption
                 ? styles.choiceCorrect
                 : index === chosenIndex
@@ -90,7 +145,7 @@ export function QuestionCard({
                   data-testid="choice-button"
                   className={`${base} ${extra}`}
                   disabled={disabled}
-                  onClick={() => onChoice(index)}
+                  onClick={() => selectChoice(index)}
                   aria-label={`選択肢 ${index + 1}`}
                 >
                   <WorkImage mono src={imageSrc(w)} alt="作品" />
@@ -129,7 +184,13 @@ export function QuestionCard({
           })}
         </div>
         {!answered && (
-          <button type="button" data-testid="unknown-button" className={styles.choice} style={{ opacity: 0.7 }} onClick={onUnknown}>
+          <button
+            type="button"
+            data-testid="unknown-button"
+            className={`${styles.choice} ${pendingSelection?.kind === 'unknown' ? styles.choiceSelected : ''}`}
+            style={{ opacity: pendingSelection?.kind === 'unknown' ? 1 : 0.7 }}
+            onClick={selectUnknown}
+          >
             わからない
           </button>
         )}
@@ -141,6 +202,8 @@ export function QuestionCard({
             onClose={() => setLightboxWork(null)}
           />
         )}
+        {!answered && <div className={styles.confirmSpacer} aria-hidden="true" />}
+        {renderConfirmBar()}
       </div>
     )
   }
@@ -213,7 +276,7 @@ export function QuestionCard({
                 data-testid="choice-button"
                 className={classForIndex(index, isCorrectOption)}
                 disabled={disabled}
-                onClick={() => onChoice(index)}
+                onClick={() => selectChoice(index)}
               >
                 <span className={styles.choiceLabelText}>{label}</span>
                 {answered && isCorrectOption && (
@@ -231,7 +294,13 @@ export function QuestionCard({
           )
         })}
         {!answered && (
-          <button type="button" data-testid="unknown-button" className={styles.choice} style={{ opacity: 0.7 }} onClick={onUnknown}>
+          <button
+            type="button"
+            data-testid="unknown-button"
+            className={`${styles.choice} ${pendingSelection?.kind === 'unknown' ? styles.choiceSelected : ''}`}
+            style={{ opacity: pendingSelection?.kind === 'unknown' ? 1 : 0.7 }}
+            onClick={selectUnknown}
+          >
             わからない
           </button>
         )}
@@ -239,6 +308,8 @@ export function QuestionCard({
       {lightboxWork && (
         <ImageLightbox src={imageSrc(lightboxWork)} alt="作品" mono onClose={() => setLightboxWork(null)} />
       )}
+      {!answered && <div className={styles.confirmSpacer} aria-hidden="true" />}
+      {renderConfirmBar()}
     </div>
   )
 }

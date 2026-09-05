@@ -327,14 +327,21 @@
       "生糸・銅銭（永楽通宝）を輸入"
     ],
     "explanation": "3代将軍足利義満が明との国交を開き、1404年に始めた貿易。倭寇と区別するため、明が発行した勘合という証票を用いたことから勘合貿易とも呼ばれる。明の皇帝に朝貢する形式をとり、日本からは刀剣・銅・硫黄などを輸出し、明からは生糸・陶磁器・銅銭（永楽通宝など）を輸入した。北山文化に大陸の禅宗文化がもたらされた背景でもある。",
-    "examNote": "「日明貿易＝足利義満＝勘合（証票）＝朝貢形式」。南蛮貿易（桃山文化）・日宋貿易（平清盛）との時代・相手国の取り違えに注意。",
+    "examNote": "「日明貿易＝足利義満＝勘合（証票）＝朝貢形式」。南蛮貿易（桃山文化）・日宋貿易（平清盛）との時代・相手国の取り違えに注意。画像は勘合の実物ではなく、遣明使天与清啓が自ら記した見本スケッチである点に注意。",
     "confusables": [],
     "sources": [
       "高校教科書（山川『詳説日本史』）北山文化の項",
-      "追検証URL未取得: 教科書水準の通説にもとづく記述で、所蔵機関・公的機関の公開ページは未参照（画像が無く ColBase 等に該当ページを特定できていない項目）"
+      "画像と作品同定: Wikimedia Commons（原資料所蔵: 妙智院＝天龍寺塔頭、資料提供: 京都国立博物館） https://commons.wikimedia.org/wiki/File:Sketch_of_a_kang%C5%8D_or_Ming_Trading_Licence_by_Tenyo_Seikei_(My%C5%8Dchi-in).jpg"
     ],
     "examTags": [],
-    "status": "reviewed"
+    "status": "reviewed",
+    "image": {
+      "file": "kango-tenyo-seikei.jpg",
+      "credit": "天与清啓筆、15世紀（1468年入明時の記録『入明記』より）。妙智院（天龍寺塔頭）蔵",
+      "license": "PD (CC-PD-Mark / PD-Art PD-old-100)",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sketch_of_a_kang%C5%8D_or_Ming_Trading_Licence_by_Tenyo_Seikei_(My%C5%8Dchi-in).jpg",
+      "sourceName": "Wikimedia Commons（原資料提供: 京都国立博物館）"
+    }
   },
   {
     "id": "ashikaga-yoshimitsu",
@@ -739,6 +746,240 @@
       "高校教科書（山川『詳説日本史』）南北朝期・北山文化の項"
     ],
     "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "shubun-sansui",
+    "orderIndex": 1406,
+    "pairs": [
+      { "kind": "人物×作品", "left": "伝周文", "right": "山水図" },
+      { "kind": "作品×様式", "left": "山水図（伝周文）", "right": "水墨画" }
+    ],
+    "artist": "伝周文（真筆と確定していない）",
+    "patron": null,
+    "style": "水墨山水画",
+    "religion": "禅宗（相国寺の禅僧画家）",
+    "holder": "The Metropolitan Museum of Art",
+    "subject": "山水（自然の風景）",
+    "periodLabel": "室町時代前期（15世紀前半〜中頃）",
+    "eraNote": "北山文化。相国寺の禅僧画家であった周文は、如拙にならい水墨山水画を発展させ、東山文化の雪舟の師にあたる画家とされる。ただし現存する周文の作とされる作品の多くは「伝周文」（真筆と確定していない）とされる。",
+    "facts": [
+      {
+        "slot": "artist",
+        "text": "伝周文（相国寺の禅僧画家）の作とされる"
+      },
+      {
+        "slot": "other",
+        "text": "現存作品は真筆確定でなく「伝周文」と呼ばれることが多い"
+      },
+      {
+        "slot": "other",
+        "text": "雪舟の師にあたるとされる画家"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "雪舟自身の作である",
+        "why": "雪舟は周文の弟子とされ、東山文化の画家。人物・時代の入れ替え",
+        "verifiedFalse": true
+      },
+      {
+        "text": "狩野永徳が描いた濃絵である",
+        "why": "濃絵（金地濃彩の障壁画）は桃山文化の狩野永徳。技法・時代の入れ替え",
+        "verifiedFalse": true
+      },
+      {
+        "text": "大和絵の代表作である",
+        "why": "本図は水墨画。大和絵（土佐派）とは技法が異なる",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "山水図（伝周文）",
+    "reading": "さんすいず（でんしゅうぶん）",
+    "era": "kitayama",
+    "category": "painting",
+    "location": null,
+    "author": "伝周文",
+    "technique": "水墨（紙本墨画）",
+    "keyPoints": [
+      "北山文化〜室町前期の水墨山水画",
+      "作者は周文と伝えられる（真筆確定ではない）",
+      "雪舟（東山文化）の師にあたるとされる",
+      "如拙に続く水墨画の担い手"
+    ],
+    "explanation": "相国寺の禅僧画家であったと伝えられる周文の作とされる水墨山水画。如拙にはじまる水墨画の伝統を受け継ぎ、のちに東山文化を代表する雪舟の師にあたる画家とされる。ただし周文自身の確実な真筆は少なく、現存作品の多くは「伝周文」（伝承として周文の作とされる）という留保つきで扱われる。",
+    "examNote": "「水墨画：如拙→周文→雪舟」という師弟・時代の流れが頻出。周文は教科書によって北山文化・室町文化のどちらに位置づけられるか揺れがあるため、本アプリでは北山文化に含めている。「伝周文」であり真筆確定でない点に注意（過度に断定した設問を作らない）。",
+    "confusables": [],
+    "image": {
+      "file": "shubun-sansui.jpg",
+      "credit": "伝周文（Tenshō Shūbun）, 15世紀前半〜中頃。室町時代。The Metropolitan Museum of Art",
+      "license": "CC0 1.0",
+      "sourceUrl": "https://www.metmuseum.org/art/collection/search/53223",
+      "sourceName": "The Metropolitan Museum of Art (Open Access)"
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）北山文化・室町文化の水墨画の項",
+      "画像と作品同定: The Metropolitan Museum of Art（Open Access, CC0） https://www.metmuseum.org/art/collection/search/53223"
+    ],
+    "examTags": [],
+    "status": "draft"
+  },
+  {
+    "id": "suibokuga-kitayama",
+    "orderIndex": 1408,
+    "pairs": [
+      { "kind": "絵画×はじまり", "left": "水墨画", "right": "如拙・明兆（東福寺の画僧）" },
+      { "kind": "絵画×題材", "left": "水墨画", "right": "禅の故事・中国の高僧" }
+    ],
+    "kind": "concept",
+    "artist": null,
+    "patron": null,
+    "style": "水墨画",
+    "religion": "禅宗（東福寺）",
+    "holder": "The Metropolitan Museum of Art",
+    "subject": "禅の高僧（豊干・寒山・拾得）",
+    "periodLabel": "室町時代前期（14世紀末〜15世紀前半）",
+    "eraNote": "北山文化。禅宗の隆盛とともに、墨の濃淡だけで自然や人物を表す水墨画が中国から伝わり広まった。相国寺の如拙、東福寺の明兆（兆殿司）ら禅僧の画家（画僧）が代表とされ、禅の故事にちなむ中国の高僧などがよく描かれた。この流れはのちに周文を経て、東山文化の雪舟による大成へとつながる。",
+    "facts": [
+      {
+        "slot": "other",
+        "text": "如拙・明兆ら禅僧の画家（画僧）が担い手となった"
+      },
+      {
+        "slot": "other",
+        "text": "明兆は東福寺の画僧で兆殿司とも呼ばれる"
+      },
+      {
+        "slot": "other",
+        "text": "禅の故事にちなむ中国の高僧などが題材になることが多い"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "雪舟が大成した様式である",
+        "why": "水墨画の大成は雪舟（東山文化）。北山文化はその先駆けにあたる",
+        "verifiedFalse": true
+      },
+      {
+        "text": "土佐派による大和絵である",
+        "why": "土佐派の大和絵とは技法・系統が異なる。水墨画は禅宗の影響による墨絵",
+        "verifiedFalse": true
+      },
+      {
+        "text": "江戸中期の文人画（南画）である",
+        "why": "南画（文人画）は江戸中期以降。時代・様式の入れ替え",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "水墨画のはじまり（如拙・明兆）",
+    "reading": "すいぼくがのはじまり（じょせつ・みんちょう）",
+    "era": "kitayama",
+    "category": "painting",
+    "location": null,
+    "author": "如拙・明兆",
+    "technique": "水墨（紙本墨画）",
+    "keyPoints": [
+      "禅宗の影響で広まった水墨画",
+      "如拙「瓢鮎図」、明兆（兆殿司、東福寺）が代表",
+      "禅の故事・中国の高僧が題材",
+      "東山文化の雪舟による大成につながる先駆け"
+    ],
+    "explanation": "禅宗の広まりとともに中国から伝わった水墨画は、墨の濃淡だけで自然や人物を表現する技法で、相国寺の如拙や東福寺の明兆（兆殿司）ら禅僧の画家（画僧）が担い手となった。豊干・寒山・拾得のような禅の故事にちなむ中国の高僧が好んで描かれ、この流れはのちに周文を経て、東山文化の雪舟による水墨画の大成へと受け継がれていく。",
+    "examNote": "「水墨画の始まり＝如拙・明兆（北山文化）」「水墨画の大成＝雪舟（東山文化）」の時代の対比が頻出。画像は如拙・明兆本人の確実な現存作例のライセンスが確認できなかったため、同じ東福寺画僧系統にあたる霊彩の作品で代表させている（教科書の主役本人の作ではない点にreviewer確認を要する）。",
+    "confusables": [],
+    "image": {
+      "file": "reisai-gakan-sanken.jpg",
+      "credit": "霊彩（Reisai）筆、15世紀前半。室町時代。The Metropolitan Museum of Art",
+      "license": "CC0 1.0",
+      "sourceUrl": "https://www.metmuseum.org/art/collection/search/65394",
+      "sourceName": "The Metropolitan Museum of Art (Open Access)"
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）北山文化の水墨画の項",
+      "画像: The Metropolitan Museum of Art（Open Access, CC0） https://www.metmuseum.org/art/collection/search/65394"
+    ],
+    "examTags": [
+      "frequent"
+    ],
+    "status": "draft"
+  },
+  {
+    "id": "nogaku-men",
+    "orderIndex": 1410,
+    "pairs": [
+      { "kind": "芸能×大成者", "left": "猿楽能", "right": "観阿弥・世阿弥" },
+      { "kind": "芸能×道具", "left": "能", "right": "能面（般若など）" }
+    ],
+    "kind": "concept",
+    "artist": null,
+    "patron": "足利義満",
+    "style": null,
+    "religion": null,
+    "holder": "東京国立博物館",
+    "subject": null,
+    "periodLabel": "室町時代前期（14世紀後半、観阿弥・世阿弥の頃に大成）",
+    "eraNote": "北山文化。観阿弥・世阿弥父子が将軍足利義満の保護を受けて猿楽能を大成し、仮面をつけて演じる能が芸能として確立した。能面には老人・女性・鬼神など役柄に応じた多くの種類があり、般若は嫉妬や怨念にとらわれた女性を表す面として知られる。",
+    "facts": [
+      {
+        "slot": "other",
+        "text": "観阿弥・世阿弥父子が猿楽能を大成した"
+      },
+      {
+        "slot": "patron",
+        "text": "足利義満の保護を受けた"
+      },
+      {
+        "slot": "other",
+        "text": "能面は役柄ごとに多くの種類がある（般若・小面など）"
+      }
+    ],
+    "falseStatements": [
+      {
+        "text": "出雲阿国が始めた",
+        "why": "出雲阿国はかぶき踊りの創始者（桃山文化）。人物・芸能・時代の入れ替え",
+        "verifiedFalse": true
+      },
+      {
+        "text": "狂言のことである",
+        "why": "能と対をなす喜劇的な芸能は狂言。ジャンルの混同",
+        "verifiedFalse": true
+      },
+      {
+        "text": "室町時代に廃れて現在に伝わっていない",
+        "why": "能は現代まで続く伝統芸能。事実誤り",
+        "verifiedFalse": true
+      }
+    ],
+    "title": "能楽と能面",
+    "reading": "のうがくとのうめん",
+    "era": "kitayama",
+    "category": "craft",
+    "location": null,
+    "author": null,
+    "technique": "木彫・彩色（能面）",
+    "keyPoints": [
+      "観阿弥・世阿弥が猿楽能を大成",
+      "足利義満の保護を受けた",
+      "能面（般若など）で役柄を表現",
+      "狂言（喜劇的な芸能）との違い"
+    ],
+    "explanation": "観阿弥・世阿弥父子は、将軍足利義満の保護のもとで猿楽能を大成し、仮面をつけて演じる能を芸能として確立した。能面には翁・小面（若い女性）・般若（嫉妬や怨念にとらわれた女性）など役柄に応じた多くの種類がある。喜劇的な要素をもつ狂言とあわせて能楽と呼ばれる。",
+    "examNote": "「猿楽能の大成＝観阿弥・世阿弥（足利義満の保護）」「能の理論書＝風姿花伝（世阿弥）」とセットで問われる。画像の般若面自体は江戸時代（17〜18世紀）の作例（東京国立博物館蔵）であり、観阿弥・世阿弥が活動した室町前期そのものの実物ではなく、能面という面種の代表例として使用している（reviewer確認を要する）。",
+    "confusables": [],
+    "image": {
+      "file": "hannya-men-tnm.jpg",
+      "credit": "東京国立博物館 C-1554、江戸時代（17〜18世紀）、重要文化財。出典: ColBase（国立文化財機構）",
+      "license": "CC BY 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hannya_(Noh_mask),_Tokyo_National_Museum_C-1554.jpg",
+      "sourceName": "ColBase（東京国立博物館、経由Wikimedia Commons）"
+    },
+    "sources": [
+      "高校教科書（山川『詳説日本史』）北山文化・能楽の項",
+      "画像: Wikimedia Commons（原資料: ColBase、東京国立博物館 C-1554） https://commons.wikimedia.org/wiki/File:Hannya_(Noh_mask),_Tokyo_National_Museum_C-1554.jpg"
+    ],
+    "examTags": [
+      "frequent"
+    ],
     "status": "draft"
   }
 ]

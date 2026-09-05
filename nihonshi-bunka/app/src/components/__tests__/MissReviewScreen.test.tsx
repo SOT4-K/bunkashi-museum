@@ -37,6 +37,8 @@ describe('MissReviewScreen', () => {
     render(<MissReviewScreen items={items} eras={testEras} onAnswer={noopAnswer} onOutcome={onOutcome} onFinish={onFinish} />)
 
     fireEvent.click(screen.getAllByTestId('choice-button')[0])
+    expect(onOutcome).not.toHaveBeenCalled()
+    fireEvent.click(screen.getByTestId('confirm-answer-button'))
     expect(onOutcome).toHaveBeenCalledWith('mr1', true)
     act(() => {
       vi.advanceTimersByTime(500)

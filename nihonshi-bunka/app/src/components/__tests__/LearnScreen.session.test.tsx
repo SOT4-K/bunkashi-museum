@@ -72,6 +72,7 @@ describe('LearnScreen: 実データで1セッションを最後まで進める',
       // 解説シートに「なぜ違うか」と4選択肢の画像・説明が出る経路も自然に踏むことになる）。
       const choices = screen.getAllByTestId('choice-button')
       fireEvent.click(choices[0])
+      fireEvent.click(screen.getByTestId('confirm-answer-button'))
 
       // 解説シートは回答直後ではなく少し遅れて出る
       act(() => {

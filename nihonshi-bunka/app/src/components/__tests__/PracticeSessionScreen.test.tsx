@@ -32,6 +32,7 @@ describe('PracticeSessionScreen', () => {
       if (screen.queryByTestId('practice-summary')) break
       const buttons = screen.getAllByTestId('choice-button')
       fireEvent.click(buttons[0])
+      fireEvent.click(screen.getByTestId('confirm-answer-button'))
       act(() => {
         vi.advanceTimersByTime(500)
       })

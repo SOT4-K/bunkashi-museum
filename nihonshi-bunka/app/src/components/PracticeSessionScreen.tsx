@@ -157,7 +157,12 @@ export function PracticeSessionScreen({
         </span>
       </div>
 
-      <LeadPanel passage={leadContext?.passage} underlineKey={leadContext?.underlineKey} pool={pool} />
+      <LeadPanel
+        passage={leadContext?.passage}
+        underlineKey={leadContext?.underlineKey}
+        pool={pool}
+        raiseAboveConfirmBar={!answered}
+      />
 
       <QuestionCard question={current} answered={answered} onChoice={handleChoice} onUnknown={handleUnknown} />
 

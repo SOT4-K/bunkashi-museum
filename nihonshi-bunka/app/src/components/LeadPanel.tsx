@@ -20,12 +20,17 @@ export function LeadPanel({
   passage,
   underlineKey,
   pool,
+  raiseAboveConfirmBar,
 }: {
   passage: Passage | null | undefined
   /** 現在の設問に対応する下線キー（強調表示に使う）。省略時はどれも強調しない。 */
   underlineKey?: string
   /** kind: "image" のリード画像を解決するための作品プール。 */
   pool: Work[]
+  /** M2-53: QuestionCard の「回答する」固定バー（未回答の間だけ表示）と縦位置が重なるため、
+   *  呼び出し元が「まだ回答していない（＝バーが出ている）」ときに true を渡すと、
+   *  このボタンをバーの上まで押し上げる。省略時（answered 状態を持たない呼び出し元）は false 相当。 */
+  raiseAboveConfirmBar?: boolean
 }) {
   const [sheetOpen, setSheetOpen] = useState(false)
   const [imageOpen, setImageOpen] = useState(true)
@@ -70,7 +75,12 @@ export function LeadPanel({
         </div>
       )}
 
-      <button type="button" className={styles.fixedButton} onClick={() => setSheetOpen(true)} data-testid="lead-button">
+      <button
+        type="button"
+        className={`${styles.fixedButton} ${raiseAboveConfirmBar ? styles.fixedButtonRaised : ''}`}
+        onClick={() => setSheetOpen(true)}
+        data-testid="lead-button"
+      >
         リード文
       </button>
 

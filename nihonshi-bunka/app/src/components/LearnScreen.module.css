@@ -155,6 +155,12 @@
   opacity: 0.5;
 }
 
+/* M2-53: タップした直後はまだ採点しない「選択中（未確定）」の見た目。正誤色（choiceCorrect/
+   choiceWrong）とは別の色にして、確定前後で混同しないようにする。 */
+.choiceSelected {
+  border-color: var(--gunjo);
+}
+
 /* 選んだ／正解の選択肢の上に 0.4 秒で現れる「正解」ラベル（UI-DESIGN.md「動きは1か所」の
    例外は既存のもの1つのみだが、これは回答という操作への直接の応答なので許容する） */
 .correctLabel {
@@ -273,6 +279,58 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+/* M2-53: Q3/Q9（画像4択）の「選択中（未確定）」枠。文字選択肢の .choiceSelected と同じ色。 */
+.imageChoiceSelected {
+  border-color: var(--gunjo);
+}
+
+/* M2-53: 選択→「回答する」ボタンで確定する二段階フロー用の固定フッター（画面下・タブバーの
+   直上に常時表示。TabBar.module.css の .bar・LeadPanel.module.css の .fixedButton と同じ
+   固定パターン＝position: fixed + env(safe-area-inset-bottom) を踏襲）。
+   LeadPanel の「リード文」ボタン（このバーと同じ高さ帯に浮く小さなピル）と重なるため、
+   LeadPanel 側は raiseAboveConfirmBar props でこのバーの高さぶんだけ上にずらす
+   （LeadPanel.module.css の .fixedButtonRaised 参照）。 */
+.confirmBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--tabbar-height) + env(safe-area-inset-bottom));
+  z-index: 12;
+  padding: 12px 16px;
+  background: var(--surface);
+  border-top: 1px solid var(--border-quiet);
+}
+
+@media (min-width: 481px) {
+  .confirmBar {
+    left: 50%;
+    right: auto;
+    width: 100%;
+    max-width: 430px;
+    transform: translateX(-50%);
+  }
+}
+
+.confirmButton {
+  width: 100%;
+  min-height: 56px;
+  border-radius: var(--radius-button);
+  background: var(--gunjo);
+  color: #fff;
+  font-size: 17px;
+}
+
+.confirmButton:disabled {
+  opacity: 0.4;
+}
+
+/* confirmBar（高さ ≈ 12+56+12=80px。位置指定側で既に safe-area 分ずらしてあるのでここでは
+   加算しない）が最後の選択肢や「わからない」ボタンを隠さないための余白。
+   AnswerSheet.module.css の .bottomSpacer（M2-43「次の問題」ボタン用）と同じ考え方。 */
+.confirmSpacer {
+  height: calc(80px + 12px);
 }
 
 .summaryScreen {

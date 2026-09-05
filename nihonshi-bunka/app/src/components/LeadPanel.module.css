@@ -22,6 +22,14 @@
   }
 }
 
+/* M2-53: QuestionCard の「回答する」固定バー（画面幅いっぱい・高さ≈80px。
+   QuestionCard.module.css 経由の LearnScreen.module.css .confirmBar 参照）が出ている間
+   （＝未回答の間）は、この「リード文」ボタンと縦位置が重なるため、その高さぶんだけ上に
+   押し上げる。回答確定後（confirmBar が消える）は通常位置に戻す。 */
+.fixedButtonRaised {
+  bottom: calc(var(--tabbar-height) + env(safe-area-inset-bottom) + 14px + 80px + 12px);
+}
+
 .title {
   font-size: 17px;
 }

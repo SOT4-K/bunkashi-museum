@@ -71,6 +71,7 @@ describe('MockExamScreen', () => {
     expect(screen.getByTestId('mock-exam-excerpt-panel')).toHaveTextContent('下線A')
 
     fireEvent.click(screen.getAllByTestId('choice-button')[0])
+    fireEvent.click(screen.getByTestId('confirm-answer-button'))
     act(() => {
       vi.advanceTimersByTime(500)
     })
@@ -80,6 +81,7 @@ describe('MockExamScreen', () => {
     expect(screen.getByTestId('mock-exam-excerpt-panel')).toHaveTextContent('下線B')
 
     fireEvent.click(screen.getAllByTestId('choice-button')[1])
+    fireEvent.click(screen.getByTestId('confirm-answer-button'))
     act(() => {
       vi.advanceTimersByTime(500)
     })

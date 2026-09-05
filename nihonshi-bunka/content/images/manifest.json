@@ -1092,7 +1092,7 @@
       "attributionText": "「如庵」Wikimedia Commons, Suikotei (CC BY-SA 4.0)",
       "identified": "織田有楽斎（織田長益）が建てた茶室で国宝。建築物のため著作権法46条により現代のカラー写真を使用可（image-licensing-policy.md 4項）。",
       "retrievedAt": "2026-09-05",
-      "notes": "【work項目が存在しないためmanifest登録のみ】momoyama.json には妙喜庵待庵（myokian-taian、画像なし）は既存だが如庵の work 項目は無い。妙喜庵待庵自体の写真は非公開のため未発見（過去複数セッションで断念済み）。如庵は千利休の弟子筋にあたらない織田有楽斎の作という点に注意（『妙喜庵待庵以外の茶室』の候補として取得したが、桃山文化の代表茶人＝千利休の作ではない）。新規work項目作成は群B（momoyama担当writer）へ。作成時は「千利休の待庵とは別人（織田有楽斎）の茶室」である旨をexamNoteに明記すること。"
+      "notes": "momoyama.jsonにwork項目'joan-chashitsu'として新規作成済み（2026-09-05）。「千利休の待庵とは別人（織田有楽斎）の茶室」である旨をexamNoteに明記した。妙喜庵待庵自体の写真は非公開のため今回も未発見（過去複数セッションで断念済み）。"
     },
     {
       "id": "shubun-sansui",
@@ -1106,7 +1106,63 @@
       "attributionText": "「山水図」The Metropolitan Museum of Art, Open Access (CC0)",
       "identified": "Met object 53223: title 'Mountain Landscape', artist 'Traditionally attributed to Tenshō Shūbun'（真筆確定ではなく伝承）, period Muromachi (1392-1573), isPublicDomain: true。",
       "retrievedAt": "2026-09-05",
-      "notes": "【work項目が存在しないためmanifest登録のみ】kitayama.json には周文の work 項目が無い（雪舟はhigashiyama.jsonにperson/画像なしで存在）。新規work項目作成は群B（kitayama担当writer）へ。「伝周文」（真筆と確定していない）である旨をexamNote/factsに明記すること。周文は教科書によっては北山文化・室町文化のどちらに分類されるか揺れがあるため、eraの割り当てはwriter/reviewerで要判断。"
+      "notes": "kitayama.jsonにwork項目'shubun-sansui'として新規作成済み（2026-09-05）。「伝周文」（真筆と確定していない）である旨をexamNote/factsに明記した。"
+    },
+    {
+      "id": "reisai-gakan-sanken",
+      "file": "reisai-gakan-sanken.jpg",
+      "title": "豊干・寒山・拾得図（霊彩筆、双幅のうち一幅）",
+      "sourceName": "The Metropolitan Museum of Art (Open Access)",
+      "sourceUrl": "https://www.metmuseum.org/art/collection/search/65394",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
+      "credit": "霊彩（Reisai）筆、15世紀前半。室町時代。The Metropolitan Museum of Art",
+      "attributionText": "「豊干・寒山・拾得図」The Metropolitan Museum of Art, Open Access (CC0)",
+      "identified": "Met object 65394: title 'Fenggan, Hanshan, and Shide', artist 'Reisai', period Muromachi (1392-1573), objectDate 'first half of the 15th century', isPublicDomain: true。霊彩は明兆と同じ東福寺画僧系統の水墨画家（明兆本人の確実な作例はMet/AICで発見できず、Formerly attributed to等の疑義があるものを除外した結果、同系統の霊彩作品で代替）。",
+      "retrievedAt": "2026-09-05",
+      "notes": "kitayama.jsonにwork項目'suibokuga-kitayama'（北山文化の水墨画の始まり、如拙・明兆ら東福寺画僧を代表として説明）として新規作成。作者は明兆本人ではなく同門の霊彩である点をexamNoteに明記。中程度確信（作者の帰属はMetのartistDisplayNameのみで、真筆性の疑義タグは無いため周文よりは確実だが、教科書の主役である明兆・如拙本人の作ではない代替）。"
+    },
+    {
+      "id": "nanban-coffer",
+      "file": "nanban-coffer.jpg",
+      "title": "南蛮漆器 螺鈿蒔絵大櫃",
+      "sourceName": "The Metropolitan Museum of Art (Open Access)",
+      "sourceUrl": "https://www.metmuseum.org/art/collection/search/715076",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access",
+      "credit": "桃山時代末〜江戸初期（16世紀末〜17世紀初め）。The Metropolitan Museum of Art",
+      "attributionText": "「南蛮漆器 螺鈿蒔絵大櫃」The Metropolitan Museum of Art, Open Access (CC0)",
+      "identified": "Met object 715076: title 'Nanban Coffer with Animals and Landscapes', medium 'Lacquered wood with gold and silver hiramaki-e and mother-of-pearl inlay', period Momoyama (1573-1615), isPublicDomain: true。南蛮貿易向けに輸出された蒔絵・螺鈿の漆器（南蛮漆器）の代表例。",
+      "retrievedAt": "2026-09-05",
+      "notes": "momoyama.jsonの既存work項目'nanban-bunka'（南蛮文化、画像なし）に投入。南蛮屏風は過去複数セッションでライセンス不採用（PD-Artのみ）だったため、南蛮貿易の代表的な工芸品である輸出漆器で代替。"
+    },
+    {
+      "id": "kango-tenyo-seikei",
+      "file": "kango-tenyo-seikei.jpg",
+      "title": "勘合（日明貿易の証票）のスケッチ（天与清啓筆）",
+      "sourceName": "Wikimedia Commons（原資料所蔵: 妙智院＝天龍寺塔頭、京都国立博物館の資料に基づく）",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sketch_of_a_kang%C5%8D_or_Ming_Trading_Licence_by_Tenyo_Seikei_(My%C5%8Dchi-in).jpg",
+      "license": "PD (CC-PD-Mark / PD-Art PD-old-100)",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "credit": "天与清啓筆、15世紀（1468年入明時の記録『入明記』より）。妙智院（天龍寺塔頭）蔵",
+      "attributionText": "「勘合のスケッチ」Wikimedia Commons（原資料: 妙智院、資料提供: 京都国立博物館）, Public Domain",
+      "identified": "1468年に明へ渡った天与清啓の入明記に描かれた勘合（日明貿易の証票）の写し。ファイルページのデジタル化元がkyohaku.go.jp（京都国立博物館、ColBase対象4館の一つ）であり、独立機関の裏付けがある戦前的な資料の複製に相当する。",
+      "retrievedAt": "2026-09-05",
+      "notes": "kitayama.jsonの既存work項目'nichimin-boeki'（日明貿易/勘合貿易、画像なし）に投入。勘合符の実物ではなく、遣明使自身が記録した勘合の見本スケッチである点をexamNoteに明記。"
+    },
+    {
+      "id": "sanbo-in-teien",
+      "file": "sanbo-in-teien.jpg",
+      "title": "醍醐寺三宝院庭園（表書院前庭）",
+      "sourceName": "Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kyoto_Daigo-ji_Omote-Shoin_Garten_1.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "credit": "撮影: Zairon, 2018年4月11日。京都市伏見区・醍醐寺三宝院",
+      "attributionText": "「醍醐寺三宝院庭園」Wikimedia Commons, Zairon (CC BY-SA 4.0)",
+      "identified": "1598年の「醍醐の花見」に際して豊臣秀吉が自ら基本設計に関わったとされる庭園。建築物・庭園のため著作権法46条により現代のカラー写真を使用可（image-licensing-policy.md 4項）。",
+      "retrievedAt": "2026-09-05",
+      "notes": "momoyama.jsonに新規work項目'daigo-sanboin-teien'として作成。写真は象徴的な巨石「藤戸石」等が写る定番アングルではなく庭園の一角（苔と樹木）である点に留意（reviewer確認推奨）。"
     }
   ]
 }
