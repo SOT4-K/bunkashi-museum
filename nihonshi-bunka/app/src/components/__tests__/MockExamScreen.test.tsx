@@ -156,4 +156,39 @@ describe('MockExamScreen（M2-52: 画像リード型のリード画像を常時�
     fireEvent.click(screen.getByTestId('lead-image-toggle'))
     expect(screen.queryByTestId('lead-image-grid')).not.toBeInTheDocument()
   })
+
+  it(
+    'reviewer指摘（2026-09-05、tenpyo-02検証・重大1）の回帰テスト: ' +
+      'リード画像が2枚以上のとき「(1)」「(2)」の番号を表示する（本文が番号で参照するため）',
+    () => {
+      const img1 = makeWork({ id: 'me-img1', era: 'tenpyo' })
+      const img2 = makeWork({ id: 'me-img2', era: 'tenpyo' })
+      const twoImagePassage: Passage = {
+        id: 'sec-image2',
+        era: 'tenpyo',
+        kind: 'image',
+        title: '画像リード（2枚）',
+        leadWorkIds: ['me-img1', 'me-img2'],
+        text: '(1)と(2)は[[a|同じ寺に伝わる像]]である。',
+        sources: [],
+        underlines: [{ key: 'a' }],
+      }
+      const items: MockExamItem[] = [
+        {
+          passage: twoImagePassage,
+          eraId: 'tenpyo',
+          underlineKey: 'a',
+          excerpt: [{ type: 'text', value: '(1)と(2)は同じ寺に伝わる像である。' }],
+          question: { type: 'q4', work: img1, choiceWorks: [], choiceStatements: [], correctIndex: 0, isReview: false },
+        },
+      ]
+      render(<MockExamScreen items={items} pool={[img1, img2]} eras={testEras} onAnswer={noopAnswer} onFinish={() => {}} />)
+      fireEvent.click(screen.getByTestId('mock-exam-start'))
+
+      const numbers = screen.getAllByTestId('lead-image-number')
+      expect(numbers).toHaveLength(2)
+      expect(numbers[0]).toHaveTextContent('(1)')
+      expect(numbers[1]).toHaveTextContent('(2)')
+    },
+  )
 })

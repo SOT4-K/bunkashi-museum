@@ -52,9 +52,17 @@ export function LeadPanel({
           </button>
           {imageOpen && (
             <div className={styles.leadImageGrid} data-testid="lead-image-grid">
-              {leadWorks.map((w) => (
+              {leadWorks.map((w, i) => (
                 <div className={styles.leadImageItem} key={w.id}>
                   <WorkImage mono src={imageSrc(w)} alt="作品" />
+                  {/* reviewer指摘（2026-09-05、tenpyo-02検証）: リード画像が2枚以上のとき
+                      本文が「(1)」「(2)」で参照するが、番号がどこにも表示されず対応が
+                      取れなかった。本番の問題冊子と同じ通し番号を付ける。 */}
+                  {leadWorks.length > 1 && (
+                    <span className={styles.leadImageNumber} data-testid="lead-image-number">
+                      ({i + 1})
+                    </span>
+                  )}
                 </div>
               ))}
             </div>
