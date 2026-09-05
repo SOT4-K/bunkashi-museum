@@ -140,6 +140,30 @@ describe('buildMockExam', () => {
     // 明確に高い比率（目安2割以上）で先頭に来ることを確認する（統計的な目安。決め打ちしすぎない）。
     expect(mw1FirstCount).toBeGreaterThan(trials * 0.15)
   })
+
+  it('reviewer指摘M2-24重大1の回帰: 複数passageが同じ作品を下線に持っていても、2本目のpassageが候補から消えない（以前は必ず消えていた）', () => {
+    // 2本目のテーマセット（本番と同じ運用）は1本目と同じ作品を参照することが多い実データを再現。
+    const passageA = textPassage('dup-a', 'asuka', ['mw1', 'mw5', 'mw9'])
+    const passageB = textPassage('dup-b', 'asuka', ['mw1', 'mw5', 'mw9'])
+    let sawFromB = false
+    for (let seed = 0; seed < 40 && !sawFromB; seed++) {
+      const items = buildMockExam([passageA, passageB], pool, pool, testEras, progress, today, seededRandom(seed))
+      if (items.some((i) => i.passage.id === 'dup-b')) sawFromB = true
+    }
+    // 修正前は buildCandidatePool が passageA 側で全作品を「使用済み」にしてしまい、
+    // passageB の下線が全滅して何回試しても出現しなかった（この assertion が red で再現する）。
+    expect(sawFromB).toBe(true)
+  })
+
+  it('reviewer指摘M2-24重大1: それでも1回の試験内では同じ作品が2問出ない', () => {
+    const passageA = textPassage('dup-a2', 'asuka', ['mw1', 'mw5', 'mw9'])
+    const passageB = textPassage('dup-b2', 'asuka', ['mw1', 'mw5', 'mw9'])
+    for (let seed = 0; seed < 20; seed++) {
+      const items = buildMockExam([passageA, passageB], pool, pool, testEras, progress, today, seededRandom(seed))
+      const workIds = items.map((i) => i.question.work.id)
+      expect(new Set(workIds).size).toBe(workIds.length)
+    }
+  })
 })
 
 describe('formatCountdown', () => {

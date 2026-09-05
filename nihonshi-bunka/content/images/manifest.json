@@ -997,7 +997,7 @@
       "notes": "3.3章定番リスト『稲荷山鉄剣』に対応。ガラスケース越しの撮影で反射がやや目立つが銘文は視認可能。★content/works/には稲荷山鉄剣の作品項目がまだ存在しないため、work側のimageフィールドは未設定。原始（genshi.json）にwriterが新規追加する想定"
     },
     {
-      "id": "hannya-men-tnm",
+      "id": "nogaku-men",
       "file": "hannya-men-tnm.jpg",
       "title": "能面 般若",
       "sourceName": "ColBase（東京国立博物館、経由Wikimedia Commons）",
@@ -1008,7 +1008,7 @@
       "attributionText": "能面 般若、東京国立博物館 C-1554（ColBase, CC BY 4.0）",
       "identified": "Wikimedia Commonsのファイル説明にColBase由来・東京国立博物館C-1554と明記。江戸期の模作だが能面の代表的な面type",
       "retrievedAt": "2026-09-04",
-      "notes": "kitayama/momoyama追加候補として発見。★ColBaseは過去複数セッションでcolbase.nich.go.jp直接アクセスが常に失敗していたが、TNM所蔵品はWikimedia CommonsにColBase由来のCC BY 4.0画像として転載されているものが複数ある（今回のような'site:commons.wikimedia.org [作品名] Tokyo National Museum'検索で発見可能）。次回の有力な迂回路として記録。★content/works/には能面の作品項目自体が存在しないため、work側のimageフィールドは未設定。この面は江戸期の模作で室町期の作例ではない点に注意（作品項目を作る場合は年代の扱いをreviewer確認）"
+      "notes": "kitayama.jsonにwork項目'nogaku-men'として新規作成済み（2026-09-05）。この面は江戸期の模作で観阿弥・世阿弥が活動した室町前期そのものの実物ではなく、能面という面種の代表例として使用している旨をexamNoteに明記した（reviewer確認を要する）。"
     },
     {
       "id": "ishibocho",
@@ -1109,7 +1109,7 @@
       "notes": "kitayama.jsonにwork項目'shubun-sansui'として新規作成済み（2026-09-05）。「伝周文」（真筆と確定していない）である旨をexamNote/factsに明記した。"
     },
     {
-      "id": "reisai-gakan-sanken",
+      "id": "suibokuga-kitayama",
       "file": "reisai-gakan-sanken.jpg",
       "title": "豊干・寒山・拾得図（霊彩筆、双幅のうち一幅）",
       "sourceName": "The Metropolitan Museum of Art (Open Access)",
@@ -1123,7 +1123,7 @@
       "notes": "kitayama.jsonにwork項目'suibokuga-kitayama'（北山文化の水墨画の始まり、如拙・明兆ら東福寺画僧を代表として説明）として新規作成。作者は明兆本人ではなく同門の霊彩である点をexamNoteに明記。中程度確信（作者の帰属はMetのartistDisplayNameのみで、真筆性の疑義タグは無いため周文よりは確実だが、教科書の主役である明兆・如拙本人の作ではない代替）。"
     },
     {
-      "id": "nanban-coffer",
+      "id": "nanban-bunka",
       "file": "nanban-coffer.jpg",
       "title": "南蛮漆器 螺鈿蒔絵大櫃",
       "sourceName": "The Metropolitan Museum of Art (Open Access)",
@@ -1137,7 +1137,7 @@
       "notes": "momoyama.jsonの既存work項目'nanban-bunka'（南蛮文化、画像なし）に投入。南蛮屏風は過去複数セッションでライセンス不採用（PD-Artのみ）だったため、南蛮貿易の代表的な工芸品である輸出漆器で代替。"
     },
     {
-      "id": "kango-tenyo-seikei",
+      "id": "nichimin-boeki",
       "file": "kango-tenyo-seikei.jpg",
       "title": "勘合（日明貿易の証票）のスケッチ（天与清啓筆）",
       "sourceName": "Wikimedia Commons（原資料所蔵: 妙智院＝天龍寺塔頭、京都国立博物館の資料に基づく）",
@@ -1151,7 +1151,7 @@
       "notes": "kitayama.jsonの既存work項目'nichimin-boeki'（日明貿易/勘合貿易、画像なし）に投入。勘合符の実物ではなく、遣明使自身が記録した勘合の見本スケッチである点をexamNoteに明記。"
     },
     {
-      "id": "sanbo-in-teien",
+      "id": "daigo-sanboin-teien",
       "file": "sanbo-in-teien.jpg",
       "title": "醍醐寺三宝院庭園（表書院前庭）",
       "sourceName": "Wikimedia Commons",

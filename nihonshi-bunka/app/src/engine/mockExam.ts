@@ -52,20 +52,25 @@ interface Candidate {
   work: Work
 }
 
-/** 全 passage の全下線から、対象作品を一意に持つ候補一覧を作る（同じ作品は最初の下線のみ、
- *  15文化に偏りなく広げるため。旧 randomLearn.ts から移設）。 */
+/** 全 passage の全下線から候補一覧を作る（reviewer指摘M2-24重大1の修正: 以前はここで
+ *  「同じ作品は最初の下線のみ」に絞っていたため、複数の passage が同じ作品を下線に持つ場合
+ *  （2本目のテーマセットは1本目と同じ作品プールを使うことが多く、実データではほぼ必ず重複する）、
+ *  passages 配列で後に来る passage 側の下線が本番モードの候補から永久に消える実バグがあった
+ *  （content.ts の並び順が era→id のため常に -01 が勝ち -02 が全滅する。実測: genshi-02/kanei-02/
+ *  genroku-02 は下線が全滅、horeki-tenmei-03 は5本中1本しか残らない状態だった）。
+ *  ここでは重複を許して全下線を候補として残し、1回の試験内での重複回避は buildMockExam 側の
+ *  抽選ループで行う（「同じ作品は1回の試験で1問まで」という目的自体は維持し、15文化への偏りは
+ *  eraWeight の重みで扱う）。旧 randomLearn.ts から移設。 */
 function buildCandidatePool(passages: Passage[], pool: Work[]): Candidate[] {
   const availableIds = new Set(pool.map((w) => w.id))
   const byId = new Map(pool.map((w) => [w.id, w]))
-  const seenWorkIds = new Set<string>()
   const candidates: Candidate[] = []
   for (const passage of passages) {
     for (const underline of passage.underlines) {
       const targetId = pickThemeTargetId(underline, passage, availableIds)
       if (!targetId) continue
       const work = byId.get(targetId)
-      if (!work || seenWorkIds.has(work.id)) continue
-      seenWorkIds.add(work.id)
+      if (!work) continue
       candidates.push({ passage, underline, work })
     }
   }
@@ -102,10 +107,14 @@ export function buildMockExam(
   const ordered = weightedSampleWithoutReplacement(candidates, weightOf, candidates.length, rng)
 
   const built: BuiltItem[] = []
+  const usedWorkIds = new Set<string>()
   let avoidEraSlot = false
   let previousType: QuestionType | undefined
   for (const candidate of ordered) {
     if (built.length >= count) break
+    // 同じ作品が複数 passage に重複して候補にある場合、1回の試験内では1問までにする
+    // （buildCandidatePool の重複許可とセットの修正。15文化への偏りは eraWeight 側で扱う）。
+    if (usedWorkIds.has(candidate.work.id)) continue
     const desiredCategory = COMPOSITION_SEQUENCE[built.length % COMPOSITION_SEQUENCE.length]
     // M2-45（M2-25 の解消）: 下線の ask を渡す（writer 手書きの stem・answerId 等を尊重する）。
     const question = buildThemeQuestionForWork(candidate.work, pool, eras, rng, {
@@ -116,6 +125,7 @@ export function buildMockExam(
       desiredCategory,
     })
     if (!question) continue
+    usedWorkIds.add(candidate.work.id)
     if (question.q9Slot === 'era') avoidEraSlot = true
     previousType = question.type
     built.push({
