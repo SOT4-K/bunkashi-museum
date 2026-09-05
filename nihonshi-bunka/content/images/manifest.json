@@ -1153,16 +1153,16 @@
     {
       "id": "daigo-sanboin-teien",
       "file": "sanbo-in-teien.jpg",
-      "title": "醍醐寺三宝院庭園（表書院前庭）",
+      "title": "醍醐寺三宝院庭園",
       "sourceName": "Wikimedia Commons",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kyoto_Daigo-ji_Omote-Shoin_Garten_1.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Daigozi_08.jpg",
       "license": "CC BY-SA 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "credit": "撮影: Zairon, 2018年4月11日。京都市伏見区・醍醐寺三宝院",
-      "attributionText": "「醍醐寺三宝院庭園」Wikimedia Commons, Zairon (CC BY-SA 4.0)",
-      "identified": "1598年の「醍醐の花見」に際して豊臣秀吉が自ら基本設計に関わったとされる庭園。建築物・庭園のため著作権法46条により現代のカラー写真を使用可（image-licensing-policy.md 4項）。",
+      "credit": "撮影: Dokudami, 2018年7月21日。京都市伏見区・醍醐寺三宝院",
+      "attributionText": "「醍醐寺三宝院庭園」Wikimedia Commons, Dokudami (CC BY-SA 4.0)",
+      "identified": "Commons File:Daigozi_08.jpg のImageDescriptionが「醍醐寺三宝院庭園」と明記。日本語版Wikipedia「三宝院」記事が同一撮影者の一連の写真（Daigozi_07/08/09.jpg）を庭園のギャラリー画像として掲載していることでも同定を補強（ja.wikipedia.org/wiki/三宝院）。1598年の「醍醐の花見」に際して豊臣秀吉が自ら基本設計に関わったとされる庭園。建築物・庭園のため著作権法46条により現代のカラー写真を使用可（image-licensing-policy.md 4項）。",
       "retrievedAt": "2026-09-05",
-      "notes": "momoyama.jsonに新規work項目'daigo-sanboin-teien'として作成。写真は象徴的な巨石「藤戸石」等が写る定番アングルではなく庭園の一角（苔と樹木）である点に留意（reviewer確認推奨）。"
+      "notes": "M2-54: 旧採用画像（Kyoto_Daigo-ji_Omote-Shoin_Garten_1.jpg、Zairon撮影）はreviewerが実見したところ池・巨石が写っておらず本文（池庭である旨）と矛盾すると判定されたため差し替え。本画像は池・巨石・松を明確に含む構図で目視確認済み（Hayato、Readツールで直接閲覧）。"
     }
   ]
 }

@@ -892,7 +892,7 @@
       { "kind": "作品×所在", "left": "東大寺南大門金剛力士像", "right": "東大寺南大門" },
       { "kind": "様式×建築", "left": "大仏様", "right": "東大寺南大門" }
     ],
-    "artist": "運慶・快慶",
+    "artist": "運慶・快慶ら",
     "patron": "東大寺（重源の再建事業にともなう造像）",
     "style": "鎌倉彫刻（慶派）",
     "religion": "仏教（南大門の門守護神）",
@@ -919,7 +919,7 @@
     "era": "kamakura",
     "category": "sculpture",
     "location": "東大寺南大門（奈良県奈良市）",
-    "author": "運慶・快慶",
+    "author": "運慶・快慶ら",
     "technique": "寄木造",
     "keyPoints": [
       "鎌倉文化を代表する写実的な彫刻",
@@ -937,6 +937,10 @@
       {
         "id": "kamakura-daibutsu",
         "howToTell": "金剛力士像は木造の門守護神で二体一対。鎌倉大仏は銅造の阿弥陀如来坐像で屋外に単独で座る。"
+      },
+      {
+        "id": "shukongoshin-todaiji",
+        "howToTell": "金剛力士像は東大寺南大門の木造・寄木造で二体一対（運慶・快慶ら、鎌倉時代1203年）。執金剛神像は東大寺法華堂の塑像で一体のみ（天平時代8世紀）。所在・技法・時代がいずれも異なる。"
       }
     ],
     "image": {
@@ -948,13 +952,12 @@
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）鎌倉文化の項（書名のみ。オンラインで追検証できるURLは無し）",
-      "research/m2-image-log-2026-09-04-wave2.md 2章（画像の出典・ライセンス）",
-      "画像と作品同定: Wikimedia Commons『Histoire de l'art du Japon』（1900年） https://commons.wikimedia.org/wiki/File:NIWAU_(Brama_et_Indra,_sanscrit),_Fin_du_%E2%85%AB_si%C3%A8cle_(Nara_Todaiji),_Histoire_de_l%27art_du_Japon_(39).jpg"
+      "画像と作品同定: Wikimedia Commons『Histoire de l'art du Japon』（1900年、キャプション Fin du Ⅻ siècle = 12世紀末） https://commons.wikimedia.org/wiki/File:NIWAU_(Brama_et_Indra,_sanscrit),_Fin_du_%E2%85%AB_si%C3%A8cle_(Nara_Todaiji),_Histoire_de_l%27art_du_Japon_(39).jpg"
     ],
     "examTags": [
       "frequent"
     ],
-    "status": "draft"
+    "status": "reviewed"
   },
   {
     "id": "unkei",

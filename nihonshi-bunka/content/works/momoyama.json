@@ -1154,16 +1154,16 @@
   },
   {
     "id": "daigo-sanboin-teien",
-    "orderIndex": 1613,
+    "orderIndex": 1598,
     "pairs": [
       { "kind": "庭園×造営者", "left": "醍醐寺三宝院庭園", "right": "豊臣秀吉" },
       { "kind": "庭園×行事", "left": "醍醐寺三宝院庭園", "right": "醍醐の花見（1598年）" }
     ],
     "artist": null,
     "patron": "豊臣秀吉",
-    "style": "池泉回遊式庭園",
+    "style": "池泉庭園",
     "religion": "真言宗（醍醐寺）",
-    "holder": "醍醐寺（京都市伏見区）",
+    "holder": "醍醐寺",
     "subject": null,
     "periodLabel": "安土桃山時代（16世紀末、1598年頃）",
     "eraNote": "桃山文化。豊臣秀吉は死の直前の1598年、京都・醍醐寺で盛大な花見（醍醐の花見）を催し、その際に三宝院の庭園の基本設計に自ら関わったと伝えられる。豪壮を好んだ桃山文化を象徴する庭園の一つとされる。",
@@ -1178,7 +1178,7 @@
       },
       {
         "slot": "other",
-        "text": "池泉回遊式庭園である"
+        "text": "池を中心とする庭園である"
       }
     ],
     "falseStatements": [
@@ -1189,7 +1189,7 @@
       },
       {
         "text": "枯山水庭園の代表である",
-        "why": "三宝院庭園は池泉回遊式庭園。枯山水の代表は龍安寺石庭（東山文化）。様式の入れ替え",
+        "why": "三宝院庭園は池を中心とする庭園。枯山水の代表は龍安寺石庭（東山文化）。様式の入れ替え",
         "verifiedFalse": true
       },
       {
@@ -1204,28 +1204,33 @@
     "category": "architecture",
     "location": "醍醐寺（京都市伏見区）",
     "author": "豊臣秀吉（基本設計に関与と伝えられる）",
-    "technique": "池泉回遊式庭園",
+    "technique": "池泉庭園",
     "keyPoints": [
       "豊臣秀吉が基本設計に関わったと伝えられる",
       "1598年の醍醐の花見に際して整備",
-      "池泉回遊式庭園",
+      "池を中心とする庭園",
       "豪壮を好んだ桃山文化を象徴"
     ],
-    "explanation": "豊臣秀吉が死の直前の1598年に京都・醍醐寺で催した盛大な花見（醍醐の花見）に際し、自ら基本設計に関わったと伝えられる庭園。巨石を配した池泉回遊式庭園で、金箔瓦の建築などとあわせて豪壮を好んだ桃山文化を象徴する遺構の一つとされる。",
-    "examNote": "「醍醐の花見（1598年）＝豊臣秀吉＝醍醐寺三宝院庭園」。枯山水庭園（龍安寺石庭、東山文化）との様式・時代の取り違えに注意。写真は庭園の一角で、著名な巨石「藤戸石」等が写る定番アングルではない点をreviewer確認してほしい。",
-    "confusables": [],
+    "explanation": "豊臣秀吉が死の直前の1598年に京都・醍醐寺で催した盛大な花見（醍醐の花見）に際し、自ら基本設計に関わったと伝えられる庭園。池を中心とする庭園で、金箔瓦の建築などとあわせて豪壮を好んだ桃山文化を象徴する遺構の一つとされる。",
+    "examNote": "「醍醐の花見（1598年）＝豊臣秀吉＝醍醐寺三宝院庭園」。枯山水庭園（龍安寺石庭、東山文化）との様式・時代の取り違えに注意。",
+    "confusables": [
+      {
+        "id": "ryoanji-sekitei",
+        "howToTell": "三宝院庭園は豊臣秀吉が関わった池を中心とする庭園（桃山文化）。龍安寺石庭は水を用いない枯山水（東山文化）。時代・様式がともに異なる。"
+      }
+    ],
     "image": {
       "file": "sanbo-in-teien.jpg",
-      "credit": "撮影: Zairon, 2018年4月11日。京都市伏見区・醍醐寺三宝院",
+      "credit": "撮影: Dokudami, 2018年7月21日。京都市伏見区・醍醐寺三宝院",
       "license": "CC BY-SA 4.0",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kyoto_Daigo-ji_Omote-Shoin_Garten_1.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Daigozi_08.jpg",
       "sourceName": "Wikimedia Commons"
     },
     "sources": [
       "高校教科書（山川『詳説日本史』）桃山文化の項",
-      "画像と作品同定: Wikimedia Commons https://commons.wikimedia.org/wiki/File:Kyoto_Daigo-ji_Omote-Shoin_Garten_1.jpg"
+      "画像と作品同定: Wikimedia Commons https://commons.wikimedia.org/wiki/File:Daigozi_08.jpg（ImageDescriptionに「醍醐寺三宝院庭園」と明記、日本語版Wikipedia「三宝院」記事の掲載写真と同一シリーズ）"
     ],
     "examTags": [],
-    "status": "draft"
+    "status": "reviewed"
   }
 ]
