@@ -15,19 +15,27 @@
       {
         "key": "a",
         "anchorKind": "person",
-        "workIds": ["yakushi-sanzon-yakushiji"],
+        "workIds": [
+          "yakushi-sanzon-yakushiji"
+        ],
         "ask": {
           "type": "q9",
           "stem": "下線部aの天皇が発願した寺の金堂に安置され、インドのグプタ様式の影響を受けたとされる銅造の三尊像はどれか",
           "answerId": "yakushi-sanzon-yakushiji",
-          "distractorIds": ["yamadadera-butsuzu", "horyuji-shaka-sanzon", "kanshinji-nyoirin-kannon"]
+          "distractorIds": [
+            "yamadadera-butsuzu",
+            "horyuji-shaka-sanzon",
+            "kanshinji-nyoirin-kannon"
+          ]
         },
         "note": "二段: 下線＝発願者／設問＝安置の堂と様式・材質。誤答の yamadadera-butsuzu は同じ白鳳の銅造仏（Aのみ）、horyuji-shaka-sanzon は銅造の三尊像（Bのみ）"
       },
       {
         "key": "b",
         "anchorKind": "temple",
-        "workIds": ["yakushiji-toto"],
+        "workIds": [
+          "yakushiji-toto"
+        ],
         "ask": {
           "type": "q10",
           "stem": "下線部bに残る次の建物（画像）について述べたA・Bの文の正誤の組合せとして正しいものはどれか",
@@ -38,19 +46,27 @@
       {
         "key": "c",
         "anchorKind": "person",
-        "workIds": ["yamadadera-butsuzu"],
+        "workIds": [
+          "yamadadera-butsuzu"
+        ],
         "ask": {
           "type": "q9",
           "stem": "下線部cの人物が営んだ寺の講堂本尊として685年に完成し、のちに興福寺へ移された像はどれか",
           "answerId": "yamadadera-butsuzu",
-          "distractorIds": ["yakushi-sanzon-yakushiji", "horyuji-shaka-sanzon", "kamakura-daibutsu"]
+          "distractorIds": [
+            "yakushi-sanzon-yakushiji",
+            "horyuji-shaka-sanzon",
+            "kamakura-daibutsu"
+          ]
         },
         "note": "二段: 下線＝建立者／設問＝完成年と移座。M2-41 で「頭部だけが残った」（画像を見れば分かる状態）を条件から外し、685年・興福寺への移座だけで一意になるようにした。誤答は同じ銅造仏でそろえる"
       },
       {
         "key": "d",
         "anchorKind": "event",
-        "workIds": ["takamatsuzuka-heki"],
+        "workIds": [
+          "takamatsuzuka-heki"
+        ],
         "ask": {
           "type": "q4",
           "stem": "下線部dの石室に描かれていた次の壁画（画像）について述べた文として最も適切なものはどれか",
@@ -61,7 +77,9 @@
       {
         "key": "e",
         "anchorKind": "event",
-        "workIds": ["horyuji-kondo-heki"],
+        "workIds": [
+          "horyuji-kondo-heki"
+        ],
         "ask": {
           "type": "q10",
           "stem": "下線部eの火災で失われた次の壁画（画像）について述べたA・Bの文の正誤の組合せとして正しいものはどれか",
@@ -76,7 +94,9 @@
     "era": "hakuho",
     "kind": "image",
     "title": "石室の壁に残された群像",
-    "leadWorkIds": ["takamatsuzuka-heki"],
+    "leadWorkIds": [
+      "takamatsuzuka-heki"
+    ],
     "text": "(1)は、色あざやかな衣をまとった女性たちが列をなして立つ[[a|場面]]である。この絵は、[[b|終末期の古墳]]の[[c|石室]]の壁に、漆喰を下地として極彩色で描かれた。[[d|1972年の発掘調査]]で見つかり、鮮やかな色を保ったまま人物の姿が現れたことで大きな注目を集めた。同じ石室には、男性の一団や、方位を守るとされる[[e|四神]]のうち青竜・白虎などもあわせて描かれている。",
     "sources": [
       "高校教科書（山川『詳説日本史』）白鳳文化の項",
@@ -87,7 +107,9 @@
       {
         "key": "a",
         "anchorKind": "event",
-        "workIds": ["takamatsuzuka-heki"],
+        "workIds": [
+          "takamatsuzuka-heki"
+        ],
         "ask": {
           "type": "q10",
           "stem": "下線部aをふくむこの壁画について述べたA・Bの文の正誤の組合せとして正しいものはどれか",
@@ -98,43 +120,63 @@
       {
         "key": "b",
         "anchorKind": "event",
-        "workIds": ["takamatsuzuka-heki"],
+        "workIds": [
+          "takamatsuzuka-heki"
+        ],
         "ask": {
           "type": "q12",
           "stem": "下線部bがある都道府県として最も適切なものはどれか",
           "answerText": "奈良県",
-          "distractorTexts": ["京都府", "大阪府", "福岡県"]
+          "distractorTexts": [
+            "京都府",
+            "大阪府",
+            "福岡県"
+          ]
         },
         "note": "説明文に県名・村名を書いていないので本文からは解けない。福岡県は九州の装飾古墳との取り違えを誘う"
       },
       {
         "key": "c",
         "anchorKind": "event",
-        "workIds": ["yakushiji-toto"],
+        "workIds": [
+          "yakushiji-toto"
+        ],
         "ask": {
           "type": "q9",
           "stem": "下線部cに壁画が描かれたのと同じ文化のもとで、天武天皇の発願によって造営された寺に建てられた塔はどれか",
           "answerId": "yakushiji-toto",
-          "distractorIds": ["muroji-gojunoto", "daigoji-gojunoto", "engakuji-shariden"]
+          "distractorIds": [
+            "muroji-gojunoto",
+            "daigoji-gojunoto",
+            "engakuji-shariden"
+          ]
         },
         "note": "このセットで時代（era）を条件にする設問はこの1問だけ。二段: 同じ文化（A）＋発願者（B）。M2-41 で「各層に裳階を付けたため六重に見える」（数えれば分かる外見）を発願者に置き換えた。誤答は同じ木造の塔・木造建築でそろえる"
       },
       {
         "key": "d",
         "anchorKind": "event",
-        "workIds": ["takamatsuzuka-heki"],
+        "workIds": [
+          "takamatsuzuka-heki"
+        ],
         "ask": {
           "type": "q12",
           "stem": "下線部dで見つかったこの壁画が描かれた時期の文化の名称として最も適切なものはどれか",
           "answerText": "白鳳文化",
-          "distractorTexts": ["飛鳥文化", "天平文化", "弘仁・貞観文化"]
+          "distractorTexts": [
+            "飛鳥文化",
+            "天平文化",
+            "弘仁・貞観文化"
+          ]
         },
         "note": "説明文に文化名・年代を書いていない。誤答は前後に隣接する3文化"
       },
       {
         "key": "e",
         "anchorKind": "event",
-        "workIds": ["takamatsuzuka-heki"],
+        "workIds": [
+          "takamatsuzuka-heki"
+        ],
         "ask": {
           "type": "q4",
           "stem": "下線部eなどが描かれたこの壁画について述べた文として最も適切なものはどれか",
@@ -146,21 +188,27 @@
   },
   {
     "id": "hakuho-02",
-    "status": "draft",
+    "status": "reviewed",
     "era": "hakuho",
     "title": "この文化は―手がかりから文化を当てる",
-    "text": "次のI〜IVは、ある一つの文化について述べたものである。　I この文化は、大化改新ののち、天武・持統天皇のもとで[[a|律令国家の形づくりが進んだ時期]]に栄え、天皇を中心とする国家の勢いを映して、若々しく清新な作風が生まれた。　II 彫刻では、唐の初期の様式に加えてインドの様式の影響も認められる。官の大寺だけでなく、[[b|大化改新にかかわった有力豪族が営んだ寺]]にも、この時期を代表する銅造の像が造られた。　III 絵画では、明日香村にある終末期の古墳の石室に極彩色の壁画が描かれた。また[[c|1949年の火災]]では、古い寺の堂の内壁に描かれていた仏教絵画の大半が失われ、翌年の文化財保護法の制定につながった。　IV [[d|都が藤原京から平城京へ移されたのち]]も、この時期の造営を伝える建物が残る。文学では柿本人麻呂や額田王が力強い歌を残し、その歌はのちに『万葉集』に収められた。　以上のI〜IVが述べる[[e|一つの文化]]は、飛鳥時代の後半にあたる。",
+    "text": "次のI〜IVは、ある一つの文化について述べたものである。　I この文化は、大化改新ののち、天武・持統天皇のもとで[[a|律令国家の形づくりが進んだ時期]]に栄え、天皇を中心とする国家の勢いを映して、若々しく清新な作風が生まれた。　II 彫刻では、唐の初期の様式に加えてインドの様式の影響も認められる。官の大寺だけでなく、[[b|大化改新にかかわった有力豪族が営んだ寺]]にも、この時期を代表する銅造の像が造られた。　III 絵画では、明日香村にある終末期の古墳の石室に極彩色の壁画が描かれた。また[[c|1949年の火災]]では、古い寺の堂の内壁に描かれていた仏教絵画の大半が焼損し、翌年の文化財保護法の制定につながった。　IV [[d|都が藤原京から平城京へ移されたのち]]も、この時期の造営を伝える建物が残る。文学では柿本人麻呂や額田王が力強い歌を残し、その歌はのちに『万葉集』に収められた。　以上のI〜IVが述べる[[e|一つの文化]]は、飛鳥時代の後半にあたる。",
     "sources": [
       "高校教科書（山川『詳説日本史』）白鳳文化の項",
       "薬師寺公式サイト",
       "興福寺公式サイト（国宝館）",
-      "本文の記述に対応する追検証用の公開URLなし（教科書水準の通説として記述。各作品の画像出典URLは works 側の sources を参照）"
+      "図版の同定URL（薬師寺金堂薬師三尊像）: https://commons.wikimedia.org/wiki/File:Triad_of_Yakushi_Nyorai.JPG",
+      "図版の同定URL（山田寺仏頭）: https://commons.wikimedia.org/wiki/File:Buddha_Head_Yamadadera.JPG",
+      "図版の同定URL（法隆寺金堂壁画）: https://commons.wikimedia.org/wiki/File:Amidhaba_paradise_Horyuji_Mural.JPG",
+      "図版の同定URL（薬師寺東塔）: https://commons.wikimedia.org/wiki/File:Nara_Yakushi-ji_Toto_Exterior_01.jpg",
+      "本文の歴史記述そのものは教科書水準の通説で、一次資料・公的機関の公開ページは未参照（追検証URL未取得。Hayato追記2026-09-05、M2-24中6・reviewer M2-51方針に合わせ図版同定URLを追加。同軽1指摘『仏教絵画の大半が失われ』→『大半が焼損し』も訂正、法隆寺金堂壁画は現存保管）"
     ],
     "underlines": [
       {
         "key": "a",
         "anchorKind": "event",
-        "workIds": ["yakushi-sanzon-yakushiji"],
+        "workIds": [
+          "yakushi-sanzon-yakushiji"
+        ],
         "ask": {
           "type": "q10",
           "stem": "下線部aに、天皇が皇后の病気平癒を祈って造営を始めた寺の金堂に伝わる次の像（画像）について述べたA・Bの文の正誤の組合せとして正しいものはどれか",
@@ -171,7 +219,9 @@
       {
         "key": "b",
         "anchorKind": "temple",
-        "workIds": ["yamadadera-butsuzu"],
+        "workIds": [
+          "yamadadera-butsuzu"
+        ],
         "ask": {
           "type": "q4",
           "stem": "下線部bの本尊としてつくられ、のちに別の寺へ移された次の像（画像）について述べた文として最も適切なものはどれか",
@@ -182,19 +232,27 @@
       {
         "key": "c",
         "anchorKind": "event",
-        "workIds": ["horyuji-kondo-heki"],
+        "workIds": [
+          "horyuji-kondo-heki"
+        ],
         "ask": {
           "type": "q9",
           "stem": "下線部cで大半が失われた、阿弥陀浄土図などを描いた壁画はどれか",
           "answerId": "horyuji-kondo-heki",
-          "distractorIds": ["takamatsuzuka-heki", "choju-giga-sumo", "fujin-raijin-sotatsu"]
+          "distractorIds": [
+            "takamatsuzuka-heki",
+            "choju-giga-sumo",
+            "fujin-raijin-sotatsu"
+          ]
         },
         "note": "二段: 下線＝火災（出来事）／設問＝描かれた主題。本文の該当文からは堂の名（金堂）を外し、選択肢の名前だけで一致しないようにした。誤答は同じ絵画カテゴリでそろえる"
       },
       {
         "key": "d",
         "anchorKind": "event",
-        "workIds": ["yakushiji-toto"],
+        "workIds": [
+          "yakushiji-toto"
+        ],
         "ask": {
           "type": "q4",
           "stem": "下線部dの新しい都に伽藍を構えた寺に残る次の塔（画像）について述べた文として最も適切なものはどれか",
@@ -205,12 +263,18 @@
       {
         "key": "e",
         "anchorKind": "style",
-        "workIds": ["yakushi-sanzon-yakushiji"],
+        "workIds": [
+          "yakushi-sanzon-yakushiji"
+        ],
         "ask": {
           "type": "q12",
           "stem": "下線部eの名称として最も適切なものはどれか",
           "answerText": "白鳳文化",
-          "distractorTexts": ["飛鳥文化", "天平文化", "国風文化"]
+          "distractorTexts": [
+            "飛鳥文化",
+            "天平文化",
+            "国風文化"
+          ]
         },
         "note": "文化伏せ型の中心となる問い。対象作品は a で画像を出したものを再利用し、新たな画像を割らない"
       }
