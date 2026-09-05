@@ -21,7 +21,13 @@ describe('実データ: buildMockExam', () => {
         expect(items.length).toBeLessThanOrEqual(MOCK_EXAM_SIZE)
         for (const item of items) {
           expect(themeSetPool.some((w) => w.id === item.question.work.id)).toBe(true)
-          expect(passages.some((p) => p.id === item.passage.id)).toBe(true)
+          // Q14（年代順）は特定の下線に紐づかない独立問題のため passage が無い（reviewer指摘
+          // M2-99v3中4の修正）。それ以外の型は必ず出題元passageを持つ。
+          if (item.question.type === 'q14') {
+            expect(item.passage).toBeUndefined()
+          } else {
+            expect(passages.some((p) => p.id === item.passage?.id)).toBe(true)
+          }
         }
       }
     },
@@ -71,6 +77,26 @@ describe('実データ: buildMockExam', () => {
       // （analysis 2章はどの型も単独で50%を超えない）。
       for (const type of Object.keys(counts)) {
         expect(counts[type] / totalQuestions).toBeLessThan(0.5)
+      }
+    },
+    60000,
+  )
+
+  // reviewer指摘 M2-99v3中4: Q14への差し替えが①無関係な下線の抜粋・LeadPanelを引き継ぐ
+  // ②orderItemsの作品が他の枠と重複しうる、という2つの不具合を実データで固定する。
+  it(
+    '100 seed の実データ確認: Q14は passage を持たず、1回の試験内で作品が重複しない',
+    () => {
+      for (let seed = 0; seed < 100; seed++) {
+        const items = buildMockExam(passages, themeSetPool, playableWorks, eras, progress, today, seededRandom(seed + 2000))
+        const workIds = items.map((i) => i.question.work.id)
+        expect(new Set(workIds).size).toBe(workIds.length)
+        for (const item of items) {
+          if (item.question.type === 'q14') {
+            expect(item.passage).toBeUndefined()
+            expect(item.excerpt).toEqual([])
+          }
+        }
       }
     },
     60000,

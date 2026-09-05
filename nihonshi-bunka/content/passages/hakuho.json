@@ -9,7 +9,12 @@
       "薬師寺公式サイト",
       "興福寺公式サイト（国宝館）",
       "文化庁「国宝高松塚古墳壁画」公式ページ",
-      "本文の記述に対応する追検証用の公開URLなし（教科書水準の通説として記述。各作品の画像出典URLは works 側の sources を参照）"
+      "図版の同定URL（薬師寺金堂薬師三尊像）: https://commons.wikimedia.org/wiki/File:Triad_of_Yakushi_Nyorai.JPG",
+      "図版の同定URL（薬師寺東塔）: https://commons.wikimedia.org/wiki/File:Nara_Yakushi-ji_Toto_Exterior_01.jpg",
+      "図版の同定URL（山田寺仏頭）: https://commons.wikimedia.org/wiki/File:Buddha_Head_Yamadadera.JPG",
+      "図版の同定URL（高松塚古墳壁画）: https://commons.wikimedia.org/wiki/File:Takamat1.jpg",
+      "図版の同定URL（法隆寺金堂壁画）: https://commons.wikimedia.org/wiki/File:Amidhaba_paradise_Horyuji_Mural.JPG",
+      "本文の歴史記述そのものは教科書水準の通説で、一次資料・公的機関の公開ページは未参照（追検証URL未取得。Hayato追記2026-09-05、M2-99v3中3指摘の解消）"
     ],
     "underlines": [
       {
@@ -101,7 +106,10 @@
     "sources": [
       "高校教科書（山川『詳説日本史』）白鳳文化の項",
       "文化庁の当該壁画に関する公式ページ（出典の正式名称は works の takamatsuzuka-heki の sources を参照。作品名を本文側に漏らさないためここでは書名を伏せる）",
-      "画像出典URLも同じく works 側の sources に記載（本文に作品名を漏らさないためここには書かない）"
+      "画像出典URLも同じく works 側の sources に記載（本文に作品名を漏らさないためここには書かない）",
+      "リード画像の同定URL（高松塚古墳壁画）: https://commons.wikimedia.org/wiki/File:Takamat1.jpg",
+      "下線cの同定URL（薬師寺東塔）: https://commons.wikimedia.org/wiki/File:Nara_Yakushi-ji_Toto_Exterior_01.jpg",
+      "説明文の歴史記述そのものは教科書水準の通説で、一次資料・公的機関の公開ページは未参照（追検証URL未取得。Hayato追記2026-09-05、M2-99v3中3指摘の解消）"
     ],
     "underlines": [
       {

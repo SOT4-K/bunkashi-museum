@@ -38,11 +38,14 @@ export const MOCK_EXAM_TIME_SECONDS = 600
 const DUE_WEIGHT_BONUS = 4
 
 export interface MockExamItem {
-  /** 出題元のリード文（全文表示・下線ラベル表示に使う。M2-42）。 */
-  passage: Passage
+  /** 出題元のリード文（全文表示・下線ラベル表示に使う。M2-42）。
+   *  reviewer指摘M2-99v3中4: Q14（年代順、下記）は特定の下線に紐づかない独立問題のため無い
+   *  （undefined）。呼び出し側はこの場合リード文の抜粋・LeadPanelを表示しない。 */
+  passage?: Passage
   eraId: string
   underlineKey: string
-  /** 「下線部を含む1〜2文」の描画用セグメント（下線ハイライトつき。旧ランダム学習と同じ見え方）。 */
+  /** 「下線部を含む1〜2文」の描画用セグメント（下線ハイライトつき。旧ランダム学習と同じ見え方）。
+   *  passage が無い（Q14）ときは空配列。 */
   excerpt: PassageSegment[]
   question: Question
 }
@@ -79,8 +82,10 @@ function buildCandidatePool(passages: Passage[], pool: Work[]): Candidate[] {
 }
 
 interface BuiltItem {
-  passage: Passage
-  underline: PassageUnderline
+  /** Q14（年代順、下記）に差し替えられた枠は passage/underline が無い（特定の下線に紐づかない
+   *  独立問題のため。reviewer指摘M2-99v3中4）。 */
+  passage: Passage | null
+  underline: PassageUnderline | null
   question: Question
 }
 
@@ -161,6 +166,7 @@ export function buildMockExam(
   if (built.length > 0 && !built.some((b) => b.question.type === 'q9')) {
     for (let i = 0; i < built.length; i++) {
       const b = built[i]
+      if (!b.passage || !b.underline) continue
       if (!imagePool.some((w) => w.id === b.question.work.id)) continue
       const forced = buildThemeQuestionForWork(b.question.work, pool, eras, rng, { ask: { type: 'q9' }, imagePool })
       if (forced && forced.type === 'q9') {
@@ -178,6 +184,7 @@ export function buildMockExam(
   if (built.length > 0 && !built.some((b) => b.question.type === 'q13')) {
     for (let i = 0; i < built.length; i++) {
       const b = built[i]
+      if (!b.passage || !b.underline) continue
       if (!(b.question.work.pairs && b.question.work.pairs.length > 0)) continue
       const forced = buildThemeQuestionForWork(b.question.work, pool, eras, rng, { ask: { type: 'q13' } })
       if (forced && forced.type === 'q13') {
@@ -192,11 +199,16 @@ export function buildMockExam(
   // setIndex の概念が無い。同じ約1/3の頻度を rng で近似する（M2-16の意図「3セットに1問」を
   // 単発の試験生成に翻訳したもの）。generateOrderQuestion が null を返す（orderIndex を持つ
   // 作品が3件そろわない）ときは何もしない（壊れない設計）。
+  // reviewer指摘M2-99v3中4の修正: Q14は特定の下線に紐づかない独立問題なので、差し替える枠の
+  // passage/underlineを引き継がない（passage: null。呼び出し側は表示を出さない）。また
+  // orderItemsの作品が他の枠と重複すると「1回の試験で同じ作品は1問まで」が破れるため、
+  // 重複するときはこの試験では追加を諦める（壊れない設計。次のシードで再挑戦されるだけ）。
   if (built.length > 0 && rng() < 1 / 3) {
     const orderData = generateOrderQuestion(imagePool, rng, 3, eras)
-    if (orderData) {
-      const lastIndex = built.length - 1
-      const b = built[lastIndex]
+    const lastIndex = built.length - 1
+    const otherWorkIds = new Set(built.slice(0, lastIndex).map((b) => b.question.work.id))
+    const collides = orderData?.displayItems.some((item) => otherWorkIds.has(item.work.id)) ?? false
+    if (orderData && !collides) {
       const nominalWork = orderData.displayItems[0].work
       const question: Question = {
         type: 'q14',
@@ -206,18 +218,16 @@ export function buildMockExam(
         correctIndex: orderData.correctIndex,
         isReview: false,
         orderItems: orderData.displayItems,
-        passageId: b.passage.id,
-        underlineKey: b.underline.key,
       }
-      built[lastIndex] = { ...b, question }
+      built[lastIndex] = { passage: null, underline: null, question }
     }
   }
 
   return built.map((b) => ({
-    passage: b.passage,
-    eraId: b.passage.era,
-    underlineKey: b.underline.key,
-    excerpt: excerptSegmentsForUnderline(b.passage.text, b.underline.key),
+    passage: b.passage ?? undefined,
+    eraId: b.passage ? b.passage.era : b.question.work.era,
+    underlineKey: b.underline ? b.underline.key : '',
+    excerpt: b.passage && b.underline ? excerptSegmentsForUnderline(b.passage.text, b.underline.key) : [],
     question: b.question,
   }))
 }

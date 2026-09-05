@@ -7,7 +7,10 @@
     "sources": [
       "高校教科書（山川『詳説日本史』）弘仁・貞観文化の項",
       "東寺（教王護国寺）公式サイト",
-      "本文の記述に対応する追検証用の公開URLなし（教科書水準の通説として記述。各作品の画像出典URLは works 側の sources を参照）"
+      "図版の同定URL（観心寺如意輪観音像）: https://commons.wikimedia.org/wiki/File:NYOIRIN_KANSHINJI.JPG",
+      "図版の同定URL（室生寺五重塔）: https://commons.wikimedia.org/wiki/File:Muro-ji,_Goju-no-to_(Five-storied_Pagoda)_-1_(July_2013)_-_panoramio.jpg",
+      "図版の同定URL（東寺講堂不動明王像）: https://commons.wikimedia.org/wiki/File:Fudo_Myoo_Kodo_Toji.jpg",
+      "本文の歴史記述そのものは教科書水準の通説で、一次資料・公的機関の公開ページは未参照（追検証URL未取得。Hayato追記2026-09-05、M2-99v3中3指摘の解消）"
     ],
     "underlines": [
       {

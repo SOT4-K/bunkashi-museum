@@ -71,10 +71,13 @@ describe('buildMockExam', () => {
     const items = buildMockExam(passages, pool, pool, testEras, progress, today, seededRandom(2))
     expect(items.length).toBeGreaterThan(0)
     for (const item of items) {
+      // このフィクスチャの work() は orderIndex を持たないため generateOrderQuestion は常に
+      // null を返し、Q14差し替え（passage無し）は発生しない前提。
+      if (!item.passage) throw new Error('このテストのフィクスチャでは passage が必ず付くはず')
       expect(item.passage.id).toBeTruthy()
       expect(item.eraId).toBe(item.passage.era)
       expect(item.excerpt.length).toBeGreaterThan(0)
-      expect(passages.some((p) => p.id === item.passage.id)).toBe(true)
+      expect(passages.some((p) => p.id === item.passage?.id)).toBe(true)
     }
   })
 
@@ -96,7 +99,7 @@ describe('buildMockExam', () => {
     }
     const items = buildMockExam([imagePassage], pool, pool, testEras, progress, today, seededRandom(3))
     expect(items.length).toBe(1)
-    expect(items[0].passage.kind).toBe('image')
+    expect(items[0].passage?.kind).toBe('image')
   })
 
   it('M2-25 の解消: 下線の ask.stem（writer 手書き）をそのまま設問文に使う', () => {
@@ -148,7 +151,7 @@ describe('buildMockExam', () => {
     let sawFromB = false
     for (let seed = 0; seed < 40 && !sawFromB; seed++) {
       const items = buildMockExam([passageA, passageB], pool, pool, testEras, progress, today, seededRandom(seed))
-      if (items.some((i) => i.passage.id === 'dup-b')) sawFromB = true
+      if (items.some((i) => i.passage?.id === 'dup-b')) sawFromB = true
     }
     // 修正前は buildCandidatePool が passageA 側で全作品を「使用済み」にしてしまい、
     // passageB の下線が全滅して何回試しても出現しなかった（この assertion が red で再現する）。

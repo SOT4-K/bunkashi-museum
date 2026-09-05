@@ -9,25 +9,37 @@
       "東京国立博物館展示（縄文・古墳の遺物）",
       "十日町市博物館展示（笹山遺跡出土深鉢形土器）",
       "広島県立歴史民俗資料館展示（黒川遺跡出土銅鐸）",
-      "本文の記述に対応する追検証用の公開URLなし（教科書水準の通説として記述。各作品の画像出典URLは works 側の sources を参照）"
+      "図版の同定URL（火焔型土器）: https://commons.wikimedia.org/wiki/File:%E7%AC%B9%E5%B1%B1%E9%81%BA%E8%B7%A1%E5%87%BA%E5%9C%9F_%E7%81%AB%E7%84%94%E5%9E%8B%E5%9C%9F%E5%99%A8_(%E6%B7%B1%E9%89%A2%E5%BD%A2)_(%E5%9B%BD%E5%AE%9D%E6%8C%87%E5%AE%9A%E7%95%AA%E5%8F%B71).JPG",
+      "図版の同定URL（挂甲武人埴輪）: https://commons.wikimedia.org/wiki/File:%E5%A4%AA%E7%94%B0%E5%B8%82%E9%A3%AF%E5%A1%9A%E7%94%BA%E5%87%BA%E5%9C%9F_%E5%9F%B4%E8%BC%AA_%E6%8C%82%E7%94%B2%E3%81%AE%E6%AD%A6%E4%BA%BA.JPG",
+      "図版の同定URL（袈裟襷文銅鐸）: https://commons.wikimedia.org/wiki/File:%E9%BB%92%E5%B7%9D%E9%81%BA%E8%B7%A1%E5%87%BA%E5%9C%9F_%E8%A2%88%E8%A3%9F%E8%A5%B7%E6%96%87%E9%8A%85%E9%90%B8.JPG",
+      "図版の同定URL（遮光器土偶）: https://commons.wikimedia.org/wiki/File:%E4%BA%80%E3%83%B6%E5%B2%A1%E9%81%BA%E8%B7%A1%E5%87%BA%E5%9C%9F_%E9%81%AE%E5%85%89%E5%99%A8%E5%9C%9F%E5%81%B6.JPG",
+      "本文の歴史記述そのものは教科書水準の通説で、一次資料・公的機関の公開ページは未参照（追検証URL未取得。Hayato追記2026-09-05、M2-99v3中3指摘の解消）"
     ],
     "underlines": [
       {
         "key": "a",
         "anchorKind": "event",
-        "workIds": ["shakoki-dogu"],
+        "workIds": [
+          "shakoki-dogu"
+        ],
         "ask": {
           "type": "q9",
           "stem": "下線部aが残された時代のもので、豊穣や安産を祈る呪術に用いられたと考えられ、青森県の亀ヶ岡遺跡から出土したものはどれか",
           "answerId": "shakoki-dogu",
-          "distractorIds": ["keiko-bujin-haniwa", "kaen-doki", "kesadasuki-dotaku"]
+          "distractorIds": [
+            "keiko-bujin-haniwa",
+            "kaen-doki",
+            "kesadasuki-dotaku"
+          ]
         },
         "note": "二段: 下線＝貝塚（縄文の生活跡）／設問＝用途と出土地。外見の語（土製の人形）は M2-41 で条件から外し、用途と出土地だけで一意になるようにした"
       },
       {
         "key": "b",
         "anchorKind": "event",
-        "workIds": ["kaen-doki"],
+        "workIds": [
+          "kaen-doki"
+        ],
         "ask": {
           "type": "q10",
           "stem": "下線部bを中心に作られた次の土器（画像）について述べたA・Bの文の正誤の組合せとして正しいものはどれか",
@@ -38,7 +50,9 @@
       {
         "key": "c",
         "anchorKind": "event",
-        "workIds": ["kesadasuki-dotaku"],
+        "workIds": [
+          "kesadasuki-dotaku"
+        ],
         "ask": {
           "type": "q4",
           "stem": "下線部cに用いられたと考えられる次の青銅器（画像）について述べた文として最も適切なものはどれか",
@@ -49,7 +63,9 @@
       {
         "key": "d",
         "anchorKind": "event",
-        "workIds": ["keiko-bujin-haniwa"],
+        "workIds": [
+          "keiko-bujin-haniwa"
+        ],
         "ask": {
           "type": "q10",
           "stem": "下線部dの墳丘の上や周囲に並べられた次の土製品（画像）について述べたA・Bの文の正誤の組合せとして正しいものはどれか",
@@ -70,25 +86,37 @@
       "東京国立博物館展示（縄文・古墳の遺物）",
       "十日町市博物館展示（笹山遺跡出土深鉢形土器）",
       "広島県立歴史民俗資料館展示（黒川遺跡出土銅鐸）",
-      "本文の記述に対応する追検証用の公開URLなし（教科書水準の通説として記述。各作品の画像出典URLは works 側の sources を参照）"
+      "図版の同定URL（火焔型土器）: https://commons.wikimedia.org/wiki/File:%E7%AC%B9%E5%B1%B1%E9%81%BA%E8%B7%A1%E5%87%BA%E5%9C%9F_%E7%81%AB%E7%84%94%E5%9E%8B%E5%9C%9F%E5%99%A8_(%E6%B7%B1%E9%89%A2%E5%BD%A2)_(%E5%9B%BD%E5%AE%9D%E6%8C%87%E5%AE%9A%E7%95%AA%E5%8F%B71).JPG",
+      "図版の同定URL（挂甲武人埴輪）: https://commons.wikimedia.org/wiki/File:%E5%A4%AA%E7%94%B0%E5%B8%82%E9%A3%AF%E5%A1%9A%E7%94%BA%E5%87%BA%E5%9C%9F_%E5%9F%B4%E8%BC%AA_%E6%8C%82%E7%94%B2%E3%81%AE%E6%AD%A6%E4%BA%BA.JPG",
+      "図版の同定URL（袈裟襷文銅鐸）: https://commons.wikimedia.org/wiki/File:%E9%BB%92%E5%B7%9D%E9%81%BA%E8%B7%A1%E5%87%BA%E5%9C%9F_%E8%A2%88%E8%A3%9F%E8%A5%B7%E6%96%87%E9%8A%85%E9%90%B8.JPG",
+      "図版の同定URL（稲荷山古墳出土鉄剣）: https://commons.wikimedia.org/wiki/File:Inariyama_sword.JPG",
+      "本文の歴史記述そのものは教科書水準の通説で、一次資料・公的機関の公開ページは未参照（追検証URL未取得。Hayato追記2026-09-05、M2-99v3中3指摘の解消）"
     ],
     "underlines": [
       {
         "key": "a",
         "anchorKind": "event",
-        "workIds": ["kesadasuki-dotaku"],
+        "workIds": [
+          "kesadasuki-dotaku"
+        ],
         "ask": {
           "type": "q9",
           "stem": "下線部aに用いられたと考えられ、広島県の黒川遺跡から出土したものとして最も適切なものはどれか",
           "answerId": "kesadasuki-dotaku",
-          "distractorIds": ["shakoki-dogu", "kaen-doki", "keiko-bujin-haniwa"]
+          "distractorIds": [
+            "shakoki-dogu",
+            "kaen-doki",
+            "keiko-bujin-haniwa"
+          ]
         },
         "note": "二段: 下線＝まつり（用途）／設問＝出土地。材質・器種の語を下線にも設問にも出さないことで、選択肢の名前だけでは決まらないようにした"
       },
       {
         "key": "b",
         "anchorKind": "event",
-        "workIds": ["keiko-bujin-haniwa"],
+        "workIds": [
+          "keiko-bujin-haniwa"
+        ],
         "ask": {
           "type": "q4",
           "stem": "下線部bのうち、群馬県太田市で出土した次の作品（画像）について述べた文として最も適切なものはどれか",
@@ -99,7 +127,9 @@
       {
         "key": "c",
         "anchorKind": "event",
-        "workIds": ["inariyama-tekken"],
+        "workIds": [
+          "inariyama-tekken"
+        ],
         "ask": {
           "type": "q10",
           "stem": "下線部cのうち、埼玉県の古墳から出土した次の遺物（画像）について述べたA・Bの文の正誤の組合せとして正しいものはどれか",
@@ -110,24 +140,36 @@
       {
         "key": "d",
         "anchorKind": "person",
-        "workIds": ["kaen-doki"],
+        "workIds": [
+          "kaen-doki"
+        ],
         "ask": {
           "type": "q12",
           "stem": "下線部dが暮らした時代の名称として最も適切なものはどれか",
           "answerText": "縄文時代",
-          "distractorTexts": ["旧石器時代", "弥生時代", "古墳時代"]
+          "distractorTexts": [
+            "旧石器時代",
+            "弥生時代",
+            "古墳時代"
+          ]
         },
         "note": "文化（時代）伏せ型の中心となる問い。本文に時代名を書いていないので、生活・遺跡の手がかりから判断させる"
       },
       {
         "key": "f",
         "anchorKind": "event",
-        "workIds": ["keiko-bujin-haniwa"],
+        "workIds": [
+          "keiko-bujin-haniwa"
+        ],
         "ask": {
           "type": "q12",
           "stem": "下線部fを古いものから順に並べたものとして最も適切なものはどれか",
           "answerText": "III→I→II",
-          "distractorTexts": ["I→II→III", "III→II→I", "I→III→II"]
+          "distractorTexts": [
+            "I→II→III",
+            "III→II→I",
+            "I→III→II"
+          ]
         },
         "note": "過去問（2016・2025）の文化伏せ型の最後に置かれる年代順の問い。本文をあえて年代順に並べていない。対象作品は b で画像を出したものを再利用し、新たな画像を割らない"
       }

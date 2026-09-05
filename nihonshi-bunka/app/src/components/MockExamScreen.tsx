@@ -96,7 +96,7 @@ export function MockExamScreen({
     const result = onAnswer(current.question.work.id, current.question.type, answer, false, today)
     setAnswered({ selection, correct, isNewDiscovery: result.isNewDiscovery, isNewlyMastered: result.isNewlyMastered })
     if (correct) setCorrectCount((prev) => prev + 1)
-    else if (onMiss) onMiss(current.question.work.id, current.question.type, current.passage.id, current.underlineKey)
+    else if (onMiss) onMiss(current.question.work.id, current.question.type, current.passage?.id, current.underlineKey)
 
     setTypeStats((prev) => {
       const prevStat = prev[current.question.type] ?? { correct: 0, total: 0 }
@@ -228,17 +228,19 @@ export function MockExamScreen({
         </span>
       </div>
 
-      <div className={styles.excerptPanel} data-testid="mock-exam-excerpt-panel">
-        {current.excerpt.map((seg, i) =>
-          seg.type === 'underline' ? (
-            <mark key={i} className={styles.underlineCurrent}>
-              {seg.value}
-            </mark>
-          ) : (
-            <span key={i}>{seg.value}</span>
-          ),
-        )}
-      </div>
+      {current.passage && (
+        <div className={styles.excerptPanel} data-testid="mock-exam-excerpt-panel">
+          {current.excerpt.map((seg, i) =>
+            seg.type === 'underline' ? (
+              <mark key={i} className={styles.underlineCurrent}>
+                {seg.value}
+              </mark>
+            ) : (
+              <span key={i}>{seg.value}</span>
+            ),
+          )}
+        </div>
+      )}
 
       <LeadPanel
         passage={current.passage}

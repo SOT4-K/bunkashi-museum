@@ -7,7 +7,12 @@
     "sources": [
       "高校教科書（山川『詳説日本史』）飛鳥文化の項",
       "法隆寺公式サイト",
-      "本文の記述に対応する追検証用の公開URLなし（教科書水準の通説として記述。各作品の画像出典URLは works 側の sources を参照）"
+      "図版の同定URL（法隆寺金堂釈迦三尊像）: https://commons.wikimedia.org/wiki/File:Shakyamuni_Triad_Horyuji.JPG",
+      "図版の同定URL（玉虫厨子）: https://commons.wikimedia.org/wiki/File:Tamamushi_Shrine.JPG",
+      "図版の同定URL（広隆寺半跏思惟像）: https://commons.wikimedia.org/wiki/File:Maitreya_Koryuji.JPG",
+      "図版の同定URL（中宮寺半跏思惟像）: https://commons.wikimedia.org/wiki/File:Bodhisattva_Chuguji.JPG",
+      "図版の同定URL（百済観音）: https://commons.wikimedia.org/wiki/File:Kudara_kannon_1.JPG",
+      "本文の歴史記述そのものは教科書水準の通説で、一次資料・公的機関の公開ページは未参照（追検証URL未取得。Hayato追記2026-09-05、M2-99v3中3指摘の解消）"
     ],
     "underlines": [
       {
