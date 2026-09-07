@@ -362,6 +362,26 @@ export interface BossState {
   bestScore: number
 }
 
+/**
+ * ステージ制（M2b-01。BOARD.md 2026-09-07）の1マス分の状態。s1/s2/s3（難易度★1〜3）・
+ * boss（テーマセット形式のボス）で共通の形。cleared は一度クリアしたら true のまま
+ * （再挑戦して basement未達でも false に戻らない）。bestScore は正解数の自己ベスト。
+ * clearedAt はクリアした最新の日付（初回クリア日ではなく、クリアするたびに更新する）。
+ */
+export interface StageState {
+  cleared: boolean
+  bestScore: number
+  clearedAt: string | null
+}
+
+/** 1文化（ワールド）分のステージ進捗。キーは engine/stages.ts の StageKey。 */
+export interface EraStageState {
+  s1: StageState
+  s2: StageState
+  s3: StageState
+  boss: StageState
+}
+
 export interface NewTodayState {
   date: string
   count: number
@@ -389,13 +409,19 @@ export interface MissLogEntry {
 
 export interface ProgressState {
   /** 1: q1/q2/q3 のみ。2: ItemProgress に q4/q6/q8 を追加（DESIGN.md 10章）。
-   *  3: missLog を追加（M2-23） */
-  version: 1 | 2 | 3
+   *  3: missLog を追加（M2-23）。4: stages を追加（M2b-01 ステージ制）。 */
+  version: 1 | 2 | 3 | 4
   xp: number
   level: number
   streak: StreakState
   items: Record<string, ItemProgress>
+  /** 旧フィールド（DESIGN.md の初期案）。書き込み箇所が無いまま残っていたため、
+   *  M2b-01 のステージ制は新設の `stages`（EraStageState.boss）を使う。後方互換のため
+   *  型・キーは残す（削除しない）。 */
   bosses: Record<string, BossState>
+  /** ステージ制の進捗（M2b-01）。キーは eraId。version 4 未満のデータには無いため
+   *  migrate() で {} を補う。 */
+  stages: Record<string, EraStageState>
   newToday: NewTodayState
   /** 間違いノート（M2-23）。旧データ（version 1/2）には無いため migrate() で [] を補う。 */
   missLog: MissLogEntry[]

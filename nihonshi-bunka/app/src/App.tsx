@@ -2,8 +2,8 @@ import { useMemo, useState } from 'react'
 import styles from './App.module.css'
 import { TabBar } from './components/TabBar'
 import { HomeScreen } from './components/HomeScreen'
-import { CultureListScreen } from './components/CultureListScreen'
-import { PracticeSessionScreen } from './components/PracticeSessionScreen'
+import { StageMapScreen } from './components/StageMapScreen'
+import { StageScreen } from './components/StageScreen'
 import { MockExamScreen } from './components/MockExamScreen'
 import { MissReviewScreen } from './components/MissReviewScreen'
 import { MuseumScreen } from './components/MuseumScreen'
@@ -14,6 +14,8 @@ import { eras, playableWorks, themeSetPool, passages, worksById } from './conten
 import { todayIso } from './engine/srs'
 import { buildMockExam, discoverableWorks, type MockExamItem } from './engine/mockExam'
 import { buildMissReviewSession, type MissReviewItem } from './engine/missLog'
+import { buildBossQuestions, buildStageQuestions, DIFFICULTY_LABELS, type Difficulty, type StageKey } from './engine/stages'
+import type { Question } from './types'
 
 // タブ遷移は React state のみで行い、history.pushState は使わない。
 // そのため iOS のスワイプ戻るジェスチャーで戻れる「前の画面」が無く、
@@ -26,14 +28,30 @@ export default function App() {
   const [activeMockExam, setActiveMockExam] = useState<MockExamItem[] | null>(null)
   // 間違いノート復習（M2-23）。
   const [activeMissReview, setActiveMissReview] = useState<MissReviewItem[] | null>(null)
-  // 学習タブ（文化別練習。M2-22）: 選択中の文化。null なら文化一覧を表示する。
-  const [practiceEraId, setPracticeEraId] = useState<string | null>(null)
-  // M2-47: 学習中（本番モード・文化別練習・間違い復習のいずれか）にタブを押したときの確認待ち。
+  // 学習タブ（ステージマップ。M2b-01）: 挑戦中のステージ／ボス。null ならマップを表示する。
+  // stageNonce は「もう一度」で StageScreen を強制的に作り直す（内部 state をリセットする）ための key。
+  interface ActiveStage {
+    eraId: string
+    key: StageKey
+    title: string
+    questions: Question[]
+  }
+  const [activeStage, setActiveStage] = useState<ActiveStage | null>(null)
+  const [stageNonce, setStageNonce] = useState(0)
+  // M2-47: 学習中（本番モード・ステージ／ボス・間違い復習のいずれか）にタブを押したときの確認待ち。
   const [pendingLeave, setPendingLeave] = useState(false)
-  const { progress, startSession, answer, importProgress, resetProgress, recordMiss, recordMissReviewOutcome } =
-    useProgressStore()
+  const {
+    progress,
+    startSession,
+    answer,
+    importProgress,
+    resetProgress,
+    recordMiss,
+    recordMissReviewOutcome,
+    recordStageResult,
+  } = useProgressStore()
 
-  const hasActiveSession = Boolean(activeMockExam || activeMissReview || practiceEraId)
+  const hasActiveSession = Boolean(activeMockExam || activeMissReview || activeStage)
 
   /** M2-47: 学習中にタブ（ホーム含む）を押したら確認する。「はい」なら記録せず中止。 */
   function handleTabChange(next: TabId) {
@@ -47,7 +65,7 @@ export default function App() {
   function confirmLeave() {
     setActiveMockExam(null)
     setActiveMissReview(null)
-    setPracticeEraId(null)
+    setActiveStage(null)
     setPendingLeave(false)
     setTab('home')
   }
@@ -79,6 +97,41 @@ export default function App() {
     if (items.length === 0) return
     startSession(todayIso())
     setActiveMissReview(items)
+  }
+
+  /** ステージ制（M2b-01）: eraId・key から見出しと問題を組み立てる。 */
+  function buildStageFor(eraId: string, key: StageKey): { title: string; questions: Question[] } {
+    const eraName = eras.find((e) => e.id === eraId)?.name ?? eraId
+    if (key === 'boss') {
+      return { title: `${eraName} ボス`, questions: buildBossQuestions(eraId, passages, themeSetPool, playableWorks, eras) }
+    }
+    const difficulty = Number(key.slice(1)) as Difficulty
+    return {
+      title: `${eraName} ${DIFFICULTY_LABELS[difficulty]}`,
+      questions: buildStageQuestions(eraId, difficulty, themeSetPool, playableWorks, eras),
+    }
+  }
+
+  function goStage(eraId: string, key: StageKey) {
+    const { title, questions } = buildStageFor(eraId, key)
+    startSession(todayIso())
+    setActiveStage({ eraId, key, title, questions })
+    setStageNonce((n) => n + 1)
+  }
+
+  /** 結果画面の「もう一度」: 新しい乱数で同じステージ／ボスを組み直す（StageScreen は
+   *  stageNonce を key にして再マウントし、内部 state をリセットする）。 */
+  function retryStage() {
+    if (!activeStage) return
+    const { title, questions } = buildStageFor(activeStage.eraId, activeStage.key)
+    setActiveStage({ ...activeStage, title, questions })
+    setStageNonce((n) => n + 1)
+  }
+
+  /** 全問終了時に1回呼ばれる。クリア判定・自己ベスト・（ボスなら）XP をまとめて記録する。 */
+  function handleStageComplete(correctCount: number, total: number) {
+    if (!activeStage) return
+    recordStageResult(activeStage.eraId, activeStage.key, correctCount, total, todayIso())
   }
 
   /** 進捗リセット（M2-46）。確定後はホームへ戻る。 */
@@ -147,6 +200,30 @@ export default function App() {
     )
   }
 
+  if (activeStage) {
+    return (
+      <div className={styles.app}>
+        <main className={styles.main}>
+          <StageScreen
+            key={stageNonce}
+            title={activeStage.title}
+            questions={activeStage.questions}
+            pool={themeSetPool}
+            passages={passages}
+            eras={eras}
+            onAnswer={sharedOnAnswer}
+            onMiss={(workId, type, passageId, underlineKey) => recordMiss(workId, type, todayIso(), passageId, underlineKey)}
+            onComplete={handleStageComplete}
+            onFinish={() => setActiveStage(null)}
+            onRetry={retryStage}
+          />
+        </main>
+        <TabBar active={tab} onChange={handleTabChange} />
+        {leaveDialog}
+      </div>
+    )
+  }
+
   return (
     <div className={styles.app}>
       <main className={styles.main}>
@@ -161,20 +238,9 @@ export default function App() {
             missLogCount={progress.missLog.length}
           />
         )}
-        {tab === 'learn' &&
-          (practiceEraId ? (
-            <PracticeSessionScreen
-              eraId={practiceEraId}
-              eraName={eras.find((e) => e.id === practiceEraId)?.name ?? practiceEraId}
-              pool={themeSetPool}
-              imagePool={playableWorks}
-              eras={eras}
-              passages={passages}
-              onFinish={() => setPracticeEraId(null)}
-            />
-          ) : (
-            <CultureListScreen works={playableWorks} eras={eras} progress={progress} onSelectEra={setPracticeEraId} />
-          ))}
+        {tab === 'learn' && (
+          <StageMapScreen eras={eras} pool={themeSetPool} imagePool={playableWorks} passages={passages} progress={progress} onSelectStage={goStage} />
+        )}
         {tab === 'museum' && (
           <MuseumScreen works={museumWorks} eras={eras} progress={progress} onStart={goMockExam} />
         )}

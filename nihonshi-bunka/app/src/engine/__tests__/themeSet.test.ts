@@ -466,6 +466,7 @@ describe('selectLearnThemeSets（「学習を始める」のテーマセット�
       streak: { count: 0, lastDate: null },
       items: {},
       bosses: {},
+      stages: {},
       newToday: { date: today, count: 0 },
       missLog: [],
     }

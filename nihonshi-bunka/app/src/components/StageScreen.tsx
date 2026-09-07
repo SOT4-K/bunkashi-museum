@@ -1,0 +1,198 @@
+// ステージ／ボスの出題画面（M2b-01）。既存 QuestionCard・AnswerSheet・LeadPanel を流用する
+// （実装スコープ c）。MockExamScreen と同じく progress の answer()/recordMiss() を呼ぶ
+// （ステージ・ボスの結果は本番モードと同じ扱いで SRS・図鑑・XP を更新する。2026-09-04 の
+// 「文化別練習は進捗を更新しない」方針をこのモードには適用しない＝新方針）。
+import { useMemo, useRef, useState } from 'react'
+import learnStyles from './LearnScreen.module.css'
+import { QuestionCard } from './QuestionCard'
+import { AnswerSheet } from './AnswerSheet'
+import { LeadPanel } from './LeadPanel'
+import { todayIso } from '../engine/srs'
+import { findLeadContextForWork } from '../engine/leadContext'
+import { clearThreshold } from '../engine/stages'
+import type { MissSelection } from '../engine/explain'
+import type { AnswerKind, Era, Passage, Question, Work } from '../types'
+
+interface AnsweredState {
+  selection: MissSelection
+  correct: boolean
+  isNewDiscovery: boolean
+  isNewlyMastered: boolean
+}
+
+type Phase = 'quiz' | 'done'
+
+export function StageScreen({
+  title,
+  questions,
+  pool,
+  passages,
+  eras,
+  onAnswer,
+  onMiss,
+  onComplete,
+  onFinish,
+  onRetry,
+}: {
+  /** 画面上部に出す見出し（例:「天平文化 ★2」「天平文化 ボス」）。 */
+  title: string
+  questions: Question[]
+  /** LeadPanel の画像リード型解決用（content.ts の themeSetPool）。 */
+  pool: Work[]
+  passages: Passage[]
+  eras: Era[]
+  onAnswer: (
+    workId: string,
+    type: Question['type'],
+    answer: AnswerKind,
+    isReview: boolean,
+    today: string,
+  ) => { xpGained: number; isNewDiscovery: boolean; isNewlyMastered: boolean }
+  onMiss?: (workId: string, type: Question['type'], passageId: string | undefined, underlineKey: string | undefined) => void
+  /** 全問終了時に1回だけ呼ぶ（正解数・全問数。呼び出し側で recordStageResult する）。 */
+  onComplete: (correctCount: number, total: number) => void
+  /** 結果画面の「次へ」（マップに戻る）。 */
+  onFinish: () => void
+  /** 結果画面の「もう一度」。呼び出し側で新しい乱数で同じステージを組み直す想定。 */
+  onRetry: () => void
+}) {
+  const today = todayIso()
+  const total = questions.length
+  const [phase, setPhase] = useState<Phase>(total > 0 ? 'quiz' : 'done')
+  const [index, setIndex] = useState(0)
+  const [answered, setAnswered] = useState<AnsweredState | null>(null)
+  const [showSheet, setShowSheet] = useState(false)
+  const [correctCount, setCorrectCount] = useState(0)
+  const sheetTimerRef = useRef<number | null>(null)
+
+  const current = questions[index]
+
+  // ボスの問題は buildBossQuestions が passageId/underlineKey を付けているため、
+  // それを passages から逆引きして本番モードと同じリード文・下線表示を再現する。
+  // 通常ステージの問題（passageId が無い）は文化別練習と同じ best-effort 逆引きにする
+  // （M2-42「全モードで同じ」。engine/leadContext.ts）。
+  const leadContext = useMemo(() => {
+    if (!current) return null
+    if (current.passageId) {
+      const passage = passages.find((p) => p.id === current.passageId)
+      if (passage) return { passage, underlineKey: current.underlineKey }
+    }
+    return findLeadContextForWork(current.work.id, passages, pool)
+  }, [current, passages, pool])
+
+  function handleResult(answer: AnswerKind, selection: MissSelection) {
+    if (!current) return
+    const correct = answer === 'correct'
+    const result = onAnswer(current.work.id, current.type, answer, false, today)
+    setAnswered({ selection, correct, isNewDiscovery: result.isNewDiscovery, isNewlyMastered: result.isNewlyMastered })
+    if (correct) setCorrectCount((c) => c + 1)
+    else if (onMiss) onMiss(current.work.id, current.type, current.passageId, current.underlineKey)
+
+    const reduceMotion =
+      typeof window !== 'undefined' &&
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduceMotion) setShowSheet(true)
+    else sheetTimerRef.current = window.setTimeout(() => setShowSheet(true), 450)
+  }
+
+  function handleChoice(choiceIndex: number) {
+    if (!current || answered) return
+    const correct = choiceIndex === current.correctIndex
+    handleResult(correct ? 'correct' : 'incorrect', { kind: 'choice', index: choiceIndex })
+  }
+
+  function handleUnknown() {
+    if (!current || answered) return
+    handleResult('unknown', { kind: 'unknown' })
+  }
+
+  function handleNext() {
+    if (sheetTimerRef.current) {
+      window.clearTimeout(sheetTimerRef.current)
+      sheetTimerRef.current = null
+    }
+    setAnswered(null)
+    setShowSheet(false)
+    const nextIndex = index + 1
+    setIndex(nextIndex)
+    if (nextIndex >= total) {
+      setPhase('done')
+      onComplete(correctCount, total)
+    }
+  }
+
+  if (total === 0) {
+    return (
+      <div className={learnStyles.screen}>
+        <p>「{title}」は今のところ問題を作れなかった（作品の投入待ち）。</p>
+        <button type="button" className={learnStyles.doneButton} onClick={onFinish}>
+          マップに戻る
+        </button>
+      </div>
+    )
+  }
+
+  if (phase === 'done') {
+    const threshold = clearThreshold(total)
+    const cleared = correctCount >= threshold
+    return (
+      <div className={learnStyles.summaryScreen} data-testid="stage-summary">
+        <div>
+          <div className={learnStyles.summaryNumber}>
+            {correctCount} / {total}
+          </div>
+          <div className={learnStyles.summaryLabel} data-testid="stage-clear-label">
+            {cleared ? 'クリア！' : `クリアには ${threshold}/${total} 問正解が必要`}
+          </div>
+        </div>
+        <button type="button" className={learnStyles.doneButton} data-testid="stage-retry" onClick={onRetry}>
+          もう一度
+        </button>
+        <button type="button" className={learnStyles.doneButton} data-testid="stage-next" onClick={onFinish}>
+          次へ
+        </button>
+      </div>
+    )
+  }
+
+  // phase === 'quiz'
+  const isLast = index === total - 1
+
+  return (
+    <div className={learnStyles.screen}>
+      <div className={learnStyles.progressRow}>
+        <span>
+          {title}　{index + 1}/{total}
+        </span>
+        <span className={learnStyles.dots}>
+          {questions.map((_, i) => (
+            <span key={i} className={`${learnStyles.dot} ${i <= index ? learnStyles.dotFilled : ''}`} />
+          ))}
+        </span>
+      </div>
+
+      <LeadPanel
+        passage={leadContext?.passage}
+        underlineKey={leadContext?.underlineKey}
+        pool={pool}
+        raiseAboveConfirmBar={!answered}
+      />
+
+      <QuestionCard question={current} answered={answered} onChoice={handleChoice} onUnknown={handleUnknown} />
+
+      {answered && showSheet && (
+        <AnswerSheet
+          question={current}
+          selection={answered.selection}
+          correct={answered.correct}
+          eras={eras}
+          isNewDiscovery={answered.isNewDiscovery}
+          isNewlyMastered={answered.isNewlyMastered}
+          nextLabel={isLast ? '結果を見る' : '次の問題'}
+          onNext={handleNext}
+        />
+      )}
+    </div>
+  )
+}

@@ -1,20 +1,23 @@
 import { describe, expect, it } from 'vitest'
 import {
+  XP_BOSS_CLEAR,
   XP_CORRECT,
   XP_REVIEW_CORRECT,
   createInitialProgress,
   dailyNewRemaining,
   migrate,
   recordAnswer,
+  recordStageResult,
   updateStreak,
 } from '../progress'
 
 describe('createInitialProgress / migrate', () => {
   it('壊れたデータは初期状態にフォールバックする', () => {
     const result = migrate({ nonsense: true }, '2026-09-03')
-    expect(result.version).toBe(3)
+    expect(result.version).toBe(4)
     expect(result.items).toEqual({})
     expect(result.missLog).toEqual([])
+    expect(result.stages).toEqual({})
   })
 
   it('null/undefined でも例外を投げない', () => {
@@ -47,11 +50,119 @@ describe('createInitialProgress / migrate', () => {
       newToday: { date: '2026-09-03', count: 1 },
     }
     const result = migrate(v1State, '2026-09-03')
-    expect(result.version).toBe(3)
+    expect(result.version).toBe(4)
     expect(result.xp).toBe(120)
     expect(result.items['ashura-kofukuji'].q1).toEqual(v1State.items['ashura-kofukuji'].q1)
     expect(result.items['ashura-kofukuji'].q4).toBeUndefined() // q4 は初出題まで作らない
     expect(result.missLog).toEqual([]) // v1/v2 データには無いため migrate が補う（M2-23）
+    expect(result.stages).toEqual({}) // v1〜v3 データには無いため migrate が補う（M2b-01）
+  })
+
+  it('M2b-01: version 3（stages が無い）データを読んでも既存の進捗（xp・items）は消えない', () => {
+    const v3State = {
+      version: 3 as const,
+      xp: 250,
+      level: 3,
+      streak: { count: 5, lastDate: '2026-09-06' },
+      items: {
+        'ashura-kofukuji': {
+          q1: { box: 3, due: '2026-09-10', correct: 3, wrong: 0 },
+          q2: { box: 0, due: '2026-09-03', correct: 0, wrong: 1 },
+          q3: { box: 0, due: '2026-09-03', correct: 0, wrong: 0 },
+          discoveredAt: '2026-09-01',
+          masteredAt: null,
+        },
+      },
+      bosses: {},
+      newToday: { date: '2026-09-06', count: 1 },
+      missLog: [],
+    }
+    const result = migrate(v3State, '2026-09-07')
+    expect(result.version).toBe(4)
+    expect(result.xp).toBe(250)
+    expect(result.items['ashura-kofukuji'].q1.correct).toBe(3)
+    expect(result.stages).toEqual({}) // v3 データには無いため補う
+  })
+
+  it('M2b-01: 現行 version（stages 持ち）のデータは stages ごとそのまま通る', () => {
+    const state = {
+      ...createInitialProgress('2026-09-07'),
+      stages: {
+        tenpyo: {
+          s1: { cleared: true, bestScore: 9, clearedAt: '2026-09-06' },
+          s2: { cleared: false, bestScore: 3, clearedAt: null },
+          s3: { cleared: false, bestScore: 0, clearedAt: null },
+          boss: { cleared: false, bestScore: 0, clearedAt: null },
+        },
+      },
+    }
+    const result = migrate(state, '2026-09-07')
+    expect(result.stages).toEqual(state.stages)
+  })
+})
+
+describe('recordStageResult（M2b-01: ステージ／ボスの結果記録）', () => {
+  it('ceil(0.9×問数) 以上正解で cleared になる（10問中9問=クリア、8問=未クリア）', () => {
+    const state = createInitialProgress('2026-09-07')
+    const cleared = recordStageResult(state, 'tenpyo', 's1', 9, 10, '2026-09-07')
+    expect(cleared.stages.tenpyo.s1.cleared).toBe(true)
+    expect(cleared.stages.tenpyo.s1.clearedAt).toBe('2026-09-07')
+
+    const notCleared = recordStageResult(state, 'tenpyo', 's1', 8, 10, '2026-09-07')
+    expect(notCleared.stages.tenpyo.s1.cleared).toBe(false)
+    expect(notCleared.stages.tenpyo.s1.clearedAt).toBeNull()
+  })
+
+  it('5問ステージは ceil(0.9×5)=5 問全問正解でないとクリアにならない', () => {
+    const state = createInitialProgress('2026-09-07')
+    expect(recordStageResult(state, 'tenpyo', 's2', 4, 5, '2026-09-07').stages.tenpyo.s2.cleared).toBe(false)
+    expect(recordStageResult(state, 'tenpyo', 's2', 5, 5, '2026-09-07').stages.tenpyo.s2.cleared).toBe(true)
+  })
+
+  it('一度クリアしたら再挑戦して未達でも cleared は false に戻らない（bestScore・clearedAt は据え置き）', () => {
+    let state = createInitialProgress('2026-09-01')
+    state = recordStageResult(state, 'tenpyo', 's1', 10, 10, '2026-09-01')
+    expect(state.stages.tenpyo.s1.cleared).toBe(true)
+    state = recordStageResult(state, 'tenpyo', 's1', 3, 10, '2026-09-02')
+    expect(state.stages.tenpyo.s1.cleared).toBe(true)
+    expect(state.stages.tenpyo.s1.bestScore).toBe(10) // 再挑戦の3より高いベストを維持
+    expect(state.stages.tenpyo.s1.clearedAt).toBe('2026-09-01') // 未達の再挑戦では更新されない
+  })
+
+  it('bestScore は自己ベスト（高い方）を保持する', () => {
+    let state = createInitialProgress('2026-09-01')
+    state = recordStageResult(state, 'tenpyo', 's1', 6, 10, '2026-09-01')
+    state = recordStageResult(state, 'tenpyo', 's1', 8, 10, '2026-09-02')
+    expect(state.stages.tenpyo.s1.bestScore).toBe(8)
+    state = recordStageResult(state, 'tenpyo', 's1', 7, 10, '2026-09-03')
+    expect(state.stages.tenpyo.s1.bestScore).toBe(8) // 下がった挑戦では更新しない
+  })
+
+  it('他のステージ・他の文化の状態を巻き込まない', () => {
+    let state = createInitialProgress('2026-09-01')
+    state = recordStageResult(state, 'tenpyo', 's1', 10, 10, '2026-09-01')
+    state = recordStageResult(state, 'tenpyo', 's2', 1, 10, '2026-09-01')
+    state = recordStageResult(state, 'hakuho', 's1', 1, 10, '2026-09-01')
+    expect(state.stages.tenpyo.s1.cleared).toBe(true)
+    expect(state.stages.tenpyo.s2.cleared).toBe(false)
+    expect(state.stages.hakuho.s1.cleared).toBe(false)
+  })
+
+  it('ボスを初めてクリアすると XP_BOSS_CLEAR が加算される（通常ステージはボーナスXPが無い）', () => {
+    const state = createInitialProgress('2026-09-07')
+    const bossCleared = recordStageResult(state, 'tenpyo', 'boss', 9, 10, '2026-09-07')
+    expect(bossCleared.xp).toBe(XP_BOSS_CLEAR)
+
+    const stageCleared = recordStageResult(state, 'tenpyo', 's1', 10, 10, '2026-09-07')
+    expect(stageCleared.xp).toBe(0)
+  })
+
+  it('ボスを2回目以降クリアしても XP_BOSS_CLEAR は重複加算されない', () => {
+    let state = createInitialProgress('2026-09-01')
+    state = recordStageResult(state, 'tenpyo', 'boss', 9, 10, '2026-09-01')
+    expect(state.xp).toBe(XP_BOSS_CLEAR)
+    state = recordStageResult(state, 'tenpyo', 'boss', 10, 10, '2026-09-02')
+    expect(state.xp).toBe(XP_BOSS_CLEAR) // 変化なし
   })
 })
 

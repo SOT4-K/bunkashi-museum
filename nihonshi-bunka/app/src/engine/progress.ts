@@ -2,13 +2,15 @@
 // スキーマ変更時は STORAGE_VERSION を上げ、migrate() に移行ロジックを足す（既存データは消さない）。
 import { applyItemAnswer, createItemProgress, todayIso } from './srs'
 import { addMiss, applyReviewOutcome } from './missLog'
-import type { AnswerKind, ItemProgress, MissLogEntry, ProgressState, QuestionType } from '../types'
+import { clearThreshold, emptyEraStageState, type StageKey } from './stages'
+import type { AnswerKind, ItemProgress, MissLogEntry, ProgressState, QuestionType, StageState } from '../types'
 
 export const STORAGE_KEY = 'bunkashi.v1'
 // v2: ItemProgress に q4/q6/q8（DESIGN.md 10章）を追加。フィールドは optional なので
 // 既存データはそのまま読める。version の値だけ更新し、items は変換不要（migrate で拾う）。
 // v3: missLog（間違いノート。M2-23）を追加。既存データには無いため migrate() で [] を補う。
-export const STORAGE_VERSION = 3 as const
+// v4: stages（ステージ制。M2b-01）を追加。既存データには無いため migrate() で {} を補う。
+export const STORAGE_VERSION = 4 as const
 
 export const XP_CORRECT = 10
 export const XP_REVIEW_CORRECT = 15
@@ -43,6 +45,7 @@ export function createInitialProgress(today: string = todayIso()): ProgressState
     streak: { count: 0, lastDate: null },
     items: {},
     bosses: {},
+    stages: {},
     newToday: { date: today, count: 0 },
     missLog: [],
   }
@@ -62,14 +65,17 @@ function isValidProgress(value: unknown): value is ProgressState {
 /** version 違い・壊れたデータを吸収して現行スキーマに揃える。既知データは消さない。 */
 export function migrate(raw: unknown, today: string = todayIso()): ProgressState {
   if (!isValidProgress(raw)) return createInitialProgress(today)
-  // v3 で missLog を追加。version が一致していても（手作りの fixture 等で）missLog が
-  // 無い可能性があるため、version 分岐に関わらず必ず補う。
+  // v3 で missLog、v4 で stages を追加。version が一致していても（手作りの fixture 等で）
+  // フィールドが無い可能性があるため、version 分岐に関わらず必ず補う（既存データは消さない）。
   const missLog: MissLogEntry[] = Array.isArray((raw as Partial<ProgressState>).missLog)
     ? (raw as ProgressState).missLog
     : []
-  if (raw.version === STORAGE_VERSION) return { ...raw, missLog }
+  const stagesRaw = (raw as Partial<ProgressState>).stages
+  const stages: ProgressState['stages'] =
+    stagesRaw && typeof stagesRaw === 'object' && !Array.isArray(stagesRaw) ? stagesRaw : {}
+  if (raw.version === STORAGE_VERSION) return { ...raw, missLog, stages }
   // 将来 version が上がったらここに変換を追加する。
-  return { ...createInitialProgress(today), ...raw, missLog, version: STORAGE_VERSION }
+  return { ...createInitialProgress(today), ...raw, missLog, stages, version: STORAGE_VERSION }
 }
 
 export function loadProgress(today: string = todayIso()): ProgressState {
@@ -181,4 +187,37 @@ export function recordMiss(
  */
 export function recordMissReviewOutcome(state: ProgressState, workId: string, correct: boolean): ProgressState {
   return { ...state, missLog: applyReviewOutcome(state.missLog, workId, correct) }
+}
+
+/**
+ * ステージ制（M2b-01）の1マス分の結果を進捗に反映する。cleared は ceil(0.9×total) 以上
+ * 正解したかどうか（engine/stages.ts の clearThreshold）。一度 cleared になったら以降
+ * 再挑戦して未達でも false には戻らない。bestScore は自己ベスト、clearedAt はクリアした
+ * 最新の日付（クリアするたびに更新する。初回クリア日を残したい場合は別途ログが必要だが、
+ * DESIGN.md にその要件は無いため「最新のクリア日」とした＝判断が必要なら要確認）。
+ * ボスを初めてクリアしたときは XP_BOSS_CLEAR を付与する（DESIGN.md 5章「時代ボス突破
+ * 200XP」。定数自体は以前から存在したが、呼び出し箇所が無かったためこのチケットで配線する）。
+ */
+export function recordStageResult(
+  state: ProgressState,
+  eraId: string,
+  key: StageKey,
+  correctCount: number,
+  total: number,
+  today: string,
+): ProgressState {
+  const cleared = total > 0 && correctCount >= clearThreshold(total)
+  const prevEra = state.stages[eraId] ?? emptyEraStageState()
+  const prevStage = prevEra[key]
+  const newlyCleared = cleared && !prevStage.cleared
+  const nextStage: StageState = {
+    cleared: prevStage.cleared || cleared,
+    bestScore: Math.max(prevStage.bestScore, correctCount),
+    clearedAt: cleared ? today : prevStage.clearedAt,
+  }
+  const withStages: ProgressState = {
+    ...state,
+    stages: { ...state.stages, [eraId]: { ...prevEra, [key]: nextStage } },
+  }
+  return key === 'boss' && newlyCleared ? addXp(withStages, XP_BOSS_CLEAR) : withStages
 }

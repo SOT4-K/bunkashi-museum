@@ -1,13 +1,14 @@
-// M2-47「学習中の離脱確認」: 文化別練習の途中でタブを押すと確認ダイアログが出て、
-// 「はい」で中止してホームに戻る（記録は残らない設計のため、そもそも失うものは無いが、
-// 途中で放り出す操作である点は本番モードと同じ扱いにする）。
+// M2-47「学習中の離脱確認」→ M2b-01 でステージ制に置き換え。学習タブ（ステージマップ）から
+// ステージを選んで挑戦中にタブを押すと確認ダイアログが出て、「はい」で中止してホームに戻る
+// （このモードは本番モードと同じく progress を更新するため、途中離脱は記録の観点でも
+// 本番モードと同じ扱いにする）。
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { makeWork, testEras } from '../engine/__tests__/testFixtures'
 import type { Work } from '../types'
 
-const w1: Work = makeWork({ id: 'lc1', era: 'tenpyo', category: 'sculpture' })
-const w2: Work = makeWork({ id: 'lc2', era: 'tenpyo', category: 'sculpture' })
+const w1: Work = makeWork({ id: 'lc1', era: 'asuka', category: 'sculpture' })
+const w2: Work = makeWork({ id: 'lc2', era: 'asuka', category: 'sculpture' })
 
 vi.mock('../content', () => ({
   eras: testEras,
@@ -24,7 +25,7 @@ async function importApp() {
   return mod.default
 }
 
-describe('App: 文化別練習の途中でタブを押すと確認ダイアログが出る（M2-47）', () => {
+describe('App: ステージ挑戦中にタブを押すと確認ダイアログが出る（M2b-01）', () => {
   beforeEach(() => {
     vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] })
   })
@@ -32,13 +33,13 @@ describe('App: 文化別練習の途中でタブを押すと確認ダイアロ�
     vi.useRealTimers()
   })
 
-  it('学習タブ→文化選択→練習中に「ホーム」を押すと確認ダイアログが出て、「いいえ」なら練習が続く', async () => {
+  it('学習タブ→★1ステージ選択→挑戦中に「ホーム」を押すと確認ダイアログが出て、「いいえ」ならステージが続く', async () => {
     const App = await importApp()
     render(<App />)
 
     fireEvent.click(screen.getByText('学習'))
-    fireEvent.click(screen.getAllByTestId('culture-button')[0])
-    expect(screen.getByText(/の練習。結果は記録されない/)).toBeInTheDocument()
+    fireEvent.click(screen.getByTestId('stage-tile-asuka-s1'))
+    expect(screen.getAllByTestId('choice-button').length).toBeGreaterThan(0)
 
     const tabButtons = screen.getByLabelText('タブ').querySelectorAll('button')
     fireEvent.click(tabButtons[0]) // ホーム
@@ -47,21 +48,27 @@ describe('App: 文化別練習の途中でタブを押すと確認ダイアロ�
     fireEvent.click(screen.getByTestId('confirm-dialog-cancel')) // いいえ
 
     expect(screen.queryByRole('alertdialog')).not.toBeInTheDocument()
-    expect(screen.getByText(/の練習。結果は記録されない/)).toBeInTheDocument()
+    expect(screen.getAllByTestId('choice-button').length).toBeGreaterThan(0)
   })
 
-  it('「はい」なら練習を中止してホームに戻る', async () => {
+  it('「はい」ならステージを中止してホームに戻る（進捗は記録されない）', async () => {
     const App = await importApp()
     render(<App />)
 
     fireEvent.click(screen.getByText('学習'))
-    fireEvent.click(screen.getAllByTestId('culture-button')[0])
+    fireEvent.click(screen.getByTestId('stage-tile-asuka-s1'))
 
     const tabButtons = screen.getByLabelText('タブ').querySelectorAll('button')
     fireEvent.click(tabButtons[0]) // ホーム
     fireEvent.click(screen.getByTestId('confirm-dialog-confirm')) // はい
 
-    expect(screen.queryByText(/の練習。結果は記録されない/)).not.toBeInTheDocument()
+    expect(screen.queryByTestId('choice-button')).not.toBeInTheDocument()
     expect(screen.getByTestId('mock-exam-button')).toBeInTheDocument()
+
+    // ホーム→学習タブに戻ると asuka の s1 はまだ未クリア（中止したので記録されない。
+    // 作品2件×型2種=最大4問生成できるため「クリア済」ではなく件数表示のまま）
+    fireEvent.click(screen.getByText('学習'))
+    expect(screen.getByTestId('stage-tile-asuka-s1')).toHaveTextContent('問')
+    expect(screen.getByTestId('stage-tile-asuka-s1')).not.toHaveTextContent('クリア済')
   })
 })
