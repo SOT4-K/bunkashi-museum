@@ -71,8 +71,19 @@ export function migrate(raw: unknown, today: string = todayIso()): ProgressState
     ? (raw as ProgressState).missLog
     : []
   const stagesRaw = (raw as Partial<ProgressState>).stages
+  // reviewer指摘M2b-99軽1の修正: stages の中身が era ごとに「一部の段しか無い」形（手編集の
+  // fixture や将来のスキーマ差分）だと、StageMapScreen/StageScreen の `es.boss.cleared` 等の
+  // アクセスで undefined 参照エラーになり画面全体が落ちていた。era ごとに emptyEraStageState()
+  // とマージして常に s1/s2/s3/boss が揃った形にする。
   const stages: ProgressState['stages'] =
-    stagesRaw && typeof stagesRaw === 'object' && !Array.isArray(stagesRaw) ? stagesRaw : {}
+    stagesRaw && typeof stagesRaw === 'object' && !Array.isArray(stagesRaw)
+      ? Object.fromEntries(
+          Object.entries(stagesRaw).map(([eraId, entry]) => [
+            eraId,
+            { ...emptyEraStageState(), ...(entry && typeof entry === 'object' ? entry : {}) },
+          ]),
+        )
+      : {}
   if (raw.version === STORAGE_VERSION) return { ...raw, missLog, stages }
   // 将来 version が上がったらここに変換を追加する。
   return { ...createInitialProgress(today), ...raw, missLog, stages, version: STORAGE_VERSION }

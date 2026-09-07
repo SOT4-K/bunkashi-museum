@@ -96,6 +96,49 @@ describe('実データ（reviewed限定プール、DEV変数なし）: buildStag
     60000,
   )
 
+  it(
+    'reviewer指摘M2b-99重大1の回帰: ボスは可能な限り10問に近づく（下線のdistinct target数が' +
+      '少ない文化でも、eraのpool全体を第2の補充源にして水増しする）。kitayama/momoyamaが' +
+      '1問のままにならないことを固定する',
+    () => {
+      const shortfall: string[] = []
+      for (const era of reviewedEras) {
+        const boss = buildBossQuestions(
+          era.id,
+          reviewedPassages,
+          reviewedThemeSetPool,
+          reviewedPlayableWorks,
+          reviewedEras,
+          seededRandom(0),
+        )
+        // 修正前は下線のdistinct target数（kitayama/momoyamaは1件）で頭打ちになっていた。
+        // STAGE_SIZE_TARGET_MIN（5問）を下回るワールドが無いことを固定する。
+        if (boss.length < STAGE_SIZE_TARGET_MIN) shortfall.push(`${era.id}(${boss.length})`)
+      }
+      expect(shortfall).toEqual([])
+      // 特に指摘のあった2ワールドを名指しで確認（1問には絶対に戻らない）。
+      const kitayamaBoss = buildBossQuestions(
+        'kitayama',
+        reviewedPassages,
+        reviewedThemeSetPool,
+        reviewedPlayableWorks,
+        reviewedEras,
+        seededRandom(0),
+      )
+      const momoyamaBoss = buildBossQuestions(
+        'momoyama',
+        reviewedPassages,
+        reviewedThemeSetPool,
+        reviewedPlayableWorks,
+        reviewedEras,
+        seededRandom(0),
+      )
+      expect(kitayamaBoss.length).toBeGreaterThan(1)
+      expect(momoyamaBoss.length).toBeGreaterThan(1)
+    },
+    30000,
+  )
+
   it('★1（Q1/Q3）は出題対象がある文化では常に1問以上作れる（見分ける、が空になる文化は無い想定）', () => {
     const zero: string[] = []
     for (const era of reviewedEras) {
@@ -107,17 +150,16 @@ describe('実データ（reviewed限定プール、DEV変数なし）: buildStag
     expect(zero).toEqual([])
   })
 
-  it('clearThreshold は実データの問数レンジ（5〜10）で常に「全問正解しなくても良い」または「全問正解が必要」のどちらかになる（9割ルールの目視確認）', () => {
-    for (let n = STAGE_SIZE_TARGET_MIN; n <= STAGE_SIZE_MAX; n++) {
-      const t = clearThreshold(n)
-      expect(t).toBeGreaterThan(0)
-      expect(t).toBeLessThanOrEqual(n)
-    }
-    // 10問だけが「1問間違えてもクリア」になる（他は全問正解が必要）。チケット文面どおりの
-    // 挙動であることを固定する（意外だが仕様どおり。低確信点として完了報告にも明記）。
-    expect(clearThreshold(10)).toBe(9)
-    for (let n = 5; n <= 9; n++) {
-      expect(clearThreshold(n)).toBe(n)
-    }
-  })
+  it(
+    'reviewer指摘M2b-99中1の回帰: clearThreshold は実データの問数レンジ（5〜10）で常に' +
+      '1ミスまでは許容する（旧実装は10問以外で全問正解必須になっており、decisions.md' +
+      '「1ミスは許容する」という意図に反していた）',
+    () => {
+      for (let n = STAGE_SIZE_TARGET_MIN; n <= STAGE_SIZE_MAX; n++) {
+        const t = clearThreshold(n)
+        expect(t).toBeGreaterThan(0)
+        expect(t).toBe(n - 1)
+      }
+    },
+  )
 })

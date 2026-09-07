@@ -11,7 +11,6 @@ import {
   buildStageQuestions,
   getEraStageState,
   isStageUnlocked,
-  isWorldUnlocked,
   worldOrder,
   type Difficulty,
   type StageKey,
@@ -19,6 +18,39 @@ import {
 import type { Era, Passage, ProgressState, Work } from '../types'
 
 const DIFFICULTIES: Difficulty[] = [1, 2, 3]
+
+type StageCounts = Map<string, { s1: number; s2: number; s3: number; boss: number }>
+
+// reviewer指摘M2b-99中3の修正: counts の useMemo はコンポーネントのマウント単位でしか効かない。
+// App.tsx はタブ切り替えを条件レンダー（{tab === 'learn' && <StageMapScreen .../>}）で行うため
+// タブを離れて戻るたびに StageMapScreen がアンマウント→再マウントされ、15ワールド×4段=60回の
+// 問題生成（実測800ms前後）を毎回やり直していた。pool/imagePool/passages/eras は
+// content.ts のモジュール定数（実行中は同じ配列参照）なので、passages の配列参照をキーにした
+// モジュールスコープの WeakMap にキャッシュし、マウントをまたいで使い回す（テストで別の
+// passages 配列を渡した場合は参照が違うので自然に再計算される＝テスト間の汚染はない）。
+const stageCountsCache = new WeakMap<Passage[], StageCounts>()
+
+function getStageCounts(
+  sortedEras: Era[],
+  pool: Work[],
+  imagePool: Work[],
+  passages: Passage[],
+  eras: Era[],
+): StageCounts {
+  const cached = stageCountsCache.get(passages)
+  if (cached) return cached
+  const map: StageCounts = new Map()
+  for (const era of sortedEras) {
+    map.set(era.id, {
+      s1: buildStageQuestions(era.id, 1, pool, imagePool, eras, PROBE_RANDOM).length,
+      s2: buildStageQuestions(era.id, 2, pool, imagePool, eras, PROBE_RANDOM).length,
+      s3: buildStageQuestions(era.id, 3, pool, imagePool, eras, PROBE_RANDOM).length,
+      boss: buildBossQuestions(era.id, passages, pool, imagePool, eras, PROBE_RANDOM, BOSS_SIZE).length,
+    })
+  }
+  stageCountsCache.set(passages, map)
+  return map
+}
 
 export function StageMapScreen({
   eras,
@@ -41,22 +73,11 @@ export function StageMapScreen({
   const worlds = useMemo(() => worldOrder(eras), [eras])
 
   // 件数表示・「なし」判定は PROBE_RANDOM（決定的）で行う。実際のプレイ用の乱数は
-  // 選択時（App.tsx）に別途引く。
-  const counts = useMemo(() => {
-    const map = new Map<string, { s1: number; s2: number; s3: number; boss: number }>()
-    for (const era of sortedEras) {
-      map.set(era.id, {
-        s1: buildStageQuestions(era.id, 1, pool, imagePool, eras, PROBE_RANDOM).length,
-        s2: buildStageQuestions(era.id, 2, pool, imagePool, eras, PROBE_RANDOM).length,
-        s3: buildStageQuestions(era.id, 3, pool, imagePool, eras, PROBE_RANDOM).length,
-        boss: buildBossQuestions(era.id, passages, pool, imagePool, eras, PROBE_RANDOM, BOSS_SIZE).length,
-      })
-    }
-    return map
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- pool/imagePool/passages/eras は
-    // content.ts のモジュール定数（実行中に変化しない）。テストでは props が変わりうるため
-    // sortedEras を通じて再計算のトリガーにする。
-  }, [sortedEras, pool, imagePool, passages, eras])
+  // 選択時（App.tsx）に別途引く。マウントをまたいだキャッシュは getStageCounts 側（上記）で行う。
+  const counts = useMemo(
+    () => getStageCounts(sortedEras, pool, imagePool, passages, eras),
+    [sortedEras, pool, imagePool, passages, eras],
+  )
 
   if (sortedEras.length === 0) {
     return (
@@ -74,7 +95,6 @@ export function StageMapScreen({
       {sortedEras.map((era, worldIndex) => {
         const es = getEraStageState(progress.stages, era.id)
         const c = counts.get(era.id)!
-        const worldUnlocked = isWorldUnlocked(worldIndex, worlds, progress.stages)
 
         return (
           <div className={styles.worldBlock} key={era.id} data-testid="world-block">
@@ -86,7 +106,12 @@ export function StageMapScreen({
                 const key: StageKey = `s${n}` as StageKey
                 const count = c[key]
                 const none = count === 0
-                const unlocked = worldUnlocked && isStageUnlocked(worldIndex, n, worlds, progress.stages)
+                // Hayato修正（Playwright実機確認で発見）: isStageUnlocked自体が
+                // isWorldUnlockedを内部で見ている（ワープでこのワールド自身のボスを撃破済み
+                // なら通す）ため、ここで外側から worldUnlocked && … と二重にゲートすると
+                // reviewer指摘M2b-99重大2の修正が呼び出し側で無効化されてしまっていた
+                // （実機確認で北山ワープ後もステージが🔒のままになる再発を発見）。
+                const unlocked = isStageUnlocked(worldIndex, n, worlds, progress.stages)
                 const cleared = es[key].cleared
                 return (
                   <button
@@ -112,7 +137,15 @@ export function StageMapScreen({
                 onClick={() => onSelectStage(era.id, 'boss')}
               >
                 <span>ボス</span>
-                {c.boss === 0 ? <span>なし</span> : es.boss.cleared ? <span>👑撃破済</span> : <span>挑戦</span>}
+                {/* reviewer指摘M2b-99中4: 挑戦前から問数を出す（本来10問固定だが、文化によって
+                    下振れうる。異常な少なさに気づけるように常時表示する）。 */}
+                {c.boss === 0 ? (
+                  <span>なし</span>
+                ) : es.boss.cleared ? (
+                  <span>👑撃破済</span>
+                ) : (
+                  <span>挑戦（{c.boss}問）</span>
+                )}
               </button>
             </div>
           </div>

@@ -24,6 +24,11 @@
   font-size: 22px;
 }
 
+/* M2b-99重大3: 文化ボス撃破の展示室バッジ（王冠）。 */
+.eraCrown {
+  margin-right: 6px;
+}
+
 .eraCount {
   font-size: 13px;
   color: var(--text-dim);

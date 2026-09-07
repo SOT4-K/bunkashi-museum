@@ -57,12 +57,16 @@ describe('DIFFICULTY_TYPES（チケット文面どおりの難易度定義）', 
   })
 })
 
-describe('clearThreshold（ceil(0.9×問数)）', () => {
-  it('10問は9問以上でクリア（1問だけ間違えても良い、10問だけの特例）', () => {
+describe('clearThreshold（reviewer指摘M2b-99中1修正: 最低1ミスは常に許容する）', () => {
+  it('10問は9問以上でクリア（1問だけ間違えても良い）', () => {
     expect(clearThreshold(10)).toBe(9)
   })
-  it('5〜9問は全問正解が必要（ceil(0.9×n)=n になる）', () => {
-    for (let n = 5; n <= 9; n++) expect(clearThreshold(n)).toBe(n)
+  it('3〜9問も1ミスまでは許容する（旧実装は全問正解必須だった。decisions.md 2026-09-07の意図に合わせた）', () => {
+    for (let n = 3; n <= 9; n++) expect(clearThreshold(n)).toBe(n - 1)
+  })
+  it('1〜2問は全問正解が必要（1ミス許容が意味をなさない極小値）', () => {
+    expect(clearThreshold(1)).toBe(1)
+    expect(clearThreshold(2)).toBe(2)
   })
   it('0問は0（生成できていない異常系。呼び出し側は0件を「なし」として扱う）', () => {
     expect(clearThreshold(0)).toBe(0)
@@ -251,6 +255,32 @@ describe('解禁・ワープ（純関数）', () => {
     // 次のワールド（e2）も解禁される
     expect(isWorldUnlocked(1, worlds, bossCleared)).toBe(true)
   })
+
+  it(
+    'reviewer指摘M2b-99重大2の回帰: ワープ先のワールド（直前ワールドのボスは未撃破）自身の' +
+      'ボスを先に倒した場合も、そのワールドのステージ1〜3が解禁される。旧実装は' +
+      'isWorldUnlocked（直前ワールドのボス撃破）を先に見てしまい、ワープ本来のケース' +
+      '（直前ワールドは未クリアのまま）では到達不能だった',
+    () => {
+      // e3（worldIndex 2）を、e1・e2のボスを一切クリアせずに直接ワープ撃破したケース。
+      const warpedFar: Record<string, EraStageState> = {
+        e3: { ...emptyEraStageState(), boss: { cleared: true, bestScore: 9, clearedAt: '2026-09-07' } },
+      }
+      // isWorldUnlocked自体は（直前ワールド未クリアのため）falseのまま——ワープは
+      // 「そのワールドの中身」だけを解禁する仕様で、他ワールドの解禁順は変えない。
+      expect(isWorldUnlocked(2, worlds, warpedFar)).toBe(false)
+      // それでもe3自身のステージ1〜3は、e3のボスを既に撃破しているので解禁される。
+      expect(isStageUnlocked(2, 1, worlds, warpedFar)).toBe(true)
+      expect(isStageUnlocked(2, 2, worlds, warpedFar)).toBe(true)
+      expect(isStageUnlocked(2, 3, worlds, warpedFar)).toBe(true)
+      // e3のボスを撃破した効果で次のワールド（e4、worldIndex 3）は正規の順序どおり解禁される
+      // （「ボス撃破で次のワールド解禁」は経路を問わない。ワープの効果はe3自身の中身を
+      // 開けることだけで、e4の解禁はそれとは別の既存ルールの帰結）。
+      expect(isWorldUnlocked(3, worlds, warpedFar)).toBe(true)
+      // 一方、間に挟まるe2（worldIndex 1）はe1のボス未撃破のままなので相変わらず未解禁。
+      expect(isStageUnlocked(1, 1, worlds, warpedFar)).toBe(false)
+    },
+  )
 
   it('ボスは常にワープ挑戦できる（ワールド・ステージの状態を問わない）', () => {
     expect(isBossChallengeable()).toBe(true)

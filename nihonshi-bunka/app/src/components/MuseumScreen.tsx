@@ -6,6 +6,7 @@ import { ImageLightbox } from './ImageLightbox'
 import { ExpandIcon } from './icons'
 import { imageSrc } from '../utils/image'
 import { isItemMastered } from '../engine/srs'
+import { getEraStageState } from '../engine/stages'
 import type { Era, ProgressState, Work } from '../types'
 
 export function MuseumScreen({
@@ -50,10 +51,21 @@ export function MuseumScreen({
           const item = progress.items[w.id]
           return item ? isItemMastered(item) : false
         }).length
+        // reviewer指摘M2b-99重大3の修正: 合格ライン④「ワールド撃破で展示室に王冠」が
+        // 未実装だった。StageMapScreen側のボスタイルにしか👑が無く、図鑑（展示室）本体には
+        // progress.stages を一切参照していなかった。
+        const bossCleared = getEraStageState(progress.stages, era.id).boss.cleared
         return (
           <div className={styles.eraSection} key={era.id}>
             <div className={styles.eraHeading}>
-              <div className={`${styles.eraName} caption`}>{era.name}</div>
+              <div className={`${styles.eraName} caption`}>
+                {bossCleared && (
+                  <span className={styles.eraCrown} aria-label="文化ボス撃破">
+                    👑
+                  </span>
+                )}
+                {era.name}
+              </div>
               <div className={styles.eraCount}>
                 {masteredCount} / {eraWorks.length} 所蔵
               </div>

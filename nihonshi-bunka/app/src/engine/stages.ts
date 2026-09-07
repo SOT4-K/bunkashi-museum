@@ -63,9 +63,21 @@ export const STAGE_SIZE_TARGET_MIN = 5
 
 export const BOSS_SIZE = 10
 
-/** クリア閾値 = ceil(0.9 × 問数)。ボス(10問固定)も ceil(9)=9 で同じ式に一致する。 */
+/**
+ * クリア閾値。reviewer指摘M2b-99中1の修正: 元の式 ceil(0.9×N) は N≤9 で常に N（＝全問正解）に
+ * なり、decisions.md 2026-09-07「全問正解ではなく90%にした理由: 1ミスでやり直しが続くと
+ * 解説を読む前に離脱する懸念→オーナーが90%を選択」という決定の意図（1ミスは許容する）を
+ * N=10（ボスの想定問数）以外では満たしていなかった。実データでは45ステージ中14・15ボス中14が
+ * 10問未満で、この14件が実質「全問正解必須」になっていた（BOARD.md M2b合格ライン②の趣旨に
+ * 反する）。許容ミス数を max(1, floor(N×0.1)) にし、N=10は従来どおり ceil(9)=9（1ミス許容）を
+ * 維持しつつ、N<10でも常に最低1ミスは許容する。N≤2（そもそも1ミスが意味をなさない極小値。
+ * 実データでは起きない想定だが将来コンテンツが減る場合の防御）は全問正解のままにする。
+ */
 export function clearThreshold(questionCount: number): number {
-  return Math.ceil(questionCount * 0.9)
+  const n = questionCount
+  if (n <= 2) return n
+  const allowedMisses = Math.max(1, Math.floor(n * 0.1))
+  return Math.max(1, n - allowedMisses)
 }
 
 export function emptyStageState(): StageState {
@@ -252,6 +264,33 @@ export function buildBossQuestions(
       previousType = question.type
       built.push({ ...question, passageId: candidate.passage.id, underlineKey: candidate.underline.key })
     }
+
+    // reviewer指摘M2b-99重大1の修正: 上のcandidatesは「そのeraのpassageの下線が指す作品」に
+    // 限られるため、下線のdistinct target数が少ない文化（実測: kitayama/momoyamaは1件）で
+    // ボスが10問に届かず1問で撃破できてしまっていた（BOARD.md M2b「ボス＝10問固定・9/10で
+    // クリア」に反する）。buildStageQuestionsと同じ「そのeraのpool全体」を第2の補充源にし、
+    // passageに紐づかない作品（下線の対象にならない作品）も候補にする。
+    if (built.length < count) {
+      const eraWorks = shuffle(
+        pool.filter((w) => w.era === eraId && !usedWorkIds.has(w.id)),
+        rng,
+      )
+      for (const work of eraWorks) {
+        if (built.length >= count) break
+        const desiredCategory = COMPOSITION_SEQUENCE[built.length % COMPOSITION_SEQUENCE.length]
+        const question = buildThemeQuestionForWork(work, pool, eras, rng, {
+          avoidEraSlot,
+          avoidType: previousType,
+          imagePool,
+          desiredCategory,
+        })
+        if (!question) continue
+        usedWorkIds.add(work.id)
+        if (question.q9Slot === 'era') avoidEraSlot = true
+        previousType = question.type
+        built.push(question)
+      }
+    }
   }
   return built
 }
@@ -277,10 +316,14 @@ export function isStageUnlocked(
   worlds: string[],
   stages: Record<string, EraStageState>,
 ): boolean {
-  if (!isWorldUnlocked(worldIndex, worlds, stages)) return false
   const eraId = worlds[worldIndex]
   if (eraId === undefined) return false
   const es = getEraStageState(stages, eraId)
+  // reviewer指摘M2b-99重大2の修正: 「ワープで先にボスだけ倒した後はW-1〜3も後から遊べる」
+  // （このワールド自身のボス撃破）が、旧実装では isWorldUnlocked（直前ワールドのボス撃破）を
+  // 先に見てしまい到達不能だった。このワールドのボスを既に撃破していれば
+  // isWorldUnlocked を通らなくても全ステージを解禁する。
+  if (!isWorldUnlocked(worldIndex, worlds, stages) && !es.boss.cleared) return false
   if (stageNum === 1) return true
   if (es.boss.cleared) return true
   const prevStage = stageNum === 2 ? es.s1 : es.s2

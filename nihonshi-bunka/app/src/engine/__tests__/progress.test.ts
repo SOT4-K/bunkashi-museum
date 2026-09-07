@@ -99,6 +99,20 @@ describe('createInitialProgress / migrate', () => {
     const result = migrate(state, '2026-09-07')
     expect(result.stages).toEqual(state.stages)
   })
+
+  it('reviewer指摘M2b-99軽1の回帰: eraごとに一部の段しか無い（s1のみ等）stagesを補完し、s2/s3/bossの欠落でアクセスエラーにならない', () => {
+    const state = {
+      ...createInitialProgress('2026-09-07'),
+      stages: {
+        tenpyo: { s1: { cleared: true, bestScore: 9, clearedAt: '2026-09-06' } },
+      },
+    }
+    const result = migrate(state, '2026-09-07')
+    expect(result.stages.tenpyo.s1).toEqual({ cleared: true, bestScore: 9, clearedAt: '2026-09-06' })
+    expect(result.stages.tenpyo.s2).toEqual({ cleared: false, bestScore: 0, clearedAt: null })
+    expect(result.stages.tenpyo.s3).toEqual({ cleared: false, bestScore: 0, clearedAt: null })
+    expect(result.stages.tenpyo.boss).toEqual({ cleared: false, bestScore: 0, clearedAt: null })
+  })
 })
 
 describe('recordStageResult（M2b-01: ステージ／ボスの結果記録）', () => {
@@ -113,10 +127,10 @@ describe('recordStageResult（M2b-01: ステージ／ボスの結果記録）', 
     expect(notCleared.stages.tenpyo.s1.clearedAt).toBeNull()
   })
 
-  it('5問ステージは ceil(0.9×5)=5 問全問正解でないとクリアにならない', () => {
+  it('reviewer指摘M2b-99中1の修正後: 5問ステージは4問正解（1ミスまで）でクリアになる', () => {
     const state = createInitialProgress('2026-09-07')
-    expect(recordStageResult(state, 'tenpyo', 's2', 4, 5, '2026-09-07').stages.tenpyo.s2.cleared).toBe(false)
-    expect(recordStageResult(state, 'tenpyo', 's2', 5, 5, '2026-09-07').stages.tenpyo.s2.cleared).toBe(true)
+    expect(recordStageResult(state, 'tenpyo', 's2', 3, 5, '2026-09-07').stages.tenpyo.s2.cleared).toBe(false)
+    expect(recordStageResult(state, 'tenpyo', 's2', 4, 5, '2026-09-07').stages.tenpyo.s2.cleared).toBe(true)
   })
 
   it('一度クリアしたら再挑戦して未達でも cleared は false に戻らない（bestScore・clearedAt は据え置き）', () => {
