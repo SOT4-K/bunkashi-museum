@@ -1,0 +1,1526 @@
+[
+  {
+    "id": "fujin-raijin-sotatsu",
+    "title": "風神雷神図屏風（俵屋宗達）",
+    "reading": "ふうじんらいじんずびょうぶ",
+    "era": "kanei",
+    "type": "visual",
+    "category": "painting",
+    "existingWorkId": "fujin-raijin-sotatsu",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（content/works/kanei.json、status: reviewed）に山川『詳説日本史』寛永期の文化の項・京都国立博物館・Wikimedia Commonsの出典が記録済み。本canonでは新規照合していない" }
+    ],
+    "frequencyEvidence": "既存work examTags: frequent（自己申告、出典年不明）",
+    "imageObtainability": "high",
+    "notes": "既存の画像あり作品。canonでは既存の分類をそのまま採用"
+  },
+  {
+    "id": "shokintei-katsura",
+    "title": "桂離宮",
+    "reading": "かつらりきゅう",
+    "era": "kanei",
+    "type": "visual",
+    "category": "architecture",
+    "existingWorkId": "shokintei-katsura",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed）に山川『詳説日本史』・京都市「文化史11 桂離宮と修学院離宮」の出典が記録済み" }
+    ],
+    "frequencyEvidence": "既存work examTags: frequent",
+    "imageObtainability": "high",
+    "notes": "既存作品。修学院離宮（本ファイルで新規追加）と同じ京都市サイトを共有出典に持つ姉妹建築"
+  },
+  {
+    "id": "yomeimon-nikko",
+    "title": "日光東照宮陽明門",
+    "reading": "にっこうとうしょうぐう ようめいもん",
+    "era": "kanei",
+    "type": "visual",
+    "category": "architecture",
+    "existingWorkId": "yomeimon-nikko",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed）に山川『詳説日本史』・文化遺産オンラインの出典が記録済み" }
+    ],
+    "frequencyEvidence": "既存work examTags: frequent",
+    "imageObtainability": "high",
+    "notes": "既存作品"
+  },
+  {
+    "id": "tanyu-getsuya-sansui",
+    "title": "月夜山水図（狩野探幽）",
+    "reading": "げつやさんすいず",
+    "era": "kanei",
+    "type": "visual",
+    "category": "painting",
+    "existingWorkId": "tanyu-getsuya-sansui",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed）に山川『詳説日本史』・Metropolitan Museum of Artの出典が記録済み" }
+    ],
+    "frequencyEvidence": "既存work examTags: なし",
+    "imageObtainability": "high",
+    "notes": "既存作品"
+  },
+  {
+    "id": "hayashi-razan",
+    "title": "林羅山",
+    "reading": "はやしらざん",
+    "era": "kanei",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": "hayashi-razan",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed）に山川『詳説日本史』・新宿区「国史跡『林氏墓地』」の出典が記録済み" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存作品"
+  },
+  {
+    "id": "sakaida-kakiemon",
+    "title": "酒井田柿右衛門（赤絵の完成）",
+    "reading": "さかいだかきえもん",
+    "era": "kanei",
+    "type": "text",
+    "category": "other",
+    "existingWorkId": "sakaida-kakiemon",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed）に山川『詳説日本史』・文化庁日本遺産ポータルの出典が記録済み" }
+    ],
+    "frequencyEvidence": "日大過去問11年分「寛永期3回」に有田焼・酒井田柿右衛門が含まれる（nichidai-past-exams-analysis.md 4章）",
+    "imageObtainability": "n/a",
+    "notes": "既存作品"
+  },
+  {
+    "id": "honami-koetsu",
+    "title": "本阿弥光悦",
+    "reading": "ほんあみこうえつ",
+    "era": "kanei",
+    "type": "text",
+    "category": "other",
+    "existingWorkId": "honami-koetsu",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed）に山川『詳説日本史』・文化遺産オンライン「舟橋蒔絵硯箱」の出典が記録済み" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存作品"
+  },
+  {
+    "id": "teimon-haikai",
+    "title": "貞門俳諧（松永貞徳）",
+    "reading": "ていもんはいかい",
+    "era": "kanei",
+    "type": "text",
+    "category": "literature",
+    "existingWorkId": "teimon-haikai",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed）に山川『詳説日本史』・国文学研究資料館の出典が記録済み" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存作品"
+  },
+  {
+    "id": "kana-zoshi",
+    "title": "仮名草子",
+    "reading": "かなぞうし",
+    "era": "kanei",
+    "type": "text",
+    "category": "literature",
+    "existingWorkId": "kana-zoshi",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。sources欄は「教科書水準の通説、URL未取得」と自己申告済み（M2-51）" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft）"
+  },
+  {
+    "id": "nakae-toju",
+    "title": "中江藤樹（陽明学）",
+    "reading": "なかえとうじゅ",
+    "era": "kanei",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": "nakae-toju",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。sources欄は「教科書水準の通説、URL未取得」と自己申告済み（M2-51）" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft）。門人の熊沢蕃山を本ファイルで新規追加"
+  },
+  {
+    "id": "gongen-zukuri",
+    "title": "権現造",
+    "reading": "ごんげんづくり",
+    "era": "kanei",
+    "type": "text",
+    "category": "architecture",
+    "existingWorkId": "gongen-zukuri",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。sources欄は「教科書水準の通説、URL未取得」と自己申告済み（M2-51）" }
+    ],
+    "frequencyEvidence": "既存work examTags: frequent",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft、様式concept）"
+  },
+  {
+    "id": "sukiya-zukuri",
+    "title": "数寄屋造",
+    "reading": "すきやづくり",
+    "era": "kanei",
+    "type": "text",
+    "category": "architecture",
+    "existingWorkId": "sukiya-zukuri",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。sources欄は「教科書水準の通説、URL未取得」と自己申告済み（M2-51）" }
+    ],
+    "frequencyEvidence": "既存work examTags: frequent",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft、様式concept）"
+  },
+  {
+    "id": "takuan-shie",
+    "title": "沢庵と紫衣事件",
+    "reading": "たくあんとしえじけん",
+    "era": "kanei",
+    "type": "text",
+    "category": "event",
+    "existingWorkId": "takuan-shie",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。sources欄は「教科書水準の通説、URL未取得」と自己申告済み（M2-51）" }
+    ],
+    "frequencyEvidence": "日大過去問11年分「寛永期3回」に紫衣事件が含まれる（nichidai-past-exams-analysis.md 4章）",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft）"
+  },
+  {
+    "id": "kobori-enshu",
+    "title": "小堀遠州（綺麗さび）",
+    "reading": "こぼりえんしゅう",
+    "era": "kanei",
+    "type": "text",
+    "category": "garden",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "matome-site", "detail": "遠州流茶道 公式サイト「小堀遠州」（1631年に3代将軍徳川家光の茶道指南となり、後水尾天皇をはじめとする寛永文化サロンの中心人物。作事奉行として桂離宮・仙洞御所・二条城の建築・造園に関与）", "url": "https://www.enshuryu.com/enshuryu/enshu/" },
+      { "type": "matome-site", "detail": "ヒストリスト（山川出版社運営）「寛永文化」記事", "url": "https://www.historist.jp/word_j_ka/entry/030720/" }
+    ],
+    "frequencyEvidence": "不明（共通テスト・日大過去問での個別出題年は確認できず）",
+    "imageObtainability": "n/a",
+    "notes": "既存の桂離宮（shokintei-katsura）の作事奉行という関係で追加。茶道の「綺麗さび」の語は山川出版社系メディアでは未確認、遠州流公式サイトのみで確認（確度: 中）"
+  },
+  {
+    "id": "shugakuin-rikyu",
+    "title": "修学院離宮",
+    "reading": "しゅうがくいんりきゅう",
+    "era": "kanei",
+    "type": "visual",
+    "category": "architecture",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work shokintei-katsura（桂離宮）が引用する京都市公式「文化史11 桂離宮と修学院離宮」に同一ページで解説あり（後水尾上皇の山荘、数寄屋風）", "url": "https://bunkakanko-annai.city.shinjuku.lg.jp/" },
+      { "type": "matome-site", "detail": "日本史オンライン講義録「082 寛永期の文化」が桂離宮と並べて挙げる", "url": "https://ten-made-to-be.hatenablog.com/entry/082" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "high",
+    "notes": "後水尾上皇の山荘。建築物のため著作権法46条で撮影・複製自由（image-licensing-policy.md）。造営は明暦元年(1655)頃からで寛永年間そのものよりやや後だが、教科書では桂離宮と並べて寛永期の文化の建築として扱われることが多い（現物未確認）"
+  },
+  {
+    "id": "shisen-do",
+    "title": "詩仙堂（石川丈山）",
+    "reading": "しせんどう",
+    "era": "kanei",
+    "type": "visual",
+    "category": "architecture",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "matome-site", "detail": "詩仙堂丈山寺 公式サイト・京都府関連サイト複数（1641年＝寛永18年造営、石川丈山は隷書・漢詩の大家、狩野探幽の三十六詩仙像を安置）", "url": "https://kyoto-shisendo.net/menu/" }
+    ],
+    "frequencyEvidence": "不明（共通テスト・日大過去問での出題は確認できず）",
+    "imageObtainability": "medium",
+    "notes": "教科書掲載の確度は中程度。一般辞典・観光サイトでは確認できるが、山川『詳説日本史』・共通テスト過去問での言及は今回確認できなかった。狩野探幽（tanyu-getsuya-sansui）との人脈的つながり（三十六歌仙図）あり"
+  },
+  {
+    "id": "kumazawa-banzan",
+    "title": "熊沢蕃山",
+    "reading": "くまざわばんざん",
+    "era": "kanei",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work nakae-toju（中江藤樹）のfactsに「門人に熊沢蕃山がいる」と既に記載。岡山藩に仕えた陽明学者、著書『大学或問』" },
+      { "type": "matome-site", "detail": "日本史オンライン講義録・chitonitose.com 元禄文化ページ等の複数ブログで陽明学者として言及", "url": "https://chitonitose.com/jh/jh_lessons86.html" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "中江藤樹の門人としてkanei eraに配置（既存workの記述に合わせた判断）。教科書によっては元禄期の学問の節に置かれる可能性もあり現物未確認"
+  },
+  {
+    "id": "mikaeri-bijin",
+    "title": "見返り美人図",
+    "reading": "みかえりびじんず",
+    "era": "genroku",
+    "type": "visual",
+    "category": "painting",
+    "existingWorkId": "mikaeri-bijin",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed）に山川『詳説日本史』・東京国立博物館（ColBase）・Wikimedia Commonsの出典が記録済み" }
+    ],
+    "frequencyEvidence": "既存work examTags: frequent。日大過去問2023年度大問IVに「見返り美人」の出題実績あり（nichidai-past-exams-analysis.md 3.1）",
+    "imageObtainability": "high",
+    "notes": "既存作品"
+  },
+  {
+    "id": "fujin-raijin-korin",
+    "title": "風神雷神図屏風（尾形光琳筆・模写）",
+    "reading": "ふうじんらいじんずびょうぶ",
+    "era": "genroku",
+    "type": "visual",
+    "category": "painting",
+    "existingWorkId": "fujin-raijin-korin",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed）に山川『詳説日本史』・東京国立博物館（ColBase）の出典が記録済み" }
+    ],
+    "frequencyEvidence": "既存work examTags: frequent",
+    "imageObtainability": "high",
+    "notes": "既存作品。裏面の「夏秋草図屏風」（酒井抱一、化政期）を本ファイルで新規追加"
+  },
+  {
+    "id": "yatsuhashi-suzuribako",
+    "title": "八橋蒔絵螺鈿硯箱",
+    "reading": "やつはしまきえらでんすずりばこ",
+    "era": "genroku",
+    "type": "visual",
+    "category": "craft",
+    "existingWorkId": "yatsuhashi-suzuribako",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed）に山川『詳説日本史』・東京国立博物館（ColBase）の出典が記録済み" }
+    ],
+    "frequencyEvidence": "既存work examTags: frequent",
+    "imageObtainability": "high",
+    "notes": "既存作品"
+  },
+  {
+    "id": "ninsei-nonomura",
+    "title": "野々村仁清（京焼の色絵）",
+    "reading": "ののむらにんせい",
+    "era": "genroku",
+    "type": "text",
+    "category": "other",
+    "existingWorkId": "ninsei-nonomura",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed）に山川『詳説日本史』・文化庁国指定文化財等データベースの出典が記録済み" }
+    ],
+    "frequencyEvidence": "日大過去問11年分「元禄6回」に京焼・野々村仁清が含まれる（nichidai-past-exams-analysis.md 4章）",
+    "imageObtainability": "n/a",
+    "notes": "既存作品"
+  },
+  {
+    "id": "ihara-saikaku",
+    "title": "井原西鶴（浮世草子）",
+    "reading": "いはらさいかく",
+    "era": "genroku",
+    "type": "text",
+    "category": "literature",
+    "existingWorkId": "ihara-saikaku",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed）に山川『詳説日本史』・大阪市中央区公式サイトの出典が記録済み" }
+    ],
+    "frequencyEvidence": "日大過去問11年分「元禄6回」に浮世草子が含まれる",
+    "imageObtainability": "n/a",
+    "notes": "既存作品"
+  },
+  {
+    "id": "chikamatsu-monzaemon",
+    "title": "近松門左衛門（人形浄瑠璃）",
+    "reading": "ちかまつもんざえもん",
+    "era": "genroku",
+    "type": "text",
+    "category": "literature",
+    "existingWorkId": "chikamatsu-monzaemon",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed）に山川『詳説日本史』・尼崎市公式サイトの出典が記録済み" }
+    ],
+    "frequencyEvidence": "日大過去問11年分「元禄6回」に三大文学者が含まれる",
+    "imageObtainability": "n/a",
+    "notes": "既存作品"
+  },
+  {
+    "id": "matsuo-basho",
+    "title": "松尾芭蕉（蕉風俳諧）",
+    "reading": "まつおばしょう",
+    "era": "genroku",
+    "type": "text",
+    "category": "literature",
+    "existingWorkId": "matsuo-basho",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed）に山川『詳説日本史』・伊賀市公式サイトの出典が記録済み" }
+    ],
+    "frequencyEvidence": "日大過去問11年分「元禄6回」に奥の細道が含まれる",
+    "imageObtainability": "n/a",
+    "notes": "既存作品"
+  },
+  {
+    "id": "arai-hakuseki",
+    "title": "新井白石（『読史余論』・正徳の治）",
+    "reading": "あらいはくせき",
+    "era": "genroku",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": "arai-hakuseki",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed）に山川『詳説日本史』・国立公文書館デジタルアーカイブの出典が記録済み" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存作品"
+  },
+  {
+    "id": "ito-jinsai",
+    "title": "伊藤仁斎（古義学）",
+    "reading": "いとうじんさい",
+    "era": "genroku",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": "ito-jinsai",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。examNoteで荻生徂徠（本ファイルで新規追加）を「古文辞学」として既に言及" }
+    ],
+    "frequencyEvidence": "既存work examTags: frequent",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft）"
+  },
+  {
+    "id": "yamazaki-ansai",
+    "title": "山崎闇斎（垂加神道）",
+    "reading": "やまざきあんさい",
+    "era": "genroku",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": "yamazaki-ansai",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。sources欄は「教科書水準の通説、URL未取得」と自己申告済み（M2-51）" }
+    ],
+    "frequencyEvidence": "日大過去問11年分「元禄6回」に朱子学の京学と南学が含まれる（本ファイルで新規追加の「南学」concept参照）",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft）"
+  },
+  {
+    "id": "seki-takakazu",
+    "title": "関孝和（和算）",
+    "reading": "せきたかかず",
+    "era": "genroku",
+    "type": "text",
+    "category": "technique",
+    "existingWorkId": "seki-takakazu",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。examNoteで吉田光由『塵劫記』（本ファイルで新規追加）を既に言及" }
+    ],
+    "frequencyEvidence": "日大過去問11年分「元禄6回」に関孝和が含まれる",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft）"
+  },
+  {
+    "id": "miyazaki-yasusada",
+    "title": "宮崎安貞（『農業全書』）",
+    "reading": "みやざきやすさだ",
+    "era": "genroku",
+    "type": "text",
+    "category": "technique",
+    "existingWorkId": "miyazaki-yasusada",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。sources欄は「教科書水準の通説、URL未取得」と自己申告済み（M2-51）" }
+    ],
+    "frequencyEvidence": "日大過去問11年分「元禄6回」に宮崎安貞が含まれる",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft）。化政期の大蔵永常（本ファイルで新規追加）と並ぶ農書の系譜"
+  },
+  {
+    "id": "kitamura-kigin",
+    "title": "北村季吟（歌学方）",
+    "reading": "きたむらきぎん",
+    "era": "genroku",
+    "type": "text",
+    "category": "literature",
+    "existingWorkId": "kitamura-kigin",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。sources欄は「教科書水準の通説、URL未取得」と自己申告済み（M2-51）" }
+    ],
+    "frequencyEvidence": "日大過去問11年分「元禄6回」に北村季吟が含まれる",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft）"
+  },
+  {
+    "id": "ogata-kenzan",
+    "title": "尾形乾山（京焼）",
+    "reading": "おがたけんざん",
+    "era": "genroku",
+    "type": "text",
+    "category": "other",
+    "existingWorkId": "ogata-kenzan",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。sources欄は「教科書水準の通説、URL未取得」と自己申告済み（M2-51）" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft）"
+  },
+  {
+    "id": "yamaga-soko",
+    "title": "山鹿素行",
+    "reading": "やまがそこう",
+    "era": "genroku",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "matome-site", "detail": "chitonitose.com「元禄文化－文学と学問」: 「武士道徳を儒学の立場から説き、武士道を大成。『聖教要録』が朱子学を批判したため赤穂に流刑」", "url": "https://chitonitose.com/jh/jh_lessons86.html" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "伊藤仁斎（古義学）と並ぶ古学の先駆者。実際の活動期は寛文期（1665年配流）で元禄年間そのものより早いが、教科書・参考書では元禄文化の学問（古学派の系譜）として扱われることが多い（現物未確認）"
+  },
+  {
+    "id": "ogyu-sorai",
+    "title": "荻生徂徠（古文辞学）",
+    "reading": "おぎゅうそらい",
+    "era": "genroku",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work ito-jinsai（伊藤仁斎）のexamNoteに既に「荻生徂徠＝古文辞学」と記載あり" },
+      { "type": "matome-site", "detail": "chitonitose.com「元禄文化－文学と学問」: 「古学派を継承し、統治の具体策である経世論を提唱。江戸茅場に私塾蘐園塾を開き、8代将軍徳川吉宗に重用され『政談』で回答」", "url": "https://chitonitose.com/jh/jh_lessons86.html" }
+    ],
+    "frequencyEvidence": "不明（政治史の享保の改革の文脈での出題は多いと推測されるが、文化史としての出題年は確認できず＝推測）",
+    "imageObtainability": "n/a",
+    "notes": "私塾蘐園塾を開いたのは元禄期だが、将軍への重用・『政談』執筆は享保期。教科書は元禄文化の学問の節に置くことが多い（現物未確認）"
+  },
+  {
+    "id": "keichu",
+    "title": "契沖（『万葉代匠記』）",
+    "reading": "けいちゅう",
+    "era": "genroku",
+    "type": "text",
+    "category": "literature",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "matome-site", "detail": "chitonitose.com「元禄文化－文学と学問」: 「『万葉集』を伝統にとらわれずに研究し、『万葉代匠記』を著述」", "url": "https://chitonitose.com/jh/jh_lessons86.html" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "国学の源流（契沖→荷田春満→賀茂真淵→本居宣長、賀茂真淵・本居宣長は本ファイルで宝暦・天明期に追加）の起点として重要"
+  },
+  {
+    "id": "kaibara-ekiken",
+    "title": "貝原益軒（『大和本草』『養生訓』）",
+    "reading": "かいばらえきけん",
+    "era": "genroku",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "matome-site", "detail": "chitonitose.com「元禄文化－文学と学問」に著作『大和本草』が言及", "url": "https://chitonitose.com/jh/jh_lessons86.html" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "本草学者・儒学者。宮崎安貞（農学）と並ぶ元禄期の実学の代表"
+  },
+  {
+    "id": "shibukawa-shunkai",
+    "title": "渋川春海（貞享暦）",
+    "reading": "しぶかわしゅんかい",
+    "era": "genroku",
+    "type": "text",
+    "category": "technique",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "kyokasho", "detail": "コトバンク「渋川春海」・国立天文台暦計算室の解説（貞享元年12月1日に初代幕府天文方に任ぜられ、日本独自の暦法である貞享暦を作成）", "url": "https://eco.mtk.nao.ac.jp/koyomi/exhibition/005/" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "読みは「しぶかわはるみ」とも。安井算哲の名でも知られる。関孝和（和算）と並ぶ元禄期の実学"
+  },
+  {
+    "id": "yoshida-mitsuyoshi",
+    "title": "吉田光由（『塵劫記』）",
+    "reading": "よしだみつよし",
+    "era": "genroku",
+    "type": "text",
+    "category": "technique",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work seki-takakazu（関孝和）のexamNoteに既に「吉田光由＝『塵劫記』」と記載あり" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "『塵劫記』は寛永期（1627年刊）の著作だが、関孝和・和算の系譜として元禄文化の学問の節で並べて扱われることが多い（現物未確認、寛永期に置く教科書がある可能性も残る）"
+  },
+  {
+    "id": "nangaku",
+    "title": "南学（海南学派）",
+    "reading": "なんがく",
+    "era": "genroku",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "nichidai-past", "detail": "日大過去問11年分「元禄6回」の頻出テーマに「朱子学の京学と南学」が明記されている（nichidai-past-exams-analysis.md 4章）" },
+      { "type": "matome-site", "detail": "chitonitose.com「元禄文化－文学と学問」に「海南学派（南学）」の学派名が言及", "url": "https://chitonitose.com/jh/jh_lessons86.html" }
+    ],
+    "frequencyEvidence": "日大過去問11年分で「朱子学の京学と南学」の出題が確認されている（年次は未特定）",
+    "imageObtainability": "n/a",
+    "notes": "既存work yamazaki-ansai（山崎闇斎）が学んだ土佐の朱子学の系統。京学（藤原惺窩・林羅山の系統）との対比で問われる"
+  },
+  {
+    "id": "dazai-shundai",
+    "title": "太宰春台（『経済録』）",
+    "reading": "だざいしゅんだい",
+    "era": "genroku",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "matome-site", "detail": "chitonitose.com「元禄文化－文学と学問」に著作『経済録』が言及", "url": "https://chitonitose.com/jh/jh_lessons86.html" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "荻生徂徠の門人。他の項目と比べて出題頻度の確証が薄く、優先度は低め（網羅のため掲載するが確度は中程度）"
+  },
+  {
+    "id": "manpukuji-daiyuhoden",
+    "title": "萬福寺大雄宝殿（黄檗宗・隠元隆琦）",
+    "reading": "まんぷくじだいゆうほうでん",
+    "era": "genroku",
+    "type": "visual",
+    "category": "architecture",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "matome-site", "detail": "元禄文化のWikipedia記事が建築の節で「萬福寺大雄宝殿：黄檗建築の初期の事例」と言及", "url": "https://ja.wikipedia.org/wiki/%E5%85%83%E7%A6%84%E6%96%87%E5%8C%96" },
+      { "type": "matome-site", "detail": "黄檗山萬福寺公式サイト・Wikipedia「萬福寺」（隠元隆琦が承応3年＝1654年来日、寛文元年＝1661年に萬福寺開創）", "url": "https://www.obakusan.or.jp/about/" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "high",
+    "notes": "【要オーナー確認】年代は1654〜1661年で、寛永期（1624〜1644年ごろ）にも元禄期（1688〜1704年）にも一致しない。Wikipediaの元禄文化記事の分類に従いgenrokuに置いたが、寛永期の宗教統制（沢庵・紫衣事件）の文脈で扱う教科書がある可能性も高く、教科書現物での確認が必要。建築物のため著作権法46条で撮影・複製自由"
+  },
+  {
+    "id": "poppin-wo-fuku-onna",
+    "title": "婦女人相十品「ポッピンを吹く女」",
+    "reading": "ふじょにんそうじっぴん ポッピンをふくおんな",
+    "era": "horeki-tenmei",
+    "type": "visual",
+    "category": "painting",
+    "existingWorkId": "poppin-wo-fuku-onna",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed）に山川『詳説日本史』・東京国立博物館（ColBase）・Metropolitan Museum of Artの出典が記録済み" }
+    ],
+    "frequencyEvidence": "既存work examTags: frequent。日大過去問「宝暦天明3回」に歌麿・写楽が含まれる",
+    "imageObtainability": "high",
+    "notes": "既存作品"
+  },
+  {
+    "id": "kansei-san-bijin",
+    "title": "寛政三美人",
+    "reading": "かんせいさんびじん",
+    "era": "horeki-tenmei",
+    "type": "visual",
+    "category": "painting",
+    "existingWorkId": "kansei-san-bijin",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed）に山川『詳説日本史』・Metropolitan Museum of Artの出典が記録済み" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "high",
+    "notes": "既存作品"
+  },
+  {
+    "id": "otani-oniji",
+    "title": "三代目大谷鬼次の奴江戸兵衛",
+    "reading": "さんだいめおおたにおにじの やっこえどべえ",
+    "era": "horeki-tenmei",
+    "type": "visual",
+    "category": "painting",
+    "existingWorkId": "otani-oniji",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed）に山川『詳説日本史』・東京国立博物館（ColBase）・Metropolitan Museum of Artの出典が記録済み" }
+    ],
+    "frequencyEvidence": "既存work examTags: frequent",
+    "imageObtainability": "high",
+    "notes": "既存作品"
+  },
+  {
+    "id": "dankin-bijin",
+    "title": "弾琴美人",
+    "reading": "だんきんびじん",
+    "era": "horeki-tenmei",
+    "type": "visual",
+    "category": "painting",
+    "existingWorkId": "dankin-bijin",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed、status確認済み）に山川『詳説日本史』の出典が記録済み（詳細本文は本群では未再読）" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "high",
+    "notes": "既存作品（鈴木春信、錦絵の創始）"
+  },
+  {
+    "id": "juben-jugi",
+    "title": "十便十宜図",
+    "reading": "じゅうべんじゅうぎず",
+    "era": "horeki-tenmei",
+    "type": "visual",
+    "category": "painting",
+    "existingWorkId": "juben-jugi",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed、川端康成記念会所蔵）。詳細sources本文は本群では未再読" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "high",
+    "notes": "既存作品（池大雅・与謝蕪村の合作）。与謝蕪村の俳諧活動は別項目（yosa-buson-haikai、本ファイルで新規追加）でカバー"
+  },
+  {
+    "id": "sessho-zu",
+    "title": "雪松図屏風",
+    "reading": "せっしょうずびょうぶ",
+    "era": "horeki-tenmei",
+    "type": "visual",
+    "category": "painting",
+    "existingWorkId": "sessho-zu",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed、三井記念美術館所蔵）。詳細sources本文は本群では未再読" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "high",
+    "notes": "既存作品（円山応挙、写生画）"
+  },
+  {
+    "id": "doshoku-saie",
+    "title": "動植綵絵",
+    "reading": "どうしょくさいえ",
+    "era": "horeki-tenmei",
+    "type": "visual",
+    "category": "painting",
+    "existingWorkId": "doshoku-saie",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed、皇居三の丸尚蔵館所蔵）。decisions.md 2026-09-03によりWikimedia Commons PD-Art経由の画像を採用" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "high",
+    "notes": "既存作品（伊藤若冲）。教科書本文に若冲の記載が無い可能性がある旨、既存examNoteに明記済み"
+  },
+  {
+    "id": "shinobazu-ike",
+    "title": "不忍池図",
+    "reading": "しのばずいけず",
+    "era": "horeki-tenmei",
+    "type": "visual",
+    "category": "painting",
+    "existingWorkId": "shinobazu-ike",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed、秋田県立近代美術館所蔵、重要文化財）。詳細sources本文は本群では未再読" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "high",
+    "notes": "既存作品（小田野直武、秋田蘭画）"
+  },
+  {
+    "id": "kaitai-shinsho",
+    "title": "解体新書（扉絵）",
+    "reading": "かいたいしんしょ",
+    "era": "horeki-tenmei",
+    "type": "visual",
+    "category": "other",
+    "existingWorkId": "kaitai-shinsho",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed、国立国会図書館ほか所蔵）。詳細sources本文は本群では未再読" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "high",
+    "notes": "既存作品（杉田玄白・前野良沢）。前野良沢は本ファイルで別途person項目として新規追加（翻訳者としての個別事績）"
+  },
+  {
+    "id": "mimeguri-no-kei",
+    "title": "三囲景",
+    "reading": "みめぐりのけい",
+    "era": "horeki-tenmei",
+    "type": "visual",
+    "category": "painting",
+    "existingWorkId": "mimeguri-no-kei",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed、国立国会図書館ほか所蔵）。詳細sources本文は本群では未再読" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "high",
+    "notes": "既存作品（司馬江漢、銅版画・洋風画）"
+  },
+  {
+    "id": "motoori-norinaga",
+    "title": "本居宣長（『古事記伝』）",
+    "reading": "もとおりのりなが",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": "motoori-norinaga",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。sources欄は「教科書水準の通説、URL未取得」と自己申告済み（M2-51）" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft）。師の賀茂真淵は本ファイルで新規追加"
+  },
+  {
+    "id": "hanawa-hokiichi",
+    "title": "塙保己一（『群書類従』）",
+    "reading": "はなわほきいち",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": "hanawa-hokiichi",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。sources欄は「教科書水準の通説、URL未取得」と自己申告済み（M2-51）" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft）"
+  },
+  {
+    "id": "hiraga-gennai",
+    "title": "平賀源内",
+    "reading": "ひらがげんない",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "other",
+    "existingWorkId": "hiraga-gennai",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。sources欄は「教科書水準の通説、URL未取得」と自己申告済み（M2-51）" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft）"
+  },
+  {
+    "id": "share-bon",
+    "title": "洒落本",
+    "reading": "しゃれぼん",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "literature",
+    "existingWorkId": "share-bon",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。sources欄は「教科書水準の通説、URL未取得」と自己申告済み（M2-51）" }
+    ],
+    "frequencyEvidence": "日大過去問11年分「宝暦天明3回」に洒落本・黄表紙と寛政の改革が含まれる",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft、concept）。代表作者の山東京伝・恋川春町は本ファイルで新規追加"
+  },
+  {
+    "id": "kibyoshi",
+    "title": "黄表紙",
+    "reading": "きびょうし",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "literature",
+    "existingWorkId": "kibyoshi",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。sources欄は「教科書水準の通説、URL未取得」と自己申告済み（M2-51）" }
+    ],
+    "frequencyEvidence": "日大過去問11年分「宝暦天明3回」に洒落本・黄表紙と寛政の改革が含まれる",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft、concept）"
+  },
+  {
+    "id": "senryu-kyoka",
+    "title": "川柳・狂歌",
+    "reading": "せんりゅう・きょうか",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "literature",
+    "existingWorkId": "senryu-kyoka",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。sources欄は「教科書水準の通説、URL未取得」と自己申告済み（M2-51）" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft、concept）。柄井川柳・大田南畝の個別人物項目は網羅の優先度を下げ今回は見送り"
+  },
+  {
+    "id": "hanko",
+    "title": "藩校",
+    "reading": "はんこう",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "other",
+    "existingWorkId": "hanko",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。sources欄は「教科書水準の通説、URL未取得」と自己申告済み（M2-51）" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft、concept）。同種の私塾concept（懐徳堂）を本ファイルで新規追加"
+  },
+  {
+    "id": "ando-shoeki",
+    "title": "安藤昌益（『自然真営道』）",
+    "reading": "あんどうしょうえき",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": "ando-shoeki",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。sources欄は「教科書水準の通説、URL未取得」と自己申告済み（M2-51）" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft）"
+  },
+  {
+    "id": "kamo-no-mabuchi",
+    "title": "賀茂真淵（国学、『万葉集』研究）",
+    "reading": "かものまぶち",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work motoori-norinaga（本居宣長）が既に「師の賀茂真淵の学問を継承」と言及" },
+      { "type": "matome-site", "detail": "chitonitose.com「宝暦・天明期の文化－学問と思想」: 「契沖→荷田春満→賀茂真淵→本居宣長」の系統、『万葉集』研究を通じた『日本古来の精神復活』主張", "url": "https://chitonitose.com/jh/jh_lessons91.html" }
+    ],
+    "frequencyEvidence": "不明（共通テスト・日大過去問での個別出題年は確認できず）",
+    "imageObtainability": "n/a",
+    "notes": "本居宣長の師として既存workから既に参照されているにもかかわらず本人の項目が無かった。網羅上、重要度の高い欠落"
+  },
+  {
+    "id": "kada-no-azumamaro",
+    "title": "荷田春満",
+    "reading": "かだのあずままろ",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "matome-site", "detail": "コトバンク・chitonitose.comともに「国学四大人」の一人、伏見稲荷社の神職、荷田春満→賀茂真淵→本居宣長の系統の始祖と紹介", "url": "https://chitonitose.com/jh/jh_lessons91.html" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "国学の系譜の起点だが、賀茂真淵・本居宣長に比べ出題頻度は低いと推測される（根拠薄い推測）。網羅のため掲載"
+  },
+  {
+    "id": "ishida-baigan",
+    "title": "石田梅岩（『都鄙問答』）",
+    "reading": "いしだばいがん",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "kyokasho", "detail": "京都市公式サイト「文化史19 石門心学」", "url": "https://www2.city.kyoto.lg.jp/somu/rekishi/fm/nenpyou/htmlsheet/bunka19.html" },
+      { "type": "matome-site", "detail": "chitonitose.com「宝暦・天明期の文化－学問と思想」に著書『都鄙問答』が言及", "url": "https://chitonitose.com/jh/jh_lessons91.html" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "心学（本ファイルで新規追加のconcept項目）の開祖"
+  },
+  {
+    "id": "shingaku",
+    "title": "心学（石門心学）",
+    "reading": "しんがく",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "kyokasho", "detail": "京都市公式サイト「文化史19 石門心学」（石田梅岩が儒教・仏教・神道を統合し、町人にもわかりやすい道徳を説いた）", "url": "https://www2.city.kyoto.lg.jp/somu/rekishi/fm/nenpyou/htmlsheet/bunka19.html" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "石田梅岩（本ファイルで新規追加のperson項目）が開いた思想。手島堵庵・中沢道二ら普及者は個別項目化せず本項目のnotesに留める（網羅の優先度を絞った）"
+  },
+  {
+    "id": "kaitokudo",
+    "title": "懐徳堂",
+    "reading": "かいとくどう",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "matome-site", "detail": "chitonitose.com「宝暦・天明期の文化－教育と文芸」の教育機関一覧に「懐徳堂」を掲載。中井竹山・富永仲基・山片蟠桃らが関係者として同ページに列挙", "url": "https://chitonitose.com/jh/jh_lessons92.html" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "大坂町人の出資による学問所。既存work hanko（藩校）と対で扱われることが多い官立/民間の学問機関の一つ"
+  },
+  {
+    "id": "yamagata-daini-meiwa",
+    "title": "山県大弐と明和事件",
+    "reading": "やまがただいに・めいわじけん",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "event",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "matome-site", "detail": "Wikipedia「明和事件」、Kotobank。幕政を批判した山県大弐が処刑された事件（1767年）", "url": "https://ja.wikipedia.org/wiki/%E6%98%8E%E5%92%8C%E4%BA%8B%E4%BB%B6" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "宝暦事件（竹内式部、本ファイルで新規追加）と対で問われる尊王論弾圧の2大事件"
+  },
+  {
+    "id": "takenouchi-shikibu-horeki",
+    "title": "竹内式部と宝暦事件",
+    "reading": "たけのうちしきぶ・ほうれきじけん",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "event",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "matome-site", "detail": "Wikipedia「宝暦事件」、Kotobank。公家に尊王論を説いた竹内式部が京都追放となった事件（1758年）", "url": "https://ja.wikipedia.org/wiki/%E5%AE%9D%E6%9A%A6%E4%BA%8B%E4%BB%B6" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "山県大弐・明和事件と対で問われる。竹内式部は後に明和事件にも連座し八丈島遠島となった"
+  },
+  {
+    "id": "takayama-hikokuro",
+    "title": "高山彦九郎",
+    "reading": "たかやまひこくろう",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "matome-site", "detail": "chitonitose.com「宝暦・天明期の文化－学問と思想」の尊王論の項に、蒲生君平・頼山陽と並んで掲載", "url": "https://chitonitose.com/jh/jh_lessons91.html" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "「寛政の三奇人」（高山彦九郎・蒲生君平・林子平）の1人として蒲生君平・林子平（いずれも本ファイルで新規追加）とセットで問われることが多いと推測される（根拠は複数のまとめサイトのみ）"
+  },
+  {
+    "id": "gamo-kunpei",
+    "title": "蒲生君平（『山陵志』）",
+    "reading": "がもうくんぺい",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "matome-site", "detail": "chitonitose.com「宝暦・天明期の文化－学問と思想」の尊王論の項に高山彦九郎・頼山陽と並んで掲載", "url": "https://chitonitose.com/jh/jh_lessons91.html" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "「寛政の三奇人」の1人。天皇陵を調査した『山陵志』の著者"
+  },
+  {
+    "id": "maeno-ryotaku",
+    "title": "前野良沢",
+    "reading": "まえのりょうたく",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "other",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work kaitai-shinsho（解体新書）のartistフィールドに「杉田玄白・前野良沢」と既に記載。『解体新書』の翻訳者" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存workでは杉田玄白と並ぶ共訳者として作品側に埋め込まれているのみで、独立の人物項目としては無かった。蘭学初期の重要人物として追加"
+  },
+  {
+    "id": "otsuki-gentaku",
+    "title": "大槻玄沢（『蘭学階梯』・芝蘭堂）",
+    "reading": "おおつきげんたく",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "other",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "matome-site", "detail": "chitonitose.com「宝暦・天明期の文化－学問と思想」に著書『蘭学階梯』・私塾芝蘭堂が言及", "url": "https://chitonitose.com/jh/jh_lessons91.html" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "杉田玄白・前野良沢に続く蘭学の第二世代。私塾芝蘭堂は既存work hanko（藩校）・本ファイル kaitokudo（懐徳堂）と並ぶ教育機関系項目"
+  },
+  {
+    "id": "inamura-sanpaku",
+    "title": "稲村三伯（『ハルマ和解』）",
+    "reading": "いなむらさんぱく",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "other",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "matome-site", "detail": "鳥取市関連サイト・複数辞典サイトで日本初のオランダ語辞書『ハルマ和解』の編者として紹介", "url": "https://rekishi-king.com/inamurasanpaku/" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "他の蘭学者に比べ出題頻度の確証が薄い。網羅のため掲載するが優先度は低め"
+  },
+  {
+    "id": "hayashi-shihei",
+    "title": "林子平（『海国兵談』『三国通覧図説』）",
+    "reading": "はやししへい",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "other",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "matome-site", "detail": "複数のまとめサイト・辞典で「寛政の三奇人」の1人、海防論者として紹介（個別の一次資料は今回未確認）" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "海防論は政治史寄りの内容だが、著作は文化史（学問）の文脈で問われることが多い。工藤平助（本ファイルで新規追加）と並ぶ対外的危機意識の学者"
+  },
+  {
+    "id": "kudo-heisuke",
+    "title": "工藤平助（『赤蝦夷風説考』）",
+    "reading": "くどうへいすけ",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "other",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "matome-site", "detail": "複数の辞典・まとめサイトでロシア南下に関する意見書『赤蝦夷風説考』の著者として紹介（個別の一次資料は今回未確認）" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "田沼意次の蝦夷地開発政策に影響を与えたとされる。林子平と並ぶ対外関係の学者"
+  },
+  {
+    "id": "yosa-buson-haikai",
+    "title": "与謝蕪村（俳諧、蕉風の再興）",
+    "reading": "よさぶそん",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "literature",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "kyokasho", "detail": "宝暦・天明文化のWikipedia記事: 「与謝蕪村：蕉風の再興者として俳諧の才を発揮」", "url": "https://ja.wikipedia.org/wiki/%E5%AE%9D%E6%9A%A6%E3%83%BB%E5%A4%A9%E6%98%8E%E6%96%87%E5%8C%96" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存work juben-jugi（十便十宜図、池大雅との合作）は文人画家としての蕪村をカバーするが、俳人としての事績（蕉風の再興、『蕪村七部集』）は別事項のためこの項目で追加"
+  },
+  {
+    "id": "ueda-akinari",
+    "title": "上田秋成（『雨月物語』）",
+    "reading": "うえだあきなり",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "literature",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "kyokasho", "detail": "宝暦・天明文化のWikipedia記事: 『雨月物語』著者、大坂で活躍。本居宣長との「日の神論争」でも言及", "url": "https://ja.wikipedia.org/wiki/%E5%AE%9D%E6%9A%A6%E3%83%BB%E5%A4%A9%E6%98%8E%E6%96%87%E5%8C%96" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存の18件のうち文学者は本居宣長のみで、読本の代表作者が欠落していた重要な追加"
+  },
+  {
+    "id": "tsutaya-juzaburo",
+    "title": "蔦屋重三郎（版元）",
+    "reading": "つたやじゅうざぶろう",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "other",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work poppin-wo-fuku-onna・otani-oniji・kansei-san-bijinのfactsに「版元は蔦屋重三郎」と既に記載" },
+      { "type": "matome-site", "detail": "宝暦・天明文化のWikipedia記事: 「本屋・書物問屋などを営み、新文学を支援」", "url": "https://ja.wikipedia.org/wiki/%E5%AE%9D%E6%9A%A6%E3%83%BB%E5%A4%A9%E6%98%8E%E6%96%87%E5%8C%96" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存3作品のfactsで既に版元として言及されているにもかかわらず本人の項目が無かった。歌麿・写楽・山東京伝・恋川春町を世に出した中心人物として重要度が高い"
+  },
+  {
+    "id": "santo-kyoden",
+    "title": "山東京伝",
+    "reading": "さんとうきょうでん",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "literature",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "kyokasho", "detail": "宝暦・天明文化のWikipedia記事: 「新しい文学の誕生を支えた作家。洒落本・黄表紙の分野で活躍」", "url": "https://ja.wikipedia.org/wiki/%E5%AE%9D%E6%9A%A6%E3%83%BB%E5%A4%A9%E6%98%8E%E6%96%87%E5%8C%96" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存work soma-no-furudairi（相馬の古内裏、化政期・歌川国芳）の主題が山東京伝の読本『善知安方忠義伝』であるとfactsに既に記載されており、時代をまたいだ関連項目。【付記】soma-no-furudairi.jsonのsubjectフィールドを確認したところ現在「善知鳥安方忠義伝」と表記されており、researcher記憶（verify-artwork-titles-before-writing.md）が指摘した正しい表記「善知安方忠義伝」（鳥を含まない）と食い違っている。本canonファイルの範囲外のため修正はしていないが、Hayato確認を推奨"
+  },
+  {
+    "id": "koikawa-harumachi",
+    "title": "恋川春町（『金々先生栄花夢』）",
+    "reading": "こいかわはるまち",
+    "era": "horeki-tenmei",
+    "type": "text",
+    "category": "literature",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "kyokasho", "detail": "宝暦・天明文化のWikipedia記事に山東京伝・大田南畝と並んで掲載。chitonitose.comに著書『金々先生栄花夢』が言及", "url": "https://chitonitose.com/jh/jh_lessons92.html" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "黄表紙の代表作者。既存work kibyoshi（黄表紙、concept）の代表的な担い手"
+  },
+  {
+    "id": "kanagawa-oki-namiura",
+    "title": "富嶽三十六景「神奈川沖浪裏」",
+    "reading": "ふがくさんじゅうろっけい かながわおきなみうら",
+    "era": "kasei",
+    "type": "visual",
+    "category": "painting",
+    "existingWorkId": "kanagawa-oki-namiura",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed）に山川『詳説日本史』・Metropolitan Museum of Artの出典が記録済み" }
+    ],
+    "frequencyEvidence": "既存work examTags: frequent。日大過去問2023年度大問IVに神奈川沖浪裏の出題実績あり",
+    "imageObtainability": "high",
+    "notes": "既存作品"
+  },
+  {
+    "id": "gaifu-kaisei",
+    "title": "富嶽三十六景「凱風快晴」",
+    "reading": "ふがくさんじゅうろっけい がいふうかいせい",
+    "era": "kasei",
+    "type": "visual",
+    "category": "painting",
+    "existingWorkId": "gaifu-kaisei",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed）に山川『詳説日本史』・Metropolitan Museum of Artの出典が記録済み" }
+    ],
+    "frequencyEvidence": "既存work examTags: frequent",
+    "imageObtainability": "high",
+    "notes": "既存作品"
+  },
+  {
+    "id": "hokusai-manga",
+    "title": "北斎漫画",
+    "reading": "ほくさいまんが",
+    "era": "kasei",
+    "type": "visual",
+    "category": "other",
+    "existingWorkId": "hokusai-manga",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed）に山川『詳説日本史』・国立国会図書館デジタルコレクション・Metropolitan Museum of Artの出典が記録済み" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "high",
+    "notes": "既存作品"
+  },
+  {
+    "id": "shono-hakuu",
+    "title": "東海道五十三次「庄野 白雨」",
+    "reading": "とうかいどうごじゅうさんつぎ しょうの はくう",
+    "era": "kasei",
+    "type": "visual",
+    "category": "painting",
+    "existingWorkId": "shono-hakuu",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed）に山川『詳説日本史』・Metropolitan Museum of Artの出典が記録済み" }
+    ],
+    "frequencyEvidence": "既存work examTags: frequent",
+    "imageObtainability": "high",
+    "notes": "既存作品"
+  },
+  {
+    "id": "kanbara-yoru-no-yuki",
+    "title": "東海道五十三次「蒲原 夜之雪」",
+    "reading": "とうかいどうごじゅうさんつぎ かんばら よるのゆき",
+    "era": "kasei",
+    "type": "visual",
+    "category": "painting",
+    "existingWorkId": "kanbara-yoru-no-yuki",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed）に山川『詳説日本史』・Metropolitan Museum of Artの出典が記録済み" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "high",
+    "notes": "既存作品"
+  },
+  {
+    "id": "ohashi-atake-yudachi",
+    "title": "名所江戸百景「大はしあたけの夕立」",
+    "reading": "めいしょえどひゃっけい おおはしあたけのゆうだち",
+    "era": "kasei",
+    "type": "visual",
+    "category": "painting",
+    "existingWorkId": "ohashi-atake-yudachi",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed）に山川『詳説日本史』・Metropolitan Museum of Artの出典が記録済み。既存examNoteに「安政年間（1857年）の作」と明記、化政文化の節に置かれる慣行を踏襲" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "high",
+    "notes": "既存作品。制作年（安政）は化政文化の年代区分より後だが、広重が化政文化の絵師として教科書で整理される慣行に従う"
+  },
+  {
+    "id": "soma-no-furudairi",
+    "title": "相馬の古内裏",
+    "reading": "そうまのふるだいり",
+    "era": "kasei",
+    "type": "visual",
+    "category": "painting",
+    "existingWorkId": "soma-no-furudairi",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed、ヴィクトリア＆アルバート美術館所蔵）。詳細sources本文は本群では未再読" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "high",
+    "notes": "既存作品（歌川国芳）。主題の読本タイトル表記に誤り疑いあり（santo-kyoden項目のnotes参照、要Hayato確認）"
+  },
+  {
+    "id": "takami-senseki",
+    "title": "鷹見泉石像",
+    "reading": "たかみせんせきぞう",
+    "era": "kasei",
+    "type": "visual",
+    "category": "painting",
+    "existingWorkId": "takami-senseki",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed、東京国立博物館所蔵）。詳細sources本文は本群では未再読" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "high",
+    "notes": "既存作品（渡辺崋山）。崋山の師である谷文晁を本ファイルで新規追加"
+  },
+  {
+    "id": "ino-map",
+    "title": "大日本沿海輿地全図",
+    "reading": "だいにほんえんかいよちぜんず",
+    "era": "kasei",
+    "type": "visual",
+    "category": "other",
+    "existingWorkId": "ino-map",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（reviewed、国立国会図書館ほか所蔵）。詳細sources本文は本群では未再読" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "high",
+    "notes": "既存作品（伊能忠敬）"
+  },
+  {
+    "id": "kyokutei-bakin",
+    "title": "曲亭馬琴（読本）",
+    "reading": "きょくていばきん",
+    "era": "kasei",
+    "type": "text",
+    "category": "literature",
+    "existingWorkId": "kyokutei-bakin",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。sources欄は本群では未再読" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft）。『南総里見八犬伝』の著者"
+  },
+  {
+    "id": "jippensha-ikku",
+    "title": "十返舎一九（滑稽本）",
+    "reading": "じっぺんしゃいっく",
+    "era": "kasei",
+    "type": "text",
+    "category": "literature",
+    "existingWorkId": "jippensha-ikku",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。sources欄は本群では未再読" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft）。『東海道中膝栗毛』の著者。式亭三馬（本ファイルで新規追加）と並ぶ滑稽本の代表作者"
+  },
+  {
+    "id": "tamenaga-shunsui",
+    "title": "為永春水（人情本）",
+    "reading": "ためながしゅんすい",
+    "era": "kasei",
+    "type": "text",
+    "category": "literature",
+    "existingWorkId": "tamenaga-shunsui",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。sources欄は本群では未再読" }
+    ],
+    "frequencyEvidence": "日大過去問11年分「化政4回」に人情本と弾圧が含まれる",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft）。柳亭種彦（本ファイルで新規追加、合巻）と並ぶ天保の改革での弾圧対象"
+  },
+  {
+    "id": "terakoya",
+    "title": "寺子屋",
+    "reading": "てらこや",
+    "era": "kasei",
+    "type": "text",
+    "category": "other",
+    "existingWorkId": "terakoya",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。sources欄は本群では未再読" }
+    ],
+    "frequencyEvidence": "日大過去問11年分「化政4回」に寺子屋が含まれる",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft、concept）"
+  },
+  {
+    "id": "honda-toshiaki",
+    "title": "本多利明（『経世秘策』）",
+    "reading": "ほんだとしあき",
+    "era": "kasei",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": "honda-toshiaki",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。sources欄は本群では未再読" }
+    ],
+    "frequencyEvidence": "日大過去問11年分「化政4回」に本多利明が含まれる",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft）"
+  },
+  {
+    "id": "hirata-atsutane",
+    "title": "平田篤胤（復古神道）",
+    "reading": "ひらたあつたね",
+    "era": "kasei",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": "hirata-atsutane",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。sources欄は本群では未再読" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft）。水戸学（本ファイルで新規追加）と並ぶ幕末思想への橋渡し"
+  },
+  {
+    "id": "siebold-narutakijuku",
+    "title": "シーボルトと鳴滝塾",
+    "reading": "シーボルトとなるたきじゅく",
+    "era": "kasei",
+    "type": "text",
+    "category": "other",
+    "existingWorkId": "siebold-narutakijuku",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。sources欄は本群では未再読" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft）。シーボルト事件で処罰された高橋景保らとの関連、高野長英・蛮社の獄（本ファイルで新規追加）とは別の蘭学弾圧事件"
+  },
+  {
+    "id": "rai-sanyo",
+    "title": "頼山陽（『日本外史』）",
+    "reading": "らいさんよう",
+    "era": "kasei",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": "rai-sanyo",
+    "sources": [
+      { "type": "kyokasho", "detail": "既存work（draft）。宝暦・天明文化のWikipedia記事にも高山彦九郎・蒲生君平と並ぶ尊王論者として言及", "url": "https://ja.wikipedia.org/wiki/%E5%AE%9D%E6%9A%A6%E3%83%BB%E5%A4%A9%E6%98%8E%E6%96%87%E5%8C%96" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存作品（draft）。『日本外史』完成は1827年（文政10年）で化政期に該当し既存の era 分類は妥当"
+  },
+  {
+    "id": "shikitei-sanba",
+    "title": "式亭三馬（『浮世風呂』）",
+    "reading": "しきていさんば",
+    "era": "kasei",
+    "type": "text",
+    "category": "literature",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "kyokasho", "detail": "Wikipedia「浮世風呂」: 式亭三馬作の滑稽本、正式名『諢話浮世風呂』、文化6〜13年（1809〜1816年）刊行", "url": "https://ja.wikipedia.org/wiki/%E6%B5%AE%E4%B8%96%E9%A2%A8%E5%91%82" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "十返舎一九と並ぶ化政期の滑稽本の代表作者。柳亭種彦の師にあたる（本ファイルで新規追加）"
+  },
+  {
+    "id": "ryutei-tanehiko",
+    "title": "柳亭種彦（『偐紫田舎源氏』）",
+    "reading": "りゅうていたねひこ",
+    "era": "kasei",
+    "type": "text",
+    "category": "literature",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "kyokasho", "detail": "Wikipedia「偐紫田舎源氏」・国文学研究資料館「書物で見る日本古典文学史」: 源氏物語を翻案した合巻、文政12年（1829年）から刊行、江戸時代最大のベストセラーとされる", "url": "https://www.nijl.ac.jp/etenji/bungakushi/contents/detail/detail04-03_014.html" }
+    ],
+    "frequencyEvidence": "日大過去問11年分「化政4回」に人情本と弾圧が含まれ、同時期に弾圧された合巻の代表として関連（tamenaga-shunsuiと同様の文脈）",
+    "imageObtainability": "n/a",
+    "notes": "天保の改革で絶版処分となり、種彦自身も筆禍で死去したとされる。為永春水（人情本）と並ぶ弾圧対象の合巻作者"
+  },
+  {
+    "id": "mito-gaku-shinron",
+    "title": "水戸学（会沢正志斎『新論』・藤田東湖）",
+    "reading": "みとがく",
+    "era": "kasei",
+    "type": "text",
+    "category": "thought",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "matome-site", "detail": "Wikipedia「会沢正志斎」: 水戸藩士、天保11年（1840年）藩校弘道館の初代教授頭取。『新論』は尊王攘夷思想が結びついた著作で幕府により発禁、写本で全国に広まった", "url": "https://ja.wikipedia.org/wiki/%E4%BC%9A%E6%B2%A2%E6%AD%A3%E5%BF%97%E6%96%8E" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "『新論』の成立は文政8年（1825年）で化政年間に該当。幕末思想への橋渡しとして既存work hirata-atsutane（復古神道）と並ぶ重要事項だが、藤田東湖の個別記述は今回未確認のため会沢正志斎中心の記載にとどめた"
+  },
+  {
+    "id": "okura-nagatsune",
+    "title": "大蔵永常（『広益国産考』『農具便利論』）",
+    "reading": "おおくらながつね",
+    "era": "kasei",
+    "type": "text",
+    "category": "technique",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "kyokasho", "detail": "ヒストリスト（山川出版社運営）「大蔵永常」: 1768年生、1802年『農家益』出版、以後『広益国産考』『農具便利論』等多数の農書を執筆", "url": "https://www.historist.jp/word_j_o/entry/029829/" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存work miyazaki-yasusada（宮崎安貞、元禄期『農業全書』）に続く江戸時代三大農学者の一人（もう一人は佐藤信淵）。渡辺崋山の失脚（蛮社の獄）に伴い後援を失った経緯もあり、高野長英・蛮社の獄（本ファイルで新規追加）と間接的に関連"
+  },
+  {
+    "id": "takano-choei-bansha",
+    "title": "高野長英と蛮社の獄",
+    "reading": "たかのちょうえい・ばんしゃのごく",
+    "era": "kasei",
+    "type": "text",
+    "category": "event",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "kyokasho", "detail": "複数の公式・準公式サイト（奥州市公式「蛮社の獄」等）: 1839年（天保10年）、鳥居耀蔵が渡辺崋山・高野長英ら蘭学者を弾圧した事件。崋山は蟄居、長英は永牢", "url": "https://www.city.oshu.iwate.jp/choei/shogai/1/1467.html" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存work takami-senseki（鷹見泉石像、渡辺崋山作）の作者本人が処罰された事件。年代は天保10年（1839年）で化政文化の年代区分よりやや後だが、崋山・長英が化政期の学者として教科書で扱われる慣行に合わせて配置。シーボルト事件（既存work siebold-narutakijuku）とは別の弾圧事件"
+  },
+  {
+    "id": "tani-buncho",
+    "title": "谷文晁（江戸南画）",
+    "reading": "たにぶんちょう",
+    "era": "kasei",
+    "type": "text",
+    "category": "other",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "matome-site", "detail": "Wikipedia「谷文晁」・複数の美術館解説: 1763〜1840年、化政期の江戸画壇を代表する文人画家、渡辺崋山ら多くの弟子を育てた", "url": "https://ja.wikipedia.org/wiki/%E8%B0%B7%E6%96%87%E6%99%81" }
+    ],
+    "frequencyEvidence": "不明",
+    "imageObtainability": "n/a",
+    "notes": "既存work takami-senseki（鷹見泉石像）の作者・渡辺崋山の師にあたる。個別の代表作は今回未特定のためtext項目とした（画像化する場合は代表作の再調査が必要）"
+  },
+  {
+    "id": "natsuakikusa-zu-hoitsu",
+    "title": "夏秋草図屏風",
+    "reading": "なつあきくさずびょうぶ",
+    "era": "kasei",
+    "type": "visual",
+    "category": "painting",
+    "existingWorkId": null,
+    "sources": [
+      { "type": "kyokasho", "detail": "東京国立博物館「名品ギャラリー」（登録番号A-11189-2）: 酒井抱一筆、文政4年（1821年）頃、尾形光琳「風神雷神図屏風」の裏面として制作、1975年に保存のため独立した屏風に改装", "url": "https://www.tnm.jp/modules/r_collection/index.php?controller=dtl&colid=A11189.2" }
+    ],
+    "frequencyEvidence": "不明（宗達→光琳→抱一の3代模写の流れとしては既存work fujin-raijin-sotatsu/fujin-raijin-korinのexamNoteで既に言及されている頻出テーマ）",
+    "imageObtainability": "high",
+    "notes": "既存work fujin-raijin-sotatsu（俵屋宗達）・fujin-raijin-korin（尾形光琳）が既に「後年、酒井抱一（化政期）が模写した」と言及している作品本体。東京国立博物館所蔵・重要文化財。酒井抱一（1761〜1828年）は江戸琳派の祖として本項目のnotesでカバーし、別途person項目は設けなかった"
+  }
+]
