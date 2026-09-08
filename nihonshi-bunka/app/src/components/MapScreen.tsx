@@ -33,6 +33,15 @@ const DIFFICULTIES: Difficulty[] = [1, 2, 3]
 /** 1ワールド分の縦幅（px）。ランドマーク＋面タイルのパネルが収まる余白を含む。 */
 const WORLD_HEIGHT = 260
 const PADDING_Y = 60
+/**
+ * M2b-99e[重大]是正: 最下段ワールド（worldIndex=0、原始文化）の worldPanel は
+ * `top: center.y - 20` から下へ実測 約272px 伸びる（3難易度行＋ボスタイル＋帯）のに対し、
+ * 旧実装は contentHeight の下端余白が PADDING_Y(60px) しか無く、パネル下端が
+ * contentHeight を約82px 超えてボスタイルがドラッグしても画面外に出せなかった
+ * （clampPan の minY が contentHeight を基準に計算されるため）。パネル高＋余裕を
+ * 下側だけ追加で確保する（他ワールドの間隔・ランドマーク位置は変えない）。
+ */
+const PADDING_BOTTOM = 260
 const CONTENT_WIDTH = 340
 /** ランドマークの左右の振れ幅（絵巻の道が蛇行する演出）。 */
 const LANDMARK_SWING = 64
@@ -77,7 +86,7 @@ export function MapScreen({
   const unlockedKeys = new Set<string>()
   for (let i = 0; i <= boundary && i < sequence.length; i++) unlockedKeys.add(stageRefKey(sequence[i]))
 
-  const contentHeight = worlds.length * WORLD_HEIGHT + PADDING_Y * 2
+  const contentHeight = worlds.length * WORLD_HEIGHT + PADDING_Y + PADDING_BOTTOM
 
   function landmarkCenter(worldIndex: number): Point {
     // worldIndex 0（最古のワールド）が最下部、番号が大きいほど上へ（既定④）。

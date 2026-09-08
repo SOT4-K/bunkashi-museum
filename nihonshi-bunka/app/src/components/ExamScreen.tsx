@@ -5,6 +5,7 @@
 import { useState } from 'react'
 import styles from './ExamScreen.module.css'
 import { formatCountdown, MOCK_EXAM_POINTS_PER_QUESTION, TIME_ATTACK_EXAM_SIZE } from '../engine/mockExam'
+import { MISS_REVIEW_MAX } from '../engine/missLog'
 import type { MockExamRecord } from '../types'
 
 const TREND_WIDTH = 280
@@ -76,19 +77,28 @@ export function ExamScreen({
    * M2b-11: 全期間の間違いノート復習（旧HomeScreenの「間違えた問題を復習」を統合）。
    * 「前回の間違いを復習」（onReviewMisses、最新1回分のみ）とは別の入口として共存する。
    * 省略時、または missLogCount が0のときはボタンを出さない（既存呼び出し元互換・
-   * decisions.md 2026-09-04 22:30「0件なら非表示」を踏襲）。
+   * decisions.md 2026-09-04 22:30「0件なら非表示」を踏襲）。M2b-99e[中]是正:
+   * missLogCount>0 でも中身が全て卒業済み等で実際には復習問題を作れないことがある
+   * （onReviewMisses と同じ死にボタンの形）ため、戻り値で成否を受け取れるようにする。
    */
-  onStartMissReview?: () => void
+  onStartMissReview?: () => boolean | void
   missLogCount?: number
 }) {
   const ordered = [...records].reverse()
   const latest = records[records.length - 1]
   const [noReviewableMisses, setNoReviewableMisses] = useState(false)
+  const [noReviewableAllMisses, setNoReviewableAllMisses] = useState(false)
 
   function handleReviewMisses() {
     if (!latest) return
     const handled = onReviewMisses(latest.missedWorkIds)
     setNoReviewableMisses(handled === false)
+  }
+
+  function handleReviewAllMisses() {
+    if (!onStartMissReview) return
+    const handled = onStartMissReview()
+    setNoReviewableAllMisses(handled === false)
   }
 
   return (
@@ -124,7 +134,9 @@ export function ExamScreen({
       )}
 
       {/* M2b-11: 旧HomeScreenの「間違えた問題を復習」（全期間・missLog全件）をここに統合。
-          「前回の間違いを復習」（直近1回分のみ）とは別の入口として共存させる。 */}
+          「前回の間違いを復習」（直近1回分のみ）とは別の入口として共存させる。
+          M2b-99e[中]是正: 表示件数は実セッションの上限（MISS_REVIEW_MAX問）でキャップし、
+          実際に復習問題を作れなかった場合はメッセージを出す（死にボタン対策）。 */}
       {onStartMissReview && missLogCount > 0 && (
         <div className={styles.section}>
           <div className={styles.sectionLabel}>間違いノート（全期間）</div>
@@ -132,10 +144,15 @@ export function ExamScreen({
             type="button"
             className={styles.reviewButton}
             data-testid="exam-review-all-misses"
-            onClick={onStartMissReview}
+            onClick={handleReviewAllMisses}
           >
-            {`全期間の間違いを復習（${missLogCount}問）`}
+            {`全期間の間違いを復習（${Math.min(missLogCount, MISS_REVIEW_MAX)}問）`}
           </button>
+          {noReviewableAllMisses && (
+            <p className={styles.empty} data-testid="exam-review-all-no-items">
+              復習する問題がありません（すでに定着済み）。
+            </p>
+          )}
         </div>
       )}
 

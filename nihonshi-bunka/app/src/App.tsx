@@ -111,12 +111,18 @@ export default function App() {
     setActiveMockExam(items)
   }
 
-  /** 間違いノート復習（M2-23）。0件なら HomeScreen 側でボタンを出さないため呼ばれない想定だが念のため防御する。 */
-  function goMissReview() {
+  /**
+   * 間違いノート復習（M2-23→M2b-11で模試タブへ移設）。missLogCount>0 でもボタンを出す条件
+   * （M2b-11: onStartMissReview && missLogCount > 0）と実際に復習問題を作れるかは別
+   * （M2b-99c軽5と同種の死にボタンが起こりうる。M2b-99e[中]指摘で発覚・是正）。
+   * goExamMissReview と同じく戻り値で成否を返し、ExamScreen側でメッセージを出せるようにする。
+   */
+  function goMissReview(): boolean {
     const items = buildMissReviewSession(progress.missLog, worksById, themeSetPool, playableWorks, eras)
-    if (items.length === 0) return
+    if (items.length === 0) return false
     startSession(todayIso())
     setActiveMissReview(items)
+    return true
   }
 
   /**

@@ -7,7 +7,10 @@
   --map-landmark: #ffb300;
   --map-landmark-locked: #b0b7c3;
   --map-locked-bg: #dfe3ea;
-  --map-locked-fg: #7b8291;
+  /* M2b-99e[中]是正: #7b8291はロックタイルの opacity:.85 と合成すると白パネル背景上で
+     実効コントラスト比2.43:1（4.5:1未達）だった。#3d4250 に暗くすると合成後5.21:1で
+     基準を満たす（WCAG相対輝度で計算・確認済み）。 */
+  --map-locked-fg: #3d4250;
   --map-unlocked-bg: #ffd53d;
   --map-unlocked-fg: #4a3900;
   --map-cleared-bg: #35d07f;
@@ -25,14 +28,15 @@
   gap: 10px;
 }
 
+/* M2b-99e[軽]是正: 13px→14px（M2b-12「本文14px以上」に揃える）。 */
 .notice {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-dim);
   margin: 0;
 }
 
 .empty {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-dim);
 }
 
@@ -144,8 +148,9 @@
   flex-wrap: wrap;
 }
 
+/* M2b-99e[軽]是正: 13px→14px。 */
 .stageStar {
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: 1px;
   width: 30px;
   flex-shrink: 0;
@@ -192,6 +197,13 @@
   background: var(--map-unlocked-bg);
   color: var(--map-unlocked-fg);
   animation: tile-pulse 1.6s ease-in-out infinite;
+}
+
+/* M2b-99e[軽]是正: OS設定でモーション低減が有効なら無限パルスを止める。 */
+@media (prefers-reduced-motion: reduce) {
+  .unlocked {
+    animation: none;
+  }
 }
 
 /* M2b-12: クリア済み（緑チェック）。 */

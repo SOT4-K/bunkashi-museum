@@ -132,5 +132,38 @@ describe('ExamScreen（M2b-07）', () => {
       expect(screen.getByTestId('exam-review-latest-misses')).toHaveTextContent('2問')
       expect(screen.getByTestId('exam-review-all-misses')).toHaveTextContent('4問')
     })
+
+    // M2b-99e[中]是正: 表示件数はMISS_REVIEW_MAX（10）を超えない（実セッションの上限と一致させる）。
+    it('missLogCount が MISS_REVIEW_MAX(10) を超えても表示は10問でキャップされる', () => {
+      render(
+        <ExamScreen
+          hasMockExam
+          records={[]}
+          onStart={() => {}}
+          onReviewMisses={() => {}}
+          onStartMissReview={() => true}
+          missLogCount={23}
+        />,
+      )
+      expect(screen.getByTestId('exam-review-all-misses')).toHaveTextContent('全期間の間違いを復習（10問）')
+    })
+
+    // M2b-99e[中]是正: missLogCount>0でも中身が全て卒業済み等で復習問題を作れないことがある
+    // （onReviewMisses と同じ死にボタンの形）。onStartMissReview が false を返したらメッセージを出す。
+    it('onStartMissReview が false を返すと「復習する問題がありません」を表示する（死にボタン対策）', () => {
+      render(
+        <ExamScreen
+          hasMockExam
+          records={[]}
+          onStart={() => {}}
+          onReviewMisses={() => {}}
+          onStartMissReview={() => false}
+          missLogCount={2}
+        />,
+      )
+      expect(screen.queryByTestId('exam-review-all-no-items')).not.toBeInTheDocument()
+      fireEvent.click(screen.getByTestId('exam-review-all-misses'))
+      expect(screen.getByTestId('exam-review-all-no-items')).toHaveTextContent('復習する問題がありません')
+    })
   })
 })
