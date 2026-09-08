@@ -121,7 +121,8 @@ describe('findHolderWords（M2b-14「所蔵館を問う設問の削除」: facts
   })
 
   it('美術館・文庫・記念館・図書館・資料館・コレクションも検出する', () => {
-    expect(findHolderWords('三井記念美術館が所蔵する')).toEqual(expect.arrayContaining(['美術館', '記念館']))
+    expect(findHolderWords('三井記念美術館が所蔵する')).toContain('美術館')
+    expect(findHolderWords('市立記念館が所蔵する')).toContain('記念館')
     expect(findHolderWords('国立国会図書館にある')).toContain('図書館')
     expect(findHolderWords('広島県立歴史民俗資料館が所蔵する')).toContain('資料館')
     expect(findHolderWords('個人コレクションに含まれる')).toContain('コレクション')

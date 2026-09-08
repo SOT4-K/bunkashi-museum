@@ -35,14 +35,19 @@ interface TextSample {
   text: string
 }
 
-/** Question から実際に画面に表示されるテキストを全て集める（stem・conditionText・各型の選択肢）。 */
+/** Question から実際に画面に表示されるテキストを全て集める（stem・conditionText・各型の選択肢）。
+ *  choiceEraItems（Q6）は含めない: Q6 の選択肢は work.holder/facts とは無関係に
+ *  eras.json の items[]（その文化の代表事項。文学・宗教・人物・様式・学問など）だけから
+ *  作られる（engine/eraItems.ts）。「芸亭（石上宅嗣の図書館）＝奈良時代の公開図書館」のような
+ *  正当な歴史事実がたまたま所蔵語と同じ単語（図書館）を含むことがあり、これは M2b-14 が
+ *  問題にしている「作品の所蔵先の館名が設問に漏れる」こととは無関係（work の holder/findSite
+ *  を一切参照しない出題経路のため、そもそも Q9 の holder ゲートと同じ問題が起きない）。 */
 function collectDisplayTexts(q: Question): TextSample[] {
   const out: TextSample[] = []
   if (q.stem) out.push({ field: 'stem', text: q.stem })
   if (q.conditionText) out.push({ field: 'conditionText', text: q.conditionText })
   for (const s of q.choiceStatements ?? []) out.push({ field: 'choiceStatements', text: s.text })
   for (const s of q.choiceQ12 ?? []) out.push({ field: 'choiceQ12', text: s.text })
-  for (const s of q.choiceEraItems ?? []) out.push({ field: 'choiceEraItems', text: s.text })
   for (const s of q.choiceCombos ?? []) out.push({ field: 'choiceCombos', text: s.text })
   if (q.statementPair) {
     out.push({ field: 'statementPair.sentenceA', text: q.statementPair.sentenceA.text })
