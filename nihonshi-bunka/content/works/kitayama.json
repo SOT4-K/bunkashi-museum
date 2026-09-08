@@ -263,7 +263,7 @@
       { "kind": "貿易×証票", "left": "日明貿易（勘合貿易）", "right": "勘合" },
       { "kind": "貿易×輸入品", "left": "日明貿易（勘合貿易）", "right": "生糸・銅銭（永楽通宝）" }
     ],
-    "kind": "artifact",
+    "kind": "concept",
     "artist": null,
     "patron": null,
     "style": null,
@@ -836,7 +836,7 @@
       { "kind": "絵画×はじまり", "left": "水墨画", "right": "如拙（相国寺）・明兆（東福寺）" },
       { "kind": "絵画×題材", "left": "水墨画", "right": "禅の故事・中国の高僧" }
     ],
-    "kind": "artifact",
+    "kind": "concept",
     "artist": null,
     "patron": null,
     "style": "水墨画",
@@ -920,7 +920,7 @@
       { "kind": "芸能×大成者", "left": "猿楽能", "right": "観阿弥・世阿弥" },
       { "kind": "芸能×道具", "left": "能", "right": "能面（般若など）" }
     ],
-    "kind": "artifact",
+    "kind": "concept",
     "artist": null,
     "patron": "足利義満",
     "style": null,
