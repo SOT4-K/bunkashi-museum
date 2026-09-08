@@ -27,6 +27,11 @@ export function makeWork(overrides: Partial<Work> & { id: string }): Work {
     eraNote: '',
     facts: [],
     falseStatements: [],
+    // M2b-14: 既存の全テスト呼び出し元は holder に寺社名（例「興福寺」）を渡して
+    // holder スロットが使えることを期待している。holderKind を明示しなかった呼び出し元は
+    // 'site' を既定にする（holderKind: 'museum' を確認したいテストは overrides で明示的に上書きする。
+    // overrides が最後にスプレッドされるためここでの既定値は上書きされる）。
+    holderKind: overrides.holder != null ? 'site' : undefined,
     ...overrides,
   }
 }

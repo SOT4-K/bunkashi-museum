@@ -114,6 +114,23 @@ export function findAppearanceWords(text) {
   return found
 }
 
+// M2b-14「所蔵館を問う設問の削除」: Q9 の holder スロットは holderKind === 'site' の
+// 作品でしか使わなくなったが、facts[].text / falseStatements[].text / underlines[].ask.stem
+// （いずれも Q4/Q9/Q10 等の設問文・選択肢としてそのまま画面に出るテキスト）に
+// 所蔵語（博物館・美術館・文庫・記念館・図書館・資料館・尚蔵館・国宝館・コレクション）が
+// 書かれていると、そこから「〜が所蔵する」のような所蔵館の設問が漏れ出す。work.location・
+// falseStatements[].why（解答後の補足説明。選択肢そのものではない）は対象外
+// （M2-41 の外見語チェックと同じく、選択肢として提示されるテキストだけを検査する）。
+// エラーにはしない（決定 2026-09-04「外見語をvalidateのエラーにしない」と同じ理由:
+// 正当な用法もあり得るため reviewer の目視判断に委ねる。警告のみ）。
+const HOLDER_WORDS = ['博物館', '美術館', '文庫', '記念館', '図書館', '資料館', '尚蔵館', '国宝館', 'コレクション']
+
+/** 所蔵語（博物館・美術館等）を含むか（M2b-14）。含まれていた語の配列を返す（空なら無し）。 */
+export function findHolderWords(text) {
+  if (typeof text !== 'string' || !text) return []
+  return HOLDER_WORDS.filter((w) => text.includes(w))
+}
+
 /** 本文（マーカー記法込みの全文）に work.title が部分文字列として含まれるか。
  *  下線先作品の答えが本文に書かれているのを機械的に防ぐチェックに使う（7章の指摘）。 */
 export function workTitleLeaksInText(work, text) {
@@ -405,6 +422,15 @@ function validatePassages({ worksById, hasImageAsset, hasThemeSetAsset, eraIds, 
             if (words.length > 0) {
               warnings.push(`${label} / ${underline.key}: ask.stem に外見の記述の疑いがある語（${words.join('、')}）が含まれている`)
             }
+            // M2b-14: ask.stem（設問文そのもの）に所蔵語が含まれていないか（警告のみ）。
+            // 既知の2件（genroku-01/b・genroku-02/d の「（東京国立博物館蔵）」）は作品の
+            // 特定用の記法として writer/reviewer が意図して残したもの（M2b-14 チケット明記）
+            // のため、この警告は許容し、値は変更しない（validate はエラーにしないため、
+            // このまま npm run validate は成功する）。
+            const holderWords = findHolderWords(ask.stem)
+            if (holderWords.length > 0) {
+              warnings.push(`${label} / ${underline.key}: ask.stem に所蔵語（${holderWords.join('、')}）が含まれている（所蔵館を問う内容が設問文に漏れる疑い）`)
+            }
           }
 
           // 9章「画像リード型セット」: q12 は answerText・distractorTexts（3件）が必須。
@@ -516,6 +542,11 @@ function main() {
           if (words.length > 0) {
             warnings.push(`${label}: facts[${i}].text に外見の記述の疑いがある語（${words.join('、')}）が含まれている`)
           }
+          // M2b-14: facts[].text は Q4 の正文選択肢としてそのまま表示される。
+          const holderWords = findHolderWords(f?.text)
+          if (holderWords.length > 0) {
+            warnings.push(`${label}: facts[${i}].text に所蔵語（${holderWords.join('、')}）が含まれている（所蔵館を問う内容が選択肢に漏れる疑い）`)
+          }
         })
       }
       if (Array.isArray(work.falseStatements)) {
@@ -523,6 +554,12 @@ function main() {
           const words = findAppearanceWords(s?.text)
           if (words.length > 0) {
             warnings.push(`${label}: falseStatements[${i}].text に外見の記述の疑いがある語（${words.join('、')}）が含まれている`)
+          }
+          // M2b-14: falseStatements[].text も Q4 の誤文選択肢としてそのまま表示される
+          // （.why は解答後の補足説明で選択肢そのものではないため対象外）。
+          const holderWords = findHolderWords(s?.text)
+          if (holderWords.length > 0) {
+            warnings.push(`${label}: falseStatements[${i}].text に所蔵語（${holderWords.join('、')}）が含まれている（所蔵館を問う内容が選択肢に漏れる疑い）`)
           }
         })
       }
@@ -533,6 +570,13 @@ function main() {
       }
       if ('subject' in work && work.subject !== null && typeof work.subject !== 'string') {
         errors.push(`${label}: subject は string か null である必要がある`)
+      }
+      // holderKind / findSite（M2b-14。任意、型チェックのみ）
+      if ('holderKind' in work && work.holderKind !== null && work.holderKind !== 'site' && work.holderKind !== 'museum') {
+        errors.push(`${label}: holderKind は "site"・"museum"・null のいずれかである必要がある`)
+      }
+      if ('findSite' in work && work.findSite !== null && typeof work.findSite !== 'string') {
+        errors.push(`${label}: findSite は string か null である必要がある`)
       }
 
       // pairs（語句の組合せ問題 T1/Q13 の素材）・orderIndex（年代順並べ替え T7/Q14）は

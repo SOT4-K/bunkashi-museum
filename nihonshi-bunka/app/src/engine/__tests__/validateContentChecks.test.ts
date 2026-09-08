@@ -6,7 +6,7 @@
 // 起きない。validate-content.mjs 側の「直接実行時のみ main() を呼ぶ」ガード参照）。
 import { describe, expect, it } from 'vitest'
 // @ts-expect-error 型定義の無いプレーン .mjs スクリプトを直接 import する
-import { workTitleLeaksInText, invalidAskFields, answerLeaksInUnderlineText, findAppearanceWords } from '../../../../scripts/validate-content.mjs'
+import { workTitleLeaksInText, invalidAskFields, answerLeaksInUnderlineText, findAppearanceWords, findHolderWords } from '../../../../scripts/validate-content.mjs'
 
 describe('workTitleLeaksInText（下線先作品の答えが本文に書かれていないかのチェック）', () => {
   it('本文に作品名がそのまま含まれていれば true', () => {
@@ -110,5 +110,39 @@ describe('findAppearanceWords（M2-41「絵を見れば分かる問題を出さ�
     expect(findAppearanceWords(undefined)).toEqual([])
     expect(findAppearanceWords(null)).toEqual([])
     expect(findAppearanceWords('')).toEqual([])
+  })
+})
+
+describe('findHolderWords（M2b-14「所蔵館を問う設問の削除」: facts/falseStatements/ask.stemの所蔵語検出）', () => {
+  it('実際に見つかった3件の実例（doshoku-saie/fujin-raijin-sotatsu/yamadadera-butsuzu修正前）を検出する', () => {
+    expect(findHolderWords('皇居三の丸尚蔵館が所蔵する')).toEqual(['尚蔵館'])
+    expect(findHolderWords('現在は東京国立博物館が所蔵する')).toEqual(['博物館'])
+    expect(findHolderWords('興福寺国宝館にある（もとは山田寺の本尊）')).toEqual(['国宝館'])
+  })
+
+  it('美術館・文庫・記念館・図書館・資料館・コレクションも検出する', () => {
+    expect(findHolderWords('三井記念美術館が所蔵する')).toEqual(expect.arrayContaining(['美術館', '記念館']))
+    expect(findHolderWords('国立国会図書館にある')).toContain('図書館')
+    expect(findHolderWords('広島県立歴史民俗資料館が所蔵する')).toContain('資料館')
+    expect(findHolderWords('個人コレクションに含まれる')).toContain('コレクション')
+  })
+
+  it('寺社・堂・遺跡などの site 表現には反応しない（holderKind: site を誤検出しない）', () => {
+    expect(findHolderWords('興福寺にある（もとは山田寺の本尊）')).toEqual([])
+    expect(findHolderWords('青森県つがる市（亀ヶ岡遺跡）で出土した')).toEqual([])
+    expect(findHolderWords('法隆寺金堂に安置される')).toEqual([])
+  })
+
+  it('作品の特定用の記法「（東京国立博物館蔵）」も語としては検出する（エラーにするかは呼び出し側の判断）', () => {
+    // M2b-14チケット: passages内の「（東京国立博物館蔵）」2箇所は作品特定用の記法として残す
+    // 決定のため、findHolderWords自体は検出するが scripts/validate-content.mjs 側で警告に留める
+    // （エラーにしない）。ここでは検出関数自体が正しく反応することだけを確認する。
+    expect(findHolderWords('次の屏風（東京国立博物館蔵）について述べた文として')).toContain('博物館')
+  })
+
+  it('text が無い・文字列でなければ空配列（例外を投げない）', () => {
+    expect(findHolderWords(undefined)).toEqual([])
+    expect(findHolderWords(null)).toEqual([])
+    expect(findHolderWords('')).toEqual([])
   })
 })

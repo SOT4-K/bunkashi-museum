@@ -27,8 +27,10 @@ export interface Q9GenerateOptions {
   preferredSlot?: Q9Slot
 }
 
-/** 試す順序（修正の仕様 M2-09〜11: holder→artist→technique→era。era は最後＝1セット1問までにする）。 */
-const SLOT_PRIORITY: Q9Slot[] = ['holder', 'artist', 'technique', 'era']
+/** 試す順序（修正の仕様 M2-09〜11: holder→artist→technique→era。era は最後＝1セット1問までにする）。
+ *  M2b-14: findSite（出土地）は holder より先に試す（出土地の設問は入試に出るため優先し、
+ *  博物館収蔵の出土品でも「どこで出土したか」を問える）。 */
+const SLOT_PRIORITY: Q9Slot[] = ['findSite', 'holder', 'artist', 'technique', 'era']
 
 function slotValue(work: Work, slot: Q9Slot): string | null {
   switch (slot) {
@@ -37,7 +39,13 @@ function slotValue(work: Work, slot: Q9Slot): string | null {
     case 'era':
       return work.era
     case 'holder':
-      return work.holder ?? null
+      // M2b-14: holderKind === 'site'（寺社・堂・遺跡・城など）の作品でしか holder 条件を
+      // 使わない。博物館・美術館等（holderKind: 'museum'）は「東京国立博物館にあるものを
+      // 選べ」のような入試に出ない設問になるため、holder スロット自体を使えなくする
+      // （値を null として返し、SLOT_PRIORITY の次の候補に進ませる）。
+      return work.holderKind === 'site' ? (work.holder ?? null) : null
+    case 'findSite':
+      return work.findSite ?? null
     case 'style':
       return work.style
     case 'technique':
@@ -65,6 +73,10 @@ function shortenValue(value: string): string {
  * （「〜にある」に統一）を修正。
  */
 function slotLabel(slot: Q9Slot, rawValue: string, eraName: string): string {
+  // M2b-14: findSite は「青森県つがる市（亀ヶ岡遺跡）」のように括弧内が遺跡名の本体で、
+  // shortenValue（括弧内除去）を適用すると肝心の遺跡名が消えてしまう。他スロットと違い
+  // 短縮しない。
+  if (slot === 'findSite') return `${rawValue}で出土したもの`
   const value = shortenValue(rawValue)
   switch (slot) {
     case 'artist':
@@ -82,6 +94,7 @@ function slotLabel(slot: Q9Slot, rawValue: string, eraName: string): string {
 
 /** 「〜でないもの」（逆パターン）版。slotLabel と同じ短縮・語尾統一を行う。 */
 function slotLabelNegated(slot: Q9Slot, rawValue: string, eraName: string): string {
+  if (slot === 'findSite') return `${rawValue}で出土したものでないもの`
   const value = shortenValue(rawValue)
   switch (slot) {
     case 'artist':

@@ -120,6 +120,121 @@ describe('スロット優先順位（修正の仕様: holder→artist→techniqu
   })
 })
 
+// M2b-14「所蔵館を問う設問の削除」: holder スロットは holderKind === 'site' の作品でしか
+// 使わない。holderKind: 'museum'（東京国立博物館等）の作品は holder が値を持っていても
+// 「東京国立博物館にあるものを選べ」のような入試に出ない設問を出さないよう、holder スロット
+// 自体が使えなくなり artist 等の次善スロットにフォールバックする。
+describe('holderKind による holder スロットのゲート（M2b-14）', () => {
+  it('holderKind: "site" の作品は holder スロットが使える（従来どおり）', () => {
+    const target = makeWork({
+      id: 'site-target',
+      era: 'tenpyo',
+      category: 'sculpture',
+      holder: '興福寺',
+      holderKind: 'site',
+      artist: '運慶',
+    })
+    const pool: Work[] = [
+      target,
+      makeWork({ id: 'site2', era: 'hakuho', category: 'sculpture', holder: '東大寺', holderKind: 'site', artist: '快慶' }),
+      makeWork({ id: 'site3', era: 'asuka', category: 'sculpture', holder: '東寺', holderKind: 'site', artist: '快慶' }),
+      makeWork({ id: 'site4', era: 'konin-jogan', category: 'sculpture', holder: '唐招提寺', holderKind: 'site', artist: '快慶' }),
+    ]
+    const result = generateQ9Question(target, pool, testEras, seededRandom(1))
+    expect(result?.slot).toBe('holder')
+    expect(result?.conditionText).toBe('興福寺にあるもの')
+  })
+
+  it('holderKind: "museum" の作品は holder スロットが使えず、次善（artist）にフォールバックする', () => {
+    const target = makeWork({
+      id: 'museum-target',
+      era: 'tenpyo',
+      category: 'sculpture',
+      holder: '東京国立博物館',
+      holderKind: 'museum',
+      artist: '運慶',
+    })
+    const pool: Work[] = [
+      target,
+      makeWork({ id: 'mu2', era: 'hakuho', category: 'sculpture', holder: '京都国立博物館', holderKind: 'museum', artist: '快慶' }),
+      makeWork({ id: 'mu3', era: 'asuka', category: 'sculpture', holder: '奈良国立博物館', holderKind: 'museum', artist: '快慶' }),
+      makeWork({ id: 'mu4', era: 'konin-jogan', category: 'sculpture', holder: '九州国立博物館', holderKind: 'museum', artist: '快慶' }),
+    ]
+    const result = generateQ9Question(target, pool, testEras, seededRandom(1))
+    expect(result?.slot).toBe('artist')
+    expect(result?.conditionText).not.toContain('博物館')
+  })
+
+  it('holder はあるが holderKind が無い（既存データ由来の想定）作品も holder スロットを使わない', () => {
+    // makeWork は holder を渡すとテストの便宜で holderKind: 'site' を自動付与するため、
+    // ここでは明示的に holderKind: undefined を上書きして「holderKind 未設定」を再現する。
+    const target = makeWork({
+      id: 'no-kind-target',
+      era: 'tenpyo',
+      category: 'sculpture',
+      holder: '興福寺',
+      holderKind: undefined,
+      artist: '運慶',
+    })
+    const pool: Work[] = [
+      target,
+      makeWork({ id: 'nk2', era: 'hakuho', category: 'sculpture', holder: '東大寺', holderKind: undefined, artist: '快慶' }),
+      makeWork({ id: 'nk3', era: 'asuka', category: 'sculpture', holder: '東寺', holderKind: undefined, artist: '快慶' }),
+      makeWork({ id: 'nk4', era: 'konin-jogan', category: 'sculpture', holder: '唐招提寺', holderKind: undefined, artist: '快慶' }),
+    ]
+    const result = generateQ9Question(target, pool, testEras, seededRandom(1))
+    expect(result?.slot).toBe('artist')
+  })
+})
+
+// M2b-14 (b): findSite（出土地）は holder より先に試す優先スロット。
+describe('findSite スロット（M2b-14: 「{findSite}で出土したもの」）', () => {
+  const findSiteTarget = makeWork({
+    id: 'fs-target',
+    era: 'genshi',
+    category: 'craft',
+    holder: '東京国立博物館',
+    holderKind: 'museum',
+    findSite: '青森県つがる市（亀ヶ岡遺跡）',
+  })
+  const findSitePool: Work[] = [
+    findSiteTarget,
+    makeWork({ id: 'fs2', era: 'hakuho', category: 'craft', holder: '十日町市博物館', holderKind: 'museum', findSite: '新潟県十日町市（笹山遺跡）' }),
+    makeWork({ id: 'fs3', era: 'asuka', category: 'craft', holder: '東京国立博物館', holderKind: 'museum', findSite: '群馬県太田市飯塚町' }),
+    makeWork({ id: 'fs4', era: 'konin-jogan', category: 'craft', holder: '広島県立歴史民俗資料館', holderKind: 'museum', findSite: '広島県（黒川遺跡）' }),
+  ]
+
+  it('findSite があれば holder（museum のため使えない）より先に findSite スロットが使われる', () => {
+    const result = generateQ9Question(findSiteTarget, findSitePool, testEras, seededRandom(1))
+    expect(result?.slot).toBe('findSite')
+    expect(result?.conditionText).toBe('青森県つがる市（亀ヶ岡遺跡）で出土したもの')
+  })
+
+  it('findSite の条件文は shortenValue（括弧内除去）を適用しない（遺跡名が消えない）', () => {
+    const result = generateQ9Question(findSiteTarget, findSitePool, testEras, seededRandom(1))
+    expect(result?.conditionText).toContain('（亀ヶ岡遺跡）')
+  })
+
+  it('findSite が無い作品では findSite を飛ばして次のスロットに進む', () => {
+    const noFindSiteTarget = makeWork({
+      id: 'nfs-target',
+      era: 'tenpyo',
+      category: 'craft',
+      holder: '東京国立博物館',
+      holderKind: 'museum',
+      artist: '尾形光琳',
+    })
+    const pool: Work[] = [
+      noFindSiteTarget,
+      makeWork({ id: 'nfs2', era: 'hakuho', category: 'craft', holder: '京都国立博物館', holderKind: 'museum', artist: '狩野永徳' }),
+      makeWork({ id: 'nfs3', era: 'asuka', category: 'craft', holder: '奈良国立博物館', holderKind: 'museum', artist: '狩野永徳' }),
+      makeWork({ id: 'nfs4', era: 'konin-jogan', category: 'craft', holder: '九州国立博物館', holderKind: 'museum', artist: '狩野永徳' }),
+    ]
+    const result = generateQ9Question(noFindSiteTarget, pool, testEras, seededRandom(1))
+    expect(result?.slot).toBe('artist')
+  })
+})
+
 describe('avoidSlots / preferredSlot オプション（修正の仕様: ask.slot・era 1セット1問まで）', () => {
   it('avoidSlots で指定したスロットは試さない（避けた結果 null になることもある）', () => {
     const result = generateQ9Question(eraOnlyTarget, eraOnlyPool, testEras, seededRandom(1), { avoidSlots: ['era'] })
@@ -186,10 +301,11 @@ describe('generateQ9QuestionFromIds（8章「二段構え」: writer 指定の a
 })
 
 describe('M2-41「絵を見れば分かる問題を出さない」: Q9 の条件スロットに外見スロットが無いこと', () => {
-  // Q9Slot（types.ts）は artist/era/holder/style/technique の5種のみ。姿勢・持ち物・表情・
-  // 向き・色・構図のような「画像を見れば判定できる」スロットは元々含まれていない
+  // Q9Slot（types.ts）は artist/era/holder/style/technique/findSite の6種のみ
+  // （findSite は M2b-14 で追加。出土地は知識でしか判定できないスロットのため許可リストに含む）。
+  // 姿勢・持ち物・表情・向き・色・構図のような「画像を見れば判定できる」スロットは元々含まれていない
   // （engine/q9.ts の SLOT_PRIORITY 定数を参照）。実装を変えずに固定するための回帰テスト。
-  const ALLOWED_SLOTS = new Set(['artist', 'era', 'holder', 'style', 'technique'])
+  const ALLOWED_SLOTS = new Set(['artist', 'era', 'holder', 'style', 'technique', 'findSite'])
   const FORBIDDEN_SLOT_WORDS = ['pose', 'posture', 'color', 'appearance', 'expression', 'composition']
 
   it('条件生成（generateQ9Question）が実際に使うスロットは常に許可された5種のいずれか', () => {

@@ -96,6 +96,16 @@ export interface Work {
   falseStatements: WorkFalseStatement[]
   /** 所蔵・安置先（寺院＋堂など）。Q9 の条件生成に使う（mock-exam-analysis.md T-C） */
   holder?: string | null
+  /** holder の種別（M2b-14）。'site' = 寺社・堂・遺跡・城など、現地保存を含む「場所」。
+   *  'museum' = 博物館・美術館・文庫・記念館・図書館・資料館・尚蔵館・国宝館・私設コレクション
+   *  など、収蔵先としての施設。Q9 の holder スロットは holderKind === 'site' の作品でしか
+   *  使わない（「東京国立博物館にあるものを選べ」のような入試に出ない設問を出さないため）。
+   *  holder が無い、または holderKind が無い作品は holder スロットを使わない。 */
+  holderKind?: 'site' | 'museum' | null
+  /** 出土地（例「青森県つがる市（亀ヶ岡遺跡）」）。holder が博物館等（holderKind: 'museum'）の
+   *  出土品で、現在の収蔵先と出土地が異なる作品に設定する（M2b-14）。Q9 の findSite スロットで
+   *  「{findSite}で出土したもの」という条件を作る（出土地の設問は入試に出るため）。 */
+  findSite?: string | null
   /** 絵巻・絵図などの主題（誰の物語か、何の場面か）。null 可 */
   subject?: string | null
   /** 語句の組合せ問題（T1/Q13）の素材。人物×技法・書物×作者・様式×建築・原料×産地など、
@@ -237,9 +247,10 @@ export interface Passage {
  */
 export type QuestionType = 'q1' | 'q2' | 'q3' | 'q4' | 'q6' | 'q8' | 'q9' | 'q10' | 'q12' | 'q13' | 'q14'
 
-/** Q9 の条件スロット（作者・時代文化・所蔵・様式・製法）。engine/q9.ts が生成ロジックを持つ
- *  （型はここで定義し、q9.ts から re-export する。types.ts が engine に依存しないため）。 */
-export type Q9Slot = 'artist' | 'era' | 'holder' | 'style' | 'technique'
+/** Q9 の条件スロット（作者・時代文化・所蔵・様式・製法・出土地）。engine/q9.ts が生成ロジックを持つ
+ *  （型はここで定義し、q9.ts から re-export する。types.ts が engine に依存しないため）。
+ *  findSite（M2b-14）: 出土地。holder（M2b-14）: holderKind === 'site' の作品でのみ使う。 */
+export type Q9Slot = 'artist' | 'era' | 'holder' | 'style' | 'technique' | 'findSite'
 
 /**
  * 回答の種類。'unknown' は4択の下の「わからない」ボタン（当てずっぽうで誤答選択肢を
