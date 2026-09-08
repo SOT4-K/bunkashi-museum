@@ -17,6 +17,7 @@ import {
 } from '../stages'
 import { reviewedEras, reviewedPassages, reviewedPlayableWorks, reviewedThemeSetPool } from './reviewedFixtures'
 import { seededRandom } from './testFixtures'
+import type { Question } from '../../types'
 
 describe('実データ（reviewed限定プール、DEV変数なし）: 15ワールドの面数表・ボス問数表', () => {
   it('reviewed の作品・テーマセットが実際に1件以上ある（fixture 自体が空でないことの前提確認）', () => {
@@ -313,4 +314,115 @@ describe('実データ（reviewed限定プール、DEV変数なし）: 15ワー�
   it('DIFFICULTY_TYPESが変わっていないことの前提確認（面数表の型構成の根拠）', () => {
     expect(DIFFICULTY_TYPES[1]).toEqual(['q1', 'q3'])
   })
+
+  it(
+    'M2b-09受け入れ条件（BOARD.md）: 全15ワールド・全面・ボスを複数seedで実データ生成し、' +
+      '画像型（Q1/Q2/Q3/Q9）の出題対象・選択肢（choiceWorks）に hasRealImage=false の作品が' +
+      '0件であることを直接assertする（reviewedPlayableWorksに無い作品＝画像なし。' +
+      'オーナー報告「画像が出ない」「4択のうち画像が1つしかなく正解が分かる」の再発防止）',
+    () => {
+      const imageEligibleIds = new Set(reviewedPlayableWorks.map((w) => w.id))
+      const IMAGE_TYPES = new Set(['q1', 'q2', 'q3', 'q9'])
+      const violations: string[] = []
+
+      function check(qs: Question[], where: string) {
+        for (const q of qs) {
+          if (!IMAGE_TYPES.has(q.type)) continue
+          if (!imageEligibleIds.has(q.work.id)) {
+            violations.push(`${where}: target ${q.work.id} (${q.type}) has no real image`)
+          }
+          for (const cw of q.choiceWorks ?? []) {
+            if (!imageEligibleIds.has(cw.id)) {
+              violations.push(`${where}: choice ${cw.id} in ${q.work.id}:${q.type} has no real image`)
+            }
+          }
+        }
+      }
+
+      for (const era of reviewedEras) {
+        const plan = buildEraStagePlan(era.id, reviewedPlayableWorks)
+        for (const difficulty of [1, 2, 3] as const) {
+          for (const seg of plan.segments) {
+            for (let seed = 0; seed < 5; seed++) {
+              const qs = buildStageQuestions(
+                era.id,
+                difficulty,
+                seg.segment,
+                reviewedThemeSetPool,
+                reviewedPlayableWorks,
+                reviewedEras,
+                seededRandom(seed),
+              )
+              check(qs, `${era.id}-${difficulty}-${seg.segment}(seed${seed})`)
+            }
+          }
+        }
+        for (let seed = 0; seed < 15; seed++) {
+          const boss = buildBossQuestions(
+            era.id,
+            reviewedPassages,
+            reviewedThemeSetPool,
+            reviewedPlayableWorks,
+            reviewedEras,
+            seededRandom(seed),
+          )
+          check(boss, `${era.id}-boss(seed${seed})`)
+        }
+      }
+      expect(violations).toEqual([])
+    },
+    90000,
+  )
+
+  it(
+    'M2b-09受け入れ条件（BOARD.md）: Q1/Q2 で画像が出ない問題が0件（対象自身が実画像を' +
+      '持つことを直接assertする。上のテストと同じ違反リストだが「target」側だけを' +
+      'Q1/Q2に絞って明示的に確認する）',
+    () => {
+      const imageEligibleIds = new Set(reviewedPlayableWorks.map((w) => w.id))
+      const violations: string[] = []
+
+      function check(qs: Question[], where: string) {
+        for (const q of qs) {
+          if (q.type !== 'q1' && q.type !== 'q2') continue
+          if (!imageEligibleIds.has(q.work.id)) {
+            violations.push(`${where}: ${q.type} target ${q.work.id} has no real image`)
+          }
+        }
+      }
+
+      for (const era of reviewedEras) {
+        const plan = buildEraStagePlan(era.id, reviewedPlayableWorks)
+        for (const difficulty of [1, 2, 3] as const) {
+          for (const seg of plan.segments) {
+            for (let seed = 0; seed < 5; seed++) {
+              const qs = buildStageQuestions(
+                era.id,
+                difficulty,
+                seg.segment,
+                reviewedThemeSetPool,
+                reviewedPlayableWorks,
+                reviewedEras,
+                seededRandom(seed),
+              )
+              check(qs, `${era.id}-${difficulty}-${seg.segment}(seed${seed})`)
+            }
+          }
+        }
+        for (let seed = 0; seed < 15; seed++) {
+          const boss = buildBossQuestions(
+            era.id,
+            reviewedPassages,
+            reviewedThemeSetPool,
+            reviewedPlayableWorks,
+            reviewedEras,
+            seededRandom(seed),
+          )
+          check(boss, `${era.id}-boss(seed${seed})`)
+        }
+      }
+      expect(violations).toEqual([])
+    },
+    90000,
+  )
 })

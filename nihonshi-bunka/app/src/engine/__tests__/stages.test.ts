@@ -32,7 +32,7 @@ import {
 // 一覧に対して行うため、名前空間import（* as）も別途取り込む。
 import * as stagesModule from '../stages'
 import { makeWork, seededRandom } from './testFixtures'
-import type { Era, EraStageProgress, Passage, Work } from '../../types'
+import type { Era, EraStageProgress, Passage, Question, Work } from '../../types'
 
 const eras: Era[] = [
   { id: 'e1', name: 'E1文化', period: '', order: 1, summary: '', detail: '', items: [{ text: 'e1item', category: 'literature' }] },
@@ -365,6 +365,91 @@ describe('buildBossQuestions（ボス長・誤答露出規則）', () => {
     expect(stats.exposed).toBe(4)
     expect(stats.rate).toBe(1)
   })
+})
+
+describe('M2b-09（画像なし作品混入バグの回帰防止）: pool（themeSetPool 相当。画像なし項目も含む）と' +
+  'imagePool（playableWorks 相当。画像あり作品のみ）を分ける。画像型（Q1/Q2/Q3/Q9）の出題対象・' +
+  '選択肢（choiceWorks）には imagePool に無い作品を一切使わない（オーナー報告「画像が出ない」' +
+  '「4択のうち画像が1つしかなく正解が分かる」の原因）。back-to-red確認: この describe の2件は' +
+  '是正前のコード（tryBuildStageQuestionForWork が pool のみを受け取り imagePool との区別が無い版）' +
+  'では実際に失敗することを確認済み', () => {
+  // e1 に4件の画像あり作品（richWorks4を再利用）＋2件の画像なし作品（pool側にのみ存在。
+  // facts/pairs/artist/style/holder/orderIndexはrichWorks4と同じだけ持たせ、
+  // 「画像さえあればQ1〜Q9すべて生成できるはずのデータ」であることを保証する
+  // ＝この2件がQ1/Q2/Q3/Q9に出てしまうこと自体がバグの再現になる）。
+  const imageWorks = richWorks4 // w1〜w4
+  const noImageWorks: Work[] = [fullWork('ni1', 91), fullWork('ni2', 92)]
+  const mixedPool: Work[] = [...imageWorks, ...noImageWorks]
+  const imageEligibleIds = new Set(imageWorks.map((w) => w.id))
+  const IMAGE_TYPES = new Set(['q1', 'q2', 'q3', 'q9'])
+
+  /** 画像型の出題対象・選択肢（choiceWorks）が imagePool に無い作品を含んでいたら文字列化して返す。 */
+  function collectViolations(qs: Question[]): string[] {
+    const out: string[] = []
+    for (const q of qs) {
+      if (!IMAGE_TYPES.has(q.type)) continue
+      if (!imageEligibleIds.has(q.work.id)) {
+        out.push(`target ${q.work.id} (${q.type}) は imagePool に無い（画像なし作品が出題対象）`)
+      }
+      for (const cw of q.choiceWorks ?? []) {
+        if (!imageEligibleIds.has(cw.id)) {
+          out.push(`choice ${cw.id} in ${q.work.id}:${q.type} は imagePool に無い（画像なし作品が選択肢）`)
+        }
+      }
+    }
+    return out
+  }
+
+  it(
+    'buildStageQuestions（面生成）: ★1（Q1/Q3）で画像なし作品が出題対象・選択肢のどちらにも現れない' +
+      '（是正前は誤答プールに mixedPool＝themeSetPool 相当をそのまま渡していたため、Q3 の' +
+      '選択肢（4枚の画像）に画像なし作品が混入し得た）',
+    () => {
+      const violations: string[] = []
+      for (let seed = 0; seed < 30; seed++) {
+        const qs = buildStageQuestions('e1', 1, 1, mixedPool, imageWorks, eras, seededRandom(seed))
+        violations.push(...collectViolations(qs))
+      }
+      expect(violations).toEqual([])
+    },
+  )
+
+  it(
+    'buildStageQuestions（面生成）: ★2（Q2/Q9含む）でも画像なし作品が出題対象・選択肢のどちらにも現れない',
+    () => {
+      const violations: string[] = []
+      for (let seed = 0; seed < 30; seed++) {
+        const qs = buildStageQuestions('e1', 2, 1, mixedPool, imageWorks, eras, seededRandom(seed))
+        violations.push(...collectViolations(qs))
+      }
+      expect(violations).toEqual([])
+    },
+  )
+
+  it(
+    'buildBossQuestions（最終補充パス）: 画像なし作品が Q1/Q2/Q3/Q9 の出題対象・選択肢のどちらにも' +
+      '現れない（是正前は最終補充パスが pool 全体（画像なし作品込み）から出題対象を選び、' +
+      'ALL_PER_WORK_TYPES に q1/q2/q3/q9 が含まれるため直接生成できてしまっていた）',
+    () => {
+      const passage: Passage = {
+        id: 'pmix',
+        era: 'e1',
+        title: 'Mix',
+        text: '本文。[[a|下線1]]',
+        sources: [],
+        underlines: [{ key: 'a', workIds: ['w1'] }],
+      }
+      const violations: string[] = []
+      for (let seed = 0; seed < 20; seed++) {
+        const boss = buildBossQuestions('e1', [passage], mixedPool, imageWorks, eras, seededRandom(seed))
+        // 最終補充パスまで実際に到達していることの前提確認（到達していなければこのテストは
+        // 何も検知できていないことになる。itemCount=4→目標10問、pass1/2だけでは届かない想定）。
+        expect(boss.length).toBeGreaterThan(6)
+        violations.push(...collectViolations(boss))
+      }
+      expect(violations).toEqual([])
+    },
+  )
 })
 
 describe('bossProgress（体力ゲージ用の進捗値。チケット規則6）', () => {

@@ -77,6 +77,19 @@ const ALL_PER_WORK_TYPES: QuestionType[] = [...DIFFICULTY_TYPES[1], ...DIFFICULT
   (t) => t !== 'q12' && t !== 'q14',
 )
 
+/**
+ * M2b-09（バグ修正）: 画像そのものを見せる／選択肢に画像を並べる型。engine/practiceSession.ts・
+ * engine/missLog.ts と同じ定数（意図的に同じ名前・同じ範囲で重複定義。他エンジンファイルも
+ * 各々ローカルに持つ既存の書き方に揃える）。
+ *  - q1: 対象の画像がヒーロー画像として出る（プレースホルダ SVG は作品名を描くため、
+ *    画像を持たない作品を対象にすると答えが直接見えてしまう）
+ *  - q2: 対象の画像がヒーロー画像として出る（選択肢自体はテキスト＝文化名だが対象は画像必須）
+ *  - q3・q9: 対象自身に加え、選択肢（choiceWorks）も画像として描画される
+ * （QuestionCard.tsx の showHeroImage・`type==='q3'||type==='q9'` 分岐参照）。
+ * この型を生成・出題する対象／誤答候補は必ず imagePool（画像あり作品のみ）から選ぶ。
+ */
+const IMAGE_DEPENDENT_TYPES: QuestionType[] = ['q1', 'q2', 'q3', 'q9']
+
 export const DIFFICULTY_LABELS: Record<Difficulty, string> = {
   1: '★1 見分ける',
   2: '★2 結びつける',
@@ -264,24 +277,31 @@ function buildWordPairQuestion(work: Work, pool: Work[], rng: RandomFn): Questio
 }
 
 /** その難易度の型（q12・q14を除く）の中から、まだこの作品で使っていない型を優先して
- *  1問だけ作る（同じ作品×同じ型は同じ呼び出し列の中で重複させない）。 */
+ *  1問だけ作る（同じ作品×同じ型は同じ呼び出し列の中で重複させない）。
+ *  M2b-09是正: 画像が要る型（IMAGE_DEPENDENT_TYPES）は、対象自身が imagePool にある
+ *  （＝画像を持つ）ときだけ候補にし、その型を作るときの pool 引数も imagePool に限定する
+ *  （practiceSession.ts・missLog.ts・themeSet.ts と同じ考え方）。それ以外の型は従来どおり
+ *  pool（themeSetPool 相当。画像なし項目も含む素材プール）を使う。 */
 function tryBuildStageQuestionForWork(
   work: Work,
   types: QuestionType[],
   pool: Work[],
+  imagePool: Work[],
   eras: Era[],
   rng: RandomFn,
   usedTypesForWork: Set<QuestionType>,
 ): Question | null {
+  const imageEligible = imagePool.some((w) => w.id === work.id)
   const candidates = shuffle(
-    types.filter((t) => !usedTypesForWork.has(t)),
+    types.filter((t) => !usedTypesForWork.has(t) && (imageEligible || !IMAGE_DEPENDENT_TYPES.includes(t))),
     rng,
   )
   for (const type of candidates) {
+    const usablePool = IMAGE_DEPENDENT_TYPES.includes(type) ? imagePool : pool
     let q: Question | null = null
-    if (type === 'q10') q = buildStatementPairQuestion(work, pool, rng)
-    else if (type === 'q13') q = buildWordPairQuestion(work, pool, rng)
-    else if (canGenerateType(type, work, pool, eras)) q = buildQuestion(work, type, pool, eras, false, rng)
+    if (type === 'q10') q = buildStatementPairQuestion(work, usablePool, rng)
+    else if (type === 'q13') q = buildWordPairQuestion(work, usablePool, rng)
+    else if (canGenerateType(type, work, usablePool, eras)) q = buildQuestion(work, type, usablePool, eras, false, rng)
     if (q) return q
   }
   return null
@@ -346,7 +366,7 @@ export function buildStageQuestions(
     const usedTypesForWork = new Set<QuestionType>()
     const perWork = doubledIds.has(work.id) ? 2 : 1
     for (let i = 0; i < perWork; i++) {
-      const q = tryBuildStageQuestionForWork(work, perWorkTypes, pool, eras, rng, usedTypesForWork)
+      const q = tryBuildStageQuestionForWork(work, perWorkTypes, pool, imagePool, eras, rng, usedTypesForWork)
       if (q) {
         questions.push(q)
         usedTypesForWork.add(q.type)
@@ -522,7 +542,7 @@ export function buildBossQuestions(
         for (const work of eraWorksAll) {
           if (built.length >= targetCount) break
           const usedTypes = usedTypesForWork.get(work.id) ?? new Set<QuestionType>()
-          const question = tryBuildStageQuestionForWork(work, ALL_PER_WORK_TYPES, pool, eras, rng, usedTypes)
+          const question = tryBuildStageQuestionForWork(work, ALL_PER_WORK_TYPES, pool, imagePool, eras, rng, usedTypes)
           if (!question) continue
           usedTypes.add(question.type)
           usedTypesForWork.set(work.id, usedTypes)
