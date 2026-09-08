@@ -18,6 +18,7 @@ import { buildMissReviewSession, type MissReviewItem } from './engine/missLog'
 import { RETRY_XP_MULTIPLIER } from './engine/progress'
 import {
   buildBossQuestions,
+  buildEraStagePlan,
   buildStageQuestions,
   getEraStageProgress,
   getSegmentState,
@@ -118,15 +119,21 @@ export default function App() {
     setActiveMissReview(items)
   }
 
-  /** 模試タブ（M2b-07）「その回の間違いの復習」: missLog を workId でその回の分だけ絞り込む
-   *  （既存 buildMissReviewSession を流用。チケット「既存missLogを流用」）。 */
-  function goExamMissReview(missedWorkIds: string[]) {
+  /**
+   * 模試タブ（M2b-07）「その回の間違いの復習」: missLog を workId でその回の分だけ絞り込む
+   * （既存 buildMissReviewSession を流用。チケット「既存missLogを流用」）。
+   * M2b-99c軽5是正: missedWorkIds は非0件でも missLog 側で既に卒業済み（2回連続正解等）だと
+   * items が0件になりうる（死にボタン）。戻り値で成否を返し、ExamScreen側でメッセージを
+   * 出せるようにする（false=復習する問題が無かった）。
+   */
+  function goExamMissReview(missedWorkIds: string[]): boolean {
     const idSet = new Set(missedWorkIds)
     const filtered = progress.missLog.filter((e) => idSet.has(e.workId))
     const items = buildMissReviewSession(filtered, worksById, themeSetPool, playableWorks, eras, undefined, filtered.length)
-    if (items.length === 0) return
+    if (items.length === 0) return false
     startSession(todayIso())
     setActiveMissReview(items)
+    return true
   }
 
   /** worldIndex（0始まり）を含む StageRef を組み立てる（stageShortLabel の入力用。M2b-05）。 */
@@ -141,7 +148,9 @@ export default function App() {
    *  見出しは「1-1 ★★ 天平文化」形式（stageShortLabel＋era名。チケット規則2の欄外注記）。 */
   function buildStageFor(eraId: string, key: StageLocalKey): { title: string; questions: Question[] } {
     const eraName = eras.find((e) => e.id === eraId)?.name ?? eraId
-    const title = `${stageShortLabel(toStageRef(eraId, key))} ${eraName}`
+    // M2b-99c中6: 面番号はワールド内の通し番号（★1〜3で共通のsegments.lengthを使う）。
+    const segmentsPerWorld = buildEraStagePlan(eraId, playableWorks).segments.length
+    const title = `${stageShortLabel(toStageRef(eraId, key), segmentsPerWorld)} ${eraName}`
     if (key.kind === 'boss') {
       return { title, questions: buildBossQuestions(eraId, passages, themeSetPool, playableWorks, eras) }
     }
@@ -208,7 +217,9 @@ export default function App() {
 
   /** 模試の1回分が終わったときに記録し、模試タブに戻る（ホームには戻らない）。 */
   function handleExamComplete(correctCount: number, total: number, elapsedSeconds: number, missedWorkIds: string[]) {
-    const record: MockExamRecord = { date: todayIso(), elapsedSeconds, correct: correctCount, total, missedWorkIds }
+    // M2b-99c軽4是正: BOARD.mdの「日時」に合わせ、日付のみ(todayIso)ではなく時刻を含む
+    // ISO日時を記録する（SRSの間隔計算に使うtodayIsoとは別軸。表示側はExamScreen.tsx）。
+    const record: MockExamRecord = { date: new Date().toISOString(), elapsedSeconds, correct: correctCount, total, missedWorkIds }
     recordExamResult(record)
   }
 

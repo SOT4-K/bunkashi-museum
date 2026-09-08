@@ -3,7 +3,7 @@ import styles from './HomeScreen.module.css'
 import { SettingsSection } from './SettingsSection'
 import { isItemMastered } from '../engine/srs'
 import { titleForLevel } from '../engine/progress'
-import { nextStageRef, stageRefToLocalKey, stageShortLabel, type StageLocalKey } from '../engine/stages'
+import { buildEraStagePlan, nextStageRef, stageRefToLocalKey, stageShortLabel, type StageLocalKey } from '../engine/stages'
 import { useStandalone } from '../hooks/useStandalone'
 import type { Era, ProgressState, Work } from '../types'
 
@@ -85,6 +85,8 @@ export function HomeScreen({
   // なら null。9/8オーナー確認済みの既定⑥「15ワールド撃破で称号『館長』の演出のみ」）。
   const nextRef = onSelectStage ? nextStageRef(eras, works, progress.stages) : null
   const nextEraName = nextRef ? (eras.find((e) => e.id === nextRef.eraId)?.name ?? nextRef.eraId) : ''
+  // M2b-99c中6: 面番号はワールド内の通し番号（★1〜3で共通のsegments.lengthを使う）。
+  const nextSegmentsPerWorld = nextRef ? buildEraStagePlan(nextRef.eraId, works).segments.length : 0
   const allWorldsCleared = Boolean(onSelectStage) && nextRef === null && eras.length > 0 && works.length > 0
 
   return (
@@ -114,7 +116,7 @@ export function HomeScreen({
         >
           <span className={styles.nextStageLabel}>次にクリアする面</span>
           <span className={styles.nextStageTitle}>
-            {stageShortLabel(nextRef)} {nextEraName}
+            {stageShortLabel(nextRef, nextSegmentsPerWorld)} {nextEraName}
           </span>
           <span className={styles.nextStagePlay}>プレイ</span>
         </button>

@@ -69,6 +69,14 @@ export const DIFFICULTY_TYPES: Record<Difficulty, QuestionType[]> = {
   3: ['q8', 'q10', 'q13', 'q14'],
 }
 
+/** buildBossQuestions の最終補充パス用（M2b-99c中1）。q12（passage下線頼みで常に0件。
+ *  上部の注記参照）・q14（3作品またがりで単一作品ループでは扱えない。buildOrderQuestions
+ *  専用）を除いた「1作品から直接1問作れる型」の全体集合。tryBuildStageQuestionForWork
+ *  （session.buildQuestion 経由）で生成できる型はこの範囲。 */
+const ALL_PER_WORK_TYPES: QuestionType[] = [...DIFFICULTY_TYPES[1], ...DIFFICULTY_TYPES[2], ...DIFFICULTY_TYPES[3]].filter(
+  (t) => t !== 'q12' && t !== 'q14',
+)
+
 export const DIFFICULTY_LABELS: Record<Difficulty, string> = {
   1: '★1 見分ける',
   2: '★2 結びつける',
@@ -131,10 +139,17 @@ export interface StageSegmentPlan {
   segment: number
   /** この面の対象作品 id（年代順固定。1-1なら常に同じ10件、再挑戦しても変わらない）。 */
   workIds: string[]
-  /** true のとき、work 1件につき2問（型を変えて）生成し、10件未満の面を10問に近づける
-   *  （チケット規則3: 端数が5件以上、または era 全体がそもそも10件未満のときの規則。
-   *  数式上はどちらも同じ「2×workIds.length」に帰着するため実装を分けていない）。 */
-  doubled: boolean
+  /**
+   * workIds の先頭から何件を「2問（型を変えて2回）」にするか（0件なら全作品1問）。
+   * M2b-99c中5是正: 以前は remainder>=5 のとき無条件で全件2問にしており、N=9で18問など
+   * 「10問に近づける」の意図と逆に10から遠ざかっていた。修正後は
+   * remainder+extraDoubleCount=10（＝questionCountForSegmentが常に10）になるよう
+   * extraDoubleCount=10-remainderの作品だけを2問にする（実行セッションの解釈確定。
+   * BOARD.md M2b-99c 中5参照）。ただし era全体がそもそも10件未満（N<5暫定規則、
+   * fullChunks===0 && remainder<5）は decisions.md 2026-09-08 の「2N問」を維持するため
+   * extraDoubleCount=workIds.length（全件2問）のまま変えない。
+   */
+  extraDoubleCount: number
 }
 
 export interface EraStagePlan {
@@ -165,11 +180,15 @@ function sortByOrderIndex(works: Work[]): Work[] {
 }
 
 /**
- * 10件ずつの固定分割＋端数規則（チケット規則3）。
- *  - 余りが無い（N が10の倍数）: フルチャンクのみ。
- *  - 余り(remainder) < 5 かつ既にフルチャンクがある: 前の面に併合（1面にする）。
- *  - 余り(remainder) >= 5、または era 全体がそもそも10件未満（フルチャンク0でremainder=N）:
- *    その面を doubled にする（呼び出し側が1作品2問で埋める）。
+ * 10件ずつの固定分割＋端数規則（チケット規則3、端数の問数配分はM2b-99c中5是正）。
+ *  - 余りが無い（N が10の倍数）: フルチャンクのみ（extraDoubleCount=0）。
+ *  - 余り(remainder) < 5 かつ既にフルチャンクがある: 前の面に併合（1面にする。
+ *    併合後の面は10+remainder件で10問以上あるため2問化はしない＝extraDoubleCount=0）。
+ *  - 余り(remainder) < 5 かつ フルチャンクが無い（era全体がN<5）: decisions.md
+ *    2026-09-08の「N<5暫定規則: 2N問」を維持し、全件2問（extraDoubleCount=remainder）。
+ *  - 余り(remainder) >= 5（フルチャンクの有無を問わない）: 目標10問に近づける
+ *    （M2b-99c中5）。extraDoubleCount = 10-remainder 件だけを2問にし、
+ *    合計が remainder + (10-remainder) = 10 になるようにする。
  */
 function partitionIntoSegments(sortedWorks: Work[]): StageSegmentPlan[] {
   const n = sortedWorks.length
@@ -181,7 +200,7 @@ function partitionIntoSegments(sortedWorks: Work[]): StageSegmentPlan[] {
     segments.push({
       segment: i + 1,
       workIds: sortedWorks.slice(i * STAGE_CHUNK_SIZE, i * STAGE_CHUNK_SIZE + STAGE_CHUNK_SIZE).map((w) => w.id),
-      doubled: false,
+      extraDoubleCount: 0,
     })
   }
   if (remainder > 0) {
@@ -189,19 +208,21 @@ function partitionIntoSegments(sortedWorks: Work[]): StageSegmentPlan[] {
       const last = segments[segments.length - 1]
       last.workIds = [...last.workIds, ...sortedWorks.slice(fullChunks * STAGE_CHUNK_SIZE).map((w) => w.id)]
     } else {
+      const remainderIds = sortedWorks.slice(fullChunks * STAGE_CHUNK_SIZE).map((w) => w.id)
+      const extraDoubleCount = fullChunks === 0 && remainder < 5 ? remainder : STAGE_CHUNK_SIZE - remainder
       segments.push({
         segment: segments.length + 1,
-        workIds: sortedWorks.slice(fullChunks * STAGE_CHUNK_SIZE).map((w) => w.id),
-        doubled: true,
+        workIds: remainderIds,
+        extraDoubleCount,
       })
     }
   }
   return segments
 }
 
-/** 面の目標問題数（doubled なら2倍。チケット規則3）。 */
+/** 面の目標問題数（先頭 extraDoubleCount 件は2問、残りは1問。チケット規則3・M2b-99c中5）。 */
 export function questionCountForSegment(seg: StageSegmentPlan): number {
-  return seg.doubled ? seg.workIds.length * 2 : seg.workIds.length
+  return seg.workIds.length + seg.extraDoubleCount
 }
 
 /** ワールド（era）のステージ計画を組み立てる（純粋にデータの分割のみ。設問は作らない）。
@@ -315,11 +336,15 @@ export function buildStageQuestions(
   )
   const targetCount = questionCountForSegment(seg)
   const perWorkTypes = DIFFICULTY_TYPES[difficulty].filter((t) => t !== 'q12' && t !== 'q14')
-  const perWork = seg.doubled ? 2 : 1
+  // M2b-99c中5: どの作品を2問にするかは seg.workIds（年代順固定）の先頭 extraDoubleCount 件で
+  // 決める（1-1が常に同じ内容になる要件を保つため、出題順シャッフル後の segWorks ではなく
+  // 分割計画側の順序で決定的に選ぶ）。
+  const doubledIds = new Set(seg.workIds.slice(0, seg.extraDoubleCount))
 
   const questions: Question[] = []
   for (const work of segWorks) {
     const usedTypesForWork = new Set<QuestionType>()
+    const perWork = doubledIds.has(work.id) ? 2 : 1
     for (let i = 0; i < perWork; i++) {
       const q = tryBuildStageQuestionForWork(work, perWorkTypes, pool, eras, rng, usedTypesForWork)
       if (q) {
@@ -471,6 +496,42 @@ export function buildBossQuestions(
         for (const id of questionExposedWorkIds(question)) exposedIds.add(id)
       }
     }
+
+    // M2b-99c中1: 上記2パスでも目標問数に届かないワールド（実測: insei/kitayama/momoyama/
+    // higashiyama/kanei/genroku/kasei。fact-check-m2b-v2.md参照）向けの改善。「同一作品×別の
+    // 問題型の組み合わせを増やす」（チケット文面の例）を採用し、既に使った作品でも
+    // まだ使っていない型でなら再登場を許す（同じ作品×同じ型の完全重複はしない＝出題の質は
+    // 落とさない）。usedTypesForWork は既に built に入っている全問題から作品ごとの使用済み
+    // 型を復元する（テーマセット由来の問題も含めて漏れなく重複回避するため）。
+    if (built.length < targetCount) {
+      const usedTypesForWork = new Map<string, Set<QuestionType>>()
+      for (const q of built) {
+        const set = usedTypesForWork.get(q.work.id) ?? new Set<QuestionType>()
+        set.add(q.type)
+        usedTypesForWork.set(q.work.id, set)
+      }
+      const eraWorksAll = shuffle(
+        pool.filter((w) => w.era === eraId),
+        rng,
+      )
+      // 1周で複数の型を使い切れる作品もあるため、進展がある限り複数周する
+      // （itemCount・型集合の大きさはどちらも高々十数件のため計算量は問題にならない）。
+      let progressed = true
+      while (built.length < targetCount && progressed) {
+        progressed = false
+        for (const work of eraWorksAll) {
+          if (built.length >= targetCount) break
+          const usedTypes = usedTypesForWork.get(work.id) ?? new Set<QuestionType>()
+          const question = tryBuildStageQuestionForWork(work, ALL_PER_WORK_TYPES, pool, eras, rng, usedTypes)
+          if (!question) continue
+          usedTypes.add(question.type)
+          usedTypesForWork.set(work.id, usedTypes)
+          built.push(question)
+          for (const id of questionExposedWorkIds(question)) exposedIds.add(id)
+          progressed = true
+        }
+      }
+    }
   }
   return built
 }
@@ -538,9 +599,15 @@ function sameLocalKey(ref: StageRef, key: StageLocalKey): boolean {
 }
 
 /** 1ワールド分の直列シーケンス: ★1の面を面番号順→★2→★3→ボス（チケット規則1・3）。
- *  ★1〜3は同じ面数（buildEraStagePlan.segments が共通）。 */
+ *  ★1〜3は同じ面数（buildEraStagePlan.segments が共通）。
+ *  M2b-99c中7: 対象作品0件のワールド（itemCount===0。将来のM2c-04でコンテンツが
+ *  増減した際に起こりうる）は面もボスも作れない（buildStageQuestions/buildBossQuestions
+ *  はどちらも空配列を返す）ため、そのままシーケンスに乗せると誰にも倒せないボスで
+ *  以降全ワールドが恒久的に詰む。シーケンスから丸ごと除外する（＝「自動クリア」相当。
+ *  isWorldUnlocked側の対応と対で見ること）。 */
 function worldStageSequence(eraId: string, worldIndex: number, imagePool: Work[]): StageRef[] {
   const plan = buildEraStagePlan(eraId, imagePool)
+  if (plan.itemCount === 0) return []
   const refs: StageRef[] = []
   for (const difficulty of [1, 2, 3] as Difficulty[]) {
     for (const seg of plan.segments) {
@@ -607,20 +674,47 @@ export function stageRefToLocalKey(ref: StageRef): StageLocalKey {
   return ref.kind === 'boss' ? { kind: 'boss' } : { kind: 'segment', difficulty: ref.difficulty, segment: ref.segment }
 }
 
-/** UI表記「ワールド番号-面番号＋★の数」（M2b-05担当、チケット規則2の欄外注記どおりここに置く）。
- *  例: {kind:'segment', worldIndex:0, difficulty:2, segment:1} → "1-1 ★★"、
- *      {kind:'boss', worldIndex:0} → "1 ボス"。worldIndex は0始まりなので表示は+1する。 */
-export function stageShortLabel(ref: StageRef): string {
-  const world = ref.worldIndex + 1
-  return ref.kind === 'boss' ? `${world} ボス` : `${world}-${ref.segment} ${'★'.repeat(ref.difficulty)}`
+/**
+ * ワールド内の通し面番号（M2b-99c中6是正）。以前は segment が★1〜3それぞれで1から
+ * 振り直されるため、全難易度が同じ「1-1」になっていた（BOARD.mdの「1-1→1-2→…」という
+ * 通し表記と食い違っていた）。segmentsPerWorld（そのワールドの buildEraStagePlan(...)
+ * .segments.length。★1〜3で共通＝チケット規則3）を使い、★1の面がそのまま1,2,…、
+ * ★2の面がsegmentsPerWorld+1,…と続く通し番号にする。
+ */
+export function overallSegmentNumber(difficulty: Difficulty, segment: number, segmentsPerWorld: number): number {
+  return (difficulty - 1) * segmentsPerWorld + segment
 }
 
-/** ワールド（worldIndex、0始まり）が解禁されているか。0番目は常に解禁。以降は直前ワールドの
- *  ボス撃破が条件（マップの雲演出向け。M2b-06担当だが判定はここに置く）。 */
-export function isWorldUnlocked(worldIndex: number, eras: Era[], stages: Record<string, EraStageProgress>): boolean {
+/** UI表記「ワールド番号-面番号＋★の数」（M2b-05担当、チケット規則2の欄外注記どおりここに置く。
+ *  面番号はM2b-99c中6是正でワールド内の通し番号）。
+ *  例: segmentsPerWorld=3 のとき {kind:'segment', worldIndex:0, difficulty:2, segment:1} →
+ *  "1-4 ★★"（★1の3面ぶん(1,2,3)の次の4）、{kind:'boss', worldIndex:0} → "1 ボス"。
+ *  worldIndex は0始まりなので表示は+1する。segmentsPerWorld は呼び出し側が
+ *  buildEraStagePlan(eraId, imagePool).segments.length を渡す（boss には無関係な引数）。 */
+export function stageShortLabel(ref: StageRef, segmentsPerWorld: number): string {
+  const world = ref.worldIndex + 1
+  if (ref.kind === 'boss') return `${world} ボス`
+  const overall = overallSegmentNumber(ref.difficulty, ref.segment, segmentsPerWorld)
+  return `${world}-${overall} ${'★'.repeat(ref.difficulty)}`
+}
+
+/**
+ * ワールド（worldIndex、0始まり）が解禁されているか。0番目は常に解禁。以降は直前ワールドの
+ * ボス撃破が条件（マップの雲演出向け。M2b-06担当だが判定はここに置く）。
+ * M2b-99c中7: 対象作品0件のワールドはボスを倒しようがない（worldStageSequenceでも
+ * シーケンスから除外している）ため、次ワールドを詰まらせないよう「自動クリア」扱いにして
+ * 遡る。0件ワールドが連続していても、実プレイで倒せる直近のワールドまで遡って判定する
+ * （見つからなければ＝それより前が全て0件＝先頭ワールド相当として解禁する）。
+ */
+export function isWorldUnlocked(worldIndex: number, eras: Era[], imagePool: Work[], stages: Record<string, EraStageProgress>): boolean {
   if (worldIndex <= 0) return true
   const worlds = worldOrder(eras)
-  const prevEraId = worlds[worldIndex - 1]
-  if (prevEraId === undefined) return false
-  return getEraStageProgress(stages, prevEraId).boss.cleared
+  for (let i = worldIndex - 1; i >= 0; i--) {
+    const eraId = worlds[i]
+    if (eraId === undefined) return false
+    const itemCount = imagePool.filter((w) => w.era === eraId).length
+    if (itemCount === 0) continue
+    return getEraStageProgress(stages, eraId).boss.cleared
+  }
+  return true
 }

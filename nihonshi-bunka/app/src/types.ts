@@ -419,7 +419,8 @@ export interface MissLogEntry {
  * 突き合わせて復習セッションを作る。engine/missLog.ts の buildMissReviewSession を流用）。
  */
 export interface MockExamRecord {
-  /** 実施日（ISO date）。 */
+  /** 実施日時（ISO 8601 日時。M2b-99c軽4是正: 以前は日付のみでBOARD.mdの「日時」という
+   *  文言と食い違っていた。App.tsx で `new Date().toISOString()` を渡す）。 */
   date: string
   /** 所要時間（秒。カウントアップ計時の結果）。 */
   elapsedSeconds: number

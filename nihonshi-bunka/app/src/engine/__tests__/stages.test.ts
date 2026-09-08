@@ -19,6 +19,7 @@ import {
   isStageUnlocked,
   isWorldUnlocked,
   nextStageRef,
+  overallSegmentNumber,
   questionCountForSegment,
   segmentKey,
   stageRefKey,
@@ -27,6 +28,9 @@ import {
   stageUnlockBoundary,
   worldOrder,
 } from '../stages'
+// M2b-99c中3: 「ワープ相当のAPIが無いこと」の検査を実モジュールの実際のエクスポート
+// 一覧に対して行うため、名前空間import（* as）も別途取り込む。
+import * as stagesModule from '../stages'
 import { makeWork, seededRandom } from './testFixtures'
 import type { Era, EraStageProgress, Passage, Work } from '../../types'
 
@@ -116,49 +120,57 @@ describe('bossQuestionCount（チケット規則4: N≤15→10問、N>15→20問
   })
 })
 
-describe('buildEraStagePlan / partitionIntoSegments（チケット規則3: 10件ずつ固定分割・端数規則）', () => {
-  it('N<5（4件）: フルチャンク無し・1面のみ・doubled=true（暫定規則）', () => {
+describe('buildEraStagePlan / partitionIntoSegments（チケット規則3: 10件ずつ固定分割・端数規則。M2b-99c中5で端数の配分を是正）', () => {
+  it('N<5（4件）: フルチャンク無し・1面のみ・全件2問（N<5暫定規則。decisions.md 2026-09-08「2N問」を維持）', () => {
     const plan = buildEraStagePlan('e1', richWorks4)
     expect(plan.itemCount).toBe(4)
     expect(plan.segments).toHaveLength(1)
-    expect(plan.segments[0]).toEqual({ segment: 1, workIds: richWorks4.map((w) => w.id), doubled: true })
+    expect(plan.segments[0]).toEqual({ segment: 1, workIds: richWorks4.map((w) => w.id), extraDoubleCount: 4 })
     expect(questionCountForSegment(plan.segments[0])).toBe(8) // 2N = 8
   })
 
-  it('5<=N<10（7件）: フルチャンク無し・1面のみ・doubled=true（端数規則、r=N=7>=5）', () => {
+  it('5<=N<10（7件）: フルチャンク無し・1面のみ・M2b-99c中5是正で10問に近づける（3件だけ2問・4件は1問）', () => {
     const plan = buildEraStagePlan('e1', richWorks7)
     expect(plan.segments).toHaveLength(1)
-    expect(plan.segments[0].doubled).toBe(true)
     expect(plan.segments[0].workIds).toHaveLength(7)
-    expect(questionCountForSegment(plan.segments[0])).toBe(14) // 2×7
+    expect(plan.segments[0].extraDoubleCount).toBe(3) // 10-7
+    expect(questionCountForSegment(plan.segments[0])).toBe(10) // 7+3=10（是正前は2×7=14だった）
   })
 
-  it('N=20（端数なし）: 2面とも10件・doubled=false', () => {
+  it('N=9（端数規則の境界、tenpyo/kaseiの実データ相当）: 1件だけ2問・10問ちょうど', () => {
+    const richWorks9 = Array.from({ length: 9 }, (_, i) => fullWork(`t${i + 1}`, i + 1))
+    const plan = buildEraStagePlan('e1', richWorks9)
+    expect(plan.segments).toHaveLength(1)
+    expect(plan.segments[0].extraDoubleCount).toBe(1) // 10-9
+    expect(questionCountForSegment(plan.segments[0])).toBe(10) // 是正前は2×9=18だった
+  })
+
+  it('N=20（端数なし）: 2面とも10件・2問化なし', () => {
     const plan = buildEraStagePlan('e1', richWorks20)
     expect(plan.segments).toHaveLength(2)
     expect(plan.segments[0].workIds).toHaveLength(10)
     expect(plan.segments[1].workIds).toHaveLength(10)
-    expect(plan.segments.every((s) => !s.doubled)).toBe(true)
+    expect(plan.segments.every((s) => s.extraDoubleCount === 0)).toBe(true)
     // 1-1（segment 1）は常に同じ10作品（orderIndex昇順の先頭10件）
     expect(plan.segments[0].workIds).toEqual(richWorks20.slice(0, 10).map((w) => w.id))
   })
 
-  it('N=23（端数3件<5）: 端数は前の面に併合され、2面目は13件・doubled=false', () => {
+  it('N=23（端数3件<5）: 端数は前の面に併合され、2面目は13件・2問化なし', () => {
     const plan = buildEraStagePlan('e1', richWorks23)
     expect(plan.segments).toHaveLength(2)
     expect(plan.segments[0].workIds).toHaveLength(10)
     expect(plan.segments[1].workIds).toHaveLength(13)
-    expect(plan.segments.every((s) => !s.doubled)).toBe(true)
+    expect(plan.segments.every((s) => s.extraDoubleCount === 0)).toBe(true)
   })
 
-  it('N=26（端数6件>=5）: 3面目は独立してdoubled=true・6件×2=12問', () => {
+  it('N=26（端数6件>=5）: 3面目は独立し、10問に近づける（4件だけ2問・2件は1問）', () => {
     const plan = buildEraStagePlan('e1', richWorks26)
     expect(plan.segments).toHaveLength(3)
     expect(plan.segments[0].workIds).toHaveLength(10)
     expect(plan.segments[1].workIds).toHaveLength(10)
     expect(plan.segments[2].workIds).toHaveLength(6)
-    expect(plan.segments[2].doubled).toBe(true)
-    expect(questionCountForSegment(plan.segments[2])).toBe(12)
+    expect(plan.segments[2].extraDoubleCount).toBe(4) // 10-6
+    expect(questionCountForSegment(plan.segments[2])).toBe(10) // 是正前は2×6=12だった
   })
 
   it('★1〜3は同じ分割・同じ面数（segmentsは難易度に依存しない共通データ）', () => {
@@ -273,13 +285,19 @@ describe('buildBossQuestions（ボス長・誤答露出規則）', () => {
     ],
   }
 
-  it('N=4（≤15）はボス10問固定を目標にするが、候補が4作品しかなければ4問止まり', () => {
-    const boss = buildBossQuestions('e1', [passageX, passageY], richWorks4, richWorks4, eras, seededRandom(1))
-    expect(boss.length).toBe(4)
-    const ids = boss.map((q) => q.work.id)
-    expect(new Set(ids).size).toBe(4)
-    for (const id of ['w1', 'w2', 'w3', 'w4']) expect(ids).toContain(id)
-  })
+  it(
+    'M2b-99c中1是正: N=4（≤15）はボス10問目標。候補が4作品しかなくても、同一作品×別の型の' +
+      '組み合わせ（最終補充パス）で目標の10問に到達する（同じ作品×同じ型の完全重複はしない。' +
+      '是正前は4問止まりだった＝insei/kitayama/momoyama等の実データ回帰と同じ原因）',
+    () => {
+      const boss = buildBossQuestions('e1', [passageX, passageY], richWorks4, richWorks4, eras, seededRandom(1))
+      expect(boss.length).toBe(10)
+      const ids = boss.map((q) => q.work.id)
+      for (const id of ['w1', 'w2', 'w3', 'w4']) expect(ids).toContain(id)
+      const pairKeys = boss.map((q) => `${q.work.id}:${q.type}`)
+      expect(new Set(pairKeys).size).toBe(pairKeys.length) // 同じ作品×同じ型の完全重複は無い
+    },
+  )
 
   it('count を明示すれば上書きできる（テスト用）', () => {
     const boss = buildBossQuestions('e1', [passageX, passageY], richWorks4, richWorks4, eras, seededRandom(1), 2)
@@ -317,22 +335,28 @@ describe('buildBossQuestions（ボス長・誤答露出規則）', () => {
     expect(seenPassageIds.has('p2')).toBe(true)
   })
 
-  it('1本のpassage内で同じ作品を対象にする下線が複数あっても、ボスの中で重複しない（実データで検出したケースの再現）', () => {
-    const dup: Passage = {
-      id: 'pdup',
-      era: 'e1',
-      title: 'Dup',
-      text: '本文。[[a|下線1]][[b|下線2]]',
-      sources: [],
-      underlines: [
-        { key: 'a', workIds: ['w1'] },
-        { key: 'b', workIds: ['w1'] }, // 同じ作品を2つの下線が指す
-      ],
-    }
-    const boss = buildBossQuestions('e1', [dup, passageY], richWorks4, richWorks4, eras, seededRandom(1))
-    const ids = boss.map((q) => q.work.id)
-    expect(new Set(ids).size).toBe(ids.length)
-  })
+  it(
+    '1本のpassage内で同じ作品を対象にする下線が複数あっても、同じ作品×同じ型の完全重複はしない' +
+      '（実データで検出したケースの再現。M2b-99c中1是正後は最終補充パスにより目標問数まで' +
+      '同一作品×別の型の組み合わせが入りうるため、検査は「作品idの一意性」ではなく' +
+      '「作品×型の組の一意性」に変更する）',
+    () => {
+      const dup: Passage = {
+        id: 'pdup',
+        era: 'e1',
+        title: 'Dup',
+        text: '本文。[[a|下線1]][[b|下線2]]',
+        sources: [],
+        underlines: [
+          { key: 'a', workIds: ['w1'] },
+          { key: 'b', workIds: ['w1'] }, // 同じ作品を2つの下線が指す
+        ],
+      }
+      const boss = buildBossQuestions('e1', [dup, passageY], richWorks4, richWorks4, eras, seededRandom(1))
+      const pairKeys = boss.map((q) => `${q.work.id}:${q.type}`)
+      expect(new Set(pairKeys).size).toBe(pairKeys.length)
+    },
+  )
 
   it('bossExposureRate: 4作品しかないワールドで、ボス4問なら全項目が露出する（total=4, exposed=4, rate=1）', () => {
     const boss = buildBossQuestions('e1', [passageX, passageY], richWorks4, richWorks4, eras, seededRandom(1))
@@ -397,10 +421,75 @@ describe('直列解禁（ワープなし）', () => {
     // 「boss.cleared」だけを見る isWorldUnlocked に従うため true になる点はチケット文面
     // どおり（＝ワープという“経路”自体が無いことの確認であり、boss.clearedフィールドの
     // 意味は変えていない）。
-    expect(isWorldUnlocked(1, eras, bossClearedOnly)).toBe(true)
+    expect(isWorldUnlocked(1, eras, imagePool, bossClearedOnly)).toBe(true)
     // 一方、e1自身の★1〜3はこの状態でも直列判定（前が全てクリア済みか）でしか解禁されない。
     expect(isStageUnlocked('e1', { kind: 'segment', difficulty: 1, segment: 1 }, eras, imagePool, bossClearedOnly)).toBe(true) // ★1-1は常に解禁（先頭ワールドの先頭面）
     expect(isStageUnlocked('e1', { kind: 'segment', difficulty: 2, segment: 1 }, eras, imagePool, bossClearedOnly)).toBe(false) // ★1-1未クリアのため
+  })
+
+  describe('M2b-99c中7: 対象作品0件のワールドへの防御（将来のM2c-04でコンテンツが増減した際の回帰防止）', () => {
+    // e1・e3に作品があり、e2は0件（e4も0件のまま。この describe では未使用）。
+    const withGapImagePool: Work[] = [...richWorks4, makeWork({ id: 'g1', era: 'e3', status: 'reviewed', orderIndex: 100 })]
+
+    it('worldStageSequence（fullStageSequence経由）は0件ワールド（e2）を丸ごと除外する', () => {
+      const seq = fullStageSequence(eras, withGapImagePool)
+      expect(seq.some((r) => r.eraId === 'e2')).toBe(false)
+      // e1（4件）の4件＋e3（1件、N<5暫定規則で2問=1面）の4件＝8件のみ（e4は0件で同様に除外）。
+      expect(seq.filter((r) => r.eraId === 'e1')).toHaveLength(4)
+      expect(seq.filter((r) => r.eraId === 'e3')).toHaveLength(4)
+      expect(seq).toHaveLength(8)
+    })
+
+    it('isStageUnlocked: e1のボスをクリアすれば、間の0件ワールド(e2)を挟んでもe3の★1-1が直接解禁される', () => {
+      const e1Cleared: Record<string, EraStageProgress> = {
+        e1: {
+          segments: {
+            [segmentKey(1, 1)]: { cleared: true, bestScore: 8, clearedAt: 'd' },
+            [segmentKey(2, 1)]: { cleared: true, bestScore: 8, clearedAt: 'd' },
+            [segmentKey(3, 1)]: { cleared: true, bestScore: 8, clearedAt: 'd' },
+          },
+          boss: { cleared: true, bestScore: 9, clearedAt: 'd' },
+        },
+      }
+      expect(isStageUnlocked('e3', { kind: 'segment', difficulty: 1, segment: 1 }, eras, withGapImagePool, {})).toBe(false)
+      expect(isStageUnlocked('e3', { kind: 'segment', difficulty: 1, segment: 1 }, eras, withGapImagePool, e1Cleared)).toBe(true)
+    })
+
+    it(
+      'isWorldUnlocked: 0件ワールド(e2, worldIndex=1)は自動クリア扱いになり、e3(worldIndex=2)の雲は' +
+        'e1(worldIndex=0)のボス撃破だけで晴れる（e2自身のboss.clearedが立つことは実プレイでは無い）',
+      () => {
+        expect(isWorldUnlocked(2, eras, withGapImagePool, {})).toBe(false) // e1未クリアならe3も未解禁
+        const e1BossCleared: Record<string, EraStageProgress> = {
+          e1: { ...emptyEraStageProgress(), boss: { cleared: true, bestScore: 9, clearedAt: 'd' } },
+        }
+        expect(isWorldUnlocked(2, eras, withGapImagePool, e1BossCleared)).toBe(true) // e2を飛ばしてe3が解禁
+      },
+    )
+
+    it('連続する0件ワールド（f2・f3がともに0件）でも、遡って直近の実プレイ可能ワールド(f1)まで判定する', () => {
+      // f1(作品あり)→f2(0件)→f3(0件)→f4(作品あり) という専用フィクスチャで、
+      // 0件が2つ連続しても isWorldUnlocked(f4のworldIndex=3) が f1 のボスまで正しく遡ることを確認する
+      // （e2一箇所だけの確認では「1つ前を見る」実装でも通ってしまうため、連続2件で検証する）。
+      const fiveEras: Era[] = [
+        { id: 'f1', name: 'F1', period: '', order: 1, summary: '', detail: '', items: [] },
+        { id: 'f2', name: 'F2', period: '', order: 2, summary: '', detail: '', items: [] },
+        { id: 'f3', name: 'F3', period: '', order: 3, summary: '', detail: '', items: [] },
+        { id: 'f4', name: 'F4', period: '', order: 4, summary: '', detail: '', items: [] },
+      ]
+      const pool: Work[] = [
+        makeWork({ id: 'f1w', era: 'f1', status: 'reviewed' }),
+        makeWork({ id: 'f4w', era: 'f4', status: 'reviewed' }),
+      ]
+      expect(isWorldUnlocked(3, fiveEras, pool, {})).toBe(false) // f1未クリアならf4も未解禁
+      const f1BossCleared: Record<string, EraStageProgress> = {
+        f1: { ...emptyEraStageProgress(), boss: { cleared: true, bestScore: 9, clearedAt: 'd' } },
+      }
+      expect(isWorldUnlocked(3, fiveEras, pool, f1BossCleared)).toBe(true) // f2・f3を飛ばしてf4が解禁
+      // fullStageSequenceもf2・f3を丸ごと除外し、f1のボスの直後にf4の★1-1が続く。
+      const seq = fullStageSequence(fiveEras, pool)
+      expect(seq.map((r) => r.eraId)).toEqual(['f1', 'f1', 'f1', 'f1', 'f4', 'f4', 'f4', 'f4'])
+    })
   })
 
   it('未解禁ワールド（e3）の★1-1は、e1・e2を一切クリアしていなければ常にfalse', () => {
@@ -441,20 +530,53 @@ describe('直列解禁（ワープなし）', () => {
     expect(getSegmentState(es, 1, 1)).toEqual({ cleared: false, bestScore: 0, clearedAt: null })
   })
 
-  it('ワープ相当のAPI（isBossChallengeable等）はもう存在しない', () => {
-    const stagesModule = { isStageUnlocked, isWorldUnlocked, buildBossQuestions } as Record<string, unknown>
-    expect(stagesModule.isBossChallengeable).toBeUndefined()
-  })
+  it(
+    'ワープ相当のAPI（isBossChallengeable等）はもう存在しない（M2b-99c中3是正: 以前は自分で3件だけ' +
+      '詰めたオブジェクトリテラルを検査しており、stages.tsが再エクスポートしても検出できない構造上' +
+      '絶対に落ちないテストだった。実モジュールの実際のエクスポート一覧を検査する）',
+    () => {
+      expect(Object.keys(stagesModule)).not.toContain('isBossChallengeable')
+      // 「何も検査していない」ことにならないよう、既知のエクスポートが実在することも確認する
+      // （テストが検知力を持つことの裏付け）。
+      expect(Object.keys(stagesModule)).toContain('isStageUnlocked')
+      expect(Object.keys(stagesModule)).toContain('isWorldUnlocked')
+    },
+  )
 })
 
-describe('stageShortLabel / stageRefToLocalKey（M2b-05: UI表記「ワールド番号-面番号＋★の数」）', () => {
-  it('segment: worldIndexは0始まりなので+1して「1-1 ★★」のように表示する', () => {
-    expect(stageShortLabel({ kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 2, segment: 1 })).toBe('1-1 ★★')
-    expect(stageShortLabel({ kind: 'segment', eraId: 'e2', worldIndex: 3, difficulty: 1, segment: 2 })).toBe('4-2 ★')
+describe('stageShortLabel / stageRefToLocalKey（M2b-05: UI表記「ワールド番号-面番号＋★の数」。M2b-99c中6是正で面番号を通し番号化）', () => {
+  it('segmentsPerWorld=1（実データの大半のワールド相当）: worldIndexは0始まりなので+1して「1-1 ★★」のように表示する', () => {
+    expect(stageShortLabel({ kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 2, segment: 1 }, 1)).toBe('1-2 ★★')
+    expect(stageShortLabel({ kind: 'segment', eraId: 'e2', worldIndex: 3, difficulty: 1, segment: 1 }, 1)).toBe('4-1 ★')
   })
 
-  it('boss: 「{world} ボス」形式', () => {
-    expect(stageShortLabel({ kind: 'boss', eraId: 'e1', worldIndex: 0 })).toBe('1 ボス')
+  it('boss: 「{world} ボス」形式（segmentsPerWorldは無関係）', () => {
+    expect(stageShortLabel({ kind: 'boss', eraId: 'e1', worldIndex: 0 }, 1)).toBe('1 ボス')
+  })
+
+  it(
+    'M2b-99c中6の回帰: segmentsPerWorld=1のワールドで★1→★2→★3→ボス→次ワールドの★1が' +
+      '「1-1→1-2→1-3→1-ボス→2-1」のように通し番号で続く（是正前は全て「1-1」だった）',
+    () => {
+      expect(stageShortLabel({ kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 1, segment: 1 }, 1)).toBe('1-1 ★')
+      expect(stageShortLabel({ kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 2, segment: 1 }, 1)).toBe('1-2 ★★')
+      expect(stageShortLabel({ kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 3, segment: 1 }, 1)).toBe('1-3 ★★★')
+      expect(stageShortLabel({ kind: 'boss', eraId: 'e1', worldIndex: 0 }, 1)).toBe('1 ボス')
+      expect(stageShortLabel({ kind: 'segment', eraId: 'e2', worldIndex: 1, difficulty: 1, segment: 1 }, 1)).toBe('2-1 ★')
+    },
+  )
+
+  it('segmentsPerWorld=3（面数が複数に分かれるワールド）: ★1の3面(1,2,3)の次に★2の面が4から続く', () => {
+    expect(stageShortLabel({ kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 1, segment: 3 }, 3)).toBe('1-3 ★')
+    expect(stageShortLabel({ kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 2, segment: 1 }, 3)).toBe('1-4 ★★')
+    expect(stageShortLabel({ kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 3, segment: 2 }, 3)).toBe('1-8 ★★★')
+  })
+
+  it('overallSegmentNumber: (difficulty-1)*segmentsPerWorld+segment', () => {
+    expect(overallSegmentNumber(1, 1, 1)).toBe(1)
+    expect(overallSegmentNumber(2, 1, 1)).toBe(2)
+    expect(overallSegmentNumber(3, 1, 1)).toBe(3)
+    expect(overallSegmentNumber(2, 2, 3)).toBe(5)
   })
 
   it('stageRefToLocalKey: eraId/worldIndexを落としてStageLocalKeyに変換する', () => {

@@ -18,6 +18,7 @@ import {
   getSegmentState,
   isWorldUnlocked,
   nextStageRef,
+  overallSegmentNumber,
   questionCountForSegment,
   stageRefKey,
   stageUnlockBoundary,
@@ -169,7 +170,7 @@ export function MapScreen({
             />
             {worlds.map((eraId, i) => {
               const p = landmarkCenter(i)
-              const unlocked = isWorldUnlocked(i, eras, progress.stages)
+              const unlocked = isWorldUnlocked(i, eras, imagePool, progress.stages)
               const bossCleared = getEraStageProgress(progress.stages, eraId).boss.cleared
               return (
                 <g key={eraId}>
@@ -193,7 +194,7 @@ export function MapScreen({
             const era = sortedEras.find((e) => e.id === eraId)
             if (!era) return null
             const p = landmarkCenter(worldIndex)
-            const unlocked = isWorldUnlocked(worldIndex, eras, progress.stages)
+            const unlocked = isWorldUnlocked(worldIndex, eras, imagePool, progress.stages)
             const plan = buildEraStagePlan(eraId, imagePool)
             const eraProgress = getEraStageProgress(progress.stages, eraId)
             const bossKey: StageLocalKey = { kind: 'boss' }
@@ -246,7 +247,7 @@ export function MapScreen({
                               className={`${styles.stageTile} ${cleared ? styles.cleared : ''}`}
                               data-testid={`stage-tile-${eraId}-${difficulty}-${seg.segment}`}
                               disabled={!segUnlocked}
-                              title={`${worldIndex + 1}-${seg.segment} ${'★'.repeat(difficulty)}`}
+                              title={`${worldIndex + 1}-${overallSegmentNumber(difficulty, seg.segment, plan.segments.length)} ${'★'.repeat(difficulty)}`}
                               onClick={() => onSelectStage(eraId, key)}
                             >
                               {!segUnlocked ? '🔒' : cleared ? '✓' : `${seg.segment}（${questionCountForSegment(seg)}問）`}
@@ -263,7 +264,10 @@ export function MapScreen({
                       title="ボス"
                       onClick={() => onSelectStage(eraId, bossKey)}
                     >
-                      {!bossUnlocked ? 'ボス 🔒' : eraProgress.boss.cleared ? 'ボス 👑撃破済' : `ボス挑戦（${plan.bossSize}問）`}
+                      {/* M2b-99c中1: 実際の生成問数はeraのpassage/pool構成次第で目標(plan.bossSize)
+                          未満になりうる（fact-check-m2b-v2.md参照）。MapScreenはpassages/poolを
+                          受け取っておらず正確な生成数はここでは確定できないため「最大」と明示する。 */}
+                      {!bossUnlocked ? 'ボス 🔒' : eraProgress.boss.cleared ? 'ボス 👑撃破済' : `ボス挑戦（最大${plan.bossSize}問）`}
                     </button>
                   </>
                 )}
