@@ -469,6 +469,7 @@ describe('selectLearnThemeSets（「学習を始める」のテーマセット�
       stages: {},
       newToday: { date: today, count: 0 },
       missLog: [],
+      resetNotice: false,
     }
   }
 

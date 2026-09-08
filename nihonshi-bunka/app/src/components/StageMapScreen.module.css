@@ -23,9 +23,16 @@
 }
 
 .stageRow {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 8px;
+}
+
+.difficultyGroup {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+  gap: 6px;
+  align-items: center;
 }
 
 .stageTile {

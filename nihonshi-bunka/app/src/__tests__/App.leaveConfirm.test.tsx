@@ -38,7 +38,7 @@ describe('App: ステージ挑戦中にタブを押すと確認ダイアログ�
     render(<App />)
 
     fireEvent.click(screen.getByText('学習'))
-    fireEvent.click(screen.getByTestId('stage-tile-asuka-s1'))
+    fireEvent.click(screen.getByTestId('stage-tile-asuka-1-1'))
     expect(screen.getAllByTestId('choice-button').length).toBeGreaterThan(0)
 
     const tabButtons = screen.getByLabelText('タブ').querySelectorAll('button')
@@ -56,7 +56,7 @@ describe('App: ステージ挑戦中にタブを押すと確認ダイアログ�
     render(<App />)
 
     fireEvent.click(screen.getByText('学習'))
-    fireEvent.click(screen.getByTestId('stage-tile-asuka-s1'))
+    fireEvent.click(screen.getByTestId('stage-tile-asuka-1-1'))
 
     const tabButtons = screen.getByLabelText('タブ').querySelectorAll('button')
     fireEvent.click(tabButtons[0]) // ホーム
@@ -68,7 +68,7 @@ describe('App: ステージ挑戦中にタブを押すと確認ダイアログ�
     // ホーム→学習タブに戻ると asuka の s1 はまだ未クリア（中止したので記録されない。
     // 作品2件×型2種=最大4問生成できるため「クリア済」ではなく件数表示のまま）
     fireEvent.click(screen.getByText('学習'))
-    expect(screen.getByTestId('stage-tile-asuka-s1')).toHaveTextContent('問')
-    expect(screen.getByTestId('stage-tile-asuka-s1')).not.toHaveTextContent('クリア済')
+    expect(screen.getByTestId('stage-tile-asuka-1-1')).toHaveTextContent('問')
+    expect(screen.getByTestId('stage-tile-asuka-1-1')).not.toHaveTextContent('クリア済')
   })
 })

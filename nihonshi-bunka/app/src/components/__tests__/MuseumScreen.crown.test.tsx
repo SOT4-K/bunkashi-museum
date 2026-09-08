@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react'
 import { MuseumScreen } from '../MuseumScreen'
 import { works, eras } from '../../content'
 import { createInitialProgress } from '../../engine/progress'
-import { emptyEraStageState } from '../../engine/stages'
+import { emptyEraStageProgress } from '../../engine/stages'
 import type { ItemProgress, ProgressState } from '../../types'
 
 const ashura = works.find((w) => w.id === 'ashura-kofukuji')!
@@ -29,7 +29,7 @@ describe('MuseumScreen: 文化ボス撃破の王冠バッジ', () => {
     const progress = seedProgress({
       stages: {
         [ashura.era]: {
-          ...emptyEraStageState(),
+          ...emptyEraStageProgress(),
           boss: { cleared: true, bestScore: 9, clearedAt: '2026-09-08' },
         },
       },

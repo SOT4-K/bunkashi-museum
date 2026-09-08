@@ -16,7 +16,7 @@ import {
   updateStreak,
 } from '../engine/progress'
 import { todayIso } from '../engine/srs'
-import type { StageKey } from '../engine/stages'
+import type { StageLocalKey } from '../engine/stages'
 import type { AnswerKind, ProgressState, QuestionType } from '../types'
 
 export function useProgressStore() {
@@ -67,9 +67,9 @@ export function useProgressStore() {
     setProgress((prev) => recordMissReviewOutcomeInState(prev, workId, correct))
   }, [])
 
-  /** ステージ制（M2b-01）の1マス分の結果を記録する（クリア判定・自己ベスト・ボスXP）。 */
+  /** ステージ制（M2b-01→M2b-04 v2）の1面/ボスの結果を記録する（クリア判定・自己ベスト・ボスXP）。 */
   const recordStageResult = useCallback(
-    (eraId: string, key: StageKey, correctCount: number, total: number, today: string = todayIso()) => {
+    (eraId: string, key: StageLocalKey, correctCount: number, total: number, today: string = todayIso()) => {
       setProgress((prev) => recordStageResultInState(prev, eraId, key, correctCount, total, today))
     },
     [],

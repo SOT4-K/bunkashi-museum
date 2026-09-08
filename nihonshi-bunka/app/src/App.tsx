@@ -14,7 +14,7 @@ import { eras, playableWorks, themeSetPool, passages, worksById } from './conten
 import { todayIso } from './engine/srs'
 import { buildMockExam, discoverableWorks, type MockExamItem } from './engine/mockExam'
 import { buildMissReviewSession, type MissReviewItem } from './engine/missLog'
-import { buildBossQuestions, buildStageQuestions, DIFFICULTY_LABELS, type Difficulty, type StageKey } from './engine/stages'
+import { buildBossQuestions, buildStageQuestions, DIFFICULTY_LABELS, type StageLocalKey } from './engine/stages'
 import type { Question } from './types'
 
 // タブ遷移は React state のみで行い、history.pushState は使わない。
@@ -32,7 +32,7 @@ export default function App() {
   // stageNonce は「もう一度」で StageScreen を強制的に作り直す（内部 state をリセットする）ための key。
   interface ActiveStage {
     eraId: string
-    key: StageKey
+    key: StageLocalKey
     title: string
     questions: Question[]
   }
@@ -99,20 +99,19 @@ export default function App() {
     setActiveMissReview(items)
   }
 
-  /** ステージ制（M2b-01）: eraId・key から見出しと問題を組み立てる。 */
-  function buildStageFor(eraId: string, key: StageKey): { title: string; questions: Question[] } {
+  /** ステージ制（M2b-01→M2b-04 v2）: eraId・key から見出しと問題を組み立てる。 */
+  function buildStageFor(eraId: string, key: StageLocalKey): { title: string; questions: Question[] } {
     const eraName = eras.find((e) => e.id === eraId)?.name ?? eraId
-    if (key === 'boss') {
+    if (key.kind === 'boss') {
       return { title: `${eraName} ボス`, questions: buildBossQuestions(eraId, passages, themeSetPool, playableWorks, eras) }
     }
-    const difficulty = Number(key.slice(1)) as Difficulty
     return {
-      title: `${eraName} ${DIFFICULTY_LABELS[difficulty]}`,
-      questions: buildStageQuestions(eraId, difficulty, themeSetPool, playableWorks, eras),
+      title: `${eraName} ${DIFFICULTY_LABELS[key.difficulty]} ${key.segment}`,
+      questions: buildStageQuestions(eraId, key.difficulty, key.segment, themeSetPool, playableWorks, eras),
     }
   }
 
-  function goStage(eraId: string, key: StageKey) {
+  function goStage(eraId: string, key: StageLocalKey) {
     const { title, questions } = buildStageFor(eraId, key)
     startSession(todayIso())
     setActiveStage({ eraId, key, title, questions })

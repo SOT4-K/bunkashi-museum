@@ -374,11 +374,16 @@ export interface StageState {
   clearedAt: string | null
 }
 
-/** 1文化（ワールド）分のステージ進捗。キーは engine/stages.ts の StageKey。 */
-export interface EraStageState {
-  s1: StageState
-  s2: StageState
-  s3: StageState
+/**
+ * 1文化（ワールド）分のステージ進捗（M2b-04 v2。BOARD.md「M2b v2」）。M2b-01 の固定
+ * s1/s2/s3/boss は、面数がワールドごと・難易度ごとに可変になった（10件ずつ固定分割・
+ * 端数規則）ため廃止した。キーは engine/stages.ts の `segmentKey(difficulty, segment)`
+ * （例 "1-1" "2-3"）。未プレイの面はエントリが無い（getSegmentState 等が emptyStageState() を補う）。
+ * v2 公開時に進捗を全リセットする決定（decisions.md 2026-09-08）のため、旧 EraStageState
+ * （s1/s2/s3/boss 固定4マス）からの移行は行わない（progress.ts の migrate 参照）。
+ */
+export interface EraStageProgress {
+  segments: Record<string, StageState>
   boss: StageState
 }
 
@@ -409,20 +414,29 @@ export interface MissLogEntry {
 
 export interface ProgressState {
   /** 1: q1/q2/q3 のみ。2: ItemProgress に q4/q6/q8 を追加（DESIGN.md 10章）。
-   *  3: missLog を追加（M2-23）。4: stages を追加（M2b-01 ステージ制）。 */
-  version: 1 | 2 | 3 | 4
+   *  3: missLog を追加（M2-23）。4: stages を追加（M2b-01 ステージ制、s1/s2/s3/boss固定）。
+   *  5: stages を可変面数（EraStageProgress）に作り直し（M2b-04 v2）。decisions.md
+   *  2026-09-08 の決定により、version 5 未満のデータは移行せず全リセットする
+   *  （progress.ts の migrate 参照。面の分割自体が変わるため意味のある移行ができない）。 */
+  version: 1 | 2 | 3 | 4 | 5
   xp: number
   level: number
   streak: StreakState
   items: Record<string, ItemProgress>
   /** 旧フィールド（DESIGN.md の初期案）。書き込み箇所が無いまま残っていたため、
-   *  M2b-01 のステージ制は新設の `stages`（EraStageState.boss）を使う。後方互換のため
+   *  M2b-01 のステージ制は新設の `stages`（EraStageProgress.boss）を使う。後方互換のため
    *  型・キーは残す（削除しない）。 */
   bosses: Record<string, BossState>
-  /** ステージ制の進捗（M2b-01）。キーは eraId。version 4 未満のデータには無いため
-   *  migrate() で {} を補う。 */
-  stages: Record<string, EraStageState>
+  /** ステージ制の進捗（M2b-01→M2b-04 v2）。キーは eraId。version 5 未満のデータは
+   *  全リセットされるため migrate() で {} になる（既存データからの変換はしない）。 */
+  stages: Record<string, EraStageProgress>
   newToday: NewTodayState
   /** 間違いノート（M2-23）。旧データ（version 1/2）には無いため migrate() で [] を補う。 */
   missLog: MissLogEntry[]
+  /** v5への移行で進捗が全リセットされた直後だけ true（M2b-04）。UI（M2b-05）が起動時に
+   *  読んで「新バージョンのため進捗をリセットしました」を1回だけ表示し、
+   *  progress.ts の acknowledgeResetNotice() で false に戻して保存し直す想定。
+   *  真の初回インストール（localStorage に何も無い）では立てない（リセットと呼べる
+   *  既存データが無いため）。 */
+  resetNotice: boolean
 }
