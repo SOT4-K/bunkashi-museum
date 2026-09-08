@@ -4,7 +4,6 @@ import { TabBar } from './components/TabBar'
 import { HomeScreen } from './components/HomeScreen'
 import { MapScreen } from './components/MapScreen'
 import { StageScreen } from './components/StageScreen'
-import { MockExamScreen } from './components/MockExamScreen'
 import { MissReviewScreen } from './components/MissReviewScreen'
 import { MuseumScreen } from './components/MuseumScreen'
 import { ExamScreen } from './components/ExamScreen'
@@ -38,8 +37,6 @@ export type TabId = 'home' | 'map' | 'museum' | 'exam'
 
 export default function App() {
   const [tab, setTab] = useState<TabId>('home')
-  // 本番モード（M2-20 → M2-45 でランダム学習を統合）。
-  const [activeMockExam, setActiveMockExam] = useState<MockExamItem[] | null>(null)
   // 間違いノート復習（M2-23）。
   const [activeMissReview, setActiveMissReview] = useState<MissReviewItem[] | null>(null)
   // 学習タブ→マップ（M2b-01→M2b-06）: 挑戦中のステージ／ボス。null ならマップを表示する。
@@ -55,7 +52,7 @@ export default function App() {
   const [stageNonce, setStageNonce] = useState(0)
   // 模試タブ（M2b-07）: タイムアタック中の問題セット。null なら模試タブの開始/記録画面を表示する。
   const [activeExam, setActiveExam] = useState<MockExamItem[] | null>(null)
-  // M2-47: 学習中（本番モード・ステージ／ボス・間違い復習・模試のいずれか）にタブを押したときの確認待ち。
+  // M2-47: 学習中（ステージ／ボス・間違い復習・模試のいずれか）にタブを押したときの確認待ち。
   const [pendingLeave, setPendingLeave] = useState(false)
   const {
     progress,
@@ -70,7 +67,7 @@ export default function App() {
     acknowledgeResetNotice,
   } = useProgressStore()
 
-  const hasActiveSession = Boolean(activeMockExam || activeMissReview || activeStage || activeExam)
+  const hasActiveSession = Boolean(activeMissReview || activeStage || activeExam)
 
   /** M2-47: 学習中にタブ（ホーム含む）を押したら確認する。「はい」なら記録せず中止。 */
   function handleTabChange(next: TabId) {
@@ -82,7 +79,6 @@ export default function App() {
   }
 
   function confirmLeave() {
-    setActiveMockExam(null)
     setActiveMissReview(null)
     setActiveStage(null)
     setActiveExam(null)
@@ -94,22 +90,13 @@ export default function App() {
     setPendingLeave(false)
   }
 
-  // reviewer指摘M2-25⑤の修正: 図鑑・成績タブの分母は「本番モードで実際に発見されうる作品」
+  // reviewer指摘M2-25⑤の修正: 図鑑・成績タブの分母は「出題エンジンで実際に発見されうる作品」
   // （discoverableWorks）に絞る。works（reviewed全件）をそのまま使うと、どの passage の下線
   // からも対象にならない作品（文化別練習は経験値・図鑑・SRSを更新しないため発見経路が無い）が
   // 永久に「未発見」のまま分母に残り続ける。
   // eslint-disable-next-line react-hooks/exhaustive-deps -- passages/themeSetPool は content.ts の
   // モジュール定数（実行中に変化しない）ため、空の依存配列で初回のみ計算する
   const museumWorks = useMemo(() => discoverableWorks(passages, themeSetPool), [])
-
-  /** 本番モード（M2-20 → M2-45: 全15文化・重み付き抽選）。作れなければ何もしない（passages が無い等）。 */
-  function goMockExam() {
-    const today = todayIso()
-    const items = buildMockExam(passages, themeSetPool, playableWorks, eras, progress, today)
-    if (items.length === 0) return
-    startSession(today)
-    setActiveMockExam(items)
-  }
 
   /**
    * 間違いノート復習（M2-23→M2b-11で模試タブへ移設）。missLogCount>0 でもボタンを出す条件
@@ -256,25 +243,6 @@ export default function App() {
     />
   )
 
-  if (activeMockExam) {
-    return (
-      <div className={styles.app}>
-        <main className={styles.main}>
-          <MockExamScreen
-            items={activeMockExam}
-            pool={themeSetPool}
-            eras={eras}
-            onAnswer={sharedOnAnswer}
-            onMiss={(workId, type, passageId, underlineKey) => recordMiss(workId, type, todayIso(), passageId, underlineKey)}
-            onFinish={() => setActiveMockExam(null)}
-          />
-        </main>
-        <TabBar active={tab} onChange={handleTabChange} />
-        {leaveDialog}
-      </div>
-    )
-  }
-
   if (activeMissReview) {
     return (
       <div className={styles.app}>
@@ -362,7 +330,9 @@ export default function App() {
           <MapScreen eras={eras} imagePool={playableWorks} progress={progress} onSelectStage={goStage} />
         )}
         {tab === 'museum' && (
-          <MuseumScreen works={museumWorks} eras={eras} progress={progress} onStart={goMockExam} />
+          // M2b-18: 本番モード（MockExamScreen/goMockExam）を廃止。空状態ボタンは
+          // ホームの「次にクリアする面」カードへ遷移させる（そこが唯一の学習開始入口）。
+          <MuseumScreen works={museumWorks} eras={eras} progress={progress} onStart={() => setTab('home')} />
         )}
         {tab === 'exam' && (
           <ExamScreen

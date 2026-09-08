@@ -1,8 +1,10 @@
-// 本番モード（大問IV形式の模試）。M2-20 → M2-45 で「学習を始める」（ランダム学習。M2-21・
-// engine/randomLearn.ts）を統合した。research/nichidai-past-exams-analysis.md 10.5章:
-//  「本番モードとランダム学習を統合: 本番モード＝全15文化から本番形式で10問（型の配分は
-//  本番どおり、20点表示、結果に型別の正答率）。経験値・図鑑・SRS・間違いノートが更新される。
-//  『時間を計る』トグル（既定オフ）」。
+// 出題エンジン（大問IV形式・全15文化・重み付き抽選で問題セットを組み立てる）。
+// M2-20 → M2-45 で「学習を始める」（ランダム学習。M2-21・engine/randomLearn.ts）を統合し、
+// 「本番モード」という10問・大問IV形式1回分の専用UI（MockExamScreen・ホーム/図鑑の入口）を
+// 持っていたが、M2b-18（2026-09-09オーナー判断「本番モードはなしでいい。模試モードに
+// 踏襲された」）でその専用UIを廃止した。この engine 自体（buildMockExam・discoverableWorks）
+// は模試タブ（TimeAttackScreen。TIME_ATTACK_EXAM_SIZE=20）・ステージ／ボス（stages.ts経由で
+// themeSet.tsを共有）・間違いノート復習が使い続けるため残す。
 //
 // 設問の選び方は旧 randomLearn.ts のロジックをそのまま引き継ぐ（全 passage の全下線から
 // 対象作品を一意に持つ候補プールを作り、eras.json の weight × SRS 期限到来ボーナスで
@@ -28,15 +30,14 @@ import type { Era, Passage, PassageUnderline, ProgressState, Question, QuestionT
 
 const defaultRandom: RandomFn = () => Math.random()
 
-/** 本番と同じ10問・20点満点（1問2点）。 */
+/** buildMockExam の既定セット数（1回2点×10問=20点満点の配分。呼び出し側が count 引数で
+ *  明示的に上書きできる。現在の呼び出し元は全て count を明示するため、この既定値自体は
+ *  今は使われていない値だが、関数の妥当なデフォルトとして残す）。 */
 export const MOCK_EXAM_SIZE = 10
 export const MOCK_EXAM_POINTS_PER_QUESTION = 2
-/** 時間目安10分（分析5.4章）。あくまで目安の表示で、自動採点はしない。 */
-export const MOCK_EXAM_TIME_SECONDS = 600
 
-/** 模試タブ（M2b-07。BOARD.md「M2b v2」9/8オーナー確認済みの既定③）: 本番配分20問の
- *  タイムアタック。ホームの「本番モード」（10問・大問IV形式1回分）とは別の問数。
- *  buildMockExam の count 引数で明示的に上書きして使う。 */
+/** 模試タブ（M2b-07。BOARD.md「M2b v2」9/8オーナー確認済みの既定③）: 全文化ランダム・
+ *  本番配分20問のタイムアタック。buildMockExam の count 引数で明示的に上書きして使う。 */
 export const TIME_ATTACK_EXAM_SIZE = 20
 
 /** 復習期限が来ている作品を優先する倍率（judgment call。決め打ちの経験値。旧 randomLearn.ts から継承）。 */
@@ -114,7 +115,8 @@ export function discoverableWorks(passages: Passage[], pool: Work[]): Work[] {
 }
 
 /**
- * 本番モード（全15文化・本番配分・重み付き抽選）の10問セットを組み立てる。
+ * 全15文化・本番配分・重み付き抽選で問題セットを組み立てる（既定 count=MOCK_EXAM_SIZE=10。
+ * 模試タブ（TimeAttackScreen）は TIME_ATTACK_EXAM_SIZE=20 を明示して呼ぶ）。
  * passages/pool が空、またはどの下線からも設問を作れない場合は空配列を返す
  * （呼び出し側で「作れなかった」メッセージを出す。エラーにしない）。
  */

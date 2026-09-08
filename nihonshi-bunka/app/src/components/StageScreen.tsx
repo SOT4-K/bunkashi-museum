@@ -1,7 +1,7 @@
 // ステージ／ボスの出題画面（M2b-01）。既存 QuestionCard・AnswerSheet・LeadPanel を流用する
-// （実装スコープ c）。MockExamScreen と同じく progress の answer()/recordMiss() を呼ぶ
-// （ステージ・ボスの結果は本番モードと同じ扱いで SRS・図鑑・XP を更新する。2026-09-04 の
-// 「文化別練習は進捗を更新しない」方針をこのモードには適用しない＝新方針）。
+// （実装スコープ c）。旧 MockExamScreen（M2b-18で廃止）と同じく progress の
+// answer()/recordMiss() を呼ぶ（ステージ・ボスの結果はそれと同じ扱いで SRS・図鑑・XP を
+// 更新する。2026-09-04 の「文化別練習は進捗を更新しない」方針をこのモードには適用しない＝新方針）。
 import { useMemo, useRef, useState } from 'react'
 import learnStyles from './LearnScreen.module.css'
 import styles from './StageScreen.module.css'
@@ -74,7 +74,7 @@ export function StageScreen({
   const current = questions[index]
 
   // ボスの問題は buildBossQuestions が passageId/underlineKey を付けているため、
-  // それを passages から逆引きして本番モードと同じリード文・下線表示を再現する。
+  // それを passages から逆引きして模試タブと同じリード文・下線表示を再現する。
   // 通常ステージの問題（passageId が無い）は文化別練習と同じ best-effort 逆引きにする
   // （M2-42「全モードで同じ」。engine/leadContext.ts）。
   const leadContext = useMemo(() => {

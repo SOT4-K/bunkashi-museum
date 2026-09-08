@@ -18,6 +18,8 @@ export function MuseumScreen({
   works: Work[]
   eras: Era[]
   progress: ProgressState
+  /** M2b-18: 本番モード廃止に伴い、空状態ボタンはホームの「次にクリアする面」へ遷移させる
+   *  （呼び出し元 App.tsx がホームタブへ切り替える）。 */
   onStart: () => void
 }) {
   const [openWorkId, setOpenWorkId] = useState<string | null>(null)
@@ -32,7 +34,7 @@ export function MuseumScreen({
         <div className={styles.emptyState}>
           <p className={styles.emptyText}>最初の作品を見つけよう。</p>
           <button type="button" className={styles.emptyButton} onClick={onStart}>
-            学習を始める
+            最初の面へ
           </button>
         </div>
       </div>

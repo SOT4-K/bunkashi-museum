@@ -1,6 +1,7 @@
 // M2-42「リード文の下線ラベルと常設表示」・M2-52「画像リード型のリード画像を常時表示」の
-// 共有部品。全モード（本番モード・文化別練習・間違い復習）で同じ見え方にするため、
-// MockExamScreen・PracticeSessionScreen・MissReviewScreen から共通で使う。
+// 共有部品。全モード（ステージ／ボス・模試・文化別練習・間違い復習）で同じ見え方にするため、
+// StageScreen・TimeAttackScreen・PracticeSessionScreen・MissReviewScreen から共通で使う
+// （旧 MockExamScreen も同じく使っていたが M2b-18 で廃止）。
 //  - スクロールしても押せる固定位置の「リード文」ボタン。押すと全文をシートで開き、
 //    下線の直下に小さくキー文字（a/b/c…。本番の問題冊子と同じ見え方）を表示し、
 //    現在の設問に対応する下線を強調する。
