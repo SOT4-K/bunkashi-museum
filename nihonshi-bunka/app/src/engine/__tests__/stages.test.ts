@@ -22,6 +22,8 @@ import {
   questionCountForSegment,
   segmentKey,
   stageRefKey,
+  stageRefToLocalKey,
+  stageShortLabel,
   stageUnlockBoundary,
   worldOrder,
 } from '../stages'
@@ -442,5 +444,25 @@ describe('直列解禁（ワープなし）', () => {
   it('ワープ相当のAPI（isBossChallengeable等）はもう存在しない', () => {
     const stagesModule = { isStageUnlocked, isWorldUnlocked, buildBossQuestions } as Record<string, unknown>
     expect(stagesModule.isBossChallengeable).toBeUndefined()
+  })
+})
+
+describe('stageShortLabel / stageRefToLocalKey（M2b-05: UI表記「ワールド番号-面番号＋★の数」）', () => {
+  it('segment: worldIndexは0始まりなので+1して「1-1 ★★」のように表示する', () => {
+    expect(stageShortLabel({ kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 2, segment: 1 })).toBe('1-1 ★★')
+    expect(stageShortLabel({ kind: 'segment', eraId: 'e2', worldIndex: 3, difficulty: 1, segment: 2 })).toBe('4-2 ★')
+  })
+
+  it('boss: 「{world} ボス」形式', () => {
+    expect(stageShortLabel({ kind: 'boss', eraId: 'e1', worldIndex: 0 })).toBe('1 ボス')
+  })
+
+  it('stageRefToLocalKey: eraId/worldIndexを落としてStageLocalKeyに変換する', () => {
+    expect(stageRefToLocalKey({ kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 3, segment: 2 })).toEqual({
+      kind: 'segment',
+      difficulty: 3,
+      segment: 2,
+    })
+    expect(stageRefToLocalKey({ kind: 'boss', eraId: 'e1', worldIndex: 0 })).toEqual({ kind: 'boss' })
   })
 })

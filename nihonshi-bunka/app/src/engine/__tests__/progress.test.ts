@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import {
+  EXAM_RECORDS_MAX,
+  RETRY_XP_MULTIPLIER,
   STORAGE_VERSION,
   XP_BOSS_CLEAR,
   XP_CORRECT,
@@ -9,9 +11,11 @@ import {
   dailyNewRemaining,
   migrate,
   recordAnswer,
+  recordExamResult,
   recordStageResult,
   updateStreak,
 } from '../progress'
+import type { MockExamRecord } from '../../types'
 
 describe('createInitialProgress / migrate', () => {
   it('壊れたデータは初期状態にフォールバックする（resetNoticeは立てない＝真の初回と区別できないため）', () => {
@@ -249,5 +253,77 @@ describe('recordAnswer', () => {
     expect(result.xpGained).toBe(0)
     expect(result.state.xp).toBe(0)
     expect(result.isNewDiscovery).toBe(false)
+  })
+
+  it('M2b v2「再挑戦はXP半分」: xpMultiplier=RETRY_XP_MULTIPLIER(0.5) で半分のXPになる（丸め）', () => {
+    const state = createInitialProgress('2026-09-03')
+    const result = recordAnswer(state, 'ashura-kofukuji', 'q1', 'correct', false, '2026-09-03', RETRY_XP_MULTIPLIER)
+    expect(result.xpGained).toBe(Math.round(XP_CORRECT * RETRY_XP_MULTIPLIER))
+    expect(result.xpGained).toBe(5)
+  })
+
+  it('xpMultiplier を省略すると従来どおり等倍（既存呼び出し元は変更なし）', () => {
+    const state = createInitialProgress('2026-09-03')
+    const result = recordAnswer(state, 'ashura-kofukuji', 'q1', 'correct', false, '2026-09-03')
+    expect(result.xpGained).toBe(XP_CORRECT)
+  })
+
+  it('xpMultiplier を適用しても SRS・図鑑（discoveredAt）は通常どおり更新される（既定⑤）', () => {
+    const state = createInitialProgress('2026-09-03')
+    const result = recordAnswer(state, 'ashura-kofukuji', 'q1', 'correct', false, '2026-09-03', RETRY_XP_MULTIPLIER)
+    expect(result.isNewDiscovery).toBe(true)
+    expect(result.state.items['ashura-kofukuji'].q1.correct).toBe(1)
+  })
+
+  it('不正解では xpMultiplier に関わらず0（0 × 何倍しても0）', () => {
+    const state = createInitialProgress('2026-09-03')
+    const result = recordAnswer(state, 'ashura-kofukuji', 'q1', 'incorrect', false, '2026-09-03', RETRY_XP_MULTIPLIER)
+    expect(result.xpGained).toBe(0)
+  })
+})
+
+describe('recordExamResult（M2b-07: 模試タブの記録）', () => {
+  function makeRecord(overrides: Partial<MockExamRecord> = {}): MockExamRecord {
+    return { date: '2026-09-08', elapsedSeconds: 120, correct: 15, total: 20, missedWorkIds: [], ...overrides }
+  }
+
+  it('examRecords に1件追加する', () => {
+    const state = createInitialProgress('2026-09-08')
+    const next = recordExamResult(state, makeRecord())
+    expect(next.examRecords).toHaveLength(1)
+    expect(next.examRecords[0]).toEqual(makeRecord())
+  })
+
+  it('EXAM_RECORDS_MAX を超えたら古い方から捨てる', () => {
+    let state = createInitialProgress('2026-09-08')
+    for (let i = 0; i < EXAM_RECORDS_MAX + 5; i++) {
+      state = recordExamResult(state, makeRecord({ date: `record-${i}` }))
+    }
+    expect(state.examRecords).toHaveLength(EXAM_RECORDS_MAX)
+    expect(state.examRecords[0].date).toBe(`record-5`)
+    expect(state.examRecords[state.examRecords.length - 1].date).toBe(`record-${EXAM_RECORDS_MAX + 4}`)
+  })
+
+  it('他のフィールド（xp・items等）を変更しない', () => {
+    const state = createInitialProgress('2026-09-08')
+    const next = recordExamResult(state, makeRecord())
+    expect(next.xp).toBe(state.xp)
+    expect(next.items).toBe(state.items)
+  })
+})
+
+describe('migrate: examRecords（M2b-07。missLogと同様、version自体は上げず既存データに補う）', () => {
+  it('examRecords が無い既存データは [] を補う', () => {
+    const state = createInitialProgress('2026-09-08')
+    const { examRecords: _drop, ...withoutExamRecords } = state
+    const result = migrate(withoutExamRecords, '2026-09-08')
+    expect(result.examRecords).toEqual([])
+  })
+
+  it('examRecords がある既存データはそのまま通す', () => {
+    const record: MockExamRecord = { date: '2026-09-08', elapsedSeconds: 60, correct: 10, total: 20, missedWorkIds: ['a'] }
+    const state = { ...createInitialProgress('2026-09-08'), examRecords: [record] }
+    const result = migrate(state, '2026-09-08')
+    expect(result.examRecords).toEqual([record])
   })
 })

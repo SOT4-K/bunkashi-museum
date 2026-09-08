@@ -600,6 +600,21 @@ export function nextStageRef(eras: Era[], imagePool: Work[], stages: Record<stri
   return boundary < sequence.length ? sequence[boundary] : null
 }
 
+/** StageRef を StageLocalKey に変換する（era側の情報を落とす）。ホーム画面が
+ *  nextStageRef() の戻り値をそのまま App.tsx の goStage(eraId, key) に渡すために使う
+ *  （チケット規則8。M2b-05）。 */
+export function stageRefToLocalKey(ref: StageRef): StageLocalKey {
+  return ref.kind === 'boss' ? { kind: 'boss' } : { kind: 'segment', difficulty: ref.difficulty, segment: ref.segment }
+}
+
+/** UI表記「ワールド番号-面番号＋★の数」（M2b-05担当、チケット規則2の欄外注記どおりここに置く）。
+ *  例: {kind:'segment', worldIndex:0, difficulty:2, segment:1} → "1-1 ★★"、
+ *      {kind:'boss', worldIndex:0} → "1 ボス"。worldIndex は0始まりなので表示は+1する。 */
+export function stageShortLabel(ref: StageRef): string {
+  const world = ref.worldIndex + 1
+  return ref.kind === 'boss' ? `${world} ボス` : `${world}-${ref.segment} ${'★'.repeat(ref.difficulty)}`
+}
+
 /** ワールド（worldIndex、0始まり）が解禁されているか。0番目は常に解禁。以降は直前ワールドの
  *  ボス撃破が条件（マップの雲演出向け。M2b-06担当だが判定はここに置く）。 */
 export function isWorldUnlocked(worldIndex: number, eras: Era[], stages: Record<string, EraStageProgress>): boolean {

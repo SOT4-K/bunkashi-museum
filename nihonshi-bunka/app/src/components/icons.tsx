@@ -56,6 +56,26 @@ export function StatsIcon(props: SVGProps<SVGSVGElement>) {
   )
 }
 
+/** マップタブ（M2b-06）: 折りたたんだ地図のアイコン。 */
+export function MapIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Base {...props}>
+      <path d="M9 4.5 4 6.5v13l5-2 6 2 5-2v-13l-5 2-6-2Z" />
+      <path d="M9 4.5v13M15 6.5v13" />
+    </Base>
+  )
+}
+
+/** 模試タブ（M2b-07）: ストップウォッチのアイコン。 */
+export function ExamIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Base {...props}>
+      <circle cx="12" cy="13" r="7.5" />
+      <path d="M12 13V9M9.5 3.5h5M12 3.5V6" />
+    </Base>
+  )
+}
+
 /** ライトボックスの閉じるボタン（×） */
 export function CloseIcon(props: SVGProps<SVGSVGElement>) {
   return (

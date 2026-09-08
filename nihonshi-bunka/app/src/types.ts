@@ -412,6 +412,22 @@ export interface MissLogEntry {
   correctStreak: number
 }
 
+/**
+ * 模試タブ（M2b-07。BOARD.md「M2b v2」）のタイムアタック1回分の記録。
+ * 「所要時間と得点」を記録する（9/8オーナー確認済みの既定③）。missedWorkIds はその回に
+ * 不正解／わからないだった作品 id（「その回の間違いの復習」用。既存 missLog を workId で
+ * 突き合わせて復習セッションを作る。engine/missLog.ts の buildMissReviewSession を流用）。
+ */
+export interface MockExamRecord {
+  /** 実施日（ISO date）。 */
+  date: string
+  /** 所要時間（秒。カウントアップ計時の結果）。 */
+  elapsedSeconds: number
+  correct: number
+  total: number
+  missedWorkIds: string[]
+}
+
 export interface ProgressState {
   /** 1: q1/q2/q3 のみ。2: ItemProgress に q4/q6/q8 を追加（DESIGN.md 10章）。
    *  3: missLog を追加（M2-23）。4: stages を追加（M2b-01 ステージ制、s1/s2/s3/boss固定）。
@@ -439,4 +455,9 @@ export interface ProgressState {
    *  真の初回インストール（localStorage に何も無い）では立てない（リセットと呼べる
    *  既存データが無いため）。 */
   resetNotice: boolean
+  /** 模試タブ（M2b-07）のタイムアタック記録。missLog と同様、既存データ（v5以前）には
+   *  無いフィールドのため migrate() で [] を補う（version 自体は上げない。missLog を
+   *  v3で追加したときと違い、examRecords の追加だけでは既存の面クリア状態・SRS等の
+   *  意味が変わらないため、v2公開までの間の全リセットを再度誘発する必要が無い）。 */
+  examRecords: MockExamRecord[]
 }

@@ -34,6 +34,11 @@ export const MOCK_EXAM_POINTS_PER_QUESTION = 2
 /** 時間目安10分（分析5.4章）。あくまで目安の表示で、自動採点はしない。 */
 export const MOCK_EXAM_TIME_SECONDS = 600
 
+/** 模試タブ（M2b-07。BOARD.md「M2b v2」9/8オーナー確認済みの既定③）: 本番配分20問の
+ *  タイムアタック。ホームの「本番モード」（10問・大問IV形式1回分）とは別の問数。
+ *  buildMockExam の count 引数で明示的に上書きして使う。 */
+export const TIME_ATTACK_EXAM_SIZE = 20
+
 /** 復習期限が来ている作品を優先する倍率（judgment call。決め打ちの経験値。旧 randomLearn.ts から継承）。 */
 const DUE_WEIGHT_BONUS = 4
 

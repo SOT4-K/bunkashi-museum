@@ -35,6 +35,19 @@
   flex-shrink: 0;
 }
 
+/* M2b-07: 時代別の習熟率（旧成績タブから移設）。 */
+.masteryBar {
+  height: 3px;
+  background: var(--border-quiet);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.masteryFill {
+  height: 100%;
+  background: var(--kin);
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

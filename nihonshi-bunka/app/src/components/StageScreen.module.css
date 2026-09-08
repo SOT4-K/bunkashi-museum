@@ -1,0 +1,25 @@
+/* M2b-05: ボス戦の体力ゲージ。既存の固定バー（LeadPanel/QuestionCard）とは重ならない
+   通常フローの要素にする（builder メモ css-fixed-bottom-bar-stacking-check）。 */
+.bossGauge {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bossGaugeTrack {
+  height: 10px;
+  border-radius: 5px;
+  background: var(--border-quiet);
+  overflow: hidden;
+}
+
+.bossGaugeFill {
+  height: 100%;
+  background: var(--shu);
+  transition: width 0.3s ease;
+}
+
+.bossGaugeLabel {
+  font-size: 12px;
+  color: var(--text-dim);
+}

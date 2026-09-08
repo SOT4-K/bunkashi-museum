@@ -4,12 +4,13 @@
 // 「文化別練習は進捗を更新しない」方針をこのモードには適用しない＝新方針）。
 import { useMemo, useRef, useState } from 'react'
 import learnStyles from './LearnScreen.module.css'
+import styles from './StageScreen.module.css'
 import { QuestionCard } from './QuestionCard'
 import { AnswerSheet } from './AnswerSheet'
 import { LeadPanel } from './LeadPanel'
 import { todayIso } from '../engine/srs'
 import { findLeadContextForWork } from '../engine/leadContext'
-import { clearThreshold } from '../engine/stages'
+import { bossProgress, clearThreshold } from '../engine/stages'
 import type { MissSelection } from '../engine/explain'
 import type { AnswerKind, Era, Passage, Question, Work } from '../types'
 
@@ -28,19 +29,23 @@ export function StageScreen({
   pool,
   passages,
   eras,
+  isBoss = false,
   onAnswer,
   onMiss,
   onComplete,
   onFinish,
   onRetry,
 }: {
-  /** 画面上部に出す見出し（例:「天平文化 ★2」「天平文化 ボス」）。 */
+  /** 画面上部に出す見出し（例:「1-1 ★★ 天平文化」「1 ボス 天平文化」。M2b-05: engine/stages.ts
+   *  の stageShortLabel + era 名を呼び出し側（App.tsx）で組み立てて渡す）。 */
   title: string
   questions: Question[]
   /** LeadPanel の画像リード型解決用（content.ts の themeSetPool）。 */
   pool: Work[]
   passages: Passage[]
   eras: Era[]
+  /** M2b-05: ボス戦なら体力ゲージ（bossProgress）を表示する。省略時は false（通常ステージ）。 */
+  isBoss?: boolean
   onAnswer: (
     workId: string,
     type: Question['type'],
@@ -63,6 +68,7 @@ export function StageScreen({
   const [answered, setAnswered] = useState<AnsweredState | null>(null)
   const [showSheet, setShowSheet] = useState(false)
   const [correctCount, setCorrectCount] = useState(0)
+  const [incorrectCount, setIncorrectCount] = useState(0)
   const sheetTimerRef = useRef<number | null>(null)
 
   const current = questions[index]
@@ -86,7 +92,10 @@ export function StageScreen({
     const result = onAnswer(current.work.id, current.type, answer, false, today)
     setAnswered({ selection, correct, isNewDiscovery: result.isNewDiscovery, isNewlyMastered: result.isNewlyMastered })
     if (correct) setCorrectCount((c) => c + 1)
-    else if (onMiss) onMiss(current.work.id, current.type, current.passageId, current.underlineKey)
+    else {
+      setIncorrectCount((c) => c + 1)
+      if (onMiss) onMiss(current.work.id, current.type, current.passageId, current.underlineKey)
+    }
 
     const reduceMotion =
       typeof window !== 'undefined' &&
@@ -171,6 +180,25 @@ export function StageScreen({
           ))}
         </span>
       </div>
+
+      {/* M2b-05: ボス戦の体力ゲージ（bossProgress。固定位置ではなく通常フローに置き、
+          既存の固定バー（LeadPanel/QuestionCardの確認バー）との縦重なりを避ける。
+          builder メモ css-fixed-bottom-bar-stacking-check）。 */}
+      {isBoss &&
+        (() => {
+          const bp = bossProgress(total, correctCount, incorrectCount)
+          const ratio = bp.total > 0 ? bp.correct / bp.total : 0
+          return (
+            <div className={styles.bossGauge} data-testid="boss-gauge">
+              <div className={styles.bossGaugeTrack}>
+                <div className={styles.bossGaugeFill} style={{ width: `${Math.round(ratio * 100)}%` }} />
+              </div>
+              <span className={styles.bossGaugeLabel}>
+                残り {bp.remaining} 問・クリアに {bp.clearThreshold} 問正解
+              </span>
+            </div>
+          )
+        })()}
 
       <LeadPanel
         passage={leadContext?.passage}

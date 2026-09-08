@@ -1,0 +1,29 @@
+.examHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.examLabel {
+  font-weight: 700;
+}
+
+.timer {
+  font-variant-numeric: tabular-nums;
+}
+
+.excerptPanel {
+  border: 1px solid var(--border-quiet);
+  border-radius: var(--radius-image);
+  padding: 16px;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.underlineCurrent {
+  background: rgba(200, 16, 46, 0.15);
+  color: inherit;
+  border-bottom: 2px solid var(--shu, #c8102e);
+}

@@ -13,6 +13,7 @@ export function ConfirmDialog({
   onCancel,
   destructive = false,
   extra,
+  confirmDisabled = false,
 }: {
   message: string
   detail?: string
@@ -22,8 +23,11 @@ export function ConfirmDialog({
   onCancel: () => void
   /** true のとき確認ボタンを破壊的操作の色にする（M2-46 の2回目確認）。 */
   destructive?: boolean
-  /** 確認ボタンの上に置く追加の導線（M2-46「先に進捗を書き出す」）。省略可。 */
+  /** 確認ボタンの上に置く追加の導線（M2-46「先に進捗を書き出す」、M2b-05「リセット」と入力）。省略可。 */
   extra?: ReactNode
+  /** true の間、確認ボタンを押せなくする（M2b-05: 全リセット3回目の「『リセット』と入力」確認）。
+   *  省略時は false（既存呼び出し元と後方互換）。 */
+  confirmDisabled?: boolean
 }) {
   return (
     <div className={styles.backdrop} role="alertdialog" aria-modal="true" aria-label={message}>
@@ -39,6 +43,7 @@ export function ConfirmDialog({
             type="button"
             className={destructive ? styles.destructiveButton : styles.confirmButton}
             onClick={onConfirm}
+            disabled={confirmDisabled}
             data-testid="confirm-dialog-confirm"
           >
             {confirmLabel}

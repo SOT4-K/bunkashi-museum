@@ -55,6 +55,9 @@ export function MuseumScreen({
         // 未実装だった。StageMapScreen側のボスタイルにしか👑が無く、図鑑（展示室）本体には
         // progress.stages を一切参照していなかった。
         const bossCleared = getEraStageProgress(progress.stages, era.id).boss.cleared
+        // M2b-07: 成績タブ廃止に伴い「時代別の習熟率」をここ（図鑑タブ）に残す
+        // （模試タブには置かない。チケット文面どおり）。
+        const masteryRatio = eraWorks.length > 0 ? masteredCount / eraWorks.length : 0
         return (
           <div className={styles.eraSection} key={era.id}>
             <div className={styles.eraHeading}>
@@ -69,6 +72,9 @@ export function MuseumScreen({
               <div className={styles.eraCount}>
                 {masteredCount} / {eraWorks.length} 所蔵
               </div>
+            </div>
+            <div className={styles.masteryBar} data-testid={`museum-mastery-bar-${era.id}`}>
+              <div className={styles.masteryFill} style={{ width: `${Math.round(masteryRatio * 100)}%` }} />
             </div>
             <div className={styles.grid}>
               {eraWorks.map((work) => {

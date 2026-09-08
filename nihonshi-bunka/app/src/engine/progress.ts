@@ -3,7 +3,7 @@
 import { applyItemAnswer, createItemProgress, todayIso } from './srs'
 import { addMiss, applyReviewOutcome } from './missLog'
 import { clearThreshold, emptyEraStageProgress, emptyStageState, getEraStageProgress, segmentKey, type StageLocalKey } from './stages'
-import type { AnswerKind, ItemProgress, MissLogEntry, ProgressState, QuestionType, StageState } from '../types'
+import type { AnswerKind, ItemProgress, MissLogEntry, MockExamRecord, ProgressState, QuestionType, StageState } from '../types'
 
 export const STORAGE_KEY = 'bunkashi.v1'
 // v2: ItemProgress に q4/q6/q8（DESIGN.md 10章）を追加。フィールドは optional なので
@@ -32,6 +32,12 @@ export const TITLES: { minLevel: number; title: string }[] = [
 
 export const DAILY_NEW_CAP = 15
 
+/** M2b v2「再挑戦はXP半分」（9/8オーナー確認済みの既定⑤）。既にクリア済みの面・ボスを
+ *  再挑戦するときに recordAnswer の xpMultiplier に渡す値。呼び出し側（App.tsx）が
+ *  「このステージは既にクリア済みか」を判定して選ぶ（progress.ts 自身は「今どのステージを
+ *  プレイ中か」を知らないため、ここでは値の定義だけを持つ）。 */
+export const RETRY_XP_MULTIPLIER = 0.5
+
 export function levelForXp(xp: number): number {
   return Math.max(1, Math.floor(xp / LEVEL_XP_STEP) + 1)
 }
@@ -52,8 +58,12 @@ export function createInitialProgress(today: string = todayIso()): ProgressState
     newToday: { date: today, count: 0 },
     missLog: [],
     resetNotice: false,
+    examRecords: [],
   }
 }
+
+/** 模試タブの記録の保持上限（無制限に増やさない。決め打ち。推移グラフは直近が見えれば十分）。 */
+export const EXAM_RECORDS_MAX = 30
 
 function isValidProgress(value: unknown): value is ProgressState {
   if (!value || typeof value !== 'object') return false
@@ -97,7 +107,10 @@ export function migrate(raw: unknown, today: string = todayIso()): ProgressState
         )
       : {}
   const resetNotice = typeof (raw as Partial<ProgressState>).resetNotice === 'boolean' ? (raw as ProgressState).resetNotice : false
-  return { ...raw, missLog, stages, resetNotice }
+  const examRecords: MockExamRecord[] = Array.isArray((raw as Partial<ProgressState>).examRecords)
+    ? (raw as ProgressState).examRecords
+    : []
+  return { ...raw, missLog, stages, resetNotice, examRecords }
 }
 
 /** resetNotice を消費する（M2b-05が通知を1回出した直後に呼び、saveProgress し直す想定）。 */
@@ -150,7 +163,13 @@ export interface RecordAnswerResult {
   isNewlyMastered: boolean
 }
 
-/** 1問への回答結果を進捗に反映する。isReview は復習出題だったか（新規出題なら false）。 */
+/**
+ * 1問への回答結果を進捗に反映する。isReview は復習出題だったか（新規出題なら false）。
+ * xpMultiplier は M2b v2「再挑戦はXP半分」（9/8オーナー確認済みの既定⑤）用。省略時は1
+ * （既存の全呼び出し元＝本番モード・間違い復習・ステージ初回挑戦は変更なし）。SRS・図鑑
+ * （discoveredAt/masteredAt）・間違いノートは xpMultiplier に関わらず通常どおり更新する
+ * （既定⑤「SRS/図鑑は通常更新」）。XP のみ Math.round(基本XP × xpMultiplier) にする。
+ */
 export function recordAnswer(
   state: ProgressState,
   workId: string,
@@ -158,6 +177,7 @@ export function recordAnswer(
   answer: AnswerKind,
   isReview: boolean,
   today: string,
+  xpMultiplier = 1,
 ): RecordAnswerResult {
   const correct = answer === 'correct'
   const isFirstExposure = !state.items[workId]
@@ -172,7 +192,7 @@ export function recordAnswer(
         ? { date: today, count: 1 }
         : state.newToday
 
-  const xpGained = correct ? (isReview ? XP_REVIEW_CORRECT : XP_CORRECT) : 0
+  const xpGained = correct ? Math.round((isReview ? XP_REVIEW_CORRECT : XP_CORRECT) * xpMultiplier) : 0
   const withXp = addXp(state, xpGained)
 
   const nextState: ProgressState = {
@@ -267,4 +287,14 @@ export function recordStageResult(
     ...state,
     stages: { ...state.stages, [eraId]: { ...prevEra, segments: { ...prevEra.segments, [segKey]: next } } },
   }
+}
+
+/**
+ * 模試タブ（M2b-07）の1回分の記録を追加する。EXAM_RECORDS_MAX を超えたら古い方から捨てる
+ * （推移グラフ・記録一覧は直近が見えれば十分。無制限に localStorage を肥大化させない）。
+ */
+export function recordExamResult(state: ProgressState, record: MockExamRecord): ProgressState {
+  const next = [...state.examRecords, record]
+  const trimmed = next.length > EXAM_RECORDS_MAX ? next.slice(next.length - EXAM_RECORDS_MAX) : next
+  return { ...state, examRecords: trimmed }
 }

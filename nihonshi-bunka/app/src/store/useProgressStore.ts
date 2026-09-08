@@ -9,6 +9,7 @@ import {
   dailyNewRemaining as calcDailyNewRemaining,
   loadProgress,
   recordAnswer,
+  recordExamResult as recordExamResultInState,
   recordMiss as recordMissInState,
   recordMissReviewOutcome as recordMissReviewOutcomeInState,
   recordStageResult as recordStageResultInState,
@@ -17,7 +18,7 @@ import {
 } from '../engine/progress'
 import { todayIso } from '../engine/srs'
 import type { StageLocalKey } from '../engine/stages'
-import type { AnswerKind, ProgressState, QuestionType } from '../types'
+import type { AnswerKind, MockExamRecord, ProgressState, QuestionType } from '../types'
 
 export function useProgressStore() {
   const [progress, setProgress] = useState<ProgressState>(() => loadProgress(todayIso()))
@@ -31,10 +32,17 @@ export function useProgressStore() {
   }, [])
 
   const answer = useCallback(
-    (workId: string, type: QuestionType, answer: AnswerKind, isReview: boolean, today: string = todayIso()) => {
+    (
+      workId: string,
+      type: QuestionType,
+      answer: AnswerKind,
+      isReview: boolean,
+      today: string = todayIso(),
+      xpMultiplier = 1,
+    ) => {
       // setState の updater 関数はこの行の中で同期評価されるとは限らないため、
       // 現在の progress（クロージャ）から直接計算して setProgress に渡す。
-      const result = recordAnswer(progress, workId, type, answer, isReview, today)
+      const result = recordAnswer(progress, workId, type, answer, isReview, today, xpMultiplier)
       setProgress(result.state)
       return result
     },
@@ -75,6 +83,16 @@ export function useProgressStore() {
     [],
   )
 
+  /** 模試タブ（M2b-07）の1回分の記録を追加する。 */
+  const recordExamResult = useCallback((record: MockExamRecord) => {
+    setProgress((prev) => recordExamResultInState(prev, record))
+  }, [])
+
+  /** v2初回起動時の進捗リセット通知（チケット規則7）を消費する。 */
+  const acknowledgeResetNotice = useCallback(() => {
+    setProgress((prev) => (prev.resetNotice ? { ...prev, resetNotice: false } : prev))
+  }, [])
+
   return {
     progress,
     startSession,
@@ -85,5 +103,7 @@ export function useProgressStore() {
     recordMiss,
     recordMissReviewOutcome,
     recordStageResult,
+    recordExamResult,
+    acknowledgeResetNotice,
   }
 }

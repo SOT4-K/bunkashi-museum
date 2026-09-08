@@ -1,12 +1,14 @@
 import styles from './TabBar.module.css'
-import { HomeIcon, LearnIcon, MuseumIcon, StatsIcon } from './icons'
+import { HomeIcon, MapIcon, MuseumIcon, ExamIcon } from './icons'
 import type { TabId } from '../App'
 
+// M2b-05: タブ構成をホーム／マップ／図鑑／模試の4つにする（学習・成績タブは廃止。
+// BOARD.md「M2b v2」）。
 const TABS: { id: TabId; label: string; Icon: typeof HomeIcon }[] = [
   { id: 'home', label: 'ホーム', Icon: HomeIcon },
-  { id: 'learn', label: '学習', Icon: LearnIcon },
+  { id: 'map', label: 'マップ', Icon: MapIcon },
   { id: 'museum', label: '図鑑', Icon: MuseumIcon },
-  { id: 'stats', label: '成績', Icon: StatsIcon },
+  { id: 'exam', label: '模試', Icon: ExamIcon },
 ]
 
 export function TabBar({ active, onChange }: { active: TabId; onChange: (tab: TabId) => void }) {

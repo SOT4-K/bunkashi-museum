@@ -108,3 +108,57 @@
   min-height: 44px;
   padding: 0 4px;
 }
+
+/* M2b-05: v2初回起動の進捗リセット通知。 */
+.resetNotice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-radius: var(--radius-button);
+  background: var(--surface);
+  border: 1px solid var(--kin);
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+/* M2b-05: ホームの主入口「次にクリアする面」カード。 */
+.nextStageCard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  min-height: 88px;
+  border-radius: var(--radius-button);
+  background: var(--gunjo);
+  color: #fff;
+  padding: 14px 18px;
+  text-align: left;
+}
+
+.nextStageLabel {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.nextStageTitle {
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+.nextStagePlay {
+  align-self: flex-end;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.completeBanner {
+  width: 100%;
+  border-radius: var(--radius-button);
+  background: var(--kin);
+  color: #201a0a;
+  padding: 14px 18px;
+  font-size: 16px;
+  text-align: center;
+}

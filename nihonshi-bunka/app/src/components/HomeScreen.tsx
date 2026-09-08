@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import styles from './HomeScreen.module.css'
+import { SettingsSection } from './SettingsSection'
 import { isItemMastered } from '../engine/srs'
 import { titleForLevel } from '../engine/progress'
+import { nextStageRef, stageRefToLocalKey, stageShortLabel, type StageLocalKey } from '../engine/stages'
 import { useStandalone } from '../hooks/useStandalone'
 import type { Era, ProgressState, Work } from '../types'
 
@@ -37,7 +39,12 @@ export function HomeScreen({
   onStartMockExam,
   onStartMissReview,
   missLogCount = 0,
+  onSelectStage,
+  onImportProgress,
+  onResetProgress,
+  onAcknowledgeResetNotice,
 }: {
+  /** content.ts の playableWorks。時代別習熟の集計と、次の面カード（ステージ計画）の両方に使う。 */
   works: Work[]
   eras: Era[]
   progress: ProgressState
@@ -48,6 +55,14 @@ export function HomeScreen({
   /** 間違いノート復習（M2-23）。省略時はボタンを出さない（既存呼び出し元互換）。 */
   onStartMissReview?: () => void
   missLogCount?: number
+  /** M2b-05: 「次の面」カードを押したときにその面を開始する。省略時はカード自体を出さない
+   *  （既存呼び出し元互換。テスト用に段階的に呼び出し元を移行できるようにするため optional）。 */
+  onSelectStage?: (eraId: string, key: StageLocalKey) => void
+  /** M2b-05: 設定セクション（旧成績タブから移設）。onResetProgress を渡したときだけ表示する。 */
+  onImportProgress?: (next: ProgressState) => void
+  onResetProgress?: () => void
+  /** M2b-05: v2初回起動時の「進捗をリセットしました」通知を1回だけ表示するための消込。 */
+  onAcknowledgeResetNotice?: () => void
 }) {
   const standalone = useStandalone()
   const [bannerDismissed, setBannerDismissed] = useState(
@@ -66,9 +81,50 @@ export function HomeScreen({
     localStorage.setItem(ADD_TO_HOME_DISMISSED_KEY, '1')
   }
 
+  // M2b-05: ホームは「次にクリアする面」カードが主入口（チケット規則8。全ワールド撃破済み
+  // なら null。9/8オーナー確認済みの既定⑥「15ワールド撃破で称号『館長』の演出のみ」）。
+  const nextRef = onSelectStage ? nextStageRef(eras, works, progress.stages) : null
+  const nextEraName = nextRef ? (eras.find((e) => e.id === nextRef.eraId)?.name ?? nextRef.eraId) : ''
+  const allWorldsCleared = Boolean(onSelectStage) && nextRef === null && eras.length > 0 && works.length > 0
+
   return (
     <div className={styles.screen}>
+      {progress.resetNotice && onAcknowledgeResetNotice && (
+        <div className={styles.resetNotice} data-testid="reset-notice-banner">
+          <span>新バージョンのため進捗をリセットしました。</span>
+          <button
+            type="button"
+            className={styles.bannerClose}
+            data-testid="reset-notice-dismiss"
+            onClick={onAcknowledgeResetNotice}
+          >
+            閉じる
+          </button>
+        </div>
+      )}
+
       <div className={styles.streak}>連続 {progress.streak.count} 日</div>
+
+      {onSelectStage && nextRef && (
+        <button
+          type="button"
+          className={styles.nextStageCard}
+          data-testid="next-stage-card"
+          onClick={() => onSelectStage(nextRef.eraId, stageRefToLocalKey(nextRef))}
+        >
+          <span className={styles.nextStageLabel}>次にクリアする面</span>
+          <span className={styles.nextStageTitle}>
+            {stageShortLabel(nextRef)} {nextEraName}
+          </span>
+          <span className={styles.nextStagePlay}>プレイ</span>
+        </button>
+      )}
+
+      {allWorldsCleared && (
+        <div className={styles.completeBanner} data-testid="all-worlds-cleared-banner">
+          全ての展示室を制覇した！称号「館長」
+        </div>
+      )}
 
       {currentEra && (
         <div className={styles.eraBlock}>
@@ -125,6 +181,12 @@ export function HomeScreen({
             閉じる
           </button>
         </div>
+      )}
+
+      {/* M2b-05: 設定（進捗の書き出し/読み込み・全リセット・画像の出典。旧成績タブから移設）。
+          onResetProgress を渡したときだけ表示する（既存呼び出し元互換）。 */}
+      {onResetProgress && (
+        <SettingsSection progress={progress} onImport={onImportProgress ?? (() => {})} onReset={onResetProgress} />
       )}
     </div>
   )

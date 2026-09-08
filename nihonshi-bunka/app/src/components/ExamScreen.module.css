@@ -1,0 +1,81 @@
+.screen {
+  flex: 1;
+  overflow-y: auto;
+  padding: calc(env(safe-area-inset-top) + 20px) 20px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sectionLabel {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.empty {
+  font-size: 15px;
+  color: var(--text-dim);
+}
+
+.startButton {
+  width: 100%;
+  min-height: 64px;
+  border-radius: var(--radius-button);
+  background: var(--gunjo);
+  color: #fff;
+  font-size: 17px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 16px;
+}
+
+.startButton:disabled {
+  opacity: 0.5;
+}
+
+.startSub {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.reviewButton {
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid var(--border-quiet);
+  border-radius: var(--radius-button);
+  text-align: left;
+  font-size: 14px;
+}
+
+.trendSvg {
+  width: 100%;
+  height: auto;
+}
+
+.trendLine {
+  stroke: var(--gunjo);
+  stroke-width: 2;
+}
+
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.historyRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border-quiet);
+  padding-bottom: 6px;
+}
