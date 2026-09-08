@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styles from './HomeScreen.module.css'
 import { SettingsSection } from './SettingsSection'
+import { BottomSheet } from './BottomSheet'
 import { isItemMastered } from '../engine/srs'
 import { titleForLevel } from '../engine/progress'
 import { buildEraStagePlan, nextStageRef, stageRefToLocalKey, stageShortLabel, type StageLocalKey } from '../engine/stages'
@@ -35,10 +36,6 @@ export function HomeScreen({
   works,
   eras,
   progress,
-  hasMockExam,
-  onStartMockExam,
-  onStartMissReview,
-  missLogCount = 0,
   onSelectStage,
   onImportProgress,
   onResetProgress,
@@ -48,17 +45,11 @@ export function HomeScreen({
   works: Work[]
   eras: Era[]
   progress: ProgressState
-  /** 本番モードが組み立てられるか（content.ts の passages が1件以上あるか）。M2-45。 */
-  hasMockExam: boolean
-  /** 本番モード（M2-20 → M2-45 でランダム学習を統合）。 */
-  onStartMockExam: () => void
-  /** 間違いノート復習（M2-23）。省略時はボタンを出さない（既存呼び出し元互換）。 */
-  onStartMissReview?: () => void
-  missLogCount?: number
   /** M2b-05: 「次の面」カードを押したときにその面を開始する。省略時はカード自体を出さない
    *  （既存呼び出し元互換。テスト用に段階的に呼び出し元を移行できるようにするため optional）。 */
   onSelectStage?: (eraId: string, key: StageLocalKey) => void
-  /** M2b-05: 設定セクション（旧成績タブから移設）。onResetProgress を渡したときだけ表示する。 */
+  /** M2b-11: 歯車→設定シート（旧成績タブ→旧ホーム直置きから移設）。onResetProgress を
+   *  渡したときだけ歯車ボタン自体を表示する（既存呼び出し元互換）。 */
   onImportProgress?: (next: ProgressState) => void
   onResetProgress?: () => void
   /** M2b-05: v2初回起動時の「進捗をリセットしました」通知を1回だけ表示するための消込。 */
@@ -68,13 +59,13 @@ export function HomeScreen({
   const [bannerDismissed, setBannerDismissed] = useState(
     () => typeof localStorage !== 'undefined' && localStorage.getItem(ADD_TO_HOME_DISMISSED_KEY) === '1',
   )
+  // M2b-11: ホームは「面カード」だけの入口にする（9/8オーナー午後フィードバック）。設定は
+  // タブでなく歯車アイコン→ボトムシートに変更。
+  const [settingsOpen, setSettingsOpen] = useState(false)
 
   const currentEra = pickCurrentEra(eras, works, progress)
   const stats = currentEra ? eraStats(currentEra, works, progress) : { total: 0, mastered: 0, discovered: 0 }
   const masteryRatio = stats.total > 0 ? stats.mastered / stats.total : 0
-  // works が0件（本番ビルドで reviewed が無い等）と、本番モードがまだ組み立てられない
-  // （passages 未投入）のを区別する（M2-45: 「今日の分」概念は本番モードには無い）。
-  const noWorksAvailable = works.length === 0
 
   function dismissBanner() {
     setBannerDismissed(true)
@@ -105,7 +96,20 @@ export function HomeScreen({
         </div>
       )}
 
-      <div className={styles.streak}>連続 {progress.streak.count} 日</div>
+      <div className={styles.header}>
+        <div className={styles.streak}>連続 {progress.streak.count} 日</div>
+        {onResetProgress && (
+          <button
+            type="button"
+            className={styles.settingsGear}
+            aria-label="設定"
+            data-testid="settings-gear-button"
+            onClick={() => setSettingsOpen(true)}
+          >
+            ⚙️
+          </button>
+        )}
+      </div>
 
       {onSelectStage && nextRef && (
         <button
@@ -146,36 +150,6 @@ export function HomeScreen({
         <span>{progress.xp} XP</span>
       </div>
 
-      {/* M2-45: ホームの入口は「本番モード」「間違い復習」＋進捗表示だけにする（テーマセット
-          一覧・ランダム学習の「学習を始める」は削除。分析10.5章）。 */}
-      <div>
-        <button
-          type="button"
-          className={styles.startButton}
-          onClick={onStartMockExam}
-          disabled={!hasMockExam}
-          data-testid="mock-exam-button"
-        >
-          <span>本番モード</span>
-          <span className={styles.startSub}>大問IV形式10問・20点満点</span>
-        </button>
-        {!hasMockExam && (
-          <div className={styles.bossLine}>
-            {noWorksAvailable ? '出題できる作品がまだない。' : 'リード文の投入待ち。'}
-          </div>
-        )}
-      </div>
-
-      {/* M2-45: 間違い復習は「0件なら非表示」（decisions.md 2026-09-04 22:30）。旧仕様
-          （0件でも disabled で表示）から変更した。 */}
-      {onStartMissReview && missLogCount > 0 && (
-        <div>
-          <button type="button" className={styles.themeSetItem} data-testid="miss-review-button" onClick={onStartMissReview}>
-            {`間違えた問題を復習（${missLogCount}問）`}
-          </button>
-        </div>
-      )}
-
       {!standalone && !bannerDismissed && (
         <div className={styles.banner}>
           <div>ホーム画面に追加すると全画面で遊べる。共有ボタン → 「ホーム画面に追加」。</div>
@@ -185,10 +159,25 @@ export function HomeScreen({
         </div>
       )}
 
-      {/* M2b-05: 設定（進捗の書き出し/読み込み・全リセット・画像の出典。旧成績タブから移設）。
-          onResetProgress を渡したときだけ表示する（既存呼び出し元互換）。 */}
-      {onResetProgress && (
-        <SettingsSection progress={progress} onImport={onImportProgress ?? (() => {})} onReset={onResetProgress} />
+      {/* M2b-11: 設定（進捗の書き出し/読み込み・全リセット・画像の出典）は歯車→ボトムシートへ
+          移設（旧: ホーム最下部に直置き）。onResetProgress を渡したときだけ歯車自体を出す
+          （既存呼び出し元互換）ため、シートも同条件でだけ開ける。 */}
+      {settingsOpen && onResetProgress && (
+        <BottomSheet
+          label="設定"
+          footer={
+            <button
+              type="button"
+              className={styles.settingsCloseButton}
+              data-testid="settings-sheet-close"
+              onClick={() => setSettingsOpen(false)}
+            >
+              閉じる
+            </button>
+          }
+        >
+          <SettingsSection progress={progress} onImport={onImportProgress ?? (() => {})} onReset={onResetProgress} />
+        </BottomSheet>
       )}
     </div>
   )

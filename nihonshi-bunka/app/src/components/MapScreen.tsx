@@ -240,35 +240,62 @@ export function MapScreen({
                             stageRefKey({ kind: 'segment', eraId, worldIndex, difficulty, segment: seg.segment }),
                           )
                           const cleared = getSegmentState(eraProgress, difficulty, seg.segment).cleared
+                          // M2b-12: 状態を色と形で即判別（緑チェック・黄色パルス・灰ロック）。
+                          const tileState = !segUnlocked ? 'locked' : cleared ? 'cleared' : 'unlocked'
                           return (
                             <button
                               type="button"
                               key={`${difficulty}-${seg.segment}`}
-                              className={`${styles.stageTile} ${cleared ? styles.cleared : ''}`}
+                              className={`${styles.stageTile} ${styles[tileState]}`}
                               data-testid={`stage-tile-${eraId}-${difficulty}-${seg.segment}`}
+                              data-state={tileState}
                               disabled={!segUnlocked}
                               title={`${worldIndex + 1}-${overallSegmentNumber(difficulty, seg.segment, plan.segments.length)} ${'★'.repeat(difficulty)}`}
                               onClick={() => onSelectStage(eraId, key)}
                             >
-                              {!segUnlocked ? '🔒' : cleared ? '✓' : `${seg.segment}（${questionCountForSegment(seg)}問）`}
+                              {tileState === 'locked' ? (
+                                <span className={styles.tileIcon} aria-hidden="true">🔒</span>
+                              ) : tileState === 'cleared' ? (
+                                <span className={styles.tileIcon} aria-hidden="true">✓</span>
+                              ) : (
+                                <span className={styles.tileLabel}>{`${seg.segment}（${questionCountForSegment(seg)}問）`}</span>
+                              )}
                             </button>
                           )
                         })}
                       </div>
                     ))}
-                    <button
-                      type="button"
-                      className={`${styles.stageTile} ${styles.bossTile} ${eraProgress.boss.cleared ? styles.cleared : ''}`}
-                      data-testid={`stage-tile-${eraId}-boss`}
-                      disabled={!bossUnlocked}
-                      title="ボス"
-                      onClick={() => onSelectStage(eraId, bossKey)}
-                    >
-                      {/* M2b-99c中1: 実際の生成問数はeraのpassage/pool構成次第で目標(plan.bossSize)
-                          未満になりうる（fact-check-m2b-v2.md参照）。MapScreenはpassages/poolを
-                          受け取っておらず正確な生成数はここでは確定できないため「最大」と明示する。 */}
-                      {!bossUnlocked ? 'ボス 🔒' : eraProgress.boss.cleared ? 'ボス 👑撃破済' : `ボス挑戦（最大${plan.bossSize}問）`}
-                    </button>
+                    {(() => {
+                      const bossState = !bossUnlocked ? 'locked' : eraProgress.boss.cleared ? 'cleared' : 'unlocked'
+                      return (
+                        <button
+                          type="button"
+                          className={`${styles.stageTile} ${styles.bossTile} ${styles[bossState]}`}
+                          data-testid={`stage-tile-${eraId}-boss`}
+                          data-state={bossState}
+                          disabled={!bossUnlocked}
+                          title="ボス"
+                          onClick={() => onSelectStage(eraId, bossKey)}
+                        >
+                          {/* M2b-99c中1: 実際の生成問数はeraのpassage/pool構成次第で目標(plan.bossSize)
+                              未満になりうる（fact-check-m2b-v2.md参照）。MapScreenはpassages/poolを
+                              受け取っておらず正確な生成数はここでは確定できないため「最大」と明示する。 */}
+                          {bossState === 'locked' && (
+                            <>
+                              <span className={styles.tileIcon} aria-hidden="true">🔒</span>
+                              <span className={styles.tileLabel}>ボス</span>
+                            </>
+                          )}
+                          {bossState === 'cleared' && (
+                            <>
+                              <span className={styles.tileIcon} aria-hidden="true">👑</span>
+                              <span className={styles.tileLabel}>ボス撃破済</span>
+                            </>
+                          )}
+                          {bossState === 'unlocked' && <span className={styles.tileLabel}>{`ボス挑戦（最大${plan.bossSize}問）`}</span>}
+                        </button>
+                      )
+                    })()}
                   </>
                 )}
               </div>

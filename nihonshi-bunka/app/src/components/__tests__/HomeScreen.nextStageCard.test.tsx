@@ -17,8 +17,6 @@ describe('HomeScreen: 次にクリアする面カード（M2b-05）', () => {
         works={[w1]}
         eras={testEras}
         progress={createInitialProgress('2026-09-08')}
-        hasMockExam={false}
-        onStartMockExam={() => {}}
         onSelectStage={onSelectStage}
       />,
     )
@@ -35,8 +33,6 @@ describe('HomeScreen: 次にクリアする面カード（M2b-05）', () => {
         works={[w1]}
         eras={testEras}
         progress={createInitialProgress('2026-09-08')}
-        hasMockExam={false}
-        onStartMockExam={() => {}}
       />,
     )
     expect(screen.queryByTestId('next-stage-card')).not.toBeInTheDocument()
@@ -60,8 +56,6 @@ describe('HomeScreen: 次にクリアする面カード（M2b-05）', () => {
         works={[w1]}
         eras={testEras}
         progress={progress}
-        hasMockExam={false}
-        onStartMockExam={() => {}}
         onSelectStage={() => {}}
       />,
     )

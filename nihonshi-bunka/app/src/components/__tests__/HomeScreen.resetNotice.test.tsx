@@ -17,8 +17,6 @@ describe('HomeScreen: 進捗リセット通知（M2b-05）', () => {
         works={works}
         eras={eras}
         progress={progress}
-        hasMockExam={false}
-        onStartMockExam={() => {}}
         onAcknowledgeResetNotice={onAck}
       />,
     )
@@ -34,8 +32,6 @@ describe('HomeScreen: 進捗リセット通知（M2b-05）', () => {
         works={works}
         eras={eras}
         progress={progress}
-        hasMockExam={false}
-        onStartMockExam={() => {}}
         onAcknowledgeResetNotice={() => {}}
       />,
     )

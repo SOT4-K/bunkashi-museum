@@ -1,6 +1,7 @@
-// M2b-05: ホーム最下部の「設定」（旧成績タブから移設）。3回連続の確認を通さないと
-// 全リセットが実行されないことを固定する（チケット規則: 1回目「本当に？」→2回目
-// 「元に戻せません」→3回目「『リセット』と入力」相当の最終確認）。
+// M2b-05→M2b-11: ホーム最下部の直置きだった「設定」を歯車アイコン→ボトムシートに移設
+// （9/8オーナー午後フィードバック「設定はタブにせず歯車アイコンに」）。3回連続の確認を
+// 通さないと全リセットが実行されないこと自体はM2b-05のチケット規則を維持する
+// （1回目「本当に？」→2回目「元に戻せません」→3回目「『リセット』と入力」相当の最終確認）。
 import { describe, expect, it, vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { HomeScreen } from '../HomeScreen'
@@ -9,12 +10,46 @@ import { createInitialProgress } from '../../engine/progress'
 
 const today = '2026-09-08'
 
-describe('HomeScreen: 設定セクション（M2b-05）', () => {
-  it('onResetProgress を渡さなければ設定セクション自体を出さない（既存呼び出し元互換）', () => {
+function openSettings() {
+  fireEvent.click(screen.getByTestId('settings-gear-button'))
+}
+
+describe('HomeScreen: 歯車→設定シート（M2b-11）', () => {
+  it('onResetProgress を渡さなければ歯車ボタン自体を出さない（既存呼び出し元互換）', () => {
+    render(<HomeScreen works={works} eras={eras} progress={createInitialProgress(today)} onSelectStage={() => {}} />)
+    expect(screen.queryByTestId('settings-gear-button')).not.toBeInTheDocument()
+  })
+
+  it('歯車ボタンは aria-label="設定" を持ち、押すと設定シート（ダイアログ）が開く', () => {
     render(
-      <HomeScreen works={works} eras={eras} progress={createInitialProgress(today)} hasMockExam={false} onStartMockExam={() => {}} />,
+      <HomeScreen
+        works={works}
+        eras={eras}
+        progress={createInitialProgress(today)}
+        onSelectStage={() => {}}
+        onResetProgress={() => {}}
+      />,
     )
-    expect(screen.queryByTestId('settings-section')).not.toBeInTheDocument()
+    expect(screen.queryByRole('dialog', { name: '設定' })).not.toBeInTheDocument()
+    expect(screen.getByTestId('settings-gear-button')).toHaveAttribute('aria-label', '設定')
+    openSettings()
+    expect(screen.getByRole('dialog', { name: '設定' })).toBeInTheDocument()
+    expect(screen.getByTestId('settings-section')).toBeInTheDocument()
+  })
+
+  it('シートの「閉じる」で設定シートが閉じる', () => {
+    render(
+      <HomeScreen
+        works={works}
+        eras={eras}
+        progress={createInitialProgress(today)}
+        onSelectStage={() => {}}
+        onResetProgress={() => {}}
+      />,
+    )
+    openSettings()
+    fireEvent.click(screen.getByTestId('settings-sheet-close'))
+    expect(screen.queryByRole('dialog', { name: '設定' })).not.toBeInTheDocument()
   })
 
   it('1回目「本当に？」→2回目「元に戻せません」→3回目、正しい語を入力するまで確定できない', () => {
@@ -24,11 +59,11 @@ describe('HomeScreen: 設定セクション（M2b-05）', () => {
         works={works}
         eras={eras}
         progress={createInitialProgress(today)}
-        hasMockExam={false}
-        onStartMockExam={() => {}}
+        onSelectStage={() => {}}
         onResetProgress={onReset}
       />,
     )
+    openSettings()
     fireEvent.click(screen.getByTestId('reset-progress-button'))
     expect(screen.getByRole('alertdialog')).toHaveTextContent('本当に？')
     fireEvent.click(screen.getByTestId('confirm-dialog-confirm')) // 1回目「続ける」
@@ -62,11 +97,11 @@ describe('HomeScreen: 設定セクション（M2b-05）', () => {
         works={works}
         eras={eras}
         progress={createInitialProgress(today)}
-        hasMockExam={false}
-        onStartMockExam={() => {}}
+        onSelectStage={() => {}}
         onResetProgress={onReset}
       />,
     )
+    openSettings()
     fireEvent.click(screen.getByTestId('reset-progress-button'))
     fireEvent.click(screen.getByTestId('confirm-dialog-confirm')) // 1回目「続ける」
     fireEvent.click(screen.getByTestId('confirm-dialog-cancel')) // 2回目でキャンセル
@@ -81,12 +116,12 @@ describe('HomeScreen: 設定セクション（M2b-05）', () => {
         works={works}
         eras={eras}
         progress={createInitialProgress(today)}
-        hasMockExam={false}
-        onStartMockExam={() => {}}
+        onSelectStage={() => {}}
         onResetProgress={() => {}}
         onImportProgress={onImport}
       />,
     )
+    openSettings()
     fireEvent.click(screen.getByText('進捗を書き出す'))
     const textarea = screen.getByPlaceholderText(/書き出すと進捗のJSON/) as HTMLTextAreaElement
     expect(JSON.parse(textarea.value).version).toBe(createInitialProgress(today).version)

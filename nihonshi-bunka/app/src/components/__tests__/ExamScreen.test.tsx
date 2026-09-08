@@ -89,4 +89,48 @@ describe('ExamScreen（M2b-07）', () => {
     fireEvent.click(screen.getByTestId('exam-review-latest-misses'))
     expect(screen.queryByTestId('exam-review-no-items')).not.toBeInTheDocument()
   })
+
+  describe('全期間の間違いノート復習（M2b-11: 旧HomeScreenの「間違えた問題を復習」を統合）', () => {
+    it('missLogCount が0、または onStartMissReview 省略時はボタンを出さない（既存呼び出し元互換）', () => {
+      render(<ExamScreen hasMockExam records={[]} onStart={() => {}} onReviewMisses={() => {}} onStartMissReview={() => {}} missLogCount={0} />)
+      expect(screen.queryByTestId('exam-review-all-misses')).not.toBeInTheDocument()
+
+      render(<ExamScreen hasMockExam records={[]} onStart={() => {}} onReviewMisses={() => {}} missLogCount={3} />)
+      expect(screen.queryAllByTestId('exam-review-all-misses')).toHaveLength(0)
+    })
+
+    it('missLogCount > 0 かつ onStartMissReview を渡すと件数付きラベルで押すと onStartMissReview が呼ばれる', () => {
+      const onStartMissReview = vi.fn()
+      render(
+        <ExamScreen
+          hasMockExam
+          records={[]}
+          onStart={() => {}}
+          onReviewMisses={() => {}}
+          onStartMissReview={onStartMissReview}
+          missLogCount={5}
+        />,
+      )
+      const button = screen.getByTestId('exam-review-all-misses')
+      expect(button).toHaveTextContent('全期間の間違いを復習（5問）')
+      fireEvent.click(button)
+      expect(onStartMissReview).toHaveBeenCalledTimes(1)
+    })
+
+    it('「前回の間違いを復習」（直近1回分）と「全期間の間違いを復習」は共存できる', () => {
+      const records: MockExamRecord[] = [{ date: '2026-09-05', elapsedSeconds: 250, correct: 16, total: 20, missedWorkIds: ['w1', 'w2'] }]
+      render(
+        <ExamScreen
+          hasMockExam
+          records={records}
+          onStart={() => {}}
+          onReviewMisses={() => {}}
+          onStartMissReview={() => {}}
+          missLogCount={4}
+        />,
+      )
+      expect(screen.getByTestId('exam-review-latest-misses')).toHaveTextContent('2問')
+      expect(screen.getByTestId('exam-review-all-misses')).toHaveTextContent('4問')
+    })
+  })
 })

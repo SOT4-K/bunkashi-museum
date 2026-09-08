@@ -1,90 +1,48 @@
-// M2-20/M2-23 → M2-45: HomeScreen の「本番モード」「間違えた問題を復習」ボタン。
-// 「学習を始める」（ランダム学習）とテーマセット一覧は M2-45 で本番モードに統合・削除された。
-import { describe, expect, it, vi } from 'vitest'
+// M2b-11: ホームは「次にクリアする面」カードだけを入口にする（9/8オーナー午後フィードバック）。
+// 旧「本番モード」（mock-exam-button）「間違えた問題を復習」（miss-review-button）ボタンは
+// ホームから削除し、模試タブ（ExamScreen）に統合した（M2b-12側の検証は ExamScreen.test.tsx）。
+// 旧テスト（M2-45時代の本番モード/間違い復習ボタン検証）はここで「もう存在しない」ことの
+// 固定に置き換える。
+import { describe, expect, it } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import { fireEvent } from '@testing-library/react'
 import { HomeScreen } from '../HomeScreen'
 import { eras, works } from '../../content'
 import { createInitialProgress } from '../../engine/progress'
 
-const today = '2026-09-04'
+const today = '2026-09-08'
 
-describe('HomeScreen: 本番モード・間違いノートのボタン（M2-45）', () => {
-  it('missLogCount が0のときは間違い復習ボタンを出さない（非表示。旧仕様の disabled から変更）', () => {
-    render(
-      <HomeScreen
-        works={works}
-        eras={eras}
-        progress={createInitialProgress(today)}
-        hasMockExam={true}
-        onStartMockExam={() => {}}
-        onStartMissReview={() => {}}
-        missLogCount={0}
-      />,
-    )
+describe('HomeScreen: 本番モード・間違いノートのボタンは無い（M2b-11）', () => {
+  it('本番モードボタン（mock-exam-button）はホームに存在しない', () => {
+    render(<HomeScreen works={works} eras={eras} progress={createInitialProgress(today)} onSelectStage={() => {}} />)
+    expect(screen.queryByTestId('mock-exam-button')).not.toBeInTheDocument()
+    expect(screen.queryByText('本番モード')).not.toBeInTheDocument()
+  })
+
+  it('間違い復習ボタン（miss-review-button）はホームに存在しない（missLogに1件あっても）', () => {
+    const progress = {
+      ...createInitialProgress(today),
+      missLog: [{ workId: 'w1', type: 'q1' as const, lastMissedAt: today, count: 1, correctStreak: 0 }],
+    }
+    render(<HomeScreen works={works} eras={eras} progress={progress} onSelectStage={() => {}} />)
     expect(screen.queryByTestId('miss-review-button')).not.toBeInTheDocument()
+    expect(screen.queryByText(/間違えた問題を復習/)).not.toBeInTheDocument()
   })
 
-  it('missLogCount > 0 なら件数付きラベルで押すと onStartMissReview が呼ばれる', () => {
-    const onStartMissReview = vi.fn()
+  it('設定欄（settings-section）はホームに直置きされていない（歯車の中に移設。M2b-11）', () => {
     render(
       <HomeScreen
         works={works}
         eras={eras}
         progress={createInitialProgress(today)}
-        hasMockExam={true}
-        onStartMockExam={() => {}}
-        onStartMissReview={onStartMissReview}
-        missLogCount={3}
+        onSelectStage={() => {}}
+        onResetProgress={() => {}}
       />,
     )
-    const button = screen.getByTestId('miss-review-button')
-    expect(button).toHaveTextContent('間違えた問題を復習（3問）')
-    expect(button).not.toBeDisabled()
-    fireEvent.click(button)
-    expect(onStartMissReview).toHaveBeenCalled()
+    expect(screen.queryByTestId('settings-section')).not.toBeInTheDocument()
   })
 
-  it('hasMockExam が true なら本番モードボタンが押せて onStartMockExam が呼ばれる', () => {
-    const onStartMockExam = vi.fn()
-    render(
-      <HomeScreen
-        works={works}
-        eras={eras}
-        progress={createInitialProgress(today)}
-        hasMockExam={true}
-        onStartMockExam={onStartMockExam}
-      />,
-    )
-    const button = screen.getByTestId('mock-exam-button')
-    expect(button).not.toBeDisabled()
-    fireEvent.click(button)
-    expect(onStartMockExam).toHaveBeenCalled()
-  })
-
-  it('hasMockExam が false なら本番モードボタンは押せない', () => {
-    render(
-      <HomeScreen
-        works={works}
-        eras={eras}
-        progress={createInitialProgress(today)}
-        hasMockExam={false}
-        onStartMockExam={() => {}}
-      />,
-    )
-    expect(screen.getByTestId('mock-exam-button')).toBeDisabled()
-  })
-
-  it('テーマセット一覧は表示しない（M2-45で削除）', () => {
-    render(
-      <HomeScreen
-        works={works}
-        eras={eras}
-        progress={createInitialProgress(today)}
-        hasMockExam={true}
-        onStartMockExam={() => {}}
-      />,
-    )
+  it('テーマセット一覧は表示しない（M2-45で削除、以降も維持）', () => {
+    render(<HomeScreen works={works} eras={eras} progress={createInitialProgress(today)} onSelectStage={() => {}} />)
     expect(screen.queryByTestId('theme-set-button')).not.toBeInTheDocument()
     expect(screen.queryByText('テーマセット（模試型）')).not.toBeInTheDocument()
     expect(screen.queryByText('学習を始める')).not.toBeInTheDocument()

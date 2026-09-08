@@ -63,7 +63,8 @@ describe('App: ステージ挑戦中にタブを押すと確認ダイアログ�
     fireEvent.click(screen.getByTestId('confirm-dialog-confirm')) // はい
 
     expect(screen.queryByTestId('choice-button')).not.toBeInTheDocument()
-    expect(screen.getByTestId('mock-exam-button')).toBeInTheDocument()
+    // M2b-11: ホームの入口は「次にクリアする面」カードのみ（本番モードボタンはホームから削除）。
+    expect(screen.getByTestId('next-stage-card')).toBeInTheDocument()
 
     // ホーム→学習タブに戻ると asuka の s1 はまだ未クリア（中止したので記録されない。
     // 作品2件×型2種=最大4問生成できるため「クリア済」ではなく件数表示のまま）

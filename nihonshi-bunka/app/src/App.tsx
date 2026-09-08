@@ -346,10 +346,6 @@ export default function App() {
             works={playableWorks}
             eras={eras}
             progress={progress}
-            hasMockExam={passages.length > 0}
-            onStartMockExam={goMockExam}
-            onStartMissReview={goMissReview}
-            missLogCount={progress.missLog.length}
             onSelectStage={goStage}
             onImportProgress={importProgress}
             onResetProgress={handleResetProgress}
@@ -368,6 +364,8 @@ export default function App() {
             records={progress.examRecords}
             onStart={goExam}
             onReviewMisses={goExamMissReview}
+            onStartMissReview={goMissReview}
+            missLogCount={progress.missLog.length}
           />
         )}
       </main>

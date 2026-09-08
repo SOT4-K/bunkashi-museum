@@ -1,6 +1,9 @@
 // M2-45: 「学習を始める」（ランダム学習）とテーマセット一覧は本番モードに統合・削除された。
-// ホームの「本番モード」ボタン→ MockExamScreen（下線抜粋＋設問。全15文化から重み付き抽選）→
-// 回答→結果→ホームに戻る、の流れを検証する。
+// M2b-11: ホームの「本番モード」ボタン（mock-exam-button）は削除し、ホームは「次にクリアする
+// 面」カードだけの入口にした（9/8オーナー午後フィードバック）。goMockExam（大問IV形式・
+// MockExamScreen）のエンジン自体は図鑑タブの空状態「学習を始める」ボタンから引き続き
+// 到達できるため、そちらを入口にしてMockExamScreenの流れ（下線抜粋＋設問→回答→結果→
+// ホームに戻る）を検証する。
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { render, screen, fireEvent, within, act } from '@testing-library/react'
 import { makeWork, testEras } from '../engine/__tests__/testFixtures'
@@ -43,7 +46,13 @@ async function importApp() {
   return mod.default
 }
 
-describe('App: ホームの「本番モード」（M2-45で全15文化に統合）', () => {
+/** 図鑑タブ（作品未発見の空状態）の「学習を始める」から goMockExam を起動する（M2b-11）。 */
+function startMockExamFromMuseum() {
+  fireEvent.click(screen.getByRole('button', { name: '図鑑' }))
+  fireEvent.click(screen.getByText('学習を始める'))
+}
+
+describe('App: 本番モード（M2-45で全15文化に統合。M2b-11でホームからは削除）', () => {
   beforeEach(() => {
     // このテスト環境では localStorage が未定義（progress.ts の loadProgress がその場合
     // createInitialProgress にフォールバックする設計）。App の再 render ごとに状態は
@@ -54,19 +63,19 @@ describe('App: ホームの「本番モード」（M2-45で全15文化に統合�
     vi.useRealTimers()
   })
 
-  it('ホームにテーマセット一覧・「学習を始める」ボタンは無い（M2-45で削除）', async () => {
+  it('ホームに本番モードボタン・テーマセット一覧・「学習を始める」ボタンは無い（M2-45で削除・M2b-11でホームからも削除）', async () => {
     const App = await importApp()
     render(<App />)
     expect(screen.queryByTestId('theme-set-button')).not.toBeInTheDocument()
     expect(screen.queryByText('学習を始める')).not.toBeInTheDocument()
-    expect(screen.getByTestId('mock-exam-button')).toBeInTheDocument()
+    expect(screen.queryByTestId('mock-exam-button')).not.toBeInTheDocument()
   })
 
-  it('「本番モード」→開始→下線抜粋＋設問→回答→結果→ホームに戻る', async () => {
+  it('図鑑タブの「学習を始める」→開始→下線抜粋＋設問→回答→結果→ホームに戻る', async () => {
     const App = await importApp()
     render(<App />)
 
-    fireEvent.click(screen.getByTestId('mock-exam-button'))
+    startMockExamFromMuseum()
     fireEvent.click(screen.getByTestId('mock-exam-start'))
 
     expect(screen.getByTestId('mock-exam-excerpt-panel')).toBeInTheDocument()
@@ -87,14 +96,20 @@ describe('App: ホームの「本番モード」（M2-45で全15文化に統合�
     const summary = screen.getByTestId('mock-exam-summary')
     fireEvent.click(within(summary).getByText('ホームに戻る'))
 
-    expect(screen.getByTestId('mock-exam-button')).toBeInTheDocument()
+    // onFinish はタブを切り替えない（開始した図鑑タブのまま）。ホームに戻る導線自体は
+    // タブバー側の責務なので、ここではモーダル/オーバーレイが閉じたことだけ確認する。
+    expect(screen.queryByTestId('mock-exam-excerpt-panel')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('mock-exam-summary')).not.toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: 'ホーム' }))
+    expect(screen.getByTestId('next-stage-card')).toBeInTheDocument()
   })
 
   it('M2-47: 本番モードの途中でタブを押すと確認ダイアログが出て、「はい」で記録せず中止する', async () => {
     const App = await importApp()
     render(<App />)
 
-    fireEvent.click(screen.getByTestId('mock-exam-button'))
+    startMockExamFromMuseum()
     fireEvent.click(screen.getByTestId('mock-exam-start'))
     expect(screen.getByTestId('mock-exam-excerpt-panel')).toBeInTheDocument()
 
@@ -103,6 +118,6 @@ describe('App: ホームの「本番モード」（M2-45で全15文化に統合�
 
     fireEvent.click(screen.getByTestId('confirm-dialog-confirm'))
     expect(screen.queryByTestId('mock-exam-excerpt-panel')).not.toBeInTheDocument()
-    expect(screen.getByTestId('mock-exam-button')).toBeInTheDocument()
+    expect(screen.getByTestId('next-stage-card')).toBeInTheDocument()
   })
 })

@@ -57,6 +57,8 @@ export function ExamScreen({
   records,
   onStart,
   onReviewMisses,
+  onStartMissReview,
+  missLogCount = 0,
 }: {
   /** 全文化から模試を組み立てられるか（content.ts の passages が1件以上あるか）。 */
   hasMockExam: boolean
@@ -70,6 +72,14 @@ export function ExamScreen({
    * 戻り値を返さない/undefinedの場合は「成功」とみなし何もしない＝後方互換）。
    */
   onReviewMisses: (missedWorkIds: string[]) => boolean | void
+  /**
+   * M2b-11: 全期間の間違いノート復習（旧HomeScreenの「間違えた問題を復習」を統合）。
+   * 「前回の間違いを復習」（onReviewMisses、最新1回分のみ）とは別の入口として共存する。
+   * 省略時、または missLogCount が0のときはボタンを出さない（既存呼び出し元互換・
+   * decisions.md 2026-09-04 22:30「0件なら非表示」を踏襲）。
+   */
+  onStartMissReview?: () => void
+  missLogCount?: number
 }) {
   const ordered = [...records].reverse()
   const latest = records[records.length - 1]
@@ -110,6 +120,22 @@ export function ExamScreen({
               復習する問題がありません（すでに定着済み）。
             </p>
           )}
+        </div>
+      )}
+
+      {/* M2b-11: 旧HomeScreenの「間違えた問題を復習」（全期間・missLog全件）をここに統合。
+          「前回の間違いを復習」（直近1回分のみ）とは別の入口として共存させる。 */}
+      {onStartMissReview && missLogCount > 0 && (
+        <div className={styles.section}>
+          <div className={styles.sectionLabel}>間違いノート（全期間）</div>
+          <button
+            type="button"
+            className={styles.reviewButton}
+            data-testid="exam-review-all-misses"
+            onClick={onStartMissReview}
+          >
+            {`全期間の間違いを復習（${missLogCount}問）`}
+          </button>
         </div>
       )}
 
