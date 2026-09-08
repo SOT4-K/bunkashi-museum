@@ -690,6 +690,7 @@
     {
       "id": "togudo-doujinsai",
       "file": "togudo-doujinsai.jpg",
+      "crop": { "left": 0, "top": 0, "width": 1920, "height": 1050 },
       "title": "慈照寺東求堂（同仁斎）",
       "sourceName": "Wikimedia Commons",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ginkakuji_Togudo.jpg",
@@ -1013,6 +1014,7 @@
     {
       "id": "ishibocho",
       "file": "ishibocho.jpg",
+      "crop": { "left": 0, "top": 0, "width": 1831, "height": 1080 },
       "title": "石包丁（見晴台遺跡出土）",
       "sourceName": "Wikimedia Commons（名古屋市見晴台考古資料館 展示）",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stone_knife_of_Miharashidai_ruins.jpg",
@@ -1083,6 +1085,7 @@
     {
       "id": "joan-chashitsu",
       "file": "joan-chashitsu.jpg",
+      "crop": { "left": 0, "top": 530, "width": 1920, "height": 910 },
       "title": "如庵（犬山・有楽苑、国宝茶室）",
       "sourceName": "Wikimedia Commons",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:J%C5%8D-an_(Urakuen).jpg",

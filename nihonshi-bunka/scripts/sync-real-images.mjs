@@ -66,8 +66,15 @@ async function main() {
       if (!existsSync(srcPath)) continue // 参照はあるが実体が無い
 
       const destName = `${work.id}.webp`
-      await sharp(srcPath)
+      let pipeline = sharp(srcPath)
         .rotate() // Exif の向きを反映してから縮小
+      if (entry.crop) {
+        // manifest に crop 指定がある画像（展示ラベル・案内板・扁額など答えが
+        // 写り込んだ範囲を除外するため）は resize の前に extract で切り抜く
+        const { left, top, width, height } = entry.crop
+        pipeline = pipeline.extract({ left, top, width, height })
+      }
+      await pipeline
         .resize({
           width: MAX_DIMENSION,
           height: MAX_DIMENSION,
