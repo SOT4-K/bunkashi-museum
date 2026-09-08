@@ -3,19 +3,27 @@
   inset: 0;
   background: rgb(21 23 28 / 55%);
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  justify-content: flex-end;
   z-index: 20;
 }
 
+/* M2b-16: iOS実機で.sheetのmax-heightが効かず（dvh未対応/SW旧バンドル等の
+   原因は特定できなかった）footerが本文を覆うバグが再発した。原因が特定できなくても
+   壊れない構造にするため、①.sheetの高さは確定済みの.backdrop（fixed inset:0）に対する
+   %指定にしdvhを使わない②flexの縮小挙動に依存せずgridの行として.footerを確保する
+   （sticky bottom:0はgridの外側でmax-heightが破れた時に本文へ被さる原因だったため撤去）。 */
 .sheet {
   width: 100%;
-  max-height: 92dvh;
+  flex: 0 1 auto;
   min-height: 0;
+  max-height: 92%;
   background: var(--surface);
   border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
   box-shadow: 0 -8px 24px rgb(0 0 0 / 24%);
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  overflow: hidden;
   animation: sheet-slide-up 0.28s ease-out;
 }
 
@@ -52,8 +60,6 @@
 }
 
 .footer {
-  position: sticky;
-  bottom: 0;
   padding: 12px 20px calc(env(safe-area-inset-bottom) + 12px);
   background: var(--surface);
   border-top: 1px solid var(--border-quiet);
