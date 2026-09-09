@@ -190,12 +190,14 @@ describe('M2e-02 受け入れ②: 模試・ボスの設問文が下線部キー�
   )
 
   it('通常ステージ（面）: passages を渡すと、下線が対象にする作品の stem に「下線部」が付く（passages 省略時は単独問題のまま＝後方互換）', () => {
-    // buildStageQuestions は面の対象作品全件が下線に紐づくとは限らない設計のため、100%は求めない
-    // （BOARD.md M2e-02 の合格ラインもボス・模試のみを対象にしている）。ここでは「passages を
-    // 渡した経路が実際に少なくとも1件は下線部つきの stem を生成できる」ことと、後方互換
-    // （passages 省略時は今までどおり全て単独問題）の両方を実データで確かめる。
+    // buildStageQuestions は面の対象作品全件が下線に紐づくとは限らない設計のため、当初は100%を
+    // 求めていなかった（BOARD.md M2e-02 の合格ラインもボス・模試のみを対象）。M2e-07（全15
+    // ワールドの下線増補、2026-09-10 実測）で playableWorks（画像あり作品）側の覆え率が
+    // 全era・全difficulty・全segmentで実測100%に達したため（stemCoverage.realdata.test.ts
+    // 実行時に検証済み: 1800問中standalone 0件）、「面に単独問題が混ざる」という当初の前提は
+    // 現状のデータでは成立しなくなった。これはM2e-07の目標超過達成であり退行ではないため、
+    // sawStandalone の期待は外す（コード上の後方互換パス自体は次のブロックで確認する）。
     let sawUnderline = false
-    let sawStandalone = false
     for (const era of reviewedEras) {
       for (let seed = 0; seed < 5; seed++) {
         const qs = buildStageQuestions(
@@ -210,12 +212,10 @@ describe('M2e-02 受け入れ②: 模試・ボスの設問文が下線部キー�
         )
         for (const q of qs) {
           if (q.stem?.includes('下線部')) sawUnderline = true
-          else if (q.stem) sawStandalone = true
         }
       }
     }
     expect(sawUnderline).toBe(true)
-    expect(sawStandalone).toBe(true)
 
     // passages 省略時（既存呼び出し・後方互換）は全問が単独問題になる（下線部を含まない）。
     let anyUnderlineWithoutPassages = false
@@ -224,5 +224,50 @@ describe('M2e-02 受け入れ②: 模試・ボスの設問文が下線部キー�
       if (qs.some((q) => q.stem?.includes('下線部'))) anyUnderlineWithoutPassages = true
     }
     expect(anyUnderlineWithoutPassages).toBe(false)
+  })
+})
+
+/** era ごとに「passages の下線が実際にカバーしている作品 id」の集合（上の coveredWorkIdsByEra と
+ *  同じロジック。M2e-99 差し戻し以降、themeSetPool を分母にするのが正しい定義）。 */
+function coveredWorkIdsInThemeSetPoolByEra(eraId: string): Set<string> {
+  const availableIds = new Set(reviewedThemeSetPool.map((w) => w.id))
+  const covered = new Set<string>()
+  for (const passage of reviewedPassages.filter((p) => p.era === eraId)) {
+    for (const underline of passage.underlines) {
+      const id = pickThemeTargetId(underline, passage, availableIds)
+      if (id) covered.add(id)
+    }
+  }
+  return covered
+}
+
+describe('M2e-07 受け入れ: themeSetPool 分母の覆え率60%以上・ボス単独問題比率40%以下（恒久テスト）', () => {
+  it('全15ワールドで覆え率>=60%・単独問題比率<=40%（20 seed実測）', () => {
+    const SEEDS = 20
+    const rows: { era: string; coverageRate: number; standaloneRate: number }[] = []
+    for (const era of reviewedEras) {
+      const poolWorks = reviewedThemeSetPool.filter((w) => w.era === era.id)
+      const covered = coveredWorkIdsInThemeSetPoolByEra(era.id)
+      const coverageRate = poolWorks.length > 0 ? covered.size / poolWorks.length : 0
+      let total = 0
+      let standalone = 0
+      for (let seed = 0; seed < SEEDS; seed++) {
+        const qs = buildBossQuestions(era.id, reviewedPassages, reviewedThemeSetPool, reviewedPlayableWorks, reviewedEras, seededRandom(seed))
+        for (const q of qs) {
+          if (q.type === 'q14') continue
+          total++
+          if (!covered.has(q.work.id)) standalone++
+        }
+      }
+      rows.push({ era: era.id, coverageRate, standaloneRate: total > 0 ? standalone / total : 0 })
+    }
+    rows.sort((a, b) => a.coverageRate - b.coverageRate)
+    // eslint-disable-next-line no-console
+    console.log(
+      '[M2e-07実測]\n' +
+        rows.map((r) => `${r.era}: 覆え率=${(r.coverageRate * 100).toFixed(1)}% 単独問題比率=${(r.standaloneRate * 100).toFixed(1)}%`).join('\n'),
+    )
+    const failing = rows.filter((r) => r.coverageRate < 0.6 || r.standaloneRate > 0.4)
+    expect(failing, JSON.stringify(failing, null, 2)).toEqual([])
   })
 })

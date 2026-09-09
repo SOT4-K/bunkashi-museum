@@ -186,5 +186,62 @@
       }
     ],
     "notes": "2本目のセット（M2-15）。『この文化は…』のＡ〜Ｆから文化を推測させる形で、文化名そのものではなく年代順（北山→応仁の乱→東山）を問う設問を置いた（nichidai-past-exams-analysis.md 2章 T7）。1本目（higashiyama-01）と型が重ならないよう、togudo は q9→q10、ryoanji は q10→q9、ginkaku は q9/q4逆→q4 に入れ替えている。"
+  },
+  {
+    "id": "higashiyama-03",
+    "era": "higashiyama",
+    "title": "乱ののち、地方と庶民へ",
+    "text": "応仁の乱で京都が荒れると、公家や僧が地方に下り、文化は地方や庶民のあいだへ広がっていった。[[a|庶民や下級武士を主人公とする短い物語]]が絵とともに親しまれたのもこのころである。禅の精神は日々の暮らしにも取り込まれ、豪華な道具を誇る座敷の茶に対して、[[b|簡素な道具と静かな心をたっとぶ茶]]が始められた。絵画では、明に渡って本場の技法を学んだ禅僧出身の画家が、[[c|日本の自然を生かした墨の絵]]を大成している。",
+    "sources": [
+      "下線a（庶民や下級武士を主人公とする短編物語群、『一寸法師』『浦島太郎』、応仁の乱後の文化の広がり）: 国立国会図書館サーチ（御伽草子第19冊『一寸法師』） https://ndlsearch.ndl.go.jp/books/R100000002-I000008305438 、content/works/higashiyama.json の otogizoshi（facts）",
+      "下線b（侘び茶の創始、一休宗純に禅を学んだ伝承、千利休の侘び茶へつながる系譜）: 奈良県観光公式サイト あをによしなら旅ネット https://yamatoji.nara-kankou.or.jp/artifact/0000000147 、content/works/higashiyama.json の murata-juko（facts）",
+      "下線c（明に渡って画技を学び日本的な水墨画を大成、『秋冬山水図』『四季山水図巻』）: e国宝（雪舟筆『秋冬山水図』） https://emuseum.nich.go.jp/detail?content_base_id=100146 、毛利博物館公式サイト（『山水長巻』） https://mohri-museum.com/museum/ 、content/works/higashiyama.json の sesshu（facts・pairs）",
+      "※本文の歴史記述そのものは教科書水準の通説（各 works の sources も「確信度: 中」と注記）。M2e-07②③（下線増補）で新設、reviewer 未検証"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "style",
+        "workIds": [
+          "otogizoshi"
+        ],
+        "ask": {
+          "type": "q12",
+          "stem": "下線部aの代表とされる作品として最も適切なものはどれか",
+          "answerText": "『一寸法師』",
+          "distractorTexts": [
+            "『太平記』",
+            "『風姿花伝』",
+            "『南総里見八犬伝』"
+          ]
+        },
+        "note": "M2e-07で新設（この3件はどの下線にも紐づいていなかった）。誤答は otogizoshi の falseStatements の軸（軍記物語／世阿弥の能楽論書／江戸の読本）にそろえた。呼び名（御伽草子）も作品名も本文に書かない"
+      },
+      {
+        "key": "b",
+        "anchorKind": "style",
+        "workIds": [
+          "murata-juko"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部bを始めた人物について述べた次のA・Bの文の正誤の組合せとして正しいものはどれか"
+        },
+        "note": "M2e-07で新設。facts 3件・verifiedFalse 5件があり Q10 を生成できる（セット内に Q10 を1問置くための下線でもある）。誤文は「茶の湯を大成した（桃山文化）」（千利休との段階・時代ずらし）「北山文化の人物である」（時代ずらし）。higashiyama-02/d はこの人物名を答えにする q12 だが対象作品は別（ginkaku 系）で、下線の対象としてはここが初出"
+      },
+      {
+        "key": "c",
+        "anchorKind": "style",
+        "workIds": [
+          "sesshu"
+        ],
+        "ask": {
+          "type": "q13",
+          "stem": "下線部cを大成した画家と、その分野または代表作の組合せとして正しいものはどれか"
+        },
+        "note": "M2e-07で新設。語句組合せ（Q13）。sesshu の pairs（雪舟・水墨画の大成／雪舟・秋冬山水図、四季山水図巻）のどちらが選ばれても stem と噛み合う。画家名は本文に書かず、経歴（明に渡った禅僧出身）だけを手がかりにしている"
+      }
+    ],
+    "notes": "M2e-07②③で新設した3本目。higashiyama-01・02 の下線は画像のある3件（ginkaku・togudo・ryoanji）に集中しており、画像を持たない3件（otogizoshi・murata-juko・sesshu）がどの下線にも紐づいていなかったので、1件ずつ下線の対象にした。"
   }
 ]

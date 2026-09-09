@@ -249,5 +249,81 @@
       }
     ],
     "notes": "M2e-05 で追加したセット。桃山区分の出題可能作品3件（himeji-jo・joan-chashitsu・daigo-sanboin-teien）のうち後の2件がどの passage の下線からも参照されておらず、覆え率が 1/3 だったため、この2件を対象にする下線（a・b）を新設した。既存の momoyama-01（下線4本）に2本足すと6本になり、validate-content.mjs の「下線は3〜5個」の警告が1件増える（momoyama-02 は既に5本）ため、既存セットに足さず新しいセットにした。型は a=q9（画像を伏せて選ばせる）→ b=q10 → c=q4 の順で、画像を伏せる問いを画像を出す問いより先に置いている（a の正解画像と b・c の写真は別作品なので、後続で答えが割れることはない）。"
+  },
+  {
+    "id": "momoyama-04",
+    "era": "momoyama",
+    "title": "金の絵、二畳の茶室、海の向こうの技",
+    "text": "全国統一が進むと、新しく力を得た大名や豪商の富を背景に、豪壮で華麗な文化が生まれた。城の書院を飾る絵は[[a|金箔を貼った地に濃い色彩を用いる様式]]で描かれ、大きな画面いっぱいに草木や獣が表された。一方で簡素と静寂を重んじる茶の湯も広がり、[[b|二畳ほどの草庵風の茶室]]を完成させた茶人が天下人に仕えている。庶民の芸能も力を得て、[[c|男装して踊る奇抜な姿の興行]]が評判となった。海の向こうからは宣教師が渡来し、[[d|活字を組んで刷る新しい印刷の術]]が伝えられて、日本語をローマ字やひらがなで記した書物が刊行される。",
+    "sources": [
+      "下線a（金地に群青・緑青などの濃彩を用いる障壁画、狩野永徳・狩野山楽・長谷川等伯ら、城郭や寺院の書院を飾ったこと）: 宮内庁三の丸尚蔵館公式サイト（狩野永徳筆『唐獅子図屏風』） https://collection.shozokan.nich.go.jp/object/SZK002944 、観光庁 地域観光資源の多言語解説文データベース（智積院障壁画『楓図』・長谷川等伯筆） https://www.mlit.go.jp/tagengo-db/R1-01743.html 、content/works/momoyama.json の noe-shohekiga（facts）",
+      "下線b（侘び茶の大成、織田信長・豊臣秀吉の茶頭、妙喜庵待庵など草庵風の茶室）: 裏千家公式サイト https://www.urasenke.or.jp/textc/about/spirit4.html 、content/works/momoyama.json の sen-no-rikyu（facts）",
+      "下線c（かぶき踊りの創始、京都での興行、のちの歌舞伎のもと）: 独立行政法人日本芸術文化振興会 文化デジタルライブラリー 歌舞伎事典「出雲の阿国」 https://www2.ntj.jac.go.jp/dglib/modules/kabuki_dic/entry.php?entryid=1013 、content/works/momoyama.json の izumo-no-okuni（facts）",
+      "下線d（ヴァリニャーノが伝えた活字印刷術、ローマ字・ひらがなによる日本語の印刷、『平家物語』『伊曽保物語』の刊行）: 国立国語研究所（天草版『平家物語』） https://www2.ninjal.ac.jp/textdb_dataset/amhk/ 、content/works/momoyama.json の kirishitan-ban（facts）",
+      "※本文の歴史記述そのものは教科書水準の通説（各 works の sources も「確信度: 中」と注記）。M2e-07②③（下線増補）で新設、reviewer 未検証"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "style",
+        "workIds": [
+          "noe-shohekiga"
+        ],
+        "ask": {
+          "type": "q12",
+          "stem": "下線部aの様式の名称として最も適切なものはどれか",
+          "answerText": "濃絵",
+          "distractorTexts": [
+            "水墨画",
+            "浮世絵",
+            "大和絵"
+          ]
+        },
+        "note": "M2e-07で新設（この4件はどの下線にも紐づいていなかった。momoyama-03 の本文は金地濃彩に触れているが、下線の対象は himeji-jo）。誤答は noe-shohekiga の falseStatements の軸（水墨画のみ／浮世絵の一種）と、国風文化の絵画。様式名は本文に書かない"
+      },
+      {
+        "key": "b",
+        "anchorKind": "style",
+        "workIds": [
+          "sen-no-rikyu"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部bを完成させた茶人について述べた次のA・Bの文の正誤の組合せとして正しいものはどれか"
+        },
+        "note": "M2e-07で新設。facts 3件・verifiedFalse 5件があり Q10 を生成できる（セット内に Q10 を1問置くための下線でもある）。誤文は「侘び茶を創始した（東山文化）」（村田珠光との段階の入れ替え）「室町幕府の将軍に仕えた」（時代・主君の入れ替え）。人物名は本文に書かない（momoyama-03 の本文には名が出ているが、passage ごとの独立した本文なので重複しない）"
+      },
+      {
+        "key": "c",
+        "anchorKind": "event",
+        "workIds": [
+          "izumo-no-okuni"
+        ],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部cを始めた人物について述べた文として最も適切なものはどれか"
+        },
+        "note": "M2e-07で新設。Q4（関連記述）。facts 3件（かぶき踊りを始めた／京都で興行し人気を集めた／のちの歌舞伎のもとになった）のどれが正文でも成り立つよう、本文では興行の地も後世への影響も書いていない。誤文は「侘び茶を大成した」「室町時代に猿楽から能を大成した」（人物・分野・時代の入れ替え）"
+      },
+      {
+        "key": "d",
+        "anchorKind": "event",
+        "workIds": [
+          "kirishitan-ban"
+        ],
+        "ask": {
+          "type": "q12",
+          "stem": "下線部dによって刊行された書物として最も適切なものはどれか",
+          "answerText": "『伊曽保物語（イソップ物語）』",
+          "distractorTexts": [
+            "『解体新書』",
+            "『読史余論』",
+            "『風姿花伝』"
+          ]
+        },
+        "note": "M2e-07で新設。誤答は kirishitan-ban の falseStatements の軸（杉田玄白の蘭学書＝『解体新書』）と、他文化の代表的な書物（元禄・北山）。下線には技法名（活字印刷）をそのまま書かないよう「活字を組んで刷る」と言い換えている（validate の technique リーク対策も兼ねる）"
+      }
+    ],
+    "notes": "M2e-07②③で新設した4本目。momoyama-01〜03 の下線は画像のある3件（himeji-jo・joan-chashitsu・daigo-sanboin-teien）に集中しており、画像を持たない4件（noe-shohekiga・sen-no-rikyu・izumo-no-okuni・kirishitan-ban）がどの下線にも紐づいていなかったので、1件ずつ下線の対象にした。4件とも画像なし項目なので Q12・Q10・Q4（文字問題）で構成している。"
   }
 ]

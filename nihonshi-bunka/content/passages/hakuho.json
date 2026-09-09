@@ -294,5 +294,94 @@
         "note": "文化伏せ型の中心となる問い。対象作品は a で画像を出したものを再利用し、新たな画像を割らない"
       }
     ]
+  },
+  {
+    "id": "hakuho-03",
+    "era": "hakuho",
+    "title": "律令の国づくりとともに（7世紀後半）",
+    "text": "7世紀後半、律令にもとづく国のしくみが整えられていくなかで、[[a|飛鳥の地に新しい都]]が営まれた。天皇のもとでは[[b|国の歴史をまとめる事業]]も始められ、その成果は次の時代に書物として実を結ぶ。仏教は国家を守るものとされ、豪族の氏寺に代わって[[c|国家が造営し維持する寺]]が営まれた。宮廷では[[d|この時期に活躍した歌人たち]]が、若々しく力強い和歌を詠んでいる。明日香村の終末期古墳では、20世紀後半の調査によって石室の[[e|壁画]]が見つかった。",
+    "sources": [
+      "下線a（持統天皇の694年遷都、条坊制の最初の本格的都城、710年の平城京遷都）: 奈良文化財研究所 藤原宮跡資料室公式サイト https://www.nabunken.go.jp/fujiwara/index.html 、content/works/hakuho.json の fujiwarakyo（facts）",
+      "下線b（天武天皇のもとでの国史編纂の開始と、奈良時代の『古事記』『日本書紀』としての完成）: 国立公文書館「歴史と物語」1.古事記 https://www.archives.go.jp/exhibition/digital/rekishitomonogatari/contents/01.html 、content/works/hakuho.json の kokushi-hensan（facts）",
+      "下線c（大官大寺・薬師寺などの官寺、薬師寺は天武天皇の発願）: 奈良県公式サイト「奈良県歴史文化資源データベース」大官大寺跡 https://www.pref.nara.lg.jp/ikasu-nara/bunkashigen/main10566.html 、content/works/hakuho.json の kanji-zoei（facts・pairs）",
+      "下線d（柿本人麻呂＝持統・文武朝の宮廷歌人／額田王＝天智・天武朝の女性歌人／歌は『万葉集』所収）: 奈良県立万葉文化館「万葉百科」柿本人麻呂 https://manyo-hyakka.pref.nara.jp/db/dicDetail?cls=d_utabito&dataId=201 ／額田王 https://manyo-hyakka.pref.nara.jp/db/dicDetail?cls=d_utabito&dataId=524",
+      "下線e（明日香村のキトラ古墳、1983年の壁画確認、精密な天文図）: 文化庁「キトラ古墳の概要」 https://www.bunka.go.jp/seisaku/bunkazai/takamatsu_kitora/kitora_gaiyo.html 、content/works/hakuho.json の kitora-kofun-heki（facts）",
+      "※本文の歴史記述そのものは教科書水準の通説。M2e-07②③（下線増補）で新設、reviewer 未検証"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "institution",
+        "workIds": [
+          "fujiwarakyo"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部aについて述べた次のA・Bの文の正誤の組合せとして正しいものはどれか"
+        },
+        "note": "M2e-07で新設（白鳳の画像なし項目7件はどの下線にも紐づいていなかった）。facts 3件・verifiedFalse 2件があり Q10 を生成できる（セット内に Q10 を1問置くための下線でもある）。誤文は「桓武天皇が造営した都」「平城京の次に営まれた都」（人物・前後の入れ替え）。下線には都の名も条坊制も書かない"
+      },
+      {
+        "key": "b",
+        "anchorKind": "event",
+        "workIds": [
+          "kokushi-hensan"
+        ],
+        "ask": {
+          "type": "q12",
+          "stem": "下線部bを始めた天皇として最も適切なものはどれか",
+          "answerText": "天武天皇",
+          "distractorTexts": [
+            "桓武天皇",
+            "持統天皇",
+            "聖武天皇"
+          ]
+        },
+        "note": "M2e-07で新設。誤答は kokushi-hensan の falseStatements の軸（桓武天皇）と、同時代・後代の天皇（持統＝藤原京遷都、聖武＝大仏造立）。本文には天皇名も書名も書かない"
+      },
+      {
+        "key": "c",
+        "anchorKind": "institution",
+        "workIds": [
+          "kanji-zoei"
+        ],
+        "ask": {
+          "type": "q13",
+          "stem": "下線部cの例と、その性格または造営を発願した天皇の組合せとして正しいものはどれか"
+        },
+        "note": "M2e-07で新設。語句組合せ（Q13）。kanji-zoei の pairs（大官大寺・官寺／薬師寺・天武天皇の発願）のどちらが選ばれても stem と噛み合う。下線は「国家が造営し維持する寺」という説明にとどめ、寺名は設問側に残した"
+      },
+      {
+        "key": "d",
+        "anchorKind": "person",
+        "workIds": [
+          "hakuho-kajin"
+        ],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部dについて述べた文として最も適切なものはどれか"
+        },
+        "note": "M2e-07で新設。Q4（関連記述）。facts 3件（柿本人麻呂＝持統・文武朝／額田王＝天智・天武朝の女性歌人／歌は『万葉集』所収）のどれが正文でも成り立つ。誤文は「柿本人麻呂は『古今和歌集』の代表歌人」（時代・書物ずらし）。歌集名は本文に書かない"
+      },
+      {
+        "key": "e",
+        "anchorKind": "temple",
+        "workIds": [
+          "kitora-kofun-heki"
+        ],
+        "ask": {
+          "type": "q12",
+          "stem": "下線部eのうち、精密な天文図をもつことで知られる古墳の名称として最も適切なものはどれか",
+          "answerText": "キトラ古墳",
+          "distractorTexts": [
+            "高松塚古墳",
+            "稲荷山古墳",
+            "大仙陵古墳"
+          ]
+        },
+        "note": "M2e-07で新設。誤答は同じ明日香村の壁画古墳（高松塚＝女子群像で天文図が判別の分かれ目。kitora-kofun-heki の confusables・falseStatements の軸）と、他時代の代表的な古墳。天文図・四神という手がかりは本文に書かず設問側に置いた（本文に書くと高松塚との識別が本文だけで済んでしまう）"
+      }
+    ],
+    "notes": "M2e-07②③で新設した3本目（hakuho-01・hakuho-image-01・hakuho-02 に続く）。既存3本の下線は画像のある5件に集中していたため、画像なし項目のうち5件（fujiwarakyo・kokushi-hensan・kanji-zoei・hakuho-kajin・kitora-kofun-heki）を1件ずつ下線の対象にした。据え置いたのは kentoshi-hakuho と horyuji-saiken-ronso（下線は1passageにつき3〜5個が目安のため。前者は文化の性格そのもの、後者は飛鳥との時代区分の論点で、文化伏せ型の hakuho-02 に足すほうが筋がよい）。"
   }
 ]

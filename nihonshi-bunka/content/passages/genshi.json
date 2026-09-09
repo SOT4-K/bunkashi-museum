@@ -174,5 +174,95 @@
         "note": "過去問（2016・2025）の文化伏せ型の最後に置かれる年代順の問い。本文をあえて年代順に並べていない。対象作品は b で画像を出したものを再利用し、新たな画像を割らない"
       }
     ]
+  },
+  {
+    "id": "genshi-03",
+    "era": "genshi",
+    "title": "捨てられたもの、埋められたもの",
+    "text": "狩りと採集で暮らした人々は、食べたあとの貝殻や骨、こわれた土器を一か所に捨て続け、[[a|その積み重なりが層をなした跡]]を各地に残した。人骨には[[b|当時の習俗を示す痕跡]]がとどめられ、埋葬の姿からも人々の信仰がうかがえる。やがて大陸から水稲耕作が伝わると、[[c|収穫のための道具]]が使われるようになり、むらの姿も変わっていった。争いに備えて[[d|濠や丘を利用した集落]]が現れ、[[e|地域ごとに特色のある墓]]も営まれるようになる。",
+    "sources": [
+      "下線a（縄文時代の生活跡、大森貝塚とモース）: 品川区立品川歴史館「大森貝塚」 https://www.city.shinagawa.tokyo.jp/jigyo/06/historyhp/kaizuka/kaizuka.html 、content/works/genshi.json の kaizuka-jomon（facts・pairs）",
+      "下線b（抜歯＝成人などの通過儀礼、屈葬）: 富山県公式サイト「縄文時代の風習」 https://www.pref.toyama.jp/3009/miryokukankou/bunka/bunkazai/mb002-1/mb002-14.html 、content/works/genshi.json の basshi-jomon（facts）",
+      "下線c（穂首刈りに用いた磨製石器）: 明治大学博物館デジタルミュージアム「石包丁｜弥生時代」 https://ict-museum-meiji.tokyo/digitalcollection/archaeology/yayoi/post-23.html 、content/works/genshi.json の ishibocho（facts）",
+      "下線d（環濠集落・吉野ヶ里遺跡・高地性集落）: 国営吉野ヶ里歴史公園公式サイト「吉野ヶ里遺跡とは」 https://www.yoshinogari.jp/introduction/remains/ 、content/works/genshi.json の kangou-shuraku（facts）",
+      "下線e（大型の土器を棺とする墓、北部九州への分布、副葬品と身分差）: 国営吉野ヶ里歴史公園公式サイト「甕棺墓列」 https://www.yoshinogari.jp/introduction/restore/kamekanboretsu/ 、content/works/genshi.json の kamekan-bo（facts）",
+      "図版の同定URL（下線c、石包丁）: https://commons.wikimedia.org/wiki/File:Stone_knife_of_Miharashidai_ruins.jpg",
+      "※本文の歴史記述そのものは教科書水準の通説。M2e-07②③（下線増補）で新設、reviewer 未検証"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "event",
+        "workIds": [
+          "kaizuka-jomon"
+        ],
+        "ask": {
+          "type": "q13",
+          "stem": "下線部aの代表例とされる遺跡と、それを発見した人物または残された時代の組合せとして正しいものはどれか"
+        },
+        "note": "M2e-07で新設（genshi-01・02 の下線は画像のある5件に集中し、画像なし項目・未参照の artifact 7件が紐づいていなかった）。語句組合せ（Q13）。kaizuka-jomon の pairs（大森貝塚・モース／貝塚・縄文時代の生活跡）が素材。genshi-01 の下線aは同じ語（貝塚）を手がかりにしつつ対象が shakoki-dogu なので、対象作品は重ならない。本文には遺跡名も「貝塚」の語も書かない"
+      },
+      {
+        "key": "b",
+        "anchorKind": "event",
+        "workIds": [
+          "basshi-jomon"
+        ],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部bについて述べた文として最も適切なものはどれか"
+        },
+        "note": "M2e-07で新設。Q4（関連記述）。facts 3件（成人などの通過儀礼としての抜歯／人骨から確認される／屈葬）のどれが正文でも成り立つよう、下線は「習俗を示す痕跡」までにとどめた。誤文は「弥生時代に大陸から伝わった風習」（時代ずらし）「古墳の副葬品の一種」（内容ずらし）"
+      },
+      {
+        "key": "c",
+        "anchorKind": "event",
+        "workIds": [
+          "ishibocho"
+        ],
+        "ask": {
+          "type": "q9",
+          "stem": "下線部cのうち、稲の穂だけを摘み取る穂首刈りに用いた磨製石器はどれか",
+          "answerId": "ishibocho",
+          "distractorIds": [
+            "kesadasuki-dotaku",
+            "kaen-doki",
+            "inariyama-tekken"
+          ]
+        },
+        "note": "M2e-07で新設。二段: 下線＝収穫のための道具／設問＝穂首刈りと磨製石器という条件。誤答は同じ原始の遺物で、kesadasuki-dotaku は ishibocho の falseStatements にある「青銅の祭器」との対比、kaen-doki は縄文の土器、inariyama-tekken は鉄製品（材質・時代で切り分けられる）。このセットに画像を出す型を1問置くことで、engine の『セット内に Q9 を1問以上』の強制ループが他の下線の設問文を流用するのも防いでいる"
+      },
+      {
+        "key": "d",
+        "anchorKind": "institution",
+        "workIds": [
+          "kangou-shuraku"
+        ],
+        "ask": {
+          "type": "q12",
+          "stem": "下線部dのうち、周囲に濠をめぐらせた集落の代表例とされる遺跡として最も適切なものはどれか",
+          "answerText": "吉野ヶ里遺跡（佐賀県）",
+          "distractorTexts": [
+            "三内丸山遺跡",
+            "登呂遺跡",
+            "大森貝塚"
+          ]
+        },
+        "note": "M2e-07で新設。誤答は kangou-shuraku・kaizuka-jomon の falseStatements/facts に出てくる遺跡（縄文の集落・弥生の水田跡・縄文の生活跡）で、時代または遺跡の性格が異なるものにそろえた"
+      },
+      {
+        "key": "e",
+        "anchorKind": "event",
+        "workIds": [
+          "kamekan-bo"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部eのうち、弥生時代の墓について述べた次のA・Bの文の正誤の組合せとして正しいものはどれか"
+        },
+        "note": "M2e-07で新設。facts 3件・verifiedFalse 2件があり Q10 を生成できる（セット内に Q10 を1問置くための下線でもある）。誤文は「縄文時代の埋葬方法である」（時代ずらし）「近畿地方を中心に分布する」（地域ずらし）。下線は棺の材質も分布地域も書かない"
+      }
+    ],
+    "notes": "M2e-07②③で新設した3本目。縄文から弥生までの5件（kaizuka-jomon・basshi-jomon・ishibocho・kangou-shuraku・kamekan-bo）を1件ずつ下線の対象にした。据え置いたのは古墳時代の2件（zenpokoenfun・fukusohin-henka。下線は1passageにつき3〜5個が目安のため）。なお zenpokoenfun は genshi-01 の本文に作品名がそのまま出ているため、あのセットの下線に足すと validate の作品名リークでエラーになる。次に足すなら古墳時代でもう1本立てるのが安全。"
   }
 ]

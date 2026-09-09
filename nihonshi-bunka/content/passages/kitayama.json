@@ -192,5 +192,88 @@
       }
     ],
     "notes": "2本目のセット（M2-15）。画像を出題できる作品が kinkaku 1件しかない区分なので、5問のうち画像を使うのは3問（q9・q10・q4）に抑え、残る2問は画像に依存しない文字4択（文化名・年代順）にした。q9 は先頭の1問だけ（画像を先に見せると後続の4択の答えが割れるため）。1本目（kitayama-01）とは下線の種類（山荘・融合・父子・制度・貿易）と設問の型の組合せを変えている。"
+  },
+  {
+    "id": "kitayama-03",
+    "era": "kitayama",
+    "title": "大陸から来たもの、舞台で育ったもの",
+    "text": "室町幕府の3代将軍が明との国交を開くと、[[a|証票を用いて行われた朝貢形式の貿易]]によって大陸の文物が入り、禅宗の文化が武家にも広まった。幕府が臨済宗の寺院に格づけを定めると、その[[b|禅僧たちは漢詩文をつくり]]、外交や学問の担い手ともなった。絵画では、[[c|墨の濃淡だけで自然や人物を表す描き方]]が禅宗の寺を中心に広まった。芸能では、猿楽から[[d|将軍の保護を受けて芸能を大成した父子]]が現れ、幽玄を重んじる舞台がつくられる。演者が[[e|役柄に応じた仮面をつけて演じる形]]も、このころに整えられていった。",
+    "sources": [
+      "下線a（明との国交・勘合という証票・朝貢形式・輸入品）: content/works/kitayama.json の nichimin-boeki（facts）、高校教科書（山川『詳説日本史』）北山文化の項",
+      "下線b（五山・十刹の制のもとで臨済宗の禅僧が漢詩文をつくり外交・学問を担ったこと）: 高知県立文学館 https://www.kochi-bungaku.com/534/ 、content/works/kitayama.json の gozan-bungaku（facts）",
+      "下線c（禅宗の広まりとともに墨の濃淡で表す絵画が広まり、寺の画僧が担い手になったこと）: content/works/kitayama.json の suibokuga-kitayama（facts・eraNote）、画像典拠 The Metropolitan Museum of Art https://www.metmuseum.org/art/collection/search/65394",
+      "下線d（観阿弥・世阿弥父子と足利義満の保護、能楽論書）: 独立行政法人日本芸術文化振興会 文化デジタルライブラリー https://www2.ntj.jac.go.jp/dglib/contents/learn/edc9/zeami/gyouseki/kaden01.html 、content/works/kitayama.json の zeami（facts）",
+      "下線e（能面が役柄ごとに多くの種類をもつこと）: content/works/kitayama.json の nogaku-men（facts）、画像典拠 ColBase（東京国立博物館 C-1554） https://commons.wikimedia.org/wiki/File:Hannya_(Noh_mask),_Tokyo_National_Museum_C-1554.jpg",
+      "※本文の歴史記述そのものは教科書水準の通説で、一次資料は未参照。M2e-07②③（下線増補）で新設、reviewer 未検証"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "event",
+        "workIds": [
+          "nichimin-boeki"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部aについて述べた次のA・Bの文の正誤の組合せとして正しいものはどれか"
+        },
+        "note": "M2e-07で新設（この作品はどの下線にも紐づいていなかった。kitayama-01/02 の下線d・eは日明貿易を手がかりにしつつ対象を kinkaku にしている）。facts 3件・verifiedFalse 5件があり Q10 を生成できる。下線には貿易の名称を書かず、証票と朝貢形式だけを手がかりにする"
+      },
+      {
+        "key": "b",
+        "anchorKind": "school",
+        "workIds": [
+          "gozan-bungaku"
+        ],
+        "ask": {
+          "type": "q13",
+          "stem": "下線部bの文学・学問と、その担い手または背景となった制度の組合せとして正しいものはどれか"
+        },
+        "note": "M2e-07で新設。語句組合せ（Q13）。gozan-bungaku の pairs（五山文学・義堂周信、絶海中津ら臨済宗の禅僧／五山文学・五山・十刹の制）のどちらが選ばれても stem と噛み合う。下線に名称を書かないので、名称と担い手の対応がそのまま設問になる"
+      },
+      {
+        "key": "c",
+        "anchorKind": "style",
+        "workIds": [
+          "suibokuga-kitayama"
+        ],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部cの絵画について述べた文として最も適切なものはどれか"
+        },
+        "note": "M2e-07で新設。Q4（関連記述）。facts 3件（如拙・明兆ら画僧が担い手／明兆は東福寺の画僧で兆殿司／題材は禅の故事にちなむ中国の高僧）のどれが正文になっても成り立つよう、下線は描き方の説明だけにとどめ、担い手・題材を本文に書かない。誤文は「雪舟によって大成されていた」（東山文化との時代ずらし）が軸"
+      },
+      {
+        "key": "d",
+        "anchorKind": "person",
+        "workIds": [
+          "zeami"
+        ],
+        "ask": {
+          "type": "q12",
+          "stem": "下線部dの父子が保護を受けた将軍として最も適切なものはどれか",
+          "answerText": "足利義満",
+          "distractorTexts": [
+            "足利義政",
+            "足利尊氏",
+            "織田信長"
+          ]
+        },
+        "note": "M2e-07で新設。zeami の facts「足利義満の保護を受けた」／falseStatements「足利義政の保護を受けて活動した」（東山文化との入れ替え）をそのまま正誤の軸にした。本文には将軍の名を書かず「3代将軍」とだけ書いている"
+      },
+      {
+        "key": "e",
+        "anchorKind": "style",
+        "workIds": [
+          "nogaku-men"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部eについて述べた次のA・Bの文の正誤の組合せとして正しいものはどれか"
+        },
+        "note": "M2e-07で新設。facts 3件・verifiedFalse 3件があり Q10 を生成できる。誤文は「出雲阿国が始めた」（桃山文化との人物・時代ずらし）「喜劇的な演目を中心とする」（狂言との混同）が軸。a と同じ型だが位置が離れており、engine の同型連続回避で並べ替えられる"
+      }
+    ],
+    "notes": "M2e-07②③で新設した3本目。kitayama-01・02 が下線の対象をほぼ kinkaku に集中させていたため、下線に紐づいていなかった5件（nichimin-boeki・gozan-bungaku・suibokuga-kitayama・zeami・nogaku-men）を1件ずつ別の下線の対象にした。5件はいずれも画像を持たない項目（kind: concept/person。画像がある3件も kind が concept のため playableWorks には入らない）なので、設問の型は Q10・Q13・Q4・Q12（文字問題）だけで構成している。"
   }
 ]

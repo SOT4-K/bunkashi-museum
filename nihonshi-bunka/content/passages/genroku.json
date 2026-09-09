@@ -158,5 +158,95 @@
         "note": "文化伏せ型の最後に置かれる年代順の問い"
       }
     ]
+  },
+  {
+    "id": "genroku-03",
+    "era": "genroku",
+    "title": "上方の町人が育てた文芸と学問（元禄期）",
+    "text": "17世紀後半、上方の町人が経済力をつけると、その暮らしや心情を写しとる文芸が次々に生まれた。ある作者は現世を肯定してとらえ、[[a|町人や武士の恋愛と金銭をありのままに描く散文]]の分野を開く。別の作者は実際に起きた事件を題材に、[[b|義理と人情の板挟みに苦しむ人々を舞台の脚本に仕立て]]、語り手と組んで大坂で人気を得た。詩歌では、言葉遊びを中心とした前の時代の作風から進み、[[c|さび・しをりといった深い趣を重んじる作風]]が大成される。工芸では、京都の門前に窯を開いた陶工が[[d|華やかな上絵付けの技法]]を完成させた。学問では、[[e|朱子学の立場から日本の歴史を段階的にとらえた史論]]が著され、その著者は将軍のもとで政治も主導した。",
+    "sources": [
+      "下線a（浮世草子の創始・『好色一代男』『日本永代蔵』）: 大阪市中央区公式サイト「誓願寺と井原西鶴」 https://www.city.osaka.lg.jp/chuo/page/0000637991.html 、content/works/genroku.json の ihara-saikaku（facts）",
+      "下線b（人形浄瑠璃・歌舞伎の脚本、『曽根崎心中』『国性爺合戦』、竹本義太夫との協働）: 尼崎市公式サイト「近松門左衛門」 https://www.city.amagasaki.hyogo.jp/manabu/art/chikamatu/055monzaemon.html 、content/works/genroku.json の chikamatsu-monzaemon（facts・pairs）",
+      "下線c（蕉風俳諧の大成・『奥の細道』・貞門俳諧の継承）: 伊賀市公式サイト「芭蕉翁記念館」 https://www.city.iga.lg.jp/0000005567.html 、content/works/genroku.json の matsuo-basho（facts）",
+      "下線d（京焼の色絵の完成・仁和寺門前の御室窯・尾形乾山との師弟関係）: 文化庁 国指定文化財等データベース「色絵藤花文茶壺」 https://kunishitei.bunka.go.jp/heritage/detail/201/306 、content/works/genroku.json の ninsei-nonomura（facts）",
+      "下線e（『読史余論』・正徳の治）: 国立公文書館デジタルアーカイブ「読史余論」 https://www.digital.archives.go.jp/file/1249032 、content/works/genroku.json の arai-hakuseki（facts）",
+      "全体の枠組み（上方の町人が担い手となった元禄文化）: 高校教科書（山川『詳説日本史』）元禄文化の項",
+      "※本文の歴史記述そのものは教科書水準の通説（公的機関の各ページは人物・作品の同定にのみ用いている）。M2e-07②③（下線増補）で新設、reviewer 未検証"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "style",
+        "workIds": [
+          "ihara-saikaku"
+        ],
+        "ask": {
+          "type": "q12",
+          "stem": "下線部aの分野を開いた作者の代表作として最も適切なものはどれか",
+          "answerText": "『好色一代男』",
+          "distractorTexts": [
+            "『曽根崎心中』",
+            "『奥の細道』",
+            "『南総里見八犬伝』"
+          ]
+        },
+        "note": "M2e-07で新設（元禄期の文学・工芸・学問の5件はどの下線にも紐づいていなかった）。誤答は ihara-saikaku の falseStatements の軸（近松の脚本／『奥の細道』は芭蕉／化政期の読本）にそろえた。作者名・作品名は本文に書かない"
+      },
+      {
+        "key": "b",
+        "anchorKind": "style",
+        "workIds": [
+          "chikamatsu-monzaemon"
+        ],
+        "ask": {
+          "type": "q13",
+          "stem": "下線部bに関わった人物と、その分野の組合せとして正しいものはどれか"
+        },
+        "note": "M2e-07で新設。語句組合せ（Q13）。chikamatsu-monzaemon の pairs（近松門左衛門・人形浄瑠璃の脚本／竹本義太夫・義太夫節）のどちらが選ばれても stem と噛み合う（脚本作者と語り手の対応が問われる）"
+      },
+      {
+        "key": "c",
+        "anchorKind": "style",
+        "workIds": [
+          "matsuo-basho"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部cを大成した人物について述べた次のA・Bの文の正誤の組合せとして正しいものはどれか"
+        },
+        "note": "M2e-07で新設。facts 5件・verifiedFalse 4件があり Q10 を生成できる（セット内に Q10 を1問置くための下線でもある）。誤文は「松永貞徳の作」（寛永期の貞門俳諧との人物・時代ずらし）「代表作は『好色一代男』」（西鶴との取り違え）が軸"
+      },
+      {
+        "key": "d",
+        "anchorKind": "style",
+        "workIds": [
+          "ninsei-nonomura"
+        ],
+        "ask": {
+          "type": "q12",
+          "stem": "下線部dを完成させた陶工として最も適切なものはどれか",
+          "answerText": "野々村仁清",
+          "distractorTexts": [
+            "酒井田柿右衛門",
+            "尾形乾山",
+            "本阿弥光悦"
+          ]
+        },
+        "note": "M2e-07で新設。誤答は ninsei-nonomura の facts・falseStatements にある関係者（肥前・有田の赤絵＝酒井田柿右衛門／仁清に学んだ尾形乾山）と寛永期の工芸家。産地（京都）は本文に書き、技法の名（色絵）と人名は設問側に残した"
+      },
+      {
+        "key": "e",
+        "anchorKind": "school",
+        "workIds": [
+          "arai-hakuseki"
+        ],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部eを著した人物について述べた文として最も適切なものはどれか"
+        },
+        "note": "M2e-07で新設。Q4（関連記述）。facts 3件（『読史余論』・元禄文化の人物・6代7代将軍のもとでの正徳の治）のどれが正文でも成り立つ。誤文は「国学者である」「代表作は『古事記伝』」（本居宣長との学派・作品ずらし）「田沼意次のもとで政治を行った」（時代ずらし）"
+      }
+    ],
+    "notes": "M2e-07②③で新設した3本目。genroku-01・02 の下線が画像のある3件（mikaeri-bijin・yatsuhashi-suzuribako・fujin-raijin-korin）に集中していたため、画像を持たない5件を1件ずつ下線の対象にした。5件とも kind が person/text で画像を出す型（Q9・Q1）は使えないため、Q12・Q13・Q10・Q4 で構成している。"
   }
 ]

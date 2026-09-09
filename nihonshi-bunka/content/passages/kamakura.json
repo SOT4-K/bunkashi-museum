@@ -190,5 +190,140 @@
       }
     ],
     "notes": "2本目のセット（M2-15）。『この文化は…』のＡ〜Ｇから文化を推測させる形。1本目（kamakura-01）と下線（六波羅蜜寺・民間の寄進・禅宗・平清盛）が重ならないよう、流派・場所・交流・信仰に下線を移し、同じ作品でも型（q9↔q4、q9↔q10）を入れ替えている。画像を伏せる型（a・d）の誤答には、そのセットで先に画像が出ている作品を入れていない。M2e-03 で下線 d を年代順並べ替え（文字4択）に差し替え、文化伏せ型の定型（文化名当て＋並べ替え）をそろえた。画像を使う設問は a・b・c の3問。"
+  },
+  {
+    "id": "kamakura-03",
+    "era": "kamakura",
+    "title": "みなに届く教えを説いた僧たち",
+    "text": "鎌倉時代には、戦乱と災いのつづく世のなかで、庶民にも実践しやすい平易な教えを説く僧が相次いで現れた。ある僧は[[a|ひたすら念仏を称えることだけで救われると説き]]、新しい宗派を開いた。その弟子は師の教えをさらに徹底し、[[b|阿弥陀仏の力にすがる自覚をもつ者こそ救われる]]と説いている。また、[[c|特定の寺を持たず諸国をめぐって布教した]]僧も現れた。一方、[[d|法華経こそ唯一正しい経典であるとした]]僧は、幕府に自らの主張を説き他宗を攻撃したため迫害を受け、島へ流された。旧仏教の側でも戒律を重んじる改革が進み、新旧の教えが並び立つ時代となる。",
+    "sources": [
+      "下線a（専修念仏・浄土宗・『選択本願念仏集』）: 浄土宗総本山知恩院公式サイト https://www.chion-in.or.jp/about/worship.php 、content/works/kamakura.json の honen（facts・pairs）",
+      "下線b（悪人正機・浄土真宗・『教行信証』、法然の弟子であること）: 浄土真宗本願寺派（西本願寺）公式サイト https://www.hongwanji.kyoto/know/shinran.html 、content/works/kamakura.json の shinran（facts）",
+      "下線c（時宗・諸国の遊行・賦算・踊念仏）: 時宗総本山遊行寺（清浄光寺）公式サイト https://yugyoji.or.jp/ 、content/works/kamakura.json の ippen（facts）",
+      "下線d（法華経を根本経典とすること・題目・『立正安国論』・佐渡への流罪）: 日蓮宗ポータルサイト https://temple.nichiren.or.jp/2011001-kuonji/ 、content/works/kamakura.json の nichiren（facts・keyPoints）",
+      "鎌倉新仏教と旧仏教の改革という枠組み: content/eras.json の kamakura（detail）、高校教科書（山川『詳説日本史』）鎌倉文化の項",
+      "※本文の歴史記述そのものは教科書水準の通説で、各僧の公式サイトは開祖・著作の確認にのみ用いている（悪人正機・題目など教義語の直接記述が無い項目は works の sources に注記あり）。M2e-07②③（下線増補）で新設、reviewer 未検証"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "school",
+        "workIds": [
+          "honen"
+        ],
+        "ask": {
+          "type": "q13",
+          "stem": "下線部aの僧と、その宗派または著書の組合せとして正しいものはどれか"
+        },
+        "note": "M2e-07で新設（鎌倉新仏教の6人はどの下線にも紐づいていなかった）。語句組合せ（Q13）。honen の pairs（法然・浄土宗／法然・選択本願念仏集／法然・専修念仏）が素材。本文に僧の名を書かないので、教えの説明から人物を特定させる二段構えになる"
+      },
+      {
+        "key": "b",
+        "anchorKind": "school",
+        "workIds": [
+          "shinran"
+        ],
+        "ask": {
+          "type": "q12",
+          "stem": "下線部bの教えを説いた僧が開いた宗派として最も適切なものはどれか",
+          "answerText": "浄土真宗",
+          "distractorTexts": [
+            "浄土宗",
+            "時宗",
+            "曹洞宗"
+          ]
+        },
+        "note": "M2e-07で新設。誤答は shinran の falseStatements の軸（浄土宗を開いた＝師の法然／踊念仏は一遍の時宗／只管打坐は道元の曹洞宗）。宗派名は本文に書かない"
+      },
+      {
+        "key": "c",
+        "anchorKind": "person",
+        "workIds": [
+          "ippen"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部cの僧について述べた次のA・Bの文の正誤の組合せとして正しいものはどれか"
+        },
+        "note": "M2e-07で新設。facts 3件・verifiedFalse 5件があり Q10 を生成できる（このセットに Q10 を1問置いておかないと、engine の『セット内に Q10 を1問以上』の強制ループが他の下線の設問文を流用して型を差し替えてしまう）。下線は遊行の形だけにとどめ、踊念仏・時宗は設問側に残す"
+      },
+      {
+        "key": "d",
+        "anchorKind": "school",
+        "workIds": [
+          "nichiren"
+        ],
+        "ask": {
+          "type": "q12",
+          "stem": "下線部dの僧の著書として最も適切なものはどれか",
+          "answerText": "『立正安国論』",
+          "distractorTexts": [
+            "『選択本願念仏集』",
+            "『教行信証』",
+            "『正法眼蔵』"
+          ]
+        },
+        "note": "M2e-07で新設。誤答は同じ鎌倉新仏教の他の3人の著書（法然・親鸞・道元。いずれも works の pairs にある組）。書名は本文に書かない"
+      }
+    ],
+    "notes": "M2e-07②③で新設。kamakura-01・02 の下線は画像のある4件（kuya-shonin-zo・kamakura-daibutsu・engakuji-shariden・sanjusangendo-hondo）に集中しており、鎌倉新仏教の6人と金剛力士像がどの下線にも紐づいていなかった。ここでは念仏・題目系の4人（honen・shinran・ippen・nichiren）を1件ずつ下線の対象にし、禅の2人と金剛力士像は kamakura-04 に分けた（下線は1passageにつき3〜5個が目安のため）。"
+  },
+  {
+    "id": "kamakura-04",
+    "era": "kamakura",
+    "title": "海を渡った禅と、よみがえる大寺",
+    "text": "宋や元との往来がさかんになると、大陸から新しい宗派が伝えられた。二度海を渡って学んだ僧は[[a|公案とよばれる問答を用いる禅]]を伝え、幕府や公家の帰依を受ける。これに続いて渡海した僧は、権力から距離を置き、[[b|ひたすら座禅に徹することを説いた]]。一方、平氏の焼打ちで失われた[[c|南都の大寺の再建]]も進み、勧進によって集めた費用と宋の技術で堂塔がよみがえった。その門には、写実を重んじる一門の仏師たちが手がけた巨像が据えられている。",
+    "sources": [
+      "下線a（南宋に2度渡って禅を学び臨済宗を伝えたこと、『喫茶養生記』、公案問答）: 建仁寺公式サイト https://www.kenninji.jp/ 、content/works/kamakura.json の eisai（facts・pairs）",
+      "下線b（只管打坐・曹洞宗・『正法眼蔵』・越前の永平寺）: 曹洞宗公式サイト SOTOZEN-NET https://www.sotozen-net.or.jp/propagation/dougenzenji 、content/works/kamakura.json の dogen（facts・pairs）",
+      "下線c（平氏の南都焼打ちののちの東大寺再建・勧進・宋の技術、1203年の造像）: content/works/kamakura.json の kongorikishi-todaiji（facts・eraNote）、content/eras.json の kamakura（detail）",
+      "図版の同定URL（下線c、東大寺南大門金剛力士像）: https://commons.wikimedia.org/wiki/File:NIWAU_(Brama_et_Indra,_sanscrit),_Fin_du_%E2%85%AB_si%C3%A8cle_(Nara_Todaiji),_Histoire_de_l%27art_du_Japon_(39).jpg",
+      "※本文の歴史記述そのものは教科書水準の通説で、一次資料は未参照。M2e-07②③（下線増補）で新設、reviewer 未検証"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "school",
+        "workIds": [
+          "eisai"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部aを伝えた僧について述べた次のA・Bの文の正誤の組合せとして正しいものはどれか"
+        },
+        "note": "M2e-07で新設。facts 3件・verifiedFalse 5件があり Q10 を生成できる（セットに Q10 を1問置く必要があるため、この下線に割り当てた）。誤文は「曹洞宗を開いた」「只管打坐を説いた」（道元との入れ替え）が軸。僧の名・宗派名は本文に書かない"
+      },
+      {
+        "key": "b",
+        "anchorKind": "school",
+        "workIds": [
+          "dogen"
+        ],
+        "ask": {
+          "type": "q13",
+          "stem": "下線部bを説いた僧と、その宗派・著書・寺院の組合せとして正しいものはどれか"
+        },
+        "note": "M2e-07で新設。語句組合せ（Q13）。dogen の pairs（道元・曹洞宗／道元・正法眼蔵／道元・永平寺（越前））のどれが選ばれても stem と噛み合う"
+      },
+      {
+        "key": "c",
+        "anchorKind": "event",
+        "workIds": [
+          "kongorikishi-todaiji"
+        ],
+        "ask": {
+          "type": "q9",
+          "stem": "下線部cにともなって1203年に造られ、その門に安置された像はどれか",
+          "answerId": "kongorikishi-todaiji",
+          "distractorIds": [
+            "kuya-shonin-zo",
+            "kamakura-daibutsu",
+            "byodoin-amida-nyorai"
+          ]
+        },
+        "note": "M2e-07で新設（この作品は reviewed になった後もどの下線にも紐づいておらず、kamakura-02/a では誤答としてのみ使われていた）。二段: 下線＝南都の大寺の再建（出来事）／設問＝造立年と安置場所。誤答はすべて彫刻で、kuya-shonin-zo は同じ慶派の系譜（条件Aのみ）、kamakura-daibutsu は同時代の別の巨像、byodoin-amida-nyorai は別時代。像の材質・姿にあたる語は下線にも本文にも書いていない。画像を出す型をこのセットに1問置くことで、engine の『セット内に Q9 を1問以上』の強制ループが他の下線の設問文を流用するのも防いでいる"
+      }
+    ],
+    "notes": "M2e-07②③で新設。kamakura-03 と対になるセットで、禅の2人（eisai・dogen）と kongorikishi-todaiji を下線の対象にした。この区分で下線に紐づいていなかった7件は kamakura-03（4件）とこの4本目（3件）で全件を覆う。"
   }
 ]

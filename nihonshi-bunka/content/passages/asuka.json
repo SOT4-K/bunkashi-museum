@@ -196,5 +196,88 @@
         "note": "文化伏せ型の中心となる問い。本文に文化名・時代名を書いていない。対象作品は a で画像を出したものを再利用し、新たな画像を割らない"
       }
     ]
+  },
+  {
+    "id": "asuka-03",
+    "era": "asuka",
+    "title": "氏寺が建ち、海の向こうの技が届く",
+    "text": "6世紀末、仏教の受容とともに、豪族は古墳に代わって氏寺を建て、一族の権威を示すようになった。推古天皇のもとで政治にあたった[[a|ある王族]]も仏教を厚く信じ、いくつかの寺を建てたと伝えられる。寺では、塔と金堂など[[b|主要な建物の並べ方]]が時代とともに変わり、しだいに本尊を安置する堂が重んじられていった。仏像づくりでは、[[c|渡来系の一族から出た仏師]]が中国北朝ゆずりの作風を確立する。一方で、細身でやわらかな表情をもつ[[d|別の系統の作風]]も半島を経て伝えられた。さらに、海を渡ってきた僧たちが[[e|紙や墨の製法、暦法]]をもたらし、大陸の技術が広まっていった。",
+    "sources": [
+      "下線a（推古天皇のもとでの政治、四天王寺・法隆寺の建立伝承、『三経義疏』）: 和宗総本山四天王寺公式サイト「四天王寺の歴史」 https://www.shitennoji.or.jp/history.html 、content/works/asuka.json の shotoku-taishi（facts・pairs）",
+      "下線b（飛鳥寺式・四天王寺式・法隆寺式の伽藍配置と若草伽藍跡）: 奈良県公式サイト「奈良県歴史文化資源データベース」法隆寺 https://www.pref.nara.lg.jp/ikasu-nara/bunkashigen/main00055.html 、content/works/asuka.json の garan-haichi（facts）",
+      "下線c（鞍作鳥＝渡来系の仏師、法隆寺金堂釈迦三尊像・飛鳥大仏の制作）: 奈良文化財研究所公式ブログ「鞍つくりから仏つくりへ」 https://www.nabunken.go.jp/nabunkenblog/2019/07/20190716.html 、content/works/asuka.json の tori-busshi（facts）",
+      "下線d（北魏様式と南朝様式の特徴と対応する作品）: content/works/asuka.json の hokugi-nancho-yoshiki（facts）、高校教科書（山川『詳説日本史』）飛鳥文化の項",
+      "下線e（曇徴＝高句麗・紙と墨の製法／観勒＝百済・暦法）: content/works/asuka.json の donchou-kanroku（facts）、高校教科書（山川『詳説日本史』）飛鳥文化の項",
+      "※下線d・e の事実は対象作品の sources にも「追検証用の公開URLなし」と記録されている（教科書水準の通説、URL による追検証手段は未取得）。M2e-07②③（下線増補）で新設、reviewer 未検証"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "person",
+        "workIds": [
+          "shotoku-taishi"
+        ],
+        "ask": {
+          "type": "q13",
+          "stem": "下線部aや同じころの人物と、その著作または建てたと伝えられる寺院の組合せとして正しいものはどれか"
+        },
+        "note": "M2e-07で新設（飛鳥の画像なし項目8件はどの下線にも紐づいていなかった）。語句組合せ（Q13）。shotoku-taishi の pairs（厩戸王・三経義疏／厩戸王・四天王寺、法隆寺／蘇我馬子・飛鳥寺）のどれが選ばれても stem と噛み合う。本文には人物名も寺名も書かない"
+      },
+      {
+        "key": "b",
+        "anchorKind": "style",
+        "workIds": [
+          "garan-haichi"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部bについて述べた次のA・Bの文の正誤の組合せとして正しいものはどれか"
+        },
+        "note": "M2e-07で新設。facts 4件・verifiedFalse 2件があり Q10 を生成できる（セット内に Q10 を1問置くための下線でもある）。誤文は「四天王寺式は塔と金堂が東西に並ぶ」（法隆寺式との入れ替え）が軸。本文には配置の具体（南北一直線・東西）を書かない"
+      },
+      {
+        "key": "c",
+        "anchorKind": "person",
+        "workIds": [
+          "tori-busshi"
+        ],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部cについて述べた文として最も適切なものはどれか"
+        },
+        "note": "M2e-07で新設。Q4（関連記述）。facts 3件（渡来系の仏師／法隆寺金堂釈迦三尊像を制作／北魏様式を確立）のどれが正文でも成り立つ。誤文は「百済観音像の作者である」（南朝様式との取り違え）「奈良時代に活動した」（時代ずらし）"
+      },
+      {
+        "key": "d",
+        "anchorKind": "style",
+        "workIds": [
+          "hokugi-nancho-yoshiki"
+        ],
+        "ask": {
+          "type": "q12",
+          "stem": "下線部dの系統の様式の名称として最も適切なものはどれか",
+          "answerText": "南朝様式",
+          "distractorTexts": [
+            "北魏様式（止利様式）",
+            "翻波式",
+            "定朝様"
+          ]
+        },
+        "note": "M2e-07で新設。誤答は同じ飛鳥のもう一方の系統（北魏様式）と、弘仁・貞観文化・国風文化の彫刻様式（時代ずらし）。下線には特徴（細身でやわらかな表情）だけを書き、様式名は設問側に残した"
+      },
+      {
+        "key": "e",
+        "anchorKind": "person",
+        "workIds": [
+          "donchou-kanroku"
+        ],
+        "ask": {
+          "type": "q13",
+          "stem": "下線部eを伝えたとされる僧と、その出身国および伝えた技術の組合せとして正しいものはどれか"
+        },
+        "note": "M2e-07で新設。語句組合せ（Q13）。donchou-kanroku の pairs（曇徴・高句麗／紙・墨の製法、観勒・百済／暦法）が素材。本文では技術を並べるだけにとどめ、僧の名と出身国の対応を設問で問う（誤文の定番＝技術の入れ替え）"
+      }
+    ],
+    "notes": "M2e-07②③で新設した3本目。asuka-01・02 の下線は画像のある5件に集中しており、画像なし項目8件がどの下線にも紐づいていなかった。ここでは5件（shotoku-taishi・garan-haichi・tori-busshi・hokugi-nancho-yoshiki・donchou-kanroku）を1件ずつ下線の対象にした。据え置いたのは sangyo-gisho・asukadera-shitennoji・tenjukoku-shucho の3件（下線は1passageにつき3〜5個が目安のため。前二者は a の pairs（三経義疏・寺院と建立者）と主題が重なるので、次のセットを足すなら天寿国繡帳を軸に工芸でまとめられる）。"
   }
 ]

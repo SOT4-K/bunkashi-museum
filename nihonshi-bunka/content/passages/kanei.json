@@ -177,5 +177,75 @@
         "note": "過去問2016・2025の文化伏せ型で最後に置かれる年代順の問い。文化名を伏せたまま前後関係だけを問う"
       }
     ]
+  },
+  {
+    "id": "kanei-03",
+    "era": "kanei",
+    "title": "幕府の学問、京の工芸、九州の窯（寛永期）",
+    "text": "幕府が開かれてまもない17世紀前半、京都と江戸のそれぞれで新しい文化が育った。幕府は身分の秩序を重んじる学問を奨励し、[[a|家康以来4代の将軍に仕えた儒者]]は、その学問が官学として重んじられる基礎を築いた。京都では、書や蒔絵、陶芸といった複数の分野で作品を残した[[b|ある芸術家]]が、洛北に一族や職人を集めた村を営んでいる。九州では、朝鮮から渡った陶工の技術を背景に磁器の生産が広がり、[[c|赤を主とする上絵付けの技法]]が完成された。文芸では、言葉遊びの技巧を重んじる[[d|俳諧の流派]]がこの時期に形づくられ、のちの元禄期へとつながっていく。",
+    "sources": [
+      "下線a（朱子学を奉じ徳川家康以下4代の将軍に仕えた儒官、上野忍岡の私塾が昌平坂学問所の起源）: 新宿区「国史跡『林氏墓地』」 https://bunkakanko-annai.city.shinjuku.lg.jp/shosai3/?id=A167 、content/works/kanei.json の hayashi-razan（facts）",
+      "下線b（書・蒔絵・陶芸の多分野での活躍、俵屋宗達との並立、洛北鷹峯の芸術家村）: 文化遺産オンライン（文化庁）「舟橋蒔絵硯箱〈本阿弥光悦作〉」 https://online.bunka.go.jp/heritages/detail/159475 、content/works/kanei.json の honami-koetsu（facts）",
+      "下線c（肥前・有田の赤絵の完成、朝鮮出兵で渡来した陶工の技術を背景とする磁器生産）: 文化庁 日本遺産ポータルサイト「柿右衛門（濁手）」 https://japan-heritage.bunka.go.jp/ja/culturalproperties/result/2550/ 、content/works/kanei.json の sakaida-kakiemon（facts・pairs）",
+      "下線d（松永貞徳を祖とする貞門俳諧、元禄期の蕉風俳諧の源流）: 国文学研究資料館「書物で見る日本古典文学史」紅梅千句 https://www.nijl.ac.jp/etenji/bungakushi/contents/detail/detail04-01_006.html 、content/works/kanei.json の teimon-haikai（facts）",
+      "※本文の歴史記述そのものは教科書水準の通説。M2e-07②③（下線増補）で新設、reviewer 未検証"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "person",
+        "workIds": [
+          "hayashi-razan"
+        ],
+        "ask": {
+          "type": "q12",
+          "stem": "下線部aが奉じた学問として最も適切なものはどれか",
+          "answerText": "朱子学",
+          "distractorTexts": [
+            "陽明学",
+            "国学",
+            "蘭学"
+          ]
+        },
+        "note": "M2e-07で新設（寛永期の画像なし項目4件はどの下線にも紐づいていなかった）。誤答は hayashi-razan の falseStatements の軸（陽明学・国学・蘭学との学派ずらし）。学問名も人物名も本文に書かない"
+      },
+      {
+        "key": "b",
+        "anchorKind": "person",
+        "workIds": [
+          "honami-koetsu"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部bについて述べた次のA・Bの文の正誤の組合せとして正しいものはどれか"
+        },
+        "note": "M2e-07で新設。facts 4件・verifiedFalse 4件があり Q10 を生成できる（セット内に Q10 を1問置くための下線でもある）。誤文は「浮世絵師である」「肥前・有田焼の陶工である」（分野・地域ずらし）「元禄期に活躍した」（時代ずらし）"
+      },
+      {
+        "key": "c",
+        "anchorKind": "style",
+        "workIds": [
+          "sakaida-kakiemon"
+        ],
+        "ask": {
+          "type": "q13",
+          "stem": "下線部cを完成させた陶工と技法、または焼き物と産地の組合せとして正しいものはどれか"
+        },
+        "note": "M2e-07で新設。語句組合せ（Q13）。sakaida-kakiemon の pairs（酒井田柿右衛門・赤絵／有田焼・肥前）のどちらが選ばれても stem と噛み合う。技法名（赤絵）と産地は本文に書かず、説明だけを手がかりにしている"
+      },
+      {
+        "key": "d",
+        "anchorKind": "style",
+        "workIds": [
+          "teimon-haikai"
+        ],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部dについて述べた文として最も適切なものはどれか"
+        },
+        "note": "M2e-07で新設。Q4（関連記述）。facts 4件（松永貞徳を祖とする流派／寛永期の文芸／貞門俳諧と呼ばれる／蕉風俳諧の源流）のどれが正文でも成り立つ。誤文は「松尾芭蕉が始めた」（元禄期との人物・時代ずらし）「化政期に始まった」（時代ずらし）"
+      }
+    ],
+    "notes": "M2e-07②③で新設した3本目。kanei-01・02 の下線は画像のある4件（yomeimon-nikko・shokintei-katsura・fujin-raijin-sotatsu・tanyu-getsuya-sansui）に集中しており、画像を持たない4件（hayashi-razan・honami-koetsu・sakaida-kakiemon・teimon-haikai）がどの下線にも紐づいていなかったので、1件ずつ下線の対象にした。なお hayashi-razan は technique が「—」という値なので、下線の文にダッシュ記号を入れると validate の technique リーク検査に引っかかる。この下線では使っていない。"
   }
 ]

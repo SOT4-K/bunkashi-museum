@@ -146,5 +146,152 @@
         "note": "reviewer指摘[重大2]（2026-09-05）: 元はQ10で(1)＝fukukensaku-todaijiを問う型だったが、本文の記述と正解facts（本尊・技法）が直接一致し盲検不合格（厳しい基準で21.6%）だったためQ9に差し替え。誤答は別区分の建築3件（弘仁貞観・鎌倉・北山）で時代のずらしが軸"
       }
     ]
+  },
+  {
+    "id": "tenpyo-03",
+    "era": "tenpyo",
+    "title": "救い、記し、詠む（奈良時代）",
+    "text": "平城京に都が移された8世紀、国家の保護のもとで仏教が栄えるとともに、書きとめる文化も広がった。民間で布教しながら橋や池をつくり、のちに大仏の造立に協力した僧や、たびかさなる渡航の失敗をこえて海を渡ってきた僧など、[[a|この時代を支えた僧たち]]がいる。宮中では、天皇の后が[[b|身寄りのない人や病人を救うための施設]]を設けたと伝えられる。国家の由来を示すために[[c|二つの歴史書]]が相次いで成立し、国ごとには地名の由来や産物、伝承を記した[[d|地誌]]を編むよう命じられた。歌の世界でも、和歌を広く集めた歌集とならんで[[e|漢詩を集めた書物]]が編まれている。",
+    "sources": [
+      "下線a（行基＝民間布教と社会事業・大仏造立への協力／鑑真＝唐から戒律を伝え唐招提寺を開く）: 唐招提寺公式サイト「概要」 https://www.toshodaiji.jp/s/about-j.html 、content/works/tenpyo.json の gyoki-ganjin（facts・pairs）",
+      "下線b（光明皇后＝聖武天皇の后、悲田院・施薬院の設置、興福寺西金堂の造営）: content/works/tenpyo.json の hiden-seyakuin（facts。同 works の sources に「追検証用の公開URLなし」と注記あり）、高校教科書（山川『詳説日本史』）天平文化の項",
+      "下線c（『古事記』712年・稗田阿礼と太安万侶／『日本書紀』720年・舎人親王ら・漢文の編年体）: 国立公文書館「歴史と物語」1.古事記 https://www.archives.go.jp/exhibition/digital/rekishitomonogatari/contents/01.html ／2.日本書紀 https://www.archives.go.jp/exhibition/digital/rekishitomonogatari/contents/02.html",
+      "下線d（713年の編纂命令、地名の由来・産物・伝承、『出雲国風土記』がほぼ完全な形で現存）: 島根県公式サイト「『出雲国風土記』写本等写真の公開」 https://www.pref.shimane.lg.jp/bunkazai/kodai/library/database/fudoki/ 、content/works/tenpyo.json の fudoki（facts）",
+      "下線e（『万葉集』＝天皇から民衆までの歌・万葉がな／『懐風藻』＝現存最古の漢詩集／山上憶良の貧窮問答歌）: 奈良県立万葉文化館「万葉百科」山上憶良 https://manyo-hyakka.pref.nara.jp/db/dicDetail?cls=d_utabito&dataId=692 、content/works/tenpyo.json の manyoshu-kaifuso（facts）",
+      "※本文の歴史記述そのものは教科書水準の通説。M2e-07②③（下線増補）で新設、reviewer 未検証"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "person",
+        "workIds": [
+          "gyoki-ganjin"
+        ],
+        "ask": {
+          "type": "q13",
+          "stem": "下線部aの僧と、その事績の組合せとして正しいものはどれか"
+        },
+        "note": "M2e-07で新設（天平の画像なし項目6件と彫刻2件はどの下線にも紐づいていなかった）。語句組合せ（Q13）。gyoki-ganjin の pairs（行基・民間布教／社会事業・大仏造立への協力、鑑真・唐から戒律を伝える／唐招提寺）が素材。本文は事績だけを書いて名を伏せているので、人物と事績の対応が設問になる"
+      },
+      {
+        "key": "b",
+        "anchorKind": "institution",
+        "workIds": [
+          "hiden-seyakuin"
+        ],
+        "ask": {
+          "type": "q12",
+          "stem": "下線部bを設けたと伝えられる人物として最も適切なものはどれか",
+          "answerText": "光明皇后",
+          "distractorTexts": [
+            "推古天皇",
+            "額田王",
+            "紫式部"
+          ]
+        },
+        "note": "M2e-07で新設。誤答は他の時代の宮廷の女性（飛鳥・白鳳・国風）で、時代のずらしが軸。施設名（悲田院・施薬院）は本文にも設問にも出さず、説明だけを手がかりにしている"
+      },
+      {
+        "key": "c",
+        "anchorKind": "style",
+        "workIds": [
+          "kojiki-nihonshoki"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部cについて述べた次のA・Bの文の正誤の組合せとして正しいものはどれか"
+        },
+        "note": "M2e-07で新設。facts 4件・verifiedFalse 2件があり Q10 を生成できる（セット内に Q10 を1問置くための下線でもある）。誤文は「『日本書紀』は『古事記』より先に完成した」（前後の入れ替え）「『古事記』は紀貫之が編んだ」（人物・時代ずらし）。書名・成立年は本文に書かない"
+      },
+      {
+        "key": "d",
+        "anchorKind": "style",
+        "workIds": [
+          "fudoki"
+        ],
+        "ask": {
+          "type": "q12",
+          "stem": "下線部dのうち、ほぼ完全な形で今日に伝わるものとして最も適切なものはどれか",
+          "answerText": "『出雲国風土記』",
+          "distractorTexts": [
+            "『常陸国風土記』",
+            "『日本書紀』",
+            "『万葉集』"
+          ]
+        },
+        "note": "M2e-07で新設。誤答は fudoki の falseStatements の軸（ほぼ完全な形で残るのを『常陸国風土記』とする誤り）と、同じ天平期の別分野の書物。書名は本文に書かない"
+      },
+      {
+        "key": "e",
+        "anchorKind": "style",
+        "workIds": [
+          "manyoshu-kaifuso"
+        ],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部eやそれとともに編まれた歌集について述べた文として最も適切なものはどれか"
+        },
+        "note": "M2e-07で新設。Q4（関連記述）。facts 4件（『万葉集』の収録範囲・万葉がな・『懐風藻』が現存最古の漢詩集・山上憶良の貧窮問答歌）のどれが正文でも成り立つ。誤文は「『万葉集』は最初の勅撰和歌集である」（国風の『古今和歌集』との性格・時代ずらし）"
+      }
+    ],
+    "notes": "M2e-07②③で新設した3本目。tenpyo-01・02 の下線は画像のある作品に集中しており、僧・社会事業・文学の6件が紐づいていなかったため、そのうち5件を1件ずつ下線の対象にした（残る nanto-rokushu と彫刻2件は tenpyo-04 に回した）。"
+  },
+  {
+    "id": "tenpyo-04",
+    "era": "tenpyo",
+    "title": "大寺で学ばれたこと、大寺に立つ像",
+    "text": "国家を守る力として仏教が重んじられた奈良時代には、平城京の大寺で[[a|六つの学派]]が学ばれ、教理の研究が国家の保護のもとで進められた。大寺には、麻布を漆で貼り重ねて形をつくる技法による大作が営まれ、[[b|東大寺の一つの堂の本尊]]は高さ3.6メートルを超える。天皇の后が建立した興福寺の堂には、[[c|釈迦の弟子たちを表した群像]]が八部衆の像とともに安置された。現存するのはその一部で、いずれも唐の様式を受けた写実的な作風を伝えている。",
+    "sources": [
+      "下線a（三論・成実・法相・倶舎・華厳・律の六つ、平城京の大寺で学ばれた学派、国家の保護）: 唐招提寺公式サイト「概要」（律宗＝南都六宗の一つ） https://www.toshodaiji.jp/s/about-j.html 、content/works/tenpyo.json の nanto-rokushu（facts）",
+      "下線b（東大寺法華堂の本尊、脱活乾漆像、高さ3.6mを超えること）: content/works/tenpyo.json の fukukensaku-todaiji（facts・eraNote）、東大寺公式サイト（同 works の sources と同じ）",
+      "下線c（光明皇后が建立した興福寺西金堂に八部衆像とともに安置された乾漆像、現存6体）: content/works/tenpyo.json の judai-deshi-kofukuji（facts・eraNote）",
+      "図版の同定URL（下線c、十大弟子像）: https://commons.wikimedia.org/wiki/File:FURUNA_Kofukuji.JPG",
+      "※本文の歴史記述そのものは教科書水準の通説。M2e-07②③（下線増補）で新設、reviewer 未検証"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "school",
+        "workIds": [
+          "nanto-rokushu"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部aについて述べた次のA・Bの文の正誤の組合せとして正しいものはどれか"
+        },
+        "note": "M2e-07で新設。facts 3件・verifiedFalse 2件があり Q10 を生成できる（セット内に Q10 を1問置くための下線でもある）。誤文は「天台宗・真言宗を含む六つの宗派である」（平安初期との時代・宗派ずらし）「鎌倉時代に庶民の間で広まった新しい仏教」（性格ずらし）。六宗の名は本文に書かない"
+      },
+      {
+        "key": "b",
+        "anchorKind": "temple",
+        "workIds": [
+          "fukukensaku-todaiji"
+        ],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部bにあたる次の像について述べた文として最も適切なものはどれか"
+        },
+        "note": "M2e-07で新設。画像を出す型（この作品は tenpyo-02 のリード画像だが、下線の対象にはなっていなかった）。本文には技法を工程（麻布を漆で貼り重ねる）でしか書いていないので、技法名・所在を問う正文が本文だけでは確定しない"
+      },
+      {
+        "key": "c",
+        "anchorKind": "temple",
+        "workIds": [
+          "judai-deshi-kofukuji"
+        ],
+        "ask": {
+          "type": "q9",
+          "stem": "下線部cのうち、興福寺に伝わり現存するものが6体である像はどれか",
+          "answerId": "judai-deshi-kofukuji",
+          "distractorIds": [
+            "ashura-kofukuji",
+            "ganjin-toshodaiji",
+            "shitenno-kaidando"
+          ]
+        },
+        "note": "M2e-07で新設。二段: 下線＝釈迦の弟子たちの群像／設問＝所在と現存体数。誤答は同じ天平の像で、ashura-kofukuji は同じ西金堂の八部衆像（本文で触れた群像＝条件Aに近いが弟子像ではない）、ganjin-toshodaiji は同じ乾漆の肖像彫刻、shitenno-kaidando は東大寺戒壇堂の像（judai-deshi の falseStatements にある所在ずらしの軸）。画像を出す型をこのセットに1問置くことで、engine の Q9 強制ループが他の下線の設問文を流用するのも防いでいる"
+      }
+    ],
+    "notes": "M2e-07②③で新設した4本目。tenpyo-03 と対になるセットで、南都六宗と、下線に紐づいていなかった彫刻2件（fukukensaku-todaiji・judai-deshi-kofukuji）を対象にした。これで天平の未カバー8件は tenpyo-03（5件）とこのセット（3件）で全件が下線に紐づく。"
   }
 ]
