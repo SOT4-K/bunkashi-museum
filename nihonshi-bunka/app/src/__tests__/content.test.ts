@@ -35,20 +35,35 @@ describe('worlds.json（M2d-01 ワールドマップの時代テーマ）', () =
     }
   })
 
-  it('原始（genshi）と化政（kasei）だけ飾りモチーフを持ち、他13ワールドは無地（motifs空）', () => {
-    const decorated = worldOrder(eras).filter((eraId) => (worldThemesById[eraId]?.motifs.length ?? 0) > 0)
-    expect(decorated.sort()).toEqual(['genshi', 'kasei'])
+  // M2d-02: 残り13ワールドにも各5種のモチーフを追加したため、15ワールド全件が飾りを持つ
+  // （無地パレットのみの世界は無くなった）。
+  it('15ワールド全件が道端の飾りモチーフを持ち、全てカタログに実在する', () => {
+    for (const eraId of worldOrder(eras)) {
+      const theme = worldThemesById[eraId]
+      expect(theme?.motifs.length ?? 0, `${eraId} に飾りが無い`).toBeGreaterThan(0)
+      for (const m of theme.motifs) expect(getMotifIcon(m.id), `${eraId} の motif ${m.id} が未定義`).not.toBeNull()
+    }
   })
 
-  it('genshi の飾りはチケット指定の5種（土偶・埴輪・竪穴住居・銅鐸・貝塚）で、全てカタログに実在する', () => {
+  it('genshi の飾りはチケット指定の5種（土偶・埴輪・竪穴住居・銅鐸・貝塚）', () => {
     const ids = worldThemesById.genshi.motifs.map((m) => m.id).sort()
     expect(ids).toEqual(['dogu', 'dotaku', 'haniwa', 'kaizuka', 'tateana'])
-    for (const id of ids) expect(getMotifIcon(id), `motif ${id} が未定義`).not.toBeNull()
   })
 
-  it('kasei の飾りはチケット指定の4種（富士・波・旅人・錦絵）で、全てカタログに実在する', () => {
+  it('kasei の飾りはチケット指定の4種（富士・波・旅人・錦絵）', () => {
     const ids = worldThemesById.kasei.motifs.map((m) => m.id).sort()
     expect(ids).toEqual(['fuji', 'nami', 'nishikie', 'tabibito'])
-    for (const id of ids) expect(getMotifIcon(id), `motif ${id} が未定義`).not.toBeNull()
+  })
+
+  it('15ワールド全件が bossFlagId を持ち、その id は自ワールドの motifs に含まれ、カタログにも実在する（M2d-02: 新規アセットを増やさず道端の飾りを再利用する設計）', () => {
+    for (const eraId of worldOrder(eras)) {
+      const theme = worldThemesById[eraId]
+      expect(theme?.bossFlagId, `${eraId} に bossFlagId が無い`).toBeDefined()
+      const flagId = theme.bossFlagId as string
+      expect(theme.motifs.some((m) => m.id === flagId), `${eraId} の bossFlagId(${flagId}) が motifs に無い`).toBe(
+        true,
+      )
+      expect(getMotifIcon(flagId), `${eraId} の bossFlagId(${flagId}) がカタログに無い`).not.toBeNull()
+    }
   })
 })

@@ -195,24 +195,45 @@
   }
 }
 
-/* ボスノード: (c) ボスノードの形は WorldMapScreen.tsx が clip-path をインラインで当てる
-   （theme.bossShape。無ければ通常の円のまま）。円ではないボスノードでは border-radius が
-   見た目に効かないため clip-path 側の形をそのまま使う。 */
+/* ボスノード（M2d-02）: 全ワールド共通「敵の砦」（BossFortressIcon、.bossArt）で見た目を
+   作るため、ボタン自体の背景・枠・影は消して SVG だけが見えるようにする（黒紫+赤のジグザグ
+   輪郭が、周囲の丸い可愛いノードや道端の飾りと対比して「ここだけ悪い」と分かるように）。
+   挑戦可能時のパルス演出も黄色い box-shadow（.unlocked）ではなく、SVG 内の目の明滅
+   （BossFortressIcon の <animate>）に置き換えるため、ここで打ち消す。 */
 .bossNode {
-  border-radius: 14px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
 }
 
 .bossNode.unlocked {
-  background: var(--wm-boss-bg);
+  animation: none;
   color: var(--wm-boss-fg);
 }
 
 .bossNode.cleared {
-  background: var(--wm-cleared-bg);
   color: var(--wm-cleared-fg);
 }
 
 .bossNode.locked {
-  background: var(--wm-locked-bg);
   color: var(--wm-locked-fg);
+}
+
+/* 砦本体の SVG。ボタン全体を覆い、道端の飾りより手前・タップは奪わない（pointer-events: none。
+   タップ判定は button 要素自体が持つ）。 */
+.bossArt {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  filter: drop-shadow(0 3px 4px rgb(0 0 0 / 45%));
+}
+
+.bossNode .tileIcon,
+.bossNode .tileLabel {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 60%);
 }

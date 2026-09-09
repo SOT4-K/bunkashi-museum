@@ -10,7 +10,6 @@ import type { WorldTheme } from '../types'
  */
 export const DEFAULT_WORLD_THEME: Omit<WorldTheme, 'eraId'> = {
   palette: { sky: '#dbe6f0', ground: '#c9d6c0', road: '#8fa3b0', accent: '#5b7083' },
-  bossShape: 'default',
   motifs: [],
 }
 

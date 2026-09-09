@@ -22,9 +22,17 @@
 //     WorldBackgroundArt.tsx の遠景イラスト（原始=山並みと森、化政=富士と海）を1枚固定し、
 //     .screen の背景グラデーションと合わせて「空／遠景／地面」の3層にした
 //     （backgroundId が無いワールド＝他13ワールドは今まで通り無地の配色のみ。触っていない）。
+//
+// M2d-02（残り13ワールドの飾り＋ボス統一）: ボスノードは時代ごとのランドマーク形状
+// （旧: 原始=前方後円墳、化政=富士山型の CSS clip-path）をやめ、全15ワールド共通の
+// 「敵の砦」シルエット（BossFortressIcon。暗い岩山+門+角/炎の突起、黒紫+赤アクセント）に
+// 統一した。時代差は頂上の旗アイコン1点（theme.bossFlagId、道端の飾りと同じカタログを
+// 再利用）のみで出す。未解禁=灰・挑戦可能=赤い目が光る・クリア=王冠（既存の👑演出を維持）の
+// 状態差は変えていない。
 import { useRef, useState, type CSSProperties } from 'react'
 import styles from './WorldMapScreen.module.css'
-import { getBossClipPath, getMotifIcon } from './worldMotifCatalog'
+import { getMotifIcon } from './worldMotifCatalog'
+import { BossFortressIcon } from './BossFortressIcon'
 import { GenshiBackdrop, KaiseiBackdrop } from './WorldBackgroundArt'
 import {
   buildEraStagePlan,
@@ -319,10 +327,16 @@ export function WorldMapScreen({
                     top: p.y - size / 2,
                     width: size,
                     height: size,
-                    clipPath: n.isBoss ? getBossClipPath(theme.bossShape) || undefined : undefined,
                   }}
                   onClick={() => onSelectStage(n.key)}
                 >
+                  {n.isBoss && (
+                    <BossFortressIcon
+                      state={tileState}
+                      FlagIcon={theme.bossFlagId ? getMotifIcon(theme.bossFlagId) : null}
+                      className={styles.bossArt}
+                    />
+                  )}
                   {tileState === 'locked' && (
                     <span className={styles.tileIcon} aria-hidden="true">
                       🔒

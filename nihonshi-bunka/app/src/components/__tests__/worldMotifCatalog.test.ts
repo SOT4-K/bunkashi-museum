@@ -3,7 +3,7 @@
 // カタログのキーと WorldMapScreen.tsx の switch 分岐・content/worlds.json の backgroundId が
 // 食い違っていないかをここで直接検証する。
 import { describe, expect, it } from 'vitest'
-import { getBackgroundArt, getBossClipPath, getMotifIcon } from '../worldMotifCatalog'
+import { getBackgroundArt, getMotifIcon } from '../worldMotifCatalog'
 
 describe('getBackgroundArt', () => {
   it('原始・化政の backgroundId はそれぞれのコンポーネントを返す', () => {
@@ -18,16 +18,34 @@ describe('getBackgroundArt', () => {
   })
 })
 
-describe('getMotifIcon / getBossClipPath（既存カタログの回帰確認）', () => {
+describe('getMotifIcon（既存カタログの回帰確認）', () => {
   it('原始・化政の全モチーフ id がカタログに存在する', () => {
     for (const id of ['dogu', 'haniwa', 'tateana', 'dotaku', 'kaizuka', 'fuji', 'nami', 'tabibito', 'nishikie']) {
       expect(getMotifIcon(id)).not.toBeNull()
     }
   })
 
-  it('未知の bossShape は既定（空文字列＝角丸長方形）にフォールバックする', () => {
-    expect(getBossClipPath('kofun')).not.toBe('')
-    expect(getBossClipPath('fuji')).not.toBe('')
-    expect(getBossClipPath('no-such-shape')).toBe('')
+  it('M2d-02: 残り13ワールド分の全モチーフ id（各5種、計65種）がカタログに存在する', () => {
+    const ids = [
+      'kawarayane', 'gojunoto', 'butsuzo', 'renge', 'kenzuishisen',
+      'yakushijito', 'butsuto', 'takamatsuzuka', 'suien', 'manyotanzaku',
+      'daibutsu', 'shosoin', 'shibi', 'kokubunjito', 'mokkan',
+      'mandala', 'gokosho', 'fudomyoo', 'ichibokuzukuributsu', 'sanpitsukan',
+      'hoodo', 'shindenzukuri', 'kanamoji', 'junihitoe', 'ogi',
+      'emakimono', 'konjikido', 'chojugiga', 'rokushojito', 'dengakumen',
+      'kongorikishi', 'nandaimon', 'yoroikabuto', 'gorinto', 'juzu',
+      'kinkaku', 'suibokuga', 'nomen', 'kangofu', 'gozanto',
+      'ginkaku', 'karesansui', 'chawan', 'sesshusuibokuga', 'shoji',
+      'tenshu', 'kinbyobu', 'chagama', 'nanbansen', 'karashishi',
+      'toshogu', 'katsurarikyu', 'fujinraijin', 'akae', 'makiesuzuribako',
+      'ukiyoehangi', 'kakitsubata', 'kumadori', 'haikutanzaku', 'iroetsubo',
+      'okubie', 'erekiteru', 'kaitaishinsho', 'bunjinga', 'terakoyatsukue',
+    ]
+    expect(ids.length).toBe(65)
+    for (const id of ids) expect(getMotifIcon(id), `motif ${id} が未定義`).not.toBeNull()
+  })
+
+  it('未知の id は null（防御的フォールバック）', () => {
+    expect(getMotifIcon('no-such-motif')).toBeNull()
   })
 })

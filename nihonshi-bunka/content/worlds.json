@@ -2,8 +2,8 @@
   {
     "eraId": "genshi",
     "palette": { "sky": "#f4e4c1", "ground": "#8a6b4a", "road": "#c98b4a", "accent": "#b5482e" },
-    "bossShape": "kofun",
     "backgroundId": "genshi-hills",
+    "bossFlagId": "dogu",
     "motifs": [
       { "id": "dogu", "label": "土偶" },
       { "id": "haniwa", "label": "埴輪" },
@@ -15,86 +15,164 @@
   {
     "eraId": "asuka",
     "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
-    "bossShape": "default",
-    "motifs": []
+    "bossFlagId": "gojunoto",
+    "motifs": [
+      { "id": "kawarayane", "label": "瓦屋根" },
+      { "id": "gojunoto", "label": "五重塔" },
+      { "id": "butsuzo", "label": "仏像" },
+      { "id": "renge", "label": "蓮弁文" },
+      { "id": "kenzuishisen", "label": "遣隋使船" }
+    ]
   },
   {
     "eraId": "hakuho",
     "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
-    "bossShape": "default",
-    "motifs": []
+    "bossFlagId": "butsuto",
+    "motifs": [
+      { "id": "yakushijito", "label": "薬師寺東塔" },
+      { "id": "butsuto", "label": "仏頭" },
+      { "id": "takamatsuzuka", "label": "高松塚壁画" },
+      { "id": "suien", "label": "水煙" },
+      { "id": "manyotanzaku", "label": "万葉の歌" }
+    ]
   },
   {
     "eraId": "tenpyo",
     "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
-    "bossShape": "default",
-    "motifs": []
+    "bossFlagId": "daibutsu",
+    "motifs": [
+      { "id": "daibutsu", "label": "大仏" },
+      { "id": "shosoin", "label": "正倉院" },
+      { "id": "shibi", "label": "鴟尾" },
+      { "id": "kokubunjito", "label": "国分寺の塔" },
+      { "id": "mokkan", "label": "万葉の木簡" }
+    ]
   },
   {
     "eraId": "konin-jogan",
     "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
-    "bossShape": "default",
-    "motifs": []
+    "bossFlagId": "fudomyoo",
+    "motifs": [
+      { "id": "mandala", "label": "曼荼羅" },
+      { "id": "gokosho", "label": "五鈷杵" },
+      { "id": "fudomyoo", "label": "不動明王" },
+      { "id": "ichibokuzukuributsu", "label": "一木造の仏像" },
+      { "id": "sanpitsukan", "label": "三筆の巻物" }
+    ]
   },
   {
     "eraId": "kokufu",
     "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
-    "bossShape": "default",
-    "motifs": []
+    "bossFlagId": "hoodo",
+    "motifs": [
+      { "id": "hoodo", "label": "鳳凰堂" },
+      { "id": "shindenzukuri", "label": "寝殿造" },
+      { "id": "kanamoji", "label": "かな文字" },
+      { "id": "junihitoe", "label": "十二単" },
+      { "id": "ogi", "label": "扇" }
+    ]
   },
   {
     "eraId": "insei",
     "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
-    "bossShape": "default",
-    "motifs": []
+    "bossFlagId": "chojugiga",
+    "motifs": [
+      { "id": "emakimono", "label": "絵巻物" },
+      { "id": "konjikido", "label": "金色堂" },
+      { "id": "chojugiga", "label": "鳥獣戯画" },
+      { "id": "rokushojito", "label": "六勝寺の塔" },
+      { "id": "dengakumen", "label": "田楽面" }
+    ]
   },
   {
     "eraId": "kamakura",
     "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
-    "bossShape": "default",
-    "motifs": []
+    "bossFlagId": "kongorikishi",
+    "motifs": [
+      { "id": "kongorikishi", "label": "金剛力士像" },
+      { "id": "nandaimon", "label": "南大門" },
+      { "id": "yoroikabuto", "label": "鎧兜" },
+      { "id": "gorinto", "label": "五輪塔" },
+      { "id": "juzu", "label": "数珠" }
+    ]
   },
   {
     "eraId": "kitayama",
     "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
-    "bossShape": "default",
-    "motifs": []
+    "bossFlagId": "kinkaku",
+    "motifs": [
+      { "id": "kinkaku", "label": "金閣" },
+      { "id": "suibokuga", "label": "水墨画" },
+      { "id": "nomen", "label": "能面" },
+      { "id": "kangofu", "label": "勘合符" },
+      { "id": "gozanto", "label": "五山の塔" }
+    ]
   },
   {
     "eraId": "higashiyama",
     "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
-    "bossShape": "default",
-    "motifs": []
+    "bossFlagId": "ginkaku",
+    "motifs": [
+      { "id": "ginkaku", "label": "銀閣" },
+      { "id": "karesansui", "label": "枯山水" },
+      { "id": "chawan", "label": "茶碗" },
+      { "id": "sesshusuibokuga", "label": "雪舟の水墨画" },
+      { "id": "shoji", "label": "書院造の障子" }
+    ]
   },
   {
     "eraId": "momoyama",
     "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
-    "bossShape": "default",
-    "motifs": []
+    "bossFlagId": "tenshu",
+    "motifs": [
+      { "id": "tenshu", "label": "天守" },
+      { "id": "kinbyobu", "label": "金屏風" },
+      { "id": "chagama", "label": "茶釜" },
+      { "id": "nanbansen", "label": "南蛮船" },
+      { "id": "karashishi", "label": "唐獅子" }
+    ]
   },
   {
     "eraId": "kanei",
     "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
-    "bossShape": "default",
-    "motifs": []
+    "bossFlagId": "toshogu",
+    "motifs": [
+      { "id": "toshogu", "label": "東照宮" },
+      { "id": "katsurarikyu", "label": "桂離宮" },
+      { "id": "fujinraijin", "label": "風神雷神" },
+      { "id": "akae", "label": "赤絵の壺" },
+      { "id": "makiesuzuribako", "label": "蒔絵硯箱" }
+    ]
   },
   {
     "eraId": "genroku",
     "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
-    "bossShape": "default",
-    "motifs": []
+    "bossFlagId": "kumadori",
+    "motifs": [
+      { "id": "ukiyoehangi", "label": "浮世絵の版木" },
+      { "id": "kakitsubata", "label": "燕子花" },
+      { "id": "kumadori", "label": "歌舞伎の隈取" },
+      { "id": "haikutanzaku", "label": "俳句の短冊" },
+      { "id": "iroetsubo", "label": "色絵の壺" }
+    ]
   },
   {
     "eraId": "horeki-tenmei",
     "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
-    "bossShape": "default",
-    "motifs": []
+    "bossFlagId": "okubie",
+    "motifs": [
+      { "id": "okubie", "label": "大首絵" },
+      { "id": "erekiteru", "label": "エレキテル" },
+      { "id": "kaitaishinsho", "label": "解体新書" },
+      { "id": "bunjinga", "label": "文人画" },
+      { "id": "terakoyatsukue", "label": "寺子屋の机" }
+    ]
   },
   {
     "eraId": "kasei",
     "palette": { "sky": "#bfe3f0", "ground": "#e8d9b5", "road": "#3d6ea5", "accent": "#c0392b" },
-    "bossShape": "fuji",
     "backgroundId": "kasei-fuji-sea",
+    "bossFlagId": "fuji",
     "motifs": [
       { "id": "fuji", "label": "富士" },
       { "id": "nami", "label": "波" },

@@ -174,10 +174,12 @@ export interface WorldMotif {
 export interface WorldTheme {
   eraId: string
   palette: WorldPalette
-  /** ボスノードの形（components/WorldMotifIcons.tsx の BOSS_SHAPES キー）。未知の値は既定形にフォールバック。 */
-  bossShape: string
-  /** 道端の飾りモチーフ（3〜5種）。空配列なら「無地のパレットのみ」（M2d-01 時点で13ワールド）。 */
+  /** 道端の飾りモチーフ（3〜5種）。空配列なら「無地のパレットのみ」（M2d-01 時点で13ワールド。
+   *  M2d-02 で全15ワールドが5種前後を持つ）。 */
   motifs: WorldMotif[]
+  /** ボスノード頂上の小さな旗（M2d-02）。motifs のいずれか1件の id を指す（新規アセットは
+   *  作らず、道端の飾りと同じアイコンを再利用する）。省略時は旗を描かない。 */
+  bossFlagId?: string
   /** 背景の遠景イラスト（M2d-01b。components/worldBackgroundCatalog.ts のカタログキー）。
    *  省略時は遠景を描かない（無地の13ワールドはこのフィールド自体を持たない＝
    *  getWorldTheme の既定テーマにも含めない。動作は今まで通り）。 */

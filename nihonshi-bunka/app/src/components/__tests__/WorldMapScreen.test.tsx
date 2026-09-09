@@ -26,7 +26,7 @@ const plainTheme: WorldTheme = { eraId: 'asuka', ...DEFAULT_WORLD_THEME }
 const decoratedTheme: WorldTheme = {
   eraId: 'asuka',
   palette: { sky: '#f4e4c1', ground: '#8a6b4a', road: '#c98b4a', accent: '#b5482e' },
-  bossShape: 'kofun',
+  bossFlagId: 'dogu',
   motifs: [
     { id: 'dogu', label: '土偶' },
     { id: 'haniwa', label: '埴輪' },
@@ -37,7 +37,7 @@ const decoratedTheme: WorldTheme = {
 const decoratedTheme5: WorldTheme = {
   eraId: 'asuka',
   palette: { sky: '#f4e4c1', ground: '#8a6b4a', road: '#c98b4a', accent: '#b5482e' },
-  bossShape: 'kofun',
+  bossFlagId: 'dogu',
   motifs: [
     { id: 'dogu', label: '土偶' },
     { id: 'haniwa', label: '埴輪' },
@@ -278,5 +278,128 @@ describe('WorldMapScreen', () => {
     )
     expect(screen.getByText('出題できる面がまだない。')).toBeInTheDocument()
     expect(screen.queryByTestId('stage-tile-asuka-1-1')).not.toBeInTheDocument()
+  })
+
+  // M2d-02: ボスノードは時代のランドマーク（前方後円墳・富士山型）をやめ、全ワールド共通の
+  // 「敵の砦」（BossFortressIcon）にした。ここでは3状態（灰/赤い目/王冠）と旗（bossFlagId）が
+  // 正しく描き分けられることを直接検証する（clip-path ではなく SVG 内の要素で表現するため）。
+  describe('ボスノード: 全ワールド共通「敵の砦」（M2d-02）', () => {
+    it('未解禁（locked）: 目を描かない', () => {
+      render(
+        <WorldMapScreen
+          eraId="asuka"
+          eras={testEras}
+          imagePool={works}
+          progress={createInitialProgress('2026-09-09')}
+          theme={decoratedTheme}
+          onSelectStage={() => {}}
+          onBack={() => {}}
+        />,
+      )
+      const boss = screen.getByTestId('stage-tile-asuka-boss')
+      expect(boss.dataset.state).toBe('locked')
+      const fortress = boss.querySelector('[data-testid="boss-fortress"]')
+      expect(fortress).not.toBeNull()
+      expect(fortress?.getAttribute('data-state')).toBe('locked')
+      expect(boss.querySelectorAll('[data-testid="boss-fortress-eye"]').length).toBe(0)
+    })
+
+    it('挑戦可能（unlocked）: 赤く光る目が2つ描かれる', () => {
+      const progress: ProgressState = {
+        ...createInitialProgress('2026-09-09'),
+        stages: {
+          asuka: {
+            segments: {
+              '1-1': { cleared: true, bestScore: 2, clearedAt: '2026-09-09' },
+              '2-1': { cleared: true, bestScore: 2, clearedAt: '2026-09-09' },
+              '3-1': { cleared: true, bestScore: 2, clearedAt: '2026-09-09' },
+            },
+            boss: { cleared: false, bestScore: 0, clearedAt: null },
+          },
+        },
+      }
+      render(
+        <WorldMapScreen
+          eraId="asuka"
+          eras={testEras}
+          imagePool={works}
+          progress={progress}
+          theme={decoratedTheme}
+          onSelectStage={() => {}}
+          onBack={() => {}}
+        />,
+      )
+      const boss = screen.getByTestId('stage-tile-asuka-boss')
+      expect(boss.dataset.state).toBe('unlocked')
+      const eyes = boss.querySelectorAll('[data-testid="boss-fortress-eye"]')
+      expect(eyes.length).toBe(2)
+      for (const eye of eyes) expect(eye.getAttribute('fill')).toBe('#ff3b3b')
+    })
+
+    it('クリア（cleared）: 王冠（👑）が表示される', () => {
+      const progress: ProgressState = {
+        ...createInitialProgress('2026-09-09'),
+        stages: {
+          asuka: {
+            segments: {
+              '1-1': { cleared: true, bestScore: 2, clearedAt: '2026-09-09' },
+              '2-1': { cleared: true, bestScore: 2, clearedAt: '2026-09-09' },
+              '3-1': { cleared: true, bestScore: 2, clearedAt: '2026-09-09' },
+            },
+            boss: { cleared: true, bestScore: 2, clearedAt: '2026-09-09' },
+          },
+        },
+      }
+      render(
+        <WorldMapScreen
+          eraId="asuka"
+          eras={testEras}
+          imagePool={works}
+          progress={progress}
+          theme={decoratedTheme}
+          onSelectStage={() => {}}
+          onBack={() => {}}
+        />,
+      )
+      const boss = screen.getByTestId('stage-tile-asuka-boss')
+      expect(boss.dataset.state).toBe('cleared')
+      expect(boss).toHaveTextContent('👑')
+      // クリア時の目は光らない暗赤（挑戦可能時の光る赤との対比）。
+      const eyes = boss.querySelectorAll('[data-testid="boss-fortress-eye"]')
+      expect(eyes.length).toBe(2)
+      for (const eye of eyes) expect(eye.getAttribute('fill')).toBe('#5a1f1f')
+    })
+
+    it('theme.bossFlagId のアイコンが頂上の旗として描かれる', () => {
+      render(
+        <WorldMapScreen
+          eraId="asuka"
+          eras={testEras}
+          imagePool={works}
+          progress={createInitialProgress('2026-09-09')}
+          theme={decoratedTheme}
+          onSelectStage={() => {}}
+          onBack={() => {}}
+        />,
+      )
+      const boss = screen.getByTestId('stage-tile-asuka-boss')
+      expect(boss.querySelector('[data-testid="boss-fortress-flag"]')).not.toBeNull()
+    })
+
+    it('bossFlagId が無いテーマでは旗を描かない（防御的）', () => {
+      render(
+        <WorldMapScreen
+          eraId="asuka"
+          eras={testEras}
+          imagePool={works}
+          progress={createInitialProgress('2026-09-09')}
+          theme={plainTheme}
+          onSelectStage={() => {}}
+          onBack={() => {}}
+        />,
+      )
+      const boss = screen.getByTestId('stage-tile-asuka-boss')
+      expect(boss.querySelector('[data-testid="boss-fortress-flag"]')).toBeNull()
+    })
   })
 })
