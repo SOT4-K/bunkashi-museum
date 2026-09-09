@@ -80,17 +80,168 @@ export function categoryOfQuestion(question: Pick<Question, 'type' | 'reversed'>
 }
 
 /**
- * M2e-06: 1回の生成（count問）で図版カテゴリ（image＝q9/q1）に許す最大数。
- * 周期的割り当て（index % 5）どおりなら count 問中 ceil(count/5) 問が「狙い」だが、
- * ask 不在時の通常優先順位が Q9 を最初に試すため、他カテゴリの生成に失敗すると
- * Q9 に落ちやすく実測は上振れする（是正前: mockExam 10問×30seedで平均3.07、
- * 「狙い」の2問より1問强く超過）。「狙い＋1」を上限にする（10問なら 2+1=3、
- * ticket指定の「最大3問」と一致）。20問（TIME_ATTACK_EXAM_SIZE・大きいボス）は
- * 同じ式を一般化したもの（ceil(20/5)+1=5）で、ticket原文に具体数の指定は無いため
- * この一般化が完了報告での明記事項。
+ * M2e-08（BOARD.md「型配分を問数に比例させる」）: 1回の生成（count問）で図版カテゴリ
+ * （image＝q9/q1）に許す最大数。ticket本文どおり `ceil(count/4)`。
+ * M2e-06時点は `ceil(count/5)+1` だったが、これは20問（TIME_ATTACK_EXAM_SIZE）でも
+ * たまたま同じ値（5）になるため気づかれず、M2e-06の「模試10問」ticket文言をそのまま
+ * 実装対象にした結果、本番が実際に呼ぶ count=20 の帯外（語句組合せ平均1.0・逆適否0.67）が
+ * 残っていた（builder メモ feedback-m2e-06-partial-accept.md）。count=10/20では
+ * 旧式・新式とも同じ値（10→3, 20→5）になるため、この変更単体では退行しない
+ * （下記 categoryFloor の一般化が本チケットの主眼）。
  */
 export function imageCategoryCap(count: number): number {
-  return Math.ceil(count / COMPOSITION_SEQUENCE.length) + 1
+  return Math.ceil(count / 4)
+}
+
+/**
+ * M2e-08: 1回の生成（count問）で5カテゴリ（COMPOSITION_SEQUENCE）それぞれに保証する
+ * 最低数（床）。ticket本文「5問につき5カテゴリ各1」＝目標は count/5、床はそこから1引いた
+ * 値（20問なら目標4・床3・上限4+1=5＝ticket本文「各4±1」と一致。10問なら目標2・床1・
+ * 上限3＝M2e-06までの固定floor=1・「2±1」帯とも一致するため、10問側は退行しない）。
+ * 目標が1未満になる極端に小さいcount（<5）でも床は最低1を保証する。
+ */
+export function categoryFloor(count: number): number {
+  return Math.max(1, Math.round(count / COMPOSITION_SEQUENCE.length) - 1)
+}
+
+/** 指定カテゴリを狙って強制生成するときに使う ask（'pairs'・'image' は下記
+ *  forceCategoryQuestion が別データソースへのフォールバックを持つため、ここでは
+ *  ask.type だけで表現できる素直な対応のみ扱う）。'q4'/'q4-reversed' は同じ
+ *  QuestionType 'q4' を ask.reversed で撃ち分ける。 */
+function askForCategory(category: ThemeCategory): PassageUnderlineAsk {
+  switch (category) {
+    case 'pairs':
+      return { type: 'q13' }
+    case 'q10':
+      return { type: 'q10' }
+    case 'q4':
+      return { type: 'q4', reversed: false }
+    case 'q4-reversed':
+      return { type: 'q4', reversed: true }
+    case 'image':
+      return { type: 'q9' }
+  }
+}
+
+/**
+ * M2e-08: 指定カテゴリを狙って work を強制的に作り直す（best-effort。作れなければ null）。
+ * mockExam.ts・stages.ts の floor 引き上げ（下記 planCategoryFloorConversions）専用の
+ * 変換関数で、通常の生成経路（ask/desiredCategory 優先順位）とは別に用意する:
+ *  - 'image': target 自身が imagePool に無ければ試さない（tryQ9 自体は target の画像有無を
+ *    検証しないため、ここで事前に弾く。既存のQ9強制ロジックの踏襲）。
+ *  - 'pairs': まず q13（work.pairs を使う。既存のQ13強制ロジックの踏襲）を試し、失敗したら
+ *    q8（artist/patron × style/religion/technique。work.pairsとは別データソース）を試す。
+ *    ask.type に q8 が無く buildThemeQuestionForWork 経由では狙えないため、combos.ts の
+ *    generateComboQuestion を直接呼ぶ（themeSet.ts 内部の tryQ8 と同じ組み立て）。
+ *    実測（mockExam 20問×30seed）: q13のみだと1/30 seedでpairs=2に留まり30 seed平均が
+ *    床（3）にわずかに届かなかった（work.pairsを持つ作品がその回のサンプルにたまたま
+ *    2件しか無かったケース）。q8フォールバックを足すことで解消する。
+ */
+export function forceCategoryQuestion(
+  work: Work,
+  pool: Work[],
+  eras: Era[],
+  rng: RandomFn,
+  category: ThemeCategory,
+  opts: { imagePool?: Work[]; underlineKey?: string } = {},
+): Question | null {
+  if (category === 'image' && !isImageEligible(work, opts.imagePool ?? pool)) return null
+  if (category === 'pairs') {
+    const viaQ13 = buildThemeQuestionForWork(work, pool, eras, rng, { ask: { type: 'q13' }, underlineKey: opts.underlineKey })
+    if (viaQ13 && categoryOfQuestion(viaQ13) === 'pairs') return viaQ13
+    const combo = generateComboQuestion(work, pool, rng)
+    if (!combo) return null
+    const { items, correctIndex } = buildChoices(combo.correct, combo.distractors, rng)
+    const stem = opts.underlineKey ? underlineStem('q8', opts.underlineKey, {}) : standaloneStem('q8', {})
+    return { type: 'q8', work, choiceWorks: [], choiceCombos: items, correctIndex, isReview: false, stem }
+  }
+  const forced = buildThemeQuestionForWork(work, pool, eras, rng, {
+    ask: askForCategory(category),
+    imagePool: opts.imagePool,
+    underlineKey: opts.underlineKey,
+  })
+  return forced && categoryOfQuestion(forced) === category ? forced : null
+}
+
+/** planCategoryFloorConversions が扱う1件分の変換候補。 */
+export interface FloorConversionCandidate {
+  /** 変換対象の作品 id（重複回避に使う。下記 workId+type の説明参照）。 */
+  workId: string
+  /** 現在この設問の型（重複回避に使う）。 */
+  type: QuestionType
+  /** 現在この設問が属するカテゴリ（5カテゴリ以外の型、または未生成なら null）。 */
+  category: ThemeCategory | null
+  /** 指定カテゴリへの変換を試す（成功すれば新しい Question、失敗すれば null。ベストエフォート。
+   *  呼び出し側は forceCategoryQuestion をそのまま渡せばよい）。 */
+  tryConvert: (category: ThemeCategory) => Question | null
+}
+
+/**
+ * M2e-08: count に比例した床（categoryFloor）を満たすよう、best-effort でカテゴリ間の変換を
+ * 計画する（candidates と同じ長さの配列を返す。変換しない要素は null）。
+ * M2e-06 の「固定floor=1・型ごとに個別のif分岐をコピペ」を一般化したもの
+ * （mockExam.ts の Q9/Q13 個別強制ブロック、stages.ts の pairs 個別強制ブロックを置き換える）。
+ * 変換元（donor）は「5カテゴリに属さない（null。例: q12/q14）」または「自分のカテゴリの
+ * 現在数が床より多い（変換後も床を割らない）」候補だけに限定し、あるカテゴリの床を
+ * 満たすために別のカテゴリの床を壊すことを防ぐ（builder メモ
+ * category-cap-side-effects-on-unrelated-metrics.md と同種の副作用を作り込まないため）。
+ * 貪欲・先頭から順に試すだけの決め打ちの経験値で、必ず床に届く保証はない（壊れない設計）。
+ * 「同じ作品×同じ型の組は1回の生成内で重複させない」（M2b-99c中1の既存規則）も守る:
+ * 変換先の (work.id, type) の組が、変換対象以外の候補に既に存在するなら、その変換は捨てる
+ * （実測: forceCategoryQuestion の q8 フォールバックを足した際、既に q8 を持つ作品を
+ * 別の枠で再度 q8 に変換してしまい、stages.realdata.test.ts の作品×型一意性テストが
+ * 落ちたのを機に追加したガード）。
+ */
+export function planCategoryFloorConversions(candidates: FloorConversionCandidate[], count: number): (Question | null)[] {
+  const floor = categoryFloor(count)
+  const counts: Record<ThemeCategory, number> = { pairs: 0, q10: 0, q4: 0, 'q4-reversed': 0, image: 0 }
+  for (const c of candidates) if (c.category) counts[c.category]++
+  const results: (Question | null)[] = candidates.map(() => null)
+  const currentCategoryOf = (i: number): ThemeCategory | null => {
+    const r = results[i]
+    return r ? categoryOfQuestion(r) : candidates[i].category
+  }
+  const pairKey = (workId: string, type: QuestionType) => `${workId}:${type}`
+  const currentPairKeyOf = (i: number): string => {
+    const r = results[i]
+    return r ? pairKey(r.work.id, r.type) : pairKey(candidates[i].workId, candidates[i].type)
+  }
+  const usedPairKeys = new Set<string>(candidates.map((c) => pairKey(c.workId, c.type)))
+  // minDonorCount: 変換元として使える最低の「変換前の自分のカテゴリの現在数」。
+  // 第1パス（厳格）は floor+1（＝床を割らない安全な余剰がある候補だけ）。実データでは
+  // 「床ちょうどの候補しか対象カテゴリに変換できない（例: work.pairsを持つ作品がその
+  // 候補集合にたまたま無い）」極端なケースが稀にあり（実測: mockExam 20問×30seedで
+  // 1/30 seedがpairs=2に留まった）、そのまま諦めると30 seed平均が床をわずかに下回る
+  // （ticket本文の帯の検査に失敗する）。第2パス（緩和）は minDonorCount=2 まで許し、
+  // 既に床ちょうどの候補も変換元に使えるようにする（donor側は最悪でも1件は残るため
+  // 0件化はしない。「5カテゴリのどれかが完全に消える」という壊れ方は避けたまま、
+  // 床への到達をもう一段階だけ粘る）。
+  for (const minDonorCount of [floor + 1, 2]) {
+    for (const category of COMPOSITION_SEQUENCE) {
+      while (counts[category] < floor) {
+        let converted = false
+        for (let i = 0; i < candidates.length; i++) {
+          const donorCategory = currentCategoryOf(i)
+          if (donorCategory === category) continue
+          if (donorCategory !== null && counts[donorCategory] < minDonorCount) continue
+          const forced = candidates[i].tryConvert(category)
+          if (!forced || categoryOfQuestion(forced) !== category) continue
+          const newKey = pairKey(forced.work.id, forced.type)
+          const oldKey = currentPairKeyOf(i)
+          if (newKey !== oldKey && usedPairKeys.has(newKey)) continue
+          usedPairKeys.delete(oldKey)
+          usedPairKeys.add(newKey)
+          if (donorCategory !== null) counts[donorCategory]--
+          counts[category]++
+          results[i] = forced
+          converted = true
+          break
+        }
+        if (!converted) break
+      }
+    }
+  }
+  return results
 }
 
 export interface ThemeQuestion {

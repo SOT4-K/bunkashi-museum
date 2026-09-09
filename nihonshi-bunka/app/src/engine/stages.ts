@@ -47,8 +47,11 @@ import {
   buildThemeSetQuestions,
   categoryOfQuestion,
   COMPOSITION_SEQUENCE,
+  type FloorConversionCandidate,
+  forceCategoryQuestion,
   imageCategoryCap,
   pickThemeTargetId,
+  planCategoryFloorConversions,
 } from './themeSet'
 import { underlineStem, standaloneStem } from './stems'
 import type {
@@ -637,25 +640,28 @@ export function buildBossQuestions(
     }
   }
 
-  // M2e-06: 語句組合せカテゴリ（pairs＝q13・q8）はmockExam.tsと同じく1回のボスで最低1問
-  // 確保する（best-effort）。実測: 対策前は reviewedEras×20seedのボス生成300件中48件
-  // （16%）が0問だった（tenpyo/horeki-tenmei/kaseiに集中。work.pairsを持つ作品が
-  // その文化にたまたま少ない/候補順で先に他の型が消費してしまうケース）。
-  if (built.length >= 2 && !built.some((q) => categoryOfQuestion(q) === 'pairs')) {
+  // M2e-08（BOARD.md「型配分を問数に比例させる」）: 旧M2e-06は語句組合せ（pairs＝q13・q8）
+  // だけを対象に「0件のときだけ1問強制」する固定floor=1のブロックを持っていたが、count
+  // （targetCount）に比例しないため、20問ボスでは帯外になりうる（mockExam.ts と同じ問題。
+  // builder メモ feedback-m2e-06-partial-accept.md）。categoryFloor(targetCount) まで
+  // 5カテゴリ全てをbest-effortで引き上げる一般化に置き換える（themeSet.ts
+  // planCategoryFloorConversions）。実測: 対策前（pairs固定floor=1のみ）は
+  // reviewedEras×20seedのボス生成300件中48件（16%）がpairs=0問だった
+  // （tenpyo/horeki-tenmei/kaseiに集中。stages.realdata.test.ts参照）。
+  if (built.length > 0) {
+    const candidates: FloorConversionCandidate[] = built.map((q) => ({
+      workId: q.work.id,
+      type: q.type,
+      category: categoryOfQuestion(q),
+      tryConvert: (category) => forceCategoryQuestion(q.work, pool, eras, rng, category, { imagePool, underlineKey: q.underlineKey }),
+    }))
+    const conversions = planCategoryFloorConversions(candidates, targetCount)
     for (let i = 0; i < built.length; i++) {
-      const q = built[i]
-      if (!(q.work.pairs && q.work.pairs.length > 0)) continue
-      const candidate = candidateByWorkId.get(q.work.id)
-      const forced = buildThemeQuestionForWork(q.work, pool, eras, rng, {
-        ask: { type: 'q13' },
-        underlineKey: candidate?.underline.key,
-      })
-      if (forced && categoryOfQuestion(forced) === 'pairs') {
-        // buildThemeQuestionForWork は内部で必ず stem を埋める（themeSet.ts の
-        // buildThemeQuestionForWorkWithMeta）ため attachLeadStem は不要。
-        built[i] = candidate ? { ...forced, passageId: candidate.passage.id, underlineKey: candidate.underline.key } : forced
-        break
-      }
+      const forced = conversions[i]
+      if (!forced) continue
+      // buildThemeQuestionForWork は内部で必ず stem を埋める（themeSet.ts の
+      // buildThemeQuestionForWorkWithMeta）ため attachLeadStem は不要。
+      built[i] = { ...forced, passageId: built[i].passageId, underlineKey: built[i].underlineKey }
     }
   }
 

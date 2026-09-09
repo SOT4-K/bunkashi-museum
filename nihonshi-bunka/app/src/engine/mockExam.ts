@@ -22,7 +22,16 @@
 // 下線も候補プールに自然に入る）。
 import { weightedSampleWithoutReplacement, eraWeight } from './weighted'
 import { selectReviewCandidates } from './session'
-import { buildThemeQuestionForWork, categoryOfQuestion, COMPOSITION_SEQUENCE, imageCategoryCap, pickThemeTargetId } from './themeSet'
+import {
+  buildThemeQuestionForWork,
+  categoryOfQuestion,
+  COMPOSITION_SEQUENCE,
+  type FloorConversionCandidate,
+  forceCategoryQuestion,
+  imageCategoryCap,
+  pickThemeTargetId,
+  planCategoryFloorConversions,
+} from './themeSet'
 import { generateOrderQuestion } from './order'
 import { excerptSegmentsForUnderline, type PassageSegment } from './passage'
 import type { RandomFn } from './distractors'
@@ -178,44 +187,28 @@ export function buildMockExam(
     })
   }
 
-  // 図版問題（Q9）は最低1問（analysis 7章）。desiredCategory の周期上は10問中2問が
-  // 'image' 狙いになるが、生成失敗でフォールバックすると0になりうるため、0件のときだけ
-  // 強制的に作り直す（best-effort。imagePool に無い作品ばかりの極端なケースでは諦める）。
-  if (built.length > 0 && !built.some((b) => b.question.type === 'q9')) {
+  // M2e-08（BOARD.md「型配分を問数に比例させる」）: 旧M2e-06はQ9・Q13それぞれに
+  // 「0件のときだけ1問強制」という固定floor=1の個別ブロックを持っていたが、count（本番は
+  // TIME_ATTACK_EXAM_SIZE=20）に比例しないため、count=20では語句組合せ平均1.0・逆適否0.67の
+  // まま帯外（builder メモ feedback-m2e-06-partial-accept.md）だった。categoryFloor(count)
+  // （20問なら床3）まで5カテゴリ全てをbest-effortで引き上げる一般化に置き換える
+  // （themeSet.ts planCategoryFloorConversions）。
+  if (built.length > 0) {
+    const candidates: FloorConversionCandidate[] = built.map((b) => ({
+      workId: b.question.work.id,
+      type: b.question.type,
+      category: categoryOfQuestion(b.question),
+      tryConvert: (category) => {
+        if (!b.passage || !b.underline) return null
+        return forceCategoryQuestion(b.question.work, pool, eras, rng, category, { imagePool, underlineKey: b.underline.key })
+      },
+    }))
+    const conversions = planCategoryFloorConversions(candidates, count)
     for (let i = 0; i < built.length; i++) {
+      const forced = conversions[i]
+      if (!forced) continue
       const b = built[i]
-      if (!b.passage || !b.underline) continue
-      if (!imagePool.some((w) => w.id === b.question.work.id)) continue
-      const forced = buildThemeQuestionForWork(b.question.work, pool, eras, rng, {
-        ask: { type: 'q9' },
-        imagePool,
-        underlineKey: b.underline.key,
-      })
-      if (forced && forced.type === 'q9') {
-        built[i] = { ...b, question: { ...forced, passageId: b.passage.id, underlineKey: b.underline.key } }
-        break
-      }
-    }
-  }
-
-  // reviewer指摘M2-25②③の修正: 実データでは全下線がask.type明示のため、desiredCategoryの
-  // 'pairs'（Q13）・COMPOSITION_SEQUENCE経由のQ14は事実上発火せず、Q13・Q14が0%になっていた
-  // （analysis 2章T1「語句の組合せ」約22%・T7「年代順」約5%を訓練できていなかった）。
-  // Q9と同じ「最低1問」のbest-effort強制パターンをQ13にも適用する（work.pairsが無い/少ない
-  // 作品ばかりの極端なケースでは諦める。壊れない設計）。
-  if (built.length > 0 && !built.some((b) => b.question.type === 'q13')) {
-    for (let i = 0; i < built.length; i++) {
-      const b = built[i]
-      if (!b.passage || !b.underline) continue
-      if (!(b.question.work.pairs && b.question.work.pairs.length > 0)) continue
-      const forced = buildThemeQuestionForWork(b.question.work, pool, eras, rng, {
-        ask: { type: 'q13' },
-        underlineKey: b.underline.key,
-      })
-      if (forced && forced.type === 'q13') {
-        built[i] = { ...b, question: { ...forced, passageId: b.passage.id, underlineKey: b.underline.key } }
-        break
-      }
+      built[i] = { ...b, question: { ...forced, passageId: b.passage!.id, underlineKey: b.underline!.key } }
     }
   }
 
