@@ -99,7 +99,8 @@
       "Ｆ（千手観音信仰・京都の堂の再建）: content/works/kamakura.json の sanjusangendo-hondo（facts・eraNote）",
       "Ｇ（南北朝の動乱ののちの公武の文化の融合）: content/eras.json の kitayama（detail）",
       "高校教科書（山川『詳説日本史』）鎌倉文化の項",
-      "形式: research/nichidai-past-exams-analysis.md 1章「文化伏せ型（2016・2025）」",
+      "四つの文化（院政期・鎌倉・北山・東山）の前後関係: content/eras.json の各区分の order・period、高校教科書（山川『詳説日本史』）各文化の項",
+      "形式: research/nichidai-past-exams-analysis.md 1章「文化伏せ型（2016・2025）」・2章 T7（年代順並べ替え）、research/stem-patterns.md P13・P14",
       "図版の同定URL（下線a・e）: https://commons.wikimedia.org/wiki/File:Kuya_Portrait.JPG",
       "図版の同定URL（下線b）: https://commons.wikimedia.org/wiki/File:The_Great_Buddha_of_K%C5%8Dtoku-in_(Kamakura_Daibutsu).jpg",
       "図版の同定URL（下線c）: https://commons.wikimedia.org/wiki/File:Engakuji-Shariden-M9239.jpg",
@@ -158,11 +159,16 @@
           "sanjusangendo-hondo"
         ],
         "ask": {
-          "type": "q10",
-          "stem": "下線部dにもとづき、湛慶が本尊を造ったとされる次の堂について述べた文A・Bの正誤の組合せとして正しいものはどれか。",
-          "answerId": "sanjusangendo-hondo"
+          "type": "q12",
+          "stem": "下線部dの信仰が受けつがれた時期にあたる、Ａ〜Ｇが述べているこの文化と、院政期の文化・北山文化・東山文化を、古いものから年代順に並べたものとして最も適切なものはどれか。",
+          "answerText": "院政期の文化 → この文化 → 北山文化 → 東山文化",
+          "distractorTexts": [
+            "この文化 → 院政期の文化 → 北山文化 → 東山文化",
+            "院政期の文化 → 北山文化 → この文化 → 東山文化",
+            "院政期の文化 → この文化 → 東山文化 → 北山文化"
+          ]
         },
-        "note": "二段構え: A=千手観音への信仰（信仰）／B=画像で示す堂。**Hayato修正（reviewer M2-24中3の付随指摘）**: 旧qはq9で、下線aも同じq9のためセット内でq9が2/5=40%と偏っていた（analysis 7章の目安は1問）。1本目（kamakura-01）はq4でこの作品を出しているため、重複を避けてq10（画像を出す型）に変更。falseStatements の『禅宗様の代表建築である』『運慶が建立を発願した』『本尊は阿弥陀如来である』が使える"
+        "note": "M2e-03 で型を差し替え（旧: q10「下線部dにもとづき、湛慶が本尊を造ったとされる次の堂について述べた文A・Bの正誤」＝画像を出す型。それ以前の経緯: **Hayato修正（reviewer M2-24中3の付随指摘）** で q9→q10 に変更していた）。nichidai-past-exams-analysis.md 2章 T7／stem-patterns.md P13・P14（文化伏せ型の最後に置く並べ替え）。文化名を伏せたまま並べさせるため、当の文化は「この文化」と表記する（kasei-02・genroku-02・kanei-02 と同じ書き方）。旧 q10 で出していた sanjusangendo-hondo は 1本目（kamakura-01）が q4 で画像を出しているので画像露出は落ちない（本セットの画像を出す設問は a・b・c の3問）。誤答は隣り合う2つを入れ替えた並びでそろえた"
       },
       {
         "key": "e",
@@ -183,6 +189,6 @@
         "note": "文化伏せ型の要となる問い。誤答は前後の時代の文化名でそろえた"
       }
     ],
-    "notes": "2本目のセット（M2-15）。『この文化は…』のＡ〜Ｇから文化を推測させる形。1本目（kamakura-01）と下線（六波羅蜜寺・民間の寄進・禅宗・平清盛）が重ならないよう、流派・場所・交流・信仰に下線を移し、同じ作品でも型（q9↔q4、q9↔q10）を入れ替えている。画像を伏せる型（a・d）の誤答には、そのセットで先に画像が出ている作品を入れていない。"
+    "notes": "2本目のセット（M2-15）。『この文化は…』のＡ〜Ｇから文化を推測させる形。1本目（kamakura-01）と下線（六波羅蜜寺・民間の寄進・禅宗・平清盛）が重ならないよう、流派・場所・交流・信仰に下線を移し、同じ作品でも型（q9↔q4、q9↔q10）を入れ替えている。画像を伏せる型（a・d）の誤答には、そのセットで先に画像が出ている作品を入れていない。M2e-03 で下線 d を年代順並べ替え（文字4択）に差し替え、文化伏せ型の定型（文化名当て＋並べ替え）をそろえた。画像を使う設問は a・b・c の3問。"
   }
 ]

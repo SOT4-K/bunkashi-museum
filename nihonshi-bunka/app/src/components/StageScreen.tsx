@@ -9,7 +9,6 @@ import { QuestionCard } from './QuestionCard'
 import { AnswerSheet } from './AnswerSheet'
 import { LeadPanel } from './LeadPanel'
 import { todayIso } from '../engine/srs'
-import { findLeadContextForWork } from '../engine/leadContext'
 import { bossProgress, clearThreshold } from '../engine/stages'
 import type { MissSelection } from '../engine/explain'
 import type { AnswerKind, Era, Passage, Question, Work } from '../types'
@@ -73,18 +72,18 @@ export function StageScreen({
 
   const current = questions[index]
 
-  // ボスの問題は buildBossQuestions が passageId/underlineKey を付けているため、
-  // それを passages から逆引きして模試タブと同じリード文・下線表示を再現する。
-  // 通常ステージの問題（passageId が無い）は文化別練習と同じ best-effort 逆引きにする
-  // （M2-42「全モードで同じ」。engine/leadContext.ts）。
+  // M2e-02: ボス・通常ステージともに engine/stages.ts が passage 起点で問題を組み立てるように
+  // なったため（buildBossQuestions・buildStageQuestions）、questionが下線から出た問題なら
+  // passageId/underlineKey を直接持っている。作品から passages を逆引きする best-effort ロジック
+  // （旧 engine/leadContext.ts findLeadContextForWork）は使わない（設問文と対応しない passage を
+  // 見せると「リード文と設問が噛み合っていない」というオーナー指摘 2026-09-09 を再発させるため）。
+  // 下線に紐づかない単独問題（passageId が無い）は元々どおりリード文を出さない。
   const leadContext = useMemo(() => {
-    if (!current) return null
-    if (current.passageId) {
-      const passage = passages.find((p) => p.id === current.passageId)
-      if (passage) return { passage, underlineKey: current.underlineKey }
-    }
-    return findLeadContextForWork(current.work.id, passages, pool)
-  }, [current, passages, pool])
+    if (!current || !current.passageId) return null
+    const passage = passages.find((p) => p.id === current.passageId)
+    if (!passage) return null
+    return { passage, underlineKey: current.underlineKey }
+  }, [current, passages])
 
   function handleResult(answer: AnswerKind, selection: MissSelection) {
     if (!current) return

@@ -149,12 +149,15 @@ export function buildMockExam(
     if (usedWorkIds.has(candidate.work.id)) continue
     const desiredCategory = COMPOSITION_SEQUENCE[built.length % COMPOSITION_SEQUENCE.length]
     // M2-45（M2-25 の解消）: 下線の ask を渡す（writer 手書きの stem・answerId 等を尊重する）。
+    // M2e-02: ask.stem が無い／使われなかったときのために underlineKey も渡す
+    // （engine/stems.ts の既定 stem が「下線部○」を必ず含むようにする）。
     const question = buildThemeQuestionForWork(candidate.work, pool, eras, rng, {
       ask: candidate.underline.ask,
       avoidEraSlot,
       avoidType: previousType,
       imagePool,
       desiredCategory,
+      underlineKey: candidate.underline.key,
     })
     if (!question) continue
     usedWorkIds.add(candidate.work.id)
@@ -175,7 +178,11 @@ export function buildMockExam(
       const b = built[i]
       if (!b.passage || !b.underline) continue
       if (!imagePool.some((w) => w.id === b.question.work.id)) continue
-      const forced = buildThemeQuestionForWork(b.question.work, pool, eras, rng, { ask: { type: 'q9' }, imagePool })
+      const forced = buildThemeQuestionForWork(b.question.work, pool, eras, rng, {
+        ask: { type: 'q9' },
+        imagePool,
+        underlineKey: b.underline.key,
+      })
       if (forced && forced.type === 'q9') {
         built[i] = { ...b, question: { ...forced, passageId: b.passage.id, underlineKey: b.underline.key } }
         break
@@ -193,7 +200,10 @@ export function buildMockExam(
       const b = built[i]
       if (!b.passage || !b.underline) continue
       if (!(b.question.work.pairs && b.question.work.pairs.length > 0)) continue
-      const forced = buildThemeQuestionForWork(b.question.work, pool, eras, rng, { ask: { type: 'q13' } })
+      const forced = buildThemeQuestionForWork(b.question.work, pool, eras, rng, {
+        ask: { type: 'q13' },
+        underlineKey: b.underline.key,
+      })
       if (forced && forced.type === 'q13') {
         built[i] = { ...b, question: { ...forced, passageId: b.passage.id, underlineKey: b.underline.key } }
         break

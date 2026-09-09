@@ -31,6 +31,7 @@ import { generatePairQuestion } from './pairs'
 import { generateOrderQuestion } from './order'
 import { pickUnderlineTargetId } from './passage'
 import { isItemMastered } from './srs'
+import { underlineStem, standaloneStem } from './stems'
 import type { Era, Passage, PassageUnderline, PassageUnderlineAsk, ProgressState, Question, QuestionType, Work } from '../types'
 
 const defaultRandom: RandomFn = () => Math.random()
@@ -73,6 +74,10 @@ export interface ThemeBuildOptions {
   /** M2-16: この下線に割り当てたい型構成カテゴリ（COMPOSITION_SEQUENCE）。ask が無いときだけ、
    *  通常の優先順位より先に試す（失敗すれば通常の優先順位に落ちる。best-effort）。 */
   desiredCategory?: ThemeCategory
+  /** M2e-02: この設問が対応する下線のキー（分かっていれば）。ask.stem が無い/使われなかった
+   *  ときの既定 stem（engine/stems.ts）を「下線部○を参照する文面」にするか「下線を参照しない
+   *  単独問題の文面」にするかを決める。省略時（下線に紐づかない補充問題）は単独問題扱い。 */
+  underlineKey?: string
 }
 
 interface BuildResult {
@@ -101,8 +106,28 @@ function withStem(result: BuildResult | null, stem: string | undefined): BuildRe
 /** 1作品に対して、優先順位（＋ ask・avoid オプション）に従って生成できる最初の設問を作る。
  *  対象が画像を持つ作品（imagePool にある）なら q1 が必ず生成できる保険になるが、画像を
  *  持たない対象（kind: person/text/concept）は facts/falseStatements/pairs が無ければ
- *  null を返すことがある（呼び出し側 buildThemeSetQuestions がその下線をスキップする。M2-16）。 */
+ *  null を返すことがある（呼び出し側 buildThemeSetQuestions がその下線をスキップする。M2-16）。
+ *  M2e-02: ask.stem（writer 手書き）が使われなかった／無かったときは engine/stems.ts の
+ *  既定 stem を付ける（withStem は ask.type が実際に生成できたときだけ ask.stem を使うため、
+ *  次善の型にフォールバックした場合や ask 自体が無い下線では stem が空のままになり、
+ *  QuestionCard の汎用プロンプトに落ちて「下線部○」を欠いていた。この関数の全ての戻り値を
+ *  ここで一度だけラップして必ず埋める）。 */
 function buildThemeQuestionForWorkWithMeta(
+  work: Work,
+  pool: Work[],
+  eras: Era[],
+  rng: RandomFn,
+  opts: ThemeBuildOptions,
+): BuildResult | null {
+  const raw = buildThemeQuestionForWorkWithMetaRaw(work, pool, eras, rng, opts)
+  if (!raw || raw.question.stem) return raw
+  const stem = opts.underlineKey
+    ? underlineStem(raw.question.type, opts.underlineKey, { reversed: raw.question.reversed, conditionText: raw.question.conditionText })
+    : standaloneStem(raw.question.type, { reversed: raw.question.reversed, conditionText: raw.question.conditionText })
+  return { ...raw, question: { ...raw.question, stem } }
+}
+
+function buildThemeQuestionForWorkWithMetaRaw(
   work: Work,
   pool: Work[],
   eras: Era[],
@@ -410,6 +435,7 @@ export function buildThemeSetQuestions(
       avoidQ9: q9UsedWorkIds.has(target.id),
       imagePool,
       desiredCategory: desiredCategoryForIndex(index),
+      underlineKey: underline.key,
     })
     if (!result) {
       // M2-16: 画像を持たない対象（kind: person/text/concept）で facts/falseStatements/pairs も
@@ -443,6 +469,7 @@ export function buildThemeSetQuestions(
         ask: { ...it.underline.ask, type: 'q9' },
         avoidEraSlot: eraSlotUsed,
         imagePool,
+        underlineKey: it.underline.key,
       })
       if (forced && forced.question.type === 'q9') {
         if (forced.q9Slot === 'era') eraSlotUsed = true
@@ -463,6 +490,7 @@ export function buildThemeSetQuestions(
       const forced = buildThemeQuestionForWorkWithMeta(it.target, pool, eras, rng, {
         ask: { ...it.underline.ask, type: 'q10' },
         imagePool,
+        underlineKey: it.underline.key,
       })
       if (forced && forced.question.type === 'q10') {
         it.result = forced

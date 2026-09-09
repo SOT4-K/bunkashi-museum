@@ -43,6 +43,7 @@ import { generateStatementPairQuestion } from './statementPair'
 import { generatePairQuestion } from './pairs'
 import { generateOrderQuestion } from './order'
 import { buildThemeQuestionForWork, buildThemeSetQuestions, pickThemeTargetId, COMPOSITION_SEQUENCE } from './themeSet'
+import { underlineStem, standaloneStem } from './stems'
 import type {
   Era,
   EraStageProgress,
@@ -336,6 +337,10 @@ function buildOrderQuestions(segWorks: Work[], eras: Era[], rng: RandomFn, maxCo
  * pool は content.ts の themeSetPool 相当（distractor 素材。画像なし項目も含む）、imagePool は
  * playableWorks 相当（出題対象自身は画像必須）。segment が存在しない（面数を超えた番号）、
  * または対象文化に出題対象が無ければ空配列。
+ * M2e-02: passages（省略可・既定 []）を渡すと、その era の passages の下線が対象にする作品には
+ * 「下線部○」を参照する設問文（passageId/underlineKey つき、components/StageScreen.tsx が
+ * そのまま LeadPanel に渡せる）を、それ以外の作品には下線を参照しない単独問題の設問文
+ * （engine/stems.ts）を付ける。省略時（後方互換。既存呼び出し・テスト）は全問が単独問題扱いになる。
  */
 export function buildStageQuestions(
   eraId: string,
@@ -345,6 +350,7 @@ export function buildStageQuestions(
   imagePool: Work[],
   eras: Era[],
   rng: RandomFn = defaultRandom,
+  passages: Passage[] = [],
 ): Question[] {
   const plan = buildEraStagePlan(eraId, imagePool)
   const seg = plan.segments.find((s) => s.segment === segment)
@@ -360,6 +366,8 @@ export function buildStageQuestions(
   // 決める（1-1が常に同じ内容になる要件を保つため、出題順シャッフル後の segWorks ではなく
   // 分割計画側の順序で決定的に選ぶ）。
   const doubledIds = new Set(seg.workIds.slice(0, seg.extraDoubleCount))
+  const eraPassages = passages.filter((p) => p.era === eraId)
+  const candidateByWorkId = buildEraCandidateByWorkId(eraPassages, pool)
 
   const questions: Question[] = []
   for (const work of segWorks) {
@@ -368,7 +376,7 @@ export function buildStageQuestions(
     for (let i = 0; i < perWork; i++) {
       const q = tryBuildStageQuestionForWork(work, perWorkTypes, pool, imagePool, eras, rng, usedTypesForWork)
       if (q) {
-        questions.push(q)
+        questions.push(attachLeadStem(q, candidateByWorkId.get(work.id)))
         usedTypesForWork.add(q.type)
       }
     }
@@ -403,6 +411,35 @@ function buildEraCandidatePool(eraPassages: Passage[], pool: Work[]): EraCandida
   return out
 }
 
+/** buildEraCandidatePool を work.id → 最初に見つかった候補（passage・underline）の逆引きにする
+ *  （M2e-02: 面/ボスの各作品が「どの下線から出せるか」を知るため。複数の下線が同じ作品を
+ *  対象にすることがあるが、ここでは最初の1件だけを使う＝どれか1つの下線部キーが分かれば
+ *  設問文に「下線部○」を付けられるため十分。厳密な優先順位は問わない）。 */
+function buildEraCandidateByWorkId(eraPassages: Passage[], pool: Work[]): Map<string, EraCandidate> {
+  const map = new Map<string, EraCandidate>()
+  for (const candidate of buildEraCandidatePool(eraPassages, pool)) {
+    if (!map.has(candidate.work.id)) map.set(candidate.work.id, candidate)
+  }
+  return map
+}
+
+/** 生成された Question に、下線起点なら「下線部○」を参照する設問文＋passageId/underlineKey を、
+ *  下線に紐づかない補充問題なら下線を参照しない単独問題の設問文を付ける（M2e-02、engine/stems.ts）。
+ *  既に stem が付いている（themeSet.ts 経由で writer 手書き ask.stem 等が既に入っている）場合は
+ *  上書きしない。 */
+function attachLeadStem(q: Question, candidate: EraCandidate | undefined): Question {
+  if (q.stem) return q
+  if (candidate) {
+    return {
+      ...q,
+      passageId: candidate.passage.id,
+      underlineKey: candidate.underline.key,
+      stem: underlineStem(q.type, candidate.underline.key, { reversed: q.reversed, conditionText: q.conditionText }),
+    }
+  }
+  return { ...q, stem: standaloneStem(q.type, { reversed: q.reversed, conditionText: q.conditionText }) }
+}
+
 /** 設問1件が画面に出す作品 id（正解・誤答選択肢・年代順の複数作品を含む）。誤答露出規則
  *  （チケット規則5）の実測・優先選定に使う。choiceStatements/choiceCombos/choiceQ12/
  *  choiceWordPairs はテキストのみで他作品の画像を出さないため対象外（q.work 自身は
@@ -431,9 +468,13 @@ function biasForExposure<T extends Work>(items: T[], eraId: string, exposed: Set
 
 /**
  * ボス: N≤15なら10問、N>15なら20問（チケット規則4。count を明示すればテスト等で上書きできる）。
- * その文化の reviewed テーマセット1本（2本以上あれば毎回ランダムに選ぶ）＋残りを本番モード
- * 生成器（themeSet.ts）をその文化の passage に限定して補う（型配分は本番どおり）。誤答は
- * 露出していないそのワールドの項目を優先する（チケット規則5、biasForExposure）。
+ * M2e-02: 以前は「その文化の passage を1本ランダムに選ぶ」→その1本の下線が尽きたら
+ * すぐフォールバックする設計だったため、下線に紐づかない作品の補充（フォールバック3・4、
+ * 下記）が早く発生し、そこで生成される設問が「下線部○」を欠いていた
+ * （research/stem-patterns.md 4.4）。ここではその文化の**全 passage の全下線**を候補にする
+ * （パス1・2）。それでも targetCount に届かない場合だけ、下線に紐づかない作品を
+ * engine/stems.ts の単独問題テンプレートで補う（パス3・4）。誤答は露出していないそのワールドの
+ * 項目を優先する（チケット規則5、biasForExposure）。
  * その文化に reviewed passage が1つも無ければ空配列を返す（呼び出し側は「ボスを作れない」と
  * 扱う。実データでは全15区分に最低1本あることを stages.realdata.test.ts で確認している）。
  */
@@ -450,17 +491,22 @@ export function buildBossQuestions(
   const targetCount = count ?? bossQuestionCount(itemCount)
   const eraPassages = passages.filter((p) => p.era === eraId)
   if (eraPassages.length === 0 || targetCount === 0) return []
-  const chosenPassage = eraPassages[Math.floor(rng() * eraPassages.length)]
+  const candidateByWorkId = buildEraCandidateByWorkId(eraPassages, pool)
 
-  // 1本の passage の中で複数の下線が同じ作品を対象にすることがある（実データで確認済み。
-  // stages.realdata.test.ts で検出）。「同じ作品は1回の試験で1問まで」（mockExam.ts と同じ
-  // 規則）をここでも守るため、テーマセット内で先に出た方だけを残す。
+  // パス1（M2e-02改修）: 1本のpassageに絞らず、その文化の全passageを順に（ランダム順で）
+  // buildThemeSetQuestions にかけて合算する。buildThemeSetQuestions 自身が持つ型構成の保証
+  // （Q9/Q10各1問以上・同型連続回避）はpassage単位でそのまま活きる。「同じ作品は1回の試験で
+  // 1問まで」（mockExam.ts と同じ規則）を全passage分の合算にも適用する（themeSeenIds）。
   const themeQuestions: Question[] = []
   const themeSeenIds = new Set<string>()
-  for (const tq of buildThemeSetQuestions(chosenPassage, pool, eras, rng, imagePool)) {
-    if (themeSeenIds.has(tq.question.work.id)) continue
-    themeSeenIds.add(tq.question.work.id)
-    themeQuestions.push({ ...tq.question, passageId: chosenPassage.id, underlineKey: tq.underlineKey })
+  for (const passage of shuffle(eraPassages, rng)) {
+    if (themeQuestions.length >= targetCount) break
+    for (const tq of buildThemeSetQuestions(passage, pool, eras, rng, imagePool)) {
+      if (themeQuestions.length >= targetCount) break
+      if (themeSeenIds.has(tq.question.work.id)) continue
+      themeSeenIds.add(tq.question.work.id)
+      themeQuestions.push({ ...tq.question, passageId: passage.id, underlineKey: tq.underlineKey })
+    }
   }
   const built: Question[] = themeQuestions.slice(0, targetCount)
   const usedWorkIds = new Set(built.map((q) => q.work.id))
@@ -481,6 +527,7 @@ export function buildBossQuestions(
         avoidType: previousType,
         imagePool: biasForExposure(imagePool, eraId, exposedIds),
         desiredCategory,
+        underlineKey: candidate.underline.key,
       })
       if (!question) continue
       usedWorkIds.add(candidate.work.id)
@@ -494,6 +541,10 @@ export function buildBossQuestions(
     // passageの下線が指す作品」に限られるため、下線のdistinct target数が少ない文化（実測:
     // kitayama/momoyamaは1件）でボスが目標問数に届かないことがある。buildStageQuestionsと
     // 同じ「そのeraのpool全体」を第2の補充源にし、下線に紐づかない作品も候補にする。
+    // M2e-02: それでも candidateByWorkId に載っている作品（パス2で他の型が失敗しただけの
+    // 作品）は underlineKey を渡して「下線部○」を保つ。載っていない作品は
+    // engine/stems.ts の単独問題テンプレートになる（buildThemeQuestionForWorkWithMeta 側の
+    // 既定 stem 付与ロジックが underlineKey の有無で自動的に切り替える）。
     if (built.length < targetCount) {
       const eraWorks = shuffle(
         pool.filter((w) => w.era === eraId && !usedWorkIds.has(w.id)),
@@ -502,17 +553,19 @@ export function buildBossQuestions(
       for (const work of eraWorks) {
         if (built.length >= targetCount) break
         const desiredCategory = COMPOSITION_SEQUENCE[built.length % COMPOSITION_SEQUENCE.length]
+        const candidate = candidateByWorkId.get(work.id)
         const question = buildThemeQuestionForWork(work, biasForExposure(pool, eraId, exposedIds), eras, rng, {
           avoidEraSlot,
           avoidType: previousType,
           imagePool: biasForExposure(imagePool, eraId, exposedIds),
           desiredCategory,
+          underlineKey: candidate?.underline.key,
         })
         if (!question) continue
         usedWorkIds.add(work.id)
         if (question.q9Slot === 'era') avoidEraSlot = true
         previousType = question.type
-        built.push(question)
+        built.push(candidate ? { ...question, passageId: candidate.passage.id, underlineKey: candidate.underline.key } : question)
         for (const id of questionExposedWorkIds(question)) exposedIds.add(id)
       }
     }
@@ -523,6 +576,8 @@ export function buildBossQuestions(
     // まだ使っていない型でなら再登場を許す（同じ作品×同じ型の完全重複はしない＝出題の質は
     // 落とさない）。usedTypesForWork は既に built に入っている全問題から作品ごとの使用済み
     // 型を復元する（テーマセット由来の問題も含めて漏れなく重複回避するため）。
+    // M2e-02: この経路（tryBuildStageQuestionForWork）は themeSet.ts を経由しないため
+    // stem が付かない。attachLeadStem で下線起点／単独問題いずれかの設問文を付ける。
     if (built.length < targetCount) {
       const usedTypesForWork = new Map<string, Set<QuestionType>>()
       for (const q of built) {
@@ -546,7 +601,7 @@ export function buildBossQuestions(
           if (!question) continue
           usedTypes.add(question.type)
           usedTypesForWork.set(work.id, usedTypes)
-          built.push(question)
+          built.push(attachLeadStem(question, candidateByWorkId.get(work.id)))
           for (const id of questionExposedWorkIds(question)) exposedIds.add(id)
           progressed = true
         }

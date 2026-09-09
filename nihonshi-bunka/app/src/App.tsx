@@ -158,7 +158,9 @@ export default function App() {
     }
     return {
       title,
-      questions: buildStageQuestions(eraId, key.difficulty, key.segment, themeSetPool, playableWorks, eras),
+      // M2e-02: passages を渡し、下線が対象にする作品には「下線部○」を参照する設問文
+      // （passageId/underlineKey つき）を付ける。
+      questions: buildStageQuestions(eraId, key.difficulty, key.segment, themeSetPool, playableWorks, eras, undefined, passages),
     }
   }
 

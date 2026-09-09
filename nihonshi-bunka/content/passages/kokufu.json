@@ -86,6 +86,8 @@
       "平等院公式サイト",
       "平等院「鳳凰堂の建築」: https://www.byodoin.or.jp/learn/architecture/",
       "図版の同定URL（平等院鳳凰堂阿弥陀如来像）: https://commons.wikimedia.org/wiki/File:%E3%80%8EJapanese_Temples_and_Their_Treasures%E3%80%8F%E5%AE%9A%E6%9C%9D%E3%80%8A%E9%98%BF%E5%BC%A5%E9%99%80%E5%A6%82%E6%9D%A5%E5%9D%90%E5%83%8F%E3%80%8B1053%E5%B9%B4%E3%80%81%E5%B9%B3%E5%AE%89%E6%99%82%E4%BB%A3%E3%80%81%E5%B9%B3%E7%AD%89%E9%99%A2%EF%BC%88%E9%B3%B3%E5%87%B0%E5%A0%82%E6%89%80%E5%9C%A8%EF%BC%89%E3%80%81%E4%BA%AC%E9%83%BD.jpg",
+      "四つの文化（弘仁貞観・国風・院政期・鎌倉）の前後関係: content/eras.json の各区分の order・period、高校教科書（山川『詳説日本史』）各文化の項",
+      "形式: research/stem-patterns.md P13・P14（文化伏せ型の並べ替え）、research/nichidai-past-exams-analysis.md 2章 T7",
       "図版の同定URL（高野切）: https://commons.wikimedia.org/wiki/File:Koyagire_20th.JPG",
       "図版の同定URL（醍醐寺五重塔）: https://commons.wikimedia.org/wiki/File:DaigojiPagoda3242.jpg",
       "図版の同定URL（平等院鳳凰堂）: https://commons.wikimedia.org/wiki/File:Byodoin_Phoenix_Hall_Uji_2009.jpg",
@@ -143,11 +145,16 @@
           "byodoin-hoo-do"
         ],
         "ask": {
-          "type": "q4",
-          "stem": "下線部dの翌年に完成した次の建物（画像）について述べた文として最も適切なものはどれか",
-          "answerId": "byodoin-hoo-do"
+          "type": "q12",
+          "stem": "下線部dの年をふくむ時期にあたる、I〜IVが述べているこの文化と、弘仁・貞観文化・院政期の文化・鎌倉文化を、古いものから年代順に並べたものとして最も適切なものはどれか",
+          "answerText": "弘仁・貞観文化 → この文化 → 院政期の文化 → 鎌倉文化",
+          "distractorTexts": [
+            "この文化 → 弘仁・貞観文化 → 院政期の文化 → 鎌倉文化",
+            "弘仁・貞観文化 → 院政期の文化 → この文化 → 鎌倉文化",
+            "弘仁・貞観文化 → この文化 → 鎌倉文化 → 院政期の文化"
+          ]
         },
-        "note": "画像を出す型。建立者（藤原頼通／空海）と様式（阿弥陀堂建築／禅宗様・校倉造）のずらしが誤文の軸。1本目は4択画像だったので型を変えた"
+        "note": "M2e-03 で型を差し替え（旧: q4「下線部dの翌年に完成した次の建物について述べた文」＝画像を出す型）。nichidai-past-exams-analysis.md 2章 T7／stem-patterns.md P13・P14（文化伏せ型の最後に置く並べ替え）。年代の手がかりを持つ下線（1052年）に並べ替えを載せた。文化名を伏せたまま並べさせるため、当の文化は「この文化」と表記する。旧 q4 で出していた byodoin-hoo-do は 1本目（kokufu-01）が4択画像で出しているので画像露出は落ちない（本セットの画像を出す設問は a・b・c の3問）。誤答は隣り合う2つを入れ替えた並びでそろえた"
       },
       {
         "key": "e",

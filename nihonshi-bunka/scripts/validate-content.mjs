@@ -418,6 +418,20 @@ function validatePassages({ worksById, hasImageAsset, hasThemeSetAsset, eraIds, 
                 `${label} / ${underline.key}: 本文に workIds "${workId}" の作品名 "${work.title}" がそのまま含まれている（図版問題の答えが本文に出てしまう）`,
               )
             }
+            // M2e-02④: 下線の文（[[key|...]] の中身。ask.answerId 有無に関わらず全下線が対象）に
+            // 正解（workIds が指す作品）の技法・主題名が含まれていないか（8章「二段構え」の
+            // answerId 専用チェック answerLeaksInUnderlineText を全下線に一般化。title は
+            // workTitleLeaksInText が本文全体＝下線の文を含む範囲で既にエラーにしているため、
+            // ここでは重複しない technique/subject のみ検査する）。
+            const underlineText = underlineTexts.get(underline.key) ?? ''
+            for (const field of ['technique', 'subject']) {
+              const value = work[field]
+              if (value && typeof value === 'string' && underlineText.includes(value)) {
+                errors.push(
+                  `${label} / ${underline.key}: 下線の文に workIds "${workId}" の ${field}「${value}」が含まれている（正解の手掛かりが下線に出てしまう）`,
+                )
+              }
+            }
           }
         }
         if (!hasGeneratable) {

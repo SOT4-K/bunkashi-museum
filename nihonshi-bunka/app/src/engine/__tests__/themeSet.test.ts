@@ -339,7 +339,7 @@ describe('8章「二段構え」: ask.stem・answerId・distractorIds', () => {
     expect(result[0].question.choiceWorks[result[0].question.correctIndex].id).toBe('kondo')
   })
 
-  it('answerId が pool に無ければ、stem を付けずに次善の型にフォールバックする', () => {
+  it('answerId が pool に無ければ、writer の stem は使わず次善の型にフォールバックする（M2e-02: engine/stems.ts の既定 stem を付ける）', () => {
     const passage: Passage = {
       id: 'stem-fallback-p',
       era: 'tenpyo',
@@ -357,7 +357,11 @@ describe('8章「二段構え」: ask.stem・answerId・distractorIds', () => {
     const result = buildThemeSetQuestions(passage, stemPool, testEras, seededRandom(1))
     expect(result).toHaveLength(1)
     expect(result[0].question.type).not.toBe('q1') // kondo は q10/q8/q4 も生成できるため q1 まで落ちないはず
-    expect(result[0].question.stem).toBeUndefined()
+    // ask.stem（"存在しない作品を指す stem"）はミスマッチな型のため使われない。
+    // かわりに engine/stems.ts が「下線部a」を含む既定 stem を付ける（M2e-02。QuestionCard の
+    // 汎用プロンプトに落ちて下線への言及を失うのを防ぐ）。
+    expect(result[0].question.stem).not.toBe('存在しない作品を指す stem')
+    expect(result[0].question.stem).toContain('下線部a')
   })
 
   it('distractorIds が不足していれば、既存の同カテゴリ・近い時代ロジックで補充する', () => {
