@@ -50,6 +50,7 @@ import {
   type FloorConversionCandidate,
   forceCategoryQuestion,
   imageCategoryCap,
+  isCulturalHiddenAsk,
   pickThemeTargetId,
   planCategoryFloorConversions,
 } from './themeSet'
@@ -649,12 +650,34 @@ export function buildBossQuestions(
   // reviewedEras×20seedのボス生成300件中48件（16%）がpairs=0問だった
   // （tenpyo/horeki-tenmei/kaseiに集中。stages.realdata.test.ts参照）。
   if (built.length > 0) {
-    const candidates: FloorConversionCandidate[] = built.map((q) => ({
-      workId: q.work.id,
-      type: q.type,
-      category: categoryOfQuestion(q),
-      tryConvert: (category) => forceCategoryQuestion(q.work, pool, eras, rng, category, { imagePool, underlineKey: q.underlineKey }),
-    }))
+    // M2e-08b: q.passageId+q.underlineKey から、その設問を生成した「実際の」下線の ask を
+    // 正確に引く（candidateByWorkId は work.id あたり最初に見つかった1件だけを見る近似で、
+    // 同じ work を対象にする下線が複数（例: 別passageの下線）あると、hasExplicitAsk/
+    // isCulturalHiddenAsk の判定が別の下線に化けてしまう。実測: kasei-02 a（文化伏せ型q12。
+    // work=takami-senseki）が、同じ work を先に持つ kasei-01 e（ask.type=q10）の判定に
+    // 上書きされ、isCulturalHiddenAsk=false と誤判定されて donor から除外されず
+    // culturalHiddenAsk.realdata.test.ts の模試/ボス経路テストが落ちた）。q12（category=null）は
+    // buildThemeSetQuestions 経由（パス1、下記）でしか生成されず、パス1は passageId/
+    // underlineKey を生成に使った下線そのものに正確に設定するため、この逆引きは正確になる。
+    const askByPassageUnderline = new Map<string, PassageUnderline['ask']>()
+    for (const passage of eraPassages) {
+      for (const underline of passage.underlines) {
+        askByPassageUnderline.set(`${passage.id}:${underline.key}`, underline.ask)
+      }
+    }
+    const candidates: FloorConversionCandidate[] = built.map((q) => {
+      const ask = q.passageId && q.underlineKey ? askByPassageUnderline.get(`${q.passageId}:${q.underlineKey}`) : undefined
+      return {
+        workId: q.work.id,
+        type: q.type,
+        category: categoryOfQuestion(q),
+        // M2e-08b: その下線に writer 明示の ask があれば記録する（donor選定には使わない。
+        // themeSet.ts planCategoryFloorConversions のdocコメント参照）。
+        hasExplicitAsk: Boolean(ask),
+        isCulturalHiddenAsk: isCulturalHiddenAsk(ask),
+        tryConvert: (category) => forceCategoryQuestion(q.work, pool, eras, rng, category, { imagePool, underlineKey: q.underlineKey }),
+      }
+    })
     const conversions = planCategoryFloorConversions(candidates, targetCount)
     for (let i = 0; i < built.length; i++) {
       const forced = conversions[i]

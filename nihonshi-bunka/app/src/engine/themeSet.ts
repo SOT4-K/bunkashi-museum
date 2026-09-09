@@ -163,6 +163,20 @@ export function forceCategoryQuestion(
   return forced && categoryOfQuestion(forced) === category ? forced : null
 }
 
+/**
+ * M2e-08b（reviewer指摘 M2e-99b）: 文化伏せ型（stemに「この文化」または「同じ文化について
+ * 述べている」を含む q12。A〜E等の記述から文化名を伏せて問う下線）の判定。M2e-07「文化伏せ型は
+ * 維持」の受け入れ条件が対象にする具体的なクラスで、実データ全件を目視確認した結果
+ * （2026-09-10）、この2パターンで content/passages/*.json 中の該当15件を過不足なく拾える
+ * （他のq12 stemは「下線部dの名称として」等、文化名当てではない別種の設問）。
+ * mockExam.ts・stages.ts（floor conversion候補の構築）と __tests__/culturalHiddenAsk.realdata.test.ts
+ * （受け入れ確認）の両方から使う単一の定義（重複実装による判定のズレを防ぐ）。
+ */
+export function isCulturalHiddenAsk(ask: PassageUnderlineAsk | undefined): boolean {
+  if (!ask || ask.type !== 'q12' || !ask.stem) return false
+  return ask.stem.includes('この文化') || ask.stem.includes('同じ文化について述べている')
+}
+
 /** planCategoryFloorConversions が扱う1件分の変換候補。 */
 export interface FloorConversionCandidate {
   /** 変換対象の作品 id（重複回避に使う。下記 workId+type の説明参照）。 */
@@ -171,6 +185,24 @@ export interface FloorConversionCandidate {
   type: QuestionType
   /** 現在この設問が属するカテゴリ（5カテゴリ以外の型、または未生成なら null）。 */
   category: ThemeCategory | null
+  /** M2e-08b（reviewer指摘 M2e-99b）: この設問が紐づく下線に writer が明示的な ask
+   *  （PassageUnderline.ask）を設定しているか。多くは category が null になる q12
+   *  （文字4択。文化伏せ型「この文化は…」を含む）の下線で、writer が手書きした
+   *  stem・answerText/distractorTexts 等を持つ。
+   *  **注記**: この値自体は下記 planCategoryFloorConversions の donor 選定には使わない
+   *  （実際に donor から除外するのは isCulturalHiddenAsk===true の候補だけ。理由は
+   *  isCulturalHiddenAsk のコメントおよび planCategoryFloorConversions のdocコメント参照）。
+   *  呼び出し元が診断・将来の拡張に使えるよう、下線に ask があるかどうかの事実として保持する。 */
+  hasExplicitAsk: boolean
+  /** M2e-08b: この候補が文化伏せ型（themeSet.isCulturalHiddenAsk）かどうか。true の候補は
+   *  planCategoryFloorConversions が絶対に donor にしない（ハード除外。M2e-07の受け入れ条件
+   *  「文化伏せ型は維持」を担保する）。hasExplicitAsk 全般（q12全体、約59件）を同様に
+   *  ハード除外すると、M2e-08 の型配分帯（既存の受け入れ済みテスト）が実データで大きく崩れる
+   *  （実測: mockExam count=20でpairs平均2.97→2.53に低下・帯外。詳細は
+   *  planCategoryFloorConversions のdocコメント）ため、M2e-07が明示的に要求する
+   *  「文化伏せ型（15件）は維持」だけを絶対要件にしている（builder メモ
+   *  hasExplicitAsk-floor-donor-guard.md）。 */
+  isCulturalHiddenAsk: boolean
   /** 指定カテゴリへの変換を試す（成功すれば新しい Question、失敗すれば null。ベストエフォート。
    *  呼び出し側は forceCategoryQuestion をそのまま渡せばよい）。 */
   tryConvert: (category: ThemeCategory) => Question | null
@@ -186,6 +218,23 @@ export interface FloorConversionCandidate {
  * 満たすために別のカテゴリの床を壊すことを防ぐ（builder メモ
  * category-cap-side-effects-on-unrelated-metrics.md と同種の副作用を作り込まないため）。
  * 貪欲・先頭から順に試すだけの決め打ちの経験値で、必ず床に届く保証はない（壊れない設計）。
+ * M2e-08b（reviewer指摘 M2e-99b）: donor の category が null（5カテゴリに属さない型。
+ * 主に q12）かつ isCulturalHiddenAsk === true（文化伏せ型。M2e-07の受け入れ条件
+ * 「文化伏せ型は維持」が対象にする具体的なクラス）の候補は、常に donor から除外する
+ * （donorCategory === null の候補にだけ効く。5カテゴリいずれかに属す候補は ask が明示指定でも
+ * 従来どおり donor 候補にする）。
+ * 除外の対象を「文化伏せ型」ではなく「ask全般（hasExplicitAsk）」にまで広げることも検討したが、
+ * 実データでは category=null の大半（q12は約59件、うち文化伏せ型は15件）が該当し、
+ * M2e-08 の型配分帯（既存の受け入れ済みテスト）が実データで大きく崩れる（実測:
+ * mockExam count=20でpairs平均2.97→2.53に低下・帯外。原因は単純な供給減だけでなく、
+ * COMPOSITION_SEQUENCE の先頭カテゴリ（pairs）がいったん床に達した直後、後続カテゴリ
+ * （q4-reversed等）を埋める安いdonor候補として再び使われて床を割り込む、という既存の
+ * minDonorCount=2緩和パスの副作用が、null donor供給が細るほど強く出るため。ソフト回避＋
+ * 最終手段パスという3段構成も試したが、同じ理由でこの副作用を解消できなかった）。
+ * このため、M2e-07が明示的に要求する「文化伏せ型」の維持だけを絶対要件（ハード除外）にし、
+ * それ以外の ask 付き下線（hasExplicitAsk）は本関数の donor 選定には使わない
+ * （呼び出し元がログ・将来の拡張用に保持するフィールド。builder メモ
+ * hasExplicitAsk-floor-donor-guard.md に詳細と実測値）。
  * 「同じ作品×同じ型の組は1回の生成内で重複させない」（M2b-99c中1の既存規則）も守る:
  * 変換先の (work.id, type) の組が、変換対象以外の候補に既に存在するなら、その変換は捨てる
  * （実測: forceCategoryQuestion の q8 フォールバックを足した際、既に q8 を持つ作品を
@@ -207,13 +256,13 @@ export function planCategoryFloorConversions(candidates: FloorConversionCandidat
     return r ? pairKey(r.work.id, r.type) : pairKey(candidates[i].workId, candidates[i].type)
   }
   const usedPairKeys = new Set<string>(candidates.map((c) => pairKey(c.workId, c.type)))
-  // minDonorCount: 変換元として使える最低の「変換前の自分のカテゴリの現在数」。
-  // 第1パス（厳格）は floor+1（＝床を割らない安全な余剰がある候補だけ）。実データでは
-  // 「床ちょうどの候補しか対象カテゴリに変換できない（例: work.pairsを持つ作品がその
-  // 候補集合にたまたま無い）」極端なケースが稀にあり（実測: mockExam 20問×30seedで
-  // 1/30 seedがpairs=2に留まった）、そのまま諦めると30 seed平均が床をわずかに下回る
-  // （ticket本文の帯の検査に失敗する）。第2パス（緩和）は minDonorCount=2 まで許し、
-  // 既に床ちょうどの候補も変換元に使えるようにする（donor側は最悪でも1件は残るため
+  // minDonorCount: 変換元として使える最低の「変換前の自分のカテゴリの現在数」（donorCategory
+  // が非null のときだけ意味を持つ）。第1パス（厳格）は floor+1（＝床を割らない安全な余剰が
+  // ある候補だけ）。実データでは「床ちょうどの候補しか対象カテゴリに変換できない（例:
+  // work.pairsを持つ作品がその候補集合にたまたま無い）」極端なケースが稀にあり（実測:
+  // mockExam 20問×30seedで1/30 seedがpairs=2に留まった）、そのまま諦めると30 seed平均が
+  // 床をわずかに下回る（ticket本文の帯の検査に失敗する）。第2パス（緩和）は minDonorCount=2
+  // まで許し、既に床ちょうどの候補も変換元に使えるようにする（donor側は最悪でも1件は残るため
   // 0件化はしない。「5カテゴリのどれかが完全に消える」という壊れ方は避けたまま、
   // 床への到達をもう一段階だけ粘る）。
   for (const minDonorCount of [floor + 1, 2]) {
@@ -223,6 +272,9 @@ export function planCategoryFloorConversions(candidates: FloorConversionCandidat
         for (let i = 0; i < candidates.length; i++) {
           const donorCategory = currentCategoryOf(i)
           if (donorCategory === category) continue
+          // M2e-08b（reviewer指摘 M2e-99b）: 文化伏せ型（donorCategory===null かつ
+          // isCulturalHiddenAsk）は donor から除外する（関数docコメント参照）。
+          if (donorCategory === null && candidates[i].isCulturalHiddenAsk) continue
           if (donorCategory !== null && counts[donorCategory] < minDonorCount) continue
           const forced = candidates[i].tryConvert(category)
           if (!forced || categoryOfQuestion(forced) !== category) continue

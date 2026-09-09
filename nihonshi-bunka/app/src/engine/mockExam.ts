@@ -29,6 +29,7 @@ import {
   type FloorConversionCandidate,
   forceCategoryQuestion,
   imageCategoryCap,
+  isCulturalHiddenAsk,
   pickThemeTargetId,
   planCategoryFloorConversions,
 } from './themeSet'
@@ -198,6 +199,11 @@ export function buildMockExam(
       workId: b.question.work.id,
       type: b.question.type,
       category: categoryOfQuestion(b.question),
+      // M2e-08b: この設問の下線に writer が明示的な ask を設定していれば記録する（donor選定には
+      // 使わない。文化伏せ型なら donor から除外する。themeSet.ts planCategoryFloorConversions
+      // 参照）。
+      hasExplicitAsk: Boolean(b.underline?.ask),
+      isCulturalHiddenAsk: isCulturalHiddenAsk(b.underline?.ask),
       tryConvert: (category) => {
         if (!b.passage || !b.underline) return null
         return forceCategoryQuestion(b.question.work, pool, eras, rng, category, { imagePool, underlineKey: b.underline.key })
