@@ -204,42 +204,64 @@ function underlineTextByKey(text) {
   return map
 }
 
+// Exif の orientation タグ（1〜8）を反映した実寸（幅・高さ）を返す。
+//  reviewer指摘（M2b-99f 2回目）: sharp の `.rotate().metadata()` は width/height に
+//  Exif 回転を反映しない（sharp 0.35.4 で実測済み。`.rotate()` はピクセルデータの回転
+//  パイプラインを積むだけで、metadata() が返す値は常に「回転前」のまま。コンストラクタの
+//  `{ autoOrient: true }` オプションでも同様に反映されないことを実測で確認した）。
+//  実際に回転後の寸法を知るには pipeline を toBuffer() まで実行して再読込する必要があるが、
+//  全画像で毎回デコード・エンコードするのはコストが高いため、Exif orientation の仕様
+//  （5・6・7・8 は 90°/270° 回転を伴い width と height が入れ替わる。1〜4 は入れ替わらない）
+//  どおりに手動で入れ替える。sharp 本体の `.rotate()` が内部で行う変換と同じ判定。
+export function orientedDimensions(meta) {
+  const { width, height, orientation } = meta
+  if (typeof orientation === 'number' && orientation >= 5 && orientation <= 8) {
+    return { width: height, height: width }
+  }
+  return { width, height }
+}
+
 // manifest.images[].crop が実画像の寸法内に収まっているか（M2b-99f reviewer指摘）。
 //  範囲外の crop は sharp の extract() が `extract_area: bad extract area` で例外を
 //  投げ、npm run build（prebuild の sync-real-images.mjs）が原因の分かりにくいまま
 //  落ちる（sync-real-images.mjs 冒頭コメント参照）。crop は Exif の向きを反映した後
 //  （.rotate()）のサイズを基準にする（sync-real-images.mjs の extract 呼び出し順と揃える）。
-//  sharp の metadata() が非同期のため main() 側から await して呼ぶ。
-async function validateImageCrops(manifest, errors) {
+//  実寸の算出は orientedDimensions() を使う（上記コメント参照。.rotate().metadata() では
+//  反映されないため）。sharp の metadata() が非同期のため main() 側から await して呼ぶ。
+//  baseDir は既定で実際の content/images/（呼び出し時に解決）。Vitest から直接呼ぶときに
+//  一時ディレクトリへ差し替えられるよう引数化してある（実データを書き換えずに Exif
+//  orientation 付き画像でテストするため）。
+export async function validateImageCrops(manifest, errors, baseDir = imagesDir) {
   for (const img of manifest.images ?? []) {
     if (!img.crop || !img.file) continue
-    const srcPath = join(imagesDir, img.file)
+    const srcPath = join(baseDir, img.file)
     if (!existsSync(srcPath)) continue // 実体が無い旨は reviewed 必須チェック側で報告済み
     const label = `content/images/manifest.json / ${img.id ?? img.file}`
     const { left, top, width, height } = img.crop
     if (
-      typeof left !== 'number' ||
-      typeof top !== 'number' ||
-      typeof width !== 'number' ||
-      typeof height !== 'number' ||
+      !Number.isInteger(left) ||
+      !Number.isInteger(top) ||
+      !Number.isInteger(width) ||
+      !Number.isInteger(height) ||
       left < 0 ||
       top < 0 ||
       width <= 0 ||
       height <= 0
     ) {
-      errors.push(`${label}: crop の値が不正（left/top は0以上、width/height は正の数値である必要がある）`)
+      errors.push(`${label}: crop の値が不正（left/top/width/height は整数で、left/top は0以上、width/height は正の値である必要がある。sharp の extract() は非整数を受け付けない）`)
       continue
     }
     let meta
     try {
-      meta = await sharp(srcPath).rotate().metadata()
+      meta = await sharp(srcPath).metadata()
     } catch (e) {
       errors.push(`${label}: 画像のメタデータが読めない（${e.message}）`)
       continue
     }
-    if (left + width > meta.width || top + height > meta.height) {
+    const { width: realWidth, height: realHeight } = orientedDimensions(meta)
+    if (left + width > realWidth || top + height > realHeight) {
       errors.push(
-        `${label}: crop（left:${left}, top:${top}, width:${width}, height:${height}）が画像の実寸（${meta.width}x${meta.height}、Exif向き反映後）をはみ出している（sharp の extract でビルドが失敗する）`,
+        `${label}: crop（left:${left}, top:${top}, width:${width}, height:${height}）が画像の実寸（${realWidth}x${realHeight}、Exif向き反映後）をはみ出している（sharp の extract でビルドが失敗する）`,
       )
     }
   }

@@ -4,9 +4,13 @@
 // underlines[].ask の値検証（invalidAskFields）を純関数として export しているので、
 // ここから直接 import して確認できる（import しても実ファイル読み込み・process.exit は
 // 起きない。validate-content.mjs 側の「直接実行時のみ main() を呼ぶ」ガード参照）。
-import { describe, expect, it } from 'vitest'
+import { afterAll, beforeAll, describe, expect, it } from 'vitest'
+import { mkdtempSync, rmSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
+import sharp from 'sharp'
 // @ts-expect-error 型定義の無いプレーン .mjs スクリプトを直接 import する
-import { workTitleLeaksInText, invalidAskFields, answerLeaksInUnderlineText, findAppearanceWords, findHolderWords } from '../../../../scripts/validate-content.mjs'
+import { workTitleLeaksInText, invalidAskFields, answerLeaksInUnderlineText, findAppearanceWords, findHolderWords, validateImageCrops, orientedDimensions } from '../../../../scripts/validate-content.mjs'
 
 describe('workTitleLeaksInText（下線先作品の答えが本文に書かれていないかのチェック）', () => {
   it('本文に作品名がそのまま含まれていれば true', () => {
@@ -145,5 +149,89 @@ describe('findHolderWords（M2b-14「所蔵館を問う設問の削除」: facts
     expect(findHolderWords(undefined)).toEqual([])
     expect(findHolderWords(null)).toEqual([])
     expect(findHolderWords('')).toEqual([])
+  })
+})
+
+describe('orientedDimensions（M2b-99f reviewer2回目指摘: sharpの.rotate().metadata()はExif向きを反映しない）', () => {
+  it('orientation が無い・1〜4 なら width/height はそのまま', () => {
+    expect(orientedDimensions({ width: 100, height: 50 })).toEqual({ width: 100, height: 50 })
+    expect(orientedDimensions({ width: 100, height: 50, orientation: 1 })).toEqual({ width: 100, height: 50 })
+    expect(orientedDimensions({ width: 100, height: 50, orientation: 3 })).toEqual({ width: 100, height: 50 }) // 180度回転は入れ替わらない
+  })
+
+  it('orientation が 5〜8（90度/270度回転）なら width/height が入れ替わる', () => {
+    expect(orientedDimensions({ width: 100, height: 50, orientation: 5 })).toEqual({ width: 50, height: 100 })
+    expect(orientedDimensions({ width: 100, height: 50, orientation: 6 })).toEqual({ width: 50, height: 100 })
+    expect(orientedDimensions({ width: 100, height: 50, orientation: 7 })).toEqual({ width: 50, height: 100 })
+    expect(orientedDimensions({ width: 100, height: 50, orientation: 8 })).toEqual({ width: 50, height: 100 })
+  })
+})
+
+describe('validateImageCrops（M2b-99f reviewer2回目指摘: Exif orientation 付き画像での実寸判定）', () => {
+  let tmpDir: string
+
+  beforeAll(async () => {
+    tmpDir = mkdtempSync(join(tmpdir(), 'validate-content-crop-test-'))
+    // 向きタグの無い 100x50 の画像
+    await sharp({ create: { width: 100, height: 50, channels: 3, background: { r: 200, g: 100, b: 50 } } })
+      .jpeg()
+      .toFile(join(tmpDir, 'plain.jpg'))
+    // reviewer の実測方法を参考に、生データは 100x50 のまま Exif orientation=6
+    //（90度回転して表示する。表示上の実寸は 50x100 になる）を埋め込んだ画像を作る
+    await sharp({ create: { width: 100, height: 50, channels: 3, background: { r: 50, g: 100, b: 200 } } })
+      .jpeg()
+      .withMetadata({ orientation: 6 })
+      .toFile(join(tmpDir, 'rotated.jpg'))
+  })
+
+  afterAll(() => {
+    rmSync(tmpDir, { recursive: true, force: true })
+  })
+
+  it('向きタグの無い画像は crop がそのままの実寸ではみ出していなければエラーにしない', async () => {
+    const manifest = { images: [{ id: 'plain', file: 'plain.jpg', crop: { left: 0, top: 0, width: 100, height: 50 } }] }
+    const errors: string[] = []
+    await validateImageCrops(manifest, errors, tmpDir)
+    expect(errors).toEqual([])
+  })
+
+  it('向きタグの無い画像は crop が実寸をはみ出すとエラーにする', async () => {
+    const manifest = { images: [{ id: 'plain', file: 'plain.jpg', crop: { left: 0, top: 0, width: 101, height: 50 } }] }
+    const errors: string[] = []
+    await validateImageCrops(manifest, errors, tmpDir)
+    expect(errors).toHaveLength(1)
+    expect(errors[0]).toContain('はみ出している')
+  })
+
+  it('Exif orientation=6 の画像は、回転後の実寸（50x100）ぴったりの crop を誤ってエラーにしない（reviewer指摘の逆パターン1）', async () => {
+    // 生データの寸法（100x50）で判定すると height:100 が height:50 をはみ出す誤エラーになる
+    const manifest = { images: [{ id: 'rotated', file: 'rotated.jpg', crop: { left: 0, top: 0, width: 50, height: 100 } }] }
+    const errors: string[] = []
+    await validateImageCrops(manifest, errors, tmpDir)
+    expect(errors).toEqual([])
+  })
+
+  it('Exif orientation=6 の画像は、生データの寸法（100x50）には収まるが回転後の実寸（50x100）をはみ出す壊れた crop を素通ししない（reviewer指摘の逆パターン2）', async () => {
+    // 生データ基準なら width:90/height:40 は 100x50 に収まってしまうが、回転後の実寸は 50x100 なので width が超過する
+    const manifest = { images: [{ id: 'rotated', file: 'rotated.jpg', crop: { left: 0, top: 0, width: 90, height: 40 } }] }
+    const errors: string[] = []
+    await validateImageCrops(manifest, errors, tmpDir)
+    expect(errors).toHaveLength(1)
+    expect(errors[0]).toContain('はみ出している')
+  })
+
+  it('crop 座標が非整数ならエラーにする（sharp の extract は整数しか受け付けない）', async () => {
+    const manifest = { images: [{ id: 'plain', file: 'plain.jpg', crop: { left: 10.7, top: 0, width: 50, height: 50 } }] }
+    const errors: string[] = []
+    await validateImageCrops(manifest, errors, tmpDir)
+    expect(errors).toHaveLength(1)
+    expect(errors[0]).toContain('整数')
+  })
+
+  it('存在しないファイルは（reviewed 必須チェック側で報告済みのため）ここではエラーにしない', async () => {
+    const manifest = { images: [{ id: 'missing', file: 'nope.jpg', crop: { left: 0, top: 0, width: 10, height: 10 } }] }
+    const errors: string[] = []
+    await validateImageCrops(manifest, errors, tmpDir)
+    expect(errors).toEqual([])
   })
 })
