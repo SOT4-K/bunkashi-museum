@@ -22,7 +22,7 @@
 // 下線も候補プールに自然に入る）。
 import { weightedSampleWithoutReplacement, eraWeight } from './weighted'
 import { selectReviewCandidates } from './session'
-import { buildThemeQuestionForWork, COMPOSITION_SEQUENCE, pickThemeTargetId } from './themeSet'
+import { buildThemeQuestionForWork, categoryOfQuestion, COMPOSITION_SEQUENCE, imageCategoryCap, pickThemeTargetId } from './themeSet'
 import { generateOrderQuestion } from './order'
 import { excerptSegmentsForUnderline, type PassageSegment } from './passage'
 import type { RandomFn } from './distractors'
@@ -142,6 +142,10 @@ export function buildMockExam(
   const usedWorkIds = new Set<string>()
   let avoidEraSlot = false
   let previousType: QuestionType | undefined
+  // M2e-06: 図版カテゴリ（q9・q1）は1回の試験で imageCap 問まで（実測: 対策前は
+  // mockExam 10問×30seedで平均3.07、目標「2±1」の上限をわずかに超えていた）。
+  let imageCount = 0
+  const imageCap = imageCategoryCap(count)
   for (const candidate of ordered) {
     if (built.length >= count) break
     // 同じ作品が複数 passage に重複して候補にある場合、1回の試験内では1問までにする
@@ -160,9 +164,13 @@ export function buildMockExam(
       underlineKey: candidate.underline.key,
     })
     if (!question) continue
+    // M2e-06: 図版上限に達していたらこの候補は捨て、次の候補（別の下線・別の作品）に譲る
+    // （usedWorkIds に加えないので、同じ作品が後で別の型として再度候補に出ることを妨げない）。
+    if (categoryOfQuestion(question) === 'image' && imageCount >= imageCap) continue
     usedWorkIds.add(candidate.work.id)
     if (question.q9Slot === 'era') avoidEraSlot = true
     previousType = question.type
+    if (categoryOfQuestion(question) === 'image') imageCount++
     built.push({
       passage: candidate.passage,
       underline: candidate.underline,

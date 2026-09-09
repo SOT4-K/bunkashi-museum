@@ -258,11 +258,16 @@ describe('実データ（reviewed限定プール、DEV変数なし）: 15ワー�
       '露出率低下を他ワールドの100%が隠して回帰を検出できなかった）。実測の最小値は' +
       'genshi 0.857（6/7）・kamakura 0.8（4/5）、他13ワールドは1.0（fact-check-m2b-v2.mdの' +
       'seed=1限定・非シード100回の実測と同じ傾向。M2b-99c中1のボス問数改善により' +
-      '以前ここで最小0.71/0.80だったgenshi/kamakura以外は全て1.0に改善した）。',
+      '以前ここで最小0.71/0.80だったgenshi/kamakura以外は全て1.0に改善した）。' +
+      'M2e-06追記: 図版型（q9/q1）の上限（imageCategoryCap）を入れた副作用で、tenpyo' +
+      '（項目数9・是正前は常に1.0）が一部seedで0.889（8/9）に下がった。Q9は選択肢に画像を' +
+      '4枚並べるため誤答露出のための「安く多く出せる」手段でもあり、上限で使用回数を絞ると' +
+      '露出機会も減るトレードオフ（実測値、tenpyo min=0.889）。',
     () => {
       const MIN_EXPOSURE_RATE: Record<string, number> = {
         genshi: 0.7, // 実測min 6/7=0.857。将来コンテンツが増えるまでの安全マージンとして0.7
         kamakura: 0.7, // 実測min 4/5=0.8。同上
+        tenpyo: 0.8, // M2e-06: 実測min 8/9=0.889。図版上限の副作用（上記コメント参照）
       }
       const DEFAULT_MIN_EXPOSURE_RATE = 0.9 // 実測min 1.0の13ワールド分の安全マージン
       const shortfalls: { eraId: string; seed: number; rate: number }[] = []

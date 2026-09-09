@@ -28,6 +28,46 @@ const pool: Work[] = [
   work('mw12', 'konin-jogan'),
 ]
 
+// M2e-06: 画像型（q9/q1）以外の型（q4/q10/q13等）も生成できる作品プール（facts/falseStatements/
+// pairs 付き）。図版上限（imageCategoryCap）を入れたことで、artist しか持たない上の pool
+// （実質 q9/q1 しか生成できない＝均質な合成fixture。builder メモ「均質な合成fixtureは
+// 分岐特有のバグを隠す」）では「候補が十分にあれば10問ちょうど作る」が満たせなくなった
+// （図版は最大3問までに絞られるため）。この pool は「型配分に上限を掛けても目標問数まで
+// 作れる」ことの確認専用（他のテストの pool には影響させない）。
+function richWork(id: string, era: string): Work {
+  return makeWork({
+    id,
+    era,
+    category: 'painting',
+    artist: `作者${id}`,
+    pairs: [{ left: `語句${id}A`, right: `語句${id}B` }],
+    facts: [
+      { slot: 'other', text: `${id}正文1` },
+      { slot: 'other', text: `${id}正文2` },
+      { slot: 'other', text: `${id}正文3` },
+    ],
+    falseStatements: [
+      { text: `${id}誤文1`, why: 'x', verifiedFalse: true },
+      { text: `${id}誤文2`, why: 'x', verifiedFalse: true },
+      { text: `${id}誤文3`, why: 'x', verifiedFalse: true },
+    ],
+  })
+}
+const richPool: Work[] = [
+  richWork('rw1', 'asuka'),
+  richWork('rw2', 'hakuho'),
+  richWork('rw3', 'tenpyo'),
+  richWork('rw4', 'konin-jogan'),
+  richWork('rw5', 'asuka'),
+  richWork('rw6', 'hakuho'),
+  richWork('rw7', 'tenpyo'),
+  richWork('rw8', 'konin-jogan'),
+  richWork('rw9', 'asuka'),
+  richWork('rw10', 'hakuho'),
+  richWork('rw11', 'tenpyo'),
+  richWork('rw12', 'konin-jogan'),
+]
+
 function textPassage(id: string, era: string, workIds: string[]): Passage {
   return {
     id,
@@ -46,6 +86,13 @@ const passages: Passage[] = [
   textPassage('mp4', 'konin-jogan', ['mw4', 'mw8', 'mw12']),
 ]
 
+const richPassages: Passage[] = [
+  textPassage('rp1', 'asuka', ['rw1', 'rw5', 'rw9']),
+  textPassage('rp2', 'hakuho', ['rw2', 'rw6', 'rw10']),
+  textPassage('rp3', 'tenpyo', ['rw3', 'rw7', 'rw11']),
+  textPassage('rp4', 'konin-jogan', ['rw4', 'rw8', 'rw12']),
+]
+
 describe('buildMockExam', () => {
   it('passages が空なら空配列', () => {
     expect(buildMockExam([], pool, pool, testEras, progress, today)).toEqual([])
@@ -56,7 +103,10 @@ describe('buildMockExam', () => {
   })
 
   it('候補が十分にあれば MOCK_EXAM_SIZE 問ちょうど作る', () => {
-    const items = buildMockExam(passages, pool, pool, testEras, progress, today, seededRandom(1))
+    // M2e-06: 図版上限（imageCategoryCap）導入後は、artist しか持たない pool（実質 q9/q1 しか
+    // 生成できない）だと図版3問で頭打ちになるため、多様な型を生成できる richPool/richPassages
+    // を使う（上記コメント参照）。
+    const items = buildMockExam(richPassages, richPool, richPool, testEras, progress, today, seededRandom(1))
     expect(items.length).toBe(MOCK_EXAM_SIZE)
   })
 

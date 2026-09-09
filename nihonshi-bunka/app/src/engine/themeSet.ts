@@ -48,6 +48,51 @@ function desiredCategoryForIndex(index: number): ThemeCategory {
   return COMPOSITION_SEQUENCE[index % COMPOSITION_SEQUENCE.length]
 }
 
+/**
+ * M2e-06: 実際に生成された Question が5カテゴリ（COMPOSITION_SEQUENCE）のどれに対応するかを
+ * 返す（対応しない型は null）。mockExam.ts・stages.ts が「1回の生成（模試10問・ボス10/20問）で
+ * 図版型は最大N問まで」の上限を実測ベースで守るために使う（下記 imageCategoryCap）。
+ * QuestionType → ThemeCategory 対応表（チケット原文どおり）:
+ *  - 'pairs'（語句組合せ）: q13（reversed 問わず）・q8（組合せ文。ticket本文「q13/q8等」）
+ *  - 'q10'（2文正誤）: q10
+ *  - 'q4'（4択）: q4 かつ reversed でない
+ *  - 'q4-reversed'（適切/不適切）: q4 かつ reversed
+ *  - 'image'（図版）: q9・q1（画像→作品名の保険。ticket本文「Q9…やQ1…などが該当」）
+ *  - 対応しない型（q12=文字4択・q14=年代順など）: null。COMPOSITION_SEQUENCE に無い別枠の
+ *    出題のため5カテゴリの集計対象外にする（q12はwriterのask.type明示でしか生成されず、
+ *    desiredCategory経由の5カテゴリ配分ロジックの対象外。mockExam.realdata.test.ts 参照）。
+ */
+export function categoryOfQuestion(question: Pick<Question, 'type' | 'reversed'>): ThemeCategory | null {
+  switch (question.type) {
+    case 'q13':
+    case 'q8':
+      return 'pairs'
+    case 'q10':
+      return 'q10'
+    case 'q4':
+      return question.reversed ? 'q4-reversed' : 'q4'
+    case 'q9':
+    case 'q1':
+      return 'image'
+    default:
+      return null
+  }
+}
+
+/**
+ * M2e-06: 1回の生成（count問）で図版カテゴリ（image＝q9/q1）に許す最大数。
+ * 周期的割り当て（index % 5）どおりなら count 問中 ceil(count/5) 問が「狙い」だが、
+ * ask 不在時の通常優先順位が Q9 を最初に試すため、他カテゴリの生成に失敗すると
+ * Q9 に落ちやすく実測は上振れする（是正前: mockExam 10問×30seedで平均3.07、
+ * 「狙い」の2問より1問强く超過）。「狙い＋1」を上限にする（10問なら 2+1=3、
+ * ticket指定の「最大3問」と一致）。20問（TIME_ATTACK_EXAM_SIZE・大きいボス）は
+ * 同じ式を一般化したもの（ceil(20/5)+1=5）で、ticket原文に具体数の指定は無いため
+ * この一般化が完了報告での明記事項。
+ */
+export function imageCategoryCap(count: number): number {
+  return Math.ceil(count / COMPOSITION_SEQUENCE.length) + 1
+}
+
 export interface ThemeQuestion {
   underlineKey: string
   question: Question

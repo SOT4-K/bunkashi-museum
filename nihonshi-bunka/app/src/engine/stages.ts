@@ -42,7 +42,14 @@ import { buildChoices, shuffle, type RandomFn } from './distractors'
 import { generateStatementPairQuestion } from './statementPair'
 import { generatePairQuestion } from './pairs'
 import { generateOrderQuestion } from './order'
-import { buildThemeQuestionForWork, buildThemeSetQuestions, pickThemeTargetId, COMPOSITION_SEQUENCE } from './themeSet'
+import {
+  buildThemeQuestionForWork,
+  buildThemeSetQuestions,
+  categoryOfQuestion,
+  COMPOSITION_SEQUENCE,
+  imageCategoryCap,
+  pickThemeTargetId,
+} from './themeSet'
 import { underlineStem, standaloneStem } from './stems'
 import type {
   Era,
@@ -497,6 +504,12 @@ export function buildBossQuestions(
   // buildThemeSetQuestions にかけて合算する。buildThemeSetQuestions 自身が持つ型構成の保証
   // （Q9/Q10各1問以上・同型連続回避）はpassage単位でそのまま活きる。「同じ作品は1回の試験で
   // 1問まで」（mockExam.ts と同じ規則）を全passage分の合算にも適用する（themeSeenIds）。
+  // M2e-06: 図版カテゴリ（q9・q1）は1回のボスで imageCap 問まで（mockExam.ts と同じ考え方。
+  // パス1〜4のどこで生成されても合算でカウントする。パス1（buildThemeSetQuestions）は
+  // passage単位のQ9最低1問保証を持つため、複数passageの合算で上限を超えないようここで絞る）。
+  const imageCap = imageCategoryCap(targetCount)
+  let imageCount = 0
+
   const themeQuestions: Question[] = []
   const themeSeenIds = new Set<string>()
   for (const passage of shuffle(eraPassages, rng)) {
@@ -504,7 +517,9 @@ export function buildBossQuestions(
     for (const tq of buildThemeSetQuestions(passage, pool, eras, rng, imagePool)) {
       if (themeQuestions.length >= targetCount) break
       if (themeSeenIds.has(tq.question.work.id)) continue
+      if (categoryOfQuestion(tq.question) === 'image' && imageCount >= imageCap) continue
       themeSeenIds.add(tq.question.work.id)
+      if (categoryOfQuestion(tq.question) === 'image') imageCount++
       themeQuestions.push({ ...tq.question, passageId: passage.id, underlineKey: tq.underlineKey })
     }
   }
@@ -530,9 +545,11 @@ export function buildBossQuestions(
         underlineKey: candidate.underline.key,
       })
       if (!question) continue
+      if (categoryOfQuestion(question) === 'image' && imageCount >= imageCap) continue
       usedWorkIds.add(candidate.work.id)
       if (question.q9Slot === 'era') avoidEraSlot = true
       previousType = question.type
+      if (categoryOfQuestion(question) === 'image') imageCount++
       built.push({ ...question, passageId: candidate.passage.id, underlineKey: candidate.underline.key })
       for (const id of questionExposedWorkIds(question)) exposedIds.add(id)
     }
@@ -562,9 +579,11 @@ export function buildBossQuestions(
           underlineKey: candidate?.underline.key,
         })
         if (!question) continue
+        if (categoryOfQuestion(question) === 'image' && imageCount >= imageCap) continue
         usedWorkIds.add(work.id)
         if (question.q9Slot === 'era') avoidEraSlot = true
         previousType = question.type
+        if (categoryOfQuestion(question) === 'image') imageCount++
         built.push(candidate ? { ...question, passageId: candidate.passage.id, underlineKey: candidate.underline.key } : question)
         for (const id of questionExposedWorkIds(question)) exposedIds.add(id)
       }
@@ -599,15 +618,47 @@ export function buildBossQuestions(
           const usedTypes = usedTypesForWork.get(work.id) ?? new Set<QuestionType>()
           const question = tryBuildStageQuestionForWork(work, ALL_PER_WORK_TYPES, pool, imagePool, eras, rng, usedTypes)
           if (!question) continue
+          // M2e-06: 図版上限に達していたらこの型は「使用済み」扱いにして次周は別の型を試させる
+          // （push はしない＝カウントに含めない。work自体は諦めず progressed=true で継続する）。
+          if (categoryOfQuestion(question) === 'image' && imageCount >= imageCap) {
+            usedTypes.add(question.type)
+            usedTypesForWork.set(work.id, usedTypes)
+            progressed = true
+            continue
+          }
           usedTypes.add(question.type)
           usedTypesForWork.set(work.id, usedTypes)
           built.push(attachLeadStem(question, candidateByWorkId.get(work.id)))
           for (const id of questionExposedWorkIds(question)) exposedIds.add(id)
+          if (categoryOfQuestion(question) === 'image') imageCount++
           progressed = true
         }
       }
     }
   }
+
+  // M2e-06: 語句組合せカテゴリ（pairs＝q13・q8）はmockExam.tsと同じく1回のボスで最低1問
+  // 確保する（best-effort）。実測: 対策前は reviewedEras×20seedのボス生成300件中48件
+  // （16%）が0問だった（tenpyo/horeki-tenmei/kaseiに集中。work.pairsを持つ作品が
+  // その文化にたまたま少ない/候補順で先に他の型が消費してしまうケース）。
+  if (built.length >= 2 && !built.some((q) => categoryOfQuestion(q) === 'pairs')) {
+    for (let i = 0; i < built.length; i++) {
+      const q = built[i]
+      if (!(q.work.pairs && q.work.pairs.length > 0)) continue
+      const candidate = candidateByWorkId.get(q.work.id)
+      const forced = buildThemeQuestionForWork(q.work, pool, eras, rng, {
+        ask: { type: 'q13' },
+        underlineKey: candidate?.underline.key,
+      })
+      if (forced && categoryOfQuestion(forced) === 'pairs') {
+        // buildThemeQuestionForWork は内部で必ず stem を埋める（themeSet.ts の
+        // buildThemeQuestionForWorkWithMeta）ため attachLeadStem は不要。
+        built[i] = candidate ? { ...forced, passageId: candidate.passage.id, underlineKey: candidate.underline.key } : forced
+        break
+      }
+    }
+  }
+
   return built
 }
 
