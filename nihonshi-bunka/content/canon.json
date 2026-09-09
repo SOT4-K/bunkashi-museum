@@ -233,12 +233,12 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "福岡市の文化財（福岡市公式）個別ページ。国宝、天明4年(1784)志賀島で発見、後漢書東夷伝の記事に対応する説を紹介。実際は福岡市公式サイトであり学習塾等のまとめサイトではないが、schemaのtype enumに『official』が無いためmatome-siteに分類",
         "url": "https://bunkazai.city.fukuoka.lg.jp/cultural_properties/detail/313"
       },
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "福岡市博物館公式サイト「金印」特設ページ（同上の注記）",
         "url": "https://museum.city.fukuoka.jp/gold/"
       }
@@ -257,12 +257,12 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "京都国立博物館「文化財点描」解説ページ（公式機関だがtype enum上matome-siteに分類）。中国製か国産かの論争が「教科書に載るテーマ」として紹介",
         "url": "https://www.kyohaku.go.jp/jp/learn/home/dictio/kouko/223/"
       },
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "文化遺産オンライン（文化庁）個別ページ",
         "url": "https://online.bunka.go.jp/heritages/detail/425905"
       }
@@ -281,12 +281,12 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "特別史跡「三内丸山遺跡」公式サイト（青森県。type enum上matome-siteに分類するが実際は自治体公式）。縄文時代の大規模集落、大型掘立柱建物（六本柱）の復元で知られる",
         "url": "https://sannaimaruyama.pref.aomori.jp/"
       },
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "世界遺産「北海道・北東北の縄文遺跡群」公式ポータル",
         "url": "https://jomon-japan.jp/learn/jomon-sites/sannai-maruyama"
       }
@@ -305,7 +305,7 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "静岡市立登呂博物館公式サイト（type enum上matome-siteに分類するが実際は自治体公式）。弥生時代後期の水田跡・高床倉庫の復元で知られ、1952年に弥生時代の遺跡として初の特別史跡指定",
         "url": "https://www.shizuoka-toromuseum.jp/toro-site/about-torosite/"
       }
@@ -324,7 +324,7 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "吉野ヶ里歴史公園公式サイト（type enum上matome-siteに分類するが実際は国営・自治体公式）。国内最大級の弥生時代環濠集落跡、物見やぐら・竪穴住居・高床倉庫を復元",
         "url": "https://www.yoshinogari.jp/introduction/history/"
       }
@@ -343,7 +343,7 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "福岡県嘉穂郡桂川町公式サイト「王塚古墳とは？」（type enum上matome-siteに分類するが実際は自治体公式）。6世紀中頃、特別史跡、赤・黄・白・黒・緑5色の壁画で全国最初に装飾古墳として特別史跡指定",
         "url": "https://www.town.keisen.fukuoka.jp/shisetsu/kofun/ouzuka_story.php"
       }
@@ -362,7 +362,7 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "みどり市岩宿博物館公式サイト（type enum上matome-siteに分類するが実際は自治体公式）。相沢忠洋が1946年に関東ローム層から打製石器を発見、日本に旧石器時代が存在したことを示した",
         "url": "https://www.city.midori.gunma.jp/iwajuku/1003480.html"
       }
@@ -565,7 +565,7 @@
         "detail": "教科書必出の図解テーマ（現物未確認）"
       },
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "四天王寺公式サイト「四天王寺式伽藍配置」の説明（中門・五重塔・金堂・講堂が南北一直線）",
         "url": "https://www.shitennoji.or.jp/history.html"
       }
@@ -620,7 +620,7 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "飛鳥寺の本尊で重要文化財、現存する日本最古の仏像とされる。鞍作鳥(止利仏師)作。飛鳥寺公式サイト・複数の観光/文化財サイトで一致した記述",
         "url": "https://yamatoji.nara-kankou.or.jp/01shaji/02tera/03east_area/asukadera/"
       }
@@ -643,7 +643,7 @@
         "detail": "現存する世界最古の木造建築群として教科書必出（現物未確認）"
       },
       {
-        "type": "matome-site",
+        "type": "ency",
         "detail": "法隆寺の建築沿革・世界遺産登録（1993年）の解説",
         "url": "https://ja.wikipedia.org/wiki/%E6%B3%95%E9%9A%86%E5%AF%BA"
       }
@@ -662,9 +662,14 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "現存する木彫像で最古級とされ、明治時代まで秘仏として非公開だった。止利派の作風を基本とするが独自性もあるとする解説（奈良国立博物館「なら仏像館」関連ページ・複数の美術サイトで一致）",
         "url": "https://kogeisha.com/encyclopedia/2543.php"
+      },
+      {
+        "type": "official",
+        "url": "https://online.bunka.go.jp/heritages/detail/147881",
+        "detail": "文化遺産オンライン（文化庁）法隆寺東院夢殿（救世観音を安置）"
       }
     ],
     "frequencyEvidence": "飛鳥文化の木彫像を代表する作品として教科書での言及が一般的と考えられるが、個別の入試出題年は未確認",
@@ -897,9 +902,14 @@
     "existingWorkId": "kokushi-hensan",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "国立公文書館「歴史と物語」デジタル展示で天武朝の国史編纂開始が解説される（researcher過去調査、sources-koten-bunkashi-official-sites.md記載）",
         "url": "https://www.archives.go.jp/exhibition/digital/rekishitomonogatari/"
+      },
+      {
+        "type": "official",
+        "url": "https://www.archives.go.jp/exhibition/digital/rekishitomonogatari/contents/02.html",
+        "detail": "国立公文書館公式サイト「歴史と物語」日本書紀"
       }
     ],
     "frequencyEvidence": "不明",
@@ -916,7 +926,7 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "薬師寺金堂薬師三尊像と並ぶ白鳳仏の代表とされる。像高188.5cm、銅造鍍金、国宝。グプタ王朝様式の影響を指摘する解説が複数の受験・美術系サイトで一致",
         "url": "https://www.historist.jp/word_j_ya/entry/037663/"
       }
@@ -935,9 +945,14 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "白鳳文化の代表的金銅仏として複数の受験対策・美術解説サイトで一致して紹介される（銅造観音菩薩立像）",
         "url": "https://manareki.com/hakuho-bunka"
+      },
+      {
+        "type": "official",
+        "url": "https://bunka.nii.ac.jp/db/heritages/detail/148308",
+        "detail": "文化遺産オンライン（文化庁）銅造観音菩薩立像（夢違観音）"
       }
     ],
     "frequencyEvidence": "白鳳文化を代表する仏像として教科書での言及が一般的と考えられるが、個別の入試出題年は未確認",
@@ -1298,7 +1313,7 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "ency",
         "detail": "法華堂本尊・不空羂索観音の両脇に安置された塑像で、戒壇堂四天王と並ぶ天平塑像の代表とする解説が複数の美術専門サイトで一致。本来は梵天・帝釈天として製作された説が有力",
         "url": "https://intojapanwaraku.com/rock/art-rock/1911/"
       }
@@ -1317,9 +1332,14 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "ency",
         "detail": "上段に絵、下段に経文を書写する形式で絵巻物の祖とされる。上品蓮台寺本・東京藝術大学本等が国宝として現存すると複数のサイト・文化遺産オンライン系ページで一致",
         "url": "https://ja.wikipedia.org/wiki/%E7%B5%B5%E5%9B%A0%E6%9E%9C%E7%B5%8C"
+      },
+      {
+        "type": "official",
+        "url": "https://online.bunka.go.jp/heritages/detail/224629",
+        "detail": "文化遺産オンライン（文化庁）絵過去現在因果経"
       }
     ],
     "frequencyEvidence": "絵巻物の源流として教科書での言及が一般的と考えられるが、個別の入試出題年は未確認",
@@ -1390,9 +1410,14 @@
     "existingWorkId": "toji-fudo-myoo",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "東寺公式サイト「立体曼荼羅」ページで講堂の密教彫刻群を確認",
         "url": "https://toji.or.jp/smp/mandala/"
+      },
+      {
+        "type": "official",
+        "url": "https://toji.or.jp/about/",
+        "detail": "東寺公式サイト「東寺とは」（講堂諸尊を所蔵）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -1485,7 +1510,7 @@
         "detail": "research/nichidai-past-exams-analysis.md 4章: 弘仁貞観の頻出テーマ(大学別曹・綜芸種智院)に明記"
       },
       {
-        "type": "matome-site",
+        "type": "ency",
         "detail": "勧学院(藤原氏)・弘文院(和気氏)・学館院(橘氏)・奨学院(皇族等)の対応が複数の受験系サイトで一致",
         "url": "https://kotobank.jp/word/%E5%A4%A7%E5%AD%A6%E5%88%A5%E6%9B%B9-90897"
       }
@@ -1558,7 +1583,7 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "厚いカヤ材の一木造で貞観様式の頂点とされ、翻波式衣文の代表例とする解説が複数の美術専門サイト・東京国立博物館「1089ブログ」等で一致",
         "url": "https://www.tnm.jp/modules/rblog/1/2024/08/21/jingoji_6/"
       }
@@ -1577,7 +1602,7 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "一木造・翻波式衣文の弘仁貞観彫刻の代表例として文化遺産オンライン等で確認",
         "url": "https://online.bunka.go.jp/heritages/detail/149751"
       }
@@ -1596,9 +1621,14 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "9世紀後期頃の作で現存最古の両界曼荼羅とされ、宮中真言院での「後七日御修法」に用いられたと伝わる。国宝。複数の専門サイト(WANDER国宝、東文研アーカイブ等)で一致",
         "url": "https://wanderkokuho.com/201-00095/"
+      },
+      {
+        "type": "official",
+        "url": "https://toji.or.jp/about/",
+        "detail": "東寺公式サイト（両界曼荼羅＝伝真言院曼荼羅を所蔵）"
       }
     ],
     "frequencyEvidence": "弘仁貞観文化の密教絵画の代表として教科書での言及が一般的と考えられるが、個別の入試出題年は未確認",
@@ -1615,7 +1645,7 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "ency",
         "detail": "空海の書の最盛期を示すとされ、唐の顔真卿の書風の影響が指摘される。東寺所蔵、国宝。Wikipedia日本語版・書道専門サイトで一致した記述",
         "url": "https://ja.wikipedia.org/wiki/%E9%A2%A8%E4%BF%A1%E5%B8%96"
       }
@@ -1656,7 +1686,7 @@
         "detail": "research/nichidai-past-exams-analysis.md 3.3・4章: 国風文化の頻出テーマ(定朝の寄木造)に明記"
       },
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "平等院公式サイトで建立者・関白藤原頼通(1053年)を確認済み（research/question-formats.md 3章）",
         "url": "https://www.byodoin.or.jp/learn/architecture/"
       }
@@ -1675,9 +1705,14 @@
     "existingWorkId": "byodoin-hoo-do",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "平等院公式サイトで建立者・藤原頼通(1053年、天喜元年)を確認済み。頼通↔道長の人物ずらしが受験対策記事でも「入試で狙われやすい」と明言される（research/question-formats.md 3章）",
         "url": "https://www.byodoin.or.jp/learn/architecture/"
+      },
+      {
+        "type": "official",
+        "url": "https://www.byodoin.or.jp/",
+        "detail": "平等院公式サイト"
       }
     ],
     "frequencyEvidence": "不明（教科書水準の標準項目）",
@@ -1857,9 +1892,14 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "ency",
         "detail": "日野資業建立、平等院鳳凰堂と並ぶ阿弥陀堂建築として複数のまとめサイト・Wikipedia国風文化ページで紹介される",
         "url": "https://ja.wikipedia.org/wiki/%E5%9B%BD%E9%A2%A8%E6%96%87%E5%8C%96"
+      },
+      {
+        "type": "official",
+        "url": "https://online.bunka.go.jp/db/heritages/detail/156455",
+        "detail": "文化遺産オンライン（文化庁）法界寺阿弥陀堂"
       }
     ],
     "frequencyEvidence": "浄土教建築の代表例のひとつとして教科書での言及がありうるが、個別の入試出題年は未確認。平等院ほどの頻出度ではないと推定（推測）",
@@ -1876,7 +1916,7 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "現存最古の大和絵風来迎図とされ、『観無量寿経』の九品往生を扉・壁に描く。平等院公式サイト「絵画」ページ・奈良国立博物館の模写解説ページで一致",
         "url": "https://www.byodoin.or.jp/learn/picture/"
       }
@@ -1895,9 +1935,14 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "蜻蛉日記(藤原道綱母)・更級日記(菅原孝標女)を代表例とする日記文学のジャンルが国文学研究資料館「書物で見る日本古典文学史」で解説される",
         "url": "https://www.nijl.ac.jp/etenji/bungakushi/contents/detail/detail02-02_007.html"
+      },
+      {
+        "type": "official",
+        "url": "https://www.nijl.ac.jp/etenji/bungakushi/contents/detail/detail02-02_007.html",
+        "detail": "国文学研究資料館公式サイト「書物で見る日本古典文学史」蜻蛉日記"
       }
     ],
     "frequencyEvidence": "国風文化の文学ジャンルの一つとして教科書必出と考えられるが、個別の入試出題年は未確認",
@@ -1914,8 +1959,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "竹取物語は現存最古の物語、土佐日記(紀貫之)はかな日記文学の先駆けとして、複数の受験対策サイト・国語便覧的サイトで一致して紹介される（一次資料での個別確認はできず）"
+      },
+      {
+        "type": "official",
+        "url": "https://kokusho.nijl.ac.jp/biblio/100421593",
+        "detail": "国文学研究資料館 国書データベース 土佐日記"
       }
     ],
     "frequencyEvidence": "不明（教科書水準の標準項目と推定）",
@@ -2040,8 +2090,13 @@
     "existingWorkId": "fujiwara-kiyohira",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "中尊寺公式サイト・touken-world等で中尊寺金色堂の建立者として確認。過去問での単独出題確認は未実施"
+      },
+      {
+        "type": "official",
+        "url": "https://www.chusonji.or.jp/know/history.html",
+        "detail": "中尊寺公式サイト「中尊寺の歴史」（藤原清衡による造営）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2094,8 +2149,13 @@
     "existingWorkId": "genji-monogatari-emaki",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "Wikipedia「源氏物語絵巻」、徳川美術館・五島美術館の公式解説で存在・所蔵を確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.gotoh-museum.or.jp/collection/genji/",
+        "detail": "五島美術館公式サイト 源氏物語絵巻"
       }
     ],
     "frequencyEvidence": "不明（教科書・資料集での掲載は標準的だが過去問での具体出題年は未確認）",
@@ -2112,8 +2172,13 @@
     "existingWorkId": "shigisan-engi-emaki",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "Wikipedia「信貴山縁起」、朝護孫子寺公式サイトで所蔵を確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.sigisan.or.jp/reihokan/",
+        "detail": "信貴山朝護孫子寺公式サイト「信貴山の寺宝」"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2130,8 +2195,13 @@
     "existingWorkId": "ban-dainagon-ekotoba",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "Wikipedia「伴大納言絵詞」、出光美術館公式サイトで所蔵を確認"
+      },
+      {
+        "type": "official",
+        "url": "https://idemitsu-museum.or.jp/collection/painting/yamatoe/01.php",
+        "detail": "出光美術館公式サイト 伴大納言絵巻"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2166,8 +2236,13 @@
     "existingWorkId": "rokushoji",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "Wikipedia「六勝寺」、複数の日本史学習サイトで院政期の代表的造寺として確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www2.city.kyoto.lg.jp/somu/rekishi/fm/nenpyou/htmlsheet/toshi06.html",
+        "detail": "京都市公式サイト「都市史06 六勝寺」"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2188,7 +2263,7 @@
         "detail": "research/nichidai-past-exams-analysis.md §3.3 図版取得優先リストに明記（「平等院鳳凰堂・中尊寺金色堂・富貴寺大堂・白水阿弥陀堂」）"
       },
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "中尊寺公式サイト(chusonji.or.jp)・Wikipediaで藤原清衡建立(1124年)・国宝を確認"
       }
     ],
@@ -2206,8 +2281,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "Wikipedia「扇面法華経冊子」、東京文化財研究所アーカイブ、四天王寺・東京国立博物館の所蔵情報"
+      },
+      {
+        "type": "official",
+        "url": "https://bunka.nii.ac.jp/heritages/detail/468206",
+        "detail": "文化遺産オンライン（文化庁）扇面法華経冊子（四天王寺蔵、国宝）の解説"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2224,8 +2304,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "Wikipedia「平家納経」、ジャパンナレッジ国史大辞典項目で厳島神社奉納(1164年)を確認"
+      },
+      {
+        "type": "official",
+        "url": "https://bunka.nii.ac.jp/db/heritages/detail/125507",
+        "detail": "文化遺産オンライン（文化庁）平家納経（厳島神社蔵、国宝）の解説"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2242,8 +2327,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "Wikipedia「餓鬼草紙」、京都国立博物館・e国宝(emuseum.nich.go.jp)で所蔵確認"
+      },
+      {
+        "type": "official",
+        "url": "https://online.bunka.go.jp/heritages/detail/548403",
+        "detail": "文化遺産オンライン（文化庁）餓鬼草紙の解説"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2260,8 +2350,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "Wikipedia「病草紙」、京都国立博物館所蔵情報"
+      },
+      {
+        "type": "official",
+        "url": "https://www.kyohaku.go.jp/jp/collection/meihin/emaki/item04/",
+        "detail": "京都国立博物館公式サイト「名品紹介」病草紙"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2278,8 +2373,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "厳島神社・日宋貿易に関する一般的な日本史解説サイトで確認。教科書での扱いは標準的と推定されるが現物未確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.city.kobe.lg.jp/a09222/kosodate/lifelong/toshokan/furusato/kiyomori_kobe/index.html",
+        "detail": "神戸市公式サイト「平清盛と神戸」"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2296,8 +2396,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "一般的な日本史解説サイトで平清盛・院政期文化との関連を確認"
+      },
+      {
+        "type": "official",
+        "url": "https://museum.city.fukuoka.jp/exhibition/special/2024/hakataiseki-nissouboueki/",
+        "detail": "福岡市博物館公式サイト 特設展示「博多遺跡と日宋貿易」"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2350,8 +2455,13 @@
     "existingWorkId": "kamakura-daibutsu",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "既存収録済み。教科書レベルの標準項目"
+      },
+      {
+        "type": "official",
+        "url": "https://www.kotoku-in.jp/",
+        "detail": "高徳院公式サイト（鎌倉大仏）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2368,8 +2478,13 @@
     "existingWorkId": "engakuji-shariden",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "禅宗様建築の代表例として複数の建築史サイトで確認済み"
+      },
+      {
+        "type": "official",
+        "url": "https://www.engakuji.or.jp/grounds/",
+        "detail": "円覚寺公式サイト「境内案内」舎利殿"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2386,8 +2501,13 @@
     "existingWorkId": "sanjusangendo-hondo",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "和様建築の代表例として複数の建築史サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.sanjusangendo.jp/precincts/",
+        "detail": "蓮華王院三十三間堂公式サイト「境内」"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2512,8 +2632,13 @@
     "existingWorkId": "kongorikishi-todaiji",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "運慶・快慶合作の代表作として複数の美術史サイトで確認済み"
+      },
+      {
+        "type": "official",
+        "url": "https://www.todaiji.or.jp/",
+        "detail": "東大寺公式サイト（南大門金剛力士像を所蔵）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2548,8 +2673,13 @@
     "existingWorkId": "chogen",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "東大寺再建の勧進僧として東大寺公式・複数サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.todaiji.or.jp/",
+        "detail": "東大寺公式サイト（重源による鎌倉復興を紹介）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2566,8 +2696,13 @@
     "existingWorkId": "daibutsuyo",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "禅宗様・和様・折衷様と対比される鎌倉新様式として複数の建築史サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.todaiji.or.jp/",
+        "detail": "東大寺公式サイト（南大門は大仏様の代表建築）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2678,7 +2813,7 @@
         "detail": "research/nichidai-past-exams-analysis.md §3.3 図版取得優先リストに明記"
       },
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "宮内庁三の丸尚蔵館公式(shozokan.nich.go.jp)・文化遺産オンラインで所蔵・2021年国宝指定を確認"
       }
     ],
@@ -2700,7 +2835,7 @@
         "detail": "research/nichidai-past-exams-analysis.md §3.3 図版取得優先リストおよび§4「一遍上人絵伝」に明記"
       },
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "東京国立博物館画像検索(webarchives.tnm.jp)・e国宝で巻第七の所蔵を確認"
       }
     ],
@@ -2722,7 +2857,7 @@
         "detail": "research/nichidai-past-exams-analysis.md §7「北円堂に安置され、運慶が製作した彫刻」という設問例が明記"
       },
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "興福寺公式サイト(kohfukuji.com)・wanderkokuho.comで運慶率いる慶派作・国宝を確認"
       }
     ],
@@ -2740,8 +2875,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "運慶と並ぶ慶派の代表仏師として複数の美術史・教育サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.narahaku.go.jp/exhibition/special/201704_kaikei/",
+        "detail": "奈良国立博物館公式サイト 特別展「快慶」"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2758,8 +2898,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "運慶・快慶を輩出した仏師集団として複数の美術史サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.narahaku.go.jp/exhibition/special/201704_kaikei/",
+        "detail": "奈良国立博物館公式サイト 特別展「快慶」（快慶は慶派仏師の代表）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2776,12 +2921,17 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "京都国立博物館公式解説(kyohaku.go.jp)・Wikipedia「神護寺三像」で1951年国宝指定・伝藤原隆信作と長らく紹介されてきた経緯を確認"
       },
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "nippon.com「源頼朝の肖像画：教科書で見た頼朝像は別人説」で1995年以降の足利直義説など像主異説の係争を確認"
+      },
+      {
+        "type": "official",
+        "url": "https://online.bunka.go.jp/heritages/detail/188556",
+        "detail": "文化遺産オンライン（文化庁）絹本著色伝源頼朝像（神護寺蔵、国宝、伝藤原隆信筆）の解説。神護寺公式サイト(jingoji.or.jp)はSSL証明書不整合のため差し替え"
       }
     ],
     "frequencyEvidence": "不明。長年教科書の定番図版だったが、現在は像主・作者について学説対立があり最新の教科書記述を要確認",
@@ -2798,8 +2948,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "鎌倉時代の写実的肖像画技法として複数の美術史サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://online.bunka.go.jp/heritages/detail/188556",
+        "detail": "文化遺産オンライン（文化庁）絹本著色伝源頼朝像（神護寺蔵、国宝、伝藤原隆信筆）の解説。神護寺公式サイト(jingoji.or.jp)はSSL証明書不整合のため差し替え"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2816,8 +2971,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "似絵の名手として複数の美術史サイトで確認。ただし神護寺三像の作者説は近年の研究で否定的"
+      },
+      {
+        "type": "official",
+        "url": "https://online.bunka.go.jp/heritages/detail/188556",
+        "detail": "文化遺産オンライン（文化庁）絹本著色伝源頼朝像（神護寺蔵、国宝、伝藤原隆信筆）の解説。神護寺公式サイト(jingoji.or.jp)はSSL証明書不整合のため差し替え"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2834,8 +2994,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "日本三大随筆の一つとして複数の教育サイト・Wikipediaで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.nijl.ac.jp/etenji/bungakushi/contents/detail/detail03-01_010.html",
+        "detail": "国文学研究資料館公式サイト「書物で見る日本古典文学史」徒然草"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2852,8 +3017,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "徒然草の作者として複数の教育サイトで確認"
+      },
+      {
+        "type": "ency",
+        "url": "https://kotobank.jp/word/%E5%90%89%E7%94%B0%E5%85%BC%E5%A5%BD-22138",
+        "detail": "コトバンク 吉田兼好の解説。公式の一次資料が見つからず百科を採用"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2870,8 +3040,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "日本三大随筆の一つ、鴨長明作として複数の教育サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://ja.kyoto.travel/tourism/single01.php?category_id=8&tourism_id=933",
+        "detail": "京都市公式サイト京都観光Navi「方丈の庵跡」"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2888,8 +3063,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "方丈記の作者として確認"
+      },
+      {
+        "type": "official",
+        "url": "https://ja.kyoto.travel/tourism/single01.php?category_id=8&tourism_id=933",
+        "detail": "京都市公式サイト京都観光Navi「方丈の庵跡」"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2906,8 +3086,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "慈円による史論書として複数の日本史学習サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.digital.archives.go.jp/file/1233008.html",
+        "detail": "国立公文書館デジタルアーカイブ 愚管抄"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2924,8 +3109,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "愚管抄の作者として確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.shorenin.com/info/",
+        "detail": "青蓮院門跡公式サイト（天台座主を務めた慈円ゆかりの寺）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2942,8 +3132,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "西大寺で真言律宗を興した戒律復興僧として複数の仏教史サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://saidaiji.or.jp/history/h02/",
+        "detail": "西大寺公式サイト「興正菩薩叡尊上人」"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2960,8 +3155,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "一遍が開いた宗派として複数の仏教史サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://yugyoji.or.jp/",
+        "detail": "時宗総本山遊行寺（清浄光寺）公式サイト"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2978,8 +3178,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "大仏様と並ぶ鎌倉新様式として複数の建築史サイトで確認。代表例は円覚寺舎利殿"
+      },
+      {
+        "type": "official",
+        "url": "https://www.engakuji.or.jp/grounds/",
+        "detail": "円覚寺公式サイト（舎利殿は禅宗様建築の代表）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -2996,8 +3201,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "和様に大仏様・禅宗様の意匠が混在した様式として建築史サイト(hineriman.work等)で確認。代表例は観心寺金堂"
+      },
+      {
+        "type": "official",
+        "url": "https://www.city.kawachinagano.lg.jp/site/history/5598.html",
+        "detail": "河内長野市公式サイト「国宝観心寺金堂」（折衷様の代表例）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3014,8 +3224,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "山口県立文書館資料・Wikipedia「絵巻物」で鎌倉時代の合戦絵巻の代表例として確認"
+      },
+      {
+        "type": "official",
+        "url": "https://colbase.nich.go.jp/collection_items/tnm/A-9976?locale=ja",
+        "detail": "ColBase（国立文化財機構）平治物語絵巻（六波羅行幸巻）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3032,8 +3247,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "Wikipedia「北野天神縁起絵巻」で菅原道真を題材とした鎌倉時代の縁起絵巻と確認。宮内庁三の丸尚蔵館にも別本の所蔵情報あり"
+      },
+      {
+        "type": "official",
+        "url": "https://kitanotenmangu.or.jp/story/%E5%A4%A9%E7%A5%9E%E3%81%95%E3%81%BE%E3%81%AE%E7%B8%81%E8%B5%B7%E7%B5%B5%E5%B7%BB-vol1/",
+        "detail": "北野天満宮公式サイト「天神さまの縁起絵巻」"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3050,8 +3270,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "大仏様建築の代表例として複数の建築史サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.todaiji.or.jp/",
+        "detail": "東大寺公式サイト（南大門・金剛力士像を所蔵）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3158,8 +3383,13 @@
     "existingWorkId": "nichimin-boeki",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "勘合符の画像を伴う教材として複数のサイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://museum.city.fukuoka.jp/archives/leaflet/325/index.html",
+        "detail": "福岡市博物館公式サイト アーカイブズ「日明貿易と博多」"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3176,8 +3406,13 @@
     "existingWorkId": "ashikaga-yoshimitsu",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "金閣造営・日明貿易開始の主体として教科書レベルの標準項目"
+      },
+      {
+        "type": "official",
+        "url": "https://www.shokoku-ji.jp/kinkakuji/about/",
+        "detail": "金閣寺（鹿苑寺）公式サイト「金閣寺について」"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3266,8 +3501,13 @@
     "existingWorkId": "gozan-jissatsu",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "臨済宗寺院の格付け制度として複数の仏教史サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.shokoku-ji.jp/reference/history/",
+        "detail": "臨済宗相国寺派公式サイト「総合歴史年表」"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3284,8 +3524,13 @@
     "existingWorkId": "musso-soseki",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "天龍寺・西芳寺の開山かつ作庭者として複数の庭園史サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.tenryuji.com/precincts/",
+        "detail": "天龍寺公式サイト（開山・夢窓疎石）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3302,8 +3547,13 @@
     "existingWorkId": "taiheiki",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "南北朝の動乱を描く軍記物として複数のサイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://kokusho.nijl.ac.jp/biblio/100011899",
+        "detail": "国文学研究資料館 国書データベース 太平記"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3320,8 +3570,13 @@
     "existingWorkId": "shubun-sansui",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "北山〜東山初期水墨画の代表例として複数の美術史サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://emuseum.nich.go.jp/detail?langId=ja&content_base_id=100351&content_part_id=000&content_pict_id=0",
+        "detail": "e国宝（国立文化財機構）山水図（伝周文）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3338,8 +3593,13 @@
     "existingWorkId": "suibokuga-kitayama",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "北山文化の水墨画導入期として複数の美術史サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://emuseum.nich.go.jp/detail?langId=ja&webView=&content_base_id=101224",
+        "detail": "e国宝（国立文化財機構）破墨山水図（如拙・明兆の水墨画の流れ）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3356,8 +3616,13 @@
     "existingWorkId": "nogaku-men",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "能面の工芸品として複数の美術館・伝統工芸サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.ntj.jac.go.jp/nou/",
+        "detail": "国立能楽堂公式サイト（独立行政法人日本芸術文化振興会）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3374,8 +3639,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "京都国立博物館博物館ディクショナリー(kyohaku.go.jp)・退蔵院公式(taizoin.com)・wanderkokuho.comで如拙筆・国宝・妙心寺退蔵院蔵を確認"
+      },
+      {
+        "type": "official",
+        "url": "http://www.taizoin.com/highlights/",
+        "detail": "退蔵院（妙心寺塔頭）公式サイト（瓢鮎図を所蔵）"
       }
     ],
     "frequencyEvidence": "不明。北山文化の水墨画導入を象徴する最重要作例と考えられるが過去問での具体出題年は未確認",
@@ -3392,8 +3662,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "京都市都市緑化協会(kyoto-ga.jp)・oniwa.gardenで夢窓疎石作庭(1339年)・世界遺産を確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.tenryuji.com/precincts/",
+        "detail": "天龍寺公式サイト「境内・山内案内」曹源池庭園"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3410,8 +3685,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "touken-world.jp・oniwa.gardenで夢窓疎石が1339年に再興・作庭したことを確認"
+      },
+      {
+        "type": "official",
+        "url": "https://saihoji-kokedera.com/",
+        "detail": "西芳寺（苔寺）公式サイト"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3428,8 +3708,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "五山文学の隆盛に伴う木版印刷として複数の日本史学習サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.shokoku-ji.jp/museum/exhibition/zendera/",
+        "detail": "相国寺公式サイト展覧会「禅寺の学問―継承される五山文学」"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3446,8 +3731,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "五山文学最高峰の禅僧として複数の文学史サイトで確認。代表作『空華集』"
+      },
+      {
+        "type": "official",
+        "url": "https://www.shokoku-ji.jp/museum/exhibition/zendera/",
+        "detail": "相国寺公式サイト展覧会「禅寺の学問―継承される五山文学」（義堂周信は五山文学の双璧）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3464,8 +3754,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "五山文学最高峰の禅僧として複数の文学史サイトで確認。代表作『蕉堅稿』"
+      },
+      {
+        "type": "official",
+        "url": "https://www.shokoku-ji.jp/museum/exhibition/zendera/",
+        "detail": "相国寺公式サイト展覧会「禅寺の学問―継承される五山文学」（絶海中津の墨蹟を所蔵）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3518,8 +3813,13 @@
     "existingWorkId": "togudo-doujinsai",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "書院造・四畳半茶室の起源として複数の建築史サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://bunka.nii.ac.jp/db/heritages/detail/122454",
+        "detail": "文化遺産オンライン（文化庁）慈照寺東求堂"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3536,8 +3836,13 @@
     "existingWorkId": "ryoanji-sekitei",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "枯山水の代表例として複数の庭園史サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "http://www.ryoanji.jp/smph/garden/index.html",
+        "detail": "龍安寺公式サイト「石庭の謎」"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3662,8 +3967,13 @@
     "existingWorkId": "kano-masanobu",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "狩野派の祖として複数の美術史サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://collection.kyuhaku.jp/gallery/7946.html",
+        "detail": "九州国立博物館公式サイト 国宝 周茂叔愛蓮図（狩野正信筆）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3716,8 +4026,13 @@
     "existingWorkId": "ashikaga-gakko",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "坂東の大学と称された教育機関として複数の日本史学習サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.city.ashikaga.tochigi.jp/education/000031/000180/p001417.html",
+        "detail": "足利市公式ホームページ「足利学校の歴史」"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3734,8 +4049,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "e国宝(emuseum.nich.go.jp)・文化遺産オンライン・Wikipediaで雪舟筆・東京国立博物館蔵・1953年国宝指定を確認"
+      },
+      {
+        "type": "official",
+        "url": "https://online.bunka.go.jp/heritages/detail/533772",
+        "detail": "文化遺産オンライン（文化庁）秋冬山水図（雪舟筆、東京国立博物館蔵）"
       }
     ],
     "frequencyEvidence": "不明。教科書掲載頻度は極めて高いと推定されるが過去問での具体出題年は未確認",
@@ -3752,8 +4072,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "京都便利堂・Wikipediaで雪舟筆・全長約16m・国宝・毛利博物館蔵を確認"
+      },
+      {
+        "type": "official",
+        "url": "https://emuseum.nich.go.jp/detail?content_base_id=100969",
+        "detail": "e国宝（国立文化財機構）四季山水図（山水長巻、雪舟筆、毛利博物館蔵）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3770,8 +4095,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "e国宝(emuseum.nich.go.jp)で雪舟筆と伝わることを確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.kyohaku.go.jp/jp/learn/home/dictio/kaiga/187/",
+        "detail": "京都国立博物館公式サイト「博物館ディクショナリー」天橋立図"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3788,8 +4118,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "oniwa.garden・garden-guide.jpで1509年古岳宗亘作庭・特別名勝を確認"
+      },
+      {
+        "type": "official",
+        "url": "https://daisen-in.net/about-daisenin/highlights/",
+        "detail": "大仙院（大徳寺塔頭）公式サイト「見どころ」"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3806,8 +4141,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "Wikipedia「一条兼良」・try-it.jp東山期の文学・学問の授業ページで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.digital.archives.go.jp/file/1244772.html",
+        "detail": "国立公文書館デジタルアーカイブ 樵談治要（一条兼良著）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3824,8 +4164,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "一条兼良が9代将軍足利義尚の諮問に応じて著した政治意見書として国立公文書館デジタルアーカイブ等で確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.digital.archives.go.jp/file/1244772.html",
+        "detail": "国立公文書館デジタルアーカイブ 樵談治要"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3842,8 +4187,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "Wikipedia・kotobankで東山文化最高の文化人、宗祇から古今伝授を受けたことを確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.enshuryu.com/%E4%BA%BA%E7%89%A9/%E4%B8%89%E6%9D%A1%E8%A5%BF%E5%AE%9F%E9%9A%86%EF%BC%88%E3%81%95%E3%82%93%E3%81%98%E3%82%87%E3%81%86%E3%81%AB%E3%81%97%E3%81%95%E3%81%AD%E3%81%9F%E3%81%8B%EF%BC%89/",
+        "detail": "遠州流茶道公式サイト「人物」三条西実隆"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3860,8 +4210,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "kokindenju.com・複数の古典文学サイトで宗祇から三条西実隆への伝授(1487年)を確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.enshuryu.com/%E4%BA%BA%E7%89%A9/%E4%B8%89%E6%9D%A1%E8%A5%BF%E5%AE%9F%E9%9A%86%EF%BC%88%E3%81%95%E3%82%93%E3%81%98%E3%82%87%E3%81%86%E3%81%AB%E3%81%97%E3%81%95%E3%81%AD%E3%81%9F%E3%81%8B%EF%BC%89/",
+        "detail": "遠州流茶道公式サイト（三条西実隆による古今伝授相伝を紹介）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3878,8 +4233,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "宗祇撰の准勅撰連歌集として複数の文学史サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://dc.tulips.tsukuba.ac.jp/s/pub_ja/document/rb_10076723087",
+        "detail": "筑波大学デジタルコレクション（国立大学法人）新撰菟玖波集"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3896,8 +4256,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "山崎宗鑑撰の俳諧連歌集として複数の文学史サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://kokusho.nijl.ac.jp/biblio/100052650",
+        "detail": "国文学研究資料館 国書データベース 新撰犬筑波集"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3914,8 +4279,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "村田珠光が創始したとされる茶の湯の様式として複数の茶道史サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "http://yamatoji.nara-kankou.or.jp/artifact/0000000147",
+        "detail": "奈良県観光公式サイト「あをによし なら旅ネット」村田珠光（わび茶の開祖）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3932,8 +4302,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "kotobank・Wikipediaで薩南学派を興した臨済宗の僧と確認"
+      },
+      {
+        "type": "ency",
+        "url": "https://kotobank.jp/word/%E6%A1%82%E5%BA%B5%E7%8E%84%E6%A8%B9-58544",
+        "detail": "コトバンク 桂庵玄樹の解説。公式の一次資料が見つからず百科を採用"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3950,8 +4325,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "kotobankで桂庵玄樹が薩摩地方で興した朱子学の一派と確認"
+      },
+      {
+        "type": "ency",
+        "url": "https://kotobank.jp/word/%E8%96%A9%E5%8D%97%E5%AD%A6%E6%B4%BE-69229",
+        "detail": "コトバンク 薩南学派の解説。同上"
       }
     ],
     "frequencyEvidence": "不明",
@@ -3968,8 +4348,13 @@
     "existingWorkId": "himeji-jo",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "現存天守・世界遺産の代表例として確認済み"
+      },
+      {
+        "type": "official",
+        "url": "https://www.city.himeji.lg.jp/castle/",
+        "detail": "姫路城公式サイト（姫路市）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -4004,8 +4389,13 @@
     "existingWorkId": "izumo-no-okuni",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "かぶき踊りの創始者として複数の日本史学習サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www2.ntj.jac.go.jp/dglib/modules/kabuki_dic/entry.php?entryid=1013",
+        "detail": "文化デジタルライブラリー（日本芸術文化振興会）歌舞伎事典「出雲の阿国」"
       }
     ],
     "frequencyEvidence": "不明",
@@ -4040,8 +4430,13 @@
     "existingWorkId": "kirishitan-ban",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "活版印刷術による出版物として複数の南蛮文化サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://kumamoto.guide/spots/detail/11250",
+        "detail": "熊本県公式観光サイト「天草コレジヨ館」（天草版キリシタン版の印刷施設）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -4076,8 +4471,13 @@
     "existingWorkId": "hasegawa-tohaku",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "狩野派と並ぶ桃山画壇の巨匠として複数の美術史サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://nanao-art-museum.jp/hasegawatohaku",
+        "detail": "石川県七尾美術館公式サイト（長谷川等伯生誕地）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -4112,8 +4512,13 @@
     "existingWorkId": "myokian-taian",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "千利休作と伝わる現存最古の茶室建築として複数の建築史サイトで確認。国宝"
+      },
+      {
+        "type": "official",
+        "url": "https://www.pref.kyoto.jp/kyotoyamashiro/treasure_7.html",
+        "detail": "京都府公式サイト「京都やましろ観光」山城地域の国宝（妙喜庵待庵）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -4166,8 +4571,13 @@
     "existingWorkId": "nanban-bunka",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "南蛮貿易・キリスト教文化流入の総称として複数のサイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.kobecitymuseum.jp/gallery/collection/detail?id=174",
+        "detail": "神戸市立博物館公式サイト（南蛮美術コレクション）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -4184,8 +4594,13 @@
     "existingWorkId": "joan-chashitsu",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "織田有楽斎作の国宝茶室として複数の建築史サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.meitetsu.co.jp/urakuen/joan/index.html",
+        "detail": "日本庭園・有楽苑公式サイト「国宝茶室如庵」"
       }
     ],
     "frequencyEvidence": "不明",
@@ -4202,8 +4617,13 @@
     "existingWorkId": "daigo-sanboin-teien",
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "豊臣秀吉の醍醐の花見に由来する庭園として複数の庭園史サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.daigoji.or.jp/grounds/sanboin.html",
+        "detail": "醍醐寺公式サイト「境内案内」三宝院"
       }
     ],
     "frequencyEvidence": "不明",
@@ -4220,8 +4640,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "ColBase公式ページ(colbase.nich.go.jp/collection_items/shozokan/SZK002944)・美術手帖(bijutsutecho.com)で狩野永徳筆・宮内庁三の丸尚蔵館蔵・国宝を確認"
+      },
+      {
+        "type": "official",
+        "url": "https://collection.shozokan.nich.go.jp/object/SZK002944",
+        "detail": "皇居三の丸尚蔵館（国立文化財機構）公式サイト 唐獅子図屏風"
       }
     ],
     "frequencyEvidence": "不明。桃山文化のシンボルとされる代表作で教科書掲載頻度は極めて高いと推定",
@@ -4238,8 +4663,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "米沢市上杉博物館公式(denkoku-no-mori.yonezawa.yamagata.jp)・キヤノン綴プロジェクト(global.canon)で狩野永徳筆・1574年織田信長より上杉謙信へ贈与・国宝を確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.denkoku-no-mori.yonezawa.yamagata.jp/rakuchyu_rakugai.htm",
+        "detail": "米沢市上杉博物館「伝国の杜」公式サイト 上杉本洛中洛外図屏風"
       }
     ],
     "frequencyEvidence": "不明",
@@ -4256,8 +4686,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "wanderkokuho.com・Wikipediaで長谷川等伯筆・東京国立博物館蔵・国宝を確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.tnm.jp/150th/project/202301/exhibition_shorinzu.html",
+        "detail": "東京国立博物館公式サイト（150周年特設）松林図屏風"
       }
     ],
     "frequencyEvidence": "不明。近世日本水墨画の最高峰とされ教科書掲載頻度は高いと推定",
@@ -4274,8 +4709,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "intojapanwaraku.com・media.thisisgallery.comで長谷川等伯（楓図）・久蔵（桜図）筆、豊臣秀吉が建立した祥雲寺（現智積院）の障壁画と確認"
+      },
+      {
+        "type": "official",
+        "url": "https://chisan.or.jp/worship/artifact/",
+        "detail": "智積院公式サイト「宝物館」桜図・楓図"
       }
     ],
     "frequencyEvidence": "不明",
@@ -4292,8 +4732,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "文化遺産オンライン・shavaspace.comでポルトガル船来航を描く狩野派の屏風絵（現存約90点）と確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.kobecitymuseum.jp/collection/detail?heritage=365028",
+        "detail": "神戸市立博物館公式サイト 南蛮屏風（狩野内膳筆）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -4310,8 +4755,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "西本願寺公式(hongwanji.kyoto)・文化遺産データベース(online.bunka.go.jp)で聚楽第からの移築と伝わる三層楼閣建築・国宝を確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.hongwanji.kyoto/see/hiunkaku.html",
+        "detail": "西本願寺公式サイト「観る」飛雲閣"
       }
     ],
     "frequencyEvidence": "不明",
@@ -4328,8 +4778,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "chitonitose.com・note.com(ura410)で聚楽第の遺構と伝わる四脚門・国宝を確認"
+      },
+      {
+        "type": "official",
+        "url": "https://online.bunka.go.jp/db/heritages/detail/174772",
+        "detail": "文化遺産オンライン（文化庁）大徳寺唐門"
       }
     ],
     "frequencyEvidence": "不明",
@@ -4346,8 +4801,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "kotobank・高台寺掌美術館公式(kodaiji.com)で秋草文様の平蒔絵、豊臣秀吉・北政所ゆかりの調度と確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.kodaiji.com/museum/makie.html",
+        "detail": "高台寺公式サイト「掌美術館」蒔絵の調度品"
       }
     ],
     "frequencyEvidence": "不明",
@@ -4364,8 +4824,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "kotobank・Wikipedia「天正遣欧少年使節」で1582年派遣・伊東マンショら4名・キリシタン版との関連を確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.qsr.mlit.go.jp/suishin/story2019/04_5.html",
+        "detail": "国土交通省九州地方整備局公式サイト「日本初のヨーロッパ派遣（天正遣欧少年使節）」"
       }
     ],
     "frequencyEvidence": "不明",
@@ -4382,8 +4847,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "天正遣欧使節を企画したイエズス会巡察師として複数のサイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://emuseum.nich.go.jp/detail?langId=ja&webView=&content_base_id=100816&content_part_id=0&content_pict_id=0",
+        "detail": "e国宝（国立文化財機構）天正遣欧使節記"
       }
     ],
     "frequencyEvidence": "不明",
@@ -4400,8 +4870,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "有田焼の祖とされる朝鮮人陶工として複数の陶芸史サイトで確認"
+      },
+      {
+        "type": "official",
+        "url": "https://arita-toso.net/pages/2/",
+        "detail": "陶山神社公式サイト（李参平を祀る）「陶山神社について」"
       }
     ],
     "frequencyEvidence": "不明",
@@ -4418,8 +4893,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "Wikipedia・shirobito.jpで1583年豊臣秀吉築城・現在の天守は1931年建造の鉄筋コンクリート復興天守（徳川期天守台の上に豊臣期天守を模して建立）と確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.osakacastle.net/",
+        "detail": "大阪城天守閣公式サイト"
       }
     ],
     "frequencyEvidence": "不明",
@@ -4436,8 +4916,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "犬山城白帝文庫公式(inuyamajohb.org)・Wikipediaで現存天守・国宝(5城の一つ)、現在の天守の姿は1617年頃の成瀬正成による改修と確認"
+      },
+      {
+        "type": "official",
+        "url": "https://inuyama.gr.jp/experience/detail/1/",
+        "detail": "犬山観光ナビ（犬山市観光協会公式）国宝犬山城"
       }
     ],
     "frequencyEvidence": "不明",
@@ -4454,8 +4939,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "Wikipedia「松本城」で国宝5城の一つ、大天守は文禄年間(1593-96年)築造説が有力と確認"
+      },
+      {
+        "type": "official",
+        "url": "https://www.city.matsumoto.nagano.jp/life/7/28/",
+        "detail": "松本市公式サイト 国宝松本城"
       }
     ],
     "frequencyEvidence": "不明",
@@ -4706,12 +5196,12 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "遠州流茶道 公式サイト「小堀遠州」（1631年に3代将軍徳川家光の茶道指南となり、後水尾天皇をはじめとする寛永文化サロンの中心人物。作事奉行として桂離宮・仙洞御所・二条城の建築・造園に関与）",
         "url": "https://www.enshuryu.com/enshuryu/enshu/"
       },
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "ヒストリスト（山川出版社運営）「寛永文化」記事",
         "url": "https://www.historist.jp/word_j_ka/entry/030720/"
       }
@@ -4735,7 +5225,7 @@
         "url": "https://bunkakanko-annai.city.shinjuku.lg.jp/"
       },
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "日本史オンライン講義録「082 寛永期の文化」が桂離宮と並べて挙げる",
         "url": "https://ten-made-to-be.hatenablog.com/entry/082"
       }
@@ -4754,7 +5244,7 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "詩仙堂丈山寺 公式サイト・京都府関連サイト複数（1641年＝寛永18年造営、石川丈山は隷書・漢詩の大家、狩野探幽の三十六詩仙像を安置）",
         "url": "https://kyoto-shisendo.net/menu/"
       }
@@ -4777,7 +5267,7 @@
         "detail": "既存work nakae-toju（中江藤樹）のfactsに「門人に熊沢蕃山がいる」と既に記載。岡山藩に仕えた陽明学者、著書『大学或問』"
       },
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "日本史オンライン講義録・chitonitose.com 元禄文化ページ等の複数ブログで陽明学者として言及",
         "url": "https://chitonitose.com/jh/jh_lessons86.html"
       }
@@ -5048,9 +5538,14 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "chitonitose.com「元禄文化－文学と学問」: 「武士道徳を儒学の立場から説き、武士道を大成。『聖教要録』が朱子学を批判したため赤穂に流刑」",
         "url": "https://chitonitose.com/jh/jh_lessons86.html"
+      },
+      {
+        "type": "official",
+        "url": "https://www.library.shinjuku.tokyo.jp/database/jinbutuyukari/080/post272.html",
+        "detail": "新宿区立図書館公式サイト「新宿区ゆかりの人物データベース」山鹿素行"
       }
     ],
     "frequencyEvidence": "不明",
@@ -5071,7 +5566,7 @@
         "detail": "既存work ito-jinsai（伊藤仁斎）のexamNoteに既に「荻生徂徠＝古文辞学」と記載あり"
       },
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "chitonitose.com「元禄文化－文学と学問」: 「古学派を継承し、統治の具体策である経世論を提唱。江戸茅場に私塾蘐園塾を開き、8代将軍徳川吉宗に重用され『政談』で回答」",
         "url": "https://chitonitose.com/jh/jh_lessons86.html"
       }
@@ -5090,9 +5585,14 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "chitonitose.com「元禄文化－文学と学問」: 「『万葉集』を伝統にとらわれずに研究し、『万葉代匠記』を著述」",
         "url": "https://chitonitose.com/jh/jh_lessons86.html"
+      },
+      {
+        "type": "official",
+        "url": "https://www.city.osaka.lg.jp/kensetsu/page/0000009684.html",
+        "detail": "大阪市公式サイト 契沖旧庵（円珠庵）跡ならびに墓 史跡"
       }
     ],
     "frequencyEvidence": "不明",
@@ -5109,9 +5609,14 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "chitonitose.com「元禄文化－文学と学問」に著作『大和本草』が言及",
         "url": "https://chitonitose.com/jh/jh_lessons86.html"
+      },
+      {
+        "type": "official",
+        "url": "https://www.city.fukuoka.lg.jp/chuoku/kikaku/charm-kankou/miryokuhasshin_chuo-ku/miryokudai9kai.html",
+        "detail": "福岡市中央区公式サイト「魅力発信中央区」貝原益軒"
       }
     ],
     "frequencyEvidence": "不明",
@@ -5169,7 +5674,7 @@
         "detail": "日大過去問11年分「元禄6回」の頻出テーマに「朱子学の京学と南学」が明記されている（nichidai-past-exams-analysis.md 4章）"
       },
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "chitonitose.com「元禄文化－文学と学問」に「海南学派（南学）」の学派名が言及",
         "url": "https://chitonitose.com/jh/jh_lessons86.html"
       }
@@ -5188,9 +5693,14 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "chitonitose.com「元禄文化－文学と学問」に著作『経済録』が言及",
         "url": "https://chitonitose.com/jh/jh_lessons86.html"
+      },
+      {
+        "type": "official",
+        "url": "https://t-navi.city.taito.lg.jp/spot/1246",
+        "detail": "台東区公式観光サイト（TAITOおでかけナビ）太宰春台の墓"
       }
     ],
     "frequencyEvidence": "不明",
@@ -5207,12 +5717,12 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "ency",
         "detail": "元禄文化のWikipedia記事が建築の節で「萬福寺大雄宝殿：黄檗建築の初期の事例」と言及",
         "url": "https://ja.wikipedia.org/wiki/%E5%85%83%E7%A6%84%E6%96%87%E5%8C%96"
       },
       {
-        "type": "matome-site",
+        "type": "official",
         "detail": "黄檗山萬福寺公式サイト・Wikipedia「萬福寺」（隠元隆琦が承応3年＝1654年来日、寛文元年＝1661年に萬福寺開創）",
         "url": "https://www.obakusan.or.jp/about/"
       }
@@ -5559,7 +6069,7 @@
         "detail": "既存work motoori-norinaga（本居宣長）が既に「師の賀茂真淵の学問を継承」と言及"
       },
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "chitonitose.com「宝暦・天明期の文化－学問と思想」: 「契沖→荷田春満→賀茂真淵→本居宣長」の系統、『万葉集』研究を通じた『日本古来の精神復活』主張",
         "url": "https://chitonitose.com/jh/jh_lessons91.html"
       }
@@ -5578,9 +6088,14 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "コトバンク・chitonitose.comともに「国学四大人」の一人、伏見稲荷社の神職、荷田春満→賀茂真淵→本居宣長の系統の始祖と紹介",
         "url": "https://chitonitose.com/jh/jh_lessons91.html"
+      },
+      {
+        "type": "official",
+        "url": "https://www2.city.kyoto.lg.jp/somu/rekishi/fm/ishibumi/html/hu123.html",
+        "detail": "京都市公式サイト「フィールドミュージアム京都 いしぶみデータベース」HU123 荷田春満旧宅（文字コードの都合で自動変換ツールでは文字化けする場合あり、検索結果のタイトル・所在地記述で内容一致を確認）"
       }
     ],
     "frequencyEvidence": "不明",
@@ -5602,7 +6117,7 @@
         "url": "https://www2.city.kyoto.lg.jp/somu/rekishi/fm/nenpyou/htmlsheet/bunka19.html"
       },
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "chitonitose.com「宝暦・天明期の文化－学問と思想」に著書『都鄙問答』が言及",
         "url": "https://chitonitose.com/jh/jh_lessons91.html"
       }
@@ -5640,9 +6155,14 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "chitonitose.com「宝暦・天明期の文化－教育と文芸」の教育機関一覧に「懐徳堂」を掲載。中井竹山・富永仲基・山片蟠桃らが関係者として同ページに列挙",
         "url": "https://chitonitose.com/jh/jh_lessons92.html"
+      },
+      {
+        "type": "official",
+        "url": "https://www.let.osaka-u.ac.jp/kaitoku-c/kaitokudo.html",
+        "detail": "大阪大学大学院人文学研究科 懐徳堂研究センター公式サイト"
       }
     ],
     "frequencyEvidence": "不明",
@@ -5659,9 +6179,14 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "ency",
         "detail": "Wikipedia「明和事件」、Kotobank。幕政を批判した山県大弐が処刑された事件（1767年）",
         "url": "https://ja.wikipedia.org/wiki/%E6%98%8E%E5%92%8C%E4%BA%8B%E4%BB%B6"
+      },
+      {
+        "type": "official",
+        "url": "https://kai.library2.city.kai.yamanashi.jp/furusato_10.html",
+        "detail": "甲斐市立図書館公式サイト「山県大弐について」"
       }
     ],
     "frequencyEvidence": "不明",
@@ -5678,9 +6203,14 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "ency",
         "detail": "Wikipedia「宝暦事件」、Kotobank。公家に尊王論を説いた竹内式部が京都追放となった事件（1758年）",
         "url": "https://ja.wikipedia.org/wiki/%E5%AE%9D%E6%9A%A6%E4%BA%8B%E4%BB%B6"
+      },
+      {
+        "type": "ency",
+        "url": "https://kotobank.jp/word/%E7%AB%B9%E5%86%85%E5%BC%8F%E9%83%A8-18680",
+        "detail": "コトバンク 竹内式部の解説。公式の一次資料が見つからず百科を採用"
       }
     ],
     "frequencyEvidence": "不明",
@@ -5697,9 +6227,14 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "chitonitose.com「宝暦・天明期の文化－学問と思想」の尊王論の項に、蒲生君平・頼山陽と並んで掲載",
         "url": "https://chitonitose.com/jh/jh_lessons91.html"
+      },
+      {
+        "type": "official",
+        "url": "https://www.city.ota.gunma.jp/page/4162.html",
+        "detail": "太田市公式ホームページ（文化財課）高山彦九郎記念館"
       }
     ],
     "frequencyEvidence": "不明",
@@ -5716,9 +6251,14 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "chitonitose.com「宝暦・天明期の文化－学問と思想」の尊王論の項に高山彦九郎・頼山陽と並んで掲載",
         "url": "https://chitonitose.com/jh/jh_lessons91.html"
+      },
+      {
+        "type": "official",
+        "url": "https://www.city.utsunomiya.lg.jp/kids/nazenani/1008380.html",
+        "detail": "宇都宮市公式サイト 蒲生君平"
       }
     ],
     "frequencyEvidence": "不明",
@@ -5753,9 +6293,14 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "chitonitose.com「宝暦・天明期の文化－学問と思想」に著書『蘭学階梯』・私塾芝蘭堂が言及",
         "url": "https://chitonitose.com/jh/jh_lessons91.html"
+      },
+      {
+        "type": "official",
+        "url": "https://www.city.ichinoseki.iwate.jp/museum/collection/01_03.html",
+        "detail": "一関市博物館公式サイト「玄沢と蘭学」"
       }
     ],
     "frequencyEvidence": "不明",
@@ -5772,9 +6317,14 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "鳥取市関連サイト・複数辞典サイトで日本初のオランダ語辞書『ハルマ和解』の編者として紹介",
         "url": "https://rekishi-king.com/inamurasanpaku/"
+      },
+      {
+        "type": "official",
+        "url": "https://www.city.oshu.iwate.jp/choei/shuzo/5/1147.html",
+        "detail": "奥州市公式サイト ハルマ和解関連ページ"
       }
     ],
     "frequencyEvidence": "不明",
@@ -5791,8 +6341,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "複数のまとめサイト・辞典で「寛政の三奇人」の1人、海防論者として紹介（個別の一次資料は今回未確認）"
+      },
+      {
+        "type": "official",
+        "url": "https://www.city.sendai.jp/museum/kidscorner/kids-08/kidscorner-06/index.html",
+        "detail": "仙台市博物館公式サイト「林子平と海防論」"
       }
     ],
     "frequencyEvidence": "不明",
@@ -5809,8 +6364,13 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "matome",
         "detail": "複数の辞典・まとめサイトでロシア南下に関する意見書『赤蝦夷風説考』の著者として紹介（個別の一次資料は今回未確認）"
+      },
+      {
+        "type": "ency",
+        "url": "https://kotobank.jp/word/%E5%B7%A5%E8%97%A4%E5%B9%B3%E5%8A%A9-55648",
+        "detail": "コトバンク 工藤平助の解説。公式の一次資料が見つからず百科を採用"
       }
     ],
     "frequencyEvidence": "不明",
@@ -5869,7 +6429,7 @@
         "detail": "既存work poppin-wo-fuku-onna・otani-oniji・kansei-san-bijinのfactsに「版元は蔦屋重三郎」と既に記載"
       },
       {
-        "type": "matome-site",
+        "type": "ency",
         "detail": "宝暦・天明文化のWikipedia記事: 「本屋・書物問屋などを営み、新文学を支援」",
         "url": "https://ja.wikipedia.org/wiki/%E5%AE%9D%E6%9A%A6%E3%83%BB%E5%A4%A9%E6%98%8E%E6%96%87%E5%8C%96"
       }
@@ -6271,9 +6831,14 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "ency",
         "detail": "Wikipedia「会沢正志斎」: 水戸藩士、天保11年（1840年）藩校弘道館の初代教授頭取。『新論』は尊王攘夷思想が結びついた著作で幕府により発禁、写本で全国に広まった",
         "url": "https://ja.wikipedia.org/wiki/%E4%BC%9A%E6%B2%A2%E6%AD%A3%E5%BF%97%E6%96%8E"
+      },
+      {
+        "type": "official",
+        "url": "https://www.city.mito.lg.jp/site/education/2369.html",
+        "detail": "水戸市公式サイト（教育委員会）会沢正志斎の墓"
       }
     ],
     "frequencyEvidence": "不明",
@@ -6328,9 +6893,14 @@
     "existingWorkId": null,
     "sources": [
       {
-        "type": "matome-site",
+        "type": "ency",
         "detail": "Wikipedia「谷文晁」・複数の美術館解説: 1763〜1840年、化政期の江戸画壇を代表する文人画家、渡辺崋山ら多くの弟子を育てた",
         "url": "https://ja.wikipedia.org/wiki/%E8%B0%B7%E6%96%87%E6%99%81"
+      },
+      {
+        "type": "official",
+        "url": "https://www.city.adachi.tokyo.jp/hakubutsukan/chiikibunka/hakubutsukan/shiryo-tanibuncho.html",
+        "detail": "足立区立郷土博物館公式サイト 谷文晁"
       }
     ],
     "frequencyEvidence": "不明",

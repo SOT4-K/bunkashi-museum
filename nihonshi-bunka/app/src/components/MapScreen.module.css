@@ -1,22 +1,13 @@
 /* M2b-12: マップのポップ化（9/8オーナー午後フィードバック）。彩度高めの明るいパレットを
    このスクリーン内だけのローカル変数として定義する（絵巻風の渋い色から変更。他画面の
    トークン var(--kin) 等には影響させない）。構造は変えない（M2b-06の縦長・原始最下部・
-   直列解禁・雲・クリア済み再挑戦はそのまま）。 */
+   直列解禁・雲・クリア済み再挑戦はそのまま）。
+   M2d-01: 面タイルの状態色（locked/unlocked/cleared/boss）は WorldMapScreen.module.css に
+   移した（このファイルはワールド単位の入口のみを描くため不要になった）。 */
 .screen {
   --map-road: #29b6f6;
   --map-landmark: #ffb300;
   --map-landmark-locked: #b0b7c3;
-  --map-locked-bg: #dfe3ea;
-  /* M2b-99e[中]是正: #7b8291はロックタイルの opacity:.85 と合成すると白パネル背景上で
-     実効コントラスト比2.43:1（4.5:1未達）だった。#3d4250 に暗くすると合成後5.21:1で
-     基準を満たす（WCAG相対輝度で計算・確認済み）。 */
-  --map-locked-fg: #3d4250;
-  --map-unlocked-bg: #ffd53d;
-  --map-unlocked-fg: #4a3900;
-  --map-cleared-bg: #35d07f;
-  --map-cleared-fg: #06381f;
-  --map-boss-bg: #ff6b6b;
-  --map-boss-fg: #4a0d0d;
   --map-panel-bg: #ffffff;
   --map-panel-fg: #1c1f2a;
 
@@ -116,11 +107,16 @@
   color: #6b7280;
 }
 
+/* M2d-01: ワールドの入口（タップで WorldMapScreen へ）。以前はここに面タイルを直接
+   展開していたが、2階層目の画面に移した（MapScreen.tsx のコメント参照）。<button> にした
+   ため既定のボタン装飾をリセットする。 */
 .worldPanel {
   position: absolute;
   width: 200px;
+  min-height: 44px;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 8px;
   background: var(--map-panel-bg);
   color: var(--map-panel-fg);
@@ -128,6 +124,14 @@
   border-radius: var(--radius-button);
   padding: 12px;
   box-shadow: 0 6px 18px rgb(0 0 0 / 24%);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.worldPanel:disabled {
+  cursor: default;
+  opacity: 0.85;
 }
 
 /* M2b-12: ワールド名は太字で帯付き。 */
@@ -141,106 +145,9 @@
   align-self: flex-start;
 }
 
-.difficultyRow {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-/* M2b-99e[軽]是正: 13px→14px。 */
-.stageStar {
-  font-size: 14px;
-  letter-spacing: 1px;
-  width: 30px;
-  flex-shrink: 0;
-  color: var(--map-panel-fg);
-}
-
-.stageTile {
-  min-height: 44px;
-  min-width: 44px;
-  border-radius: 10px;
-  border: 2px solid transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.worldProgress {
+  margin: 0;
   font-size: 14px;
   font-weight: 700;
-  padding: 4px;
-  flex: 1;
-}
-
-.stageTile:disabled {
-  cursor: default;
-}
-
-.tileIcon {
-  font-size: 18px;
-  line-height: 1;
-}
-
-.tileLabel {
-  font-size: 14px;
-  line-height: 1.2;
-}
-
-/* M2b-12: ロック（灰）。 */
-.locked {
-  background: var(--map-locked-bg);
-  color: var(--map-locked-fg);
-  opacity: 0.85;
-}
-
-/* M2b-12: 挑戦可能（黄色パルス）。 */
-.unlocked {
-  background: var(--map-unlocked-bg);
-  color: var(--map-unlocked-fg);
-  animation: tile-pulse 1.6s ease-in-out infinite;
-}
-
-/* M2b-99e[軽]是正: OS設定でモーション低減が有効なら無限パルスを止める。 */
-@media (prefers-reduced-motion: reduce) {
-  .unlocked {
-    animation: none;
-  }
-}
-
-/* M2b-12: クリア済み（緑チェック）。 */
-.cleared {
-  background: var(--map-cleared-bg);
-  color: var(--map-cleared-fg);
-}
-
-@keyframes tile-pulse {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 rgb(255 213 61 / 55%);
-  }
-  50% {
-    box-shadow: 0 0 0 6px rgb(255 213 61 / 0%);
-  }
-}
-
-.bossTile {
-  width: 100%;
-  min-height: 48px;
-  font-size: 14px;
-  gap: 6px;
-}
-
-/* M2b-12: ボスは王冠アイコンで撃破済みを判別。挑戦可能時は赤系で目立たせる。 */
-.bossTile.unlocked {
-  background: var(--map-boss-bg);
-  color: var(--map-boss-fg);
-}
-
-.bossTile.cleared {
-  background: var(--map-cleared-bg);
-  color: var(--map-cleared-fg);
-}
-
-.bossTile.locked {
-  background: var(--map-locked-bg);
-  color: var(--map-locked-fg);
+  color: var(--map-panel-fg);
 }

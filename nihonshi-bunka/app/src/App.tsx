@@ -3,6 +3,7 @@ import styles from './App.module.css'
 import { TabBar } from './components/TabBar'
 import { HomeScreen } from './components/HomeScreen'
 import { MapScreen } from './components/MapScreen'
+import { WorldMapScreen } from './components/WorldMapScreen'
 import { StageScreen } from './components/StageScreen'
 import { MissReviewScreen } from './components/MissReviewScreen'
 import { MuseumScreen } from './components/MuseumScreen'
@@ -10,7 +11,8 @@ import { ExamScreen } from './components/ExamScreen'
 import { TimeAttackScreen } from './components/TimeAttackScreen'
 import { ConfirmDialog } from './components/ConfirmDialog'
 import { useProgressStore } from './store/useProgressStore'
-import { eras, playableWorks, themeSetPool, passages, worksById } from './content'
+import { eras, playableWorks, themeSetPool, passages, worksById, worldThemesById } from './content'
+import { getWorldTheme } from './engine/worldTheme'
 import { todayIso } from './engine/srs'
 import { buildMockExam, discoverableWorks, TIME_ATTACK_EXAM_SIZE, type MockExamItem } from './engine/mockExam'
 import { buildMissReviewSession, type MissReviewItem } from './engine/missLog'
@@ -50,6 +52,9 @@ export default function App() {
   }
   const [activeStage, setActiveStage] = useState<ActiveStage | null>(null)
   const [stageNonce, setStageNonce] = useState(0)
+  // M2d-01: マップタブの2階層目。全体マップ（MapScreen）でワールドをタップすると
+  // そのワールドの WorldMapScreen を開く。null なら全体マップを表示する。
+  const [activeWorldEraId, setActiveWorldEraId] = useState<string | null>(null)
   // 模試タブ（M2b-07）: タイムアタック中の問題セット。null なら模試タブの開始/記録画面を表示する。
   const [activeExam, setActiveExam] = useState<MockExamItem[] | null>(null)
   // M2-47: 学習中（ステージ／ボス・間違い復習・模試のいずれか）にタブを押したときの確認待ち。
@@ -75,6 +80,9 @@ export default function App() {
       setPendingLeave(true)
       return
     }
+    // M2d-01: マップタブを離れたら（他タブへ、または一旦ホームへ等）ワールドマップは閉じ、
+    // 次にマップタブを開いたときは全体マップから始まるようにする。
+    if (next !== 'map') setActiveWorldEraId(null)
     setTab(next)
   }
 
@@ -83,6 +91,7 @@ export default function App() {
     setActiveStage(null)
     setActiveExam(null)
     setPendingLeave(false)
+    setActiveWorldEraId(null)
     setTab('home')
   }
 
@@ -219,6 +228,7 @@ export default function App() {
   /** 進捗リセット（M2b-05: 3回確認を通した後に呼ばれる）。確定後はホームへ戻る。 */
   function handleResetProgress() {
     resetProgress()
+    setActiveWorldEraId(null)
     setTab('home')
   }
 
@@ -326,8 +336,19 @@ export default function App() {
             onAcknowledgeResetNotice={acknowledgeResetNotice}
           />
         )}
-        {tab === 'map' && (
-          <MapScreen eras={eras} imagePool={playableWorks} progress={progress} onSelectStage={goStage} />
+        {tab === 'map' && activeWorldEraId === null && (
+          <MapScreen eras={eras} imagePool={playableWorks} progress={progress} onSelectWorld={setActiveWorldEraId} />
+        )}
+        {tab === 'map' && activeWorldEraId !== null && (
+          <WorldMapScreen
+            eraId={activeWorldEraId}
+            eras={eras}
+            imagePool={playableWorks}
+            progress={progress}
+            theme={getWorldTheme(worldThemesById, activeWorldEraId)}
+            onSelectStage={(key) => goStage(activeWorldEraId, key)}
+            onBack={() => setActiveWorldEraId(null)}
+          />
         )}
         {tab === 'museum' && (
           // M2b-18: 本番モード（MockExamScreen/goMockExam）を廃止。空状態ボタンは

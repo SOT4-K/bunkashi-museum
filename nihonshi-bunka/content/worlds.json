@@ -1,0 +1,103 @@
+[
+  {
+    "eraId": "genshi",
+    "palette": { "sky": "#f4e4c1", "ground": "#8a6b4a", "road": "#c98b4a", "accent": "#b5482e" },
+    "bossShape": "kofun",
+    "motifs": [
+      { "id": "dogu", "label": "土偶" },
+      { "id": "haniwa", "label": "埴輪" },
+      { "id": "tateana", "label": "竪穴住居" },
+      { "id": "dotaku", "label": "銅鐸" },
+      { "id": "kaizuka", "label": "貝塚" }
+    ]
+  },
+  {
+    "eraId": "asuka",
+    "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
+    "bossShape": "default",
+    "motifs": []
+  },
+  {
+    "eraId": "hakuho",
+    "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
+    "bossShape": "default",
+    "motifs": []
+  },
+  {
+    "eraId": "tenpyo",
+    "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
+    "bossShape": "default",
+    "motifs": []
+  },
+  {
+    "eraId": "konin-jogan",
+    "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
+    "bossShape": "default",
+    "motifs": []
+  },
+  {
+    "eraId": "kokufu",
+    "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
+    "bossShape": "default",
+    "motifs": []
+  },
+  {
+    "eraId": "insei",
+    "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
+    "bossShape": "default",
+    "motifs": []
+  },
+  {
+    "eraId": "kamakura",
+    "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
+    "bossShape": "default",
+    "motifs": []
+  },
+  {
+    "eraId": "kitayama",
+    "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
+    "bossShape": "default",
+    "motifs": []
+  },
+  {
+    "eraId": "higashiyama",
+    "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
+    "bossShape": "default",
+    "motifs": []
+  },
+  {
+    "eraId": "momoyama",
+    "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
+    "bossShape": "default",
+    "motifs": []
+  },
+  {
+    "eraId": "kanei",
+    "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
+    "bossShape": "default",
+    "motifs": []
+  },
+  {
+    "eraId": "genroku",
+    "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
+    "bossShape": "default",
+    "motifs": []
+  },
+  {
+    "eraId": "horeki-tenmei",
+    "palette": { "sky": "#dbe6f0", "ground": "#c9d6c0", "road": "#8fa3b0", "accent": "#5b7083" },
+    "bossShape": "default",
+    "motifs": []
+  },
+  {
+    "eraId": "kasei",
+    "palette": { "sky": "#bfe3f0", "ground": "#e8d9b5", "road": "#3d6ea5", "accent": "#c0392b" },
+    "bossShape": "fuji",
+    "motifs": [
+      { "id": "fuji", "label": "富士" },
+      { "id": "nami", "label": "波" },
+      { "id": "tabibito", "label": "旅人" },
+      { "id": "nishikie", "label": "錦絵" }
+    ]
+  }
+]

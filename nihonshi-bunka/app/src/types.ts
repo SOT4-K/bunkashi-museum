@@ -154,6 +154,32 @@ export interface Era {
   weight?: number
 }
 
+// --- ワールドマップの時代テーマ（M2d-01。content/worlds.json） ---
+
+/** ワールドマップの背景配色。WorldMapScreen 画面内だけの CSS 変数に流し込む。 */
+export interface WorldPalette {
+  sky: string
+  ground: string
+  road: string
+  accent: string
+}
+
+/** 道端の飾り1件。id は components/WorldMotifIcons.tsx のカタログキー（自作 SVG）。
+ *  タップ不可の演出のみ（実際の出題画像は使わない＝CLAUDE.md 禁止事項）。 */
+export interface WorldMotif {
+  id: string
+  label: string
+}
+
+export interface WorldTheme {
+  eraId: string
+  palette: WorldPalette
+  /** ボスノードの形（components/WorldMotifIcons.tsx の BOSS_SHAPES キー）。未知の値は既定形にフォールバック。 */
+  bossShape: string
+  /** 道端の飾りモチーフ（3〜5種）。空配列なら「無地のパレットのみ」（M2d-01 時点で13ワールド）。 */
+  motifs: WorldMotif[]
+}
+
 // --- リード文＋下線部（テーマセット。decisions.md 2026-09-04「模試型」） ---
 
 /** 下線部から出す設問の希望（mock-exam-analysis.md 7章「修正の仕様」・8章「二段構え」・

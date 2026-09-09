@@ -1,13 +1,20 @@
 // content/ 以下（app/ の外、nihonshi-bunka/content/）を Vite の import.meta.glob で読み込む。
 // このファイル（app/src/content.ts）から見ると content/ は2階層上（app/src → app → nihonshi-bunka → content）。
 // vite.config.ts の server.fs.allow に '..' を追加してある。
-import type { Era, Passage, Work } from './types'
+import type { Era, Passage, Work, WorldTheme } from './types'
 import { hasRealImage } from './utils/image'
 
 const eraModules = import.meta.glob('../../content/eras.json', {
   eager: true,
   import: 'default',
 }) as Record<string, Era[]>
+
+// ワールドマップの時代テーマ（M2d-01。content/worlds.json）。無ければ空配列
+// （getWorldTheme 側が既定テーマにフォールバックするので落ちない）。
+const worldThemeModules = import.meta.glob('../../content/worlds.json', {
+  eager: true,
+  import: 'default',
+}) as Record<string, WorldTheme[]>
 
 const workModules = import.meta.glob('../../content/works/*.json', {
   eager: true,
@@ -23,6 +30,8 @@ const passageModules = import.meta.glob('../../content/passages/*.json', {
 
 const rawEras: Era[] = Object.values(eraModules)[0] ?? []
 
+const rawWorldThemes: WorldTheme[] = Object.values(worldThemeModules)[0] ?? []
+
 const rawWorks: Work[] = Object.values(workModules).flat()
 
 const rawPassages: Passage[] = Object.values(passageModules).flat()
@@ -37,6 +46,12 @@ function shouldIncludeDraft(): boolean {
 }
 
 export const eras: Era[] = [...rawEras].sort((a, b) => a.order - b.order)
+
+/** eraId → WorldTheme。worlds.json に無い eraId は engine/worldTheme.ts の
+ *  getWorldTheme() が既定テーマ（無地パレット）にフォールバックする。 */
+export const worldThemesById: Record<string, WorldTheme> = Object.fromEntries(
+  rawWorldThemes.map((t) => [t.eraId, t]),
+)
 
 export const works: Work[] = shouldIncludeDraft()
   ? rawWorks

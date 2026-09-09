@@ -1,0 +1,194 @@
+/* M2d-01: ワールドマップ画面。色は WorldMapScreen.tsx が --wm-* を theme（content/worlds.json）
+   から流し込む（このファイルではデフォルト値だけ書き、13ワールド分の「無地パレット」は
+   その既定値と実質同じ色を worldTheme.ts の DEFAULT_WORLD_THEME に持たせている）。 */
+.screen {
+  --wm-locked-bg: #dfe3ea;
+  --wm-locked-fg: #3d4250;
+  --wm-unlocked-bg: #ffd53d;
+  --wm-unlocked-fg: #4a3900;
+  --wm-cleared-bg: #35d07f;
+  --wm-cleared-fg: #06381f;
+  --wm-boss-bg: #ff6b6b;
+  --wm-boss-fg: #4a0d0d;
+
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: calc(env(safe-area-inset-top) + 12px) 16px 16px;
+  background: linear-gradient(180deg, var(--wm-sky, #dbe6f0) 0%, var(--wm-sky, #dbe6f0) 60%, var(--wm-ground, #c9d6c0) 100%);
+  border-radius: var(--radius-image);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.backButton {
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: none;
+  background: #ffffff;
+  color: #1c1f2a;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 18%);
+}
+
+.worldTitle {
+  font-weight: 700;
+  font-size: 15px;
+  color: #1c1f2a;
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 6px 12px;
+}
+
+.empty {
+  font-size: 14px;
+  color: var(--text-dim);
+}
+
+/* ノード数が少ないため自前ドラッグではなくネイティブ縦スクロールで足りる
+   （builder メモ「custom-pointer-drag-pan-clamped-transform」は多量コンテンツ向け。
+   ここは十数ノード規模のため素直な overflow-y: auto を選んだ）。 */
+.viewport {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius-image);
+}
+
+.canvas {
+  position: relative;
+}
+
+.groundStrip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 70px;
+  background: var(--wm-ground, #c9d6c0);
+  opacity: 0.55;
+}
+
+.roadSvg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.road {
+  stroke: var(--wm-road, #8fa3b0);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 2 16;
+  opacity: 0.9;
+}
+
+/* 道端の飾り（タップ不可）。 */
+.motif {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 3px rgb(0 0 0 / 20%));
+}
+
+.node {
+  position: absolute;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 24%);
+}
+
+.node:disabled {
+  cursor: default;
+}
+
+.tileIcon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.tileLabel {
+  font-size: 14px;
+  line-height: 1.1;
+}
+
+.tileStars {
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 1px;
+}
+
+.locked {
+  background: var(--wm-locked-bg);
+  color: var(--wm-locked-fg);
+  opacity: 0.85;
+}
+
+.unlocked {
+  background: var(--wm-unlocked-bg);
+  color: var(--wm-unlocked-fg);
+  animation: node-pulse 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .unlocked {
+    animation: none;
+  }
+}
+
+.cleared {
+  background: var(--wm-cleared-bg);
+  color: var(--wm-cleared-fg);
+}
+
+@keyframes node-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(255 213 61 / 55%);
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgb(255 213 61 / 0%);
+  }
+}
+
+/* ボスノード: (c) ボスノードの形は WorldMapScreen.tsx が clip-path をインラインで当てる
+   （theme.bossShape。無ければ通常の円のまま）。円ではないボスノードでは border-radius が
+   見た目に効かないため clip-path 側の形をそのまま使う。 */
+.bossNode {
+  border-radius: 14px;
+}
+
+.bossNode.unlocked {
+  background: var(--wm-boss-bg);
+  color: var(--wm-boss-fg);
+}
+
+.bossNode.cleared {
+  background: var(--wm-cleared-bg);
+  color: var(--wm-cleared-fg);
+}
+
+.bossNode.locked {
+  background: var(--wm-locked-bg);
+  color: var(--wm-locked-fg);
+}

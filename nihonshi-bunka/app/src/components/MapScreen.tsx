@@ -9,26 +9,24 @@
 //  5. クリア済みの面はタップで再挑戦できる（成績は更新するがクリア状態は下がらない）
 //  6. 撃破済みボスに王冠
 //  7. 縦長で原始（最初のワールド）が最下部、上へ登る構成（9/8オーナー確認済みの既定④）
+//
+// M2d-01（BOARD.md「M2d ワールド内マップと時代別ビジュアル」）: 要件3「現在プレイ中の
+// ワールドは全面が見える」は、この画面がその場に面タイルを展開する形から、
+// タップして WorldMapScreen（新規2階層目の画面）へ入る形に変わった（設計要点「2階層」）。
+// このファイルは①雲・直列解禁・王冠の判定（変更なし）②ワールド単位の進捗要約＋
+// タップで onSelectWorld(eraId) を呼ぶだけの入口、に役割を絞った。個別の面タイル
+// （★1-1 等）の状態判定・レンダリングは WorldMapScreen.tsx に移した。
 import { useRef, useState } from 'react'
 import styles from './MapScreen.module.css'
 import {
   buildEraStagePlan,
-  fullStageSequence,
   getEraStageProgress,
   getSegmentState,
   isWorldUnlocked,
   nextStageRef,
-  overallSegmentNumber,
-  questionCountForSegment,
-  stageRefKey,
-  stageUnlockBoundary,
   worldOrder,
-  type Difficulty,
-  type StageLocalKey,
 } from '../engine/stages'
 import type { Era, ProgressState, Work } from '../types'
-
-const DIFFICULTIES: Difficulty[] = [1, 2, 3]
 
 /** 1ワールド分の縦幅（px）。ランドマーク＋面タイルのパネルが収まる余白を含む。 */
 const WORLD_HEIGHT = 260
@@ -67,12 +65,13 @@ export function MapScreen({
   /** content.ts の playableWorks（出題対象自身は画像必須）。面数・面の中身の計算に使う。 */
   imagePool,
   progress,
-  onSelectStage,
+  onSelectWorld,
 }: {
   eras: Era[]
   imagePool: Work[]
   progress: ProgressState
-  onSelectStage: (eraId: string, key: StageLocalKey) => void
+  /** M2d-01: ワールドの入口をタップしたら呼ぶ（App.tsx が WorldMapScreen を開く）。 */
+  onSelectWorld: (eraId: string) => void
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const dragRef = useRef<{ startX: number; startY: number; panX: number; panY: number; pointerId: number } | null>(null)
@@ -81,10 +80,6 @@ export function MapScreen({
 
   const sortedEras = [...eras].sort((a, b) => a.order - b.order)
   const worlds = worldOrder(eras)
-  const sequence = fullStageSequence(eras, imagePool)
-  const boundary = stageUnlockBoundary(sequence, progress.stages)
-  const unlockedKeys = new Set<string>()
-  for (let i = 0; i <= boundary && i < sequence.length; i++) unlockedKeys.add(stageRefKey(sequence[i]))
 
   const contentHeight = worlds.length * WORLD_HEIGHT + PADDING_Y + PADDING_BOTTOM
 
@@ -206,8 +201,6 @@ export function MapScreen({
             const unlocked = isWorldUnlocked(worldIndex, eras, imagePool, progress.stages)
             const plan = buildEraStagePlan(eraId, imagePool)
             const eraProgress = getEraStageProgress(progress.stages, eraId)
-            const bossKey: StageLocalKey = { kind: 'boss' }
-            const bossUnlocked = unlockedKeys.has(stageRefKey({ kind: 'boss', eraId, worldIndex }))
 
             if (!unlocked) {
               // 要件4: 先（未到達）のワールドは雲で隠す。
@@ -226,12 +219,30 @@ export function MapScreen({
               )
             }
 
+            // M2d-01: ワールド単位の進捗要約（面+ボス、全難易度合算）。個別の面の状態は
+            // WorldMapScreen 側で判定する（このパネルはタップして入るだけの入口）。
+            let clearedNodeCount = 0
+            let totalNodeCount = 0
+            if (plan.itemCount > 0) {
+              for (const difficulty of [1, 2, 3] as const) {
+                for (const seg of plan.segments) {
+                  totalNodeCount += 1
+                  if (getSegmentState(eraProgress, difficulty, seg.segment).cleared) clearedNodeCount += 1
+                }
+              }
+              totalNodeCount += 1 // ボス
+              if (eraProgress.boss.cleared) clearedNodeCount += 1
+            }
+
             return (
-              <div
+              <button
+                type="button"
                 key={eraId}
                 className={styles.worldPanel}
                 data-testid={`world-block-${eraId}`}
                 style={{ left: p.x - 100, top: p.y - 20 }}
+                disabled={plan.itemCount === 0}
+                onClick={() => onSelectWorld(eraId)}
               >
                 <div className={styles.worldName}>
                   W{worldIndex + 1} {era.name}
@@ -239,75 +250,11 @@ export function MapScreen({
                 {plan.itemCount === 0 ? (
                   <p className={styles.empty}>出題できる作品がまだない。</p>
                 ) : (
-                  <>
-                    {DIFFICULTIES.map((difficulty) => (
-                      <div className={styles.difficultyRow} key={difficulty} data-testid={`difficulty-group-${eraId}-${difficulty}`}>
-                        <span className={styles.stageStar}>{'★'.repeat(difficulty)}</span>
-                        {plan.segments.map((seg) => {
-                          const key: StageLocalKey = { kind: 'segment', difficulty, segment: seg.segment }
-                          const segUnlocked = unlockedKeys.has(
-                            stageRefKey({ kind: 'segment', eraId, worldIndex, difficulty, segment: seg.segment }),
-                          )
-                          const cleared = getSegmentState(eraProgress, difficulty, seg.segment).cleared
-                          // M2b-12: 状態を色と形で即判別（緑チェック・黄色パルス・灰ロック）。
-                          const tileState = !segUnlocked ? 'locked' : cleared ? 'cleared' : 'unlocked'
-                          return (
-                            <button
-                              type="button"
-                              key={`${difficulty}-${seg.segment}`}
-                              className={`${styles.stageTile} ${styles[tileState]}`}
-                              data-testid={`stage-tile-${eraId}-${difficulty}-${seg.segment}`}
-                              data-state={tileState}
-                              disabled={!segUnlocked}
-                              title={`${worldIndex + 1}-${overallSegmentNumber(difficulty, seg.segment, plan.segments.length)} ${'★'.repeat(difficulty)}`}
-                              onClick={() => onSelectStage(eraId, key)}
-                            >
-                              {tileState === 'locked' ? (
-                                <span className={styles.tileIcon} aria-hidden="true">🔒</span>
-                              ) : tileState === 'cleared' ? (
-                                <span className={styles.tileIcon} aria-hidden="true">✓</span>
-                              ) : (
-                                <span className={styles.tileLabel}>{`${seg.segment}（${questionCountForSegment(seg)}問）`}</span>
-                              )}
-                            </button>
-                          )
-                        })}
-                      </div>
-                    ))}
-                    {(() => {
-                      const bossState = !bossUnlocked ? 'locked' : eraProgress.boss.cleared ? 'cleared' : 'unlocked'
-                      return (
-                        <button
-                          type="button"
-                          className={`${styles.stageTile} ${styles.bossTile} ${styles[bossState]}`}
-                          data-testid={`stage-tile-${eraId}-boss`}
-                          data-state={bossState}
-                          disabled={!bossUnlocked}
-                          title="ボス"
-                          onClick={() => onSelectStage(eraId, bossKey)}
-                        >
-                          {/* M2b-99c中1: 実際の生成問数はeraのpassage/pool構成次第で目標(plan.bossSize)
-                              未満になりうる（fact-check-m2b-v2.md参照）。MapScreenはpassages/poolを
-                              受け取っておらず正確な生成数はここでは確定できないため「最大」と明示する。 */}
-                          {bossState === 'locked' && (
-                            <>
-                              <span className={styles.tileIcon} aria-hidden="true">🔒</span>
-                              <span className={styles.tileLabel}>ボス</span>
-                            </>
-                          )}
-                          {bossState === 'cleared' && (
-                            <>
-                              <span className={styles.tileIcon} aria-hidden="true">👑</span>
-                              <span className={styles.tileLabel}>ボス撃破済</span>
-                            </>
-                          )}
-                          {bossState === 'unlocked' && <span className={styles.tileLabel}>{`ボス挑戦（最大${plan.bossSize}問）`}</span>}
-                        </button>
-                      )
-                    })()}
-                  </>
+                  <p className={styles.worldProgress} data-testid={`world-progress-${eraId}`}>
+                    {clearedNodeCount}/{totalNodeCount} 面クリア ▶
+                  </p>
                 )}
-              </div>
+              </button>
             )
           })}
         </div>
