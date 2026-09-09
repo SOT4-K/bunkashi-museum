@@ -11,6 +11,10 @@
 //  work.holder / work.subject（任意、型チェックのみ）。
 //  eras.json の各要素の weight（数値、省略時は1。無くても警告のみ）。
 //  content/passages/<era>.json（リード文＋下線部）の検証（下記 validatePassages 参照）。
+// M2b-99f reviewer指摘で追加:
+//  manifest.images[].crop が画像の実寸（Exif向き反映後）をはみ出していないかのチェック
+//  （下記 validateImageCrops 参照。範囲外だと sync-real-images.mjs の sharp extract が
+//  原因の分かりにくいまま失敗するため）。
 // npm run build の prebuild で必ず走る。エラーがあれば exit code 1 で失敗させる
 // （警告のみなら exit 0）。
 //
@@ -19,6 +23,7 @@
 import { readFileSync, readdirSync, existsSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { createRequire } from 'node:module'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = join(__dirname, '..')
@@ -27,6 +32,11 @@ const erasPath = join(root, 'content', 'eras.json')
 const imagesDir = join(root, 'content', 'images')
 const manifestPath = join(imagesDir, 'manifest.json')
 const passagesDir = join(root, 'content', 'passages')
+// crop 範囲チェック（M2b-99f reviewer指摘）用。このファイルは app/ の外にあり app/node_modules を
+// 通常のバレ import では解決できないため、sync-real-images.mjs と同じく createRequire で
+// app/package.json を起点に 'sharp' を明示的に解決する。
+const requireFromApp = createRequire(join(root, 'app', 'package.json'))
+const sharp = requireFromApp('sharp')
 
 // status: reviewed で必須の manifest フィールド
 const REQUIRED_MANIFEST_FIELDS = ['file', 'license', 'sourceUrl', 'attributionText']
@@ -192,6 +202,47 @@ function underlineTextByKey(text) {
     map.set(match[1], match[2])
   }
   return map
+}
+
+// manifest.images[].crop が実画像の寸法内に収まっているか（M2b-99f reviewer指摘）。
+//  範囲外の crop は sharp の extract() が `extract_area: bad extract area` で例外を
+//  投げ、npm run build（prebuild の sync-real-images.mjs）が原因の分かりにくいまま
+//  落ちる（sync-real-images.mjs 冒頭コメント参照）。crop は Exif の向きを反映した後
+//  （.rotate()）のサイズを基準にする（sync-real-images.mjs の extract 呼び出し順と揃える）。
+//  sharp の metadata() が非同期のため main() 側から await して呼ぶ。
+async function validateImageCrops(manifest, errors) {
+  for (const img of manifest.images ?? []) {
+    if (!img.crop || !img.file) continue
+    const srcPath = join(imagesDir, img.file)
+    if (!existsSync(srcPath)) continue // 実体が無い旨は reviewed 必須チェック側で報告済み
+    const label = `content/images/manifest.json / ${img.id ?? img.file}`
+    const { left, top, width, height } = img.crop
+    if (
+      typeof left !== 'number' ||
+      typeof top !== 'number' ||
+      typeof width !== 'number' ||
+      typeof height !== 'number' ||
+      left < 0 ||
+      top < 0 ||
+      width <= 0 ||
+      height <= 0
+    ) {
+      errors.push(`${label}: crop の値が不正（left/top は0以上、width/height は正の数値である必要がある）`)
+      continue
+    }
+    let meta
+    try {
+      meta = await sharp(srcPath).rotate().metadata()
+    } catch (e) {
+      errors.push(`${label}: 画像のメタデータが読めない（${e.message}）`)
+      continue
+    }
+    if (left + width > meta.width || top + height > meta.height) {
+      errors.push(
+        `${label}: crop（left:${left}, top:${top}, width:${width}, height:${height}）が画像の実寸（${meta.width}x${meta.height}、Exif向き反映後）をはみ出している（sharp の extract でビルドが失敗する）`,
+      )
+    }
+  }
 }
 
 // content/passages/<era>.json（リード文＋下線部→図版問題。M2 チケット「テーマセット」）の検証。
@@ -448,7 +499,7 @@ function validatePassages({ worksById, hasImageAsset, hasThemeSetAsset, eraIds, 
   }
 }
 
-function main() {
+async function main() {
   const errors = []
   const warnings = []
 
@@ -459,6 +510,7 @@ function main() {
     errors.push(`content/images/manifest.json が読めない（${e.message}）`)
   }
   const manifestById = new Map((manifest.images ?? []).filter((img) => img.id).map((img) => [img.id, img]))
+  await validateImageCrops(manifest, errors)
 
   const eras = loadJson(erasPath)
   if (!Array.isArray(eras)) {
@@ -730,5 +782,8 @@ function main() {
 // Vitest から workTitleLeaksInText / invalidAskFields を import するときに、実ファイルの読み込みや
 // process.exit が副作用として起きないようにするため（app/src/engine/__tests__ 参照）。
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  main()
+  main().catch((e) => {
+    console.error(e)
+    process.exit(1)
+  })
 }
