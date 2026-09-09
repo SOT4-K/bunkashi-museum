@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest'
 import { eras, passages, playableWorks, themeSetPool, works } from '../../content'
 import { buildMockExam, discoverableWorks, MOCK_EXAM_SIZE } from '../mockExam'
 import { createInitialProgress } from '../progress'
+import { categoryOfQuestion, imageCategoryCap, type ThemeCategory } from '../themeSet'
 import { seededRandom } from './testFixtures'
 
 const today = '2026-09-05'
@@ -112,4 +113,64 @@ describe('実データ: buildMockExam', () => {
       expect(works.some((x) => x.id === w.id)).toBe(true)
     }
   })
+
+  // M2e-06: BOARD.md「型配分のテストと図版型の上限」。M2e-04の実測④で mockExam 10問×30seed
+  // の型別平均が 図版3.07／2文正誤2.13／文字4択1.87／適否1.6／語句組合せ1.0／年代順0.33 となり、
+  // 図版だけ目標「2±1（=1〜3）」の上限をわずかに超えていた。
+  // QuestionType→5カテゴリ（COMPOSITION_SEQUENCE）対応表（themeSet.ts categoryOfQuestion 参照。
+  // このテストではその対応をそのまま使う）:
+  //  - pairs（語句組合せ）: q13・q8
+  //  - q10（2文正誤）: q10
+  //  - q4（4択）: q4 かつ reversed でない
+  //  - q4-reversed（適切/不適切）: q4 かつ reversed
+  //  - image（図版）: q9・q1
+  //  - 対応しない型（q12=文字4択・q14=年代順）は5カテゴリの集計対象外（COMPOSITION_SEQUENCEに
+  //    無い別枠の出題のため）。
+  it(
+    'M2e-06: mockExam 10問×30seedの平均で、図版カテゴリが最大3問に収まり（是正前は平均3.07で' +
+      '超過）、語句組合せカテゴリは最低1問出続ける（既存のQ13最低1問強制ロジックの回帰確認）。' +
+      '4択・2文正誤も目安「2±1（1〜3）」に収まることを確認する。',
+    () => {
+      const totals: Record<ThemeCategory, number> = { pairs: 0, q10: 0, q4: 0, 'q4-reversed': 0, image: 0 }
+      const SEED_COUNT = 30
+      for (let seed = 0; seed < SEED_COUNT; seed++) {
+        const items = buildMockExam(passages, themeSetPool, playableWorks, eras, progress, today, seededRandom(seed))
+        const perExamCount: Record<ThemeCategory, number> = { pairs: 0, q10: 0, q4: 0, 'q4-reversed': 0, image: 0 }
+        for (const item of items) {
+          const cat = categoryOfQuestion(item.question)
+          if (cat) {
+            totals[cat]++
+            perExamCount[cat]++
+          }
+        }
+        // 図版上限そのものの直接確認（1回の試験ごとに imageCategoryCap を超えない）。
+        expect(perExamCount.image).toBeLessThanOrEqual(imageCategoryCap(MOCK_EXAM_SIZE))
+      }
+      const averages: Record<ThemeCategory, number> = {
+        pairs: totals.pairs / SEED_COUNT,
+        q10: totals.q10 / SEED_COUNT,
+        q4: totals.q4 / SEED_COUNT,
+        'q4-reversed': totals['q4-reversed'] / SEED_COUNT,
+        image: totals.image / SEED_COUNT,
+      }
+      console.log('[M2e-06] mockExam 10問×30seed カテゴリ別平均:', JSON.stringify(averages))
+      // ticket本文どおり「2±1（=1〜3）」。this ticket が直接手を入れたのは image（上限3問）・
+      // pairs（最低1問、既存ロジックの回帰確認）。q10・q4 も実測が目安に収まることを固定する。
+      expect(averages.image).toBeGreaterThanOrEqual(1)
+      expect(averages.image).toBeLessThanOrEqual(3)
+      expect(averages.pairs).toBeGreaterThanOrEqual(1)
+      expect(averages.pairs).toBeLessThanOrEqual(3)
+      expect(averages.q10).toBeGreaterThanOrEqual(1)
+      expect(averages.q10).toBeLessThanOrEqual(3)
+      expect(averages.q4).toBeGreaterThanOrEqual(1)
+      expect(averages.q4).toBeLessThanOrEqual(3)
+      // 既知の限界（M2e-06の対象外、完了報告に明記）: q4-reversed（適切/不適切）は是正前から
+      // 実測0.27前後で「2±1」の下限を満たしていない（このチケットが触ったdesiredCategory選択
+      // ロジックではなく、real content側でask.reversed=trueの下線・reversedで生成できる
+      // falseStatementsが少ないことが原因と見られる。別チケット向けの所見）。ここでは
+      // 「0にはならない（実際に出題され続けている）」ことだけを固定する。
+      expect(averages['q4-reversed']).toBeGreaterThan(0)
+    },
+    60000,
+  )
 })

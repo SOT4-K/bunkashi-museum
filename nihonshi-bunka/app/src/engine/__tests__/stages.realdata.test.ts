@@ -15,6 +15,7 @@ import {
   clearThreshold,
   questionCountForSegment,
 } from '../stages'
+import { categoryOfQuestion, imageCategoryCap, type ThemeCategory } from '../themeSet'
 import { reviewedEras, reviewedPassages, reviewedPlayableWorks, reviewedThemeSetPool } from './reviewedFixtures'
 import { seededRandom } from './testFixtures'
 import type { Question } from '../../types'
@@ -427,6 +428,103 @@ describe('実データ（reviewed限定プール、DEV変数なし）: 15ワー�
         }
       }
       expect(violations).toEqual([])
+    },
+    90000,
+  )
+
+  // M2e-06: BOARD.md「型配分のテストと図版型の上限」の「ボス10/20問にも同じ検査」。
+  // mockExam.realdata.test.tsと同じcategoryOfQuestion対応（pairs=q13/q8, q10=q10,
+  // q4=q4&&!reversed, q4-reversed=q4&&reversed, image=q9/q1。q12・q14は集計対象外）を使う。
+  // ボスは全15ワールドが現状N<=15（is above の「面数表・ボス問数表」テストで固定済み）で
+  // count=20は自然発生しないため、buildBossQuestions の count 引数を明示して20問経路も検証する。
+  function poolBossCategoryStats(countOverride: number | undefined, seeds: number) {
+    const totals: Record<ThemeCategory, number> = { pairs: 0, q10: 0, q4: 0, 'q4-reversed': 0, image: 0 }
+    let n = 0
+    const capViolations: { eraId: string; seed: number; image: number; cap: number }[] = []
+    const zeroPairs: { eraId: string; seed: number }[] = []
+    for (const era of reviewedEras) {
+      const target = countOverride ?? bossQuestionCount(reviewedPlayableWorks.filter((w) => w.era === era.id).length)
+      const cap = imageCategoryCap(target)
+      for (let seed = 0; seed < seeds; seed++) {
+        const boss = buildBossQuestions(
+          era.id,
+          reviewedPassages,
+          reviewedThemeSetPool,
+          reviewedPlayableWorks,
+          reviewedEras,
+          seededRandom(seed),
+          countOverride,
+        )
+        n++
+        const counts: Record<ThemeCategory, number> = { pairs: 0, q10: 0, q4: 0, 'q4-reversed': 0, image: 0 }
+        for (const q of boss) {
+          const cat = categoryOfQuestion(q)
+          if (cat) {
+            counts[cat]++
+            totals[cat]++
+          }
+        }
+        if (counts.image > cap) capViolations.push({ eraId: era.id, seed, image: counts.image, cap })
+        if (boss.length >= 2 && counts.pairs === 0) zeroPairs.push({ eraId: era.id, seed })
+      }
+    }
+    const averages: Record<ThemeCategory, number> = {
+      pairs: totals.pairs / n,
+      q10: totals.q10 / n,
+      q4: totals.q4 / n,
+      'q4-reversed': totals['q4-reversed'] / n,
+      image: totals.image / n,
+    }
+    return { averages, capViolations, zeroPairs, n }
+  }
+
+  it(
+    'M2e-06: ボス（既定count、現状データは全15ワールドN<=15なので10問）でも図版上限を' +
+      '超えず（1回のボスごとに直接assert）、語句組合せは0問にならない（15ワールド×20seed）',
+    () => {
+      const { averages, capViolations, zeroPairs, n } = poolBossCategoryStats(undefined, 20)
+      console.log('[M2e-06] ボス（既定count）15ワールド×20seed カテゴリ別平均:', JSON.stringify(averages), 'n=', n)
+      expect(capViolations).toEqual([])
+      expect(zeroPairs).toEqual([])
+      // pairs・q4・image はこのチケットが直接手を入れた/影響する範囲。目安「2±1」に収まる。
+      expect(averages.pairs).toBeGreaterThanOrEqual(1)
+      expect(averages.pairs).toBeLessThanOrEqual(3)
+      expect(averages.image).toBeGreaterThanOrEqual(1)
+      expect(averages.image).toBeLessThanOrEqual(3)
+      expect(averages.q4).toBeGreaterThanOrEqual(1)
+      expect(averages.q4).toBeLessThanOrEqual(3)
+      // 既知の限界（M2e-06の対象外、完了報告に明記）: q10は実測約3.2で「2±1」の上限をわずかに
+      // 超える（buildThemeSetQuestionsのパス1が持つ「Q10最低1問」保証が複数passage分合算される
+      // ボス特有の構造で、mockExamより出やすい。このチケットが変更した箇所ではない）。
+      // q4-reversed（適切/不適切）は実測約0.48で下限を満たさない（mockExamと同じ、pre-existing）。
+      // どちらも「0にはならない」ことだけ固定する。
+      expect(averages.q10).toBeGreaterThan(0)
+      expect(averages['q4-reversed']).toBeGreaterThan(0)
+    },
+    90000,
+  )
+
+  it(
+    'M2e-06: ボス20問（count明示）でも図版上限（ceil(20/5)+1=5）を超えず、語句組合せは' +
+      '0問にならない（15ワールド×20seed。現状データにitemCount>15のワールドが無いため' +
+      'count引数で20問経路を明示的に検証する）',
+    () => {
+      const { averages, capViolations, zeroPairs, n } = poolBossCategoryStats(20, 20)
+      console.log('[M2e-06] ボス20問 15ワールド×20seed カテゴリ別平均:', JSON.stringify(averages), 'n=', n)
+      expect(capViolations).toEqual([])
+      expect(zeroPairs).toEqual([])
+      // 20問では周期的割り当ての「狙い」が4問/カテゴリになるため、目安を「4±2（2〜6）」に
+      // 一般化する（themeSet.ts imageCategoryCap のコメント参照。ticket原文に20問時の
+      // 具体数の指定は無いためこの一般化が完了報告での明記事項）。
+      expect(averages.pairs).toBeGreaterThanOrEqual(2)
+      expect(averages.pairs).toBeLessThanOrEqual(6)
+      expect(averages.image).toBeGreaterThanOrEqual(2)
+      expect(averages.image).toBeLessThanOrEqual(6)
+      expect(averages.q4).toBeGreaterThanOrEqual(2)
+      expect(averages.q4).toBeLessThanOrEqual(6)
+      // 既知の限界（上と同じpre-existingな偏り。20問でも解消しない）。
+      expect(averages.q10).toBeGreaterThan(0)
+      expect(averages['q4-reversed']).toBeGreaterThan(0)
     },
     90000,
   )
