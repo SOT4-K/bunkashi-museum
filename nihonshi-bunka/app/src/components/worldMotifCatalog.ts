@@ -13,6 +13,19 @@ import {
   TabibitoIcon,
   TateanaIcon,
 } from './WorldMotifIcons'
+import { GenshiBackdrop, KaiseiBackdrop } from './WorldBackgroundArt'
+
+/** id → 遠景イラスト（M2d-01b）。content/worlds.json の backgroundId を引く。未知の id・
+ *  未指定は null（呼び出し側は遠景を描かない＝防御的。既定は13ワールドと同じ「無し」）。 */
+export const BACKGROUND_CATALOG: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
+  'genshi-hills': GenshiBackdrop,
+  'kasei-fuji-sea': KaiseiBackdrop,
+}
+
+export function getBackgroundArt(id: string | undefined): ComponentType<SVGProps<SVGSVGElement>> | null {
+  if (!id) return null
+  return BACKGROUND_CATALOG[id] ?? null
+}
 
 /** id → 描画コンポーネント。content/worlds.json の motifs[].id を引く（未知の id は
  *  null を返し、呼び出し側（WorldMapScreen）はその飾りを描かず落ちない＝防御的）。 */

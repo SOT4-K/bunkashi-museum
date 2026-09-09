@@ -178,6 +178,10 @@ export interface WorldTheme {
   bossShape: string
   /** 道端の飾りモチーフ（3〜5種）。空配列なら「無地のパレットのみ」（M2d-01 時点で13ワールド）。 */
   motifs: WorldMotif[]
+  /** 背景の遠景イラスト（M2d-01b。components/worldBackgroundCatalog.ts のカタログキー）。
+   *  省略時は遠景を描かない（無地の13ワールドはこのフィールド自体を持たない＝
+   *  getWorldTheme の既定テーマにも含めない。動作は今まで通り）。 */
+  backgroundId?: string
 }
 
 // --- リード文＋下線部（テーマセット。decisions.md 2026-09-04「模試型」） ---

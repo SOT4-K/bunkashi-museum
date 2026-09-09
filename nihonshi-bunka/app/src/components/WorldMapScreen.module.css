@@ -11,14 +11,49 @@
   --wm-boss-bg: #ff6b6b;
   --wm-boss-fg: #4a0d0d;
 
+  position: relative;
   flex: 1;
   min-height: 0;
   display: flex;
   flex-direction: column;
   gap: 8px;
   padding: calc(env(safe-area-inset-top) + 12px) 16px 16px;
-  background: linear-gradient(180deg, var(--wm-sky, #dbe6f0) 0%, var(--wm-sky, #dbe6f0) 60%, var(--wm-ground, #c9d6c0) 100%);
+  /* M2d-01b③: 「空／地面」の境目をはっきりさせる（旧版は 0-60-100% のなだらかなグラデーション
+     一枚だけで「配色だけで時代の雰囲気」になっていた所見への対応）。40% までは空一色、
+     40-46% で地面色へ短く遷移、46% 以降は地面一色。遠景イラスト（.backgroundArt）は
+     この境目をまたぐ位置に重ねて置く。 */
+  background: linear-gradient(
+    180deg,
+    var(--wm-sky, #dbe6f0) 0%,
+    var(--wm-sky, #dbe6f0) 40%,
+    var(--wm-ground, #c9d6c0) 46%,
+    var(--wm-ground, #c9d6c0) 100%
+  );
   border-radius: var(--radius-image);
+  overflow: hidden;
+}
+
+/* 遠景イラスト（M2d-01b③）。.viewport（スクロールする道）の外側にあるため、道をスクロール
+   させてもこの層は動かない（「空・遠景・地面」がいつも同じ高さに見える固定の背景）。
+   .screen の内側全体を覆い、画面幅いっぱいに伸縮する（WorldBackgroundArt.tsx 側で
+   preserveAspectRatio="none" を指定済み）。ノード・道・道端の飾りより奥（z-index 低）。 */
+.backgroundArt {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.backgroundArt svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.header,
+.viewport {
+  position: relative;
+  z-index: 1;
 }
 
 .header {
@@ -71,16 +106,6 @@
   position: relative;
 }
 
-.groundStrip {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 70px;
-  background: var(--wm-ground, #c9d6c0);
-  opacity: 0.55;
-}
-
 .roadSvg {
   position: absolute;
   top: 0;
@@ -96,11 +121,10 @@
   opacity: 0.9;
 }
 
-/* 道端の飾り（タップ不可）。 */
+/* 道端の飾り（タップ不可）。サイズは WorldMapScreen.tsx が buildDecorations() の結果
+   （40〜72px、M2d-01b①）をインラインで当てる。 */
 .motif {
   position: absolute;
-  width: 40px;
-  height: 40px;
   pointer-events: none;
   filter: drop-shadow(0 2px 3px rgb(0 0 0 / 20%));
 }

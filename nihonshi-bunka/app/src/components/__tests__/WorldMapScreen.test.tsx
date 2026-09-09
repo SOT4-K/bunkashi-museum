@@ -3,6 +3,11 @@
 // （3状態を注入。合格ライン①）②「マップへ戻る」で onBack が呼ばれる③ノードタップで
 // onSelectStage が正しい StageLocalKey で呼ばれる④飾りモチーフは theme.motifs が
 // 空なら描かれない（無地ワールドの13本相当）、非空なら描かれる（合格ライン②の土台）。
+//
+// M2d-01b（様式手直し）: 管理セッション所見①「飾りが1画面3個・約24pxと小さい」への対応の
+// 検証。飾りを4ノード（実データの原始・化政と同じ規模。works が2件＝1面のみ）のワールドに
+// 5種の motifs で描かせ、⑤個数が8〜12個（チケット「1画面8〜12個」）⑥各飾りが40〜72px
+// ⑦飾り同士が重ならない⑧ノード（タップ領域）と重ならない、を機械的に確認する。
 import { describe, expect, it, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { WorldMapScreen } from '../WorldMapScreen'
@@ -25,6 +30,20 @@ const decoratedTheme: WorldTheme = {
   motifs: [
     { id: 'dogu', label: '土偶' },
     { id: 'haniwa', label: '埴輪' },
+  ],
+}
+// content/worlds.json の genshi と同じ5種（M2d-01b）。works は4ノード規模（実データの
+// 原始・化政と同じ、1面のみ）。
+const decoratedTheme5: WorldTheme = {
+  eraId: 'asuka',
+  palette: { sky: '#f4e4c1', ground: '#8a6b4a', road: '#c98b4a', accent: '#b5482e' },
+  bossShape: 'kofun',
+  motifs: [
+    { id: 'dogu', label: '土偶' },
+    { id: 'haniwa', label: '埴輪' },
+    { id: 'tateana', label: '竪穴住居' },
+    { id: 'dotaku', label: '銅鐸' },
+    { id: 'kaizuka', label: '貝塚' },
   ],
 }
 
@@ -180,6 +199,69 @@ describe('WorldMapScreen', () => {
     expect(motifNodes.length).toBeGreaterThan(0)
     // 飾りは svg 内で <img> や実写真の src を一切参照しない（装飾は手描き SVG のみ）。
     expect(container.querySelector('[data-testid^="world-motif-"] img')).toBeNull()
+  })
+
+  it('飾りは1画面規模（4ノード＝実データの原始・化政相当）で8〜12個、40〜72pxの範囲', () => {
+    const { container } = render(
+      <WorldMapScreen
+        eraId="asuka"
+        eras={testEras}
+        imagePool={works}
+        progress={createInitialProgress('2026-09-09')}
+        theme={decoratedTheme5}
+        onSelectStage={() => {}}
+        onBack={() => {}}
+      />,
+    )
+    const motifEls = Array.from(container.querySelectorAll<HTMLElement>('[data-testid^="world-motif-asuka-"]'))
+    expect(motifEls.length).toBeGreaterThanOrEqual(8)
+    expect(motifEls.length).toBeLessThanOrEqual(12)
+    for (const el of motifEls) {
+      const w = parseFloat(el.style.width)
+      const h = parseFloat(el.style.height)
+      expect(w).toBeGreaterThanOrEqual(40)
+      expect(w).toBeLessThanOrEqual(72)
+      expect(h).toBe(w)
+    }
+  })
+
+  it('飾り同士・飾りとノード（タップ領域）が重ならない', () => {
+    const { container } = render(
+      <WorldMapScreen
+        eraId="asuka"
+        eras={testEras}
+        imagePool={works}
+        progress={createInitialProgress('2026-09-09')}
+        theme={decoratedTheme5}
+        onSelectStage={() => {}}
+        onBack={() => {}}
+      />,
+    )
+    type Box = { left: number; top: number; right: number; bottom: number }
+    const boxOf = (el: HTMLElement): Box => {
+      const left = parseFloat(el.style.left)
+      const top = parseFloat(el.style.top)
+      const w = parseFloat(el.style.width)
+      const h = parseFloat(el.style.height)
+      return { left, top, right: left + w, bottom: top + h }
+    }
+    const overlaps = (a: Box, b: Box) => a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom
+
+    const motifBoxes = Array.from(container.querySelectorAll<HTMLElement>('[data-testid^="world-motif-asuka-"]')).map(
+      boxOf,
+    )
+    const nodeBoxes = Array.from(container.querySelectorAll<HTMLElement>('[data-testid^="stage-tile-asuka-"]')).map(
+      boxOf,
+    )
+
+    for (let i = 0; i < motifBoxes.length; i++) {
+      for (let j = i + 1; j < motifBoxes.length; j++) {
+        expect(overlaps(motifBoxes[i], motifBoxes[j])).toBe(false)
+      }
+      for (const nodeBox of nodeBoxes) {
+        expect(overlaps(motifBoxes[i], nodeBox)).toBe(false)
+      }
+    }
   })
 
   it('対象作品0件のワールドは「出題できる面がまだない」を表示しノードを作らない', () => {

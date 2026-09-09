@@ -3,6 +3,7 @@
     "eraId": "genshi",
     "palette": { "sky": "#f4e4c1", "ground": "#8a6b4a", "road": "#c98b4a", "accent": "#b5482e" },
     "bossShape": "kofun",
+    "backgroundId": "genshi-hills",
     "motifs": [
       { "id": "dogu", "label": "土偶" },
       { "id": "haniwa", "label": "埴輪" },
@@ -93,6 +94,7 @@
     "eraId": "kasei",
     "palette": { "sky": "#bfe3f0", "ground": "#e8d9b5", "road": "#3d6ea5", "accent": "#c0392b" },
     "bossShape": "fuji",
+    "backgroundId": "kasei-fuji-sea",
     "motifs": [
       { "id": "fuji", "label": "富士" },
       { "id": "nami", "label": "波" },
