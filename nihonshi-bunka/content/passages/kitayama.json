@@ -3,15 +3,17 @@
     "id": "kitayama-01",
     "era": "kitayama",
     "title": "足利義満の権勢と、大陸から来た文化",
-    "text": "南北朝の合一によって幕府の権力が安定した室町時代前期、3代将軍[[a|足利義満]]の頃には、公家文化と武家文化の融合が進んだ。義満は[[b|五山・十刹の制]]を整えて臨済宗を保護し、その禅僧たちは漢詩文をつくり、幕府の外交や学問の担い手ともなった。猿楽から能を大成した[[c|観阿弥・世阿弥]]父子も義満の保護のもとで活躍し、世阿弥は能楽論書『風姿花伝』を著している。義満は明との国交を開いて[[d|日明貿易]]を始め、勘合を用いる朝貢の形式のもとで、生糸や銅銭とともに大陸の文物がもたらされた。義満は将軍職を子に譲ったのちも実権を握り、出家してからも政治の中心にありつづけた。この時期の文化は、義満が晩年を過ごした京都の地名にちなんで北山文化と呼ばれる。",
+    "text": "南北朝の合一によって幕府の権力が安定した室町時代前期、3代将軍[[a|足利義満]]の頃には、公家文化と武家文化の融合が進んだ。義満は[[b|五山・十刹の制]]を整えて臨済宗を保護し、その禅僧たちは漢詩文をつくり、幕府の外交や学問の担い手ともなった。猿楽から能を大成した[[c|観阿弥・世阿弥]]父子も義満の保護のもとで活躍し、世阿弥は能楽論書『風姿花伝』を著している。義満は明との国交を開いて[[d|日明貿易]]を始め、勘合を用いる朝貢の形式のもとで、生糸や銅銭とともに大陸の文物がもたらされた。禅宗の広まりとともに、墨の濃淡だけで自然や人物を表す絵画も大陸から入り、[[e|相国寺の禅僧のなかからも、その担い手となる画家が出た]]。義満は将軍職を子に譲ったのちも実権を握り、出家してからも政治の中心にありつづけた。この時期の文化は、義満が晩年を過ごした京都の地名にちなんで北山文化と呼ばれる。",
     "sources": [
       "1文目（南北朝の合一・公家文化と武家文化の融合）: content/eras.json の kitayama（detail）",
       "2文目（五山・十刹の制と五山文学）: content/works/kitayama.json の gozan-bungaku（facts・explanation）、content/eras.json の kitayama（items）",
       "3文目（観阿弥・世阿弥と義満の保護・風姿花伝）: content/works/kitayama.json の zeami（facts・keyPoints）",
       "4文目（日明貿易・勘合・朝貢形式・輸入品）: content/works/kitayama.json の nichimin-boeki（facts・explanation）",
-      "5〜6文目（義満の権勢と北山の地名に由来する呼称）: content/eras.json の kitayama（detail）、content/works/kitayama.json の kinkaku（eraNote）",
+      "5文目（禅宗とともに広まった水墨画・相国寺の禅僧の画家）: content/eras.json の kitayama（detail「明兆・如拙・周文らの水墨画が発達した」）、content/works/kitayama.json の suibokuga-kitayama（facts・eraNote）・shubun-sansui（facts・eraNote）",
+      "6〜7文目（義満の権勢と北山の地名に由来する呼称）: content/eras.json の kitayama（detail）、content/works/kitayama.json の kinkaku（eraNote）",
       "高校教科書（山川『詳説日本史』）北山文化の項",
       "図版の同定URL（下線a〜d、いずれも鹿苑寺金閣）: https://commons.wikimedia.org/wiki/File:Kinkaku-ji.jpg",
+      "図版の同定URL（下線e、山水図（伝周文））: https://www.metmuseum.org/art/collection/search/53223",
       "リード文の歴史記述そのものは教科書水準の通説で、一次資料・公的機関の公開ページは未参照（追検証URL未取得）"
     ],
     "underlines": [
@@ -71,9 +73,23 @@
           "answerId": "kinkaku"
         },
         "note": "画像を出す型。bと同じ型だが下線（制度／貿易）とA・B文の観点が異なる。falseStatements の『応仁の乱後に建立された』『東山文化の代表建築である』など時代の入れ替え型を当てる"
+      },
+      {
+        "key": "e",
+        "anchorKind": "person",
+        "workIds": [
+          "shubun-sansui"
+        ],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部eに関して、次の写真の絵画について述べた文として最も不適切なものはどれか。",
+          "answerId": "shubun-sansui",
+          "reversed": true
+        },
+        "note": "M2e-05 で追加。この区分の出題可能作品2件（kinkaku・shubun-sansui）のうち shubun-sansui がどの下線からも参照されておらず、覆え率が 1/2 だったため。二段構え: A=相国寺の禅僧の画家（下線）／B=写真の絵画。下線には画家名（周文）も作品名も書かず、所属（相国寺）だけを手がかりにしている。a〜d と型が重ならないよう、c（q4・適切なもの）に対してこちらは reversed（最も不適切なもの）にした。stem に facts（伝周文の作とされる・真筆確定でない・雪舟の師）を書かないのは、正文がそのまま確定してしまうため。**残る穴（works 側のデータで、この下線からは直せない）**: falseStatements の『大和絵の代表作である』は、写真が墨だけで描かれていることから外見だけで誤りと判断できる"
       }
     ],
-    "notes": "この区分で画像を出題できるのは kinkaku のみ（research/m2-playable-works-2026-09-04.md）。同一作品に対して人物（義満）・制度（五山十刹）・人物（観阿弥世阿弥）・出来事（日明貿易）と、下線の種類と足す属性を変えて4問にしている。画像を伏せて選ばせる型（q9）は先頭のaだけに置き、以降は画像を出す型にした（同じ作品なので、画像を先に見せると後続のq9の答えが割れるため）。"
+    "notes": "この区分で画像を出題できるのは kinkaku と shubun-sansui の2件（このセットを書いた時点の research/m2-playable-works-2026-09-04.md では kinkaku のみだった）。a〜d は同一作品（kinkaku）に対して人物（義満）・制度（五山十刹）・人物（観阿弥世阿弥）・出来事（日明貿易）と、下線の種類と足す属性を変えて4問にしている。画像を伏せて選ばせる型（q9）は先頭のaだけに置き、以降は画像を出す型にした（同じ作品なので、画像を先に見せると後続のq9の答えが割れるため）。e は M2e-05 で追加した shubun-sansui 向けの下線で、a の q9（正解 kinkaku）とは別作品のため画像の提示順は変えていない。"
   },
   {
     "id": "kitayama-02",

@@ -184,5 +184,70 @@
       }
     ],
     "notes": "2本目のセット（M2-15）。画像を出題できる作品が himeji-jo 1件しかない区分なので、画像を使うのは先頭側の2問（q9・q10）に抑え、残る3問は画像に依存しない文字4択（文化名・人物・年代順）にした（M2e-03 で末尾の q4 を年代順並べ替えに差し替え、同じ写真の3回提示をやめた）。q9 は先頭の1問だけ。1本目（momoyama-01）とは下線の種類と設問の型の組合せを変えている。"
+  },
+  {
+    "id": "momoyama-03",
+    "era": "momoyama",
+    "title": "茶室・庭園・城 — 天下人たちの造営",
+    "text": "織田信長・豊臣秀吉が全国統一を進めた時代には、大名や豪商のあいだで茶の湯が流行し、千利休が簡素な草庵風の茶室を完成させた。[[a|信長の弟にあたる武将も、利休に茶を学んだと伝えられ]]、みずから茶室を建てている。また、[[b|秀吉は死の直前の年に、京都の寺で盛大な花見を催している]]。大名たちは[[c|天守を中心にすえた居城]]を各地に築き、その内部を金地に濃い色で描く障壁画で飾らせた。関ヶ原の戦いののちも城の造営や大改修は続き、茶室・庭園・城郭のいずれにも、簡素さと豪壮さをあわせもつこの時代の性格が表れている。",
+    "sources": [
+      "1文目（茶の湯の流行・千利休の草庵風の茶室）: content/eras.json の momoyama（detail）、content/works/momoyama.json の sen-no-rikyu（facts・eraNote）",
+      "2文目（信長の弟にあたる武将が利休に茶を学び、みずから茶室を建てた）: content/works/momoyama.json の joan-chashitsu（facts・explanation・eraNote）",
+      "3文目（秀吉が死の直前の年に京都の寺で催した盛大な花見）: content/works/momoyama.json の daigo-sanboin-teien（eraNote・facts）",
+      "4文目（天守を中心とする城郭と、金地に濃い色で描く障壁画）: content/works/momoyama.json の himeji-jo（eraNote・pairs）・noe-shohekiga（facts・explanation）、content/eras.json の momoyama（detail）",
+      "5文目（関ヶ原の戦いののちも続いた造営・大改修）: content/works/momoyama.json の himeji-jo（periodLabel・facts・explanation）",
+      "高校教科書（山川『詳説日本史』）桃山文化・茶の湯の項",
+      "図版の同定URL（下線a、如庵）: https://commons.wikimedia.org/wiki/File:J%C5%8D-an_(Urakuen).jpg",
+      "図版の同定URL（下線b、醍醐寺三宝院庭園）: https://commons.wikimedia.org/wiki/File:Daigozi_08.jpg",
+      "図版の同定URL（下線c、姫路城）: https://commons.wikimedia.org/wiki/File:Ch%C3%A2teau_de_Himeji01.jpg",
+      "リード文の歴史記述そのものは教科書水準の通説で、一次資料・公的機関の公開ページは未参照（追検証URL未取得）"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "person",
+        "workIds": [
+          "joan-chashitsu"
+        ],
+        "ask": {
+          "type": "q9",
+          "stem": "下線部aの武将が建てたと伝えられ、現在は愛知県犬山市に移されている茶室はどれか。",
+          "answerId": "joan-chashitsu",
+          "distractorIds": [
+            "shokintei-katsura",
+            "ginkaku",
+            "yomeimon-nikko"
+          ]
+        },
+        "note": "二段構え: A=信長の弟にあたり利休に茶を学んだ武将（下線）／B=愛知県犬山市への移築（joan-chashitsu の facts）。下線には作品名も作者名（織田有楽斎）も書かない。画像を伏せて選ばせる型はこのセットの先頭1問だけに置く。**残る構造的な穴**: 誤答3件のうち茶室に近い建物は shokintei-katsura のみで、桃山区分に茶室の画像が joan-chashitsu 1件しかないため外見だけで絞られうる（momoyama-02/a と同じ構造の穴。別の茶室の画像が増えるまで持ち越し）"
+      },
+      {
+        "key": "b",
+        "anchorKind": "event",
+        "workIds": [
+          "daigo-sanboin-teien"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部bに関して、豪壮を好んだこの時代を象徴する次の写真の庭園について述べた文A・Bの正誤の組合せとして正しいものはどれか。",
+          "answerId": "daigo-sanboin-teien"
+        },
+        "note": "画像を出す型。stem には daigo-sanboin-teien の facts（秀吉が基本設計に関わった・花見に際して整えられた・池を中心とする庭園）を書かない（A・B文の真偽が先に決まってしまうため、下線側は花見という出来事だけにとどめている）。falseStatements の『足利義満が造営した』『枯山水庭園の代表である』『千利休が設計した茶庭である』が人物・様式の入れ替え型としてそろう"
+      },
+      {
+        "key": "c",
+        "anchorKind": "hall",
+        "workIds": [
+          "himeji-jo"
+        ],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部cに関して、次の写真の城について述べた文として最も適切なものはどれか。",
+          "answerId": "himeji-jo"
+        },
+        "note": "画像を出す型。momoyama-01・02 と同じ himeji-jo だが、下線（天守を中心にすえた居城）と型（適切なものを選ぶ q4）の組合せを変えている。stem に大改修・所在の事実を書かないのは、正文がそのまま確定してしまうため。falseStatements の『織田信長が築いた安土城である』『豊臣秀吉が築いた大坂城である』『江戸時代中期に新築された』が作品・時代の入れ替え型としてそろう"
+      }
+    ],
+    "notes": "M2e-05 で追加したセット。桃山区分の出題可能作品3件（himeji-jo・joan-chashitsu・daigo-sanboin-teien）のうち後の2件がどの passage の下線からも参照されておらず、覆え率が 1/3 だったため、この2件を対象にする下線（a・b）を新設した。既存の momoyama-01（下線4本）に2本足すと6本になり、validate-content.mjs の「下線は3〜5個」の警告が1件増える（momoyama-02 は既に5本）ため、既存セットに足さず新しいセットにした。型は a=q9（画像を伏せて選ばせる）→ b=q10 → c=q4 の順で、画像を伏せる問いを画像を出す問いより先に置いている（a の正解画像と b・c の写真は別作品なので、後続で答えが割れることはない）。"
   }
 ]
