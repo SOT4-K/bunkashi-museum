@@ -24,6 +24,10 @@ import { readFileSync, readdirSync, existsSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createRequire } from 'node:module'
+// M2c-03: 収録率レポート（canon.json と content/works の突き合わせ）。validate の末尾に
+// 要約だけ出す（詳細な canon-only/content-only 列挙は `npm run coverage` に譲る。
+// coverage.mjs 側のコメント参照）。
+import { printCoverageSummary } from './coverage.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = join(__dirname, '..')
@@ -812,6 +816,10 @@ async function main() {
   }
 
   console.log(`content OK: ${allWorks.length} 作品 / ${eras.length} 時代（警告 ${warnings.length} 件）`)
+
+  // M2c-03: 収録率レポートの要約（canon.json との突き合わせ）。エラーが無い時だけ出す
+  // （エラーで process.exit(1) する経路は上で既に抜けている）。
+  printCoverageSummary()
 }
 
 // このファイルが `node scripts/validate-content.mjs` として直接実行されたときだけ main() を走らせる。

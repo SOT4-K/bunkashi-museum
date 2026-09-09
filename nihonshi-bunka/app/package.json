@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "validate": "node ../scripts/validate-content.mjs",
+    "coverage": "node ../scripts/coverage.mjs",
     "make-placeholders": "node ../scripts/make-placeholders.mjs",
     "sync-real-images": "node ../scripts/sync-real-images.mjs",
     "make-icons": "node ../scripts/make-icons.mjs",
