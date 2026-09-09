@@ -108,6 +108,13 @@ export function MapScreen({
   }
 
   function handlePointerDown(e: React.PointerEvent<HTMLDivElement>) {
+    // M2d-01 で発覚・修正: ここで無条件に setPointerCapture すると、Pointer Events 仕様上
+    // 関連する mouse/click イベントも capture 先（この viewport）へリターゲットされ、
+    // 子要素のボタン（ワールドの入口 .worldPanel 等）がタップされても click が発火しない
+    // （ワールドタップで WorldMapScreen に入れない実機バグになる。実ブラウザの疑似クリック
+    // シーケンスで再現・確認済み。jsdom のテストは pointer capture を再現しないため検出できない）。
+    // ボタン上の pointerdown はパンを開始しない（クリックに譲る）。
+    if ((e.target as HTMLElement).closest('button')) return
     dragRef.current = { startX: e.clientX, startY: e.clientY, panX: pan.x, panY: pan.y, pointerId: e.pointerId }
     e.currentTarget.setPointerCapture(e.pointerId)
   }
