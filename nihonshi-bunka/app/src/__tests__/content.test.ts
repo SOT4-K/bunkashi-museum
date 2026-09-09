@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import { eras, works } from '../content'
+import { eras, works, worldThemesById } from '../content'
+import { getMotifIcon } from '../components/worldMotifCatalog'
+import { worldOrder } from '../engine/stages'
 
 describe('content (import.meta.glob 読み込み)', () => {
   it('eras.json を読み込める', () => {
@@ -23,5 +25,30 @@ describe('content (import.meta.glob 読み込み)', () => {
     // （reviewed のみに絞られていたら draft は works から消えているはず）。
     expect(works.some((w) => w.status === 'draft')).toBe(true)
     expect(works.some((w) => w.status === 'reviewed')).toBe(true)
+  })
+})
+
+describe('worlds.json（M2d-01 ワールドマップの時代テーマ）', () => {
+  it('15ワールド全件にテーマの器がある', () => {
+    for (const eraId of worldOrder(eras)) {
+      expect(worldThemesById[eraId], `${eraId} のテーマが無い`).toBeDefined()
+    }
+  })
+
+  it('原始（genshi）と化政（kasei）だけ飾りモチーフを持ち、他13ワールドは無地（motifs空）', () => {
+    const decorated = worldOrder(eras).filter((eraId) => (worldThemesById[eraId]?.motifs.length ?? 0) > 0)
+    expect(decorated.sort()).toEqual(['genshi', 'kasei'])
+  })
+
+  it('genshi の飾りはチケット指定の5種（土偶・埴輪・竪穴住居・銅鐸・貝塚）で、全てカタログに実在する', () => {
+    const ids = worldThemesById.genshi.motifs.map((m) => m.id).sort()
+    expect(ids).toEqual(['dogu', 'dotaku', 'haniwa', 'kaizuka', 'tateana'])
+    for (const id of ids) expect(getMotifIcon(id), `motif ${id} が未定義`).not.toBeNull()
+  })
+
+  it('kasei の飾りはチケット指定の4種（富士・波・旅人・錦絵）で、全てカタログに実在する', () => {
+    const ids = worldThemesById.kasei.motifs.map((m) => m.id).sort()
+    expect(ids).toEqual(['fuji', 'nami', 'nishikie', 'tabibito'])
+    for (const id of ids) expect(getMotifIcon(id), `motif ${id} が未定義`).not.toBeNull()
   })
 })

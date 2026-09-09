@@ -18,6 +18,7 @@ vi.mock('../content', () => ({
   passages: [],
   passagesByEra: {},
   worksById: { lc1: w1, lc2: w2 },
+  worldThemesById: {},
 }))
 
 async function importApp() {
@@ -38,6 +39,7 @@ describe('App: ステージ挑戦中にタブを押すと確認ダイアログ�
     render(<App />)
 
     fireEvent.click(screen.getByText('マップ'))
+    fireEvent.click(screen.getByTestId('world-block-asuka')) // M2d-01: ワールドマップへ入る
     fireEvent.click(screen.getByTestId('stage-tile-asuka-1-1'))
     expect(screen.getAllByTestId('choice-button').length).toBeGreaterThan(0)
 
@@ -56,6 +58,7 @@ describe('App: ステージ挑戦中にタブを押すと確認ダイアログ�
     render(<App />)
 
     fireEvent.click(screen.getByText('マップ'))
+    fireEvent.click(screen.getByTestId('world-block-asuka')) // M2d-01: ワールドマップへ入る
     fireEvent.click(screen.getByTestId('stage-tile-asuka-1-1'))
 
     const tabButtons = screen.getByLabelText('タブ').querySelectorAll('button')
@@ -67,9 +70,10 @@ describe('App: ステージ挑戦中にタブを押すと確認ダイアログ�
     expect(screen.getByTestId('next-stage-card')).toBeInTheDocument()
 
     // ホーム→学習タブに戻ると asuka の s1 はまだ未クリア（中止したので記録されない。
-    // 作品2件×型2種=最大4問生成できるため「クリア済」ではなく件数表示のまま）
+    // M2d-01: 中止で activeWorldEraId もリセットされるため、再びワールドの入口から入る）。
     fireEvent.click(screen.getByText('マップ'))
-    expect(screen.getByTestId('stage-tile-asuka-1-1')).toHaveTextContent('問')
-    expect(screen.getByTestId('stage-tile-asuka-1-1')).not.toHaveTextContent('クリア済')
+    fireEvent.click(screen.getByTestId('world-block-asuka'))
+    expect(screen.getByTestId('stage-tile-asuka-1-1').dataset.state).toBe('unlocked')
+    expect(screen.getByTestId('stage-tile-asuka-1-1')).not.toBeDisabled()
   })
 })

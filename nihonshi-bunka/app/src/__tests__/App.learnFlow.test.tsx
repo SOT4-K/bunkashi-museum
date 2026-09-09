@@ -39,6 +39,7 @@ vi.mock('../content', () => ({
   passages: [passageA, passageB],
   passagesByEra: {},
   worksById: { lw1: w1, lw2: w2 },
+  worldThemesById: {},
 }))
 
 async function importApp() {

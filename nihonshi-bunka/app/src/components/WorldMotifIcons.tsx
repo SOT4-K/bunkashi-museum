@@ -13,7 +13,7 @@
 //    （富士・神奈川沖浪裏＝波）、歌川広重の東海道シリーズ（旅人）、多色刷り木版画そのもの
 //    （錦絵）は content/works/kasei.json の実作品（kanagawa-oki-namiura 等）と整合する
 //    化政文化の代表的主題。
-import type { ComponentType, SVGProps } from 'react'
+import type { SVGProps } from 'react'
 
 function MotifBase(props: SVGProps<SVGSVGElement>) {
   return <svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true" {...props} />
@@ -127,37 +127,3 @@ export function NishikieIcon(props: SVGProps<SVGSVGElement>) {
   )
 }
 
-/** id → 描画コンポーネント。content/worlds.json の motifs[].id を引く（未知の id は
- *  null を返し、呼び出し側（WorldMapScreen）はその飾りを描かず落ちない＝防御的）。 */
-export const MOTIF_CATALOG: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
-  dogu: DoguIcon,
-  haniwa: HaniwaIcon,
-  tateana: TateanaIcon,
-  dotaku: DotakuIcon,
-  kaizuka: KaizukaIcon,
-  fuji: FujiIcon,
-  nami: NamiIcon,
-  tabibito: TabibitoIcon,
-  nishikie: NishikieIcon,
-}
-
-export function getMotifIcon(id: string): ComponentType<SVGProps<SVGSVGElement>> | null {
-  return MOTIF_CATALOG[id] ?? null
-}
-
-/**
- * ボスノードの形（チケット「(c) ボスノードの形」）。CSS clip-path のポリゴン値。
- * 'default' は clip-path を使わず通常の角丸長方形にする（空文字列）。
- * 未知の値は 'default' にフォールバックする（getBossClipPath）。
- */
-export const BOSS_SHAPES: Record<string, string> = {
-  default: '',
-  // 前方後円墳（鍵穴型）を単純化: 丸い後円部+方形の前方部。
-  kofun: 'polygon(50% 0%, 74% 10%, 88% 32%, 88% 52%, 100% 52%, 100% 100%, 0% 100%, 0% 52%, 12% 52%, 12% 32%, 26% 10%)',
-  // 富士山型: 左右対称の台形。
-  fuji: 'polygon(50% 2%, 68% 32%, 86% 32%, 100% 100%, 0% 100%, 14% 32%, 32% 32%)',
-}
-
-export function getBossClipPath(shape: string): string {
-  return BOSS_SHAPES[shape] ?? BOSS_SHAPES.default
-}

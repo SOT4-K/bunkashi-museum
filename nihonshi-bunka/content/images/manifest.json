@@ -1085,7 +1085,7 @@
     {
       "id": "joan-chashitsu",
       "file": "joan-chashitsu.jpg",
-      "crop": { "left": 0, "top": 530, "width": 1920, "height": 910 },
+      "crop": { "left": 0, "top": 0, "width": 1120, "height": 1440 },
       "title": "如庵（犬山・有楽苑、国宝茶室）",
       "sourceName": "Wikimedia Commons",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:J%C5%8D-an_(Urakuen).jpg",

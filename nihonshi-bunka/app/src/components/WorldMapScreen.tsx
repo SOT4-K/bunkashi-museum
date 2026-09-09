@@ -11,7 +11,7 @@
 //  - 面の並び・解禁・クリア判定は既存 engine/stages をそのまま使う（進捗データの形式は変えない）
 import { useRef, useState, type CSSProperties } from 'react'
 import styles from './WorldMapScreen.module.css'
-import { getBossClipPath, getMotifIcon } from './WorldMotifIcons'
+import { getBossClipPath, getMotifIcon } from './worldMotifCatalog'
 import {
   buildEraStagePlan,
   fullStageSequence,
