@@ -12,8 +12,9 @@
       "5文目（禅宗とともに広まった水墨画・相国寺の禅僧の画家）: content/eras.json の kitayama（detail「明兆・如拙・周文らの水墨画が発達した」）、content/works/kitayama.json の suibokuga-kitayama（facts・eraNote）・shubun-sansui（facts・eraNote）",
       "6〜7文目（義満の権勢と北山の地名に由来する呼称）: content/eras.json の kitayama（detail）、content/works/kitayama.json の kinkaku（eraNote）",
       "高校教科書（山川『詳説日本史』）北山文化の項",
-      "図版の同定URL（下線a〜d、いずれも鹿苑寺金閣）: https://commons.wikimedia.org/wiki/File:Kinkaku-ji.jpg",
-      "図版の同定URL（下線e、山水図（伝周文））: https://www.metmuseum.org/art/collection/search/53223",
+      "図版の同定URL（下線a〜c、いずれも鹿苑寺金閣）: https://commons.wikimedia.org/wiki/File:Kinkaku-ji.jpg",
+      "図版の同定URL（下線d・e、山水図（伝周文））: https://www.metmuseum.org/art/collection/search/53223",
+      "下線d（「如拙→周文→雪舟」という水墨画の師弟・時代の流れ）: content/works/kitayama.json の shubun-sansui（examNote）、suibokuga-kitayama（facts・pairs「水墨画／如拙（相国寺）・明兆（東福寺）」）",
       "リード文の歴史記述そのものは教科書水準の通説で、一次資料・公的機関の公開ページは未参照（追検証URL未取得）"
     ],
     "underlines": [
@@ -65,14 +66,19 @@
         "key": "d",
         "anchorKind": "event",
         "workIds": [
-          "kinkaku"
+          "shubun-sansui"
         ],
         "ask": {
-          "type": "q10",
-          "stem": "下線部dによって明の文物が入った頃に営まれた、次の写真の建築について述べた文A・Bの正誤の組合せとして正しいものはどれか。",
-          "answerId": "kinkaku"
+          "type": "q12",
+          "stem": "下線部dによって大陸の文物とともに入った画法を受けついだ画家を、古いものから順に並べたものとして最も適切なものはどれか。",
+          "answerText": "如拙 → 周文 → 雪舟",
+          "distractorTexts": [
+            "雪舟 → 周文 → 如拙",
+            "周文 → 如拙 → 雪舟",
+            "如拙 → 雪舟 → 周文"
+          ]
         },
-        "note": "画像を出す型。bと同じ型だが下線（制度／貿易）とA・B文の観点が異なる。falseStatements の『応仁の乱後に建立された』『東山文化の代表建築である』など時代の入れ替え型を当てる"
+        "note": "M2i-03で改訂。旧: q10（対象 kinkaku）。同じ kinkaku × q10 を下線 b が持っており、ボスでは同一作品×同一型が1回に畳まれてこの下線が死んでいたため、対象と型の両方を替えた。年代順並べ替え（nichidai-past-exams-analysis.md 2章 T7）。「如拙→周文→雪舟」の師弟・時代の流れは content/works/kitayama.json の shubun-sansui の examNote にある頻出事項。誤答は隣り合う2人を入れ替えた並びでそろえた"
       },
       {
         "key": "e",
@@ -89,7 +95,7 @@
         "note": "M2e-05 で追加。この区分の出題可能作品2件（kinkaku・shubun-sansui）のうち shubun-sansui がどの下線からも参照されておらず、覆え率が 1/2 だったため。二段構え: A=相国寺の禅僧の画家（下線）／B=写真の絵画。下線には画家名（周文）も作品名も書かず、所属（相国寺）だけを手がかりにしている。a〜d と型が重ならないよう、c（q4・適切なもの）に対してこちらは reversed（最も不適切なもの）にした。stem に facts（伝周文の作とされる・真筆確定でない・雪舟の師）を書かないのは、正文がそのまま確定してしまうため。**残る穴（works 側のデータで、この下線からは直せない）**: falseStatements の『大和絵の代表作である』は、写真が墨だけで描かれていることから外見だけで誤りと判断できる"
       }
     ],
-    "notes": "この区分で画像を出題できるのは kinkaku と shubun-sansui の2件（このセットを書いた時点の research/m2-playable-works-2026-09-04.md では kinkaku のみだった）。a〜d は同一作品（kinkaku）に対して人物（義満）・制度（五山十刹）・人物（観阿弥世阿弥）・出来事（日明貿易）と、下線の種類と足す属性を変えて4問にしている。画像を伏せて選ばせる型（q9）は先頭のaだけに置き、以降は画像を出す型にした（同じ作品なので、画像を先に見せると後続のq9の答えが割れるため）。e は M2e-05 で追加した shubun-sansui 向けの下線で、a の q9（正解 kinkaku）とは別作品のため画像の提示順は変えていない。"
+    "notes": "この区分で画像を出題できるのは kinkaku と shubun-sansui の2件（このセットを書いた時点の research/m2-playable-works-2026-09-04.md では kinkaku のみだった）。a〜c は同一作品（kinkaku）に対して人物（義満）・制度（五山十刹）・人物（観阿弥世阿弥）と、下線の種類と足す属性を変えて3問にしている（M2i-03 で d を kinkaku の q10 から shubun-sansui の年代順並べ替えに差し替えた）。画像を伏せて選ばせる型（q9）は先頭のaだけに置き、以降は画像を出す型にした（同じ作品なので、画像を先に見せると後続のq9の答えが割れるため）。e は M2e-05 で追加した shubun-sansui 向けの下線で、a の q9（正解 kinkaku）とは別作品のため画像の提示順は変えていない。"
   },
   {
     "id": "kitayama-02",
@@ -275,5 +281,95 @@
       }
     ],
     "notes": "M2e-07②③で新設した3本目。kitayama-01・02 が下線の対象をほぼ kinkaku に集中させていたため、下線に紐づいていなかった5件（nichimin-boeki・gozan-bungaku・suibokuga-kitayama・zeami・nogaku-men）を1件ずつ別の下線の対象にした。5件はいずれも画像を持たない項目（kind: concept/person。画像がある3件も kind が concept のため playableWorks には入らない）なので、設問の型は Q10・Q13・Q4・Q12（文字問題）だけで構成している。"
+  },
+  {
+    "id": "kitayama-04",
+    "era": "kitayama",
+    "title": "将軍の山荘と、禅寺に入った大陸の絵",
+    "text": "室町幕府の3代将軍のもとで、公家の文化と武家の文化が溶けあった。将軍が[[a|京都の北山に営んだ山荘]]は、その死後に禅寺となった。将軍は[[b|将軍職を子に譲ったのちも出家して実権を握りつづけ]]、禅の寺々を厚く保護している。明との国交が開かれると、禅宗とともに大陸の絵画が入り、[[c|墨の濃淡だけで自然を表す描き方]]が寺を中心に広まった。相国寺の禅僧のなかからも担い手が出て、[[d|中国の画風にならって描かれた風景の絵]]が残されている。そのなかには、[[e|古くから一人の画僧の名で伝えられてきた作品]]もある。",
+    "sources": [
+      "全体の枠組み（3代将軍のもとでの公武の文化の融合、日明貿易と禅宗、水墨画の広まり）: content/eras.json の kitayama（detail）、高校教科書（山川『詳説日本史』）北山文化の項",
+      "下線a（将軍が北山に営んだ山荘と、その死後に禅寺となったこと）: content/works/kitayama.json の kinkaku（eraNote・patron・pairs）",
+      "下線b（将軍職を子に譲ったのちも実権を握り、出家してからも政治の中心にありつづけたこと、臨済宗の保護）: content/eras.json の kitayama（detail）、content/works/kitayama.json の kinkaku（religion「禅宗（臨済宗、義満の帰依）」）、gozan-jissatsu（pairs「五山・十刹の制／臨済宗」）",
+      "下線c・d・e（禅宗とともに広まった水墨画、相国寺の禅僧画家、「伝」を冠して伝わる作品）: content/works/kitayama.json の shubun-sansui（facts・eraNote・examNote・pairs）、suibokuga-kitayama（facts）",
+      "図版の同定URL（下線c〜e、山水図（伝周文））: https://www.metmuseum.org/art/collection/search/53223",
+      "※本文の歴史記述そのものは教科書水準の通説で、一次資料・公的機関の公開ページは未参照（追検証URL未取得）。M2i-03（ボスの下線増補）で新設、reviewer 未検証"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "hall",
+        "workIds": [
+          "kinkaku"
+        ],
+        "ask": {
+          "type": "q13",
+          "stem": "下線部aの中心にすえられた建物と、その造営者・様式・文化のいずれかの組合せとして正しいものはどれか。"
+        },
+        "note": "M2i-03で新設。語句組合せ（Q13）。kinkaku の pairs（鹿苑寺金閣／足利義満、／寝殿造風と禅宗様の折衷、北山文化／鹿苑寺金閣）のどれが選ばれても stem と噛み合う。下線には建物の名も様式も書かない"
+      },
+      {
+        "key": "b",
+        "anchorKind": "person",
+        "workIds": [
+          "kinkaku"
+        ],
+        "ask": {
+          "type": "q12",
+          "stem": "下線部bの将軍が帰依し、幕府が寺院に格づけの制度を定めて保護した宗派として最も適切なものはどれか。",
+          "answerText": "臨済宗",
+          "distractorTexts": [
+            "曹洞宗",
+            "浄土真宗",
+            "日蓮宗"
+          ]
+        },
+        "note": "M2i-03で新設。誤答は同じ鎌倉新仏教の他宗派でそろえた（曹洞宗＝道元、浄土真宗＝親鸞、日蓮宗＝日蓮）。宗派名は本文に書かない。画像に依存しない文字4択"
+      },
+      {
+        "key": "c",
+        "anchorKind": "style",
+        "workIds": [
+          "shubun-sansui"
+        ],
+        "ask": {
+          "type": "q9",
+          "stem": "下線部cのうち、相国寺の禅僧であった画家の作と古くから伝えられてきたものはどれか。",
+          "answerId": "shubun-sansui",
+          "distractorIds": [
+            "choju-giga-sumo",
+            "horyuji-kondo-heki",
+            "fujin-raijin-sotatsu"
+          ]
+        },
+        "note": "M2i-03で新設。二段構え: A=墨の濃淡で表す描き方（下線）／B=相国寺の禅僧の作という伝承（設問で追加）。誤答は3件とも絵画で、AもBも満たさない。この下線（画像を伏せて選ばせる型）を d・e より前に置き、後続で答えが割れないようにしている。**低確信点**: 条件Bは works の facts にある事実でもあるため、同じボスに d（2文正誤）が同時に出ると A・B文の一方が先に確定しうる。この文化は出題可能作品が2件しかなく、これ以上条件を分ける材料が無い（別の水墨画の画像が増えたら見直す）"
+      },
+      {
+        "key": "d",
+        "anchorKind": "style",
+        "workIds": [
+          "shubun-sansui"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部dにあたる次の絵画（画像）について述べたA・Bの文の正誤の組合せとして正しいものはどれか。",
+          "answerId": "shubun-sansui"
+        },
+        "note": "M2i-03で新設。facts 3件・verifiedFalse 3件があり Q10 を生成できる。誤文は雪舟自身の作（師弟の入れ替え）・狩野永徳の濃絵（技法と時代の入れ替え）が軸なので、下線には画家名も技法名も書かない"
+      },
+      {
+        "key": "e",
+        "anchorKind": "person",
+        "workIds": [
+          "shubun-sansui"
+        ],
+        "ask": {
+          "type": "q13",
+          "stem": "下線部eにあたる作品と、その伝承筆者または様式の組合せとして正しいものはどれか。"
+        },
+        "note": "M2i-03で新設。語句組合せ（Q13）。shubun-sansui の pairs（伝周文／山水図、山水図（伝周文）／水墨画）のどちらが選ばれても stem と噛み合う。下線には画僧の名も作品名も書かない"
+      }
+    ],
+    "notes": "M2i-03（ボス規則v4）で新設した4本目。この文化の出題可能作品は kinkaku と shubun-sansui の2件しかなく、ボスの3群は実質2群（第1群=鹿苑寺金閣／第2群=山水図（伝周文））になる。M2i-01 の実測ではボスが4問（目標10問）しか作れておらず、原因は①既存の下線が kinkaku に集中し同一作品×同一型が重複していた ②shubun-sansui を対象にする下線が1本しか無かった、の2点だった。ここでは kinkaku に q13・q12 を、shubun-sansui に q9・q10・q13 を足し、kitayama-01/d の対象と型も差し替えて、2群それぞれ5型（q9・q10・q4・q12・q13）を1回ずつ使い切る構成にしている。"
   }
 ]

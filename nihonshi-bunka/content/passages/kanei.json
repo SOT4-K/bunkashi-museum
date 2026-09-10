@@ -247,5 +247,61 @@
       }
     ],
     "notes": "M2e-07②③で新設した3本目。kanei-01・02 の下線は画像のある4件（yomeimon-nikko・shokintei-katsura・fujin-raijin-sotatsu・tanyu-getsuya-sansui）に集中しており、画像を持たない4件（hayashi-razan・honami-koetsu・sakaida-kakiemon・teimon-haikai）がどの下線にも紐づいていなかったので、1件ずつ下線の対象にした。なお hayashi-razan は technique が「—」という値なので、下線の文にダッシュ記号を入れると validate の technique リーク検査に引っかかる。この下線では使っていない。"
+  },
+  {
+    "id": "kanei-04",
+    "era": "kanei",
+    "title": "幕府の造営と、公家の別邸（寛永期）",
+    "text": "3代将軍のもとで幕藩体制が固まると、幕府の権威を示す造営と、公家や町衆の洗練された美意識とが並び立った。将軍は寛永13年、[[a|祖父を神としてまつる社]]を大規模に造り替え、その社殿を今日の姿に整えさせた。いっぽう京都の郊外では、公家の父子が三次にわたって別邸を造作し、[[b|別邸のなかに建てられた茶屋]]に簡素な美しさを求めている。絵の分野では、[[c|幕府の御用をつとめた絵師の一門]]が江戸城や二条城の障壁画を手がけた。武家の豪華さと公家の簡素さが同じ時期に並んで育ったところに、この時期の文化の特色がある。",
+    "sources": [
+      "全体の枠組み（家光の頃・幕藩体制・幕府の権威と公家や町衆の美意識）: 高校教科書（山川『詳説日本史』）寛永期の文化の項",
+      "下線a（寛永13年＝1636年の大造替、徳川家光、権現造）: 文化遺産オンライン「東照宮 陽明門」、content/works/kanei.json の yomeimon-nikko（facts・pairs「徳川家光／権現造」）",
+      "下線b（八条宮智仁親王・智忠親王父子が営んだ別邸、元和年間の着手から寛文年間の完成まで三次にわたる造営、数寄屋造）: 京都市「文化史11」（京都の離宮に関する解説）、content/works/kanei.json の shokintei-katsura（facts・pairs）",
+      "下線c（狩野派が幕府の御用をつとめる家となったこと、江戸城・二条城・名古屋城の障壁画、狩野探幽）: The Metropolitan Museum of Art コレクション（狩野探幽「月夜山水図」）https://www.metmuseum.org/art/collection/search/45419 、content/works/kanei.json の tanyu-getsuya-sansui（facts・pairs「狩野探幽／幕府の御用絵師」「狩野探幽／水墨画（狩野派）」）",
+      "図版の同定URL（下線a、日光東照宮陽明門）: https://commons.wikimedia.org/wiki/File:Nikko_toshogu_yomeimon_gate_ver1.jpg",
+      "図版の同定URL（下線b、桂離宮・松琴亭）: https://commons.wikimedia.org/wiki/File:Shokin-tei.jpg",
+      "※教科書に由来する記述と、京都市／文化遺産オンラインの解説は URL による追検証手段が未取得（M2-51）。M2i-03（ボスの下線増補）で新設、reviewer 未検証"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "temple",
+        "workIds": [
+          "yomeimon-nikko"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部aの造り替えでつくられた次の建物（画像）について述べたA・Bの文の正誤の組合せとして最も適切なものはどれか",
+          "answerId": "yomeimon-nikko"
+        },
+        "note": "M2i-03で新設。この作品は kanei-01/a（q9）でしか出ておらず（kanei-02/a は文化伏せ型でボスからは使わない）、ボスでは1問しか作れなかった。A・B文は造営者（徳川家光／徳川家康）と様式（権現造／数寄屋造）の入れ替えが軸なので、下線には人物名も様式名も書かない。外見の記述（極彩色・彫刻）は M2-41 の方針どおり使わない"
+      },
+      {
+        "key": "b",
+        "anchorKind": "hall",
+        "workIds": [
+          "shokintei-katsura"
+        ],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部bにあたる次の建物（画像）について述べた文として最も適切なものはどれか",
+          "answerId": "shokintei-katsura"
+        },
+        "note": "M2i-03で新設。kanei-01/b は q10、02/b は q9 で、関連記述はこの作品でまだ使っていなかった。誤文は施主（八条宮父子／徳川家光）と様式（数寄屋造／権現造）の入れ替えが軸なので、下線には施主名も様式名も書かない"
+      },
+      {
+        "key": "c",
+        "anchorKind": "school",
+        "workIds": [
+          "tanyu-getsuya-sansui"
+        ],
+        "ask": {
+          "type": "q13",
+          "stem": "下線部cの中心人物と、その幕府での役目または画風の組合せとして正しいものはどれか"
+        },
+        "note": "M2i-03で新設。語句組合せ（Q13）。tanyu-getsuya-sansui の pairs（狩野探幽／幕府の御用絵師、狩野探幽／水墨画（狩野派））のどちらが選ばれても stem と噛み合う。絵師名は本文に書かない"
+      }
+    ],
+    "notes": "M2i-03（ボス規則v4）で新設した4本目。この文化の出題可能作品4件を年代順に3群に分けると 第1群=桂離宮・風神雷神図屏風／第2群=日光東照宮陽明門・月夜山水図 の2群になる。既存3本では8問（第1群4問・第2群4問）で目標10問に2問足りなかったため、日光東照宮陽明門（1問しか作れていなかった）を中心に、既存セットで使っていない型（yomeimon-nikko×q10／shokintei-katsura×q4／tanyu-getsuya-sansui×q13）を足した。"
   }
 ]

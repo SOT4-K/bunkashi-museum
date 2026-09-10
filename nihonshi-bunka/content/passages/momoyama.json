@@ -325,5 +325,91 @@
       }
     ],
     "notes": "M2e-07②③で新設した4本目。momoyama-01〜03 の下線は画像のある3件（himeji-jo・joan-chashitsu・daigo-sanboin-teien）に集中しており、画像を持たない4件（noe-shohekiga・sen-no-rikyu・izumo-no-okuni・kirishitan-ban）がどの下線にも紐づいていなかったので、1件ずつ下線の対象にした。4件とも画像なし項目なので Q12・Q10・Q4（文字問題）で構成している。"
+  },
+  {
+    "id": "momoyama-05",
+    "era": "momoyama",
+    "title": "花見の庭、草庵の茶室、天守の城",
+    "text": "全国統一が進んだ時代には、天下人たちの造営が各地に形を残した。豊臣秀吉は死の直前の年、[[a|京都の寺で盛大な花見を催し]]、その寺の庭にみずから手を加えたと伝えられる。茶の湯がひろがると、[[b|大名や武将のなかにも、みずから茶室を建てる者が現れ]]、[[c|草庵風の小さな茶室]]が各地に営まれた。いっぽう[[d|各地に築かれた大名の居城]]の内部は、金地に濃い色で描く絵で飾られた。関ヶ原の戦いののちも城の大改修は続き、庭や城の豪壮さと、[[e|茶の湯のためにしつらえられた小さな座敷]]の簡素さとが、同じ時代のなかに並び立っていた。",
+    "sources": [
+      "全体の枠組み（新興大名・豪商の富を背景とする豪壮な文化、茶の湯の流行、天守を中心とする城郭と濃絵の障壁画）: content/eras.json の momoyama（detail）、高校教科書（山川『詳説日本史』）桃山文化の項",
+      "下線a（秀吉が死の直前の1598年に京都の寺で催した盛大な花見と、その庭園への関与）: content/works/momoyama.json の daigo-sanboin-teien（facts・eraNote・pairs）",
+      "下線b・c（草庵風の茶室の広まり、織田信長の弟にあたる武将が建てたと伝えられる国宝の茶室、愛知県犬山市への移築）: content/works/momoyama.json の joan-chashitsu（facts・pairs）、sen-no-rikyu（facts）",
+      "下線d（関ヶ原の戦いののちの大改修、池田輝政、1601〜1609年、天守を中心とする城郭建築）: content/works/momoyama.json の himeji-jo（facts・pairs）",
+      "図版の同定URL（下線a、醍醐寺三宝院庭園）: https://commons.wikimedia.org/wiki/File:Daigozi_08.jpg",
+      "図版の同定URL（下線b、如庵）: https://commons.wikimedia.org/wiki/File:J%C5%8D-an_(Urakuen).jpg",
+      "※本文の歴史記述そのものは教科書水準の通説で、一次資料・公的機関の公開ページは未参照（追検証URL未取得）。M2i-03（ボスの下線増補）で新設、reviewer 未検証"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "event",
+        "workIds": [
+          "daigo-sanboin-teien"
+        ],
+        "ask": {
+          "type": "q9",
+          "stem": "下線部aを催した人物が基本設計に関わったと伝えられる庭園はどれか。",
+          "answerId": "daigo-sanboin-teien",
+          "distractorIds": [
+            "ryoanji-sekitei",
+            "shokintei-katsura",
+            "ginkaku"
+          ]
+        },
+        "note": "M2i-03で新設。この作品は momoyama-03/b（q10）でしか出ておらず、ボスでは1問しか作れなかった。誤答には別の様式の庭園（ryoanji-sekitei＝枯山水）を入れ、「庭園はどれか」で1件に絞れないようにしている。画像を伏せて選ばせる型はこのセットの先頭1問だけに置き、正解画像は b・c・d の対象と別作品なので後続で答えが割れない。**低確信点**: 条件（基本設計に関わったと伝えられる）は works の facts にもある事実なので、同じボスに momoyama-03/b（この作品の2文正誤）が同時に出るとA・B文の一方が先に確定しうる"
+      },
+      {
+        "key": "b",
+        "anchorKind": "event",
+        "workIds": [
+          "joan-chashitsu"
+        ],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部bによって建てられた次の茶室（画像）について述べた文として最も適切なものはどれか。",
+          "answerId": "joan-chashitsu"
+        },
+        "note": "M2i-03で新設。facts 3件・verifiedFalse 3件があり Q4 を生成できる。誤文は建てた人物（織田有楽斎／千利休）・別の茶室との取り違え（待庵）・所在（愛知県犬山市／京都府大山崎町）の入れ替えが軸なので、stem には人物名も所在も書かない"
+      },
+      {
+        "key": "c",
+        "anchorKind": "style",
+        "workIds": [
+          "joan-chashitsu"
+        ],
+        "ask": {
+          "type": "q13",
+          "stem": "下線部cのうち、現在は愛知県犬山市に移されているものと、それを建てたと伝えられる人物または座敷の造りの組合せとして正しいものはどれか。"
+        },
+        "note": "M2i-03で新設。語句組合せ（Q13）。joan-chashitsu の pairs（如庵／織田有楽斎（織田長益）、如庵／二畳半台目の茶室）のどちらが選ばれても stem と噛み合う。茶室の名は本文にも stem にも書かない"
+      },
+      {
+        "key": "d",
+        "anchorKind": "hall",
+        "workIds": [
+          "himeji-jo"
+        ],
+        "ask": {
+          "type": "q13",
+          "stem": "下線部dのうち、関ヶ原の戦いののちに播磨で大改修されたものと、その改修者・改修の時期・文化のいずれかの組合せとして正しいものはどれか。"
+        },
+        "note": "M2i-03で新設。語句組合せ（Q13）。himeji-jo の pairs（姫路城／池田輝政、姫路城／1601〜1609年（関ヶ原の戦いののち）、桃山文化／天守を中心とする城郭建築）のどれが選ばれても stem と噛み合う。城の名は本文にも stem にも書かない"
+      },
+      {
+        "key": "e",
+        "anchorKind": "style",
+        "workIds": [
+          "joan-chashitsu"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部eにあたる次の建物（画像）について述べたA・Bの文の正誤の組合せとして正しいものはどれか。",
+          "answerId": "joan-chashitsu"
+        },
+        "note": "M2i-03で新設。facts 3件・verifiedFalse 3件があり Q10 を生成できる。momoyama-03/a は q9、このセットの b は q4、c は q13 なので、2文正誤はこの作品でまだ使っていない型。A・B文は建てた人物・別の茶室との取り違え・所在の入れ替えが軸なので、下線には人物名も所在も書かない。当初は daigo-sanboin-teien の q13 を置いていたが、この本文が下線aで秀吉の関与を述べており、語句組合せの答え（庭園×豊臣秀吉）が本文から決まってしまうため差し替えた"
+      }
+    ],
+    "notes": "M2i-03（ボス規則v4）で新設した5本目。この文化の出題可能作品は3件で、ボスの3群は 第1群=醍醐寺三宝院庭園／第2群=姫路城／第3群=如庵 になる。M2i-01 の実測ではボスが6問（目標10問）止まりで、内訳は姫路城4問・如庵1問・醍醐寺三宝院庭園1問と第2群に偏っていた。ここでは第1群に q9、第3群に q4・q13・q10、第2群に q13 を足し、3群がそれぞれ複数問を出せるようにした（合計11問ぶんの候補になり、1問ぶんの余裕を残している）。"
   }
 ]

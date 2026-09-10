@@ -248,5 +248,73 @@
       }
     ],
     "notes": "M2e-07②③で新設した3本目。genroku-01・02 の下線が画像のある3件（mikaeri-bijin・yatsuhashi-suzuribako・fujin-raijin-korin）に集中していたため、画像を持たない5件を1件ずつ下線の対象にした。5件とも kind が person/text で画像を出す型（Q9・Q1）は使えないため、Q12・Q13・Q10・Q4 で構成している。"
+  },
+  {
+    "id": "genroku-04",
+    "era": "genroku",
+    "title": "上方の装飾、江戸の風俗（元禄期）",
+    "text": "元禄期には、上方の町人の経済力を背景に、装飾性の高い造形が生まれた。京都では、寛永期の絵屋の当主の画風を約80年後に学び直した絵師が現れ、[[a|絵画と工芸の双方にわたる装飾的な様式]]を確立する。この絵師は漆の工芸にも手を広げ、[[b|古典文学の一場面を意匠にした調度]]をつくっており、そこでは[[c|漆に金や貝をあしらう技]]が生かされた。江戸では、版本の挿絵であった絵を一枚の鑑賞用の絵として独立させる動きが生まれ、[[d|町の風俗を題材とする絵]]が評判となった。工芸では京焼の色絵も完成され、上方と江戸のそれぞれで町人の好みに応える作品が生まれた時期であった。",
+    "sources": [
+      "全体の枠組み（上方の町人が担い手、江戸で町の風俗が絵の題材になったこと、京焼の色絵の完成）: 高校教科書（山川『詳説日本史』）元禄文化の項",
+      "下線a（寛永期の絵屋の当主の画風を約80年後に学び直し、絵画と工芸の双方に装飾的な様式を残したこと）: 東京国立博物館（ColBase 収蔵品、登録番号 A-11189-1／H-86）、content/works/genroku.json の fujin-raijin-korin（facts・pairs「尾形光琳／琳派」）",
+      "下線b（漆に鉛板と貝をはめ、『伊勢物語』第九段に取材した意匠の調度）: 東京国立博物館（ColBase 収蔵品、登録番号 H-86）、content/works/genroku.json の yatsuhashi-suzuribako（facts・pairs）",
+      "下線c（漆に鉛板と貝をはめる蒔絵・螺鈿の技法と、その作者・題材）: content/works/genroku.json の yatsuhashi-suzuribako（pairs「尾形光琳／蒔絵」「八橋の意匠／『伊勢物語』」）",
+      "下線d（版本の挿絵であった絵を一枚の鑑賞用の絵として独立させたこと、肉筆の美人画）: 東京国立博物館（ColBase 収蔵品、登録番号 A-60）https://colbase.nich.go.jp/collection_items/tnm/A-60?locale=ja 、content/works/genroku.json の mikaeri-bijin（facts・pairs）",
+      "設問で用いる図版の所在: 見返り美人図 https://commons.wikimedia.org/wiki/File:Hishikawa_Moronobu_-_Beauty_Looking_Back_-_Google_Art_Project.jpg ／八橋蒔絵螺鈿硯箱 https://commons.wikimedia.org/wiki/File:Writing_Box_Yatsuhashi_bridge_design.jpg",
+      "※教科書に由来する記述（元禄文化の枠組み・京焼）は URL による追検証手段が未取得（M2-51）。M2i-03（ボスの下線増補）で新設、reviewer 未検証"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "school",
+        "workIds": [
+          "fujin-raijin-korin"
+        ],
+        "ask": {
+          "type": "q13",
+          "stem": "下線部aを確立した絵師と、その様式の呼び名の組合せとして正しいものはどれか"
+        },
+        "note": "M2i-03で新設。語句組合せ（Q13）。fujin-raijin-korin の pairs（尾形光琳／琳派）が素材。絵師名も様式名も本文に書かない。この作品は画像が fujin-raijin-sotatsu（寛永期）と酷似するため画像を伏せて選ばせる型（q9）は使わない方針で、文字問題を足した"
+      },
+      {
+        "key": "b",
+        "anchorKind": "style",
+        "workIds": [
+          "yatsuhashi-suzuribako"
+        ],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部bにあたる次の作品（画像）について述べた文として最も適切なものはどれか",
+          "answerId": "yatsuhashi-suzuribako"
+        },
+        "note": "M2i-03で新設。この作品は genroku-01/c（q9）と genroku-02/c（q10）でしか出ておらず、ボスでは2問しか作れなかった。画像を出す型なので下線は題材の説明でよい。器物の種類（硯箱）は M2-41 の方針どおり条件に使わない"
+      },
+      {
+        "key": "c",
+        "anchorKind": "style",
+        "workIds": [
+          "yatsuhashi-suzuribako"
+        ],
+        "ask": {
+          "type": "q13",
+          "stem": "下線部cを用いた作品と、その作者または題材となった古典文学の組合せとして正しいものはどれか"
+        },
+        "note": "M2i-03で新設。語句組合せ（Q13）。yatsuhashi-suzuribako の pairs（尾形光琳／蒔絵、八橋の意匠／『伊勢物語』）のどちらが選ばれても stem と噛み合う。技法名（蒔絵・螺鈿）も作者名も本文に書かず、工程の説明にとどめている"
+      },
+      {
+        "key": "d",
+        "anchorKind": "style",
+        "workIds": [
+          "mikaeri-bijin"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部dを一枚の鑑賞用の絵として独立させた絵師が描いた次の作品（画像）について述べたA・Bの文の正誤の組合せとして正しいものはどれか",
+          "answerId": "mikaeri-bijin"
+        },
+        "note": "M2i-03で新設。genroku-01/a は q4、genroku-02/b は q9 で、2文正誤はこの作品でまだ使っていなかった。A・B文は技法（肉筆／木版多色刷）と時代の入れ替えが軸なので、下線にも stem にも技法名を書かない"
+      }
+    ],
+    "notes": "M2i-03（ボス規則v4）で新設した4本目。この文化の出題可能作品は3件で、ボスの3群は 第1群=見返り美人図／第2群=風神雷神図屏風（尾形光琳筆）／第3群=八橋蒔絵螺鈿硯箱 になる。既存3本では各群2問ずつ（計7問）しか作れずボスが10問に届かなかったため、既存セットで使っていない型（fujin-raijin-korin×q13／yatsuhashi-suzuribako×q4・q13／mikaeri-bijin×q10）を足して11問にした（1問ぶんの余裕を残している）。"
   }
 ]

@@ -243,5 +243,75 @@
       }
     ],
     "notes": "M2e-07②③で新設した3本目。higashiyama-01・02 の下線は画像のある3件（ginkaku・togudo・ryoanji）に集中しており、画像を持たない3件（otogizoshi・murata-juko・sesshu）がどの下線にも紐づいていなかったので、1件ずつ下線の対象にした。"
+  },
+  {
+    "id": "higashiyama-04",
+    "era": "higashiyama",
+    "title": "東山の山荘に残された住まいと庭",
+    "text": "応仁の乱ののち、8代将軍は政務を退いて京都の東山に山荘を営んだ。[[a|山荘の中心にすえられた楼閣]]は、将軍の死後に禅寺となったこの地に受けつがれている。[[b|同じ山荘に建てられた持仏堂]]の一室には、床の間や違い棚をそなえた[[c|のちの和室のもとになった座敷の形式]]が整えられ、住まいのかたちを大きく変えた。禅の考え方は庭づくりにも及び、[[d|寺の方丈の前に営まれた庭]]が名高い。乱によって公家や僧が地方へ下り、文化が地方や庶民にまで広がっていったのも、この時期の大きな特色である。",
+    "sources": [
+      "全体の枠組み（応仁の乱と将軍の隠退、東山の山荘、禅の精神が生活文化に及んだこと、文化の地方・庶民への広がり）: content/eras.json の higashiyama（detail）、高校教科書（山川『詳説日本史』）東山文化の項",
+      "下線a（足利義政が東山に営んだ山荘の中心建物、その死後に慈照寺となったこと）: content/works/higashiyama.json の ginkaku（patron・eraNote・pairs）",
+      "下線b・c（足利義政が山荘に建てた持仏堂と、床の間・違い棚・付書院をそなえた座敷の形式）: content/works/higashiyama.json の togudo-doujinsai（facts・pairs「書院造／慈照寺東求堂同仁斎」「慈照寺東求堂／足利義政」）、shoin-zukuri（facts）",
+      "下線d（禅寺の方丈の前に営まれた庭、作庭者・年代が確定していないこと）: content/works/higashiyama.json の ryoanji-sekitei（facts・eraNote）、karesansui（facts）",
+      "図版の同定URL（下線a、慈照寺銀閣）: https://commons.wikimedia.org/wiki/File:Kyoto_Ginkaku-ji_Ginkaku_02.jpg",
+      "図版の同定URL（下線b、慈照寺東求堂）: https://commons.wikimedia.org/wiki/File:Ginkakuji_Togudo.jpg",
+      "図版の同定URL（下線d、龍安寺方丈庭園）: https://commons.wikimedia.org/wiki/File:Kare-sansui_zen_garden,_Ry%C5%8Dan-ji,_Kyoto_20190416_1.jpg",
+      "※本文の歴史記述そのものは教科書水準の通説で、一次資料・公的機関の公開ページは未参照（追検証URL未取得）。M2i-03（ボスの下線増補）で新設、reviewer 未検証"
+    ],
+    "underlines": [
+      {
+        "key": "a",
+        "anchorKind": "hall",
+        "workIds": [
+          "ginkaku"
+        ],
+        "ask": {
+          "type": "q10",
+          "stem": "下線部aにあたる次の建物（画像）について述べたA・Bの文の正誤の組合せとして正しいものはどれか。",
+          "answerId": "ginkaku"
+        },
+        "note": "M2i-03で新設。higashiyama-01/a は q9、01/d は q4（不適切）、02/a・02/d は q12、02/e は q4 で、2文正誤はこの作品でまだ使っていなかった。A・B文は建立者（足利義政／足利義満）・文化（東山／北山）・造営の時期（応仁の乱の前後）の入れ替えが軸なので、下線には建立者も様式も書かない"
+      },
+      {
+        "key": "b",
+        "anchorKind": "hall",
+        "workIds": [
+          "togudo-doujinsai"
+        ],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部bにあたる次の建物（画像）について述べた文として最も適切なものはどれか。",
+          "answerId": "togudo-doujinsai"
+        },
+        "note": "M2i-03で新設。higashiyama-01/c は q9、02/b は q10 で、関連記述はこの作品でまだ使っていなかった。誤文は銀閣そのものの別名とする混同・様式（書院造／寝殿造）・建立者（足利義政／足利義満）の入れ替えが軸なので、下線には様式名も建立者も書かない"
+      },
+      {
+        "key": "c",
+        "anchorKind": "style",
+        "workIds": [
+          "togudo-doujinsai"
+        ],
+        "ask": {
+          "type": "q13",
+          "stem": "下線部cと、その形式をそなえた建物または建物を営んだ将軍の組合せとして正しいものはどれか。"
+        },
+        "note": "M2i-03で新設。語句組合せ（Q13）。togudo-doujinsai の pairs（書院造／慈照寺東求堂同仁斎、慈照寺東求堂／足利義政）のどちらが選ばれても stem と噛み合う。様式名も建物名も本文に書かない。b（画像を出す型）と同じ作品だが型が異なる"
+      },
+      {
+        "key": "d",
+        "anchorKind": "style",
+        "workIds": [
+          "ryoanji-sekitei"
+        ],
+        "ask": {
+          "type": "q4",
+          "stem": "下線部dのうち、京都の龍安寺にある次の庭園（画像）について述べた文として最も適切なものはどれか。",
+          "answerId": "ryoanji-sekitei"
+        },
+        "note": "M2i-03で新設。higashiyama-01/b は q10、02/c は q9 で、関連記述はこの作品でまだ使っていなかった。画像を出す型なので寺名を stem に書いてよい（higashiyama-01/b と同じ扱い）。誤文は様式（枯山水／池泉回遊式）と作庭者・年代の断定の入れ替えが軸なので、下線には様式名も作庭者も書かない"
+      }
+    ],
+    "notes": "M2i-03（ボス規則v4）で新設した4本目。この文化の出題可能作品は3件で、ボスの3群は 第1群=慈照寺銀閣／第2群=慈照寺東求堂（同仁斎）／第3群=龍安寺方丈庭園 になる。既存3本では第1群3問・第2群2問・第3群2問（計7問）しか作れずボスが10問に届かなかったため、既存セットで使っていない型（ginkaku×q10／togudo-doujinsai×q4・q13／ryoanji-sekitei×q4）を足して11問にした（1問ぶんの余裕を残している）。"
   }
 ]
