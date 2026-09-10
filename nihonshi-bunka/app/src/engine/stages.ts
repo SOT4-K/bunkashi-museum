@@ -343,18 +343,27 @@ function buildQ9QuestionForStage(work: Work, imagePool: Work[], eras: Era[], rng
   }
 }
 
-/** 型が同じ要素が隣り合わないよう、可能な範囲で入れ替える（best-effort。完全には解消できない
- *  こともある。engine/themeSet.ts の reorderToAvoidConsecutiveSameType と同じアルゴリズムだが、
- *  ここでは Question[] を直接扱う）。 */
+/** 隣り合う2問が「同じ型」または「同じ作品（doubled規則で2回出る作品の2回目）」にならないよう、
+ *  可能な範囲で入れ替える（best-effort。完全には解消できないこともある。BOARD.md M2i-01⑤
+ *  「同じ作品の2回目は別型かつ非隣接」「同型連続を抑える」の両方をこの1関数で満たす。
+ *  engine/themeSet.ts の reorderToAvoidConsecutiveSameType と似たアルゴリズムだが、
+ *  ここでは Question[] を直接扱い、衝突条件に work.id も加えている）。 */
+function collides(a: Question, b: Question): boolean {
+  return a.type === b.type || a.work.id === b.work.id
+}
+
 function reorderToAvoidConsecutiveSameType(items: Question[]): Question[] {
   const arr = items.slice()
   for (let pass = 0; pass < 3; pass++) {
     let changed = false
     for (let i = 1; i < arr.length; i++) {
-      if (arr[i].type !== arr[i - 1].type) continue
+      if (!collides(arr[i], arr[i - 1])) continue
       let swapIdx = -1
       for (let j = i + 1; j < arr.length; j++) {
-        if (arr[j].type !== arr[i - 1].type) {
+        // 入れ替え先の候補（arr[j]）を位置iへ動かしたとき、両隣（arr[i-1]・arr[i+1]。
+        // arr[i+1]は末尾なら存在しない）のどちらとも衝突しないことを確認する。
+        const nextNeighbor = arr[i + 1]
+        if (!collides(arr[j], arr[i - 1]) && (!nextNeighbor || !collides(arr[j], nextNeighbor))) {
           swapIdx = j
           break
         }

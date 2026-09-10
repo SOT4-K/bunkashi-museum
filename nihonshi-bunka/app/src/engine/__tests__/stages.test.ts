@@ -315,6 +315,29 @@ describe('buildStageQuestions', () => {
     for (const count of countByWork.values()) expect(count).toBeLessThanOrEqual(2)
   })
 
+  it(
+    '同じ作品の2回目はできるだけ非隣接にする（best-effort。★1×N=4×2型という最も厳しい条件' +
+      '〔8要素中4要素が同じ作品、型はq1/q3の2種類しか無いため型を交互にすると必然的に組合せが' +
+      '限られる〕でも、隣接率は無対策（単純シャッフルのみ）の想定よりかなり低く抑えられる）',
+    () => {
+      let adjacentSameWork = 0
+      let totalAdjacentPairs = 0
+      for (let seed = 0; seed < 30; seed++) {
+        const qs = buildStageQuestions('e1', 1, 1, richWorks4, richWorks4, eras, seededRandom(seed))
+        for (let i = 1; i < qs.length; i++) {
+          totalAdjacentPairs++
+          if (qs[i].work.id === qs[i - 1].work.id) adjacentSameWork++
+        }
+      }
+      // 単純シャッフルのみ（reorderなし）だと8要素中4作品×2回のペアが隣接する期待値は
+      // 4/7≈57%程度になる（4組のペアのどれかが隣り合う確率）。reorder適用後の実測は
+      // 大幅に下がることだけを回帰として固定する（低確信点: 数学的に0を保証するアルゴリズムでは
+      // ない。既存のreorderToAvoidConsecutiveSameType＝engine/themeSet.tsと同じ「best-effort」
+      // 思想を踏襲したため。完了報告に明記）。
+      expect(adjacentSameWork / totalAdjacentPairs).toBeLessThan(0.15)
+    },
+  )
+
   it('存在しない面番号（segment）は0件', () => {
     const qs = buildStageQuestions('e1', 1, 99, richWorks4, richWorks4, eras, seededRandom(1))
     expect(qs).toEqual([])
