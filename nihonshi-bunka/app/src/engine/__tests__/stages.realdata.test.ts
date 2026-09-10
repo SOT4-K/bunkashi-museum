@@ -148,7 +148,7 @@ describe('合格ライン③: 合格判定（10問→8問以上、10問未満→
   it('clearThreshold は実データの問数レンジで正しい値を返す', () => {
     expect(clearThreshold(10)).toBe(8)
     expect(clearThreshold(20)).toBe(16)
-    for (let n = 3; n <= 9; n++) expect(clearThreshold(n)).toBe(n - 1)
+    for (let n = 2; n <= 9; n++) expect(clearThreshold(n)).toBe(n - 1)
   })
 
   it('面の目標問数（questionCountForSegment）は常に clearThreshold と整合する（>=1ミスの余地がある）', () => {

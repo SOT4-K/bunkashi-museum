@@ -112,7 +112,11 @@ export const STAGE_CHUNK_SIZE = 10
  */
 export function clearThreshold(questionCount: number): number {
   const n = questionCount
-  if (n <= 2) return n
+  // オーナー規則（BOARD.md M2i v4）: 10問未満は常に1ミス以内で解放。
+  // n=1 だけは「1ミス許容」が「0問正解で合格」になり成立しないため、唯一の例外として全問正解を要求する
+  // （M2i-99 [中]-2 で n<=2 が誤って n=2 でもノーミス必須になっていたバグを修正、fact-check-m2i.md 参照）
+  if (n <= 0) return 0
+  if (n === 1) return 1
   if (n < 10) return n - 1
   return Math.floor(n * 0.8)
 }

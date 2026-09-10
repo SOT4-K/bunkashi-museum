@@ -104,12 +104,11 @@ describe('clearThreshold（★の定義v4: 10問→8問以上、10問未満→1�
   it('10問は8問以上でクリア', () => {
     expect(clearThreshold(10)).toBe(8)
   })
-  it('3〜9問は1ミスまで許容', () => {
-    for (let n = 3; n <= 9; n++) expect(clearThreshold(n)).toBe(n - 1)
+  it('2〜9問は1ミスまで許容（M2i-99 [中]-2で修正: 以前はn<=2が誤って全問正解必須だった）', () => {
+    for (let n = 2; n <= 9; n++) expect(clearThreshold(n)).toBe(n - 1)
   })
-  it('1〜2問は全問正解が必要', () => {
+  it('1問だけは「1ミス許容」が成立しない唯一の例外として全問正解が必要', () => {
     expect(clearThreshold(1)).toBe(1)
-    expect(clearThreshold(2)).toBe(2)
   })
   it('0問は0（生成できていない異常系）', () => {
     expect(clearThreshold(0)).toBe(0)

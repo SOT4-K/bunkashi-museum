@@ -88,7 +88,7 @@ describe('StageScreen', () => {
     expect(onComplete).toHaveBeenCalledWith(1, 2)
   })
 
-  it('結果画面: 2問中1問正解では「クリアには2/2問正解が必要」（ceil(0.9×2)=2）、「もう一度」「次へ」が押せる', () => {
+  it('結果画面: 2問中1問正解でクリア（M2i-99 [中]-2 修正後: clearThreshold(2)=1、1ミス以内で解放）、「もう一度」「次へ」が押せる', () => {
     const onRetry = vi.fn()
     const onFinish = vi.fn()
     render(
@@ -113,7 +113,7 @@ describe('StageScreen', () => {
     }
     const summary = screen.getByTestId('stage-summary')
     expect(within(summary).getByText('1 / 2')).toBeInTheDocument()
-    expect(screen.getByTestId('stage-clear-label')).toHaveTextContent('クリアには 2/2 問正解が必要')
+    expect(screen.getByTestId('stage-clear-label')).toHaveTextContent('クリア！')
 
     fireEvent.click(screen.getByTestId('stage-retry'))
     expect(onRetry).toHaveBeenCalledTimes(1)
