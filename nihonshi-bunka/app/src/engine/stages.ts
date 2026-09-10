@@ -333,31 +333,48 @@ function buildWordPairQuestion(work: Work, pool: Work[], rng: RandomFn): Questio
   return { type: 'q13', work, choiceWorks: [], choiceWordPairs: items, correctIndex, isReview: false, reversed: false }
 }
 
-/** Q5（画像→作者。M2i ★2）を組み立てる。誤答は同文化→隣接文化の実在の作者から選ぶ
- *  （engine/q5.ts）。artist が無い、または誤答が3件そろわなければ null。 */
+/** Q5（画像→作者。M2i ★2）を組み立てる。誤答は同era（＝ワールド）優先、足りなければ隣接文化の
+ *  実在の作者から選ぶ（M2i-05b③、engine/q5.ts の preferSameEra）。artist が無い、または誤答が
+ *  3件そろわなければ null。 */
 function buildQ5QuestionForStage(work: Work, pool: Work[], eras: Era[], rng: RandomFn): Question | null {
-  const data = generateQ5Question(work, pool, eras, rng)
+  const data = generateQ5Question(work, pool, eras, rng, { preferSameEra: true })
   if (!data) return null
   const { items, correctIndex } = buildChoices(data.correctArtist, data.distractorArtists, rng)
   return { type: 'q5', work, choiceWorks: [], choiceArtists: items, correctIndex, isReview: false }
 }
 
-/** Q7（画像→出土地・所在地。M2i-05③ ★3）を組み立てる。誤答は同文化→隣接文化の実在の
- *  出土地・所在地から選ぶ（engine/q7.ts）。対象が値を持たない、または誤答が3件そろわなければ null。 */
+/** Q7（画像→出土地・所在地。M2i-05③ ★3）を組み立てる。誤答は同era（＝ワールド）優先、
+ *  足りなければ隣接文化の実在の出土地・所在地から選ぶ（M2i-05b②、engine/q7.ts の
+ *  preferSameEra。reviewer fact-check-m2i-05.md [重大]-2「Q7のヘッダー解答可能率23.9%」の是正）。
+ *  対象が値を持たない、または誤答が3件そろわなければ null。 */
 function buildQ7QuestionForStage(work: Work, pool: Work[], eras: Era[], rng: RandomFn): Question | null {
-  const data = generateQ7Question(work, pool, eras, rng)
+  const data = generateQ7Question(work, pool, eras, rng, { preferSameEra: true })
   if (!data) return null
   const { items, correctIndex } = buildChoices(data.correctLocation, data.distractorLocations, rng)
   return { type: 'q7', work, choiceWorks: [], choiceLocations: items, correctIndex, isReview: false }
 }
 
+/** M2i-05b⑤（decisions.md 2026-09-11、reviewer fact-check-m2i-05.md [中]-2「asuka★4=83.2%は
+ *  アルゴリズムでは解消不能」の是正）: preferSameEra が選んだ誤答のうち同era（＝ワールド）が
+ *  この件数未満なら「薄いケース」（同era候補がほぼ無く、ヘッダーだけでほぼ解けてしまう）として
+ *  q9を辞退する。選ばれた distractorWorks のうち同era件数は preferSameEra の
+ *  selectPreferSameEraWindow の実装上 min(sameEraAny件数, 3) と一致する（決定的）ため、
+ *  生成結果からこの件数を数えるだけで判定できる。 */
+const MIN_SAME_ERA_DISTRACTORS_FOR_STAGE_Q9 = 2
+
 /** Q9をスロット固定（allowSlots）で組み立てる（M2i ★2〜5）。eraスロットは常に禁止する
  *  （ワールド固定のステージ・ボスではヘッダーの文化名だけで解けてしまうため）。誤答は同era
  *  （＝ワールド）を優先する（M2i-05②、preferSameEra。reviewer fact-check-m2i.md でq9の
- *  43.6%がヘッダーだけで解けると指摘されたための是正。engine/q9.ts 参照）。 */
+ *  43.6%がヘッダーだけで解けると指摘されたための是正。engine/q9.ts 参照）。同era候補が
+ *  MIN_SAME_ERA_DISTRACTORS_FOR_STAGE_Q9 件未満（＝正解含めてヘッダーだけでほぼ解けてしまう
+ *  薄いケース、例: asuka★4のreligion/subjectスロット）は q9 を辞退する（null を返す）。
+ *  呼び出し元（tryBuildStageQuestionForWork）はその作品の候補型リストの中から他の型
+ *  （★4ならq4/q8等）を試す（M2i-05b⑤）。 */
 function buildQ9QuestionForStage(work: Work, imagePool: Work[], eras: Era[], rng: RandomFn, allowSlots: Q9Slot[]): Question | null {
   const data = generateQ9Question(work, imagePool, eras, rng, { allowSlots, avoidSlots: ['era'], preferSameEra: true })
   if (!data) return null
+  const sameEraDistractorCount = data.distractorWorks.filter((d) => d.era === work.era).length
+  if (sameEraDistractorCount < MIN_SAME_ERA_DISTRACTORS_FOR_STAGE_Q9) return null
   const { items, correctIndex } = buildChoices(data.correctWork, data.distractorWorks, rng)
   return {
     type: 'q9',
@@ -380,31 +397,68 @@ function collides(a: Question, b: Question): boolean {
   return a.type === b.type || a.work.id === b.work.id
 }
 
-function reorderToAvoidConsecutiveSameType(items: Question[]): Question[] {
-  const arr = items.slice()
-  for (let pass = 0; pass < 3; pass++) {
-    let changed = false
-    for (let i = 1; i < arr.length; i++) {
-      if (!collides(arr[i], arr[i - 1])) continue
-      let swapIdx = -1
-      for (let j = i + 1; j < arr.length; j++) {
-        // 入れ替え先の候補（arr[j]）を位置iへ動かしたとき、両隣（arr[i-1]・arr[i+1]。
-        // arr[i+1]は末尾なら存在しない）のどちらとも衝突しないことを確認する。
-        const nextNeighbor = arr[i + 1]
-        if (!collides(arr[j], arr[i - 1]) && (!nextNeighbor || !collides(arr[j], nextNeighbor))) {
-          swapIdx = j
-          break
+function countAdjacentCollisions(items: Question[]): number {
+  let n = 0
+  for (let i = 1; i < items.length; i++) if (collides(items[i], items[i - 1])) n++
+  return n
+}
+
+/** 「残り件数の多い型を優先する」貪欲アルゴリズム（LeetCode767「文字列の再編成」と同じ考え方を
+ *  Question[] に適用。M2i-05b④、reviewer fact-check-m2i-05.md [中]-1「同一集合を並べ替えだけで
+ *  最適化すると4.1%まで下げられる」を踏まえ、既存の3パス隣接スワップ〈best-effort〉から置き換える）。
+ *  1件ずつ、直前と衝突しない候補の中から「残り件数が最も多い型」を選んで置く（衝突しやすい型を
+ *  早めに使い切ることで、後半に同じ型ばかりが残って連続するのを防ぐ）。衝突を避けられない
+ *  （残り全件が直前と衝突する）場合だけ、残り件数が最も多い型を仕方なく置く（要素を1件も
+ *  落とさないための最終手段）。 */
+function greedyReorderOnce(items: Question[], rng: RandomFn): Question[] {
+  const remaining = shuffle(items, rng)
+  const result: Question[] = []
+  while (remaining.length > 0) {
+    const last = result[result.length - 1]
+    const typeCountOf = (type: QuestionType) => remaining.reduce((n, q) => (q.type === type ? n + 1 : n), 0)
+    let bestIdx = -1
+    let bestCount = -1
+    for (let i = 0; i < remaining.length; i++) {
+      if (last && collides(remaining[i], last)) continue
+      const c = typeCountOf(remaining[i].type)
+      if (c > bestCount) {
+        bestCount = c
+        bestIdx = i
+      }
+    }
+    if (bestIdx === -1) {
+      // 直前と衝突しない候補が無い（best-effort。要素を落とさないためやむなく衝突させる）。
+      for (let i = 0; i < remaining.length; i++) {
+        const c = typeCountOf(remaining[i].type)
+        if (c > bestCount) {
+          bestCount = c
+          bestIdx = i
         }
       }
-      if (swapIdx === -1) continue
-      const tmp = arr[i]
-      arr[i] = arr[swapIdx]
-      arr[swapIdx] = tmp
-      changed = true
     }
-    if (!changed) break
+    result.push(remaining[bestIdx])
+    remaining.splice(bestIdx, 1)
   }
-  return arr
+  return result
+}
+
+/** greedyReorderOnce は初期シャッフル次第で結果が変わる（同順位タイの解決順が変わるため）。
+ *  複数回試して隣接衝突が最も少ない結果を採用する（「再スタート」、M2i-05b④）。 */
+const REORDER_ATTEMPTS = 8
+
+function reorderToAvoidConsecutiveSameType(items: Question[], rng: RandomFn = defaultRandom): Question[] {
+  if (items.length <= 1) return items.slice()
+  let best = greedyReorderOnce(items, rng)
+  let bestScore = countAdjacentCollisions(best)
+  for (let attempt = 1; attempt < REORDER_ATTEMPTS && bestScore > 0; attempt++) {
+    const candidate = greedyReorderOnce(items, rng)
+    const score = countAdjacentCollisions(candidate)
+    if (score < bestScore) {
+      best = candidate
+      bestScore = score
+    }
+  }
+  return best
 }
 
 /** 下線（passage）に紐づかない単独問題の設問文を付ける（M2i: ステージはリード文を一切使わない
@@ -441,7 +495,10 @@ function tryBuildStageQuestionForWork(
     else if (type === 'q5') q = buildQ5QuestionForStage(work, usablePool, eras, rng)
     else if (type === 'q7') q = buildQ7QuestionForStage(work, usablePool, eras, rng)
     else if (type === 'q9') q = q9AllowSlots ? buildQ9QuestionForStage(work, usablePool, eras, rng, q9AllowSlots) : null
-    else if (canGenerateType(type, work, usablePool, eras)) q = buildQuestion(work, type, usablePool, eras, false, rng)
+    else if (canGenerateType(type, work, usablePool, eras))
+      // M2i-05b③: q1/q3（このelse-ifに到達するのは事実上この2型のみ。q4/q8はbuildQuestion内部の
+      // 別分岐で処理されるためpreferSameEraDistractorsの影響を受けない）は誤答を同era優先にする。
+      q = buildQuestion(work, type, usablePool, eras, false, rng, { preferSameEraDistractors: true })
     if (q) return q
   }
   return null
@@ -490,7 +547,7 @@ export function buildStageQuestions(
       }
     }
   }
-  return reorderToAvoidConsecutiveSameType(shuffle(questions, rng))
+  return reorderToAvoidConsecutiveSameType(shuffle(questions, rng), rng)
 }
 
 // --- ボス（3群×リード文、writerのask.stemがある下線だけから作る） ---
@@ -692,7 +749,7 @@ export function buildBossQuestions(
       }
     }
   }
-  return reorderToAvoidConsecutiveSameType(shuffle(built, rng))
+  return reorderToAvoidConsecutiveSameType(shuffle(built, rng), rng)
 }
 
 /** 設問1件が画面に出す作品 id（正解・誤答選択肢・年代順の複数作品を含む）。誤答露出の実測・

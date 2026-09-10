@@ -32,6 +32,22 @@ function pickRandom<T>(items: T[], rng: RandomFn): T | undefined {
   return items[idx]
 }
 
+export interface PickWorkDistractorsOptions {
+  /** M2i-05b③（decisions.md 2026-09-11、reviewer fact-check-m2i-05.md [重大]-1「q1/q3のヘッダー
+   *  解答可能率が19.8%/19.9%で未改善」の修正）: true のとき、step 2（同カテゴリ・近い時代）を
+   *  「target と同era（＝ワールド、カテゴリ不問）の候補が4件以上あればそれだけ、未満なら同era分
+   *  ＋足りない分だけ同カテゴリの他eraから補う」に置き換える（q9.ts の preferSameEra・
+   *  SAME_ERA_EXCLUSIVE_MIN と同じ考え方。同カテゴリに限定すると母数が減って同era候補が
+   *  見つからないことがあるため、同era側はカテゴリを問わずに広く集める）。engine/stages.ts の
+   *  ステージ生成（q1/q3）だけが渡す。step 3・4（同era・別カテゴリ／全体ランダム）は
+   *  preferSameEra でも変えない（不足時のフォールバックとして従来どおり使う）。 */
+  preferSameEra?: boolean
+}
+
+/** 同era（＝ワールド）の候補が4件以上あれば全て同eraから、未満なら同eraぶん＋足りない分だけ
+ *  同カテゴリの他eraから補う（q9.ts の SAME_ERA_EXCLUSIVE_MIN と同じ値、同じ考え方）。 */
+const SAME_ERA_EXCLUSIVE_MIN = 4
+
 /**
  * 対象作品に対する 3 件のディストラクタ（不正解の作品）を選ぶ。
  * pool には対象作品自身が含まれていてもよい（除外する）。
@@ -42,10 +58,12 @@ export function pickWorkDistractors(
   eraOrderIndex: Record<string, number>,
   count = 3,
   rng: RandomFn = defaultRandom,
+  opts: PickWorkDistractorsOptions = {},
 ): Work[] {
   const chosen: Work[] = []
   const chosenIds = new Set<string>([target.id])
   const poolById = new Map(pool.map((w) => [w.id, w]))
+  const targetOrder = eraOrderIndex[target.era] ?? 0
 
   // 1. confusables を優先（登録順だがランダム性を持たせるためシャッフル）
   const confusableCandidates = shuffle(target.confusables, rng)
@@ -57,16 +75,28 @@ export function pickWorkDistractors(
     chosenIds.add(w.id)
   }
 
-  // 2. 同カテゴリ・近い時代からランダム
+  // 2. preferSameEra: 同era（ワールド）優先。既定: 同カテゴリ・近い時代からランダム
   if (chosen.length < count) {
-    const targetOrder = eraOrderIndex[target.era] ?? 0
-    const sameCategory = pool
+    const categoryNear = pool
       .filter((w) => w.category === target.category && !chosenIds.has(w.id))
       .map((w) => ({ w, dist: Math.abs((eraOrderIndex[w.era] ?? 0) - targetOrder) }))
       .sort((a, b) => a.dist - b.dist)
+      .map((x) => x.w)
+
+    let remaining: Work[]
+    if (opts.preferSameEra) {
+      const sameEraAny = pool.filter((w) => w.era === target.era && !chosenIds.has(w.id))
+      if (sameEraAny.length >= SAME_ERA_EXCLUSIVE_MIN) {
+        remaining = sameEraAny
+      } else {
+        const adjacent = categoryNear.filter((w) => w.era !== target.era)
+        remaining = [...sameEraAny, ...adjacent]
+      }
+    } else {
+      remaining = categoryNear
+    }
 
     // 距離が近い順の上位グループ（同率含む）からランダムに選ぶ
-    const remaining = sameCategory.map((x) => x.w)
     while (chosen.length < count && remaining.length > 0) {
       // 上位 4 件程度のプールからランダムに1件選ぶ（近い時代を優先しつつランダム性を保つ）
       const topWindow = remaining.slice(0, Math.max(4, count))

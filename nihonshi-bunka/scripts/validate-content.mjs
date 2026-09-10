@@ -145,6 +145,75 @@ export function findHolderWords(text) {
   return HOLDER_WORDS.filter((w) => text.includes(w))
 }
 
+// M2i-05b①（decisions.md 2026-09-11、reviewer fact-check-m2i-05.md [重大]-3の再発防止）:
+// app/src/engine/q9.ts の Q9 条件文は、findSite を除く各スロットの値を shortenValue（括弧内・
+// 読点以降を除去した短い語）にして表示する。誤答除外の比較も同じ基準で行うよう q9.ts 側を
+// 修正したが、コンテンツ側で「同一 slot 内に、raw 値は異なるが shortenValue が同じになる値の組」
+// が増えるほど、Q9 のその slot で誤答が作りにくくなる（该当する作品が実質「同じ値」として
+// 除外され続けるため）。ここでは q9.ts の slotValue と同じ抽出規則（重複実装。plain .mjs から
+// TS を直接 import できないため。q9.ts 冒頭コメント・containsMuseumWord と同じ事情）を使って
+// 検出し、警告のみ出す（エラーにはしない。値が違うこと自体は正当なデータのため reviewer の
+// 目視判断に委ねる）。
+function shortenValueForValidate(value) {
+  return value
+    .replace(/（[^）]*）/g, '')
+    .split(/[、。]/)[0]
+    .trim()
+}
+
+// findSite は q9.ts の slotLabel で shortenValue を適用しない（括弧内が遺跡名の本体のため）ので
+// 対象外。era は eras.json の id（短縮の対象にならない文字列）なので対象外。
+const Q9_SHORTEN_SLOTS = ['artist', 'holder', 'style', 'technique', 'location', 'subject', 'patron', 'religion']
+
+/** work から Q9 の slot 値（q9.ts の slotValue と同じ抽出規則）を返す。値が無ければ null。 */
+function q9SlotRawValueForValidate(work, slot) {
+  switch (slot) {
+    case 'artist':
+      return work.artist || null
+    case 'holder':
+      if (work.holderKind !== 'site' || !work.holder) return null
+      return findHolderWords(work.holder).length > 0 ? null : work.holder
+    case 'style':
+      return work.style || null
+    case 'technique':
+      return work.technique || null
+    case 'location':
+      if (work.holderKind !== 'site' || !work.location) return null
+      return findHolderWords(work.location).length > 0 ? null : work.location
+    case 'subject':
+      return work.subject || null
+    case 'patron':
+      return work.patron || null
+    case 'religion':
+      return work.religion || null
+    default:
+      return null
+  }
+}
+
+/**
+ * Q9 の各 slot について、raw 値は異なるが shortenValue（条件文で使う短い値）が同じになる組を
+ * 検出する。`{ slot, shortValue, rawValues }` の配列を返す（無ければ空配列）。
+ */
+export function findShortenValueCollisions(works) {
+  const collisions = []
+  for (const slot of Q9_SHORTEN_SLOTS) {
+    const rawValuesByShort = new Map()
+    for (const work of works) {
+      const raw = q9SlotRawValueForValidate(work, slot)
+      if (!raw) continue
+      const short = shortenValueForValidate(raw)
+      const set = rawValuesByShort.get(short) ?? new Set()
+      set.add(raw)
+      rawValuesByShort.set(short, set)
+    }
+    for (const [short, rawSet] of rawValuesByShort) {
+      if (rawSet.size > 1) collisions.push({ slot, shortValue: short, rawValues: [...rawSet] })
+    }
+  }
+  return collisions
+}
+
 /** 本文（マーカー記法込みの全文）に work.title が部分文字列として含まれるか。
  *  下線先作品の答えが本文に書かれているのを機械的に防ぐチェックに使う（7章の指摘）。 */
 export function workTitleLeaksInText(work, text) {
@@ -810,6 +879,14 @@ async function main() {
         errors.push(`${work.id}: confusables の参照先 "${c.id}" が存在しない`)
       }
     }
+  }
+
+  // M2i-05b①: Q9 の shortenValue 衝突検出（警告のみ。上の findShortenValueCollisions 参照）。
+  for (const c of findShortenValueCollisions(allWorks)) {
+    warnings.push(
+      `Q9 slot "${c.slot}": 条件文では同じ値「${c.shortValue}」になる raw 値が複数ある（${c.rawValues.join(' / ')}）。` +
+        'Q9 の誤答除外は条件文と同じ基準で判定するため、これらの作品同士は誤答として選ばれにくくなる',
+    )
   }
 
   // 作品ごとに「出題プールにある画像付き作品」かどうか（passages の workIds 検証に使う）

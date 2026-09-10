@@ -192,6 +192,11 @@ export interface BuildQuestionOptions {
    *  修正の仕様 M2-09〜11。避けられなければ他の型にフォールバックする＝呼び出し側で
    *  buildQuestionOrFallback を使えば q1 まで落ちる）。 */
   avoidQ9EraSlot?: boolean
+  /** M2i-05b③（decisions.md 2026-09-11、reviewer fact-check-m2i-05.md [重大]-1の修正）: true のとき
+   *  q1/q3（この関数の最後の分岐、共有 pickWorkDistractors）の誤答を同era（＝ワールド）優先にする
+   *  （engine/q9.ts の preferSameEra・engine/q7.ts・engine/q5.ts と同じ考え方）。
+   *  engine/stages.ts のステージ生成だけが渡す。自由出題・模試・ボスの既定挙動は変えない。 */
+  preferSameEraDistractors?: boolean
 }
 
 export function buildQuestion(
@@ -275,7 +280,9 @@ export function buildQuestion(
     return null
   }
 
-  const distractors = pickWorkDistractors(work, pool, eraOrderIndex, 3, rng)
+  const distractors = pickWorkDistractors(work, pool, eraOrderIndex, 3, rng, {
+    preferSameEra: opts.preferSameEraDistractors,
+  })
   const { items, correctIndex } = buildChoices(work, distractors, rng)
   return { type, work, choiceWorks: items, correctIndex, isReview }
 }

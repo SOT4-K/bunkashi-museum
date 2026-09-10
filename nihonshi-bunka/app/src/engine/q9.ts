@@ -60,7 +60,9 @@ export function containsMuseumWord(value: string): boolean {
   return MUSEUM_LIKE_WORDS.some((w) => value.includes(w))
 }
 
-function slotValue(work: Work, slot: Q9Slot): string | null {
+/** M2i-05b受け入れ検証用に export（realdataテストが実際の条件文と同じ基準で
+ *  「誤答が条件文の上では正解になっていないか」を検証するために使う）。 */
+export function slotValue(work: Work, slot: Q9Slot): string | null {
   switch (slot) {
     case 'artist':
       return work.artist
@@ -107,11 +109,32 @@ function slotValue(work: Work, slot: Q9Slot): string | null {
  * 短い語だけを残す。reviewer 指摘（2026-09-04 M2-11 [中]-3）: 長い technique/holder の値を
  * そのまま条件文に使うと、答えの説明（年号・技法の由来など）を先に与えてしまう。
  */
-function shortenValue(value: string): string {
+export function shortenValue(value: string): string {
   return value
     .replace(/（[^）]*）/g, '')
     .split(/[、。]/)[0]
     .trim()
+}
+
+/**
+ * M2i-05b①（decisions.md 2026-09-11、reviewer fact-check-m2i-05.md [重大]-3「Q9の6.0%で誤答が
+ * 条件文の上では正解になっている」の修正）: 条件文は findSite を除き shortenValue（括弧内除去）
+ * した値を使う（slotLabel/slotLabelNegated 参照）。しかし誤答除外の値比較（candidateWorksForSlot・
+ * generateNormal・generateReversed）は raw 値の完全一致で行っていたため、「仏教」と
+ * 「仏教（法相宗）」のように raw 値は異なるが条件文の上では同じに見える値が「異なる値」として
+ * 誤答に選ばれ、4択全部が条件を満たす設問が発生していた（実データ回帰: asuka★4
+ * 「宗派が仏教のもの」で4択全部仏教）。条件文と同じ基準（findSite だけ raw のまま）で比較する。
+ */
+function conditionValue(slot: Q9Slot, rawValue: string): string {
+  return slot === 'findSite' ? rawValue : shortenValue(rawValue)
+}
+
+/** work の slot 値が、target の条件文の上での値（conditionValue）と異なるか。値が無い（null）
+ *  作品は「条件に合わない」として常に異なる扱いにする（従来どおり）。 */
+function slotValueDiffers(work: Work, slot: Q9Slot, targetValue: string): boolean {
+  const raw = slotValue(work, slot)
+  if (!raw) return true
+  return conditionValue(slot, raw) !== conditionValue(slot, targetValue)
 }
 
 /**
@@ -221,8 +244,9 @@ function candidateWorksForSlot(
   slot: Q9Slot,
   value: string,
 ): { categoryNear: Work[]; sameEraAny: Work[] } {
-  const categoryNear = near.filter((w) => slotValue(w, slot) !== value)
-  const sameEraAny = pool.filter((w) => w.id !== target.id && w.era === target.era && slotValue(w, slot) !== value)
+  // M2i-05b①: raw値の完全一致ではなく conditionValue（条件文と同じ基準）で「異なる値」を判定する。
+  const categoryNear = near.filter((w) => slotValueDiffers(w, slot, value))
+  const sameEraAny = pool.filter((w) => w.id !== target.id && w.era === target.era && slotValueDiffers(w, slot, value))
   return { categoryNear, sameEraAny }
 }
 
@@ -284,7 +308,8 @@ function generateNormal(
   for (const slot of effectiveSlotOrder(opts)) {
     const value = slotValue(target, slot)
     if (!value) continue
-    const candidates = near.filter((w) => slotValue(w, slot) !== value)
+    // M2i-05b①: raw値の完全一致ではなく conditionValue（条件文と同じ基準）で「異なる値」を判定する。
+    const candidates = near.filter((w) => slotValueDiffers(w, slot, value))
     if (candidates.length < 3) continue
     // reviewer 指摘 [中]-2（2026-09-04 M2-11）: Math.max だと常に全件を返し、直前の
     // nearbyCandidates による時代距離ソートが無効化されていた。Math.min が正しい
@@ -315,13 +340,19 @@ function generateReversed(
   const near = nearbyCandidates(target, pool, eraOrderIndex)
   for (const slot of effectiveSlotOrder(opts)) {
     const targetValue = slotValue(target, slot)
+    // M2i-05b①: raw値そのものではなく conditionValue（条件文と同じ基準）でグループ化する。
+    // raw値が違っても条件文の上では同じ値（例: 「仏教」「仏教（法相宗）」）になる作品を
+    // 別グループのまま扱うと、target と条件文の上で同じ値を共有するグループを「合わない」
+    // 誤答として選んでしまう（4択全部が条件文の上では正解になるバグと同根）。
     const groups = new Map<string, Work[]>()
     for (const w of near) {
       const v = slotValue(w, slot)
-      if (!v || v === targetValue) continue
-      const list = groups.get(v) ?? []
+      if (!v) continue
+      if (targetValue && conditionValue(slot, v) === conditionValue(slot, targetValue)) continue
+      const key = conditionValue(slot, v)
+      const list = groups.get(key) ?? []
       list.push(w)
-      groups.set(v, list)
+      groups.set(key, list)
     }
     const eligible = shuffle(
       [...groups.entries()].filter(([, list]) => list.length >= 3),

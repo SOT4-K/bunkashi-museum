@@ -324,6 +324,64 @@ describe('preferSameEra オプション（M2i-05②: ステージのQ9誤答は�
   })
 })
 
+// M2i-05b①（decisions.md 2026-09-11、reviewer fact-check-m2i-05.md [重大]-3の修正）:
+// 誤答除外は raw 値の完全一致ではなく、条件文と同じ基準（shortenValue、findSite除く）で
+// 判定する。「仏教」と「仏教（法相宗）」のように raw 値は異なるが条件文の上では同じに見える
+// 値を「異なる値」として誤答に選ぶと、4択全部が条件文の上で正解になってしまう回帰。
+describe('M2i-05b①: shortenValue が衝突する値は誤答除外で「同じ値」として扱う（設問成立性バグ修正）', () => {
+  const target = makeWork({ id: 'bud-target', era: 'asuka', category: 'sculpture', religion: '仏教（法相宗）' })
+  const collidingPool: Work[] = [
+    target,
+    makeWork({ id: 'bud-d1', era: 'asuka', category: 'sculpture', religion: '仏教' }),
+    makeWork({ id: 'bud-d2', era: 'asuka', category: 'sculpture', religion: '仏教（天台宗）' }),
+    makeWork({ id: 'bud-d3', era: 'hakuho', category: 'sculpture', religion: '神道' }),
+  ]
+
+  it('正パターン: shortenValue が target と同じ（「仏教」）誤答候補は選ばれない（3件そろわなければ null）', () => {
+    for (let seed = 0; seed < 10; seed++) {
+      const result = generateQ9Question(target, collidingPool, testEras, seededRandom(seed), {
+        allowSlots: ['religion'],
+      })
+      // 「異なる値」が神道（bud-d3）の1件しか無いため3件そろわず null になるはず
+      // （修正前は bud-d1/bud-d2 も「異なる値」として誤答に混ざり、4択全部が「仏教」になっていた）。
+      expect(result).toBeNull()
+    }
+  })
+
+  it('正パターン: 十分な数の真に異なる値がある場合、誤答に shortenValue が target と同じ値の作品は含まれない', () => {
+    const richPool: Work[] = [
+      target,
+      makeWork({ id: 'bud-d1', era: 'asuka', category: 'sculpture', religion: '仏教' }), // conditionValue衝突（除外されるべき）
+      makeWork({ id: 'shinto1', era: 'asuka', category: 'sculpture', religion: '神道' }),
+      makeWork({ id: 'shinto2', era: 'hakuho', category: 'sculpture', religion: '神道（伊勢系）' }),
+      makeWork({ id: 'other1', era: 'kokufu', category: 'sculpture', religion: '道教' }),
+    ]
+    for (let seed = 0; seed < 10; seed++) {
+      const result = generateQ9Question(target, richPool, testEras, seededRandom(seed), { allowSlots: ['religion'] })
+      expect(result).not.toBeNull()
+      expect(result!.conditionText).toBe('宗派（宗教）が仏教のもの')
+      expect(result!.distractorWorks.some((d) => d.id === 'bud-d1')).toBe(false)
+    }
+  })
+
+  it('逆パターン: target と conditionValue が同じ raw 値のグループは「合わない1枚」の誤答候補にならない', () => {
+    // target(religion: 仏教（法相宗）) と conditionValue が衝突する「仏教」3件だけを共有値に
+    // したプールでは、逆パターンの「3件が共有し target は持たない値」グループとして選んではいけない
+    // （target 自身も条件文の上では「仏教」に一致するため）。
+    const reversedPool: Work[] = [
+      target,
+      makeWork({ id: 'rb1', era: 'asuka', category: 'sculpture', religion: '仏教' }),
+      makeWork({ id: 'rb2', era: 'hakuho', category: 'sculpture', religion: '仏教' }),
+      makeWork({ id: 'rb3', era: 'kokufu', category: 'sculpture', religion: '仏教' }),
+    ]
+    const result = generateQ9Question(target, reversedPool, testEras, seededRandom(1), {
+      reversed: true,
+      allowSlots: ['religion'],
+    })
+    expect(result).toBeNull()
+  })
+})
+
 // 8章「二段構え」: writer が answerId/distractorIds を直接指定するデータ形。
 describe('generateQ9QuestionFromIds（8章「二段構え」: writer 指定の answerId/distractorIds）', () => {
   it('distractorIds が3件そろっていれば、そのまま使う（algorithmic な選定はしない）', () => {

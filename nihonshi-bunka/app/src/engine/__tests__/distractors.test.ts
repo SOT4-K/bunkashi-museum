@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { buildChoices, pickEraDistractors, pickWorkDistractors, shuffle } from '../distractors'
-import { scarceCategoryWorks, seededRandom, testEras, testWorks } from './testFixtures'
+import { makeWork, scarceCategoryWorks, seededRandom, testEras, testWorks } from './testFixtures'
+import type { Work } from '../../types'
 
 const eraOrderIndex = Object.fromEntries(testEras.map((e) => [e.id, e.order]))
 
@@ -72,6 +73,59 @@ describe('pickWorkDistractors', () => {
       const ids = distractors.map((w) => w.id)
       expect(ids.sort()).toEqual(['b2', 'b3', 'b6'])
     }
+  })
+})
+
+// M2i-05b③（decisions.md 2026-09-11、reviewer fact-check-m2i-05.md [重大]-1「q1/q3のヘッダー解答
+// 可能率が19.8%/19.9%で未改善」の修正）: preferSameEra オプションは誤答を同era（＝ワールド、
+// カテゴリ不問）優先で選ぶ。engine/stages.ts のステージ生成（q1/q3）だけが渡す
+// （preferSameEra を渡さない既定の呼び出し元＝上の既存テストは挙動が変わらないことを確認済み）。
+describe('pickWorkDistractors の preferSameEra オプション（M2i-05b③）', () => {
+  const target = makeWork({ id: 'pse-target', era: 'tenpyo', category: 'sculpture' })
+
+  it('同era（tenpyo）の候補が4件以上あれば、誤答は全て同eraから選ばれる（カテゴリ不問）', () => {
+    const sameEraWorks: Work[] = [
+      makeWork({ id: 'pse-same0', era: 'tenpyo', category: 'sculpture' }),
+      makeWork({ id: 'pse-same1', era: 'tenpyo', category: 'painting' }), // 別カテゴリでも同eraなら候補に入る
+      makeWork({ id: 'pse-same2', era: 'tenpyo', category: 'craft' }),
+      makeWork({ id: 'pse-same3', era: 'tenpyo', category: 'sculpture' }),
+    ]
+    const otherEraWorks: Work[] = [
+      makeWork({ id: 'pse-other1', era: 'hakuho', category: 'sculpture' }),
+      makeWork({ id: 'pse-other2', era: 'asuka', category: 'sculpture' }),
+    ]
+    const pool = [target, ...sameEraWorks, ...otherEraWorks]
+    for (let seed = 0; seed < 10; seed++) {
+      const distractors = pickWorkDistractors(target, pool, eraOrderIndex, 3, seededRandom(seed), { preferSameEra: true })
+      expect(distractors).toHaveLength(3)
+      for (const d of distractors) expect(d.era).toBe('tenpyo')
+    }
+  })
+
+  it('同eraの候補が4件未満（1件）なら、同era分＋足りない分だけ同カテゴリの他eraから補う（同era1件のみにはならない）', () => {
+    const sameEraWorks: Work[] = [makeWork({ id: 'pse-same0', era: 'tenpyo', category: 'sculpture' })]
+    const otherEraWorks: Work[] = [
+      makeWork({ id: 'pse-other1', era: 'hakuho', category: 'sculpture' }),
+      makeWork({ id: 'pse-other2', era: 'konin-jogan', category: 'sculpture' }),
+      makeWork({ id: 'pse-other3', era: 'asuka', category: 'sculpture' }),
+    ]
+    const pool = [target, ...sameEraWorks, ...otherEraWorks]
+    for (let seed = 0; seed < 10; seed++) {
+      const distractors = pickWorkDistractors(target, pool, eraOrderIndex, 3, seededRandom(seed), { preferSameEra: true })
+      expect(distractors).toHaveLength(3)
+      expect(distractors.map((d) => d.id)).toContain('pse-same0')
+    }
+  })
+
+  it('preferSameEra を渡さない（既定）場合は従来どおり距離順（同カテゴリ）で選ぶ（同era限定にならない）', () => {
+    const sameEraWorks: Work[] = [makeWork({ id: 'pse2-same0', era: 'tenpyo', category: 'sculpture' })]
+    const otherEraWorks: Work[] = [
+      makeWork({ id: 'pse2-other1', era: 'hakuho', category: 'sculpture' }),
+      makeWork({ id: 'pse2-other2', era: 'konin-jogan', category: 'sculpture' }),
+    ]
+    const pool = [target, ...sameEraWorks, ...otherEraWorks]
+    const distractors = pickWorkDistractors(target, pool, eraOrderIndex, 3, seededRandom(1))
+    expect(distractors).toHaveLength(3)
   })
 })
 
