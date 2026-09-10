@@ -87,12 +87,12 @@ const richWorks20: Work[] = Array.from({ length: 20 }, (_, i) => fullWork(`f${i 
 // ★1・★4だけを持ち、★2・★3・★5は持たない（hasStar の判定材料）。
 const bareWork = makeWork({ id: 'bare1', era: 'e2', category: 'sculpture', status: 'reviewed' })
 
-describe('DIFFICULTY_TYPES（★の定義v4）', () => {
-  it('★1=Q1/Q3、★2=Q5/Q9、★3=Q9、★4=Q4/Q6/Q9/Q8、★5=Q9/Q13/Q10', () => {
+describe('DIFFICULTY_TYPES（★の定義v4。M2i-05で★3・★4を修正）', () => {
+  it('★1=Q1/Q3、★2=Q5/Q9、★3=Q9/Q7、★4=Q4/Q9/Q8（Q6は模試・ボス専用に）、★5=Q9/Q13/Q10', () => {
     expect(DIFFICULTY_TYPES[1]).toEqual(['q1', 'q3'])
     expect(DIFFICULTY_TYPES[2]).toEqual(['q5', 'q9'])
-    expect(DIFFICULTY_TYPES[3]).toEqual(['q9'])
-    expect(DIFFICULTY_TYPES[4]).toEqual(['q4', 'q6', 'q9', 'q8'])
+    expect(DIFFICULTY_TYPES[3]).toEqual(['q9', 'q7'])
+    expect(DIFFICULTY_TYPES[4]).toEqual(['q4', 'q9', 'q8'])
     expect(DIFFICULTY_TYPES[5]).toEqual(['q9', 'q13', 'q10'])
   })
   it('ALL_DIFFICULTIES は1〜5', () => {
@@ -262,20 +262,31 @@ describe('buildStageQuestions', () => {
     expect(qs).toEqual([])
   })
 
-  it('★3（Q9、findSite/locationスロット固定）はfindSite/locationを持つ作品で生成できる', () => {
+  it('★3（Q9/Q7、findSite/locationスロット固定）はfindSite/locationを持つ作品で生成できる', () => {
     const qs = buildStageQuestions('e1', 3, 1, richWorks4, richWorks4, eras, seededRandom(3))
     expect(qs.length).toBeGreaterThan(0)
     for (const q of qs) {
-      expect(q.type).toBe('q9')
-      expect(['findSite', 'location']).toContain(q.q9Slot)
+      expect(['q9', 'q7']).toContain(q.type)
+      if (q.type === 'q9') expect(['findSite', 'location']).toContain(q.q9Slot)
+      if (q.type === 'q7') expect(q.choiceLocations).toHaveLength(4)
     }
   })
 
-  it('★4（Q4/Q6/Q9/Q8）はfacts/eras.items/subject等がそろっている作品で生成できる', () => {
+  it('★3はQ9とQ7の両方が出る（doubledな面。同型連続の是正、M2i-05③）', () => {
+    const types = new Set<string>()
+    for (let seed = 0; seed < 15; seed++) {
+      const qs = buildStageQuestions('e1', 3, 1, richWorks4, richWorks4, eras, seededRandom(seed))
+      for (const q of qs) types.add(q.type)
+    }
+    expect(types).toEqual(new Set(['q9', 'q7']))
+  })
+
+  it('★4（Q4/Q9/Q8、Q6は含まない。M2i-05①）はfacts/subject等がそろっている作品で生成できる', () => {
     const qs = buildStageQuestions('e1', 4, 1, richWorks4, richWorks4, eras, seededRandom(4))
     expect(qs.length).toBeGreaterThan(0)
     for (const q of qs) {
-      expect(['q4', 'q6', 'q9', 'q8']).toContain(q.type)
+      expect(['q4', 'q9', 'q8']).toContain(q.type)
+      expect(q.type).not.toBe('q6')
       if (q.type === 'q9') expect(['subject', 'patron', 'religion']).toContain(q.q9Slot)
     }
   })
@@ -359,13 +370,13 @@ describe('buildStageQuestions', () => {
 })
 
 describe('M2b-09（画像なし作品混入バグの回帰防止）: pool（themeSetPool 相当。画像なし項目も含む）と' +
-  'imagePool（playableWorks 相当。画像あり作品のみ）を分ける。画像型（Q1/Q3/Q5/Q9）の出題対象・' +
+  'imagePool（playableWorks 相当。画像あり作品のみ）を分ける。画像型（Q1/Q3/Q5/Q7/Q9）の出題対象・' +
   '選択肢（choiceWorks）には imagePool に無い作品を一切使わない', () => {
   const imageWorks = richWorks4
   const noImageWorks: Work[] = [fullWork('ni1', 91), fullWork('ni2', 92)]
   const mixedPool: Work[] = [...imageWorks, ...noImageWorks]
   const imageEligibleIds = new Set(imageWorks.map((w) => w.id))
-  const IMAGE_TYPES = new Set(['q1', 'q3', 'q5', 'q9'])
+  const IMAGE_TYPES = new Set(['q1', 'q3', 'q5', 'q7', 'q9'])
 
   function collectViolations(qs: Question[]): string[] {
     const out: string[] = []
@@ -396,6 +407,15 @@ describe('M2b-09（画像なし作品混入バグの回帰防止）: pool（them
     const violations: string[] = []
     for (let seed = 0; seed < 30; seed++) {
       const qs = buildStageQuestions('e1', 2, 1, mixedPool, imageWorks, eras, seededRandom(seed))
+      violations.push(...collectViolations(qs))
+    }
+    expect(violations).toEqual([])
+  })
+
+  it('buildStageQuestions（★3, Q7/Q9含む）でも画像なし作品が出題対象・選択肢のどちらにも現れない', () => {
+    const violations: string[] = []
+    for (let seed = 0; seed < 30; seed++) {
+      const qs = buildStageQuestions('e1', 3, 1, mixedPool, imageWorks, eras, seededRandom(seed))
       violations.push(...collectViolations(qs))
     }
     expect(violations).toEqual([])

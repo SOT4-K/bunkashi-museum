@@ -29,6 +29,15 @@ export interface Q9GenerateOptions {
    *  既定の優先順位・avoidSlots は無視し、ここに列挙した順で試す）。省略時は従来どおり
    *  SLOT_PRIORITY（自由出題・模試・ボス向けの既定の優先順位）を使う。 */
   allowSlots?: Q9Slot[]
+  /** M2i-05②（decisions.md 2026-09-11、reviewer fact-check-m2i.md q9 43.6%がヘッダーだけで
+   *  解けると指摘）: true のとき、試せるスロット（allowSlots/SLOT_PRIORITY の候補のうち3件以上
+   *  誤答が作れるもの）の中から target と同じ era（＝ワールド、カテゴリは問わない）の誤答候補が
+   *  最も多いスロットを選ぶ。選んだスロットで同era候補が4件以上あれば誤答は同era限定、未満なら
+   *  同eraの分をすべて使い、足りない分（3-同era件数）だけ近い時代（隣接文化、カテゴリ一致）から
+   *  補う。engine/stages.ts のステージ生成だけが渡す（自由出題・模試・ボスは既定どおり
+   *  SLOT_PRIORITY の優先順位＋距離順の窓から選ぶ）。generateNormal のみ対応（generateReversed は
+   *  本番でreversed:trueを渡す呼び出し元が無いため未対応）。 */
+  preferSameEra?: boolean
 }
 
 /** 試す順序（修正の仕様 M2-09〜11: holder→artist→technique→era。era は最後＝1セット1問までにする）。
@@ -194,15 +203,84 @@ function nearbyCandidates(target: Work, pool: Work[], eraOrderIndex: Record<stri
     .map((x) => x.w)
 }
 
+/** 同era（＝ワールド）が4件以上あれば全て同eraから、未満なら同eraぶん＋足りない分だけ
+ *  近い時代から補う（preferSameEra、M2i-05②）。 */
+const SAME_ERA_EXCLUSIVE_MIN = 4
+
+/** スロットごとの候補2種（preferSameEra専用）:
+ *  categoryNear: 既存の near（同カテゴリ・全era、距離昇順）から value が違うものだけを残した集合
+ *   （非preferSameEra時と同じ絞り込み。隣接文化から補うときの供給源にする）。
+ *  sameEraAny: target と同era（カテゴリ不問）で value が違う作品。M2i-05②の文言「同ワールドの
+ *   作品から誤答を作る」はカテゴリを問わないため、near のカテゴリ制限を外して同era全体から集める
+ *   （実データ回帰: asuka の religion スロットのように、同カテゴリ内では target と同じ値の作品しか
+ *   無く sameEra 候補が0件になるケースがあった。カテゴリを問わなければ候補が見つかることが多い）。 */
+function candidateWorksForSlot(
+  target: Work,
+  pool: Work[],
+  near: Work[],
+  slot: Q9Slot,
+  value: string,
+): { categoryNear: Work[]; sameEraAny: Work[] } {
+  const categoryNear = near.filter((w) => slotValue(w, slot) !== value)
+  const sameEraAny = pool.filter((w) => w.id !== target.id && w.era === target.era && slotValue(w, slot) !== value)
+  return { categoryNear, sameEraAny }
+}
+
+/** sameEraAny が4件以上ならそれだけを使う。未満なら sameEraAny 全件＋足りない分
+ *  （3-sameEraAny.length）だけ categoryNear の他era分（距離昇順）から補う。 */
+function selectPreferSameEraWindow(target: Work, categoryNear: Work[], sameEraAny: Work[]): Work[] {
+  if (sameEraAny.length >= SAME_ERA_EXCLUSIVE_MIN) return sameEraAny
+  const adjacent = categoryNear.filter((w) => w.era !== target.era)
+  const needed = Math.max(3 - sameEraAny.length, 0)
+  return [...sameEraAny, ...adjacent.slice(0, needed)]
+}
+
+/** preferSameEra: 試せるスロット（value があり、categoryNear∪sameEraAny の併合が3件以上）の中から、
+ *  同era候補（sameEraAny）が最も多いスロットを選ぶ（M2i-05②。SLOT_PRIORITY の優先順位より
+ *  「ヘッダーだけで解けるのを避けられるか」を優先する。1つでも4件以上のスロットが見つかれば
+ *  それ以上探さない＝早期終了）。 */
+function generateNormalPreferSameEra(
+  target: Work,
+  pool: Work[],
+  near: Work[],
+  eras: Era[],
+  rng: RandomFn,
+  opts: Pick<Q9GenerateOptions, 'avoidSlots' | 'preferredSlot' | 'allowSlots'>,
+): Q9QuestionData | null {
+  let best: { slot: Q9Slot; value: string; categoryNear: Work[]; sameEraAny: Work[] } | null = null
+  for (const slot of effectiveSlotOrder(opts)) {
+    const value = slotValue(target, slot)
+    if (!value) continue
+    const { categoryNear, sameEraAny } = candidateWorksForSlot(target, pool, near, slot, value)
+    const combinedCount = new Set([...categoryNear, ...sameEraAny].map((w) => w.id)).size
+    if (combinedCount < 3) continue
+    if (!best || sameEraAny.length > best.sameEraAny.length) best = { slot, value, categoryNear, sameEraAny }
+    if (best.sameEraAny.length >= SAME_ERA_EXCLUSIVE_MIN) break
+  }
+  if (!best) return null
+  const window = selectPreferSameEraWindow(target, best.categoryNear, best.sameEraAny)
+  if (window.length < 3) return null
+  const distractorWorks = shuffle(window, rng).slice(0, 3)
+  if (distractorWorks.length < 3) return null
+  return {
+    reversed: false,
+    slot: best.slot,
+    conditionText: slotLabel(best.slot, best.value, eraNameOf(target.era, eras)),
+    correctWork: target,
+    distractorWorks,
+  }
+}
+
 function generateNormal(
   target: Work,
   pool: Work[],
   eras: Era[],
   rng: RandomFn,
-  opts: Pick<Q9GenerateOptions, 'avoidSlots' | 'preferredSlot' | 'allowSlots'>,
+  opts: Pick<Q9GenerateOptions, 'avoidSlots' | 'preferredSlot' | 'allowSlots' | 'preferSameEra'>,
 ): Q9QuestionData | null {
   const eraOrderIndex = eraOrderIndexOf(eras)
   const near = nearbyCandidates(target, pool, eraOrderIndex)
+  if (opts.preferSameEra) return generateNormalPreferSameEra(target, pool, near, eras, rng, opts)
   for (const slot of effectiveSlotOrder(opts)) {
     const value = slotValue(target, slot)
     if (!value) continue
@@ -212,6 +290,7 @@ function generateNormal(
     // nearbyCandidates による時代距離ソートが無効化されていた。Math.min が正しい
     // （近い時代から最大6件の窓を取り、そこからシャッフルして3件選ぶ）。
     const window = candidates.slice(0, Math.min(candidates.length, 6))
+    if (window.length < 3) continue
     const distractorWorks = shuffle(window, rng).slice(0, 3)
     if (distractorWorks.length < 3) continue
     return {

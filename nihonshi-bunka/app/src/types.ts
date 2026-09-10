@@ -258,7 +258,8 @@ export interface Passage {
 /**
  * Q1: 画像→作品名 / Q2: 画像→文化 / Q3: 作品名→画像
  * Q4: 画像→関連記述の正誤 / Q6: 画像→同時代の事項 / Q8: 画像→作者×様式の組合せ文
- * （DESIGN.md 10章。Q5/Q7/⑨ は試験実例未確認のため実装しない）
+ * （DESIGN.md 10章。Q5/Q7/⑨ は試験実例未確認のため実装しない、としていたが M2i で
+ *   Q5（画像→作者）・Q7（画像→出土地・所在地）をステージ専用型として追加した）
  * Q9: 画像4枚（選択肢）から条件に合う/合わない1枚を選ぶ（mock-exam-analysis.md T-C。M2 チケットで新設）
  * Q10: 2文（A・B）の正誤組合せ 4択（正正/正誤/誤正/誤誤）。mock-exam-analysis.md T-A（最頻出）に対応。
  *   DESIGN.md 10章の既存 Q8（組合せ文形式。「正正/正誤ラベルは使わない」方針）とは別物。
@@ -278,7 +279,9 @@ export interface Passage {
  *   appendOrderQuestionIfDue）。
  */
 /** q5（M2i、★2「作者」）: 画像→作者（4択は作者名の文字列）。engine/q5.ts が生成ロジックを持つ。 */
-export type QuestionType = 'q1' | 'q2' | 'q3' | 'q4' | 'q5' | 'q6' | 'q8' | 'q9' | 'q10' | 'q12' | 'q13' | 'q14'
+/** q7（M2i-05③、★3「出土地・所在地」）: 画像→出土地・所在地（4択は地名・寺社・遺跡名の文字列）。
+ *  engine/q7.ts が生成ロジックを持つ。q5 と対称の構造（ステージ専用、自由出題では使わない）。 */
+export type QuestionType = 'q1' | 'q2' | 'q3' | 'q4' | 'q5' | 'q6' | 'q7' | 'q8' | 'q9' | 'q10' | 'q12' | 'q13' | 'q14'
 
 /** Q9 の条件スロット（作者・時代文化・所蔵・様式・製法・出土地・所在地・主題・発願者・宗派）。
  *  engine/q9.ts が生成ロジックを持つ（型はここで定義し、q9.ts から re-export する。types.ts が
@@ -348,6 +351,9 @@ export interface Question {
   choiceEras?: Era[]
   /** Q5（画像→作者。M2i ★2）のときの選択肢（作者名の文字列、4件、シャッフル済み）。 */
   choiceArtists?: string[]
+  /** Q7（画像→出土地・所在地。M2i-05③ ★3）のときの選択肢（地名・寺社・遺跡名の文字列、4件、
+   *  シャッフル済み）。engine/q7.ts が生成ロジックを持つ。 */
+  choiceLocations?: string[]
   /** Q4 のときの選択肢（4件、シャッフル済み）。Q14（年代順並べ替え）のときは、
    *  順序の並び（「A → B → C」）を text に入れて流用する（M2-16）。 */
   choiceStatements?: StatementOption[]
@@ -402,6 +408,8 @@ export interface ItemProgress {
   /** q5（M2i、★2「作者」画像→作者）は初めて出題された時点で作る。q1〜q3と同様「所蔵」判定には使わない。 */
   q5?: SrsCell
   q6?: SrsCell
+  /** q7（M2i-05③、★3「出土地・所在地」画像→出土地・所在地）。q5と同様「所蔵」判定には使わない。 */
+  q7?: SrsCell
   q8?: SrsCell
   q9?: SrsCell
   q10?: SrsCell

@@ -31,6 +31,13 @@ export function explainMiss(question: Question, selection: MissSelection, eras: 
     return `これは${chosenArtist}の作品ではない。`
   }
 
+  if (question.type === 'q7') {
+    const chosenLocation = question.choiceLocations?.[selection.index]
+    if (!chosenLocation) return ''
+    if (selection.index === question.correctIndex) return '' // 正解を選んでいた場合は何も言わない
+    return `これは${chosenLocation}にあるものではない。`
+  }
+
   const chosenWork = question.choiceWorks[selection.index]
   if (!chosenWork) return ''
   if (chosenWork.id === question.work.id) return '' // 正解時

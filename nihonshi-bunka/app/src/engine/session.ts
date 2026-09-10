@@ -37,10 +37,11 @@ export const QUESTION_TYPE_WEIGHTS: Record<QuestionType, number> = {
   q6: 0.08,
   q8: 0.08,
   q9: 0.2,
-  // q5（画像→作者。M2i ★2）・q10（2文正誤）・q12（画像なし文字4択）・q13（語句の組合せ）・
-  // q14（年代順並べ替え）はステージ／テーマセット専用（engine/stages.ts・engine/themeSet.ts）。
-  // 自由出題の重みには含めない。
+  // q5（画像→作者。M2i ★2）・q7（画像→出土地・所在地。M2i-05③ ★3）・q10（2文正誤）・
+  // q12（画像なし文字4択）・q13（語句の組合せ）・q14（年代順並べ替え）はステージ／テーマセット専用
+  // （engine/stages.ts・engine/themeSet.ts）。自由出題の重みには含めない。
   q5: 0,
+  q7: 0,
   q10: 0,
   q12: 0,
   q13: 0,
@@ -66,11 +67,12 @@ export function canGenerateType(type: QuestionType, work: Work, pool: Work[], er
     case 'q9':
       return generateQ9Question(work, pool, eras, PROBE_RANDOM) !== null
     case 'q5':
+    case 'q7':
     case 'q10':
     case 'q12':
     case 'q13':
     case 'q14':
-      // q5 はステージ専用（engine/stages.ts）、その他はテーマセット専用（engine/themeSet.ts）。
+      // q5/q7 はステージ専用（engine/stages.ts）、その他はテーマセット専用（engine/themeSet.ts）。
       // 自由出題では生成しない。
       return false
     default:
@@ -266,9 +268,10 @@ export function buildQuestion(
     }
   }
 
-  if (type === 'q10' || type === 'q5') {
-    // q5（画像→作者）はステージ専用（engine/stages.ts が engine/q5.ts を直接呼んで組み立てる）、
-    // q10 はテーマセット専用（engine/themeSet.ts が直接組み立てる）。自由出題からは呼ばれない想定。
+  if (type === 'q10' || type === 'q5' || type === 'q7') {
+    // q5（画像→作者）・q7（画像→出土地・所在地）はステージ専用（engine/stages.ts が
+    // engine/q5.ts・engine/q7.ts を直接呼んで組み立てる）、q10 はテーマセット専用
+    // （engine/themeSet.ts が直接組み立てる）。自由出題からは呼ばれない想定。
     return null
   }
 

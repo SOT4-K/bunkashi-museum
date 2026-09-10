@@ -4,19 +4,31 @@
 // チケット文面の規則（実装漏れ防止のためそのまま転記。builder メモ
 // 「依頼文の規則はdocstringに番号で転記してから完了報告する」）:
 //
-// ★の定義 v4（確定）:
+// ★の定義 v4（確定。M2i-05〈decisions.md 2026-09-11〉で★3・★4を修正、下記「M2i-05修正」参照）:
 //  ★1 名前（Q1 画像→作品名・Q3 作品名→画像）: 全件対象
 //  ★2 作者（Q5 画像→作者・Q9 作者→画像）: artist を持つ作品のみ
-//  ★3 出土地・所在地（Q9 の findSite/location スロット）: findSite または
-//    （holderKind==='site' かつ location）を持つ作品のみ（博物館は出さない＝M2b-14 の決定どおり。
-//    「findSite または location を持つ作品のみ」という文言と「博物館は出さない」という決定が
-//    両立するよう、location 側は site 限定にした＝下記 hasStar 参照。低確信点として完了報告に明記）
-//  ★4 周辺知識（Q4 関連記述の正誤・Q6 同時代の事項・Q9 の subject/patron/religion スロット・
-//    Q8 組合せ文）
+//  ★3 出土地・所在地（Q9 の findSite/location スロット・Q7 画像→出土地・所在地〈M2i-05③新設〉）:
+//    findSite または（holderKind==='site' かつ location）を持つ作品のみ（博物館は出さない＝
+//    M2b-14 の決定どおり。「findSite または location を持つ作品のみ」という文言と「博物館は
+//    出さない」という決定が両立するよう、location 側は site 限定にした＝下記 hasStar 参照。
+//    低確信点として完了報告に明記）
+//  ★4 周辺知識（Q4 関連記述の正誤・Q9 の subject/patron/religion スロット・Q8 組合せ文。
+//    M2i-05①でQ6同時代の事項を外した＝下記「M2i-05修正」参照）
 //  ★5 技法・様式（Q9 の technique/style スロット・Q13 語句の組合せ・Q10 2文正誤）
 //  ボス（本番形式、3リード文。すべてリード文なし＝ボス以外にリード文の問題は無い）
 //  ★を持つ作品が0件の★はその文化では「なし」として飛ばす。ワールド固定なので文化名を当てる型
 //  （Q2・Q12・Q9のeraスロット）はステージで使わない
+//
+// M2i-05修正（decisions.md 2026-09-11。reviewer fact-check-m2i.md の実測: ヘッダーだけで解ける
+// 問題27.6%〈q6 100%・q9 43.6%〉、★3の同型連続率100%〈型がQ9の1種類しか無いため〉を受けた是正）:
+//  ①★4からQ6（同時代の事項）を外す（誤答が他文化の事項なので、ワールド固定のステージでは
+//    ヘッダーの文化名だけで100%解けていた。q6は模試・ボス専用のまま残す）
+//  ②ステージのQ9の誤答は同era（＝ワールド）の作品を優先する（4件以上あれば全て同era、
+//    未満なら同eraぶん＋足りない分だけ隣接文化から補う。generateQ9Question の preferSameEra
+//    オプション、engine/q9.ts 参照）。ボス・自由出題・模試のQ9は対象外（従来どおり）
+//  ③★3にQ7（画像→出土地・所在地。Q5と対称の構造、engine/q7.ts）を新設し、★3の型を
+//    Q9（findSite/locationスロット）とQ7の2種類にする（同型連続率100%だった問題を緩和し、
+//    1作品2問〈extraDoubleCount〉の際に型を変えられるようにする）
 //
 // ステージ生成規則 v4:
 //  ワールドの出題可能作品を年代順に並べ、★ごとに「その★を持つ作品」を10件ずつに固定分割
@@ -42,8 +54,9 @@ import { generateStatementPairQuestion } from './statementPair'
 import { generatePairQuestion } from './pairs'
 import { generateStatementQuestion } from './statements'
 import { generateQ12Question } from './q12'
-import { containsMuseumWord, generateQ9Question, generateQ9QuestionFromIds } from './q9'
+import { generateQ9Question, generateQ9QuestionFromIds } from './q9'
 import { generateQ5Question } from './q5'
+import { generateQ7Question, q7LocationValue } from './q7'
 import { isCulturalHiddenAsk, pickThemeTargetId } from './themeSet'
 import { standaloneStem } from './stems'
 import type {
@@ -72,8 +85,8 @@ export const ALL_DIFFICULTIES: Difficulty[] = [1, 2, 3, 4, 5]
 export const DIFFICULTY_TYPES: Record<Difficulty, QuestionType[]> = {
   1: ['q1', 'q3'],
   2: ['q5', 'q9'],
-  3: ['q9'],
-  4: ['q4', 'q6', 'q9', 'q8'],
+  3: ['q9', 'q7'],
+  4: ['q4', 'q9', 'q8'],
   5: ['q9', 'q13', 'q10'],
 }
 
@@ -97,9 +110,10 @@ export const DIFFICULTY_LABELS: Record<Difficulty, string> = {
 /**
  * 画像そのものを見せる／選択肢に画像を並べる型。engine/practiceSession.ts・engine/missLog.ts と
  * 同じ定数（意図的に同じ名前・同じ範囲で重複定義。他エンジンファイルも各々ローカルに持つ既存の
- * 書き方に揃える）。q5（M2i、画像→作者）は対象自身のヒーロー画像を見せるため画像必須。
+ * 書き方に揃える）。q5（M2i、画像→作者）・q7（M2i-05③、画像→出土地・所在地）は対象自身の
+ * ヒーロー画像を見せるため画像必須。
  */
-const IMAGE_DEPENDENT_TYPES: QuestionType[] = ['q1', 'q2', 'q3', 'q5', 'q9']
+const IMAGE_DEPENDENT_TYPES: QuestionType[] = ['q1', 'q2', 'q3', 'q5', 'q7', 'q9']
 
 /** 10件ずつに固定分割する（チケット規則）。 */
 export const STAGE_CHUNK_SIZE = 10
@@ -161,10 +175,12 @@ export function worldOrder(eras: Era[]): string[] {
  *    holderKind==='museum' の作品でも収蔵館名が入っている（実データで26/74件）ため、素通しすると
  *    「東京国立博物館にあるもの」のような設問が生成されてしまう（M2b-14が禁止した形）。
  *    ここでは M2b-14 の決定を優先し、location 側は holderKind==='site' に限定した
- *    （findSite はもともと出土地そのものなので holderKind を問わない）。
- *  ★4: 全件対象（Q4/Q6/Q9のsubject等/Q8のどれかが生成できることが多いため、★1と同様に
+ *    （findSite はもともと出土地そのものなので holderKind を問わない。判定は engine/q7.ts の
+ *    q7LocationValue と共有し、Q7〈画像→出土地・所在地。M2i-05③〉の対象・正解値もこれで揃える）。
+ *  ★4: 全件対象（Q4/Q9のsubject等/Q8のどれかが生成できることが多いため、★1と同様に
  *    「なし」を作らない簡易判定にした。実際に1問も作れない作品は tryBuildStageQuestionForWork が
- *    その作品をスキップするだけで面自体は壊れない）。
+ *    その作品をスキップするだけで面自体は壊れない。M2i-05①でQ6同時代の事項を外した＝
+ *    DIFFICULTY_TYPES[4] 参照、hasStar 自体の判定は変わらない）。
  *  ★5: technique または style または pairs（1件以上）を持つ作品のみ。
  */
 function hasStar(work: Work, difficulty: Difficulty): boolean {
@@ -174,10 +190,7 @@ function hasStar(work: Work, difficulty: Difficulty): boolean {
     case 2:
       return Boolean(work.artist)
     case 3:
-      return (
-        Boolean(work.findSite) ||
-        (work.holderKind === 'site' && Boolean(work.location) && !containsMuseumWord(work.location as string))
-      )
+      return q7LocationValue(work) !== null
     case 4:
       return true
     case 5:
@@ -329,10 +342,21 @@ function buildQ5QuestionForStage(work: Work, pool: Work[], eras: Era[], rng: Ran
   return { type: 'q5', work, choiceWorks: [], choiceArtists: items, correctIndex, isReview: false }
 }
 
+/** Q7（画像→出土地・所在地。M2i-05③ ★3）を組み立てる。誤答は同文化→隣接文化の実在の
+ *  出土地・所在地から選ぶ（engine/q7.ts）。対象が値を持たない、または誤答が3件そろわなければ null。 */
+function buildQ7QuestionForStage(work: Work, pool: Work[], eras: Era[], rng: RandomFn): Question | null {
+  const data = generateQ7Question(work, pool, eras, rng)
+  if (!data) return null
+  const { items, correctIndex } = buildChoices(data.correctLocation, data.distractorLocations, rng)
+  return { type: 'q7', work, choiceWorks: [], choiceLocations: items, correctIndex, isReview: false }
+}
+
 /** Q9をスロット固定（allowSlots）で組み立てる（M2i ★2〜5）。eraスロットは常に禁止する
- *  （ワールド固定のステージ・ボスではヘッダーの文化名だけで解けてしまうため）。 */
+ *  （ワールド固定のステージ・ボスではヘッダーの文化名だけで解けてしまうため）。誤答は同era
+ *  （＝ワールド）を優先する（M2i-05②、preferSameEra。reviewer fact-check-m2i.md でq9の
+ *  43.6%がヘッダーだけで解けると指摘されたための是正。engine/q9.ts 参照）。 */
 function buildQ9QuestionForStage(work: Work, imagePool: Work[], eras: Era[], rng: RandomFn, allowSlots: Q9Slot[]): Question | null {
-  const data = generateQ9Question(work, imagePool, eras, rng, { allowSlots, avoidSlots: ['era'] })
+  const data = generateQ9Question(work, imagePool, eras, rng, { allowSlots, avoidSlots: ['era'], preferSameEra: true })
   if (!data) return null
   const { items, correctIndex } = buildChoices(data.correctWork, data.distractorWorks, rng)
   return {
@@ -415,6 +439,7 @@ function tryBuildStageQuestionForWork(
     if (type === 'q10') q = buildStatementPairQuestion(work, usablePool, rng)
     else if (type === 'q13') q = buildWordPairQuestion(work, usablePool, rng)
     else if (type === 'q5') q = buildQ5QuestionForStage(work, usablePool, eras, rng)
+    else if (type === 'q7') q = buildQ7QuestionForStage(work, usablePool, eras, rng)
     else if (type === 'q9') q = q9AllowSlots ? buildQ9QuestionForStage(work, usablePool, eras, rng, q9AllowSlots) : null
     else if (canGenerateType(type, work, usablePool, eras)) q = buildQuestion(work, type, usablePool, eras, false, rng)
     if (q) return q

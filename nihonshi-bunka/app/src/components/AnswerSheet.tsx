@@ -53,13 +53,15 @@ export function AnswerSheet({
   const correctAnswerLabel =
     question.type === 'q5'
       ? (question.choiceArtists?.[question.correctIndex] ?? work.artist ?? work.title)
-      : question.type === 'q12'
-        ? (question.choiceQ12?.find((s) => s.correct)?.text ?? work.title)
-        : question.type === 'q13'
-          ? (question.choiceWordPairs?.find((c) => c.correct)?.text ?? work.title)
-          : question.type === 'q14'
-            ? (question.choiceStatements?.find((c) => c.correct)?.text ?? work.title)
-            : work.title
+      : question.type === 'q7'
+        ? (question.choiceLocations?.[question.correctIndex] ?? work.findSite ?? work.location ?? work.title)
+        : question.type === 'q12'
+          ? (question.choiceQ12?.find((s) => s.correct)?.text ?? work.title)
+          : question.type === 'q13'
+            ? (question.choiceWordPairs?.find((c) => c.correct)?.text ?? work.title)
+            : question.type === 'q14'
+              ? (question.choiceStatements?.find((c) => c.correct)?.text ?? work.title)
+              : work.title
 
   const targetEra = eras.find((e) => e.id === work.era)
   // Q6 の「正解の文化」の detail を1〜2文だけ添える（DESIGN.md 10章「解説の拡張」）

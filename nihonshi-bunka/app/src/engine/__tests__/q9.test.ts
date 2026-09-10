@@ -267,6 +267,63 @@ describe('avoidSlots / preferredSlot オプション（修正の仕様: ask.slot
   })
 })
 
+// M2i-05②（decisions.md 2026-09-11、reviewer fact-check-m2i.md「q9が43.6%ヘッダーだけで解ける」の
+// 是正）: preferSameEra オプションは誤答を同era（＝ワールド）優先で選ぶ。engine/stages.ts の
+// ステージ生成だけが渡す（自由出題・模試・ボスの既存テストには影響しない＝オプション省略時の
+// 挙動は変わらないことを他のテストがすでに保証している）。
+describe('preferSameEra オプション（M2i-05②: ステージのQ9誤答は同ワールド優先）', () => {
+  const target = makeWork({ id: 'pse-target', era: 'tenpyo', category: 'sculpture', artist: '目標作者' })
+
+  it('同era（tenpyo）の候補が4件以上あれば、誤答は全て同eraから選ばれる', () => {
+    const sameEraWorks: Work[] = Array.from({ length: 5 }, (_, i) =>
+      makeWork({ id: `pse-same${i}`, era: 'tenpyo', category: 'sculpture', artist: `同era作者${i}` }),
+    )
+    const otherEraWorks: Work[] = [
+      makeWork({ id: 'pse-other1', era: 'hakuho', category: 'sculpture', artist: '別era作者1' }),
+      makeWork({ id: 'pse-other2', era: 'asuka', category: 'sculpture', artist: '別era作者2' }),
+    ]
+    const pool = [target, ...sameEraWorks, ...otherEraWorks]
+    for (let seed = 0; seed < 10; seed++) {
+      const result = generateQ9Question(target, pool, testEras, seededRandom(seed), { preferSameEra: true })
+      expect(result).not.toBeNull()
+      expect(result!.slot).toBe('artist')
+      expect(result!.distractorWorks).toHaveLength(3)
+      for (const d of result!.distractorWorks) expect(d.era).toBe('tenpyo')
+    }
+  })
+
+  it('同eraの候補が4件未満（1件）なら、同era分＋足りない分だけ他eraから補う（他eraは1件のみにはならない）', () => {
+    const sameEraWorks: Work[] = [makeWork({ id: 'pse-same0', era: 'tenpyo', category: 'sculpture', artist: '同era作者0' })]
+    const otherEraWorks: Work[] = [
+      makeWork({ id: 'pse-other1', era: 'hakuho', category: 'sculpture', artist: '別era作者1' }),
+      makeWork({ id: 'pse-other2', era: 'konin-jogan', category: 'sculpture', artist: '別era作者2' }),
+      makeWork({ id: 'pse-other3', era: 'asuka', category: 'sculpture', artist: '別era作者3' }),
+    ]
+    const pool = [target, ...sameEraWorks, ...otherEraWorks]
+    for (let seed = 0; seed < 10; seed++) {
+      const result = generateQ9Question(target, pool, testEras, seededRandom(seed), { preferSameEra: true })
+      expect(result).not.toBeNull()
+      expect(result!.distractorWorks).toHaveLength(3)
+      const sameEraCount = result!.distractorWorks.filter((d) => d.era === 'tenpyo').length
+      // sameEraが1件しか無い場合、同era分（1件）はすべて使い、残り2件は他eraから補う
+      // （＝正解1件のみが同eraという「ヘッダーだけで解ける」状態を避ける）。
+      expect(sameEraCount).toBe(1)
+    }
+  })
+
+  it('preferSameEra を渡さない（既定）場合は従来どおり距離順の窓から選ぶ（同era限定にならない）', () => {
+    const sameEraWorks: Work[] = [makeWork({ id: 'pse2-same0', era: 'tenpyo', category: 'sculpture', artist: '同era作者0' })]
+    const otherEraWorks: Work[] = [
+      makeWork({ id: 'pse2-other1', era: 'hakuho', category: 'sculpture', artist: '別era作者1' }),
+      makeWork({ id: 'pse2-other2', era: 'konin-jogan', category: 'sculpture', artist: '別era作者2' }),
+    ]
+    const pool = [target, ...sameEraWorks, ...otherEraWorks]
+    const result = generateQ9Question(target, pool, testEras, seededRandom(1))
+    expect(result).not.toBeNull()
+    expect(result!.distractorWorks).toHaveLength(3)
+  })
+})
+
 // 8章「二段構え」: writer が answerId/distractorIds を直接指定するデータ形。
 describe('generateQ9QuestionFromIds（8章「二段構え」: writer 指定の answerId/distractorIds）', () => {
   it('distractorIds が3件そろっていれば、そのまま使う（algorithmic な選定はしない）', () => {

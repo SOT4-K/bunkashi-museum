@@ -41,6 +41,8 @@ export function underlineStem(type: QuestionType, underlineKey: string, opts: St
         : `${key}に関する記述として最も適切なものを、次のうちから選べ。`
     case 'q5': // M2i ★2（画像→作者）
       return `${key}に該当する作品の作者として最も適切なものを、次のうちから選べ。`
+    case 'q7': // M2i-05③ ★3（画像→出土地・所在地）
+      return `${key}に該当する作品の出土地・所在地として最も適切なものを、次のうちから選べ。`
     case 'q6': // P1 系
       return `${key}と同じ時代の文化に属する事項として最も適切なものを、次のうちから選べ。`
     case 'q8': // P3 系（組合せ）
@@ -81,6 +83,8 @@ export function standaloneStem(type: QuestionType, opts: StemOptions = {}): stri
         : 'この作品に関する記述として最も適切なものを、次のうちから選べ。'
     case 'q5':
       return 'この作品の作者として最も適切なものを、次のうちから選べ。'
+    case 'q7':
+      return 'この作品の出土地・所在地として最も適切なものを、次のうちから選べ。'
     case 'q6':
       return 'この作品と同じ時代の文化に属する事項として最も適切なものを、次のうちから選べ。'
     case 'q8':

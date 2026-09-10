@@ -14,6 +14,7 @@ const PROMPTS: Record<Question['type'], string> = {
   q4: 'この作品に関する記述として正しいものは？',
   q5: 'この作品の作者は？',
   q6: 'この作品と同じ文化に属する事項は？',
+  q7: 'この作品の出土地・所在地は？',
   q8: '作者（建立者）と様式（宗教背景）の組合せとして正しいものは？',
   q9: '条件に合う作品は？',
   q10: '次の2つの記述の正誤の組合せとして正しいものは？',
@@ -214,19 +215,21 @@ export function QuestionCard({
       ? (question.choiceEras ?? []).map((e) => e.name)
       : question.type === 'q5'
         ? (question.choiceArtists ?? [])
-        : question.type === 'q4' || question.type === 'q14'
-          ? (question.choiceStatements ?? []).map((s) => s.text)
-          : question.type === 'q6'
-            ? (question.choiceEraItems ?? []).map((it) => it.text)
-            : question.type === 'q8'
-              ? (question.choiceCombos ?? []).map((c) => c.text)
-              : question.type === 'q10'
-                ? (question.choicePairLabels ?? [])
-                : question.type === 'q12'
-                  ? (question.choiceQ12 ?? []).map((s) => s.text)
-                  : question.type === 'q13'
-                    ? (question.choiceWordPairs ?? []).map((c) => c.text)
-                    : question.choiceWorks.map((w) => w.title)
+        : question.type === 'q7'
+          ? (question.choiceLocations ?? [])
+          : question.type === 'q4' || question.type === 'q14'
+            ? (question.choiceStatements ?? []).map((s) => s.text)
+            : question.type === 'q6'
+              ? (question.choiceEraItems ?? []).map((it) => it.text)
+              : question.type === 'q8'
+                ? (question.choiceCombos ?? []).map((c) => c.text)
+                : question.type === 'q10'
+                  ? (question.choicePairLabels ?? [])
+                  : question.type === 'q12'
+                    ? (question.choiceQ12 ?? []).map((s) => s.text)
+                    : question.type === 'q13'
+                      ? (question.choiceWordPairs ?? []).map((c) => c.text)
+                      : question.choiceWorks.map((w) => w.title)
 
   // Q12（画像なし文字4択。9章「画像リード型セット」）はリード文自体が画像なので、
   // 設問ごとのヒーロー画像は出さない（そもそも question.work の画像＝答えではないことが多い）。
