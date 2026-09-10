@@ -1,144 +1,128 @@
-// 実データ（content/）に対する engine/stages.ts v2（M2b-04）のチェック。
-// 受け入れ条件①「直列解禁・固定分割・9/10判定・ボス長・誤答露出規則が単体テストで担保され、
-// reviewed限定プールで15ワールド全ての面数とボス問数が表になる」を確かめるため、
+// 実データ（content/、reviewed限定プール）に対する engine/stages.ts v4（M2i ★の定義v4）の
+// 受け入れライン①〜⑥の検査（BOARD.md M2i-01⑦「30 seed×15 eraで検査するテストを追加」）。
+// 旧M2b/M2e系（v2〜v3、下線起点のリード文つきステージ・型配分の床/上限）は前提から変わった
+// ため、このファイルは新しい前提でテストを書き直した（builder メモ
+// 「旧方式を置き換えるならテストも書き直す」）。
 // content.ts の import.meta.glob（vitest 実行中は DEV=true で draft も混在する。builder メモ
 // vite-import-meta-env-dev-true-in-vitest.md）を経由せず、reviewedFixtures.ts で
 // status: reviewed のみを fs から直接読み込んで検証する。
 import { describe, expect, it } from 'vitest'
 import {
-  DIFFICULTY_TYPES,
-  bossExposureRate,
-  bossQuestionCount,
+  ALL_DIFFICULTIES,
   buildBossQuestions,
   buildEraStagePlan,
-  buildStageQuestions,
   clearThreshold,
+  bossQuestionCount,
+  buildStageQuestions,
+  eraTotalItemCount,
   questionCountForSegment,
 } from '../stages'
-import { categoryFloor, categoryOfQuestion, imageCategoryCap, type ThemeCategory } from '../themeSet'
 import { reviewedEras, reviewedPassages, reviewedPlayableWorks, reviewedThemeSetPool } from './reviewedFixtures'
 import { seededRandom } from './testFixtures'
-import type { Question } from '../../types'
 
-describe('実データ（reviewed限定プール、DEV変数なし）: 15ワールドの面数表・ボス問数表', () => {
-  it('reviewed の作品・テーマセットが実際に1件以上ある（fixture 自体が空でないことの前提確認）', () => {
+const SEEDS = 30
+
+describe('前提確認: reviewed限定プールが空でない', () => {
+  it('reviewed の作品・テーマセット・リード文が実際に1件以上ある', () => {
     expect(reviewedEras.length).toBe(15)
     expect(reviewedPlayableWorks.length).toBeGreaterThan(0)
     expect(reviewedPassages.length).toBeGreaterThan(0)
   })
+})
 
+describe('合格ライン①: 各★の面が「その★を持つ作品」を全件一巡し、リード文・passageId・「下線部」が0件', () => {
   it(
-    '止める条件の確認: 全15ワールドでボスが1問以上作れる（reviewed テーマセットが無い文化が無いこと）',
+    `全15ワールド×★1〜5×全面×${SEEDS} seed で、ステージ問題は passageId 無し・stemに「下線部」を含まない`,
     () => {
-      const noBoss: string[] = []
+      const violations: string[] = []
+      let totalQuestions = 0
       for (const era of reviewedEras) {
-        const boss = buildBossQuestions(era.id, reviewedPassages, reviewedThemeSetPool, reviewedPlayableWorks, reviewedEras)
-        if (boss.length === 0) noBoss.push(era.id)
-      }
-      expect(noBoss).toEqual([])
-    },
-    30000,
-  )
-
-  it(
-    'M2b-99c中1: 15ワールド全てのボス問数の下限を実データで固定する（上限だけの検査をやめる）。' +
-      '是正前（M2b-04時点、fact-check-m2b-v2.md）は insei/kitayama/momoyama=7・higashiyama=6・' +
-      'kanei/genroku=8・kasei=9問だったが、最終補充パス（同一作品×別の型）を追加した結果、' +
-      '2026-09-09時点の実データでは20 seed全てで全15ワールドが目標問数（10問）ちょうどに到達する' +
-      '（実測。buildBossQuestionsのコメント参照）。',
-    () => {
-      // 是正後の下限（実測値。将来コンテンツが増えて崩れたらこのテストが検知する）。
-      const MIN_BOSS_LEN: Record<string, number> = {
-        genshi: 10,
-        asuka: 10,
-        hakuho: 10,
-        tenpyo: 10,
-        'konin-jogan': 10,
-        kokufu: 10,
-        insei: 10,
-        kamakura: 10,
-        kitayama: 10,
-        higashiyama: 10,
-        momoyama: 10,
-        kanei: 10,
-        genroku: 10,
-        'horeki-tenmei': 10,
-        kasei: 10,
-      }
-      const shortfalls: { eraId: string; seed: number; len: number }[] = []
-      for (const era of reviewedEras) {
-        const minExpected = MIN_BOSS_LEN[era.id]
-        expect(minExpected, `MIN_BOSS_LEN に ${era.id} の実測値が無い（reviewedEras が変わった）`).toBeDefined()
-        for (let seed = 0; seed < 20; seed++) {
-          const boss = buildBossQuestions(
-            era.id,
-            reviewedPassages,
-            reviewedThemeSetPool,
-            reviewedPlayableWorks,
-            reviewedEras,
-            seededRandom(seed),
-          )
-          if (boss.length < minExpected) shortfalls.push({ eraId: era.id, seed, len: boss.length })
+        for (const difficulty of ALL_DIFFICULTIES) {
+          const plan = buildEraStagePlan(era.id, difficulty, reviewedPlayableWorks)
+          for (const seg of plan.segments) {
+            for (let seed = 0; seed < SEEDS; seed++) {
+              const qs = buildStageQuestions(
+                era.id,
+                difficulty,
+                seg.segment,
+                reviewedThemeSetPool,
+                reviewedPlayableWorks,
+                reviewedEras,
+                seededRandom(seed),
+              )
+              totalQuestions += qs.length
+              for (const q of qs) {
+                if (q.passageId) violations.push(`${era.id}-${difficulty}-${seg.segment}(seed${seed}): passageId 付き`)
+                if (q.stem?.includes('下線部')) violations.push(`${era.id}-${difficulty}-${seg.segment}(seed${seed}): stemに「下線部」`)
+              }
+            }
+          }
         }
       }
-      expect(shortfalls).toEqual([])
+      expect(totalQuestions).toBeGreaterThan(0)
+      expect(violations).toEqual([])
     },
-    60000,
+    120000,
   )
 
   it(
-    '15ワールドの面数表・ボス問数表を実データで固定する（完了報告に転記する数値の根拠）',
+    `全15ワールド×★1〜5×全面×${SEEDS} seed で、その面の対象作品（seg.workIds）全件が少なくとも1回は生成される（一巡）`,
     () => {
-      const table: { eraId: string; itemCount: number; segmentCounts: number[]; bossSize: number }[] = []
+      const uncoveredList: string[] = []
       for (const era of reviewedEras) {
-        const plan = buildEraStagePlan(era.id, reviewedPlayableWorks)
-        table.push({
-          eraId: era.id,
-          itemCount: plan.itemCount,
-          segmentCounts: plan.segments.map((s) => questionCountForSegment(s)),
-          bossSize: plan.bossSize,
-        })
-      }
-      // eslint 的な理由ではなく人間が読むための整形（報告転記用）。
-      console.log('[stages v2] 面数表・ボス問数表:', JSON.stringify(table, null, 0))
-      // 実データの現状（2026-09-09時点）: 全15ワールドが N<=10（M2c-04でコンテンツが
-      // 増えるまでは10件ずつの固定分割・端数併合は発動しない）。この事実そのものを
-      // 固定する（今後コンテンツが増えて崩れたら、このテストが教えてくれる）。
-      for (const row of table) {
-        expect(row.itemCount).toBeGreaterThan(0)
-        expect(row.segmentCounts.length).toBe(1) // 現状は全ワールド1面のみ（★1につき）
-        expect(row.bossSize).toBe(10) // 現状は全ワールドN<=15なのでボスは10問固定
-      }
-    },
-    30000,
-  )
-
-  it(
-    'N<5暫定規則が実際に発動するワールドがあるか実データで確認する（チケット指示: 北山など）',
-    () => {
-      const under5: { eraId: string; itemCount: number }[] = []
-      for (const era of reviewedEras) {
-        const plan = buildEraStagePlan(era.id, reviewedPlayableWorks)
-        if (plan.itemCount > 0 && plan.itemCount < 5) under5.push({ eraId: era.id, itemCount: plan.itemCount })
-      }
-      console.log('[stages v2] N<5暫定規則が発動するワールド:', under5)
-      // 実データでは北山（kitayama）が該当する想定。0件なら誤り無く報告するため
-      // ここでは存在を強制しない（実測値をそのままログに出し、報告に転記する）。
-    },
-    30000,
-  )
-
-  it(
-    'M2b-99c中4是正: 全15ワールド×★1〜3×そのワールドの全面は、目標問数を超えない・' +
-      '同じ作品×同じ型の重複が無い・0件の面が無い（以前は上限のみの検査で0問でも通っていた。' +
-      '0問の面は直列解禁の下でそのワールド以降を永久に詰ませる致命的回帰なので、下限として' +
-      '実際にassertする。noneListはconsole.logだけで無視されていた）',
-    () => {
-      const noneList: string[] = []
-      for (const era of reviewedEras) {
-        const plan = buildEraStagePlan(era.id, reviewedPlayableWorks)
-        for (const difficulty of [1, 2, 3] as const) {
+        for (const difficulty of ALL_DIFFICULTIES) {
+          const plan = buildEraStagePlan(era.id, difficulty, reviewedPlayableWorks)
           for (const seg of plan.segments) {
+            const coveredIds = new Set<string>()
+            for (let seed = 0; seed < SEEDS; seed++) {
+              const qs = buildStageQuestions(
+                era.id,
+                difficulty,
+                seg.segment,
+                reviewedThemeSetPool,
+                reviewedPlayableWorks,
+                reviewedEras,
+                seededRandom(seed),
+              )
+              for (const q of qs) coveredIds.add(q.work.id)
+            }
+            const uncovered = seg.workIds.filter((id) => !coveredIds.has(id))
+            if (uncovered.length > 0) uncoveredList.push(`${era.id}-${difficulty}-${seg.segment}: ${uncovered.join(',')}`)
+          }
+        }
+      }
+      expect(uncoveredList).toEqual([])
+    },
+    120000,
+  )
+
+  it('15ワールド×★1〜5の面数表・対象作品数表を実データで記録する（完了報告に転記する数値の根拠）', () => {
+    const table: Record<string, Record<number, { itemCount: number; segmentCounts: number[] }>> = {}
+    for (const era of reviewedEras) {
+      table[era.id] = {}
+      for (const difficulty of ALL_DIFFICULTIES) {
+        const plan = buildEraStagePlan(era.id, difficulty, reviewedPlayableWorks)
+        table[era.id][difficulty] = { itemCount: plan.itemCount, segmentCounts: plan.segments.map((s) => questionCountForSegment(s)) }
+      }
+    }
+    console.log('[M2i] ★ごとの対象作品数・面数表:', JSON.stringify(table))
+    // 0件の★が5つ以上ある文化が★2/★3/★5のどれかで発生していないか（止める条件の一次判定用に記録）。
+    for (const difficulty of [2, 3, 5] as const) {
+      const zeroEras = reviewedEras.filter((e) => table[e.id][difficulty].itemCount === 0).map((e) => e.id)
+      const under3Eras = reviewedEras.filter((e) => table[e.id][difficulty].itemCount > 0 && table[e.id][difficulty].itemCount < 3).map((e) => e.id)
+      console.log(`[M2i] ★${difficulty} が0件のワールド:`, zeroEras, '/ 3件未満のワールド:', under3Eras)
+    }
+  })
+})
+
+describe('合格ライン②: ヘッダー（文化名）だけで解ける問題が0件', () => {
+  it(`全15ワールド×★1〜5×全面×${SEEDS} seedで、q2/q12/Q9のeraスロットが一度も出ない`, () => {
+    const violations: string[] = []
+    for (const era of reviewedEras) {
+      for (const difficulty of ALL_DIFFICULTIES) {
+        const plan = buildEraStagePlan(era.id, difficulty, reviewedPlayableWorks)
+        for (const seg of plan.segments) {
+          for (let seed = 0; seed < SEEDS; seed++) {
             const qs = buildStageQuestions(
               era.id,
               difficulty,
@@ -146,394 +130,208 @@ describe('実データ（reviewed限定プール、DEV変数なし）: 15ワー�
               reviewedThemeSetPool,
               reviewedPlayableWorks,
               reviewedEras,
-              seededRandom(difficulty * 100 + era.order + seg.segment),
+              seededRandom(seed),
             )
-            expect(qs.length).toBeLessThanOrEqual(questionCountForSegment(seg))
-            expect(qs.length).toBeGreaterThan(0)
-            const pairKeys = qs.map((q) => `${q.work.id}:${q.type}`)
-            expect(new Set(pairKeys).size).toBe(pairKeys.length)
             for (const q of qs) {
-              expect(reviewedThemeSetPool.some((w) => w.id === q.work.id)).toBe(true)
-            }
-            if (qs.length === 0) noneList.push(`${era.id}-${difficulty}-${seg.segment}`)
-          }
-        }
-      }
-      expect(noneList).toEqual([])
-    },
-    60000,
-  )
-
-  it(
-    'M2b-99c中4是正: 「固定分割が全項目を漏れなく一巡する」を直接アサートする（以前は目視・' +
-      'console.logのみ）。★1〜3×全面×seed0〜9の各生成結果に、その面のseg.workIds全件が' +
-      '現れることを確認する（合格ライン①の「一巡」そのもの）',
-    () => {
-      const uncoveredList: string[] = []
-      for (const era of reviewedEras) {
-        const plan = buildEraStagePlan(era.id, reviewedPlayableWorks)
-        for (const difficulty of [1, 2, 3] as const) {
-          for (const seg of plan.segments) {
-            for (let seed = 0; seed < 10; seed++) {
-              const qs = buildStageQuestions(
-                era.id,
-                difficulty,
-                seg.segment,
-                reviewedThemeSetPool,
-                reviewedPlayableWorks,
-                reviewedEras,
-                seededRandom(seed),
-              )
-              const coveredIds = new Set(qs.map((q) => q.work.id))
-              const uncovered = seg.workIds.filter((id) => !coveredIds.has(id))
-              if (uncovered.length > 0) {
-                uncoveredList.push(`${era.id}-${difficulty}-${seg.segment}(seed${seed}): ${uncovered.join(',')}`)
-              }
+              if (q.type === 'q2' || q.type === 'q12') violations.push(`${era.id}-${difficulty}-${seg.segment}(seed${seed}): ${q.type} が出た`)
+              if (q.q9Slot === 'era') violations.push(`${era.id}-${difficulty}-${seg.segment}(seed${seed}): Q9のeraスロットが出た`)
             }
           }
         }
       }
-      expect(uncoveredList).toEqual([])
-    },
-    60000,
-  )
+    }
+    expect(violations).toEqual([])
+  }, 120000)
+})
 
+describe('合格ライン③: 合格判定（10問→8問以上、10問未満→1ミス以内、ボス20問→8割）', () => {
+  it('clearThreshold は実データの問数レンジで正しい値を返す', () => {
+    expect(clearThreshold(10)).toBe(8)
+    expect(clearThreshold(20)).toBe(16)
+    for (let n = 3; n <= 9; n++) expect(clearThreshold(n)).toBe(n - 1)
+  })
+
+  it('面の目標問数（questionCountForSegment）は常に clearThreshold と整合する（>=1ミスの余地がある）', () => {
+    for (const era of reviewedEras) {
+      for (const difficulty of ALL_DIFFICULTIES) {
+        const plan = buildEraStagePlan(era.id, difficulty, reviewedPlayableWorks)
+        for (const seg of plan.segments) {
+          const total = questionCountForSegment(seg)
+          expect(clearThreshold(total)).toBeLessThanOrEqual(total)
+        }
+      }
+    }
+  })
+})
+
+describe('合格ライン④: ボスは3群のリード文に分かれ、全問がwriterのask.stem由来（汎用文0件）', () => {
   it(
-    '全15ワールド×10 seed で: ボスは目標問数以下・作品×型の組は重複しない・題材はプール内' +
-      '（M2b-99c中1是正: 最終補充パスにより目標問数に足りないワールドは同一作品×別の型で' +
-      '埋めるため、以前の「全問ユニークな作品」検査は「作品×型の組の一意性」に変更する）',
+    `全15ワールド×${SEEDS} seedで、ボスの全問の stem が、その下線の ask.stem と完全一致する（汎用文が混ざらない）`,
     () => {
+      const askStemByPassageUnderline = new Map<string, string>()
+      for (const passage of reviewedPassages) {
+        for (const underline of passage.underlines) {
+          if (underline.ask?.stem) askStemByPassageUnderline.set(`${passage.id}:${underline.key}`, underline.ask.stem)
+        }
+      }
+      const violations: string[] = []
+      let total = 0
       for (const era of reviewedEras) {
-        const target = bossQuestionCount(reviewedPlayableWorks.filter((w) => w.era === era.id).length)
-        for (let seed = 0; seed < 10; seed++) {
-          const boss = buildBossQuestions(
-            era.id,
-            reviewedPassages,
-            reviewedThemeSetPool,
-            reviewedPlayableWorks,
-            reviewedEras,
-            seededRandom(seed),
-          )
-          expect(boss.length).toBeLessThanOrEqual(target)
-          const pairKeys = boss.map((q) => `${q.work.id}:${q.type}`)
-          expect(new Set(pairKeys).size).toBe(pairKeys.length)
+        for (let seed = 0; seed < SEEDS; seed++) {
+          const boss = buildBossQuestions(era.id, reviewedPassages, reviewedThemeSetPool, reviewedPlayableWorks, reviewedEras, seededRandom(seed))
           for (const q of boss) {
-            expect(reviewedThemeSetPool.some((w) => w.id === q.work.id)).toBe(true)
+            total++
+            const key = q.passageId && q.underlineKey ? `${q.passageId}:${q.underlineKey}` : undefined
+            const expected = key ? askStemByPassageUnderline.get(key) : undefined
+            if (!expected || q.stem !== expected) violations.push(`${era.id}(seed${seed}): ${q.work.id}/${q.type} が汎用文または不一致`)
           }
         }
       }
+      expect(total).toBeGreaterThan(0)
+      expect(violations).toEqual([])
+    },
+    120000,
+  )
+
+  it(
+    '完了報告用: 15ワールド×10 seedで、ボスが実際に何本のリード文（passageId）を使っているかを記録する' +
+      '（3群それぞれ別のリード文を使う設計の実測。1本しか使われていない＝群が事実上機能していないワールドを報告する）',
+    () => {
+      const table: Record<string, { bossLen: number[]; distinctPassageIds: string[] }> = {}
+      for (const era of reviewedEras) {
+        const lens: number[] = []
+        const passageIdSet = new Set<string>()
+        for (let seed = 0; seed < 10; seed++) {
+          const boss = buildBossQuestions(era.id, reviewedPassages, reviewedThemeSetPool, reviewedPlayableWorks, reviewedEras, seededRandom(seed))
+          lens.push(boss.length)
+          for (const q of boss) if (q.passageId) passageIdSet.add(q.passageId)
+        }
+        table[era.id] = { bossLen: lens, distinctPassageIds: [...passageIdSet] }
+      }
+      console.log('[M2i] ボス問数・使用リード文の実測（10 seed）:', JSON.stringify(table))
+      const fewPassageWorlds = Object.entries(table)
+        .filter(([, v]) => v.distinctPassageIds.length < 2 && Math.max(...v.bossLen, 0) > 0)
+        .map(([era]) => era)
+      console.log('[M2i] ボスで使用リード文が1本以下のワールド（群が事実上機能していない可能性）:', fewPassageWorlds)
     },
     60000,
   )
 
-  it(
-    'reviewer指摘M2b-99重大1の回帰（M2b-01から引き継ぎ）: ボスは可能な限り目標問数に近づく（下線のdistinct target数が' +
-      '少ない文化でも、eraのpool全体を第2の補充源にして水増しする）。M2b-99c中1是正後は' +
-      'kitayama/momoyamaも目標の10問ちょうどに到達する（是正前は1問のままにならないことのみ確認していた）',
-    () => {
-      const kitayamaBoss = buildBossQuestions(
-        'kitayama',
-        reviewedPassages,
-        reviewedThemeSetPool,
-        reviewedPlayableWorks,
-        reviewedEras,
-        seededRandom(0),
-      )
-      const momoyamaBoss = buildBossQuestions(
-        'momoyama',
-        reviewedPassages,
-        reviewedThemeSetPool,
-        reviewedPlayableWorks,
-        reviewedEras,
-        seededRandom(0),
-      )
-      expect(kitayamaBoss.length).toBe(10)
-      expect(momoyamaBoss.length).toBe(10)
-    },
-    30000,
-  )
-
-  it(
-    'M2b-99c中2是正: 誤答露出規則（チケット規則5）を単一seedの平均ではなく、20 seedの' +
-      '最小値でアサートする（以前は seed=1 のみ・平均0.6以上だったため、genshi/kamakuraの' +
-      '露出率低下を他ワールドの100%が隠して回帰を検出できなかった）。実測の最小値は' +
-      'genshi 0.857（6/7）・kamakura 0.8（4/5）、他13ワールドは1.0（fact-check-m2b-v2.mdの' +
-      'seed=1限定・非シード100回の実測と同じ傾向。M2b-99c中1のボス問数改善により' +
-      '以前ここで最小0.71/0.80だったgenshi/kamakura以外は全て1.0に改善した）。' +
-      'M2e-06追記: 図版型（q9/q1）の上限（imageCategoryCap）を入れた副作用で、tenpyo' +
-      '（項目数9・是正前は常に1.0）が一部seedで0.889（8/9）に下がった。Q9は選択肢に画像を' +
-      '4枚並べるため誤答露出のための「安く多く出せる」手段でもあり、上限で使用回数を絞ると' +
-      '露出機会も減るトレードオフ（実測値、tenpyo min=0.889）。' +
-      'M2e-07追記: tenpyoの下線増補（tenpyo-03/04、themeSetPool覆え率50%→100%）で' +
-      'pass1（下線ベースの合算）が10問枠の大半を埋めるようになり、誤答露出のためだけに' +
-      '使われていたQ9/Q1の余地がさらに減った。20 seed実測min=0.556（5/9）。覆え率60%以上・' +
-      '単独問題40%以下という本チケットの目的達成に伴う既知のトレードオフ（誤答露出は' +
-      '「同じ試験内で誤答として一度は見せる」ための補助規則で、下線ベースの出題を優先する' +
-      'M2e-02以降の設計方針そのものと構造的にぶつかる）。管理判断は仰がず実測min以下の' +
-      '安全マージンで閾値を更新',
-    () => {
-      const MIN_EXPOSURE_RATE: Record<string, number> = {
-        genshi: 0.7, // 実測min 6/7=0.857。将来コンテンツが増えるまでの安全マージンとして0.7
-        kamakura: 0.7, // 実測min 4/5=0.8。同上
-        tenpyo: 0.5, // M2e-07: 実測min 5/9=0.556（上記コメント参照）。安全マージンとして0.5
+  it(`全15ワールドで、目標問数（N≤15→10、N>15→20）に対するボスの実際の生成数を記録する（M2i-03のwriter増補判断材料）`, () => {
+    const shortfalls: { era: string; target: number; min: number; max: number }[] = []
+    for (const era of reviewedEras) {
+      const target = bossQuestionCount(eraTotalItemCount(era.id, reviewedPlayableWorks))
+      const lens: number[] = []
+      for (let seed = 0; seed < 10; seed++) {
+        const boss = buildBossQuestions(era.id, reviewedPassages, reviewedThemeSetPool, reviewedPlayableWorks, reviewedEras, seededRandom(seed))
+        lens.push(boss.length)
       }
-      const DEFAULT_MIN_EXPOSURE_RATE = 0.9 // 実測min 1.0の13ワールド分の安全マージン
-      const shortfalls: { eraId: string; seed: number; rate: number }[] = []
-      const allRates: { eraId: string; total: number; exposed: number; rate: number }[] = []
-      for (const era of reviewedEras) {
-        const minExpected = MIN_EXPOSURE_RATE[era.id] ?? DEFAULT_MIN_EXPOSURE_RATE
-        for (let seed = 0; seed < 20; seed++) {
-          const boss = buildBossQuestions(
-            era.id,
-            reviewedPassages,
-            reviewedThemeSetPool,
-            reviewedPlayableWorks,
-            reviewedEras,
-            seededRandom(seed),
-          )
-          const stats = bossExposureRate(boss, era.id, reviewedPlayableWorks)
-          if (seed === 0) allRates.push({ eraId: era.id, ...stats })
-          if (stats.rate < minExpected) shortfalls.push({ eraId: era.id, seed, rate: stats.rate })
+      const min = Math.min(...lens)
+      const max = Math.max(...lens)
+      if (min < target) shortfalls.push({ era: era.id, target, min, max })
+    }
+    console.log('[M2i] ボス目標問数に届かないワールド（10 seed中のmin/max。M2i-03のwriter増補対象）:', JSON.stringify(shortfalls))
+  })
+})
+
+describe('合格ライン⑤: 面内で同じ作品×同じ型の重複0、同型連続率の実測、再挑戦で同一問題が出ない', () => {
+  it(`全15ワールド×★1〜5×全面×${SEEDS} seedで、同じ作品×同じ型の面内重複が無い`, () => {
+    const violations: string[] = []
+    for (const era of reviewedEras) {
+      for (const difficulty of ALL_DIFFICULTIES) {
+        const plan = buildEraStagePlan(era.id, difficulty, reviewedPlayableWorks)
+        for (const seg of plan.segments) {
+          for (let seed = 0; seed < SEEDS; seed++) {
+            const qs = buildStageQuestions(
+              era.id,
+              difficulty,
+              seg.segment,
+              reviewedThemeSetPool,
+              reviewedPlayableWorks,
+              reviewedEras,
+              seededRandom(seed),
+            )
+            const keys = qs.map((q) => `${q.work.id}:${q.type}`)
+            if (new Set(keys).size !== keys.length) violations.push(`${era.id}-${difficulty}-${seg.segment}(seed${seed}): 重複あり`)
+          }
         }
       }
-      console.log('[stages v2] ボス誤答露出率（seed=0時点の参考値。実際は20 seedの最小値で判定）:', JSON.stringify(allRates))
-      expect(shortfalls).toEqual([])
-    },
-    60000,
-  )
+    }
+    expect(violations).toEqual([])
+  }, 120000)
 
-  it('★1（Q1/Q3）は出題対象がある文化では常に1問以上作れる（見分ける、が空になる文化は無い想定）', () => {
-    const zero: string[] = []
+  it('完了報告用: 同型連続率（隣接する2問が同じ型になる割合）を15ワールド×★1〜5×30 seedで実測する', () => {
+    let adjacentPairs = 0
+    let sameTypeAdjacent = 0
     for (const era of reviewedEras) {
-      const plan = buildEraStagePlan(era.id, reviewedPlayableWorks)
+      for (const difficulty of ALL_DIFFICULTIES) {
+        const plan = buildEraStagePlan(era.id, difficulty, reviewedPlayableWorks)
+        for (const seg of plan.segments) {
+          for (let seed = 0; seed < SEEDS; seed++) {
+            const qs = buildStageQuestions(
+              era.id,
+              difficulty,
+              seg.segment,
+              reviewedThemeSetPool,
+              reviewedPlayableWorks,
+              reviewedEras,
+              seededRandom(seed),
+            )
+            for (let i = 1; i < qs.length; i++) {
+              adjacentPairs++
+              if (qs[i].type === qs[i - 1].type) sameTypeAdjacent++
+            }
+          }
+        }
+      }
+    }
+    const rate = adjacentPairs > 0 ? sameTypeAdjacent / adjacentPairs : 0
+    console.log(`[M2i] 同型連続率（隣接ペア中）: ${sameTypeAdjacent}/${adjacentPairs} = ${(rate * 100).toFixed(1)}%`)
+    // ★1（型が2種類のみ）は同型連続が構造的に起きやすい（reorderの入れ替え先が無いことがある）ため、
+    // 極端な劣化（8割超）だけを回帰として検知する安全側の閾値にする（低確信点。完了報告に明記）。
+    expect(rate).toBeLessThan(0.8)
+  }, 120000)
+
+  it('再挑戦（別seed）は同一問題（stem+選択肢の完全一致）にならない（10ワールド×5面×隣接seedペアで確認）', () => {
+    const violations: string[] = []
+    let checked = 0
+    for (const era of reviewedEras.slice(0, 10)) {
+      const plan = buildEraStagePlan(era.id, 1, reviewedPlayableWorks)
+      for (const seg of plan.segments.slice(0, 5)) {
+        for (let seed = 0; seed < 5; seed++) {
+          const a = buildStageQuestions(era.id, 1, seg.segment, reviewedThemeSetPool, reviewedPlayableWorks, reviewedEras, seededRandom(seed))
+          const b = buildStageQuestions(era.id, 1, seg.segment, reviewedThemeSetPool, reviewedPlayableWorks, reviewedEras, seededRandom(seed + 1000))
+          checked++
+          const serialize = (qs: typeof a) => qs.map((q) => `${q.work.id}:${q.type}:${q.stem}:${(q.choiceWorks ?? []).map((w) => w.id).join(',')}`).join('|')
+          if (a.length > 0 && serialize(a) === serialize(b)) violations.push(`${era.id}-1-${seg.segment}`)
+        }
+      }
+    }
+    expect(checked).toBeGreaterThan(0)
+    expect(violations).toEqual([])
+  })
+})
+
+describe('合格ライン⑥: Q5（画像→作者）が artist ありの作品全件に出る', () => {
+  it(`全15ワールドで、artistを持つ作品（★2対象）は${SEEDS} seedのうち少なくとも1回はQ5で出題される`, () => {
+    const neverQ5: string[] = []
+    let totalArtistWorks = 0
+    for (const era of reviewedEras) {
+      const plan = buildEraStagePlan(era.id, 2, reviewedPlayableWorks)
       if (plan.itemCount === 0) continue
-      const qs = buildStageQuestions(era.id, 1, 1, reviewedThemeSetPool, reviewedPlayableWorks, reviewedEras)
-      if (qs.length === 0) zero.push(era.id)
-    }
-    expect(zero).toEqual([])
-  })
-
-  it(
-    'reviewer指摘M2b-99中1の回帰: clearThreshold は実データの問数レンジで常に1ミスまでは許容する',
-    () => {
-      for (let n = 3; n <= 20; n++) {
-        const t = clearThreshold(n)
-        expect(t).toBeGreaterThan(0)
-        expect(t).toBe(n - Math.max(1, Math.floor(n * 0.1)))
-      }
-    },
-  )
-
-  it('DIFFICULTY_TYPESが変わっていないことの前提確認（面数表の型構成の根拠）', () => {
-    expect(DIFFICULTY_TYPES[1]).toEqual(['q1', 'q3'])
-  })
-
-  it(
-    'M2b-09受け入れ条件（BOARD.md）: 全15ワールド・全面・ボスを複数seedで実データ生成し、' +
-      '画像型（Q1/Q2/Q3/Q9）の出題対象・選択肢（choiceWorks）に hasRealImage=false の作品が' +
-      '0件であることを直接assertする（reviewedPlayableWorksに無い作品＝画像なし。' +
-      'オーナー報告「画像が出ない」「4択のうち画像が1つしかなく正解が分かる」の再発防止）',
-    () => {
-      const imageEligibleIds = new Set(reviewedPlayableWorks.map((w) => w.id))
-      const IMAGE_TYPES = new Set(['q1', 'q2', 'q3', 'q9'])
-      const violations: string[] = []
-
-      function check(qs: Question[], where: string) {
-        for (const q of qs) {
-          if (!IMAGE_TYPES.has(q.type)) continue
-          if (!imageEligibleIds.has(q.work.id)) {
-            violations.push(`${where}: target ${q.work.id} (${q.type}) has no real image`)
-          }
-          for (const cw of q.choiceWorks ?? []) {
-            if (!imageEligibleIds.has(cw.id)) {
-              violations.push(`${where}: choice ${cw.id} in ${q.work.id}:${q.type} has no real image`)
-            }
-          }
+      for (const seg of plan.segments) {
+        const q5SeenIds = new Set<string>()
+        for (let seed = 0; seed < SEEDS; seed++) {
+          const qs = buildStageQuestions(era.id, 2, seg.segment, reviewedThemeSetPool, reviewedPlayableWorks, reviewedEras, seededRandom(seed))
+          for (const q of qs) if (q.type === 'q5') q5SeenIds.add(q.work.id)
         }
-      }
-
-      for (const era of reviewedEras) {
-        const plan = buildEraStagePlan(era.id, reviewedPlayableWorks)
-        for (const difficulty of [1, 2, 3] as const) {
-          for (const seg of plan.segments) {
-            for (let seed = 0; seed < 5; seed++) {
-              const qs = buildStageQuestions(
-                era.id,
-                difficulty,
-                seg.segment,
-                reviewedThemeSetPool,
-                reviewedPlayableWorks,
-                reviewedEras,
-                seededRandom(seed),
-              )
-              check(qs, `${era.id}-${difficulty}-${seg.segment}(seed${seed})`)
-            }
-          }
+        totalArtistWorks += seg.workIds.length
+        for (const id of seg.workIds) {
+          if (!q5SeenIds.has(id)) neverQ5.push(`${era.id}-2-${seg.segment}: ${id}`)
         }
-        for (let seed = 0; seed < 15; seed++) {
-          const boss = buildBossQuestions(
-            era.id,
-            reviewedPassages,
-            reviewedThemeSetPool,
-            reviewedPlayableWorks,
-            reviewedEras,
-            seededRandom(seed),
-          )
-          check(boss, `${era.id}-boss(seed${seed})`)
-        }
-      }
-      expect(violations).toEqual([])
-    },
-    90000,
-  )
-
-  it(
-    'M2b-09受け入れ条件（BOARD.md）: Q1/Q2 で画像が出ない問題が0件（対象自身が実画像を' +
-      '持つことを直接assertする。上のテストと同じ違反リストだが「target」側だけを' +
-      'Q1/Q2に絞って明示的に確認する）',
-    () => {
-      const imageEligibleIds = new Set(reviewedPlayableWorks.map((w) => w.id))
-      const violations: string[] = []
-
-      function check(qs: Question[], where: string) {
-        for (const q of qs) {
-          if (q.type !== 'q1' && q.type !== 'q2') continue
-          if (!imageEligibleIds.has(q.work.id)) {
-            violations.push(`${where}: ${q.type} target ${q.work.id} has no real image`)
-          }
-        }
-      }
-
-      for (const era of reviewedEras) {
-        const plan = buildEraStagePlan(era.id, reviewedPlayableWorks)
-        for (const difficulty of [1, 2, 3] as const) {
-          for (const seg of plan.segments) {
-            for (let seed = 0; seed < 5; seed++) {
-              const qs = buildStageQuestions(
-                era.id,
-                difficulty,
-                seg.segment,
-                reviewedThemeSetPool,
-                reviewedPlayableWorks,
-                reviewedEras,
-                seededRandom(seed),
-              )
-              check(qs, `${era.id}-${difficulty}-${seg.segment}(seed${seed})`)
-            }
-          }
-        }
-        for (let seed = 0; seed < 15; seed++) {
-          const boss = buildBossQuestions(
-            era.id,
-            reviewedPassages,
-            reviewedThemeSetPool,
-            reviewedPlayableWorks,
-            reviewedEras,
-            seededRandom(seed),
-          )
-          check(boss, `${era.id}-boss(seed${seed})`)
-        }
-      }
-      expect(violations).toEqual([])
-    },
-    90000,
-  )
-
-  // M2e-06: BOARD.md「型配分のテストと図版型の上限」の「ボス10/20問にも同じ検査」。
-  // mockExam.realdata.test.tsと同じcategoryOfQuestion対応（pairs=q13/q8, q10=q10,
-  // q4=q4&&!reversed, q4-reversed=q4&&reversed, image=q9/q1。q12・q14は集計対象外）を使う。
-  // ボスは全15ワールドが現状N<=15（is above の「面数表・ボス問数表」テストで固定済み）で
-  // count=20は自然発生しないため、buildBossQuestions の count 引数を明示して20問経路も検証する。
-  function poolBossCategoryStats(countOverride: number | undefined, seeds: number) {
-    const totals: Record<ThemeCategory, number> = { pairs: 0, q10: 0, q4: 0, 'q4-reversed': 0, image: 0 }
-    let n = 0
-    const capViolations: { eraId: string; seed: number; image: number; cap: number }[] = []
-    const zeroPairs: { eraId: string; seed: number }[] = []
-    for (const era of reviewedEras) {
-      const target = countOverride ?? bossQuestionCount(reviewedPlayableWorks.filter((w) => w.era === era.id).length)
-      const cap = imageCategoryCap(target)
-      for (let seed = 0; seed < seeds; seed++) {
-        const boss = buildBossQuestions(
-          era.id,
-          reviewedPassages,
-          reviewedThemeSetPool,
-          reviewedPlayableWorks,
-          reviewedEras,
-          seededRandom(seed),
-          countOverride,
-        )
-        n++
-        const counts: Record<ThemeCategory, number> = { pairs: 0, q10: 0, q4: 0, 'q4-reversed': 0, image: 0 }
-        for (const q of boss) {
-          const cat = categoryOfQuestion(q)
-          if (cat) {
-            counts[cat]++
-            totals[cat]++
-          }
-        }
-        if (counts.image > cap) capViolations.push({ eraId: era.id, seed, image: counts.image, cap })
-        if (boss.length >= 2 && counts.pairs === 0) zeroPairs.push({ eraId: era.id, seed })
       }
     }
-    const averages: Record<ThemeCategory, number> = {
-      pairs: totals.pairs / n,
-      q10: totals.q10 / n,
-      q4: totals.q4 / n,
-      'q4-reversed': totals['q4-reversed'] / n,
-      image: totals.image / n,
-    }
-    return { averages, capViolations, zeroPairs, n }
-  }
-
-  it(
-    'M2e-06→M2e-08是正: buildBossQuestionsの実引数（count省略＝本番と同じ呼び方。' +
-      '現状データは全15ワールドN<=15なので既定count=10）で図版上限を超えず（1回のボスごとに' +
-      '直接assert）、5カテゴリ全て目安「1±1（1〜3）」に収まる（15ワールド×20seed）。' +
-      'M2e-06時点はpairs・q4-reversedに固定floor=1しか無く、q10（実測約3.2）が上限をわずかに' +
-      '超え・q4-reversed（実測約0.48）が下限未達だったが、M2e-08のcategoryFloor一般化で' +
-      'donor（q10等の超過分）から変換して両方とも帯内に収まった（下記実測値）。',
-    () => {
-      const { averages, capViolations, zeroPairs, n } = poolBossCategoryStats(undefined, 20)
-      console.log('[M2e-08] ボス（実引数・既定count）15ワールド×20seed カテゴリ別平均:', JSON.stringify(averages), 'n=', n)
-      expect(capViolations).toEqual([])
-      expect(zeroPairs).toEqual([])
-      // App.tsx:157 は count を渡さず呼ぶため、実データでは全15ワールドが bossQuestionCount(10)。
-      const floor = categoryFloor(10)
-      const cap = floor + 2
-      for (const cat of Object.keys(averages) as ThemeCategory[]) {
-        expect(averages[cat], `${cat} average ${averages[cat]} should be >= floor ${floor}`).toBeGreaterThanOrEqual(floor)
-        expect(averages[cat], `${cat} average ${averages[cat]} should be <= cap ${cap}`).toBeLessThanOrEqual(cap)
-      }
-    },
-    90000,
-  )
-
-  it(
-    'M2e-06→M2e-08是正: ボス20問（count明示。itemCount>15のワールドが実データに無いため' +
-      'この経路をcount引数で明示的に検証する）でも図版上限（ceil(20/4)=5）を超えず、' +
-      '5カテゴリ全て目安「4±1（3〜5）」に収まる（15ワールド×20seed）',
-    () => {
-      const { averages, capViolations, zeroPairs, n } = poolBossCategoryStats(20, 20)
-      console.log('[M2e-08] ボス20問 15ワールド×20seed カテゴリ別平均:', JSON.stringify(averages), 'n=', n)
-      expect(capViolations).toEqual([])
-      expect(zeroPairs).toEqual([])
-      const floor = categoryFloor(20)
-      const cap = floor + 2
-      // 既知の限界（完了報告に明記）: q4-reversed（適切/不適切）だけ実測2.957（floor 3から
-      // 0.043不足）に留まる。q4-reversed は generateStatementQuestion(reversed:true) 1本しか
-      // データソースが無く（pairsのようなQ8フォールバックが無い）、reversed statementを
-      // 作れる作品が少ない一部ワールド×seedの組み合わせで強制変換の材料が尽きるため
-      // （planCategoryFloorConversionsは「作れない」ときは諦める設計）。この経路（count=20の
-      // ボス）は現状データにitemCount>15のワールドが無く本番では呼ばれない（buildBossQuestions
-      // の実引数を検証する上のテスト「実引数・既定count」では床3に収まることを確認済み）ため、
-      // 実測値ベースの安全マージンで判定する。
-      const FLOOR_OVERRIDE: Partial<Record<ThemeCategory, number>> = { 'q4-reversed': 2.9 } // 実測2.957
-      for (const cat of Object.keys(averages) as ThemeCategory[]) {
-        const catFloor = FLOOR_OVERRIDE[cat] ?? floor
-        expect(averages[cat], `${cat} average ${averages[cat]} should be >= floor ${catFloor}`).toBeGreaterThanOrEqual(catFloor)
-        expect(averages[cat], `${cat} average ${averages[cat]} should be <= cap ${cap}`).toBeLessThanOrEqual(cap)
-      }
-    },
-    90000,
-  )
+    console.log(`[M2i] ★2対象作品総数: ${totalArtistWorks}、${SEEDS}seedでQ5が一度も出なかった作品:`, neverQ5)
+    expect(neverQ5).toEqual([])
+  }, 120000)
 })

@@ -39,6 +39,8 @@ export function underlineStem(type: QuestionType, underlineKey: string, opts: St
       return opts.reversed
         ? `${key}に関する記述として最も適切でないものを、次のうちから選べ。`
         : `${key}に関する記述として最も適切なものを、次のうちから選べ。`
+    case 'q5': // M2i ★2（画像→作者）
+      return `${key}に該当する作品の作者として最も適切なものを、次のうちから選べ。`
     case 'q6': // P1 系
       return `${key}と同じ時代の文化に属する事項として最も適切なものを、次のうちから選べ。`
     case 'q8': // P3 系（組合せ）
@@ -77,6 +79,8 @@ export function standaloneStem(type: QuestionType, opts: StemOptions = {}): stri
       return opts.reversed
         ? 'この作品に関する記述として最も適切でないものを、次のうちから選べ。'
         : 'この作品に関する記述として最も適切なものを、次のうちから選べ。'
+    case 'q5':
+      return 'この作品の作者として最も適切なものを、次のうちから選べ。'
     case 'q6':
       return 'この作品と同じ時代の文化に属する事項として最も適切なものを、次のうちから選べ。'
     case 'q8':

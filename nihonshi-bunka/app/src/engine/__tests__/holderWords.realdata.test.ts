@@ -12,7 +12,7 @@
 // 所蔵語の出現を許可し、それ以外（conditionText・各種選択肢・他の下線の stem）は
 // 一切許容しない。
 import { describe, expect, it } from 'vitest'
-import { buildBossQuestions, buildEraStagePlan, buildStageQuestions } from '../stages'
+import { ALL_DIFFICULTIES, buildBossQuestions, buildEraStagePlan, buildStageQuestions } from '../stages'
 import { buildMockExam } from '../mockExam'
 import { createInitialProgress } from '../progress'
 import { reviewedEras, reviewedPassages, reviewedPlayableWorks, reviewedThemeSetPool } from './reviewedFixtures'
@@ -54,6 +54,7 @@ function collectDisplayTexts(q: Question): TextSample[] {
     out.push({ field: 'statementPair.sentenceB', text: q.statementPair.sentenceB.text })
   }
   for (const s of q.choiceWordPairs ?? []) out.push({ field: 'choiceWordPairs', text: s.text })
+  for (const s of q.choiceArtists ?? []) out.push({ field: 'choiceArtists', text: s })
   return out
 }
 
@@ -72,12 +73,12 @@ function checkQuestion(q: Question, where: string): string[] {
 
 describe('M2b-14: 生成された設問文・選択肢に所蔵語（博物館・美術館等）が0件', () => {
   it(
-    '全15ワールド×★1〜3×全面×10 seed で、面クリアのQ1〜Q10の生成結果に所蔵語が無い',
+    '全15ワールド×★1〜5×全面×10 seed で、面クリアのQ1〜Q13の生成結果に所蔵語が無い',
     () => {
       const violations: string[] = []
       for (const era of reviewedEras) {
-        const plan = buildEraStagePlan(era.id, reviewedPlayableWorks)
-        for (const difficulty of [1, 2, 3] as const) {
+        for (const difficulty of ALL_DIFFICULTIES) {
+          const plan = buildEraStagePlan(era.id, difficulty, reviewedPlayableWorks)
           for (const seg of plan.segments) {
             for (let seed = 0; seed < 10; seed++) {
               const qs = buildStageQuestions(

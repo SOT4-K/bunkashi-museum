@@ -11,6 +11,7 @@ import { AnswerSheet } from './AnswerSheet'
 import { LeadPanel } from './LeadPanel'
 import { todayIso } from '../engine/srs'
 import { formatCountdown, MOCK_EXAM_POINTS_PER_QUESTION, type MockExamItem } from '../engine/mockExam'
+import { isCulturalHiddenAsk } from '../engine/themeSet'
 import type { MissSelection } from '../engine/explain'
 import type { AnswerKind, Era, Question, Work } from '../types'
 
@@ -79,7 +80,11 @@ export function TimeAttackScreen({
   }, [])
 
   const current = items[index]
-  const eraName = current ? (eras.find((e) => e.id === current.eraId)?.name ?? current.eraId) : ''
+  // M2i-02③（fact-check-m2e-tiers.md [中]-1 是正）: 文化伏せ型（q12「この文化は…」）の設問中は
+  // ヘッダーの文化名を伏せる（表示したままだと文化当てがヘッダーだけで解けてしまう）。
+  const currentAsk = current?.passage?.underlines.find((u) => u.key === current.underlineKey)?.ask
+  const hideEraName = isCulturalHiddenAsk(currentAsk)
+  const eraName = current ? (hideEraName ? '？？？' : (eras.find((e) => e.id === current.eraId)?.name ?? current.eraId)) : ''
 
   function handleResult(answer: AnswerKind, selection: MissSelection) {
     if (!current) return

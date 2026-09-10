@@ -17,6 +17,9 @@ import { DEFAULT_WORLD_THEME } from '../../engine/worldTheme'
 import type { ProgressState, Work, WorldTheme } from '../../types'
 
 // asuka は testEras の先頭（order 1）＝常に解禁済み。2件で1面のみ（STAGE_CHUNK_SIZE=10未満）。
+// makeWork の既定値（artist/findSite/technique/style/pairs 無し）のため、engine/stages.ts の
+// hasStar 判定で★1（全件対象）・★4（周辺知識、全件対象）だけが面を持つ（★2/3/5は0件で飛ばされる。
+// M2i ★の定義v4）。このファイルのノードID・面キーは「1-1」「4-1」+ボスの3つを前提にする。
 const works: Work[] = [
   makeWork({ id: 'wm1', era: 'asuka', category: 'sculpture' }),
   makeWork({ id: 'wm2', era: 'asuka', category: 'sculpture' }),
@@ -66,7 +69,7 @@ describe('WorldMapScreen', () => {
     expect(s1).not.toBeDisabled()
     expect(s1.dataset.state).toBe('unlocked')
 
-    const s2 = screen.getByTestId('stage-tile-asuka-2-1')
+    const s2 = screen.getByTestId('stage-tile-asuka-4-1')
     expect(s2).toBeDisabled()
     expect(s2.dataset.state).toBe('locked')
 
@@ -75,7 +78,7 @@ describe('WorldMapScreen', () => {
     expect(boss.dataset.state).toBe('locked')
   })
 
-  it('途中: ★1-1のみクリア済みなら、1-1はcleared、2-1はunlocked、ボスはlocked', () => {
+  it('途中: ★1-1のみクリア済みなら、1-1はcleared、4-1はunlocked、ボスはlocked', () => {
     const progress: ProgressState = {
       ...createInitialProgress('2026-09-09'),
       stages: {
@@ -97,8 +100,8 @@ describe('WorldMapScreen', () => {
       />,
     )
     expect(screen.getByTestId('stage-tile-asuka-1-1').dataset.state).toBe('cleared')
-    expect(screen.getByTestId('stage-tile-asuka-2-1').dataset.state).toBe('unlocked')
-    expect(screen.getByTestId('stage-tile-asuka-2-1')).not.toBeDisabled()
+    expect(screen.getByTestId('stage-tile-asuka-4-1').dataset.state).toBe('unlocked')
+    expect(screen.getByTestId('stage-tile-asuka-4-1')).not.toBeDisabled()
     expect(screen.getByTestId('stage-tile-asuka-boss').dataset.state).toBe('locked')
   })
 
@@ -109,8 +112,7 @@ describe('WorldMapScreen', () => {
         asuka: {
           segments: {
             '1-1': { cleared: true, bestScore: 2, clearedAt: '2026-09-09' },
-            '2-1': { cleared: true, bestScore: 2, clearedAt: '2026-09-09' },
-            '3-1': { cleared: true, bestScore: 2, clearedAt: '2026-09-09' },
+            '4-1': { cleared: true, bestScore: 2, clearedAt: '2026-09-09' },
           },
           boss: { cleared: true, bestScore: 2, clearedAt: '2026-09-09' },
         },
@@ -127,7 +129,7 @@ describe('WorldMapScreen', () => {
         onBack={() => {}}
       />,
     )
-    for (const id of ['stage-tile-asuka-1-1', 'stage-tile-asuka-2-1', 'stage-tile-asuka-3-1', 'stage-tile-asuka-boss']) {
+    for (const id of ['stage-tile-asuka-1-1', 'stage-tile-asuka-4-1', 'stage-tile-asuka-boss']) {
       expect(screen.getByTestId(id).dataset.state).toBe('cleared')
       expect(screen.getByTestId(id)).not.toBeDisabled()
     }
@@ -311,8 +313,7 @@ describe('WorldMapScreen', () => {
           asuka: {
             segments: {
               '1-1': { cleared: true, bestScore: 2, clearedAt: '2026-09-09' },
-              '2-1': { cleared: true, bestScore: 2, clearedAt: '2026-09-09' },
-              '3-1': { cleared: true, bestScore: 2, clearedAt: '2026-09-09' },
+              '4-1': { cleared: true, bestScore: 2, clearedAt: '2026-09-09' },
             },
             boss: { cleared: false, bestScore: 0, clearedAt: null },
           },
@@ -343,8 +344,7 @@ describe('WorldMapScreen', () => {
           asuka: {
             segments: {
               '1-1': { cleared: true, bestScore: 2, clearedAt: '2026-09-09' },
-              '2-1': { cleared: true, bestScore: 2, clearedAt: '2026-09-09' },
-              '3-1': { cleared: true, bestScore: 2, clearedAt: '2026-09-09' },
+              '4-1': { cleared: true, bestScore: 2, clearedAt: '2026-09-09' },
             },
             boss: { cleared: true, bestScore: 2, clearedAt: '2026-09-09' },
           },

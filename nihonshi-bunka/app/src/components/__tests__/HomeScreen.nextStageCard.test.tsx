@@ -42,12 +42,14 @@ describe('HomeScreen: 次にクリアする面カード（M2b-05）', () => {
     const cleared = { cleared: true, bestScore: 1, clearedAt: '2026-09-08' }
     const stages: ProgressState['stages'] = {}
     for (const era of testEras) {
-      // works=[w1]（asukaのみ1件）のため、asuka以外は面が0件でボスだけがシーケンスに乗る。
-      // asuka自身は1件→3段とも面1（segmentKey "1-1"/"2-1"/"3-1"）が生成されるため、
+      // works=[w1]（asukaのみ1件、artist/findSite/technique等を持たない makeWork の既定値）のため、
+      // asuka以外は面が0件でボスだけがシーケンスに乗る。asuka自身は★1（全件対象）・★4（周辺知識、
+      // 全件対象）だけが対象になり（★2/3/5はartist/findSite/technique等が無く0件のため飛ばされる。
+      // engine/stages.ts の hasStar 参照）、面1（segmentKey "1-1"/"4-1"）が生成されるため、
       // それらも合わせてクリア済みにしないと nextStageRef が null にならない。
       stages[era.id] =
         era.id === 'asuka'
-          ? { segments: { '1-1': cleared, '2-1': cleared, '3-1': cleared }, boss: cleared }
+          ? { segments: { '1-1': cleared, '4-1': cleared }, boss: cleared }
           : { ...emptyEraStageProgress(), boss: cleared }
     }
     const progress: ProgressState = { ...createInitialProgress('2026-09-08'), stages }

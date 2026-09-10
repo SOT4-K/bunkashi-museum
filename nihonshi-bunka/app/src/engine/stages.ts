@@ -1,65 +1,57 @@
-// ステージ制 v2（マリオ型。オーナー実機フィードバック 2026-09-08、BOARD.md M2b-04）。
-// M2b-01 の固定 s1/s2/s3/boss・ワープありを、直列解禁・可変面数に作り直す。
+// ステージ制 v4（★の定義 v4。オーナー指示 2026-09-10 夜、BOARD.md M2i、decisions.md
+// 「2026-09-10（夜） ★の定義 v4」）。v3（M2e。★1〜3・下線起点のリード文つき）を置き換える。
 //
 // チケット文面の規則（実装漏れ防止のためそのまま転記。builder メモ
 // 「依頼文の規則はdocstringに番号で転記してから完了報告する」）:
-//  1. 解禁を完全に直列にする：W-1→W-2→…→W-ボス→次ワールドの1面。ワープは削除。
-//     ボスはそのワールドの全ステージをクリアするまで挑めない。
-//  2. 表記：ステージIDは「era+難易度+分割番号」の形で持つ（例: genshi-1-1, genshi-2-1,
-//     genshi-3-2）。UI表記（ワールド番号-面番号＋★の数）はM2b-05担当。engineはワールド
-//     番号・面番号・難易度・ボスかどうかを判別できるデータ構造を返せばよい。
-//  3. ステージ生成規則：ワールドの対象項目（出題可能な画像あり作品）を年代順（orderIndex）に
-//     並べ、10件ずつに固定分割する。★1の面数=ceil(N/10)、★2・★3も同じ分割で同じ面数
-//     （3段とも同じ分割・同じ面数）。1-1は常に同じ10作品（再挑戦しても対象は固定、
-//     問題文・型・選択肢だけ変わる）。各面10問（1作品1問）が基本、クリア=9問以上正解相当
-//     （clearThreshold）。端数の面（10件未満で余る最終面）: 件数が5件以上ならその件数×2問
-//     （型を変えて2回）で10問に近づける。5件未満なら前の面に併合する。N<5のワールド全体は
-//     暫定規則: 2N問・クリア閾値は1ミス許容（M2c-04の画像追加で解消する前提。実装上は
-//     「端数×2問」と同じ式に帰着する＝下記 partitionIntoSegments 参照）。
-//  4. ボス: N（そのワールドの対象項目数）≤15なら10問固定、N>15なら20問固定。本番モード
-//     生成器をそのワールドの文化に限定して使い、reviewedテーマセットのリード文＋下線問題を
-//     核に残りを補う。クリア閾値90%（ceil(0.9×N)、N<10でも最低1ミス許容。clearThreshold）。
-//  5. 誤答露出規則: ボスの誤答選択肢を優先してそのワールドの項目から選ぶ。10〜20問の選択肢を
-//     合わせるとワールドの全項目が最低1回は画面（正解or誤答）に出るようにする。厳密な保証が
-//     難しい場合は「優先的に選ぶ」実装＋実測でよい（bossExposureRate でテストする）。
-//  6. 体力ゲージ用の進捗値: ボス戦で「あと何問で決着か」をUIが出せるよう、現在の正解数・
-//     不正解数・残り問数を返す構造にする（bossProgress）。
-//  7. 進捗スキーマの移行: 面IDが変わるため旧M2bの進捗とは互換性がない。v2公開時に全リセット
-//     する（progress.ts の STORAGE_VERSION・migrate 参照）。
-//  8. 新しい面ID体系での「次に挑戦する面」を返す関数を用意する（nextStageRef。ホーム画面用）。
 //
-// 難易度は「設問の型」で定義する（コンテンツは触らない。M2b-01から変更なし）:
-//  ★1 見分ける＝Q1 画像→作品名・Q3 作品名→画像
-//  ★2 結びつける＝Q2 画像→文化・Q4 関連記述の正誤・Q6 同時代の事項・Q9 条件に合う画像・Q12 文化名当て
-//  ★3 組み合わせて判断＝Q8 組合せ文・Q10 2文正誤・Q13 語句の組合せ・Q14 年代順
+// ★の定義 v4（確定）:
+//  ★1 名前（Q1 画像→作品名・Q3 作品名→画像）: 全件対象
+//  ★2 作者（Q5 画像→作者・Q9 作者→画像）: artist を持つ作品のみ
+//  ★3 出土地・所在地（Q9 の findSite/location スロット）: findSite または
+//    （holderKind==='site' かつ location）を持つ作品のみ（博物館は出さない＝M2b-14 の決定どおり。
+//    「findSite または location を持つ作品のみ」という文言と「博物館は出さない」という決定が
+//    両立するよう、location 側は site 限定にした＝下記 hasStar 参照。低確信点として完了報告に明記）
+//  ★4 周辺知識（Q4 関連記述の正誤・Q6 同時代の事項・Q9 の subject/patron/religion スロット・
+//    Q8 組合せ文）
+//  ★5 技法・様式（Q9 の technique/style スロット・Q13 語句の組合せ・Q10 2文正誤）
+//  ボス（本番形式、3リード文。すべてリード文なし＝ボス以外にリード文の問題は無い）
+//  ★を持つ作品が0件の★はその文化では「なし」として飛ばす。ワールド固定なので文化名を当てる型
+//  （Q2・Q12・Q9のeraスロット）はステージで使わない
 //
-// 注記（低確信点。完了報告にも明記）: Q12（画像なし文字4択）は writer が passage の下線に
-// 手書きした answerText/distractorTexts が無いと生成できない。ステージは特定の passage に
-// 紐づかず「その文化の出題可能作品」から直接生成するため、Q12 は型リストに残すが実際には
-// 常に生成0件になる（M2b-01から変更なし）。
+// ステージ生成規則 v4:
+//  ワールドの出題可能作品を年代順に並べ、★ごとに「その★を持つ作品」を10件ずつに固定分割
+//  （★1は全件、★2はartistあり、★3はfindSite/location…）。1面＝その作品群×その★の型で
+//  1作品1問（10件未満なら問数はその件数）。合格＝10問なら8問以上、10問未満なら1ミス以内。
+//  ★を持つ作品が0件の★は「なし」として飛ばす。面番号は★1の面→★2の面→…→ボスの順に通し
+//  （1-1, 1-2, …, 1-ボス）。同じ作品×同じ型は1面1回、同型の連続を抑える（avoidType）、
+//  再挑戦は選択肢と型を変える。
+//
+// ボス規則 v4:
+//  その文化の出題可能作品をざっくり3群（年代順で3等分）に分け、群ごとに1本のリード文
+//  （既存3〜4本を割り当て直す。足りなければwriterが書く）。問題はwriter手書きのask.stemがある
+//  下線だけから作り、engineの汎用文（「下線部○に関わる／該当する作品を…」）は使わない
+//  （型が合わず作れない下線は飛ばす）。下線はヒントになりすぎない。問数はN≤15で10、N>15で20、
+//  クリアは8割（ステージと揃える）。文化伏せ型は模試専用にし、ボスでは使わない。
+//
+// 進捗データの引き継ぎ: ステージ分割が変わるため、stages（面クリア状況）のみリセットする
+// （progress.ts の STORAGE_VERSION・migrate 参照）。図鑑（discoveredWorks）・SRS（items の箱・
+// 間隔）・XP・missLog・模試履歴は保持する。
 import { buildQuestion, canGenerateType } from './session'
 import { buildChoices, shuffle, type RandomFn } from './distractors'
 import { generateStatementPairQuestion } from './statementPair'
 import { generatePairQuestion } from './pairs'
-import { generateOrderQuestion } from './order'
-import {
-  buildThemeQuestionForWork,
-  buildThemeSetQuestions,
-  categoryOfQuestion,
-  COMPOSITION_SEQUENCE,
-  type FloorConversionCandidate,
-  forceCategoryQuestion,
-  imageCategoryCap,
-  isCulturalHiddenAsk,
-  pickThemeTargetId,
-  planCategoryFloorConversions,
-} from './themeSet'
-import { underlineStem, standaloneStem } from './stems'
+import { generateStatementQuestion } from './statements'
+import { generateQ12Question } from './q12'
+import { containsMuseumWord, generateQ9Question, generateQ9QuestionFromIds } from './q9'
+import { generateQ5Question } from './q5'
+import { isCulturalHiddenAsk, pickThemeTargetId } from './themeSet'
+import { standaloneStem } from './stems'
 import type {
   Era,
   EraStageProgress,
   Passage,
   PassageUnderline,
+  Q9Slot,
   Question,
   QuestionType,
   StageState,
@@ -73,59 +65,56 @@ const defaultRandom: RandomFn = () => Math.random()
  *  （毎回同じ問題になってしまう）。 */
 export const PROBE_RANDOM: RandomFn = () => 0
 
-export type Difficulty = 1 | 2 | 3
+export type Difficulty = 1 | 2 | 3 | 4 | 5
+
+export const ALL_DIFFICULTIES: Difficulty[] = [1, 2, 3, 4, 5]
 
 export const DIFFICULTY_TYPES: Record<Difficulty, QuestionType[]> = {
   1: ['q1', 'q3'],
-  2: ['q2', 'q4', 'q6', 'q9', 'q12'],
-  3: ['q8', 'q10', 'q13', 'q14'],
+  2: ['q5', 'q9'],
+  3: ['q9'],
+  4: ['q4', 'q6', 'q9', 'q8'],
+  5: ['q9', 'q13', 'q10'],
 }
 
-/** buildBossQuestions の最終補充パス用（M2b-99c中1）。q12（passage下線頼みで常に0件。
- *  上部の注記参照）・q14（3作品またがりで単一作品ループでは扱えない。buildOrderQuestions
- *  専用）を除いた「1作品から直接1問作れる型」の全体集合。tryBuildStageQuestionForWork
- *  （session.buildQuestion 経由）で生成できる型はこの範囲。 */
-const ALL_PER_WORK_TYPES: QuestionType[] = [...DIFFICULTY_TYPES[1], ...DIFFICULTY_TYPES[2], ...DIFFICULTY_TYPES[3]].filter(
-  (t) => t !== 'q12' && t !== 'q14',
-)
-
-/**
- * M2b-09（バグ修正）: 画像そのものを見せる／選択肢に画像を並べる型。engine/practiceSession.ts・
- * engine/missLog.ts と同じ定数（意図的に同じ名前・同じ範囲で重複定義。他エンジンファイルも
- * 各々ローカルに持つ既存の書き方に揃える）。
- *  - q1: 対象の画像がヒーロー画像として出る（プレースホルダ SVG は作品名を描くため、
- *    画像を持たない作品を対象にすると答えが直接見えてしまう）
- *  - q2: 対象の画像がヒーロー画像として出る（選択肢自体はテキスト＝文化名だが対象は画像必須）
- *  - q3・q9: 対象自身に加え、選択肢（choiceWorks）も画像として描画される
- * （QuestionCard.tsx の showHeroImage・`type==='q3'||type==='q9'` 分岐参照）。
- * この型を生成・出題する対象／誤答候補は必ず imagePool（画像あり作品のみ）から選ぶ。
- */
-const IMAGE_DEPENDENT_TYPES: QuestionType[] = ['q1', 'q2', 'q3', 'q9']
+/** ★2〜5でQ9を使うときに固定するスロット（★1はQ9を使わないため無し）。eraスロットは
+ *  ワールド固定のステージでは絶対に使わない（ヘッダーの文化名だけで解けてしまうため）。 */
+const DIFFICULTY_Q9_SLOTS: Partial<Record<Difficulty, Q9Slot[]>> = {
+  2: ['artist'],
+  3: ['findSite', 'location'],
+  4: ['subject', 'patron', 'religion'],
+  5: ['technique', 'style'],
+}
 
 export const DIFFICULTY_LABELS: Record<Difficulty, string> = {
-  1: '★1 見分ける',
-  2: '★2 結びつける',
-  3: '★3 組み合わせて判断',
+  1: '★1 名前',
+  2: '★2 作者',
+  3: '★3 出土地・所在地',
+  4: '★4 周辺知識',
+  5: '★5 技法・様式',
 }
 
-/** 10件ずつに固定分割する（チケット規則3）。 */
+/**
+ * 画像そのものを見せる／選択肢に画像を並べる型。engine/practiceSession.ts・engine/missLog.ts と
+ * 同じ定数（意図的に同じ名前・同じ範囲で重複定義。他エンジンファイルも各々ローカルに持つ既存の
+ * 書き方に揃える）。q5（M2i、画像→作者）は対象自身のヒーロー画像を見せるため画像必須。
+ */
+const IMAGE_DEPENDENT_TYPES: QuestionType[] = ['q1', 'q2', 'q3', 'q5', 'q9']
+
+/** 10件ずつに固定分割する（チケット規則）。 */
 export const STAGE_CHUNK_SIZE = 10
 
 /**
- * クリア閾値。M2b-01 reviewer指摘M2b-99中1の修正を引き継ぐ: 元の式 ceil(0.9×N) は N≤9 で
- * 常に N（＝全問正解）になり、decisions.md 2026-09-07「全問正解ではなく90%にした理由:
- * 1ミスでやり直しが続くと解説を読む前に離脱する懸念→オーナーが90%を選択」という決定の
- * 意図（1ミスは許容する）を N=10 以外では満たしていなかった。許容ミス数を
- * max(1, floor(N×0.1)) にし、N=10は従来どおり ceil(9)=9（1ミス許容）を維持しつつ、
- * N<10でも常に最低1ミスは許容する。N≤2（そもそも1ミスが意味をなさない極小値）は
- * 全問正解のままにする。M2b v2 の「N<5暫定規則: 1ミス許容」もこの式で満たされる
- * （例: N=2→2N=4問→clearThreshold(4)=3=「3問以上正解」。チケット文面の例と一致）。
+ * クリア閾値（★の定義v4、BOARD.md M2i-01④・ボス規則v4「クリアは8割（ステージと揃える）」）:
+ *  10問（フル分割の面）は8問以上。10問未満の面は1ミス以内（n-1問以上）。ボス（N>15で20問）も
+ *  同じ80%基準に揃えるため、10問以上は floor(n*0.8) で統一する（n=10→8、n=20→16）。
+ *  n<=2（1ミス許容が意味をなさない極小値）は全問正解のままにする。
  */
 export function clearThreshold(questionCount: number): number {
   const n = questionCount
   if (n <= 2) return n
-  const allowedMisses = Math.max(1, Math.floor(n * 0.1))
-  return Math.max(1, n - allowedMisses)
+  if (n < 10) return n - 1
+  return Math.floor(n * 0.8)
 }
 
 export function emptyStageState(): StageState {
@@ -141,9 +130,8 @@ export function getEraStageProgress(stages: Record<string, EraStageProgress>, er
   return stages[eraId] ?? emptyEraStageProgress()
 }
 
-/** チケット規則2「面IDはera+難易度+分割番号」。era側は呼び出し元（progress.ts の stages の
- *  キー）が既に eraId で分けているため、ここでは difficulty-segment の部分だけを作る
- *  （例 "1-1" "2-3"）。 */
+/** 面IDは「era+難易度+分割番号」。era側は呼び出し元（progress.ts の stages のキー）が既に
+ *  eraId で分けているため、ここでは difficulty-segment の部分だけを作る（例 "1-1" "2-3"）。 */
 export function segmentKey(difficulty: Difficulty, segment: number): string {
   return `${difficulty}-${segment}`
 }
@@ -157,40 +145,40 @@ export function worldOrder(eras: Era[]): string[] {
   return [...eras].sort((a, b) => a.order - b.order).map((e) => e.id)
 }
 
-// --- ステージ生成規則（チケット規則3） ---
+// --- ★の判定（v4: ★ごとに対象作品を固定する） ---
 
-export interface StageSegmentPlan {
-  /** 1始まりの面番号（同じ難易度内でのみ意味を持つ）。 */
-  segment: number
-  /** この面の対象作品 id（年代順固定。1-1なら常に同じ10件、再挑戦しても変わらない）。 */
-  workIds: string[]
-  /**
-   * workIds の先頭から何件を「2問（型を変えて2回）」にするか（0件なら全作品1問）。
-   * M2b-99c中5是正: 以前は remainder>=5 のとき無条件で全件2問にしており、N=9で18問など
-   * 「10問に近づける」の意図と逆に10から遠ざかっていた。修正後は
-   * remainder+extraDoubleCount=10（＝questionCountForSegmentが常に10）になるよう
-   * extraDoubleCount=10-remainderの作品だけを2問にする（実行セッションの解釈確定。
-   * BOARD.md M2b-99c 中5参照）。ただし era全体がそもそも10件未満（N<5暫定規則、
-   * fullChunks===0 && remainder<5）は decisions.md 2026-09-08 の「2N問」を維持するため
-   * extraDoubleCount=workIds.length（全件2問）のまま変えない。
-   */
-  extraDoubleCount: number
-}
-
-export interface EraStagePlan {
-  eraId: string
-  /** 対象作品総数（imagePool のうちその era のもの）。ボス長・N<5判定の元になる値。 */
-  itemCount: number
-  /** ★1〜★3で共通の面リスト（チケット規則3「3段とも同じ分割・同じ面数」）。難易度による
-   *  違いは面の中身（対象作品）ではなく、その面で使う設問の型（DIFFICULTY_TYPES）だけ。 */
-  segments: StageSegmentPlan[]
-  bossSize: number
-}
-
-/** N≤15なら10問、N>15なら20問（チケット規則4）。N=0（対象項目が無い）はボスを作れないため0。 */
-export function bossQuestionCount(itemCount: number): number {
-  if (itemCount <= 0) return 0
-  return itemCount <= 15 ? 10 : 20
+/**
+ * work が difficulty の★を持つか（BOARD.md M2i ★の定義v4）。
+ *  ★1: 全件対象。
+ *  ★2: artist を持つ作品のみ。
+ *  ★3: findSite を持つ、または（holderKind==='site' かつ location を持つ）作品のみ。
+ *    低確信点（完了報告に明記）: チケット文言は「findSite または location を持つ作品のみ」だが、
+ *    BOARD.md M2i の本文は「博物館は出さない＝M2b-14の決定どおり」を明記している。location は
+ *    holderKind==='museum' の作品でも収蔵館名が入っている（実データで26/74件）ため、素通しすると
+ *    「東京国立博物館にあるもの」のような設問が生成されてしまう（M2b-14が禁止した形）。
+ *    ここでは M2b-14 の決定を優先し、location 側は holderKind==='site' に限定した
+ *    （findSite はもともと出土地そのものなので holderKind を問わない）。
+ *  ★4: 全件対象（Q4/Q6/Q9のsubject等/Q8のどれかが生成できることが多いため、★1と同様に
+ *    「なし」を作らない簡易判定にした。実際に1問も作れない作品は tryBuildStageQuestionForWork が
+ *    その作品をスキップするだけで面自体は壊れない）。
+ *  ★5: technique または style または pairs（1件以上）を持つ作品のみ。
+ */
+function hasStar(work: Work, difficulty: Difficulty): boolean {
+  switch (difficulty) {
+    case 1:
+      return true
+    case 2:
+      return Boolean(work.artist)
+    case 3:
+      return (
+        Boolean(work.findSite) ||
+        (work.holderKind === 'site' && Boolean(work.location) && !containsMuseumWord(work.location as string))
+      )
+    case 4:
+      return true
+    case 5:
+      return Boolean(work.technique) || Boolean(work.style) || (work.pairs?.length ?? 0) > 0
+  }
 }
 
 function sortByOrderIndex(works: Work[]): Work[] {
@@ -204,16 +192,48 @@ function sortByOrderIndex(works: Work[]): Work[] {
   })
 }
 
+/** その era の対象作品総数（★を問わない。ボス長の判定に使う）。 */
+export function eraTotalItemCount(eraId: string, imagePool: Work[]): number {
+  return imagePool.filter((w) => w.era === eraId).length
+}
+
+/** N≤15なら10問、N>15なら20問。N=0（対象項目が無い）はボスを作れないため0。 */
+export function bossQuestionCount(itemCount: number): number {
+  if (itemCount <= 0) return 0
+  return itemCount <= 15 ? 10 : 20
+}
+
+// --- ステージ生成規則（10件ずつの固定分割＋端数規則） ---
+
+export interface StageSegmentPlan {
+  /** 1始まりの面番号（同じ難易度内でのみ意味を持つ）。 */
+  segment: number
+  /** この面の対象作品 id（年代順固定。1-1なら常に同じ10件、再挑戦しても対象は変わらない）。 */
+  workIds: string[]
+  /**
+   * workIds の先頭から何件を「2問（型を変えて2回）」にするか（0件なら全作品1問）。
+   * remainder+extraDoubleCount=10（＝questionCountForSegmentが常に10）になるよう
+   * extraDoubleCount=10-remainderの作品だけを2問にする。ただしそもそも10件未満
+   * （fullChunks===0 && remainder<5）は全件2問のまま（2N問）にする。
+   */
+  extraDoubleCount: number
+}
+
+export interface EraStagePlan {
+  eraId: string
+  difficulty: Difficulty
+  /** その★を持つ対象作品総数（imagePool のうちその era・その★のもの）。 */
+  itemCount: number
+  segments: StageSegmentPlan[]
+}
+
 /**
- * 10件ずつの固定分割＋端数規則（チケット規則3、端数の問数配分はM2b-99c中5是正）。
+ * 10件ずつの固定分割＋端数規則。
  *  - 余りが無い（N が10の倍数）: フルチャンクのみ（extraDoubleCount=0）。
- *  - 余り(remainder) < 5 かつ既にフルチャンクがある: 前の面に併合（1面にする。
- *    併合後の面は10+remainder件で10問以上あるため2問化はしない＝extraDoubleCount=0）。
- *  - 余り(remainder) < 5 かつ フルチャンクが無い（era全体がN<5）: decisions.md
- *    2026-09-08の「N<5暫定規則: 2N問」を維持し、全件2問（extraDoubleCount=remainder）。
- *  - 余り(remainder) >= 5（フルチャンクの有無を問わない）: 目標10問に近づける
- *    （M2b-99c中5）。extraDoubleCount = 10-remainder 件だけを2問にし、
- *    合計が remainder + (10-remainder) = 10 になるようにする。
+ *  - 余り(remainder) < 5 かつ既にフルチャンクがある: 前の面に併合する。
+ *  - 余り(remainder) < 5 かつ フルチャンクが無い（N<5）: 全件2問（extraDoubleCount=remainder）。
+ *  - 余り(remainder) >= 5（フルチャンクの有無を問わない）: 10問に近づける。
+ *    extraDoubleCount = 10-remainder 件だけを2問にし、合計が remainder + (10-remainder) = 10 になる。
  */
 function partitionIntoSegments(sortedWorks: Work[]): StageSegmentPlan[] {
   const n = sortedWorks.length
@@ -245,27 +265,35 @@ function partitionIntoSegments(sortedWorks: Work[]): StageSegmentPlan[] {
   return segments
 }
 
-/** 面の目標問題数（先頭 extraDoubleCount 件は2問、残りは1問。チケット規則3・M2b-99c中5）。 */
+/** 面の目標問題数（先頭 extraDoubleCount 件は2問、残りは1問）。 */
 export function questionCountForSegment(seg: StageSegmentPlan): number {
   return seg.workIds.length + seg.extraDoubleCount
 }
 
-/** ワールド（era）のステージ計画を組み立てる（純粋にデータの分割のみ。設問は作らない）。
- *  imagePool は content.ts の playableWorks 相当（出題対象自身は画像必須）。 */
-export function buildEraStagePlan(eraId: string, imagePool: Work[]): EraStagePlan {
-  const eraWorks = sortByOrderIndex(imagePool.filter((w) => w.era === eraId))
-  const itemCount = eraWorks.length
-  return {
-    eraId,
-    itemCount,
-    segments: partitionIntoSegments(eraWorks),
-    bossSize: bossQuestionCount(itemCount),
-  }
+/** ワールド（era）の、指定した★のステージ計画を組み立てる（純粋にデータの分割のみ。設問は
+ *  作らない）。imagePool は content.ts の playableWorks 相当（出題対象自身は画像必須）。 */
+export function buildEraStagePlan(eraId: string, difficulty: Difficulty, imagePool: Work[]): EraStagePlan {
+  const eraWorks = sortByOrderIndex(imagePool.filter((w) => w.era === eraId && hasStar(w, difficulty)))
+  return { eraId, difficulty, itemCount: eraWorks.length, segments: partitionIntoSegments(eraWorks) }
 }
 
-// --- Q10/Q13/Q14 の直接生成（session.ts の canGenerateType/buildQuestion は
-// テーマセット専用としてこの3型を常に false/null にするため、themeSet.ts と同じ考え方で
-// 各型の生成器を直接呼ぶ） ---
+/** そのワールドで実際に面を持つ★（0件の★は含まない）を★の若い順に並べたもの。
+ *  面番号の通し番号付け（overallSegmentNumber）・ワールドマップのノード生成が共通で使う。 */
+export function worldSegmentPlans(eraId: string, imagePool: Work[]): { difficulty: Difficulty; plan: EraStagePlan }[] {
+  return ALL_DIFFICULTIES.map((difficulty) => ({ difficulty, plan: buildEraStagePlan(eraId, difficulty, imagePool) })).filter(
+    ({ plan }) => plan.segments.length > 0,
+  )
+}
+
+/** difficulty ごとの面数（0件の★は0）。overallSegmentNumber・UI表示に渡す軽量な形。 */
+export function segmentCountsByDifficulty(eraId: string, imagePool: Work[]): Partial<Record<Difficulty, number>> {
+  const out: Partial<Record<Difficulty, number>> = {}
+  for (const { difficulty, plan } of worldSegmentPlans(eraId, imagePool)) out[difficulty] = plan.segments.length
+  return out
+}
+
+// --- 設問の直接生成（q9/q5/q10/q13。session.ts の canGenerateType/buildQuestion は
+// q9 のスロット制限を持たない／q5・q10・q13 を常に false/null にするため、ここで直接組み立てる） ---
 
 function buildStatementPairQuestion(work: Work, pool: Work[], rng: RandomFn): Question | null {
   const pair = generateStatementPairQuestion(work, pool, rng)
@@ -288,12 +316,71 @@ function buildWordPairQuestion(work: Work, pool: Work[], rng: RandomFn): Questio
   return { type: 'q13', work, choiceWorks: [], choiceWordPairs: items, correctIndex, isReview: false, reversed: false }
 }
 
-/** その難易度の型（q12・q14を除く）の中から、まだこの作品で使っていない型を優先して
- *  1問だけ作る（同じ作品×同じ型は同じ呼び出し列の中で重複させない）。
- *  M2b-09是正: 画像が要る型（IMAGE_DEPENDENT_TYPES）は、対象自身が imagePool にある
- *  （＝画像を持つ）ときだけ候補にし、その型を作るときの pool 引数も imagePool に限定する
- *  （practiceSession.ts・missLog.ts・themeSet.ts と同じ考え方）。それ以外の型は従来どおり
- *  pool（themeSetPool 相当。画像なし項目も含む素材プール）を使う。 */
+/** Q5（画像→作者。M2i ★2）を組み立てる。誤答は同文化→隣接文化の実在の作者から選ぶ
+ *  （engine/q5.ts）。artist が無い、または誤答が3件そろわなければ null。 */
+function buildQ5QuestionForStage(work: Work, pool: Work[], eras: Era[], rng: RandomFn): Question | null {
+  const data = generateQ5Question(work, pool, eras, rng)
+  if (!data) return null
+  const { items, correctIndex } = buildChoices(data.correctArtist, data.distractorArtists, rng)
+  return { type: 'q5', work, choiceWorks: [], choiceArtists: items, correctIndex, isReview: false }
+}
+
+/** Q9をスロット固定（allowSlots）で組み立てる（M2i ★2〜5）。eraスロットは常に禁止する
+ *  （ワールド固定のステージ・ボスではヘッダーの文化名だけで解けてしまうため）。 */
+function buildQ9QuestionForStage(work: Work, imagePool: Work[], eras: Era[], rng: RandomFn, allowSlots: Q9Slot[]): Question | null {
+  const data = generateQ9Question(work, imagePool, eras, rng, { allowSlots, avoidSlots: ['era'] })
+  if (!data) return null
+  const { items, correctIndex } = buildChoices(data.correctWork, data.distractorWorks, rng)
+  return {
+    type: 'q9',
+    work,
+    choiceWorks: items,
+    correctIndex,
+    isReview: false,
+    conditionText: data.conditionText,
+    reversed: data.reversed,
+    q9Slot: data.slot,
+  }
+}
+
+/** 型が同じ要素が隣り合わないよう、可能な範囲で入れ替える（best-effort。完全には解消できない
+ *  こともある。engine/themeSet.ts の reorderToAvoidConsecutiveSameType と同じアルゴリズムだが、
+ *  ここでは Question[] を直接扱う）。 */
+function reorderToAvoidConsecutiveSameType(items: Question[]): Question[] {
+  const arr = items.slice()
+  for (let pass = 0; pass < 3; pass++) {
+    let changed = false
+    for (let i = 1; i < arr.length; i++) {
+      if (arr[i].type !== arr[i - 1].type) continue
+      let swapIdx = -1
+      for (let j = i + 1; j < arr.length; j++) {
+        if (arr[j].type !== arr[i - 1].type) {
+          swapIdx = j
+          break
+        }
+      }
+      if (swapIdx === -1) continue
+      const tmp = arr[i]
+      arr[i] = arr[swapIdx]
+      arr[swapIdx] = tmp
+      changed = true
+    }
+    if (!changed) break
+  }
+  return arr
+}
+
+/** 下線（passage）に紐づかない単独問題の設問文を付ける（M2i: ステージはリード文を一切使わない
+ *  ため、常に standaloneStem。passageId/underlineKey は付けない）。 */
+function attachStandaloneStem(q: Question): Question {
+  if (q.stem) return q
+  return { ...q, stem: standaloneStem(q.type, { reversed: q.reversed, conditionText: q.conditionText }) }
+}
+
+/** その難易度の型の中から、まだこの作品で使っていない型を優先して1問だけ作る（同じ作品×同じ型は
+ *  同じ呼び出し列の中で重複させない）。画像が要る型（IMAGE_DEPENDENT_TYPES）は、対象自身が
+ *  imagePool にある（＝画像を持つ）ときだけ候補にし、その型を作るときの pool 引数も imagePool に
+ *  限定する（practiceSession.ts・missLog.ts・themeSet.ts と同じ考え方）。 */
 function tryBuildStageQuestionForWork(
   work: Work,
   types: QuestionType[],
@@ -302,6 +389,7 @@ function tryBuildStageQuestionForWork(
   eras: Era[],
   rng: RandomFn,
   usedTypesForWork: Set<QuestionType>,
+  q9AllowSlots: Q9Slot[] | undefined,
 ): Question | null {
   const imageEligible = imagePool.some((w) => w.id === work.id)
   const candidates = shuffle(
@@ -313,45 +401,20 @@ function tryBuildStageQuestionForWork(
     let q: Question | null = null
     if (type === 'q10') q = buildStatementPairQuestion(work, usablePool, rng)
     else if (type === 'q13') q = buildWordPairQuestion(work, usablePool, rng)
+    else if (type === 'q5') q = buildQ5QuestionForStage(work, usablePool, eras, rng)
+    else if (type === 'q9') q = q9AllowSlots ? buildQ9QuestionForStage(work, usablePool, eras, rng, q9AllowSlots) : null
     else if (canGenerateType(type, work, usablePool, eras)) q = buildQuestion(work, type, usablePool, eras, false, rng)
     if (q) return q
   }
   return null
 }
 
-/** Q14（年代順）は1問が3作品にまたがるため、単一作品×型のループでは扱えない。難易度3の面で
- *  目標問数に足りないときの補充として、独立に末尾へ追加する（M2b-01から変更なし）。 */
-function buildOrderQuestions(segWorks: Work[], eras: Era[], rng: RandomFn, maxCount: number): Question[] {
-  const out: Question[] = []
-  let remaining = segWorks.filter((w) => typeof w.orderIndex === 'number')
-  while (remaining.length >= 3 && out.length < maxCount) {
-    const data = generateOrderQuestion(remaining, rng, 3, eras)
-    if (!data) break
-    const usedIds = new Set(data.displayItems.map((d) => d.work.id))
-    remaining = remaining.filter((w) => !usedIds.has(w.id))
-    const nominalWork = data.displayItems[0].work
-    out.push({
-      type: 'q14',
-      work: nominalWork,
-      choiceWorks: [],
-      choiceStatements: data.choices,
-      correctIndex: data.correctIndex,
-      isReview: false,
-      orderItems: data.displayItems,
-    })
-  }
-  return out
-}
-
 /**
- * eraId・difficulty・segment から、その面の対象作品に対して設問を作る（チケット規則3）。
+ * eraId・difficulty・segment から、その面の対象作品に対して設問を作る。
  * pool は content.ts の themeSetPool 相当（distractor 素材。画像なし項目も含む）、imagePool は
  * playableWorks 相当（出題対象自身は画像必須）。segment が存在しない（面数を超えた番号）、
  * または対象文化に出題対象が無ければ空配列。
- * M2e-02: passages（省略可・既定 []）を渡すと、その era の passages の下線が対象にする作品には
- * 「下線部○」を参照する設問文（passageId/underlineKey つき、components/StageScreen.tsx が
- * そのまま LeadPanel に渡せる）を、それ以外の作品には下線を参照しない単独問題の設問文
- * （engine/stems.ts）を付ける。省略時（後方互換。既存呼び出し・テスト）は全問が単独問題扱いになる。
+ * M2i: ステージはリード文（passage）を一切使わない（passageId を付けない。standaloneStem 固定）。
  */
 export function buildStageQuestions(
   eraId: string,
@@ -361,9 +424,8 @@ export function buildStageQuestions(
   imagePool: Work[],
   eras: Era[],
   rng: RandomFn = defaultRandom,
-  passages: Passage[] = [],
 ): Question[] {
-  const plan = buildEraStagePlan(eraId, imagePool)
+  const plan = buildEraStagePlan(eraId, difficulty, imagePool)
   const seg = plan.segments.find((s) => s.segment === segment)
   if (!seg) return []
   const idSet = new Set(seg.workIds)
@@ -371,123 +433,168 @@ export function buildStageQuestions(
     imagePool.filter((w) => idSet.has(w.id)),
     rng,
   )
-  const targetCount = questionCountForSegment(seg)
-  const perWorkTypes = DIFFICULTY_TYPES[difficulty].filter((t) => t !== 'q12' && t !== 'q14')
-  // M2b-99c中5: どの作品を2問にするかは seg.workIds（年代順固定）の先頭 extraDoubleCount 件で
-  // 決める（1-1が常に同じ内容になる要件を保つため、出題順シャッフル後の segWorks ではなく
-  // 分割計画側の順序で決定的に選ぶ）。
+  const types = DIFFICULTY_TYPES[difficulty]
+  const q9AllowSlots = DIFFICULTY_Q9_SLOTS[difficulty]
+  // どの作品を2問にするかは seg.workIds（年代順固定）の先頭 extraDoubleCount 件で決める
+  // （1-1が「常に同じ内容」であるためには、出題順シャッフル後の segWorks ではなく分割計画側の
+  // 順序で決定的に選ぶ必要がある）。
   const doubledIds = new Set(seg.workIds.slice(0, seg.extraDoubleCount))
-  const eraPassages = passages.filter((p) => p.era === eraId)
-  const candidateByWorkId = buildEraCandidateByWorkId(eraPassages, pool)
 
   const questions: Question[] = []
   for (const work of segWorks) {
     const usedTypesForWork = new Set<QuestionType>()
     const perWork = doubledIds.has(work.id) ? 2 : 1
     for (let i = 0; i < perWork; i++) {
-      const q = tryBuildStageQuestionForWork(work, perWorkTypes, pool, imagePool, eras, rng, usedTypesForWork)
+      const q = tryBuildStageQuestionForWork(work, types, pool, imagePool, eras, rng, usedTypesForWork, q9AllowSlots)
       if (q) {
-        questions.push(attachLeadStem(q, candidateByWorkId.get(work.id)))
+        questions.push(attachStandaloneStem(q))
         usedTypesForWork.add(q.type)
       }
     }
   }
-  if (DIFFICULTY_TYPES[difficulty].includes('q14') && questions.length < targetCount) {
-    questions.push(...buildOrderQuestions(segWorks, eras, rng, targetCount - questions.length))
-  }
-  return shuffle(questions, rng)
+  return reorderToAvoidConsecutiveSameType(shuffle(questions, rng))
 }
 
-interface EraCandidate {
+// --- ボス（3群×リード文、writerのask.stemがある下線だけから作る） ---
+
+interface BossCandidate {
   passage: Passage
   underline: PassageUnderline
   work: Work
 }
 
-/** mockExam.ts の buildCandidatePool と同じ考え方だが、渡された passages（呼び出し側で
- *  該当 era に絞り込み済み）だけを対象にする。 */
-function buildEraCandidatePool(eraPassages: Passage[], pool: Work[]): EraCandidate[] {
-  const availableIds = new Set(pool.map((w) => w.id))
-  const byId = new Map(pool.map((w) => [w.id, w]))
-  const out: EraCandidate[] = []
-  for (const passage of eraPassages) {
-    for (const underline of passage.underlines) {
-      const targetId = pickThemeTargetId(underline, passage, availableIds)
-      if (!targetId) continue
-      const work = byId.get(targetId)
-      if (!work) continue
-      out.push({ passage, underline, work })
-    }
-  }
-  return out
+/** ask.slot の値が Q9 の preferredSlot として使える値か（types.ts PassageUnderlineAsk.slot の
+ *  範囲。実データはこの範囲に限られるが、JSON なので念のため実行時にも確認する）。 */
+function isAskQ9Slot(value: string | undefined): value is Q9Slot {
+  return value === 'holder' || value === 'artist' || value === 'technique' || value === 'era' || value === 'subject'
 }
 
-/** buildEraCandidatePool を work.id → 最初に見つかった候補（passage・underline）の逆引きにする
- *  （M2e-02: 面/ボスの各作品が「どの下線から出せるか」を知るため。複数の下線が同じ作品を
- *  対象にすることがあるが、ここでは最初の1件だけを使う＝どれか1つの下線部キーが分かれば
- *  設問文に「下線部○」を付けられるため十分。厳密な優先順位は問わない）。 */
-function buildEraCandidateByWorkId(eraPassages: Passage[], pool: Work[]): Map<string, EraCandidate> {
-  const map = new Map<string, EraCandidate>()
-  for (const candidate of buildEraCandidatePool(eraPassages, pool)) {
-    if (!map.has(candidate.work.id)) map.set(candidate.work.id, candidate)
-  }
-  return map
-}
-
-/** 生成された Question に、下線起点なら「下線部○」を参照する設問文＋passageId/underlineKey を、
- *  下線に紐づかない補充問題なら下線を参照しない単独問題の設問文を付ける（M2e-02、engine/stems.ts）。
- *  既に stem が付いている（themeSet.ts 経由で writer 手書き ask.stem 等が既に入っている）場合は
- *  上書きしない。 */
-function attachLeadStem(q: Question, candidate: EraCandidate | undefined): Question {
-  if (q.stem) return q
-  if (candidate) {
-    return {
-      ...q,
-      passageId: candidate.passage.id,
-      underlineKey: candidate.underline.key,
-      stem: underlineStem(q.type, candidate.underline.key, { reversed: q.reversed, conditionText: q.conditionText }),
-    }
-  }
-  return { ...q, stem: standaloneStem(q.type, { reversed: q.reversed, conditionText: q.conditionText }) }
-}
-
-/** 設問1件が画面に出す作品 id（正解・誤答選択肢・年代順の複数作品を含む）。誤答露出規則
- *  （チケット規則5）の実測・優先選定に使う。choiceStatements/choiceCombos/choiceQ12/
- *  choiceWordPairs はテキストのみで他作品の画像を出さないため対象外（q.work 自身は
- *  どの型でもリード/画像として画面に出るため常に含める）。 */
-function questionExposedWorkIds(q: Question): string[] {
-  const ids = [q.work.id]
-  if (q.choiceWorks) ids.push(...q.choiceWorks.map((w) => w.id))
-  if (q.orderItems) ids.push(...q.orderItems.map((oi) => oi.work.id))
-  return ids
-}
-
-/** era の項目のうち、まだ画面に出ていない（exposed に無い）ものを items の先頭に押し出す。
- *  distractors.ts の pickWorkDistractors は「同カテゴリ・近い時代」を距離でソートしており、
- *  同じ era 内は距離0で同点になるため、Array.sort の安定性により元の並び順（＝ここで
- *  先頭に寄せた順）が保たれ、露出していない項目が選ばれやすくなる。厳密な保証ではなく
- *  「優先的に選ぶ」実装（チケット規則5が明示的に許容する範囲）。 */
-function biasForExposure<T extends Work>(items: T[], eraId: string, exposed: Set<string>): T[] {
-  const unexposedEraMates: T[] = []
-  const rest: T[] = []
-  for (const w of items) {
-    if (w.era === eraId && !exposed.has(w.id)) unexposedEraMates.push(w)
-    else rest.push(w)
-  }
-  return [...unexposedEraMates, ...rest]
+/** リード画像に正解画像が含まれるq9問題は生成しない（M2i-02④、
+ *  research/fact-check-m2e-tiers.md [中]-2「リード画像に正解画像が並ぶ」の是正）。 */
+function leadImageConflict(passage: Passage, workId: string): boolean {
+  return passage.kind === 'image' && (passage.leadWorkIds ?? []).includes(workId)
 }
 
 /**
- * ボス: N≤15なら10問、N>15なら20問（チケット規則4。count を明示すればテスト等で上書きできる）。
- * M2e-02: 以前は「その文化の passage を1本ランダムに選ぶ」→その1本の下線が尽きたら
- * すぐフォールバックする設計だったため、下線に紐づかない作品の補充（フォールバック3・4、
- * 下記）が早く発生し、そこで生成される設問が「下線部○」を欠いていた
- * （research/stem-patterns.md 4.4）。ここではその文化の**全 passage の全下線**を候補にする
- * （パス1・2）。それでも targetCount に届かない場合だけ、下線に紐づかない作品を
- * engine/stems.ts の単独問題テンプレートで補う（パス3・4）。誤答は露出していないそのワールドの
- * 項目を優先する（チケット規則5、biasForExposure）。
- * その文化に reviewed passage が1つも無ければ空配列を返す（呼び出し側は「ボスを作れない」と
- * 扱う。実データでは全15区分に最低1本あることを stages.realdata.test.ts で確認している）。
+ * writer 手書きの ask.stem がある下線だけから、ask.type をそのまま使って1問を組み立てる
+ * （ボス規則v4「engineの汎用文は使わない。型が合わず作れない下線は飛ばす」＝ここで null を
+ * 返したら呼び出し側は次の候補に進み、フォールバックはしない）。
+ */
+function buildAskExactQuestion(
+  passage: Passage,
+  underline: PassageUnderline,
+  work: Work,
+  pool: Work[],
+  imagePool: Work[],
+  eras: Era[],
+  rng: RandomFn,
+): Question | null {
+  const ask = underline.ask
+  if (!ask || !ask.stem) return null
+  const stem = ask.stem
+  switch (ask.type) {
+    case 'q9': {
+      if (!imagePool.some((w) => w.id === work.id)) return null
+      if (leadImageConflict(passage, work.id)) return null
+      const data = ask.answerId
+        ? generateQ9QuestionFromIds(imagePool, ask.answerId, ask.distractorIds, eras, rng)
+        : generateQ9Question(work, imagePool, eras, rng, {
+            preferredSlot: isAskQ9Slot(ask.slot) ? ask.slot : undefined,
+            avoidSlots: ['era'],
+          })
+      if (!data) return null
+      if (leadImageConflict(passage, data.correctWork.id)) return null
+      const { items, correctIndex } = buildChoices(data.correctWork, data.distractorWorks, rng)
+      return {
+        type: 'q9',
+        work,
+        choiceWorks: items,
+        correctIndex,
+        isReview: false,
+        conditionText: data.conditionText,
+        reversed: data.reversed,
+        q9Slot: data.slot,
+        stem,
+      }
+    }
+    case 'q10': {
+      const pair = generateStatementPairQuestion(work, pool, rng)
+      if (!pair) return null
+      return {
+        type: 'q10',
+        work,
+        choiceWorks: [],
+        choicePairLabels: pair.labels,
+        statementPair: { sentenceA: pair.sentenceA, sentenceB: pair.sentenceB },
+        correctIndex: pair.correctIndex,
+        isReview: false,
+        stem,
+      }
+    }
+    case 'q4': {
+      const statement = generateStatementQuestion(work, pool, rng, { reversed: ask.reversed })
+      if (!statement) return null
+      const { items, correctIndex } = buildChoices(statement.correct, statement.distractors, rng)
+      return {
+        type: 'q4',
+        work,
+        choiceWorks: [],
+        choiceStatements: items,
+        correctIndex,
+        isReview: false,
+        reversed: Boolean(ask.reversed),
+        stem,
+      }
+    }
+    case 'q12': {
+      const data = generateQ12Question(ask, rng)
+      if (!data) return null
+      return { type: 'q12', work, choiceWorks: [], choiceQ12: data.choices, correctIndex: data.correctIndex, isReview: false, stem }
+    }
+    case 'q13': {
+      const data = generatePairQuestion(work, pool, rng, { reversed: ask.reversed })
+      if (!data) return null
+      const { items, correctIndex } = buildChoices(data.correct, data.distractors, rng)
+      return {
+        type: 'q13',
+        work,
+        choiceWorks: [],
+        choiceWordPairs: items,
+        correctIndex,
+        isReview: false,
+        reversed: Boolean(ask.reversed),
+        stem,
+      }
+    }
+    default:
+      // q11 は M3 候補で未実装。文化伏せ型（q12「この文化」）はボスでは使わない方針だが、
+      // 中身（answerText/distractorTexts）を機械判定できないため、ここでは全ての q12 を許容する
+      // （文化伏せ型の除外は content 側＝M2i-03 writer がボス用リード文に含めない、で担保する）。
+      return null
+  }
+}
+
+/** その文化の出題可能作品を年代順にざっくり3等分する（ボス規則v4）。作品数が3件未満でも
+ *  空の群は作らない（1〜3群になる）。 */
+function bossWorkGroups(eraWorksSorted: Work[]): Work[][] {
+  const n = eraWorksSorted.length
+  if (n === 0) return []
+  const size = Math.ceil(n / 3)
+  const groups: Work[][] = []
+  for (let i = 0; i < 3; i++) {
+    const slice = eraWorksSorted.slice(i * size, (i + 1) * size)
+    if (slice.length > 0) groups.push(slice)
+  }
+  return groups
+}
+
+/**
+ * ボス: N≤15なら10問、N>15なら20問（count を明示すればテスト等で上書きできる）。
+ * M2i: その文化の全passageの全下線のうち、ask.stemがある下線だけを候補にし、対象作品の年代位置
+ * （bossWorkGroups の3群）ごとにグループ分けして、群を順番に回しながら1問ずつ組み立てる
+ * （3本のリード文に分散させる意図。1本のリード文に集中してヒントが積み重なるのを避ける）。
+ * ask.typeで指定された型が生成できない下線は飛ばす（engineの汎用文にフォールバックしない）。
+ * 群に候補が無ければその群からは出さない（M2i-03のwriter増補待ち。完了報告に群ごとの不足を書く）。
  */
 export function buildBossQuestions(
   eraId: string,
@@ -498,202 +605,71 @@ export function buildBossQuestions(
   rng: RandomFn = defaultRandom,
   count?: number,
 ): Question[] {
-  const itemCount = imagePool.filter((w) => w.era === eraId).length
-  const targetCount = count ?? bossQuestionCount(itemCount)
+  const eraWorksAll = sortByOrderIndex(imagePool.filter((w) => w.era === eraId))
+  const targetCount = count ?? bossQuestionCount(eraWorksAll.length)
+  if (targetCount === 0) return []
   const eraPassages = passages.filter((p) => p.era === eraId)
-  if (eraPassages.length === 0 || targetCount === 0) return []
-  const candidateByWorkId = buildEraCandidateByWorkId(eraPassages, pool)
+  if (eraPassages.length === 0) return []
 
-  // パス1（M2e-02改修）: 1本のpassageに絞らず、その文化の全passageを順に（ランダム順で）
-  // buildThemeSetQuestions にかけて合算する。buildThemeSetQuestions 自身が持つ型構成の保証
-  // （Q9/Q10各1問以上・同型連続回避）はpassage単位でそのまま活きる。「同じ作品は1回の試験で
-  // 1問まで」（mockExam.ts と同じ規則）を全passage分の合算にも適用する（themeSeenIds）。
-  // M2e-06: 図版カテゴリ（q9・q1）は1回のボスで imageCap 問まで（mockExam.ts と同じ考え方。
-  // パス1〜4のどこで生成されても合算でカウントする。パス1（buildThemeSetQuestions）は
-  // passage単位のQ9最低1問保証を持つため、複数passageの合算で上限を超えないようここで絞る）。
-  const imageCap = imageCategoryCap(targetCount)
-  let imageCount = 0
+  const groups = bossWorkGroups(eraWorksAll)
+  if (groups.length === 0) return []
+  const groupIndexByWorkId = new Map<string, number>()
+  groups.forEach((g, gi) => g.forEach((w) => groupIndexByWorkId.set(w.id, gi)))
 
-  const themeQuestions: Question[] = []
-  const themeSeenIds = new Set<string>()
-  for (const passage of shuffle(eraPassages, rng)) {
-    if (themeQuestions.length >= targetCount) break
-    for (const tq of buildThemeSetQuestions(passage, pool, eras, rng, imagePool)) {
-      if (themeQuestions.length >= targetCount) break
-      if (themeSeenIds.has(tq.question.work.id)) continue
-      if (categoryOfQuestion(tq.question) === 'image' && imageCount >= imageCap) continue
-      themeSeenIds.add(tq.question.work.id)
-      if (categoryOfQuestion(tq.question) === 'image') imageCount++
-      themeQuestions.push({ ...tq.question, passageId: passage.id, underlineKey: tq.underlineKey })
+  const availableIds = new Set(pool.map((w) => w.id))
+  const candidatesByGroup: BossCandidate[][] = groups.map(() => [])
+  for (const passage of eraPassages) {
+    for (const underline of passage.underlines) {
+      if (!underline.ask?.stem) continue // ボス規則v4: 手書きstemの無い下線は使わない
+      // ボス規則v4「文化伏せ型は模試専用にし、ボスでは使わない（ヘッダーに文化名が出るため）」。
+      if (isCulturalHiddenAsk(underline.ask)) continue
+      const targetId = pickThemeTargetId(underline, passage, availableIds)
+      if (!targetId) continue
+      const work = pool.find((w) => w.id === targetId)
+      if (!work) continue
+      const groupIndex = groupIndexByWorkId.get(work.id)
+      if (groupIndex === undefined) continue // 対象がこのeraの出題可能作品（imagePool）に無い
+      candidatesByGroup[groupIndex].push({ passage, underline, work })
     }
   }
-  const built: Question[] = themeQuestions.slice(0, targetCount)
-  const usedWorkIds = new Set(built.map((q) => q.work.id))
-  const exposedIds = new Set<string>()
-  for (const q of built) for (const id of questionExposedWorkIds(q)) exposedIds.add(id)
 
-  if (built.length < targetCount) {
-    const candidates = shuffle(buildEraCandidatePool(eraPassages, pool), rng)
-    let previousType: QuestionType | undefined = built.length > 0 ? built[built.length - 1].type : undefined
-    let avoidEraSlot = built.some((q) => q.type === 'q9' && q.q9Slot === 'era')
-    for (const candidate of candidates) {
+  const built: Question[] = []
+  const usedPairKeys = new Set<string>()
+  const queues = candidatesByGroup.map((list) => shuffle(list, rng))
+  let progressed = true
+  while (built.length < targetCount && progressed) {
+    progressed = false
+    for (const queue of queues) {
       if (built.length >= targetCount) break
-      if (usedWorkIds.has(candidate.work.id)) continue
-      const desiredCategory = COMPOSITION_SEQUENCE[built.length % COMPOSITION_SEQUENCE.length]
-      const question = buildThemeQuestionForWork(candidate.work, biasForExposure(pool, eraId, exposedIds), eras, rng, {
-        ask: candidate.underline.ask,
-        avoidEraSlot,
-        avoidType: previousType,
-        imagePool: biasForExposure(imagePool, eraId, exposedIds),
-        desiredCategory,
-        underlineKey: candidate.underline.key,
-      })
-      if (!question) continue
-      if (categoryOfQuestion(question) === 'image' && imageCount >= imageCap) continue
-      usedWorkIds.add(candidate.work.id)
-      if (question.q9Slot === 'era') avoidEraSlot = true
-      previousType = question.type
-      if (categoryOfQuestion(question) === 'image') imageCount++
-      built.push({ ...question, passageId: candidate.passage.id, underlineKey: candidate.underline.key })
-      for (const id of questionExposedWorkIds(question)) exposedIds.add(id)
-    }
-
-    // reviewer指摘M2b-99重大1の修正（M2b-01から引き継ぎ）: 上のcandidatesは「そのeraの
-    // passageの下線が指す作品」に限られるため、下線のdistinct target数が少ない文化（実測:
-    // kitayama/momoyamaは1件）でボスが目標問数に届かないことがある。buildStageQuestionsと
-    // 同じ「そのeraのpool全体」を第2の補充源にし、下線に紐づかない作品も候補にする。
-    // M2e-02: それでも candidateByWorkId に載っている作品（パス2で他の型が失敗しただけの
-    // 作品）は underlineKey を渡して「下線部○」を保つ。載っていない作品は
-    // engine/stems.ts の単独問題テンプレートになる（buildThemeQuestionForWorkWithMeta 側の
-    // 既定 stem 付与ロジックが underlineKey の有無で自動的に切り替える）。
-    if (built.length < targetCount) {
-      const eraWorks = shuffle(
-        pool.filter((w) => w.era === eraId && !usedWorkIds.has(w.id)),
-        rng,
-      )
-      for (const work of eraWorks) {
-        if (built.length >= targetCount) break
-        const desiredCategory = COMPOSITION_SEQUENCE[built.length % COMPOSITION_SEQUENCE.length]
-        const candidate = candidateByWorkId.get(work.id)
-        const question = buildThemeQuestionForWork(work, biasForExposure(pool, eraId, exposedIds), eras, rng, {
-          avoidEraSlot,
-          avoidType: previousType,
-          imagePool: biasForExposure(imagePool, eraId, exposedIds),
-          desiredCategory,
-          underlineKey: candidate?.underline.key,
-        })
-        if (!question) continue
-        if (categoryOfQuestion(question) === 'image' && imageCount >= imageCap) continue
-        usedWorkIds.add(work.id)
-        if (question.q9Slot === 'era') avoidEraSlot = true
-        previousType = question.type
-        if (categoryOfQuestion(question) === 'image') imageCount++
-        built.push(candidate ? { ...question, passageId: candidate.passage.id, underlineKey: candidate.underline.key } : question)
-        for (const id of questionExposedWorkIds(question)) exposedIds.add(id)
-      }
-    }
-
-    // M2b-99c中1: 上記2パスでも目標問数に届かないワールド（実測: insei/kitayama/momoyama/
-    // higashiyama/kanei/genroku/kasei。fact-check-m2b-v2.md参照）向けの改善。「同一作品×別の
-    // 問題型の組み合わせを増やす」（チケット文面の例）を採用し、既に使った作品でも
-    // まだ使っていない型でなら再登場を許す（同じ作品×同じ型の完全重複はしない＝出題の質は
-    // 落とさない）。usedTypesForWork は既に built に入っている全問題から作品ごとの使用済み
-    // 型を復元する（テーマセット由来の問題も含めて漏れなく重複回避するため）。
-    // M2e-02: この経路（tryBuildStageQuestionForWork）は themeSet.ts を経由しないため
-    // stem が付かない。attachLeadStem で下線起点／単独問題いずれかの設問文を付ける。
-    if (built.length < targetCount) {
-      const usedTypesForWork = new Map<string, Set<QuestionType>>()
-      for (const q of built) {
-        const set = usedTypesForWork.get(q.work.id) ?? new Set<QuestionType>()
-        set.add(q.type)
-        usedTypesForWork.set(q.work.id, set)
-      }
-      const eraWorksAll = shuffle(
-        pool.filter((w) => w.era === eraId),
-        rng,
-      )
-      // 1周で複数の型を使い切れる作品もあるため、進展がある限り複数周する
-      // （itemCount・型集合の大きさはどちらも高々十数件のため計算量は問題にならない）。
-      let progressed = true
-      while (built.length < targetCount && progressed) {
-        progressed = false
-        for (const work of eraWorksAll) {
-          if (built.length >= targetCount) break
-          const usedTypes = usedTypesForWork.get(work.id) ?? new Set<QuestionType>()
-          const question = tryBuildStageQuestionForWork(work, ALL_PER_WORK_TYPES, pool, imagePool, eras, rng, usedTypes)
-          if (!question) continue
-          // M2e-06: 図版上限に達していたらこの型は「使用済み」扱いにして次周は別の型を試させる
-          // （push はしない＝カウントに含めない。work自体は諦めず progressed=true で継続する）。
-          if (categoryOfQuestion(question) === 'image' && imageCount >= imageCap) {
-            usedTypes.add(question.type)
-            usedTypesForWork.set(work.id, usedTypes)
-            progressed = true
-            continue
-          }
-          usedTypes.add(question.type)
-          usedTypesForWork.set(work.id, usedTypes)
-          built.push(attachLeadStem(question, candidateByWorkId.get(work.id)))
-          for (const id of questionExposedWorkIds(question)) exposedIds.add(id)
-          if (categoryOfQuestion(question) === 'image') imageCount++
-          progressed = true
-        }
+      while (queue.length > 0) {
+        const c = queue.shift()!
+        const q = buildAskExactQuestion(c.passage, c.underline, c.work, pool, imagePool, eras, rng)
+        if (!q) continue // 型が合わず作れない下線は飛ばす（次の候補へ）
+        const pairKey = `${c.work.id}:${q.type}`
+        if (usedPairKeys.has(pairKey)) continue
+        usedPairKeys.add(pairKey)
+        built.push({ ...q, passageId: c.passage.id, underlineKey: c.underline.key })
+        progressed = true
+        break
       }
     }
   }
-
-  // M2e-08（BOARD.md「型配分を問数に比例させる」）: 旧M2e-06は語句組合せ（pairs＝q13・q8）
-  // だけを対象に「0件のときだけ1問強制」する固定floor=1のブロックを持っていたが、count
-  // （targetCount）に比例しないため、20問ボスでは帯外になりうる（mockExam.ts と同じ問題。
-  // builder メモ feedback-m2e-06-partial-accept.md）。categoryFloor(targetCount) まで
-  // 5カテゴリ全てをbest-effortで引き上げる一般化に置き換える（themeSet.ts
-  // planCategoryFloorConversions）。実測: 対策前（pairs固定floor=1のみ）は
-  // reviewedEras×20seedのボス生成300件中48件（16%）がpairs=0問だった
-  // （tenpyo/horeki-tenmei/kaseiに集中。stages.realdata.test.ts参照）。
-  if (built.length > 0) {
-    // M2e-08b: q.passageId+q.underlineKey から、その設問を生成した「実際の」下線の ask を
-    // 正確に引く（candidateByWorkId は work.id あたり最初に見つかった1件だけを見る近似で、
-    // 同じ work を対象にする下線が複数（例: 別passageの下線）あると、hasExplicitAsk/
-    // isCulturalHiddenAsk の判定が別の下線に化けてしまう。実測: kasei-02 a（文化伏せ型q12。
-    // work=takami-senseki）が、同じ work を先に持つ kasei-01 e（ask.type=q10）の判定に
-    // 上書きされ、isCulturalHiddenAsk=false と誤判定されて donor から除外されず
-    // culturalHiddenAsk.realdata.test.ts の模試/ボス経路テストが落ちた）。q12（category=null）は
-    // buildThemeSetQuestions 経由（パス1、下記）でしか生成されず、パス1は passageId/
-    // underlineKey を生成に使った下線そのものに正確に設定するため、この逆引きは正確になる。
-    const askByPassageUnderline = new Map<string, PassageUnderline['ask']>()
-    for (const passage of eraPassages) {
-      for (const underline of passage.underlines) {
-        askByPassageUnderline.set(`${passage.id}:${underline.key}`, underline.ask)
-      }
-    }
-    const candidates: FloorConversionCandidate[] = built.map((q) => {
-      const ask = q.passageId && q.underlineKey ? askByPassageUnderline.get(`${q.passageId}:${q.underlineKey}`) : undefined
-      return {
-        workId: q.work.id,
-        type: q.type,
-        category: categoryOfQuestion(q),
-        // M2e-08b: その下線に writer 明示の ask があれば記録する（donor選定には使わない。
-        // themeSet.ts planCategoryFloorConversions のdocコメント参照）。
-        hasExplicitAsk: Boolean(ask),
-        isCulturalHiddenAsk: isCulturalHiddenAsk(ask),
-        tryConvert: (category) => forceCategoryQuestion(q.work, pool, eras, rng, category, { imagePool, underlineKey: q.underlineKey }),
-      }
-    })
-    const conversions = planCategoryFloorConversions(candidates, targetCount)
-    for (let i = 0; i < built.length; i++) {
-      const forced = conversions[i]
-      if (!forced) continue
-      // buildThemeQuestionForWork は内部で必ず stem を埋める（themeSet.ts の
-      // buildThemeQuestionForWorkWithMeta）ため attachLeadStem は不要。
-      built[i] = { ...forced, passageId: built[i].passageId, underlineKey: built[i].underlineKey }
-    }
-  }
-
-  return built
+  return reorderToAvoidConsecutiveSameType(shuffle(built, rng))
 }
 
-/** チケット規則5の実測用。ボスの1回の生成結果について、そのワールドの項目のうち
- *  何件が画面に出たか（正解 or 誤答choiceWorks/orderItemsとして）を返す。100%未達の場合の
- *  「次点の改善余地」は stages.realdata.test.ts のコメントを参照。 */
+/** 設問1件が画面に出す作品 id（正解・誤答選択肢・年代順の複数作品を含む）。誤答露出の実測・
+ *  優先選定に使う。choiceStatements/choiceCombos/choiceQ12/choiceWordPairs/choiceArtists は
+ *  テキストのみで他作品の画像を出さないため対象外（q.work 自身はどの型でもリード/画像として
+ *  画面に出るため常に含める）。 */
+function questionExposedWorkIds(q: Question): string[] {
+  const ids = [q.work.id]
+  if (q.choiceWorks) ids.push(...q.choiceWorks.map((w) => w.id))
+  if (q.orderItems) ids.push(...q.orderItems.map((oi) => oi.work.id))
+  return ids
+}
+
+/** era の項目のうち、ボスの1回の生成結果で何件が画面に出たか（正解 or 誤答choiceWorks）を返す。
+ *  M2i では誤答露出率そのものは合格ラインに含まれないが、完了報告用の実測に使えるよう残す。 */
 export function bossExposureRate(
   questions: Question[],
   eraId: string,
@@ -710,7 +686,7 @@ export function bossExposureRate(
   return { total, exposed: exposed.size, rate: total > 0 ? exposed.size / total : 1 }
 }
 
-// --- 体力ゲージ用の進捗値（チケット規則6） ---
+// --- 体力ゲージ用の進捗値 ---
 
 export interface BossProgress {
   total: number
@@ -722,8 +698,7 @@ export interface BossProgress {
   clearThreshold: number
 }
 
-/** ボス戦の途中経過（何問目まで答えたか）から、体力ゲージ表示に要る値をまとめる
- *  （見た目自体はUI/M2b-05担当）。 */
+/** ボス戦の途中経過（何問目まで答えたか）から、体力ゲージ表示に要る値をまとめる。 */
 export function bossProgress(total: number, correct: number, incorrect: number): BossProgress {
   return {
     total,
@@ -734,7 +709,7 @@ export function bossProgress(total: number, correct: number, incorrect: number):
   }
 }
 
-// --- 解禁（純関数。チケット規則1: 完全直列、ワープなし） ---
+// --- 解禁（純関数。完全直列、ワープなし） ---
 
 export type StageLocalKey = { kind: 'segment'; difficulty: Difficulty; segment: number } | { kind: 'boss' }
 
@@ -742,8 +717,7 @@ export type StageRef =
   | { kind: 'segment'; eraId: string; worldIndex: number; difficulty: Difficulty; segment: number }
   | { kind: 'boss'; eraId: string; worldIndex: number }
 
-/** StageRef を一意に識別する文字列キー（チケット規則2の「era+難易度+分割番号」形式。
- *  例 "genshi-1-1" "genshi-boss"）。UI表示用の整形（「1-1」「W1 ★1」等）はM2b-05担当。 */
+/** StageRef を一意に識別する文字列キー（例 "genshi-1-1" "genshi-boss"）。 */
 export function stageRefKey(ref: StageRef): string {
   return ref.kind === 'boss' ? `${ref.eraId}-boss` : `${ref.eraId}-${ref.difficulty}-${ref.segment}`
 }
@@ -753,18 +727,14 @@ function sameLocalKey(ref: StageRef, key: StageLocalKey): boolean {
   return ref.kind === 'segment' && ref.difficulty === key.difficulty && ref.segment === key.segment
 }
 
-/** 1ワールド分の直列シーケンス: ★1の面を面番号順→★2→★3→ボス（チケット規則1・3）。
- *  ★1〜3は同じ面数（buildEraStagePlan.segments が共通）。
- *  M2b-99c中7: 対象作品0件のワールド（itemCount===0。将来のM2c-04でコンテンツが
- *  増減した際に起こりうる）は面もボスも作れない（buildStageQuestions/buildBossQuestions
- *  はどちらも空配列を返す）ため、そのままシーケンスに乗せると誰にも倒せないボスで
- *  以降全ワールドが恒久的に詰む。シーケンスから丸ごと除外する（＝「自動クリア」相当。
- *  isWorldUnlocked側の対応と対で見ること）。 */
+/** 1ワールド分の直列シーケンス: ★1の面を面番号順→★2→…→★5→ボス。0件の★は丸ごと飛ばす
+ *  （BOARD.md M2i「★を持つ作品が0件の★はその文化では『なし』として飛ばす」）。
+ *  対象作品0件のワールド自体（将来コンテンツが増減した場合）も面もボスも作れないため丸ごと除外し、
+ *  誰にも倒せないボスで以降全ワールドが恒久的に詰むのを防ぐ（isWorldUnlocked側の対応と対で見ること）。 */
 function worldStageSequence(eraId: string, worldIndex: number, imagePool: Work[]): StageRef[] {
-  const plan = buildEraStagePlan(eraId, imagePool)
-  if (plan.itemCount === 0) return []
+  if (eraTotalItemCount(eraId, imagePool) === 0) return []
   const refs: StageRef[] = []
-  for (const difficulty of [1, 2, 3] as Difficulty[]) {
+  for (const { difficulty, plan } of worldSegmentPlans(eraId, imagePool)) {
     for (const seg of plan.segments) {
       refs.push({ kind: 'segment', eraId, worldIndex, difficulty, segment: seg.segment })
     }
@@ -774,8 +744,7 @@ function worldStageSequence(eraId: string, worldIndex: number, imagePool: Work[]
 }
 
 /** 全ワールドを通した直列シーケンス（W-1の★1-1から最終ワールドのボスまで）。
- *  「解禁は完全に直列」（チケット規則1）を1本の配列で表現し、以降の解禁判定は
- *  「このシーケンス上で自分より前が全てクリア済みか」だけで決まる。 */
+ *  以降の解禁判定は「このシーケンス上で自分より前が全てクリア済みか」だけで決まる。 */
 export function fullStageSequence(eras: Era[], imagePool: Work[]): StageRef[] {
   const worlds = worldOrder(eras)
   return worlds.flatMap((eraId, worldIndex) => worldStageSequence(eraId, worldIndex, imagePool))
@@ -797,9 +766,8 @@ export function stageUnlockBoundary(sequence: StageRef[], stages: Record<string,
   return sequence.length
 }
 
-/** 指定した面（eraId・key）が解禁されているか（チケット規則1: 完全直列。ワープに相当する
- *  APIはこのモジュールに存在しない＝「そのワールド自身のボスを先に倒せば全ステージ解禁」
- *  のような経路はもう無い）。 */
+/** 指定した面（eraId・key）が解禁されているか（完全直列。ワープに相当するAPIはこのモジュールに
+ *  存在しない）。 */
 export function isStageUnlocked(
   eraId: string,
   key: StageLocalKey,
@@ -814,52 +782,47 @@ export function isStageUnlocked(
   return idx <= boundary
 }
 
-/** 次に挑戦する面（ホーム画面のカード用。チケット規則8）。全ワールド・全面をクリア済みなら
- *  null（15ワールド撃破後の「館長」演出はM2b-05担当）。 */
+/** 次に挑戦する面（ホーム画面のカード用）。全ワールド・全面をクリア済みなら null。 */
 export function nextStageRef(eras: Era[], imagePool: Work[], stages: Record<string, EraStageProgress>): StageRef | null {
   const sequence = fullStageSequence(eras, imagePool)
   const boundary = stageUnlockBoundary(sequence, stages)
   return boundary < sequence.length ? sequence[boundary] : null
 }
 
-/** StageRef を StageLocalKey に変換する（era側の情報を落とす）。ホーム画面が
- *  nextStageRef() の戻り値をそのまま App.tsx の goStage(eraId, key) に渡すために使う
- *  （チケット規則8。M2b-05）。 */
+/** StageRef を StageLocalKey に変換する（era側の情報を落とす）。 */
 export function stageRefToLocalKey(ref: StageRef): StageLocalKey {
   return ref.kind === 'boss' ? { kind: 'boss' } : { kind: 'segment', difficulty: ref.difficulty, segment: ref.segment }
 }
 
 /**
- * ワールド内の通し面番号（M2b-99c中6是正）。以前は segment が★1〜3それぞれで1から
- * 振り直されるため、全難易度が同じ「1-1」になっていた（BOARD.mdの「1-1→1-2→…」という
- * 通し表記と食い違っていた）。segmentsPerWorld（そのワールドの buildEraStagePlan(...)
- * .segments.length。★1〜3で共通＝チケット規則3）を使い、★1の面がそのまま1,2,…、
- * ★2の面がsegmentsPerWorld+1,…と続く通し番号にする。
+ * ワールド内の通し面番号。★ごとに面数が異なる（v4: ★ごとに対象作品が違うため）ため、
+ * segmentCounts（segmentCountsByDifficulty の戻り値。0件の★はキー自体が無い/0）を渡して、
+ * difficulty より前の★の面数を積算する。
  */
-export function overallSegmentNumber(difficulty: Difficulty, segment: number, segmentsPerWorld: number): number {
-  return (difficulty - 1) * segmentsPerWorld + segment
+export function overallSegmentNumber(difficulty: Difficulty, segment: number, segmentCounts: Partial<Record<Difficulty, number>>): number {
+  let offset = 0
+  for (const d of ALL_DIFFICULTIES) {
+    if (d === difficulty) return offset + segment
+    offset += segmentCounts[d] ?? 0
+  }
+  return offset + segment
 }
 
-/** UI表記「ワールド番号-面番号＋★の数」（M2b-05担当、チケット規則2の欄外注記どおりここに置く。
- *  面番号はM2b-99c中6是正でワールド内の通し番号）。
- *  例: segmentsPerWorld=3 のとき {kind:'segment', worldIndex:0, difficulty:2, segment:1} →
+/** UI表記「ワールド番号-面番号＋★の数」。面番号はワールド内の通し番号（overallSegmentNumber）。
+ *  例: segmentCounts={1:3} のとき {kind:'segment', worldIndex:0, difficulty:2, segment:1} →
  *  "1-4 ★★"（★1の3面ぶん(1,2,3)の次の4）、{kind:'boss', worldIndex:0} → "1 ボス"。
- *  worldIndex は0始まりなので表示は+1する。segmentsPerWorld は呼び出し側が
- *  buildEraStagePlan(eraId, imagePool).segments.length を渡す（boss には無関係な引数）。 */
-export function stageShortLabel(ref: StageRef, segmentsPerWorld: number): string {
+ *  worldIndex は0始まりなので表示は+1する。 */
+export function stageShortLabel(ref: StageRef, segmentCounts: Partial<Record<Difficulty, number>>): string {
   const world = ref.worldIndex + 1
   if (ref.kind === 'boss') return `${world} ボス`
-  const overall = overallSegmentNumber(ref.difficulty, ref.segment, segmentsPerWorld)
+  const overall = overallSegmentNumber(ref.difficulty, ref.segment, segmentCounts)
   return `${world}-${overall} ${'★'.repeat(ref.difficulty)}`
 }
 
 /**
  * ワールド（worldIndex、0始まり）が解禁されているか。0番目は常に解禁。以降は直前ワールドの
- * ボス撃破が条件（マップの雲演出向け。M2b-06担当だが判定はここに置く）。
- * M2b-99c中7: 対象作品0件のワールドはボスを倒しようがない（worldStageSequenceでも
- * シーケンスから除外している）ため、次ワールドを詰まらせないよう「自動クリア」扱いにして
- * 遡る。0件ワールドが連続していても、実プレイで倒せる直近のワールドまで遡って判定する
- * （見つからなければ＝それより前が全て0件＝先頭ワールド相当として解禁する）。
+ * ボス撃破が条件。対象作品0件のワールドはボスを倒しようがないため「自動クリア」扱いにして遡る
+ * （0件ワールドが連続していても、実プレイで倒せる直近のワールドまで遡って判定する）。
  */
 export function isWorldUnlocked(worldIndex: number, eras: Era[], imagePool: Work[], stages: Record<string, EraStageProgress>): boolean {
   if (worldIndex <= 0) return true
@@ -867,8 +830,7 @@ export function isWorldUnlocked(worldIndex: number, eras: Era[], imagePool: Work
   for (let i = worldIndex - 1; i >= 0; i--) {
     const eraId = worlds[i]
     if (eraId === undefined) return false
-    const itemCount = imagePool.filter((w) => w.era === eraId).length
-    if (itemCount === 0) continue
+    if (eraTotalItemCount(eraId, imagePool) === 0) continue
     return getEraStageProgress(stages, eraId).boss.cleared
   }
   return true

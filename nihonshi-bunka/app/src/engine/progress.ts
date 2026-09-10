@@ -13,7 +13,11 @@ export const STORAGE_KEY = 'bunkashi.v1'
 // v5: stages を可変面数（EraStageProgress。M2b-04 v2）に作り直し。decisions.md
 //     2026-09-08「v2公開時に進捗を全リセットする」に従い、v5未満のデータは移行せず
 //     全リセットする（面の分割自体が変わるため意味のある移行ができない）。
-export const STORAGE_VERSION = 5 as const
+// v6: ★の定義v4（M2i。decisions.md 2026-09-10夜）でステージの分割規則自体が変わったため、
+//     stages（面クリア状況）のみ空にする。図鑑（items の discoveredAt 等）・SRS（items の
+//     箱・間隔）・XP・missLog・examRecords は意味が変わらないため保持する（BOARD.md M2i-01
+//     「進捗データの引き継ぎ」の指示どおり）。
+export const STORAGE_VERSION = 6 as const
 
 export const XP_CORRECT = 10
 export const XP_REVIEW_CORRECT = 15
@@ -80,19 +84,25 @@ function isValidProgress(value: unknown): value is ProgressState {
  * version 違い・壊れたデータを吸収して現行スキーマに揃える。
  * v5未満（旧M2bのs1/s2/s3/boss固定4マス）は decisions.md 2026-09-08「v2公開時に進捗を
  * 全リセットする」に従い、意味のある移行を試みず全リセットする（面の分割自体が変わるため）。
- * このとき resetNotice を true にし、UI（M2b-05）が起動時に1回だけ通知を出せるようにする
- * （チケット規則7）。壊れたデータ（isValidProgress が false）は「旧バージョンの進捗を検出」
- * とは呼べないため resetNotice は立てない（真の初回インストールと区別できないため）。
+ * v5→v6（★の定義v4。M2i。decisions.md 2026-09-10夜）は、ステージの分割規則だけが変わるため
+ * stages のみ空にする（図鑑・SRS・XP・missLog・examRecords は保持する。BOARD.md M2i-01
+ * 「進捗データの引き継ぎ」の指示どおり）。どちらの場合も resetNotice を true にし、UI が
+ * 起動時に1回だけ通知を出せるようにする。壊れたデータ（isValidProgress が false）は
+ * 「旧バージョンの進捗を検出」とは呼べないため resetNotice は立てない（真の初回インストールと
+ * 区別できないため）。
  */
 export function migrate(raw: unknown, today: string = todayIso()): ProgressState {
   if (!isValidProgress(raw)) return createInitialProgress(today)
-  if (raw.version < STORAGE_VERSION) return { ...createInitialProgress(today), resetNotice: true }
+  if (raw.version < 5) return { ...createInitialProgress(today), resetNotice: true }
+  // v6: stages のみリセット（stagesRaw を無視する）。図鑑・SRS・XP・missLog・examRecords は
+  // raw の値をそのまま引き継ぐ（下の missLog/examRecords 補完ロジックと合流させる）。
+  const stagesOnlyReset = raw.version < STORAGE_VERSION
   // v3 で missLog を追加。version が一致していても（手作りの fixture 等で）フィールドが
   // 無い可能性があるため、必ず補う（既存データは消さない）。
   const missLog: MissLogEntry[] = Array.isArray((raw as Partial<ProgressState>).missLog)
     ? (raw as ProgressState).missLog
     : []
-  const stagesRaw = (raw as Partial<ProgressState>).stages
+  const stagesRaw = stagesOnlyReset ? undefined : (raw as Partial<ProgressState>).stages
   // reviewer指摘M2b-99軽1の修正（M2b-01から引き継ぎ）: stages の中身が era ごとに「一部の
   // 段しか無い」形（手編集の fixture や将来のスキーマ差分）だと、StageMapScreen/StageScreen
   // の `.boss.cleared` 等のアクセスで undefined 参照エラーになり画面全体が落ちていた。
@@ -106,11 +116,15 @@ export function migrate(raw: unknown, today: string = todayIso()): ProgressState
           ]),
         )
       : {}
-  const resetNotice = typeof (raw as Partial<ProgressState>).resetNotice === 'boolean' ? (raw as ProgressState).resetNotice : false
+  const resetNotice = stagesOnlyReset
+    ? true
+    : typeof (raw as Partial<ProgressState>).resetNotice === 'boolean'
+      ? (raw as ProgressState).resetNotice
+      : false
   const examRecords: MockExamRecord[] = Array.isArray((raw as Partial<ProgressState>).examRecords)
     ? (raw as ProgressState).examRecords
     : []
-  return { ...raw, missLog, stages, resetNotice, examRecords }
+  return { ...raw, version: STORAGE_VERSION, missLog, stages, resetNotice, examRecords }
 }
 
 /** resetNotice を消費する（M2b-05が通知を1回出した直後に呼び、saveProgress し直す想定）。 */

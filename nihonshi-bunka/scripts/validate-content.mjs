@@ -178,6 +178,26 @@ export function answerLeaksInUnderlineText(work, underlineText) {
   return leaked
 }
 
+/**
+ * M2i-02①（fact-check-m2e-tiers.md [中]-3「中宮寺→中宮寺半跏思惟像」是正）: 下線テキスト自体が
+ * 正解作品の名称／作者名／出土地名の部分文字列になっていないか（answerLeaksInUnderlineText とは
+ * 逆方向の関係。あちらは「答えの属性が下線に含まれるか」、こちらは「下線が答えの一部そのものか」）。
+ * 例: 下線「中宮寺」→正解「中宮寺半跏思惟像」（work.title に下線テキストがそのまま含まれる）。
+ * 2文字未満の下線テキストは助詞等の偶然一致が多いため対象外にする（低確信点。完了報告に明記）。
+ * 含まれていたフィールド名の配列（'title' | 'artist' | 'findSite' | 'location'）を返す。無ければ空配列。
+ */
+export function underlineTextLeaksIntoAnswer(work, underlineText) {
+  if (!work || typeof underlineText !== 'string' || underlineText.length < 2) return []
+  const leaked = []
+  for (const field of ['title', 'artist', 'findSite', 'location']) {
+    const value = work[field]
+    if (value && typeof value === 'string' && value.includes(underlineText)) {
+      leaked.push(field)
+    }
+  }
+  return leaked
+}
+
 // リード文の下線マーカー。app/src/engine/passage.ts の UNDERLINE_MARKER と揃える
 // （プレーン Node ESM のスクリプトからは TS を直接 import できないため重複実装。
 // 変更する場合は両方揃え、app 側は __tests__/passage.test.ts で固定してある）。
@@ -436,12 +456,28 @@ function validatePassages({ worksById, hasImageAsset, hasThemeSetAsset, eraIds, 
                 )
               }
             }
+            // M2i-02①（fact-check-m2e-tiers.md [中]-3是正）: 下線テキスト自体が正解作品の
+            // 名称／作者名／出土地名の部分文字列になっていないか（上のチェックとは逆方向）。
+            const reverseLeaks = underlineTextLeaksIntoAnswer(work, underlineText)
+            for (const field of reverseLeaks) {
+              errors.push(
+                `${label} / ${underline.key}: 下線テキスト「${underlineText}」が workIds "${workId}" の ${field}「${work[field]}」に含まれている（下線が答えの一部そのものになっている）`,
+              )
+            }
           }
         }
         if (!hasGeneratable) {
           errors.push(
             `${label} / ${underline.key}: workIds のどれも設問を生成できない（画像で出題できず、kind も artifact のまま＝文字問題の素材にもできない）`,
           )
+        }
+
+        // M2i-02②: ask.stem が無い下線は warning で一覧化する（ボス・模試の設問文は
+        // writerのask.stem由来にする方針＝ボス規則v4「engineの汎用文は使わない。型が合わず
+        // 作れない下線は飛ばす」。ask自体が無い、またはask.stemが空/欠落の下線は、ボスでは
+        // 一切使われず、模試ではengineの自動合成文にフォールバックする）。
+        if (!underline.ask || typeof underline.ask.stem !== 'string' || !underline.ask.stem) {
+          warnings.push(`${label} / ${underline.key}: ask.stem が無い（ボス・模試の設問文が汎用文になる/ボスでは使われない）`)
         }
 
         // ask（下線から出したい設問の型・条件スロット。省略可）。値が不正ならエラー。

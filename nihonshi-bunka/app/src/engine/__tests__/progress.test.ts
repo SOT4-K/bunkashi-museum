@@ -131,13 +131,13 @@ describe('createInitialProgress / migrate', () => {
 })
 
 describe('recordStageResult（M2b-04 v2: StageLocalKeyでsegment/bossを指定）', () => {
-  it('ceil(0.9×問数) 以上正解で cleared になる（10問中9問=クリア、8問=未クリア）', () => {
+  it('clearThreshold(10)=8以上正解で cleared になる（M2i ★の定義v4: 10問中8問=クリア、7問=未クリア）', () => {
     const state = createInitialProgress('2026-09-09')
-    const cleared = recordStageResult(state, 'tenpyo', { kind: 'segment', difficulty: 1, segment: 1 }, 9, 10, '2026-09-09')
+    const cleared = recordStageResult(state, 'tenpyo', { kind: 'segment', difficulty: 1, segment: 1 }, 8, 10, '2026-09-09')
     expect(cleared.stages.tenpyo.segments['1-1'].cleared).toBe(true)
     expect(cleared.stages.tenpyo.segments['1-1'].clearedAt).toBe('2026-09-09')
 
-    const notCleared = recordStageResult(state, 'tenpyo', { kind: 'segment', difficulty: 1, segment: 1 }, 8, 10, '2026-09-09')
+    const notCleared = recordStageResult(state, 'tenpyo', { kind: 'segment', difficulty: 1, segment: 1 }, 7, 10, '2026-09-09')
     expect(notCleared.stages.tenpyo.segments['1-1'].cleared).toBe(false)
     expect(notCleared.stages.tenpyo.segments['1-1'].clearedAt).toBeNull()
   })

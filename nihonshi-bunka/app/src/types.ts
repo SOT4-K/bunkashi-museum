@@ -277,12 +277,27 @@ export interface Passage {
  *   テーマセット専用。3セットに1問の頻度で追加する想定（themeSet.ts の
  *   appendOrderQuestionIfDue）。
  */
-export type QuestionType = 'q1' | 'q2' | 'q3' | 'q4' | 'q6' | 'q8' | 'q9' | 'q10' | 'q12' | 'q13' | 'q14'
+/** q5（M2i、★2「作者」）: 画像→作者（4択は作者名の文字列）。engine/q5.ts が生成ロジックを持つ。 */
+export type QuestionType = 'q1' | 'q2' | 'q3' | 'q4' | 'q5' | 'q6' | 'q8' | 'q9' | 'q10' | 'q12' | 'q13' | 'q14'
 
-/** Q9 の条件スロット（作者・時代文化・所蔵・様式・製法・出土地）。engine/q9.ts が生成ロジックを持つ
- *  （型はここで定義し、q9.ts から re-export する。types.ts が engine に依存しないため）。
- *  findSite（M2b-14）: 出土地。holder（M2b-14）: holderKind === 'site' の作品でのみ使う。 */
-export type Q9Slot = 'artist' | 'era' | 'holder' | 'style' | 'technique' | 'findSite'
+/** Q9 の条件スロット（作者・時代文化・所蔵・様式・製法・出土地・所在地・主題・発願者・宗派）。
+ *  engine/q9.ts が生成ロジックを持つ（型はここで定義し、q9.ts から re-export する。types.ts が
+ *  engine に依存しないため）。
+ *  findSite（M2b-14）: 出土地。holder（M2b-14）: holderKind === 'site' の作品でのみ使う。
+ *  location（M2i、★3「出土地・所在地」）: holderKind === 'site' の作品の work.location を使う
+ *  （holder と似た値だが BOARD.md M2i の決定で明示的に location フィールドを使う）。
+ *  subject/patron/religion（M2i、★4「周辺知識」）: work.subject/patron/religion をそのまま使う。 */
+export type Q9Slot =
+  | 'artist'
+  | 'era'
+  | 'holder'
+  | 'style'
+  | 'technique'
+  | 'findSite'
+  | 'location'
+  | 'subject'
+  | 'patron'
+  | 'religion'
 
 /**
  * 回答の種類。'unknown' は4択の下の「わからない」ボタン（当てずっぽうで誤答選択肢を
@@ -331,6 +346,8 @@ export interface Question {
   choiceWorks: Work[]
   /** Q2 のときの選択肢（era id）。Q1/Q3 のときは undefined */
   choiceEras?: Era[]
+  /** Q5（画像→作者。M2i ★2）のときの選択肢（作者名の文字列、4件、シャッフル済み）。 */
+  choiceArtists?: string[]
   /** Q4 のときの選択肢（4件、シャッフル済み）。Q14（年代順並べ替え）のときは、
    *  順序の並び（「A → B → C」）を text に入れて流用する（M2-16）。 */
   choiceStatements?: StatementOption[]
@@ -382,6 +399,8 @@ export interface ItemProgress {
   /** q4/q6/q8/q9/q10 は作品ごとに生成できるとは限らないため、初めてその型が出題された時点で作る。
    *  「所蔵」の判定は q1〜q3 の3方向のまま（DESIGN.md 10章5項）。SRS の型を bunkashi.v2 に拡張。 */
   q4?: SrsCell
+  /** q5（M2i、★2「作者」画像→作者）は初めて出題された時点で作る。q1〜q3と同様「所蔵」判定には使わない。 */
+  q5?: SrsCell
   q6?: SrsCell
   q8?: SrsCell
   q9?: SrsCell
@@ -478,8 +497,10 @@ export interface ProgressState {
    *  3: missLog を追加（M2-23）。4: stages を追加（M2b-01 ステージ制、s1/s2/s3/boss固定）。
    *  5: stages を可変面数（EraStageProgress）に作り直し（M2b-04 v2）。decisions.md
    *  2026-09-08 の決定により、version 5 未満のデータは移行せず全リセットする
-   *  （progress.ts の migrate 参照。面の分割自体が変わるため意味のある移行ができない）。 */
-  version: 1 | 2 | 3 | 4 | 5
+   *  （progress.ts の migrate 参照。面の分割自体が変わるため意味のある移行ができない）。
+   *  6: ★の定義v4（M2i。decisions.md 2026-09-10夜）でステージ分割規則が変わったため、
+   *  stages のみリセットする（図鑑・SRS・XP・missLog・examRecords は保持）。 */
+  version: 1 | 2 | 3 | 4 | 5 | 6
   xp: number
   level: number
   streak: StreakState

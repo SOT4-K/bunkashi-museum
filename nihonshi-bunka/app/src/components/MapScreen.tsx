@@ -19,12 +19,13 @@
 import { useRef, useState } from 'react'
 import styles from './MapScreen.module.css'
 import {
-  buildEraStagePlan,
+  eraTotalItemCount,
   getEraStageProgress,
   getSegmentState,
   isWorldUnlocked,
   nextStageRef,
   worldOrder,
+  worldSegmentPlans,
 } from '../engine/stages'
 import type { Era, ProgressState, Work } from '../types'
 
@@ -206,7 +207,7 @@ export function MapScreen({
             if (!era) return null
             const p = landmarkCenter(worldIndex)
             const unlocked = isWorldUnlocked(worldIndex, eras, imagePool, progress.stages)
-            const plan = buildEraStagePlan(eraId, imagePool)
+            const itemCount = eraTotalItemCount(eraId, imagePool)
             const eraProgress = getEraStageProgress(progress.stages, eraId)
 
             if (!unlocked) {
@@ -230,9 +231,11 @@ export function MapScreen({
             // WorldMapScreen 側で判定する（このパネルはタップして入るだけの入口）。
             let clearedNodeCount = 0
             let totalNodeCount = 0
-            if (plan.itemCount > 0) {
-              for (const difficulty of [1, 2, 3] as const) {
-                for (const seg of plan.segments) {
+            if (itemCount > 0) {
+              // M2i: ★ごとに対象作品（面数）が違うため、そのワールドで実際に面を持つ★
+              // （worldSegmentPlans。0件の★は含まない）だけを合算する。
+              for (const { difficulty, plan: difficultyPlan } of worldSegmentPlans(eraId, imagePool)) {
+                for (const seg of difficultyPlan.segments) {
                   totalNodeCount += 1
                   if (getSegmentState(eraProgress, difficulty, seg.segment).cleared) clearedNodeCount += 1
                 }
@@ -248,13 +251,13 @@ export function MapScreen({
                 className={styles.worldPanel}
                 data-testid={`world-block-${eraId}`}
                 style={{ left: p.x - 100, top: p.y - 20 }}
-                disabled={plan.itemCount === 0}
+                disabled={itemCount === 0}
                 onClick={() => onSelectWorld(eraId)}
               >
                 <div className={styles.worldName}>
                   W{worldIndex + 1} {era.name}
                 </div>
-                {plan.itemCount === 0 ? (
+                {itemCount === 0 ? (
                   <p className={styles.empty}>出題できる作品がまだない。</p>
                 ) : (
                   <p className={styles.worldProgress} data-testid={`world-progress-${eraId}`}>

@@ -19,10 +19,10 @@ import { buildMissReviewSession, type MissReviewItem } from './engine/missLog'
 import { RETRY_XP_MULTIPLIER } from './engine/progress'
 import {
   buildBossQuestions,
-  buildEraStagePlan,
   buildStageQuestions,
   getEraStageProgress,
   getSegmentState,
+  segmentCountsByDifficulty,
   stageShortLabel,
   worldOrder,
   type StageLocalKey,
@@ -146,22 +146,18 @@ export default function App() {
       : { kind: 'segment', eraId, worldIndex, difficulty: key.difficulty, segment: key.segment }
   }
 
-  /** ステージ制（M2b-01→M2b-04 v2→M2b-05）: eraId・key から見出しと問題を組み立てる。
-   *  見出しは「1-1 ★★ 天平文化」形式（stageShortLabel＋era名。チケット規則2の欄外注記）。 */
+  /** ステージ制（M2i ★の定義v4）: eraId・key から見出しと問題を組み立てる。
+   *  見出しは「1-1 ★ 天平文化」形式（stageShortLabel＋era名）。 */
   function buildStageFor(eraId: string, key: StageLocalKey): { title: string; questions: Question[] } {
     const eraName = eras.find((e) => e.id === eraId)?.name ?? eraId
-    // M2b-99c中6: 面番号はワールド内の通し番号（★1〜3で共通のsegments.lengthを使う）。
-    const segmentsPerWorld = buildEraStagePlan(eraId, playableWorks).segments.length
-    const title = `${stageShortLabel(toStageRef(eraId, key), segmentsPerWorld)} ${eraName}`
+    // 面番号はワールド内の通し番号（★ごとに対象作品・面数が違うため、difficultyごとの面数を渡す）。
+    const segmentCounts = segmentCountsByDifficulty(eraId, playableWorks)
+    const title = `${stageShortLabel(toStageRef(eraId, key), segmentCounts)} ${eraName}`
     if (key.kind === 'boss') {
       return { title, questions: buildBossQuestions(eraId, passages, themeSetPool, playableWorks, eras) }
     }
-    return {
-      title,
-      // M2e-02: passages を渡し、下線が対象にする作品には「下線部○」を参照する設問文
-      // （passageId/underlineKey つき）を付ける。
-      questions: buildStageQuestions(eraId, key.difficulty, key.segment, themeSetPool, playableWorks, eras, undefined, passages),
-    }
+    // M2i: ステージはリード文を一切使わない（passages を渡さない。standaloneStem 固定）。
+    return { title, questions: buildStageQuestions(eraId, key.difficulty, key.segment, themeSetPool, playableWorks, eras) }
   }
 
   function goStage(eraId: string, key: StageLocalKey) {

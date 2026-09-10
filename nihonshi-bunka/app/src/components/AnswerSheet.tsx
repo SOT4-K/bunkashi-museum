@@ -47,17 +47,19 @@ export function AnswerSheet({
   const otherEras =
     question.type === 'q2' ? (question.choiceEras ?? []).filter((e) => e.id !== work.era) : []
 
-  // q12/q13/q14 は work.title ではなく writer 手書き・生成済みの選択肢テキストが「正解」
+  // q5/q12/q13/q14 は work.title ではなく writer 手書き・生成済みの選択肢テキストが「正解」
   // （M2-99 reviewer 指摘: 「正解は{work.title}」が常に表示され、文字4択の設問では
-  //  正解の選択肢と無関係な作品名が出てしまっていた）
+  //  正解の選択肢と無関係な作品名が出てしまっていた。M2i: q5（画像→作者）も同様に作者名を出す）
   const correctAnswerLabel =
-    question.type === 'q12'
-      ? (question.choiceQ12?.find((s) => s.correct)?.text ?? work.title)
-      : question.type === 'q13'
-        ? (question.choiceWordPairs?.find((c) => c.correct)?.text ?? work.title)
-        : question.type === 'q14'
-          ? (question.choiceStatements?.find((c) => c.correct)?.text ?? work.title)
-          : work.title
+    question.type === 'q5'
+      ? (question.choiceArtists?.[question.correctIndex] ?? work.artist ?? work.title)
+      : question.type === 'q12'
+        ? (question.choiceQ12?.find((s) => s.correct)?.text ?? work.title)
+        : question.type === 'q13'
+          ? (question.choiceWordPairs?.find((c) => c.correct)?.text ?? work.title)
+          : question.type === 'q14'
+            ? (question.choiceStatements?.find((c) => c.correct)?.text ?? work.title)
+            : work.title
 
   const targetEra = eras.find((e) => e.id === work.era)
   // Q6 の「正解の文化」の detail を1〜2文だけ添える（DESIGN.md 10章「解説の拡張」）

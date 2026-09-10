@@ -99,8 +99,9 @@ describe('実データ: 文化伏せ型下線（q12・stemに「この文化」�
   )
 
   it(
-    'ボス経路（buildBossQuestions、本番実引数・実count）: 文化伏せ型を持つワールド全てで' +
-      '30 seedとも100%維持される（修正前はボス全体で22.4%が上書きされていた。M2e-08b修正確認）',
+    'ボス経路（buildBossQuestions、本番実引数・実count）: M2i ボス規則v4「文化伏せ型は模試専用にし、' +
+      'ボスでは使わない（ヘッダーに文化名が出るため）」により、文化伏せ型の下線は30 seedとも' +
+      '一度もボスに出ない（0%。M2e-08b時点の「100%維持」からv4で方針が変わったため書き直し）',
     () => {
       const keys = culturalHiddenKeys(reviewedPassages)
       const erasWithCultural = reviewedEras.filter((era) =>
@@ -108,21 +109,16 @@ describe('実データ: 文化伏せ型下線（q12・stemに「この文化」�
       )
       expect(erasWithCultural.length).toBeGreaterThan(0)
       const violations: { eraId: string; underlineKey: string; seed: number; type: string }[] = []
-      let hitCount = 0
       for (const era of erasWithCultural) {
         for (let seed = 0; seed < SEED_COUNT; seed++) {
           const boss = buildBossQuestions(era.id, reviewedPassages, reviewedThemeSetPool, reviewedPlayableWorks, reviewedEras, seededRandom(seed))
           for (const q of boss) {
             const key = `${q.passageId}:${q.underlineKey}`
             if (!keys.has(key)) continue
-            hitCount++
-            if (q.type !== 'q12') {
-              violations.push({ eraId: era.id, underlineKey: q.underlineKey ?? '', seed, type: q.type })
-            }
+            violations.push({ eraId: era.id, underlineKey: q.underlineKey ?? '', seed, type: q.type })
           }
         }
       }
-      expect(hitCount).toBeGreaterThan(0)
       expect(violations).toEqual([])
     },
     60000,

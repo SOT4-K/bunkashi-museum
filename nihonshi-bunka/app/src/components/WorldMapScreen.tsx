@@ -35,13 +35,13 @@ import { getMotifIcon } from './worldMotifCatalog'
 import { BossFortressIcon } from './BossFortressIcon'
 import { GenshiBackdrop, KaiseiBackdrop } from './WorldBackgroundArt'
 import {
-  buildEraStagePlan,
+  eraTotalItemCount,
   fullStageSequence,
   isStageRefCleared,
-  overallSegmentNumber,
   stageRefKey,
   stageUnlockBoundary,
   worldOrder,
+  worldSegmentPlans,
   type Difficulty,
   type StageLocalKey,
   type StageRef,
@@ -95,22 +95,24 @@ interface WorldMapNode {
   difficulty?: Difficulty
 }
 
+/** M2i: ★ごとに対象作品（面数）が違うため、そのワールドで実際に面を持つ★（worldSegmentPlans。
+ *  0件の★は含まない）だけを順に並べ、通し番号を振る。 */
 function buildNodes(eraId: string, worldIndex: number, imagePool: Work[]): WorldMapNode[] {
-  const plan = buildEraStagePlan(eraId, imagePool)
-  const segmentsPerWorld = plan.segments.length
   const nodes: WorldMapNode[] = []
-  for (const difficulty of [1, 2, 3] as Difficulty[]) {
+  let overall = 0
+  for (const { difficulty, plan } of worldSegmentPlans(eraId, imagePool)) {
     for (const seg of plan.segments) {
+      overall++
       nodes.push({
         ref: { kind: 'segment', eraId, worldIndex, difficulty, segment: seg.segment },
         key: { kind: 'segment', difficulty, segment: seg.segment },
         isBoss: false,
-        overallLabel: String(overallSegmentNumber(difficulty, seg.segment, segmentsPerWorld)),
+        overallLabel: String(overall),
         difficulty,
       })
     }
   }
-  if (plan.itemCount > 0) {
+  if (eraTotalItemCount(eraId, imagePool) > 0) {
     nodes.push({
       ref: { kind: 'boss', eraId, worldIndex },
       key: { kind: 'boss' },

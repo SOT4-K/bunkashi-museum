@@ -25,12 +25,31 @@ export interface Q9GenerateOptions {
   avoidSlots?: Q9Slot[]
   /** この下線の ask.slot（あれば最優先で試す。失敗すれば通常の優先順位に落ちる）。 */
   preferredSlot?: Q9Slot
+  /** M2i（★2〜★5固定スロット）: 指定した場合、このスロット集合だけを試す（SLOT_PRIORITY による
+   *  既定の優先順位・avoidSlots は無視し、ここに列挙した順で試す）。省略時は従来どおり
+   *  SLOT_PRIORITY（自由出題・模試・ボス向けの既定の優先順位）を使う。 */
+  allowSlots?: Q9Slot[]
 }
 
 /** 試す順序（修正の仕様 M2-09〜11: holder→artist→technique→era。era は最後＝1セット1問までにする）。
  *  M2b-14: findSite（出土地）は holder より先に試す（出土地の設問は入試に出るため優先し、
- *  博物館収蔵の出土品でも「どこで出土したか」を問える）。 */
+ *  博物館収蔵の出土品でも「どこで出土したか」を問える）。
+ *  M2i: ★2〜★5のステージ・ボスは allowSlots で明示的にスロットを固定するため、ここには
+ *  location/subject/patron/religion（M2i で追加した新スロット）を含めない（自由出題・模試の
+ *  既定挙動を変えないため。既存の呼び出し元は allowSlots を渡さず、この配列だけを見る）。 */
 const SLOT_PRIORITY: Q9Slot[] = ['findSite', 'holder', 'artist', 'technique', 'era']
+
+/** scripts/validate-content.mjs の HOLDER_WORDS と同じ語（重複実装。plain .mjs から TS を直接
+ *  import できないため）。M2i 実データ回帰（hakuho-3-1: yamadadera-butsuzu の location「興福寺
+ *  国宝館」が holderKind: 'site' でも「国宝館」という所蔵語を含んでいた）を受け、holderKind だけ
+ *  では防げない所蔵語混入を値そのものでも弾く。 */
+const MUSEUM_LIKE_WORDS = ['博物館', '美術館', '文庫', '記念館', '図書館', '資料館', '尚蔵館', '国宝館', 'コレクション']
+
+/** value に所蔵語（博物館・美術館等）が含まれるか。engine/stages.ts の hasStar（★3判定）からも
+ *  同じ語で判定できるよう export する。 */
+export function containsMuseumWord(value: string): boolean {
+  return MUSEUM_LIKE_WORDS.some((w) => value.includes(w))
+}
 
 function slotValue(work: Work, slot: Q9Slot): string | null {
   switch (slot) {
@@ -38,12 +57,16 @@ function slotValue(work: Work, slot: Q9Slot): string | null {
       return work.artist
     case 'era':
       return work.era
-    case 'holder':
+    case 'holder': {
       // M2b-14: holderKind === 'site'（寺社・堂・遺跡・城など）の作品でしか holder 条件を
       // 使わない。博物館・美術館等（holderKind: 'museum'）は「東京国立博物館にあるものを
       // 選べ」のような入試に出ない設問になるため、holder スロット自体を使えなくする
       // （値を null として返し、SLOT_PRIORITY の次の候補に進ませる）。
-      return work.holderKind === 'site' ? (work.holder ?? null) : null
+      // M2i実データ回帰: holderKind==='site'でも値そのものに所蔵語（「興福寺国宝館」等）が
+      // 含まれることがあるため、そちらも弾く（MUSEUM_LIKE_WORDS参照）。
+      if (work.holderKind !== 'site' || !work.holder) return null
+      return containsMuseumWord(work.holder) ? null : work.holder
+    }
     case 'findSite':
       return work.findSite ?? null
     case 'style':
@@ -52,6 +75,21 @@ function slotValue(work: Work, slot: Q9Slot): string | null {
       // technique は必須の string フィールドだが未設定は空文字（testFixtures.makeWork 参照）。
       // 空文字は「値が無い」として扱う。
       return work.technique || null
+    case 'location': {
+      // M2i ★3「出土地・所在地」: holder と同じく holderKind === 'site' の作品でしか使わない
+      // （博物館収蔵品の所在地を問うと「東京国立博物館にあるものを選べ」になってしまうため。
+      // M2b-14 の決定と同じ理由）。値は BOARD.md M2i の決定どおり work.location を使う
+      // （holder より地名・寺社名が読み取りやすい表記のため）。所蔵語混入も holder と同様に弾く
+      // （実データ回帰: yamadadera-butsuzu の location「興福寺国宝館」）。
+      if (work.holderKind !== 'site' || !work.location) return null
+      return containsMuseumWord(work.location) ? null : work.location
+    }
+    case 'subject':
+      return work.subject ?? null
+    case 'patron':
+      return work.patron ?? null
+    case 'religion':
+      return work.religion ?? null
   }
 }
 
@@ -85,10 +123,18 @@ function slotLabel(slot: Q9Slot, rawValue: string, eraName: string): string {
       return `${eraName}のもの`
     case 'holder':
       return `${value}にあるもの`
+    case 'location':
+      return `${value}にあるもの`
     case 'style':
       return `${value}の様式のもの`
     case 'technique':
       return `製法が${value}のもの`
+    case 'subject':
+      return `${value}を主題とするもの`
+    case 'patron':
+      return `発願者（建立者）が${value}のもの`
+    case 'religion':
+      return `宗派（宗教）が${value}のもの`
   }
 }
 
@@ -103,17 +149,27 @@ function slotLabelNegated(slot: Q9Slot, rawValue: string, eraName: string): stri
       return `${eraName}でないもの`
     case 'holder':
       return `${value}にないもの`
+    case 'location':
+      return `${value}にないもの`
     case 'style':
       return `${value}の様式でないもの`
     case 'technique':
       return `製法が${value}でないもの`
+    case 'subject':
+      return `${value}を主題としないもの`
+    case 'patron':
+      return `発願者（建立者）が${value}でないもの`
+    case 'religion':
+      return `宗派（宗教）が${value}でないもの`
   }
 }
 
-/** ask.slot / avoidSlots を反映した、実際に試すスロット順。preferredSlot があれば先頭に回す。 */
-function effectiveSlotOrder(opts: Pick<Q9GenerateOptions, 'avoidSlots' | 'preferredSlot'>): Q9Slot[] {
+/** ask.slot / avoidSlots / allowSlots を反映した、実際に試すスロット順。preferredSlot があれば
+ *  先頭に回す。allowSlots が指定されているときは SLOT_PRIORITY を無視し、allowSlots に列挙した
+ *  順だけを試す（M2i: ★2〜★5のステージ・ボスがスロットを固定するために使う）。 */
+function effectiveSlotOrder(opts: Pick<Q9GenerateOptions, 'avoidSlots' | 'preferredSlot' | 'allowSlots'>): Q9Slot[] {
   const avoid = new Set(opts.avoidSlots ?? [])
-  const base = SLOT_PRIORITY.filter((s) => !avoid.has(s))
+  const base = (opts.allowSlots ?? SLOT_PRIORITY).filter((s) => !avoid.has(s))
   if (opts.preferredSlot && !avoid.has(opts.preferredSlot) && base.includes(opts.preferredSlot)) {
     return [opts.preferredSlot, ...base.filter((s) => s !== opts.preferredSlot)]
   }
@@ -143,7 +199,7 @@ function generateNormal(
   pool: Work[],
   eras: Era[],
   rng: RandomFn,
-  opts: Pick<Q9GenerateOptions, 'avoidSlots' | 'preferredSlot'>,
+  opts: Pick<Q9GenerateOptions, 'avoidSlots' | 'preferredSlot' | 'allowSlots'>,
 ): Q9QuestionData | null {
   const eraOrderIndex = eraOrderIndexOf(eras)
   const near = nearbyCandidates(target, pool, eraOrderIndex)
@@ -174,7 +230,7 @@ function generateReversed(
   pool: Work[],
   eras: Era[],
   rng: RandomFn,
-  opts: Pick<Q9GenerateOptions, 'avoidSlots' | 'preferredSlot'>,
+  opts: Pick<Q9GenerateOptions, 'avoidSlots' | 'preferredSlot' | 'allowSlots'>,
 ): Q9QuestionData | null {
   const eraOrderIndex = eraOrderIndexOf(eras)
   const near = nearbyCandidates(target, pool, eraOrderIndex)

@@ -326,6 +326,11 @@ export interface ThemeBuildOptions {
    *  ときの既定 stem（engine/stems.ts）を「下線部○を参照する文面」にするか「下線を参照しない
    *  単独問題の文面」にするかを決める。省略時（下線に紐づかない補充問題）は単独問題扱い。 */
   underlineKey?: string
+  /** M2i-02④（research/fact-check-m2e-tiers.md [中]-2「リード画像に正解画像が並ぶ」是正）:
+   *  ここに列挙した work.id を Q9 の正解にしない（画像リード型 passage の leadWorkIds を
+   *  渡す想定。同じ画像がリードと選択肢の両方に出て答えが分かってしまうのを防ぐ）。
+   *  Q9 が生成できてもこの集合に含まれていれば null 扱いにし、通常の優先順位に落ちる。 */
+  excludeQ9WorkIds?: string[]
 }
 
 interface BuildResult {
@@ -382,7 +387,7 @@ function buildThemeQuestionForWorkWithMetaRaw(
   rng: RandomFn,
   opts: ThemeBuildOptions,
 ): BuildResult | null {
-  const { ask, avoidEraSlot = false, avoidType, avoidQ9 = false, imagePool = pool, desiredCategory } = opts
+  const { ask, avoidEraSlot = false, avoidType, avoidQ9 = false, imagePool = pool, desiredCategory, excludeQ9WorkIds } = opts
   const askSlot = isQ9Slot(ask?.slot) ? ask?.slot : undefined
   const avoidSlotsForQ9: Q9Slot[] = avoidEraSlot ? ['era'] : []
   // M2-16: 対象自身が画像で出題できる作品かどうか（imagePool にあるか）。画像が要る型
@@ -399,6 +404,9 @@ function buildThemeQuestionForWorkWithMetaRaw(
     if (ask?.answerId) {
       const explicit = generateQ9QuestionFromIds(imagePool, ask.answerId, ask.distractorIds, eras, rng)
       if (!explicit) return null
+      // M2i-02④: 正解画像がリード画像（excludeQ9WorkIds）と同じなら、Q9 は出さない
+      // （通常の優先順位に落ちる。呼び出し側 buildThemeQuestionForWorkWithMetaRaw 参照）。
+      if (excludeQ9WorkIds?.includes(explicit.correctWork.id)) return null
       const { items, correctIndex } = buildChoices(explicit.correctWork, explicit.distractorWorks, rng)
       return {
         question: {
@@ -416,6 +424,8 @@ function buildThemeQuestionForWorkWithMetaRaw(
     }
     const data = generateQ9Question(work, imagePool, eras, rng, { avoidSlots: avoidSlotsForQ9, preferredSlot: askSlot })
     if (!data) return null
+    // M2i-02④: 正解画像がリード画像と同じなら、Q9 は出さない（通常の優先順位に落ちる）。
+    if (excludeQ9WorkIds?.includes(data.correctWork.id)) return null
     const { items, correctIndex } = buildChoices(data.correctWork, data.distractorWorks, rng)
     return {
       question: {
@@ -684,6 +694,8 @@ export function buildThemeSetQuestions(
       imagePool,
       desiredCategory: desiredCategoryForIndex(index),
       underlineKey: underline.key,
+      // M2i-02④: 画像リード型 passage のリード画像と同じ画像を Q9 の正解にしない。
+      excludeQ9WorkIds: passage.kind === 'image' ? passage.leadWorkIds : undefined,
     })
     if (!result) {
       // M2-16: 画像を持たない対象（kind: person/text/concept）で facts/falseStatements/pairs も

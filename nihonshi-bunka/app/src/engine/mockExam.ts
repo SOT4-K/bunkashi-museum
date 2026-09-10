@@ -172,6 +172,9 @@ export function buildMockExam(
       imagePool,
       desiredCategory,
       underlineKey: candidate.underline.key,
+      // M2i-02④: 画像リード型 passage のリード画像と同じ画像を Q9 の正解にしない
+      // （research/fact-check-m2e-tiers.md [中]-2 是正）。
+      excludeQ9WorkIds: candidate.passage.kind === 'image' ? candidate.passage.leadWorkIds : undefined,
     })
     if (!question) continue
     // M2e-06: 図版上限に達していたらこの候補は捨て、次の候補（別の下線・別の作品）に譲る

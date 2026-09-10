@@ -1,9 +1,10 @@
-// engine/stages.ts の単体テスト（M2b-04 v2: 直列解禁・可変面数・端数規則・N<5暫定規則・
-// ボス長・誤答露出規則）。合成データで期待値を手計算できる形にする。
-// builder メモ「旧方式を置き換えるならテストも書き直す」: M2b-01（固定s1/s2/s3/boss・
-// ワープあり）から作り直したため、この事業のテストも新方式の説明ごと書き直した。
+// engine/stages.ts の単体テスト（M2i ★の定義v4: ★ごとに対象作品を固定分割・リード文なし・
+// ボスはwriterのask.stemがある下線だけから3群で作る）。合成データで期待値を手計算できる形にする。
+// builder メモ「旧方式を置き換えるならテストも書き直す」: v3（M2e。★1〜3共通の分割・下線起点の
+// リード文つき）から作り直したため、この事業のテストも新方式の説明ごと書き直した。
 import { describe, expect, it } from 'vitest'
 import {
+  ALL_DIFFICULTIES,
   DIFFICULTY_TYPES,
   bossExposureRate,
   bossProgress,
@@ -13,20 +14,21 @@ import {
   buildStageQuestions,
   clearThreshold,
   emptyEraStageProgress,
+  eraTotalItemCount,
   fullStageSequence,
-  getEraStageProgress,
-  getSegmentState,
   isStageUnlocked,
   isWorldUnlocked,
   nextStageRef,
   overallSegmentNumber,
   questionCountForSegment,
+  segmentCountsByDifficulty,
   segmentKey,
   stageRefKey,
   stageRefToLocalKey,
   stageShortLabel,
   stageUnlockBoundary,
   worldOrder,
+  worldSegmentPlans,
 } from '../stages'
 // M2b-99c中3: 「ワープ相当のAPIが無いこと」の検査を実モジュールの実際のエクスポート
 // 一覧に対して行うため、名前空間import（* as）も別途取り込む。
@@ -41,7 +43,7 @@ const eras: Era[] = [
   { id: 'e4', name: 'E4文化', period: '', order: 4, summary: '', detail: '', items: [{ text: 'e4item', category: 'style' }] },
 ]
 
-/** ★1〜3 のすべての型が生成できるだけのデータを持つ作品（era: e1）。 */
+/** ★1〜5のすべての型が生成できるだけのデータを持つ作品（era: e1）。 */
 function fullWork(id: string, n: number): Work {
   return makeWork({
     id,
@@ -49,9 +51,14 @@ function fullWork(id: string, n: number): Work {
     category: 'sculpture',
     status: 'reviewed',
     artist: `作者${n}`,
-    style: `様式${n}`,
-    technique: `製法${n}`,
+    findSite: `出土地${n}`,
     holder: `所蔵${n}`,
+    location: `所在地${n}`,
+    technique: `製法${n}`,
+    style: `様式${n}`,
+    subject: `主題${n}`,
+    patron: `発願者${n}`,
+    religion: `宗派${n}`,
     facts: [
       { slot: 'artist', text: `作者${n}が作った作品` },
       { slot: 'style', text: `様式${n}の作品` },
@@ -76,37 +83,43 @@ const richWorks26: Work[] = Array.from({ length: 26 }, (_, i) => fullWork(`n${i 
 // e1にちょうど20件（フルチャンクのみ、端数なし）。
 const richWorks20: Work[] = Array.from({ length: 20 }, (_, i) => fullWork(`f${i + 1}`, i + 1))
 
-// facts/pairs/orderIndex/artist/style/holder 一切無い、画像だけの作品（e2）。
+// artist/findSite/location/technique/style/pairs 一切無い、画像だけの作品（e2）。
+// ★1・★4だけを持ち、★2・★3・★5は持たない（hasStar の判定材料）。
 const bareWork = makeWork({ id: 'bare1', era: 'e2', category: 'sculpture', status: 'reviewed' })
 
-describe('DIFFICULTY_TYPES（チケット文面どおりの難易度定義）', () => {
-  it('★1=Q1/Q3、★2=Q2/Q4/Q6/Q9/Q12、★3=Q8/Q10/Q13/Q14', () => {
+describe('DIFFICULTY_TYPES（★の定義v4）', () => {
+  it('★1=Q1/Q3、★2=Q5/Q9、★3=Q9、★4=Q4/Q6/Q9/Q8、★5=Q9/Q13/Q10', () => {
     expect(DIFFICULTY_TYPES[1]).toEqual(['q1', 'q3'])
-    expect(DIFFICULTY_TYPES[2]).toEqual(['q2', 'q4', 'q6', 'q9', 'q12'])
-    expect(DIFFICULTY_TYPES[3]).toEqual(['q8', 'q10', 'q13', 'q14'])
+    expect(DIFFICULTY_TYPES[2]).toEqual(['q5', 'q9'])
+    expect(DIFFICULTY_TYPES[3]).toEqual(['q9'])
+    expect(DIFFICULTY_TYPES[4]).toEqual(['q4', 'q6', 'q9', 'q8'])
+    expect(DIFFICULTY_TYPES[5]).toEqual(['q9', 'q13', 'q10'])
+  })
+  it('ALL_DIFFICULTIES は1〜5', () => {
+    expect(ALL_DIFFICULTIES).toEqual([1, 2, 3, 4, 5])
   })
 })
 
-describe('clearThreshold（reviewer指摘M2b-99中1修正を引き継ぐ: 最低1ミスは常に許容する）', () => {
-  it('10問は9問以上でクリア（1問だけ間違えても良い）', () => {
-    expect(clearThreshold(10)).toBe(9)
+describe('clearThreshold（★の定義v4: 10問→8問以上、10問未満→1ミス以内、20問(ボス)→8割）', () => {
+  it('10問は8問以上でクリア', () => {
+    expect(clearThreshold(10)).toBe(8)
   })
-  it('3〜9問も1ミスまでは許容する', () => {
+  it('3〜9問は1ミスまで許容', () => {
     for (let n = 3; n <= 9; n++) expect(clearThreshold(n)).toBe(n - 1)
   })
-  it('1〜2問は全問正解が必要（1ミス許容が意味をなさない極小値）', () => {
+  it('1〜2問は全問正解が必要', () => {
     expect(clearThreshold(1)).toBe(1)
     expect(clearThreshold(2)).toBe(2)
   })
   it('0問は0（生成できていない異常系）', () => {
     expect(clearThreshold(0)).toBe(0)
   })
-  it('チケット文面の例「N=2なら4問・3問以上正解」と一致する（N<5暫定規則: 2N問にclearThresholdを適用）', () => {
-    expect(clearThreshold(4)).toBe(3)
+  it('20問（ボス、N>15）は8割=16問以上', () => {
+    expect(clearThreshold(20)).toBe(16)
   })
 })
 
-describe('bossQuestionCount（チケット規則4: N≤15→10問、N>15→20問）', () => {
+describe('bossQuestionCount（N≤15→10問、N>15→20問）', () => {
   it('N=0はボスを作れないため0', () => {
     expect(bossQuestionCount(0)).toBe(0)
   })
@@ -120,70 +133,100 @@ describe('bossQuestionCount（チケット規則4: N≤15→10問、N>15→20問
   })
 })
 
-describe('buildEraStagePlan / partitionIntoSegments（チケット規則3: 10件ずつ固定分割・端数規則。M2b-99c中5で端数の配分を是正）', () => {
-  it('N<5（4件）: フルチャンク無し・1面のみ・全件2問（N<5暫定規則。decisions.md 2026-09-08「2N問」を維持）', () => {
-    const plan = buildEraStagePlan('e1', richWorks4)
+describe('buildEraStagePlan（★ごとの対象作品の固定分割。10件ずつ＋端数規則）', () => {
+  it('★1（全件対象）N<5（4件）: フルチャンク無し・1面のみ・全件2問', () => {
+    const plan = buildEraStagePlan('e1', 1, richWorks4)
     expect(plan.itemCount).toBe(4)
     expect(plan.segments).toHaveLength(1)
     expect(plan.segments[0]).toEqual({ segment: 1, workIds: richWorks4.map((w) => w.id), extraDoubleCount: 4 })
     expect(questionCountForSegment(plan.segments[0])).toBe(8) // 2N = 8
   })
 
-  it('5<=N<10（7件）: フルチャンク無し・1面のみ・M2b-99c中5是正で10問に近づける（3件だけ2問・4件は1問）', () => {
-    const plan = buildEraStagePlan('e1', richWorks7)
+  it('5<=N<10（7件）: フルチャンク無し・1面のみ・10問に近づける（3件だけ2問・4件は1問）', () => {
+    const plan = buildEraStagePlan('e1', 1, richWorks7)
     expect(plan.segments).toHaveLength(1)
     expect(plan.segments[0].workIds).toHaveLength(7)
     expect(plan.segments[0].extraDoubleCount).toBe(3) // 10-7
-    expect(questionCountForSegment(plan.segments[0])).toBe(10) // 7+3=10（是正前は2×7=14だった）
+    expect(questionCountForSegment(plan.segments[0])).toBe(10)
   })
 
-  it('N=9（端数規則の境界、tenpyo/kaseiの実データ相当）: 1件だけ2問・10問ちょうど', () => {
-    const richWorks9 = Array.from({ length: 9 }, (_, i) => fullWork(`t${i + 1}`, i + 1))
-    const plan = buildEraStagePlan('e1', richWorks9)
-    expect(plan.segments).toHaveLength(1)
-    expect(plan.segments[0].extraDoubleCount).toBe(1) // 10-9
-    expect(questionCountForSegment(plan.segments[0])).toBe(10) // 是正前は2×9=18だった
-  })
-
-  it('N=20（端数なし）: 2面とも10件・2問化なし', () => {
-    const plan = buildEraStagePlan('e1', richWorks20)
+  it('N=20（端数なし）: 2面とも10件・2問化なし。1面目は常に同じ10作品（orderIndex昇順の先頭10件）', () => {
+    const plan = buildEraStagePlan('e1', 1, richWorks20)
     expect(plan.segments).toHaveLength(2)
     expect(plan.segments[0].workIds).toHaveLength(10)
     expect(plan.segments[1].workIds).toHaveLength(10)
     expect(plan.segments.every((s) => s.extraDoubleCount === 0)).toBe(true)
-    // 1-1（segment 1）は常に同じ10作品（orderIndex昇順の先頭10件）
     expect(plan.segments[0].workIds).toEqual(richWorks20.slice(0, 10).map((w) => w.id))
   })
 
   it('N=23（端数3件<5）: 端数は前の面に併合され、2面目は13件・2問化なし', () => {
-    const plan = buildEraStagePlan('e1', richWorks23)
+    const plan = buildEraStagePlan('e1', 1, richWorks23)
     expect(plan.segments).toHaveLength(2)
     expect(plan.segments[0].workIds).toHaveLength(10)
     expect(plan.segments[1].workIds).toHaveLength(13)
-    expect(plan.segments.every((s) => s.extraDoubleCount === 0)).toBe(true)
   })
 
   it('N=26（端数6件>=5）: 3面目は独立し、10問に近づける（4件だけ2問・2件は1問）', () => {
-    const plan = buildEraStagePlan('e1', richWorks26)
+    const plan = buildEraStagePlan('e1', 1, richWorks26)
     expect(plan.segments).toHaveLength(3)
-    expect(plan.segments[0].workIds).toHaveLength(10)
-    expect(plan.segments[1].workIds).toHaveLength(10)
     expect(plan.segments[2].workIds).toHaveLength(6)
     expect(plan.segments[2].extraDoubleCount).toBe(4) // 10-6
-    expect(questionCountForSegment(plan.segments[2])).toBe(10) // 是正前は2×6=12だった
-  })
-
-  it('★1〜3は同じ分割・同じ面数（segmentsは難易度に依存しない共通データ）', () => {
-    const plan = buildEraStagePlan('e1', richWorks23)
-    // buildEraStagePlan は難易度を引数に取らない＝★1/2/3で常に同じ segments を使う設計。
-    expect(plan.segments.map((s) => s.workIds.length)).toEqual([10, 13])
+    expect(questionCountForSegment(plan.segments[2])).toBe(10)
   })
 
   it('対象作品が無い文化は0面（itemCount=0, segments=[]）', () => {
-    const plan = buildEraStagePlan('e3', richWorks4)
+    const plan = buildEraStagePlan('e3', 1, richWorks4)
     expect(plan.itemCount).toBe(0)
     expect(plan.segments).toEqual([])
-    expect(plan.bossSize).toBe(0)
+  })
+
+  it('★2（artistを持つ作品のみ）: artistが無い作品は分割対象から外れる', () => {
+    const mixed = [...richWorks4, bareWork].filter((w) => w.era === 'e1' || w.id === 'bare1')
+    // bareWork は era e2 のため e1 の分割には影響しない（別途 e2 で確認）。
+    const plan1 = buildEraStagePlan('e1', 2, richWorks4)
+    expect(plan1.itemCount).toBe(4) // richWorks4 は全件 artist あり
+    const plan2 = buildEraStagePlan('e2', 2, [bareWork])
+    expect(plan2.itemCount).toBe(0) // bareWork は artist が無いため★2の対象外
+    void mixed
+  })
+
+  it('★3（findSite/locationを持つ作品のみ、博物館は除外）: 何も持たない作品は対象外', () => {
+    const plan = buildEraStagePlan('e2', 3, [bareWork])
+    expect(plan.itemCount).toBe(0)
+    const withFindSite = makeWork({ id: 'fs1', era: 'e2', status: 'reviewed', findSite: '出土地X' })
+    expect(buildEraStagePlan('e2', 3, [withFindSite]).itemCount).toBe(1)
+    // holderKind: 'museum' の location は★3の対象にしない（博物館は出さない、M2b-14の決定どおり）。
+    const museumLocation = makeWork({ id: 'ml1', era: 'e2', status: 'reviewed', holder: '東京国立博物館', holderKind: 'museum', location: '東京国立博物館' })
+    expect(buildEraStagePlan('e2', 3, [museumLocation]).itemCount).toBe(0)
+    // holderKind: 'site' の location は対象になる。
+    const siteLocation = makeWork({ id: 'sl1', era: 'e2', status: 'reviewed', holder: '法隆寺', holderKind: 'site', location: '法隆寺（奈良）' })
+    expect(buildEraStagePlan('e2', 3, [siteLocation]).itemCount).toBe(1)
+  })
+
+  it('★4（周辺知識）は全件対象（★1と同じ分割になる）', () => {
+    expect(buildEraStagePlan('e1', 4, richWorks4).itemCount).toBe(4)
+    expect(buildEraStagePlan('e2', 4, [bareWork]).itemCount).toBe(1)
+  })
+
+  it('★5（technique/style/pairsのいずれかを持つ作品のみ）: 何も持たない作品は対象外', () => {
+    expect(buildEraStagePlan('e2', 5, [bareWork]).itemCount).toBe(0)
+    expect(buildEraStagePlan('e1', 5, richWorks4).itemCount).toBe(4)
+  })
+})
+
+describe('worldSegmentPlans / segmentCountsByDifficulty（0件の★は含まない）', () => {
+  it('richWorks4（全★を持つ）は★1〜5すべてが1面ずつ', () => {
+    const plans = worldSegmentPlans('e1', richWorks4)
+    expect(plans.map((p) => p.difficulty)).toEqual([1, 2, 3, 4, 5])
+    const counts = segmentCountsByDifficulty('e1', richWorks4)
+    expect(counts).toEqual({ 1: 1, 2: 1, 3: 1, 4: 1, 5: 1 })
+  })
+
+  it('bareWork（★1・★4のみ）は★2・3・5が抜ける', () => {
+    const plans = worldSegmentPlans('e2', [bareWork])
+    expect(plans.map((p) => p.difficulty)).toEqual([1, 4])
+    const counts = segmentCountsByDifficulty('e2', [bareWork])
+    expect(counts).toEqual({ 1: 1, 4: 1 })
   })
 })
 
@@ -197,27 +240,71 @@ describe('buildStageQuestions', () => {
     for (const q of qs) expect(['q1', 'q3']).toContain(q.type)
   })
 
-  it('★2（Q2/Q4/Q6/Q9/Q12）は必要なデータがそろっている作品で生成できる。Q12は仕組み上ステージ内では常に0件', () => {
-    const qs = buildStageQuestions('e1', 2, 1, richWorks4, richWorks4, eras, seededRandom(2))
-    expect(qs.length).toBeGreaterThan(0)
+  it('★1はリード文を一切使わない（passageId無し、stemは「下線部」を含まない）', () => {
+    const qs = buildStageQuestions('e1', 1, 1, richWorks4, richWorks4, eras, seededRandom(1))
     for (const q of qs) {
-      expect(['q2', 'q4', 'q6', 'q9']).toContain(q.type)
-      expect(q.type).not.toBe('q12')
+      expect(q.passageId).toBeUndefined()
+      expect(q.stem?.includes('下線部')).toBe(false)
     }
   })
 
-  it('★3（Q8/Q10/Q13/Q14）はfacts/pairs/orderIndexがそろっている作品で生成できる', () => {
+  it('★2（Q5/Q9）はartistを持つ作品で生成できる。Q9はartistスロット固定', () => {
+    const qs = buildStageQuestions('e1', 2, 1, richWorks4, richWorks4, eras, seededRandom(2))
+    expect(qs.length).toBeGreaterThan(0)
+    for (const q of qs) {
+      expect(['q5', 'q9']).toContain(q.type)
+      if (q.type === 'q9') expect(q.q9Slot).toBe('artist')
+      if (q.type === 'q5') expect(q.choiceArtists).toHaveLength(4)
+    }
+  })
+
+  it('★2はartistが無い作品では0件になる', () => {
+    const qs = buildStageQuestions('e2', 2, 1, [bareWork], [bareWork], eras, seededRandom(1))
+    expect(qs).toEqual([])
+  })
+
+  it('★3（Q9、findSite/locationスロット固定）はfindSite/locationを持つ作品で生成できる', () => {
     const qs = buildStageQuestions('e1', 3, 1, richWorks4, richWorks4, eras, seededRandom(3))
     expect(qs.length).toBeGreaterThan(0)
-    for (const q of qs) expect(['q8', 'q10', 'q13', 'q14']).toContain(q.type)
+    for (const q of qs) {
+      expect(q.type).toBe('q9')
+      expect(['findSite', 'location']).toContain(q.q9Slot)
+    }
+  })
+
+  it('★4（Q4/Q6/Q9/Q8）はfacts/eras.items/subject等がそろっている作品で生成できる', () => {
+    const qs = buildStageQuestions('e1', 4, 1, richWorks4, richWorks4, eras, seededRandom(4))
+    expect(qs.length).toBeGreaterThan(0)
+    for (const q of qs) {
+      expect(['q4', 'q6', 'q9', 'q8']).toContain(q.type)
+      if (q.type === 'q9') expect(['subject', 'patron', 'religion']).toContain(q.q9Slot)
+    }
+  })
+
+  it('★5（Q9/Q13/Q10）はtechnique/style/pairs/factsがそろっている作品で生成できる', () => {
+    const qs = buildStageQuestions('e1', 5, 1, richWorks4, richWorks4, eras, seededRandom(5))
+    expect(qs.length).toBeGreaterThan(0)
+    for (const q of qs) {
+      expect(['q9', 'q13', 'q10']).toContain(q.type)
+      if (q.type === 'q9') expect(['technique', 'style']).toContain(q.q9Slot)
+    }
+  })
+
+  it('eraスロット（文化当て）のQ9は★2〜5のどの面でも一度も出ない（30 seed）', () => {
+    for (const difficulty of [2, 3, 4, 5] as const) {
+      for (let seed = 0; seed < 30; seed++) {
+        const qs = buildStageQuestions('e1', difficulty, 1, richWorks20, richWorks20, eras, seededRandom(seed))
+        for (const q of qs) expect(q.q9Slot).not.toBe('era')
+      }
+    }
   })
 
   it('doubledでない面（20件中の1面=10件）は1作品1問、10問を超えない', () => {
-    for (const difficulty of [1, 2, 3] as const) {
+    for (const difficulty of [1, 2, 3, 4, 5] as const) {
       const qs = buildStageQuestions('e1', difficulty, 1, richWorks20, richWorks20, eras, seededRandom(difficulty))
       expect(qs.length).toBeLessThanOrEqual(10)
       const workIds = qs.map((q) => q.work.id)
-      expect(new Set(workIds).size).toBe(workIds.length) // 1作品1問（重複無し）
+      expect(new Set(workIds).size).toBe(workIds.length)
     }
   })
 
@@ -233,8 +320,8 @@ describe('buildStageQuestions', () => {
     expect(qs).toEqual([])
   })
 
-  it('10 seed とも「同じ作品×同じ型」の重複が無い（★1〜3すべて）', () => {
-    for (const difficulty of [1, 2, 3] as const) {
+  it('10 seed とも「同じ作品×同じ型」の重複が無い（★1〜5すべて）', () => {
+    for (const difficulty of [1, 2, 3, 4, 5] as const) {
       for (let seed = 0; seed < 10; seed++) {
         const qs = buildStageQuestions('e1', difficulty, 1, richWorks4, richWorks4, eras, seededRandom(seed))
         const keys = qs.map((q) => `${q.work.id}:${q.type}`)
@@ -243,147 +330,21 @@ describe('buildStageQuestions', () => {
     }
   })
 
-  it('型が1問も作れない文化はその面が0件になる', () => {
-    // bareWork は facts/pairs/orderIndex/artist/style/holder が無いため、★3の4型すべてが
-    // 生成不能（q8: artist/style無し、q10: facts無し、q13: pairs無し、q14: orderIndex無し）。
-    const qs = buildStageQuestions('e2', 3, 1, [bareWork], [bareWork], eras, seededRandom(1))
-    expect(qs).toEqual([])
-  })
-
-  it('一方、同じ作品で★1（Q1/Q3）はデータ不要なので生成できる（0件にならない）', () => {
-    const qs = buildStageQuestions('e2', 1, 1, [bareWork], [bareWork], eras, seededRandom(1))
-    expect(qs.length).toBeGreaterThan(0)
-  })
-
   it('対象文化に出題対象が無ければ0件（面自体が存在しない）', () => {
     const qs = buildStageQuestions('e3', 1, 1, richWorks4, richWorks4, eras, seededRandom(1))
     expect(qs).toEqual([])
   })
 })
 
-describe('buildBossQuestions（ボス長・誤答露出規則）', () => {
-  const passageX: Passage = {
-    id: 'px',
-    era: 'e1',
-    title: 'X',
-    text: '本文。[[a|下線1]][[b|下線2]]',
-    sources: [],
-    underlines: [
-      { key: 'a', workIds: ['w1'] },
-      { key: 'b', workIds: ['w2'] },
-    ],
-  }
-  const passageY: Passage = {
-    id: 'py',
-    era: 'e1',
-    title: 'Y',
-    text: '本文。[[a|下線1]][[b|下線2]]',
-    sources: [],
-    underlines: [
-      { key: 'a', workIds: ['w3'] },
-      { key: 'b', workIds: ['w4'] },
-    ],
-  }
-
-  it(
-    'M2b-99c中1是正: N=4（≤15）はボス10問目標。候補が4作品しかなくても、同一作品×別の型の' +
-      '組み合わせ（最終補充パス）で目標の10問に到達する（同じ作品×同じ型の完全重複はしない。' +
-      '是正前は4問止まりだった＝insei/kitayama/momoyama等の実データ回帰と同じ原因）',
-    () => {
-      const boss = buildBossQuestions('e1', [passageX, passageY], richWorks4, richWorks4, eras, seededRandom(1))
-      expect(boss.length).toBe(10)
-      const ids = boss.map((q) => q.work.id)
-      for (const id of ['w1', 'w2', 'w3', 'w4']) expect(ids).toContain(id)
-      const pairKeys = boss.map((q) => `${q.work.id}:${q.type}`)
-      expect(new Set(pairKeys).size).toBe(pairKeys.length) // 同じ作品×同じ型の完全重複は無い
-    },
-  )
-
-  it('count を明示すれば上書きできる（テスト用）', () => {
-    const boss = buildBossQuestions('e1', [passageX, passageY], richWorks4, richWorks4, eras, seededRandom(1), 2)
-    expect(boss.length).toBeLessThanOrEqual(2)
-  })
-
-  it('その文化に reviewed passage が無ければ空配列（ボスを作れない＝止める条件のケース）', () => {
-    const boss = buildBossQuestions('e1', [{ ...passageX, era: 'e2' }], richWorks4, richWorks4, eras, seededRandom(1))
-    expect(boss).toEqual([])
-  })
-
-  it('passage が複数あれば、どれを選ぶかは乱数で変わる（20 seed で両方が選ばれることを確認）', () => {
-    const single1: Passage = {
-      id: 'p1',
-      era: 'e1',
-      title: 'P1',
-      text: '本文。[[a|下線]]',
-      sources: [],
-      underlines: [{ key: 'a', workIds: ['w1'] }],
-    }
-    const single2: Passage = {
-      id: 'p2',
-      era: 'e1',
-      title: 'P2',
-      text: '本文。[[a|下線]]',
-      sources: [],
-      underlines: [{ key: 'a', workIds: ['w2'] }],
-    }
-    const seenPassageIds = new Set<string>()
-    for (let seed = 0; seed < 20; seed++) {
-      const boss = buildBossQuestions('e1', [single1, single2], richWorks4, richWorks4, eras, seededRandom(seed))
-      for (const q of boss) if (q.passageId) seenPassageIds.add(q.passageId)
-    }
-    expect(seenPassageIds.has('p1')).toBe(true)
-    expect(seenPassageIds.has('p2')).toBe(true)
-  })
-
-  it(
-    '1本のpassage内で同じ作品を対象にする下線が複数あっても、同じ作品×同じ型の完全重複はしない' +
-      '（実データで検出したケースの再現。M2b-99c中1是正後は最終補充パスにより目標問数まで' +
-      '同一作品×別の型の組み合わせが入りうるため、検査は「作品idの一意性」ではなく' +
-      '「作品×型の組の一意性」に変更する）',
-    () => {
-      const dup: Passage = {
-        id: 'pdup',
-        era: 'e1',
-        title: 'Dup',
-        text: '本文。[[a|下線1]][[b|下線2]]',
-        sources: [],
-        underlines: [
-          { key: 'a', workIds: ['w1'] },
-          { key: 'b', workIds: ['w1'] }, // 同じ作品を2つの下線が指す
-        ],
-      }
-      const boss = buildBossQuestions('e1', [dup, passageY], richWorks4, richWorks4, eras, seededRandom(1))
-      const pairKeys = boss.map((q) => `${q.work.id}:${q.type}`)
-      expect(new Set(pairKeys).size).toBe(pairKeys.length)
-    },
-  )
-
-  it('bossExposureRate: 4作品しかないワールドで、ボス4問なら全項目が露出する（total=4, exposed=4, rate=1）', () => {
-    const boss = buildBossQuestions('e1', [passageX, passageY], richWorks4, richWorks4, eras, seededRandom(1))
-    const stats = bossExposureRate(boss, 'e1', richWorks4)
-    expect(stats.total).toBe(4)
-    expect(stats.exposed).toBe(4)
-    expect(stats.rate).toBe(1)
-  })
-})
-
 describe('M2b-09（画像なし作品混入バグの回帰防止）: pool（themeSetPool 相当。画像なし項目も含む）と' +
-  'imagePool（playableWorks 相当。画像あり作品のみ）を分ける。画像型（Q1/Q2/Q3/Q9）の出題対象・' +
-  '選択肢（choiceWorks）には imagePool に無い作品を一切使わない（オーナー報告「画像が出ない」' +
-  '「4択のうち画像が1つしかなく正解が分かる」の原因）。back-to-red確認: この describe の2件は' +
-  '是正前のコード（tryBuildStageQuestionForWork が pool のみを受け取り imagePool との区別が無い版）' +
-  'では実際に失敗することを確認済み', () => {
-  // e1 に4件の画像あり作品（richWorks4を再利用）＋2件の画像なし作品（pool側にのみ存在。
-  // facts/pairs/artist/style/holder/orderIndexはrichWorks4と同じだけ持たせ、
-  // 「画像さえあればQ1〜Q9すべて生成できるはずのデータ」であることを保証する
-  // ＝この2件がQ1/Q2/Q3/Q9に出てしまうこと自体がバグの再現になる）。
-  const imageWorks = richWorks4 // w1〜w4
+  'imagePool（playableWorks 相当。画像あり作品のみ）を分ける。画像型（Q1/Q3/Q5/Q9）の出題対象・' +
+  '選択肢（choiceWorks）には imagePool に無い作品を一切使わない', () => {
+  const imageWorks = richWorks4
   const noImageWorks: Work[] = [fullWork('ni1', 91), fullWork('ni2', 92)]
   const mixedPool: Work[] = [...imageWorks, ...noImageWorks]
   const imageEligibleIds = new Set(imageWorks.map((w) => w.id))
-  const IMAGE_TYPES = new Set(['q1', 'q2', 'q3', 'q9'])
+  const IMAGE_TYPES = new Set(['q1', 'q3', 'q5', 'q9'])
 
-  /** 画像型の出題対象・選択肢（choiceWorks）が imagePool に無い作品を含んでいたら文字列化して返す。 */
   function collectViolations(qs: Question[]): string[] {
     const out: string[] = []
     for (const q of qs) {
@@ -400,62 +361,133 @@ describe('M2b-09（画像なし作品混入バグの回帰防止）: pool（them
     return out
   }
 
-  it(
-    'buildStageQuestions（面生成）: ★1（Q1/Q3）で画像なし作品が出題対象・選択肢のどちらにも現れない' +
-      '（是正前は誤答プールに mixedPool＝themeSetPool 相当をそのまま渡していたため、Q3 の' +
-      '選択肢（4枚の画像）に画像なし作品が混入し得た）',
-    () => {
-      const violations: string[] = []
-      for (let seed = 0; seed < 30; seed++) {
-        const qs = buildStageQuestions('e1', 1, 1, mixedPool, imageWorks, eras, seededRandom(seed))
-        violations.push(...collectViolations(qs))
-      }
-      expect(violations).toEqual([])
-    },
-  )
+  it('buildStageQuestions（★1）: 画像なし作品が出題対象・選択肢のどちらにも現れない', () => {
+    const violations: string[] = []
+    for (let seed = 0; seed < 30; seed++) {
+      const qs = buildStageQuestions('e1', 1, 1, mixedPool, imageWorks, eras, seededRandom(seed))
+      violations.push(...collectViolations(qs))
+    }
+    expect(violations).toEqual([])
+  })
 
-  it(
-    'buildStageQuestions（面生成）: ★2（Q2/Q9含む）でも画像なし作品が出題対象・選択肢のどちらにも現れない',
-    () => {
-      const violations: string[] = []
-      for (let seed = 0; seed < 30; seed++) {
-        const qs = buildStageQuestions('e1', 2, 1, mixedPool, imageWorks, eras, seededRandom(seed))
-        violations.push(...collectViolations(qs))
-      }
-      expect(violations).toEqual([])
-    },
-  )
-
-  it(
-    'buildBossQuestions（最終補充パス）: 画像なし作品が Q1/Q2/Q3/Q9 の出題対象・選択肢のどちらにも' +
-      '現れない（是正前は最終補充パスが pool 全体（画像なし作品込み）から出題対象を選び、' +
-      'ALL_PER_WORK_TYPES に q1/q2/q3/q9 が含まれるため直接生成できてしまっていた）',
-    () => {
-      const passage: Passage = {
-        id: 'pmix',
-        era: 'e1',
-        title: 'Mix',
-        text: '本文。[[a|下線1]]',
-        sources: [],
-        underlines: [{ key: 'a', workIds: ['w1'] }],
-      }
-      const violations: string[] = []
-      for (let seed = 0; seed < 20; seed++) {
-        const boss = buildBossQuestions('e1', [passage], mixedPool, imageWorks, eras, seededRandom(seed))
-        // 最終補充パスまで実際に到達していることの前提確認（到達していなければこのテストは
-        // 何も検知できていないことになる。itemCount=4→目標10問、pass1/2だけでは届かない想定）。
-        expect(boss.length).toBeGreaterThan(6)
-        violations.push(...collectViolations(boss))
-      }
-      expect(violations).toEqual([])
-    },
-  )
+  it('buildStageQuestions（★2, Q5/Q9含む）でも画像なし作品が出題対象・選択肢のどちらにも現れない', () => {
+    const violations: string[] = []
+    for (let seed = 0; seed < 30; seed++) {
+      const qs = buildStageQuestions('e1', 2, 1, mixedPool, imageWorks, eras, seededRandom(seed))
+      violations.push(...collectViolations(qs))
+    }
+    expect(violations).toEqual([])
+  })
 })
 
-describe('bossProgress（体力ゲージ用の進捗値。チケット規則6）', () => {
+describe('buildBossQuestions（3群×リード文。writerのask.stemがある下線だけから作る）', () => {
+  const askA = { type: 'q9' as const, stem: '下線部aに該当する作品を選べ。', slot: 'artist' as const }
+  const askB = { type: 'q10' as const, stem: '下線部bに関するA・Bの正誤の組合せを選べ。' }
+  const askC = { type: 'q4' as const, stem: '下線部cに関する記述として正しいものを選べ。' }
+  const askD = { type: 'q13' as const, stem: '下線部dに該当する語句の組合せを選べ。' }
+
+  function passageFor(id: string, works: Work[]): Passage {
+    return {
+      id,
+      era: 'e1',
+      title: id,
+      text: works.map((_w, i) => `本文${i}[[u${i}|下線${i}]]`).join(''),
+      sources: [],
+      underlines: works.map((w, i) => ({ key: `u${i}`, workIds: [w.id], ask: [askA, askB, askC, askD][i % 4] })),
+    }
+  }
+
+  it('ask.stemが無い下線は使われない（汎用文にフォールバックしない）', () => {
+    const passage: Passage = {
+      id: 'p-nostem',
+      era: 'e1',
+      title: 'p',
+      text: '本文[[u0|下線0]]',
+      sources: [],
+      underlines: [{ key: 'u0', workIds: ['w1'] }], // ask 自体が無い
+    }
+    const boss = buildBossQuestions('e1', [passage], richWorks20, richWorks20, eras, seededRandom(1))
+    expect(boss).toEqual([])
+  })
+
+  it('全問のstemがその下線のask.stemと完全一致する（汎用文が混ざらない）', () => {
+    const passage = passageFor('p1', richWorks20.slice(0, 8))
+    const boss = buildBossQuestions('e1', [passage], richWorks20, richWorks20, eras, seededRandom(1))
+    expect(boss.length).toBeGreaterThan(0)
+    for (const q of boss) {
+      const idx = Number(q.underlineKey?.replace('u', ''))
+      const expectedAsk = [askA, askB, askC, askD][idx % 4]
+      expect(q.stem).toBe(expectedAsk.stem)
+    }
+  })
+
+  it('文化伏せ型（q12「この文化は…」）の下線はボスに一切出ない', () => {
+    const hiddenAsk = { type: 'q12' as const, stem: 'この文化について述べているものとして最も適切なものを選べ。', answerText: 'A', distractorTexts: ['B', 'C', 'D'] }
+    const passage: Passage = {
+      id: 'p-hidden',
+      era: 'e1',
+      title: 'p',
+      text: richWorks20
+        .slice(0, 4)
+        .map((_, i) => `本文${i}[[u${i}|下線${i}]]`)
+        .join(''),
+      sources: [],
+      underlines: richWorks20.slice(0, 4).map((w, i) => ({ key: `u${i}`, workIds: [w.id], ask: i === 0 ? hiddenAsk : askB })),
+    }
+    for (let seed = 0; seed < 10; seed++) {
+      const boss = buildBossQuestions('e1', [passage], richWorks20, richWorks20, eras, seededRandom(seed))
+      expect(boss.some((q) => q.underlineKey === 'u0')).toBe(false)
+    }
+  })
+
+  it('リード画像に正解画像が含まれるQ9は生成しない（kind: image のpassage）', () => {
+    const target = richWorks4[0]
+    const passage: Passage = {
+      id: 'p-image',
+      era: 'e1',
+      title: 'p',
+      kind: 'image',
+      leadWorkIds: [target.id],
+      text: `画像の説明[[u0|下線0]]`,
+      sources: [],
+      underlines: [{ key: 'u0', ask: { type: 'q9', stem: '下線部0の図版を選べ。', answerId: target.id } }],
+    }
+    const boss = buildBossQuestions('e1', [passage], richWorks4, richWorks4, eras, seededRandom(1))
+    expect(boss.some((q) => q.work.id === target.id && q.type === 'q9')).toBe(false)
+  })
+
+  it('その文化に passage が無ければ空配列', () => {
+    const boss = buildBossQuestions('e1', [], richWorks20, richWorks20, eras, seededRandom(1))
+    expect(boss).toEqual([])
+  })
+
+  it('count を明示すれば上書きできる（テスト用）', () => {
+    const passage = passageFor('p2', richWorks20.slice(0, 8))
+    const boss = buildBossQuestions('e1', [passage], richWorks20, richWorks20, eras, seededRandom(1), 3)
+    expect(boss.length).toBeLessThanOrEqual(3)
+  })
+
+  it('同じ作品×同じ型の完全重複は無い', () => {
+    const passage = passageFor('p3', richWorks20.slice(0, 8))
+    const boss = buildBossQuestions('e1', [passage], richWorks20, richWorks20, eras, seededRandom(1))
+    const pairKeys = boss.map((q) => `${q.work.id}:${q.type}`)
+    expect(new Set(pairKeys).size).toBe(pairKeys.length)
+  })
+
+  it('bossExposureRate: 実測用ユーティリティが動く（total/exposed/rateを返す）', () => {
+    const passage = passageFor('p4', richWorks4)
+    const boss = buildBossQuestions('e1', [passage], richWorks4, richWorks4, eras, seededRandom(1))
+    const stats = bossExposureRate(boss, 'e1', richWorks4)
+    expect(stats.total).toBe(4)
+    expect(stats.exposed).toBeGreaterThanOrEqual(0)
+    expect(stats.rate).toBeGreaterThanOrEqual(0)
+  })
+})
+
+describe('bossProgress（体力ゲージ用の進捗値）', () => {
   it('残り問数・クリア閾値を返す', () => {
     const p = bossProgress(10, 6, 1)
-    expect(p).toEqual({ total: 10, correct: 6, incorrect: 1, remaining: 3, clearThreshold: 9 })
+    expect(p).toEqual({ total: 10, correct: 6, incorrect: 1, remaining: 3, clearThreshold: 8 })
   })
   it('残りが0を下回らない', () => {
     const p = bossProgress(10, 10, 0)
@@ -463,24 +495,35 @@ describe('bossProgress（体力ゲージ用の進捗値。チケット規則6）
   })
 })
 
-describe('直列解禁（ワープなし）', () => {
+describe('直列解禁（ワープなし。0件の★は丸ごと飛ばす）', () => {
   const worlds = worldOrder(eras)
 
   it('worldOrder は eras.json の order 昇順', () => {
     expect(worlds).toEqual(['e1', 'e2', 'e3', 'e4'])
   })
 
-  it('fullStageSequence: e1（N=4, doubled単一面）は ★1-1→★2-1→★3-1→ボス の4件で1ワールド分', () => {
+  it('fullStageSequence: e1（全★を持つ）は ★1-1→★2-1→★3-1→★4-1→★5-1→ボス の6件で1ワールド分', () => {
     const seq = fullStageSequence(eras.filter((e) => e.id === 'e1'), richWorks4)
     expect(seq).toEqual([
       { kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 1, segment: 1 },
       { kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 2, segment: 1 },
       { kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 3, segment: 1 },
+      { kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 4, segment: 1 },
+      { kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 5, segment: 1 },
       { kind: 'boss', eraId: 'e1', worldIndex: 0 },
     ])
   })
 
-  it('先頭ワールドの★1-1は常に解禁。★2-1は★1-1クリアが条件。ボスは★1〜3すべてクリアが条件', () => {
+  it('bareWork（★1・★4のみ）のワールドは★2・3・5を飛ばして ★1-1→★4-1→ボス の3件になる', () => {
+    const seq = fullStageSequence(eras.filter((e) => e.id === 'e2'), [bareWork])
+    expect(seq).toEqual([
+      { kind: 'segment', eraId: 'e2', worldIndex: 0, difficulty: 1, segment: 1 },
+      { kind: 'segment', eraId: 'e2', worldIndex: 0, difficulty: 4, segment: 1 },
+      { kind: 'boss', eraId: 'e2', worldIndex: 0 },
+    ])
+  })
+
+  it('先頭ワールドの★1-1は常に解禁。★2-1は★1-1クリアが条件。ボスは全★クリアが条件', () => {
     const imagePool = richWorks4
     const noProgress: Record<string, EraStageProgress> = {}
     expect(isStageUnlocked('e1', { kind: 'segment', difficulty: 1, segment: 1 }, eras, imagePool, noProgress)).toBe(true)
@@ -495,95 +538,32 @@ describe('直列解禁（ワープなし）', () => {
     expect(isStageUnlocked('e1', { kind: 'boss' }, eras, imagePool, s1Cleared)).toBe(false)
   })
 
-  it('ワープは存在しない: このワールド自身のボスをクリア扱いにしても、★1〜3が未クリアのままなら次ワールドは未解禁', () => {
-    const imagePool = richWorks4
-    const bossClearedOnly: Record<string, EraStageProgress> = {
-      e1: { ...emptyEraStageProgress(), boss: { cleared: true, bestScore: 9, clearedAt: '2026-09-08' } },
-    }
-    // ★1〜3が未クリアのまま「ボスだけクリア」というデータ状態は、直列解禁の下では
-    // 通常のプレイでは作れない（ボス自体が★1〜3クリアまで isStageUnlocked が false を返す
-    // ため到達できない）。手作りデータでこの状態を作っても、次ワールドの解禁判定は
-    // 「boss.cleared」だけを見る isWorldUnlocked に従うため true になる点はチケット文面
-    // どおり（＝ワープという“経路”自体が無いことの確認であり、boss.clearedフィールドの
-    // 意味は変えていない）。
-    expect(isWorldUnlocked(1, eras, imagePool, bossClearedOnly)).toBe(true)
-    // 一方、e1自身の★1〜3はこの状態でも直列判定（前が全てクリア済みか）でしか解禁されない。
-    expect(isStageUnlocked('e1', { kind: 'segment', difficulty: 1, segment: 1 }, eras, imagePool, bossClearedOnly)).toBe(true) // ★1-1は常に解禁（先頭ワールドの先頭面）
-    expect(isStageUnlocked('e1', { kind: 'segment', difficulty: 2, segment: 1 }, eras, imagePool, bossClearedOnly)).toBe(false) // ★1-1未クリアのため
-  })
-
-  describe('M2b-99c中7: 対象作品0件のワールドへの防御（将来のM2c-04でコンテンツが増減した際の回帰防止）', () => {
-    // e1・e3に作品があり、e2は0件（e4も0件のまま。この describe では未使用）。
+  it('対象作品0件のワールド（将来のコンテンツ増減）は面もボスも作れないため丸ごと除外', () => {
     const withGapImagePool: Work[] = [...richWorks4, makeWork({ id: 'g1', era: 'e3', status: 'reviewed', orderIndex: 100 })]
-
-    it('worldStageSequence（fullStageSequence経由）は0件ワールド（e2）を丸ごと除外する', () => {
-      const seq = fullStageSequence(eras, withGapImagePool)
-      expect(seq.some((r) => r.eraId === 'e2')).toBe(false)
-      // e1（4件）の4件＋e3（1件、N<5暫定規則で2問=1面）の4件＝8件のみ（e4は0件で同様に除外）。
-      expect(seq.filter((r) => r.eraId === 'e1')).toHaveLength(4)
-      expect(seq.filter((r) => r.eraId === 'e3')).toHaveLength(4)
-      expect(seq).toHaveLength(8)
-    })
-
-    it('isStageUnlocked: e1のボスをクリアすれば、間の0件ワールド(e2)を挟んでもe3の★1-1が直接解禁される', () => {
-      const e1Cleared: Record<string, EraStageProgress> = {
-        e1: {
-          segments: {
-            [segmentKey(1, 1)]: { cleared: true, bestScore: 8, clearedAt: 'd' },
-            [segmentKey(2, 1)]: { cleared: true, bestScore: 8, clearedAt: 'd' },
-            [segmentKey(3, 1)]: { cleared: true, bestScore: 8, clearedAt: 'd' },
-          },
-          boss: { cleared: true, bestScore: 9, clearedAt: 'd' },
-        },
-      }
-      expect(isStageUnlocked('e3', { kind: 'segment', difficulty: 1, segment: 1 }, eras, withGapImagePool, {})).toBe(false)
-      expect(isStageUnlocked('e3', { kind: 'segment', difficulty: 1, segment: 1 }, eras, withGapImagePool, e1Cleared)).toBe(true)
-    })
-
-    it(
-      'isWorldUnlocked: 0件ワールド(e2, worldIndex=1)は自動クリア扱いになり、e3(worldIndex=2)の雲は' +
-        'e1(worldIndex=0)のボス撃破だけで晴れる（e2自身のboss.clearedが立つことは実プレイでは無い）',
-      () => {
-        expect(isWorldUnlocked(2, eras, withGapImagePool, {})).toBe(false) // e1未クリアならe3も未解禁
-        const e1BossCleared: Record<string, EraStageProgress> = {
-          e1: { ...emptyEraStageProgress(), boss: { cleared: true, bestScore: 9, clearedAt: 'd' } },
-        }
-        expect(isWorldUnlocked(2, eras, withGapImagePool, e1BossCleared)).toBe(true) // e2を飛ばしてe3が解禁
-      },
-    )
-
-    it('連続する0件ワールド（f2・f3がともに0件）でも、遡って直近の実プレイ可能ワールド(f1)まで判定する', () => {
-      // f1(作品あり)→f2(0件)→f3(0件)→f4(作品あり) という専用フィクスチャで、
-      // 0件が2つ連続しても isWorldUnlocked(f4のworldIndex=3) が f1 のボスまで正しく遡ることを確認する
-      // （e2一箇所だけの確認では「1つ前を見る」実装でも通ってしまうため、連続2件で検証する）。
-      const fiveEras: Era[] = [
-        { id: 'f1', name: 'F1', period: '', order: 1, summary: '', detail: '', items: [] },
-        { id: 'f2', name: 'F2', period: '', order: 2, summary: '', detail: '', items: [] },
-        { id: 'f3', name: 'F3', period: '', order: 3, summary: '', detail: '', items: [] },
-        { id: 'f4', name: 'F4', period: '', order: 4, summary: '', detail: '', items: [] },
-      ]
-      const pool: Work[] = [
-        makeWork({ id: 'f1w', era: 'f1', status: 'reviewed' }),
-        makeWork({ id: 'f4w', era: 'f4', status: 'reviewed' }),
-      ]
-      expect(isWorldUnlocked(3, fiveEras, pool, {})).toBe(false) // f1未クリアならf4も未解禁
-      const f1BossCleared: Record<string, EraStageProgress> = {
-        f1: { ...emptyEraStageProgress(), boss: { cleared: true, bestScore: 9, clearedAt: 'd' } },
-      }
-      expect(isWorldUnlocked(3, fiveEras, pool, f1BossCleared)).toBe(true) // f2・f3を飛ばしてf4が解禁
-      // fullStageSequenceもf2・f3を丸ごと除外し、f1のボスの直後にf4の★1-1が続く。
-      const seq = fullStageSequence(fiveEras, pool)
-      expect(seq.map((r) => r.eraId)).toEqual(['f1', 'f1', 'f1', 'f1', 'f4', 'f4', 'f4', 'f4'])
-    })
+    const seq = fullStageSequence(eras, withGapImagePool)
+    expect(seq.some((r) => r.eraId === 'e2')).toBe(false)
+    expect(seq.filter((r) => r.eraId === 'e1')).toHaveLength(6)
+    // e3（1件、★1・4のみ。findSite/artist/technique等が無いため）: ★1-1→★4-1→ボス の3件。
+    expect(seq.filter((r) => r.eraId === 'e3')).toHaveLength(3)
   })
 
-  it('未解禁ワールド（e3）の★1-1は、e1・e2を一切クリアしていなければ常にfalse', () => {
+  it('eraTotalItemCount は★を問わない総数を返す（bareWorkはfindSite等を持たなくても1件と数える）', () => {
+    expect(eraTotalItemCount('e2', [bareWork])).toBe(1)
+    expect(eraTotalItemCount('e1', richWorks4)).toBe(4)
+    expect(eraTotalItemCount('e3', richWorks4)).toBe(0)
+  })
+
+  it('isWorldUnlocked: 0件ワールドは自動クリア扱いになり、直近の実プレイ可能ワールドまで遡る', () => {
+    const withGapImagePool: Work[] = [...richWorks4, makeWork({ id: 'g1', era: 'e3', status: 'reviewed', orderIndex: 100 })]
+    expect(isWorldUnlocked(2, eras, withGapImagePool, {})).toBe(false)
+    const e1BossCleared: Record<string, EraStageProgress> = {
+      e1: { ...emptyEraStageProgress(), boss: { cleared: true, bestScore: 9, clearedAt: 'd' } },
+    }
+    expect(isWorldUnlocked(2, eras, withGapImagePool, e1BossCleared)).toBe(true)
+  })
+
+  it('存在しない面番号を問い合わせても false（ワープ相当のAPI自体が無いことの確認）', () => {
     const imagePool = richWorks4
-    expect(isStageUnlocked('e3', { kind: 'segment', difficulty: 1, segment: 1 }, eras, imagePool, {})).toBe(false)
-  })
-
-  it('存在しない面番号を問い合わせても false（ワープ相当のAPI自体が無いことの確認: 未生成の面を直接指定しても解禁扱いにならない）', () => {
-    const imagePool = richWorks4 // e1は1面のみ
     expect(isStageUnlocked('e1', { kind: 'segment', difficulty: 1, segment: 2 }, eras, imagePool, {})).toBe(false)
   })
 
@@ -595,7 +575,13 @@ describe('直列解禁（ワープなし）', () => {
 
     const allCleared: Record<string, EraStageProgress> = {
       e1: {
-        segments: { [segmentKey(1, 1)]: { cleared: true, bestScore: 8, clearedAt: 'd' }, [segmentKey(2, 1)]: { cleared: true, bestScore: 8, clearedAt: 'd' }, [segmentKey(3, 1)]: { cleared: true, bestScore: 8, clearedAt: 'd' } },
+        segments: {
+          [segmentKey(1, 1)]: { cleared: true, bestScore: 8, clearedAt: 'd' },
+          [segmentKey(2, 1)]: { cleared: true, bestScore: 8, clearedAt: 'd' },
+          [segmentKey(3, 1)]: { cleared: true, bestScore: 8, clearedAt: 'd' },
+          [segmentKey(4, 1)]: { cleared: true, bestScore: 8, clearedAt: 'd' },
+          [segmentKey(5, 1)]: { cleared: true, bestScore: 8, clearedAt: 'd' },
+        },
         boss: { cleared: true, bestScore: 9, clearedAt: 'd' },
       },
     }
@@ -603,68 +589,46 @@ describe('直列解禁（ワープなし）', () => {
     expect(nextStageRef(seqEras, richWorks4, allCleared)).toBeNull()
   })
 
-  it('stageRefKey は「era-難易度-面番号」/「era-boss」形式（チケット規則2）', () => {
+  it('stageRefKey は「era-難易度-面番号」/「era-boss」形式', () => {
     expect(stageRefKey({ kind: 'segment', eraId: 'genshi', worldIndex: 0, difficulty: 1, segment: 1 })).toBe('genshi-1-1')
     expect(stageRefKey({ kind: 'boss', eraId: 'genshi', worldIndex: 0 })).toBe('genshi-boss')
   })
 
-  it('getEraStageProgress は未プレイの文化にデフォルト値を返す（全て未クリア・0点）', () => {
-    const es = getEraStageProgress({}, 'e1')
-    expect(es.segments).toEqual({})
-    expect(es.boss).toEqual({ cleared: false, bestScore: 0, clearedAt: null })
-    expect(getSegmentState(es, 1, 1)).toEqual({ cleared: false, bestScore: 0, clearedAt: null })
-  })
-
   it(
-    'ワープ相当のAPI（isBossChallengeable等）はもう存在しない（M2b-99c中3是正: 以前は自分で3件だけ' +
-      '詰めたオブジェクトリテラルを検査しており、stages.tsが再エクスポートしても検出できない構造上' +
-      '絶対に落ちないテストだった。実モジュールの実際のエクスポート一覧を検査する）',
+    'ワープ相当のAPI（isBossChallengeable等）は存在しない（実モジュールの実際のエクスポート一覧を検査する）',
     () => {
       expect(Object.keys(stagesModule)).not.toContain('isBossChallengeable')
-      // 「何も検査していない」ことにならないよう、既知のエクスポートが実在することも確認する
-      // （テストが検知力を持つことの裏付け）。
       expect(Object.keys(stagesModule)).toContain('isStageUnlocked')
       expect(Object.keys(stagesModule)).toContain('isWorldUnlocked')
     },
   )
 })
 
-describe('stageShortLabel / stageRefToLocalKey（M2b-05: UI表記「ワールド番号-面番号＋★の数」。M2b-99c中6是正で面番号を通し番号化）', () => {
-  it('segmentsPerWorld=1（実データの大半のワールド相当）: worldIndexは0始まりなので+1して「1-1 ★★」のように表示する', () => {
-    expect(stageShortLabel({ kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 2, segment: 1 }, 1)).toBe('1-2 ★★')
-    expect(stageShortLabel({ kind: 'segment', eraId: 'e2', worldIndex: 3, difficulty: 1, segment: 1 }, 1)).toBe('4-1 ★')
+describe('overallSegmentNumber / stageShortLabel（★ごとに面数が違うため通し番号は積算する）', () => {
+  it('segmentCounts={1:1,2:1,3:1}のとき、★2の1面目は「4」（★1の1面ぶんの次）', () => {
+    expect(overallSegmentNumber(2, 1, { 1: 1 })).toBe(2)
+    expect(overallSegmentNumber(1, 1, {})).toBe(1)
   })
 
-  it('boss: 「{world} ボス」形式（segmentsPerWorldは無関係）', () => {
-    expect(stageShortLabel({ kind: 'boss', eraId: 'e1', worldIndex: 0 }, 1)).toBe('1 ボス')
+  it('0件の★（キー自体が無い）はスキップされて積算されない', () => {
+    // ★2が0件（キー無し）のワールドで★3の1面目は、★1の面数ぶんだけずれる。
+    expect(overallSegmentNumber(3, 1, { 1: 2 })).toBe(3)
   })
 
-  it(
-    'M2b-99c中6の回帰: segmentsPerWorld=1のワールドで★1→★2→★3→ボス→次ワールドの★1が' +
-      '「1-1→1-2→1-3→1-ボス→2-1」のように通し番号で続く（是正前は全て「1-1」だった）',
-    () => {
-      expect(stageShortLabel({ kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 1, segment: 1 }, 1)).toBe('1-1 ★')
-      expect(stageShortLabel({ kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 2, segment: 1 }, 1)).toBe('1-2 ★★')
-      expect(stageShortLabel({ kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 3, segment: 1 }, 1)).toBe('1-3 ★★★')
-      expect(stageShortLabel({ kind: 'boss', eraId: 'e1', worldIndex: 0 }, 1)).toBe('1 ボス')
-      expect(stageShortLabel({ kind: 'segment', eraId: 'e2', worldIndex: 1, difficulty: 1, segment: 1 }, 1)).toBe('2-1 ★')
-    },
-  )
-
-  it('segmentsPerWorld=3（面数が複数に分かれるワールド）: ★1の3面(1,2,3)の次に★2の面が4から続く', () => {
-    expect(stageShortLabel({ kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 1, segment: 3 }, 3)).toBe('1-3 ★')
-    expect(stageShortLabel({ kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 2, segment: 1 }, 3)).toBe('1-4 ★★')
-    expect(stageShortLabel({ kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 3, segment: 2 }, 3)).toBe('1-8 ★★★')
+  it('stageShortLabel: segment型は「ワールド番号-通し番号 ★の数」、bossは「ワールド番号 ボス」', () => {
+    expect(stageShortLabel({ kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 2, segment: 1 }, { 1: 1 })).toBe('1-2 ★★')
+    expect(stageShortLabel({ kind: 'boss', eraId: 'e1', worldIndex: 3 }, {})).toBe('4 ボス')
   })
 
-  it('overallSegmentNumber: (difficulty-1)*segmentsPerWorld+segment', () => {
-    expect(overallSegmentNumber(1, 1, 1)).toBe(1)
-    expect(overallSegmentNumber(2, 1, 1)).toBe(2)
-    expect(overallSegmentNumber(3, 1, 1)).toBe(3)
-    expect(overallSegmentNumber(2, 2, 3)).toBe(5)
+  it('実データ相当（segmentCountsByDifficulty）と組み合わせて通し番号が1から連番になる', () => {
+    const counts = segmentCountsByDifficulty('e1', richWorks4)
+    expect(stageShortLabel({ kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 1, segment: 1 }, counts)).toBe('1-1 ★')
+    expect(stageShortLabel({ kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 5, segment: 1 }, counts)).toBe('1-5 ★★★★★')
   })
+})
 
-  it('stageRefToLocalKey: eraId/worldIndexを落としてStageLocalKeyに変換する', () => {
+describe('stageRefToLocalKey', () => {
+  it('eraId/worldIndexを落としてStageLocalKeyに変換する', () => {
     expect(stageRefToLocalKey({ kind: 'segment', eraId: 'e1', worldIndex: 0, difficulty: 3, segment: 2 })).toEqual({
       kind: 'segment',
       difficulty: 3,
