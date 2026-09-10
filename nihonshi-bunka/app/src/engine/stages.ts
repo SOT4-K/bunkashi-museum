@@ -369,12 +369,24 @@ const MIN_SAME_ERA_DISTRACTORS_FOR_STAGE_Q9 = 2
  *  MIN_SAME_ERA_DISTRACTORS_FOR_STAGE_Q9 件未満（＝正解含めてヘッダーだけでほぼ解けてしまう
  *  薄いケース、例: asuka★4のreligion/subjectスロット）は q9 を辞退する（null を返す）。
  *  呼び出し元（tryBuildStageQuestionForWork）はその作品の候補型リストの中から他の型
- *  （★4ならq4/q8等）を試す（M2i-05b⑤）。 */
-function buildQ9QuestionForStage(work: Work, imagePool: Work[], eras: Era[], rng: RandomFn, allowSlots: Q9Slot[]): Question | null {
+ *  （★4ならq4/q8等）を試す（M2i-05b⑤）。
+ *  M2i-05c③（decisions.md 2026-09-11、reviewer fact-check-m2i-05b.md [重大]-B「⑤のフォールバックが
+ *  1問だけの面・ノーミス必須を新規に作った」の修正）: allowThinQ9=true のときはこの辞退を行わず、
+ *  同era候補が薄くても生成された q9 をそのまま使う（呼び出し元 buildStageQuestions が、辞退した
+ *  結果その面の問題数が1問になってしまう場合だけ true を渡す。M2i-99[中]-2「10件未満は1ミス以内」
+ *  というオーナー規則を、ヘッダー解答可能性の対策より優先する）。 */
+function buildQ9QuestionForStage(
+  work: Work,
+  imagePool: Work[],
+  eras: Era[],
+  rng: RandomFn,
+  allowSlots: Q9Slot[],
+  allowThinQ9 = false,
+): Question | null {
   const data = generateQ9Question(work, imagePool, eras, rng, { allowSlots, avoidSlots: ['era'], preferSameEra: true })
   if (!data) return null
   const sameEraDistractorCount = data.distractorWorks.filter((d) => d.era === work.era).length
-  if (sameEraDistractorCount < MIN_SAME_ERA_DISTRACTORS_FOR_STAGE_Q9) return null
+  if (!allowThinQ9 && sameEraDistractorCount < MIN_SAME_ERA_DISTRACTORS_FOR_STAGE_Q9) return null
   const { items, correctIndex } = buildChoices(data.correctWork, data.distractorWorks, rng)
   return {
     type: 'q9',
@@ -481,6 +493,7 @@ function tryBuildStageQuestionForWork(
   rng: RandomFn,
   usedTypesForWork: Set<QuestionType>,
   q9AllowSlots: Q9Slot[] | undefined,
+  allowThinQ9: boolean,
 ): Question | null {
   const imageEligible = imagePool.some((w) => w.id === work.id)
   const candidates = shuffle(
@@ -494,7 +507,7 @@ function tryBuildStageQuestionForWork(
     else if (type === 'q13') q = buildWordPairQuestion(work, usablePool, rng)
     else if (type === 'q5') q = buildQ5QuestionForStage(work, usablePool, eras, rng)
     else if (type === 'q7') q = buildQ7QuestionForStage(work, usablePool, eras, rng)
-    else if (type === 'q9') q = q9AllowSlots ? buildQ9QuestionForStage(work, usablePool, eras, rng, q9AllowSlots) : null
+    else if (type === 'q9') q = q9AllowSlots ? buildQ9QuestionForStage(work, usablePool, eras, rng, q9AllowSlots, allowThinQ9) : null
     else if (canGenerateType(type, work, usablePool, eras))
       // M2i-05b③: q1/q3（このelse-ifに到達するのは事実上この2型のみ。q4/q8はbuildQuestion内部の
       // 別分岐で処理されるためpreferSameEraDistractorsの影響を受けない）は誤答を同era優先にする。
@@ -535,18 +548,28 @@ export function buildStageQuestions(
   // 順序で決定的に選ぶ必要がある）。
   const doubledIds = new Set(seg.workIds.slice(0, seg.extraDoubleCount))
 
-  const questions: Question[] = []
-  for (const work of segWorks) {
-    const usedTypesForWork = new Set<QuestionType>()
-    const perWork = doubledIds.has(work.id) ? 2 : 1
-    for (let i = 0; i < perWork; i++) {
-      const q = tryBuildStageQuestionForWork(work, types, pool, imagePool, eras, rng, usedTypesForWork, q9AllowSlots)
-      if (q) {
-        questions.push(attachStandaloneStem(q))
-        usedTypesForWork.add(q.type)
+  const buildAll = (allowThinQ9: boolean): Question[] => {
+    const built: Question[] = []
+    for (const work of segWorks) {
+      const usedTypesForWork = new Set<QuestionType>()
+      const perWork = doubledIds.has(work.id) ? 2 : 1
+      for (let i = 0; i < perWork; i++) {
+        const q = tryBuildStageQuestionForWork(work, types, pool, imagePool, eras, rng, usedTypesForWork, q9AllowSlots, allowThinQ9)
+        if (q) {
+          built.push(attachStandaloneStem(q))
+          usedTypesForWork.add(q.type)
+        }
       }
     }
+    return built
   }
+
+  let questions = buildAll(false)
+  // M2i-05c③: MIN_SAME_ERA_DISTRACTORS_FOR_STAGE_Q9 による q9 の辞退が、結果としてこの面を
+  // 1問だけ（clearThreshold(1)=1＝ノーミス必須）にしてしまう場合は、辞退せず元の q9 生成
+  // （同eraが薄くても採用）にフォールバックして作り直す（M2i-99[中]-2の「10件未満は1ミス以内」
+  // 規則を優先する。kitayama★2/★3で実測: 計画2問→辞退により1問に減っていた）。
+  if (questions.length === 1) questions = buildAll(true)
   return reorderToAvoidConsecutiveSameType(shuffle(questions, rng), rng)
 }
 

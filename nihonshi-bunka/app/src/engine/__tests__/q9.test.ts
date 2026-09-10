@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { generateQ9Question, generateQ9QuestionFromIds } from '../q9'
+import { generateQ9Question, generateQ9QuestionFromIds, slotValue } from '../q9'
 import { makeWork, seededRandom, testEras } from './testFixtures'
 import type { Work } from '../../types'
 
@@ -328,22 +328,26 @@ describe('preferSameEra オプション（M2i-05②: ステージのQ9誤答は�
 // 誤答除外は raw 値の完全一致ではなく、条件文と同じ基準（shortenValue、findSite除く）で
 // 判定する。「仏教」と「仏教（法相宗）」のように raw 値は異なるが条件文の上では同じに見える
 // 値を「異なる値」として誤答に選ぶと、4択全部が条件文の上で正解になってしまう回帰。
+// M2i-05c②（decisions.md 2026-09-11）で「仏教」単体（上位語）は religion スロットの条件に
+// 使わなくなったため、このブロックの shortenValue 衝突テストは「仏教」ではなく特定の宗派
+// （「浄土教」、BROAD_RELIGION_VALUES に含まれない値）で検証する（衝突除外そのものの挙動は
+// 上位語かどうかに関係なく共通のロジックのため、これで検証意図は変わらない）。
 describe('M2i-05b①: shortenValue が衝突する値は誤答除外で「同じ値」として扱う（設問成立性バグ修正）', () => {
-  const target = makeWork({ id: 'bud-target', era: 'asuka', category: 'sculpture', religion: '仏教（法相宗）' })
+  const target = makeWork({ id: 'bud-target', era: 'asuka', category: 'sculpture', religion: '浄土教（法然系）' })
   const collidingPool: Work[] = [
     target,
-    makeWork({ id: 'bud-d1', era: 'asuka', category: 'sculpture', religion: '仏教' }),
-    makeWork({ id: 'bud-d2', era: 'asuka', category: 'sculpture', religion: '仏教（天台宗）' }),
+    makeWork({ id: 'bud-d1', era: 'asuka', category: 'sculpture', religion: '浄土教' }),
+    makeWork({ id: 'bud-d2', era: 'asuka', category: 'sculpture', religion: '浄土教（天台宗）' }),
     makeWork({ id: 'bud-d3', era: 'hakuho', category: 'sculpture', religion: '神道' }),
   ]
 
-  it('正パターン: shortenValue が target と同じ（「仏教」）誤答候補は選ばれない（3件そろわなければ null）', () => {
+  it('正パターン: shortenValue が target と同じ（「浄土教」）誤答候補は選ばれない（3件そろわなければ null）', () => {
     for (let seed = 0; seed < 10; seed++) {
       const result = generateQ9Question(target, collidingPool, testEras, seededRandom(seed), {
         allowSlots: ['religion'],
       })
       // 「異なる値」が神道（bud-d3）の1件しか無いため3件そろわず null になるはず
-      // （修正前は bud-d1/bud-d2 も「異なる値」として誤答に混ざり、4択全部が「仏教」になっていた）。
+      // （修正前は bud-d1/bud-d2 も「異なる値」として誤答に混ざり、4択全部が「浄土教」になっていた）。
       expect(result).toBeNull()
     }
   })
@@ -351,7 +355,7 @@ describe('M2i-05b①: shortenValue が衝突する値は誤答除外で「同じ
   it('正パターン: 十分な数の真に異なる値がある場合、誤答に shortenValue が target と同じ値の作品は含まれない', () => {
     const richPool: Work[] = [
       target,
-      makeWork({ id: 'bud-d1', era: 'asuka', category: 'sculpture', religion: '仏教' }), // conditionValue衝突（除外されるべき）
+      makeWork({ id: 'bud-d1', era: 'asuka', category: 'sculpture', religion: '浄土教' }), // conditionValue衝突（除外されるべき）
       makeWork({ id: 'shinto1', era: 'asuka', category: 'sculpture', religion: '神道' }),
       makeWork({ id: 'shinto2', era: 'hakuho', category: 'sculpture', religion: '神道（伊勢系）' }),
       makeWork({ id: 'other1', era: 'kokufu', category: 'sculpture', religion: '道教' }),
@@ -359,26 +363,117 @@ describe('M2i-05b①: shortenValue が衝突する値は誤答除外で「同じ
     for (let seed = 0; seed < 10; seed++) {
       const result = generateQ9Question(target, richPool, testEras, seededRandom(seed), { allowSlots: ['religion'] })
       expect(result).not.toBeNull()
-      expect(result!.conditionText).toBe('宗派（宗教）が仏教のもの')
+      expect(result!.conditionText).toBe('宗派（宗教）が浄土教のもの')
       expect(result!.distractorWorks.some((d) => d.id === 'bud-d1')).toBe(false)
     }
   })
 
   it('逆パターン: target と conditionValue が同じ raw 値のグループは「合わない1枚」の誤答候補にならない', () => {
-    // target(religion: 仏教（法相宗）) と conditionValue が衝突する「仏教」3件だけを共有値に
+    // target(religion: 浄土教（法然系）) と conditionValue が衝突する「浄土教」3件だけを共有値に
     // したプールでは、逆パターンの「3件が共有し target は持たない値」グループとして選んではいけない
-    // （target 自身も条件文の上では「仏教」に一致するため）。
+    // （target 自身も条件文の上では「浄土教」に一致するため）。
     const reversedPool: Work[] = [
       target,
-      makeWork({ id: 'rb1', era: 'asuka', category: 'sculpture', religion: '仏教' }),
-      makeWork({ id: 'rb2', era: 'hakuho', category: 'sculpture', religion: '仏教' }),
-      makeWork({ id: 'rb3', era: 'kokufu', category: 'sculpture', religion: '仏教' }),
+      makeWork({ id: 'rb1', era: 'asuka', category: 'sculpture', religion: '浄土教' }),
+      makeWork({ id: 'rb2', era: 'hakuho', category: 'sculpture', religion: '浄土教' }),
+      makeWork({ id: 'rb3', era: 'kokufu', category: 'sculpture', religion: '浄土教' }),
     ]
     const result = generateQ9Question(target, reversedPool, testEras, seededRandom(1), {
       reversed: true,
       allowSlots: ['religion'],
     })
     expect(result).toBeNull()
+  })
+})
+
+// M2i-05c①（decisions.md 2026-09-11、reviewer fact-check-m2i-05b.md [重大]-A(2)「条件値が『不詳』」の
+// 修正）: 値が「不詳」「不明」「未詳」を含む場合は null 扱いになり、条件にも誤答除外にも使われない。
+describe('M2i-05c①: 「不詳/不明/未詳」を含む値は null 扱い（値が無いのと同じ）', () => {
+  it('slotValue: patron が「不詳」を含む場合 null を返す', () => {
+    const work = makeWork({ id: 'unknown-patron', era: 'kamakura', category: 'sculpture', patron: '不詳（民間の勧進によると考えられる）' })
+    expect(slotValue(work, 'patron')).toBeNull()
+  })
+
+  it('slotValue: religion が「不明」「未詳」を含む場合も null を返す', () => {
+    const w1 = makeWork({ id: 'unknown-religion-1', era: 'kamakura', category: 'sculpture', religion: '不明' })
+    const w2 = makeWork({ id: 'unknown-religion-2', era: 'kamakura', category: 'sculpture', religion: '未詳の宗派' })
+    expect(slotValue(w1, 'religion')).toBeNull()
+    expect(slotValue(w2, 'religion')).toBeNull()
+  })
+
+  it('generateQ9Question: target の patron が「不詳」を含む場合、patron スロットは条件に使われない（他のスロットにフォールバック）', () => {
+    const target = makeWork({
+      id: 'daibutsu-like',
+      era: 'kamakura',
+      category: 'sculpture',
+      patron: '不詳（民間の勧進によると考えられる）',
+      religion: '浄土教',
+    })
+    const pool: Work[] = [
+      target,
+      makeWork({ id: 'p1', era: 'kamakura', category: 'sculpture', patron: '源頼朝', religion: '禅宗' }),
+      makeWork({ id: 'p2', era: 'kamakura', category: 'sculpture', patron: '北条氏', religion: '律宗' }),
+      makeWork({ id: 'p3', era: 'kamakura', category: 'sculpture', patron: '後鳥羽上皇', religion: '神道' }),
+    ]
+    const result = generateQ9Question(target, pool, testEras, seededRandom(1), { allowSlots: ['patron', 'religion'] })
+    expect(result).not.toBeNull()
+    // patron ではなく religion スロットにフォールバックしているはず（浄土教のもの、を条件に使う）
+    expect(result!.slot).toBe('religion')
+    expect(result!.conditionText).toBe('宗派（宗教）が浄土教のもの')
+  })
+})
+
+// M2i-05c②（decisions.md 2026-09-11、reviewer fact-check-m2i-05b.md [重大]-A(1)「宗派の上位/下位関係」
+// の修正）: religion の値が「仏教」（上位語）のときは、その設問を生成しない（他のスロット・型に
+// フォールバック）。密教・浄土教・禅宗等の下位区分が誤答に混ざると4択全部が「仏教」を満たしてしまう
+// ため（対応(b)を採用、README相当の理由は engine/q9.ts のコメント参照）。
+describe('M2i-05c②: religion の値が「仏教」（上位語）のときは条件に使わない', () => {
+  it('target の religion が「仏教」（shortenValue後）のとき、allowSlots が religion のみなら null になる', () => {
+    const target = makeWork({ id: 'broad-target', era: 'asuka', category: 'sculpture', religion: '仏教（法相宗）' })
+    const pool: Work[] = [
+      target,
+      makeWork({ id: 'sub1', era: 'asuka', category: 'sculpture', religion: '密教' }),
+      makeWork({ id: 'sub2', era: 'asuka', category: 'sculpture', religion: '浄土教' }),
+      makeWork({ id: 'sub3', era: 'hakuho', category: 'sculpture', religion: '禅宗' }),
+    ]
+    for (let seed = 0; seed < 10; seed++) {
+      const result = generateQ9Question(target, pool, testEras, seededRandom(seed), { allowSlots: ['religion'] })
+      expect(result).toBeNull()
+    }
+  })
+
+  it('target の religion が「仏教」でも、他のスロットが allowSlots にあればそちらにフォールバックする', () => {
+    const target = makeWork({
+      id: 'broad-target2',
+      era: 'asuka',
+      category: 'sculpture',
+      religion: '仏教',
+      subject: '観音',
+    })
+    const pool: Work[] = [
+      target,
+      makeWork({ id: 'sub1', era: 'asuka', category: 'sculpture', religion: '密教', subject: '不動明王' }),
+      makeWork({ id: 'sub2', era: 'asuka', category: 'sculpture', religion: '浄土教', subject: '阿弥陀' }),
+      makeWork({ id: 'sub3', era: 'hakuho', category: 'sculpture', religion: '禅宗', subject: '達磨' }),
+    ]
+    const result = generateQ9Question(target, pool, testEras, seededRandom(1), { allowSlots: ['religion', 'subject'] })
+    expect(result).not.toBeNull()
+    expect(result!.slot).toBe('subject')
+  })
+
+  it('religion 以外のスロットで shortenValue 後の値が「仏教」相当でも（他スロットには適用されない）通常どおり生成できる', () => {
+    // isBroadReligionValue は slot === 'religion' のときだけ効く。他スロット（例: style）の値が
+    // たまたま「仏教」という文字列であってもガードは適用されない（religion 固有の仕様のため）。
+    const target = makeWork({ id: 'style-target', era: 'asuka', category: 'sculpture', style: '仏教' })
+    const pool: Work[] = [
+      target,
+      makeWork({ id: 's1', era: 'asuka', category: 'sculpture', style: '神道' }),
+      makeWork({ id: 's2', era: 'asuka', category: 'sculpture', style: '道教' }),
+      makeWork({ id: 's3', era: 'hakuho', category: 'sculpture', style: '儒教' }),
+    ]
+    const result = generateQ9Question(target, pool, testEras, seededRandom(1), { allowSlots: ['style'] })
+    expect(result).not.toBeNull()
+    expect(result!.slot).toBe('style')
   })
 })
 

@@ -60,9 +60,27 @@ export function containsMuseumWord(value: string): boolean {
   return MUSEUM_LIKE_WORDS.some((w) => value.includes(w))
 }
 
+/** M2i-05c①（decisions.md 2026-09-11、reviewer fact-check-m2i-05b.md [重大]-A(2)「条件値が
+ *  『不詳』」の修正）: 値が「不詳」「不明」「未詳」を含む（＝実質的に値が判明していない）場合は
+ *  値が無いのと同じ扱いにする。kamakura-daibutsu の patron:"不詳（民間の勧進によると考えられる）"
+ *  を条件（「発願者が不詳のもの」）に使うと、誤答側もpatron未記録のため判別不能な設問になっていた
+ *  （kamakura★4の70%で発生）。null にすることで、条件文にも誤答除外にも使われなくなる
+ *  （effectiveSlotOrder が次の候補スロットに進む）。 */
+const UNKNOWN_VALUE_WORDS = ['不詳', '不明', '未詳']
+
+function isUnknownValue(value: string): boolean {
+  return UNKNOWN_VALUE_WORDS.some((w) => value.includes(w))
+}
+
 /** M2i-05b受け入れ検証用に export（realdataテストが実際の条件文と同じ基準で
  *  「誤答が条件文の上では正解になっていないか」を検証するために使う）。 */
 export function slotValue(work: Work, slot: Q9Slot): string | null {
+  const raw = rawSlotValue(work, slot)
+  if (!raw) return null
+  return isUnknownValue(raw) ? null : raw
+}
+
+function rawSlotValue(work: Work, slot: Q9Slot): string | null {
   switch (slot) {
     case 'artist':
       return work.artist
@@ -127,6 +145,21 @@ export function shortenValue(value: string): string {
  */
 function conditionValue(slot: Q9Slot, rawValue: string): string {
   return slot === 'findSite' ? rawValue : shortenValue(rawValue)
+}
+
+/** M2i-05c②（decisions.md 2026-09-11、reviewer fact-check-m2i-05b.md [重大]-A(1)「宗派の上位/下位
+ *  関係」の修正、対応(b)を採用）: 仏教は密教・浄土教・禅宗・真言宗・律宗等の下位区分（宗派）を持つ
+ *  上位概念で、これらは shortenValue 後も別の文字列（「密教」「浄土教」等）のまま残るため
+ *  slotValueDiffers（文字列比較）では「異なる値」＝誤答として選ばれてしまう。しかし意味の上では
+ *  仏教の下位区分も全て「仏教」を満たすため、4択全部が条件を満たす設問になる（konin-jogan★4
+ *  「宗派が仏教のもの」、30 seed中30回）。上位/下位を網羅した包含関係テーブルを持つのは
+ *  自由記述フィールドの表記ゆれに対して脆いため、対応(b)（religionスロットの値が広い語のときは
+ *  そもそも条件に使わない＝他のスロット・型にフォールバック）を採用する。「仏教」単体（法相宗等の
+ *  補足付きも shortenValue で「仏教」になる）だけが実データで確認された広い語。 */
+const BROAD_RELIGION_VALUES = new Set(['仏教'])
+
+function isBroadReligionValue(slot: Q9Slot, rawValue: string): boolean {
+  return slot === 'religion' && BROAD_RELIGION_VALUES.has(conditionValue(slot, rawValue))
 }
 
 /** work の slot 値が、target の条件文の上での値（conditionValue）と異なるか。値が無い（null）
@@ -275,6 +308,9 @@ function generateNormalPreferSameEra(
   for (const slot of effectiveSlotOrder(opts)) {
     const value = slotValue(target, slot)
     if (!value) continue
+    // M2i-05c②: 仏教のような上位語は下位区分（禅宗・浄土教等）も意味的に満たすため、
+    // このスロットは条件として使わない（次のスロット・呼び出し元の他の型にフォールバック）。
+    if (isBroadReligionValue(slot, value)) continue
     const { categoryNear, sameEraAny } = candidateWorksForSlot(target, pool, near, slot, value)
     const combinedCount = new Set([...categoryNear, ...sameEraAny].map((w) => w.id)).size
     if (combinedCount < 3) continue
@@ -308,6 +344,8 @@ function generateNormal(
   for (const slot of effectiveSlotOrder(opts)) {
     const value = slotValue(target, slot)
     if (!value) continue
+    // M2i-05c②: 仏教のような上位語は条件として使わない（generateNormalPreferSameEra と同じ理由）。
+    if (isBroadReligionValue(slot, value)) continue
     // M2i-05b①: raw値の完全一致ではなく conditionValue（条件文と同じ基準）で「異なる値」を判定する。
     const candidates = near.filter((w) => slotValueDiffers(w, slot, value))
     if (candidates.length < 3) continue
@@ -340,6 +378,9 @@ function generateReversed(
   const near = nearbyCandidates(target, pool, eraOrderIndex)
   for (const slot of effectiveSlotOrder(opts)) {
     const targetValue = slotValue(target, slot)
+    // M2i-05c②: 仏教のような上位語は「合わない」判定も意味的に壊れる（下位区分の作品を
+    // 「仏教でない」の正解にしてしまう）ため、reversed でも条件として使わない。
+    if (targetValue && isBroadReligionValue(slot, targetValue)) continue
     // M2i-05b①: raw値そのものではなく conditionValue（条件文と同じ基準）でグループ化する。
     // raw値が違っても条件文の上では同じ値（例: 「仏教」「仏教（法相宗）」）になる作品を
     // 別グループのまま扱うと、target と条件文の上で同じ値を共有するグループを「合わない」

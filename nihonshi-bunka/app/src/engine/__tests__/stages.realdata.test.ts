@@ -597,3 +597,143 @@ describe('合格ライン(M2i-05③): ★3の面は対象作品5件以上のワ�
     expect(violations).toEqual([])
   }, 120000)
 })
+
+// M2i-05c（decisions.md 2026-09-11、reviewer fact-check-m2i-05b.md [重大]-A「文字列一致のレベルでしか
+// 直っていない」の是正）: [重大]-A(1)宗派の上位/下位関係・(2)「不詳」条件値の2つを、文字列一致だけでなく
+// 意味レベルで検査する（M2i-05b①の既存テストは shortenValue の文字列一致しか見ておらず、この2症状を
+// 検出できなかった＝reviewer に指摘された）。
+describe('合格ライン(M2i-05c): Q9の「誤答が条件文の上で意味的にも正解」になっている設問が0件', () => {
+  // reviewer fact-check-m2i-05b.md [重大]-A(1) の再現用に、実データの religion 値（shortenValue後）を
+  // 仏教の下位区分として手動で分類する（本体コードは対応(b)＝「仏教」を条件にしないため、この
+  // 包含関係テーブル自体は実装に持たない。テストでの意味検証専用）。
+  const BUDDHIST_TERMS = new Set([
+    '仏教',
+    '密教',
+    '浄土教',
+    '浄土宗',
+    '浄土真宗',
+    '時宗',
+    '日蓮宗',
+    '臨済宗',
+    '曹洞宗',
+    '律宗',
+    '禅宗',
+    '真言宗',
+    '鎮護国家',
+    '神仏習合',
+  ])
+  const UNKNOWN_WORDS = ['不詳', '不明', '未詳']
+
+  function conditionValueForTest(slot: Q9Slot, rawValue: string): string {
+    return slot === 'findSite' ? rawValue : shortenValue(rawValue)
+  }
+  function isUnknownRaw(raw: string): boolean {
+    return UNKNOWN_WORDS.some((w) => raw.includes(w))
+  }
+  // 選択肢の値（raw、null許容）が target の条件を意味的に満たすか。religion は「仏教」が
+  // 条件のときだけ下位区分も満たす扱いにする（特定の宗派同士は別扱い、過剰判定を避ける）。
+  // raw が「不詳」等を含む場合は「判別不能」（=この関数の呼び出し側で別集計する）。
+  function semanticallySatisfies(slot: Q9Slot, targetRaw: string, choiceRaw: string): boolean {
+    const tv = conditionValueForTest(slot, targetRaw)
+    const cv = conditionValueForTest(slot, choiceRaw)
+    if (tv === cv) return true
+    if (slot === 'religion' && tv === '仏教' && BUDDHIST_TERMS.has(cv)) return true
+    return false
+  }
+
+  it(`全15ワールド×★2〜5×全面×${SEEDS} seedで、Q9の誤答が意味的に条件を満たす設問、または条件文（conditionText）が「不詳/不明/未詳」を含む設問が0件`, () => {
+    const semanticViolations: string[] = []
+    const unknownConditionViolations: string[] = []
+    let totalQ9 = 0
+    for (const era of reviewedEras) {
+      for (const difficulty of ALL_DIFFICULTIES) {
+        if (difficulty === 1) continue
+        const plan = buildEraStagePlan(era.id, difficulty, reviewedPlayableWorks)
+        for (const seg of plan.segments) {
+          for (let seed = 0; seed < SEEDS; seed++) {
+            const qs = buildStageQuestions(
+              era.id,
+              difficulty,
+              seg.segment,
+              reviewedThemeSetPool,
+              reviewedPlayableWorks,
+              reviewedEras,
+              seededRandom(seed),
+            )
+            for (const q of qs) {
+              if (q.type !== 'q9' || !q.q9Slot || q.q9Slot === 'era') continue
+              totalQ9++
+              // M2i-05c①: 条件文自体が「不詳/不明/未詳」を含んではいけない（＝そもそも target の
+              // 値としてこの種の値が使われていない、という直接的な検査。値が不明な作品は
+              // slotValue が null を返すため、effectiveSlotOrder が別のスロットにフォールバックし、
+              // conditionText には決して現れないはず）。
+              if (q.conditionText && isUnknownRaw(q.conditionText)) {
+                unknownConditionViolations.push(
+                  `${era.id}-${difficulty}-${seg.segment}(seed${seed}): ${q.work.id} の条件文「${q.conditionText}」が不詳系`,
+                )
+              }
+              const targetRaw = slotValue(q.work, q.q9Slot)
+              if (!targetRaw) continue
+              for (const choice of q.choiceWorks) {
+                if (choice.id === q.work.id) continue
+                // 誤答側（選択肢）の実際の値自体が「不詳」等を含むのは問題ない（slotValue が
+                // null を返すため target の値とは必ず「異なる」扱いになり、正しく誤答として
+                // 選ばれているだけ。判別不能になるのは target 側が不詳のときだけ、それは
+                // conditionText の検査で捕捉している）。ここでは意味的な包含関係のみ検査する。
+                const choiceRaw = slotValue(choice, q.q9Slot)
+                if (choiceRaw && semanticallySatisfies(q.q9Slot, targetRaw, choiceRaw)) {
+                  semanticViolations.push(
+                    `${era.id}-${difficulty}-${seg.segment}(seed${seed}): ${q.q9Slot} "${choice.id}"="${choiceRaw}" が target "${q.work.id}"="${targetRaw}" を意味的に満たす`,
+                  )
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    console.log(`[M2i-05c] Q9出題数（★2〜5、全15ワールド×${SEEDS}seed）: ${totalQ9}`)
+    console.log('[M2i-05c] 意味的に条件を満たす誤答（religion包含関係）:', semanticViolations)
+    console.log('[M2i-05c] 条件文が不詳系を含む設問:', unknownConditionViolations)
+    expect(totalQ9).toBeGreaterThan(0)
+    expect(semanticViolations).toEqual([])
+    expect(unknownConditionViolations).toEqual([])
+  }, 180000)
+})
+
+// M2i-05c③（decisions.md 2026-09-11、reviewer fact-check-m2i-05b.md [重大]-B「⑤のフォールバックが
+// 1問だけの面・ノーミス必須を新規に作った」の是正）: 面の目標問数（questionCountForSegment）が2以上
+// なのに、実際の生成が1問に減ってしまう（＝clearThreshold(1)=1でノーミス必須になる）ケースが
+// 0件であることを確認する（kitayama★2/★3で実測、200/200試行で決定的に再現していた回帰）。
+describe('合格ライン(M2i-05c③): 目標問数2以上の面が実際に1問に減らない', () => {
+  it(`全15ワールド×★2〜5×全面×${SEEDS} seedで、questionCountForSegment>=2の面はqs.length===1にならない`, () => {
+    const violations: string[] = []
+    let checkedSegments = 0
+    for (const era of reviewedEras) {
+      for (const difficulty of ALL_DIFFICULTIES) {
+        if (difficulty === 1) continue // ★1はQ9を使わないため対象外（このバグの対象外）
+        const plan = buildEraStagePlan(era.id, difficulty, reviewedPlayableWorks)
+        for (const seg of plan.segments) {
+          const target = questionCountForSegment(seg)
+          if (target < 2) continue
+          checkedSegments++
+          for (let seed = 0; seed < SEEDS; seed++) {
+            const qs = buildStageQuestions(
+              era.id,
+              difficulty,
+              seg.segment,
+              reviewedThemeSetPool,
+              reviewedPlayableWorks,
+              reviewedEras,
+              seededRandom(seed),
+            )
+            if (qs.length === 1) violations.push(`${era.id}-${difficulty}-${seg.segment}(seed${seed}): target=${target}だがqs.length=1`)
+          }
+        }
+      }
+    }
+    console.log(`[M2i-05c③] target>=2の面数（★2〜5）: ${checkedSegments}`)
+    expect(checkedSegments).toBeGreaterThan(0)
+    expect(violations).toEqual([])
+  }, 180000)
+})
