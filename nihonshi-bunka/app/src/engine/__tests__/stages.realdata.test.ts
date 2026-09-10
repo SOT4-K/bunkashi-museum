@@ -598,31 +598,19 @@ describe('合格ライン(M2i-05③): ★3の面は対象作品5件以上のワ�
   }, 120000)
 })
 
-// M2i-05c（decisions.md 2026-09-11、reviewer fact-check-m2i-05b.md [重大]-A「文字列一致のレベルでしか
-// 直っていない」の是正）: [重大]-A(1)宗派の上位/下位関係・(2)「不詳」条件値の2つを、文字列一致だけでなく
-// 意味レベルで検査する（M2i-05b①の既存テストは shortenValue の文字列一致しか見ておらず、この2症状を
-// 検出できなかった＝reviewer に指摘された）。
-describe('合格ライン(M2i-05c): Q9の「誤答が条件文の上で意味的にも正解」になっている設問が0件', () => {
-  // reviewer fact-check-m2i-05b.md [重大]-A(1) の再現用に、実データの religion 値（shortenValue後）を
-  // 仏教の下位区分として手動で分類する（本体コードは対応(b)＝「仏教」を条件にしないため、この
-  // 包含関係テーブル自体は実装に持たない。テストでの意味検証専用）。
-  const BUDDHIST_TERMS = new Set([
-    '仏教',
-    '密教',
-    '浄土教',
-    '浄土宗',
-    '浄土真宗',
-    '時宗',
-    '日蓮宗',
-    '臨済宗',
-    '曹洞宗',
-    '律宗',
-    '禅宗',
-    '真言宗',
-    '鎮護国家',
-    '神仏習合',
-  ])
+// M2i-05d（decisions.md 2026-09-11、reviewer fact-check-m2i-05c.md [重大]「文字列不一致だけで
+// 判定するslotValueDiffersが、木造/錦絵/紙本墨画等の一般形（choiceのraw値がVを含む・区切り文字の
+// 先頭要素と一致・locationは共通接頭辞）を素通りしていた」の是正。M2i-05cまでの受け入れテスト
+// （semanticallySatisfies）は shortenValue後の完全一致＋手書きのreligion限定テーブルしか見ておらず、
+// この一般形（466件、7.96%の面）を検出できなかった（reviewerに指摘された）。
+// [中]-1: このテスト自体をraw値ベースの包含判定に書き換える。個別ワールドを名指しした期待値では
+// なく、全15ワールド×★2〜5×100 seedで「意味的に条件を満たす誤答が0件」という一般ルールを
+// ハードゲートにする（reviewerの指摘どおり、個別ケースだけを潰すテストにしない）。
+describe('合格ライン(M2i-05d): Q9の「誤答が条件文の上で意味的にも正解」になっている設問が0件（raw値ベースの包含判定、全ワールド共通ルール）', () => {
+  const SEMANTIC_SEEDS = 100
   const UNKNOWN_WORDS = ['不詳', '不明', '未詳']
+  const VALUE_SPLIT_DELIMS_FOR_TEST = /[／・\s]+/
+  const LOCATION_SHARED_PREFIX_MIN_FOR_TEST = 3
 
   function conditionValueForTest(slot: Q9Slot, rawValue: string): string {
     return slot === 'findSite' ? rawValue : shortenValue(rawValue)
@@ -630,18 +618,30 @@ describe('合格ライン(M2i-05c): Q9の「誤答が条件文の上で意味的
   function isUnknownRaw(raw: string): boolean {
     return UNKNOWN_WORDS.some((w) => raw.includes(w))
   }
-  // 選択肢の値（raw、null許容）が target の条件を意味的に満たすか。religion は「仏教」が
-  // 条件のときだけ下位区分も満たす扱いにする（特定の宗派同士は別扱い、過剰判定を避ける）。
-  // raw が「不詳」等を含む場合は「判別不能」（=この関数の呼び出し側で別集計する）。
+  function sharedPrefixLength(a: string, b: string): number {
+    let i = 0
+    while (i < a.length && i < b.length && a[i] === b[i]) i++
+    return i
+  }
+  // choice の raw 値（生のフィールド値、shortenValue で括弧内を落とす前）が target の条件値 V
+  // （conditionValueForTest 後）を意味的に満たすか。q9.ts の実装とは独立に、reviewer が実データ
+  // （tenpyo「東大寺境内」⊃「東大寺法華堂」、insei/higashiyama/kasei/konin-jogan/horeki-tenmei
+  // の「木造」⊂「木造・書院造」「錦絵」⊂「錦絵／三枚続」等）から導いた一般ルールをそのまま
+  // 独立実装する（q9.ts の関数を直接呼ぶと実装のバグをテストが見逃す＝テストの意味が無くなる）。
+  // 非対称: choice の raw 値が V を包含する方向のみ判定する（V が choice の raw より具体的・
+  // 複合的なときに choice がその一部しか満たさないと断定できないため、逆方向は判定しない。
+  // builder メモ semantic-check-needs-asymmetric-containment-not-mutual-membership と同種）。
   function semanticallySatisfies(slot: Q9Slot, targetRaw: string, choiceRaw: string): boolean {
-    const tv = conditionValueForTest(slot, targetRaw)
-    const cv = conditionValueForTest(slot, choiceRaw)
-    if (tv === cv) return true
-    if (slot === 'religion' && tv === '仏教' && BUDDHIST_TERMS.has(cv)) return true
+    const v = conditionValueForTest(slot, targetRaw)
+    const choiceValue = conditionValueForTest(slot, choiceRaw)
+    if (v === choiceValue) return true
+    if (choiceRaw.includes(v)) return true
+    if (choiceRaw.split(VALUE_SPLIT_DELIMS_FOR_TEST)[0] === v) return true
+    if ((slot === 'location' || slot === 'findSite') && sharedPrefixLength(choiceValue, v) >= LOCATION_SHARED_PREFIX_MIN_FOR_TEST) return true
     return false
   }
 
-  it(`全15ワールド×★2〜5×全面×${SEEDS} seedで、Q9の誤答が意味的に条件を満たす設問、または条件文（conditionText）が「不詳/不明/未詳」を含む設問が0件`, () => {
+  it(`全15ワールド×★2〜5×全面×${SEMANTIC_SEEDS} seedで、Q9の誤答が意味的に条件を満たす設問、または条件文（conditionText）が「不詳/不明/未詳」を含む設問が0件`, () => {
     const semanticViolations: string[] = []
     const unknownConditionViolations: string[] = []
     let totalQ9 = 0
@@ -650,7 +650,7 @@ describe('合格ライン(M2i-05c): Q9の「誤答が条件文の上で意味的
         if (difficulty === 1) continue
         const plan = buildEraStagePlan(era.id, difficulty, reviewedPlayableWorks)
         for (const seg of plan.segments) {
-          for (let seed = 0; seed < SEEDS; seed++) {
+          for (let seed = 0; seed < SEMANTIC_SEEDS; seed++) {
             const qs = buildStageQuestions(
               era.id,
               difficulty,
@@ -692,12 +692,56 @@ describe('合格ライン(M2i-05c): Q9の「誤答が条件文の上で意味的
         }
       }
     }
-    console.log(`[M2i-05c] Q9出題数（★2〜5、全15ワールド×${SEEDS}seed）: ${totalQ9}`)
-    console.log('[M2i-05c] 意味的に条件を満たす誤答（religion包含関係）:', semanticViolations)
-    console.log('[M2i-05c] 条件文が不詳系を含む設問:', unknownConditionViolations)
+    console.log(`[M2i-05d] Q9出題数（★2〜5、全15ワールド×${SEMANTIC_SEEDS}seed）: ${totalQ9}`)
+    console.log('[M2i-05d] 意味的に条件を満たす誤答（raw値ベースの包含判定）:', semanticViolations)
+    console.log('[M2i-05d] 条件文が不詳系を含む設問:', unknownConditionViolations)
     expect(totalQ9).toBeGreaterThan(0)
     expect(semanticViolations).toEqual([])
     expect(unknownConditionViolations).toEqual([])
+  }, 600000)
+
+  it(`horeki-tenmei★3で所蔵施設（博物館・記念館・記念会等）を問う設問が${SEMANTIC_SEEDS} seed中0件`, () => {
+    const violations: string[] = []
+    const plan = buildEraStagePlan('horeki-tenmei', 3, reviewedPlayableWorks)
+    for (const seg of plan.segments) {
+      for (let seed = 0; seed < SEMANTIC_SEEDS; seed++) {
+        const qs = buildStageQuestions('horeki-tenmei', 3, seg.segment, reviewedThemeSetPool, reviewedPlayableWorks, reviewedEras, seededRandom(seed))
+        for (const q of qs) {
+          if (q.type === 'q9' && (q.q9Slot === 'holder' || q.q9Slot === 'location') && q.conditionText?.includes('記念会')) {
+            violations.push(`seed${seed}: ${q.work.id} の条件文「${q.conditionText}」`)
+          }
+        }
+      }
+    }
+    expect(violations).toEqual([])
+  }, 60000)
+})
+
+// M2i-05d④（decisions.md 2026-09-11、reviewer fact-check-m2i-05c.md [中]-3「★4 subjectの条件文が
+// 日本語として壊れている」の是正）: shortenValue が読点で切った結果、動詞の連用形（〜し）で終わる
+// 体言でない句がそのまま条件文（「〜を主題とするもの」）に入らないことを確認する。
+describe('合格ライン(M2i-05d④): ★4のsubject条件文に連用形の破綻が無い', () => {
+  it('全15ワールド×★4×全面×30 seedで、q9Slot=subjectのconditionTextが「し」等の連用形で終わらない', () => {
+    const violations: string[] = []
+    let totalSubjectQ9 = 0
+    const NON_NOMINAL_ENDING_FOR_TEST = /[ぁ-ゖー]を主題とするもの$/
+    for (const era of reviewedEras) {
+      const plan = buildEraStagePlan(era.id, 4, reviewedPlayableWorks)
+      for (const seg of plan.segments) {
+        for (let seed = 0; seed < 30; seed++) {
+          const qs = buildStageQuestions(era.id, 4, seg.segment, reviewedThemeSetPool, reviewedPlayableWorks, reviewedEras, seededRandom(seed))
+          for (const q of qs) {
+            if (q.type !== 'q9' || q.q9Slot !== 'subject' || !q.conditionText) continue
+            totalSubjectQ9++
+            if (NON_NOMINAL_ENDING_FOR_TEST.test(q.conditionText)) {
+              violations.push(`${era.id}-4-${seg.segment}(seed${seed}): ${q.work.id} の条件文「${q.conditionText}」`)
+            }
+          }
+        }
+      }
+    }
+    console.log(`[M2i-05d④] subjectスロットのQ9出題数（★4、全15ワールド×30seed）: ${totalSubjectQ9}`)
+    expect(violations).toEqual([])
   }, 180000)
 })
 

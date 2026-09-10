@@ -43,17 +43,26 @@ const eras: Era[] = [
   { id: 'e4', name: 'E4文化', period: '', order: 4, summary: '', detail: '', items: [{ text: 'e4item', category: 'style' }] },
 ]
 
+// M2i-05d①: location/findSite は q9.ts の新しい意味的包含判定（同じ寺院・遺跡内の別表記を
+// 「同じ場所」とみなす、conditionValue同士の共通接頭辞3文字以上）の対象になったため、
+// `所在地1`/`所在地2`のように先頭3文字が共通する値を複数作品に使うと、意図せず「全員同じ場所」
+// 扱いになり Q9 の location/findSite スロットが誤答を作れず成立しなくなる
+// （builder メモ existing-test-fixture-value-can-collide-with-new-broad-term-guard と同種）。
+// n ごとに異なるアルファベットを先頭に置き、先頭3文字が常に作品間で異なるようにする。
+const LOCATION_PREFIXES = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
 /** ★1〜5のすべての型が生成できるだけのデータを持つ作品（era: e1）。 */
 function fullWork(id: string, n: number): Work {
+  const locationPrefix = LOCATION_PREFIXES[(n - 1) % LOCATION_PREFIXES.length]
   return makeWork({
     id,
     era: 'e1',
     category: 'sculpture',
     status: 'reviewed',
     artist: `作者${n}`,
-    findSite: `出土地${n}`,
+    findSite: `${locationPrefix}出土地${n}`,
     holder: `所蔵${n}`,
-    location: `所在地${n}`,
+    location: `${locationPrefix}所在地${n}`,
     technique: `製法${n}`,
     style: `様式${n}`,
     subject: `主題${n}`,

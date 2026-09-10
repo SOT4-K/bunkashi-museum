@@ -52,7 +52,10 @@ const SLOT_PRIORITY: Q9Slot[] = ['findSite', 'holder', 'artist', 'technique', 'e
  *  import できないため）。M2i 実データ回帰（hakuho-3-1: yamadadera-butsuzu の location「興福寺
  *  国宝館」が holderKind: 'site' でも「国宝館」という所蔵語を含んでいた）を受け、holderKind だけ
  *  では防げない所蔵語混入を値そのものでも弾く。 */
-const MUSEUM_LIKE_WORDS = ['博物館', '美術館', '文庫', '記念館', '図書館', '資料館', '尚蔵館', '国宝館', 'コレクション']
+// M2i-05d②（decisions.md 2026-09-11、reviewer fact-check-m2i-05c.md [中]-2）: juben-jugi の
+// holder/location が「川端康成記念会」（財団法人の文学館で holderKind: 'site' だが実質は
+// 博物館・記念館と同じ所蔵語）のため、「記念館」だけでなく「記念会」も弾く。
+const MUSEUM_LIKE_WORDS = ['博物館', '美術館', '文庫', '記念館', '記念会', '図書館', '資料館', '尚蔵館', '国宝館', 'コレクション']
 
 /** value に所蔵語（博物館・美術館等）が含まれるか。engine/stages.ts の hasStar（★3判定）からも
  *  同じ語で判定できるよう export する。 */
@@ -72,12 +75,28 @@ function isUnknownValue(value: string): boolean {
   return UNKNOWN_VALUE_WORDS.some((w) => value.includes(w))
 }
 
+/** M2i-05d③（decisions.md 2026-09-11、reviewer fact-check-m2i-05c.md [中]-3「★4 subjectの
+ *  条件文が日本語として壊れている」の修正）: shortenValue は読点（、）で区切った先頭の句しか
+ *  残さないため、subject の生値が「兎・蛙・猿を擬人化し、相撲や…」のように動詞の連用形（〜し）で
+ *  文が続く形だと、shortenValue 後は「兎・蛙・猿を擬人化し」という体言（名詞）で終わらない句が
+ *  そのまま条件文（「〜を主題とするもの」）に入ってしまう。実データを見る限り、このコーパスの
+ *  subject 値は体言止め（〜図・〜像・〜写・〜化 等、漢字で終わる）が正しい形で、連用形で切れて
+ *  いる値は shortenValue 後の末尾がひらがな（動詞・助動詞の活用語尾）になる、という違いで機械的に
+ *  見分けられる（choju-giga-sumo「擬人化し」・soma-no-furudairi「取材し」の2件で確認）。 */
+const NON_NOMINAL_ENDING = /[ぁ-ゖー]$/
+
+function isNonNominalSubjectValue(rawValue: string): boolean {
+  return NON_NOMINAL_ENDING.test(shortenValue(rawValue))
+}
+
 /** M2i-05b受け入れ検証用に export（realdataテストが実際の条件文と同じ基準で
  *  「誤答が条件文の上では正解になっていないか」を検証するために使う）。 */
 export function slotValue(work: Work, slot: Q9Slot): string | null {
   const raw = rawSlotValue(work, slot)
   if (!raw) return null
-  return isUnknownValue(raw) ? null : raw
+  if (isUnknownValue(raw)) return null
+  if (slot === 'subject' && isNonNominalSubjectValue(raw)) return null
+  return raw
 }
 
 function rawSlotValue(work: Work, slot: Q9Slot): string | null {
@@ -162,12 +181,54 @@ function isBroadReligionValue(slot: Q9Slot, rawValue: string): boolean {
   return slot === 'religion' && BROAD_RELIGION_VALUES.has(conditionValue(slot, rawValue))
 }
 
-/** work の slot 値が、target の条件文の上での値（conditionValue）と異なるか。値が無い（null）
- *  作品は「条件に合わない」として常に異なる扱いにする（従来どおり）。 */
+/** M2i-05d①（decisions.md 2026-09-11、reviewer fact-check-m2i-05c.md [重大]「誤答が条件文の
+ *  上では意味的に正解」が★5(technique/style)・★3(location)に一般形で残存）の修正: choice 側の
+ *  raw 値（shortenValue で括弧内を落とす前の元の値）が「／」「・」または空白で複数の属性を
+ *  並記していることがある（例: 「木造・書院造」「錦絵（木版多色刷）／三枚続」）。V（target の
+ *  conditionValue）と choice の conditionValue が文字列として異なっていても、choice の raw
+ *  値の中に V がそのまま含まれていれば、choice も V という属性を持つ＝条件文の上で target と
+ *  同じ値を満たしてしまう（「木造・書院造」は「木造」でもある）。逆方向（V が choice の raw より
+ *  長い複合語を含む場合に choice が V を含まない）は意図的に対象外（[[semantic-check-needs-
+ *  asymmetric-containment-not-mutual-membership]]と同種の非対称性: choice が「木造」だけで
+ *  target の条件が「木造・書院造」のときは、choice が本当に書院造かどうか分からないため
+ *  「異なる」扱いのままにする）。 */
+const VALUE_SPLIT_DELIMS = /[／・\s]+/
+
+function choiceRawSharesConditionValue(choiceRaw: string, v: string): boolean {
+  if (choiceRaw === v) return true
+  if (choiceRaw.includes(v)) return true
+  // choice の raw 値を区切った先頭要素が V と一致する場合（上の includes と実質同値だが、
+  // reviewer の修正案の文言どおり明示的に判定する）。
+  return choiceRaw.split(VALUE_SPLIT_DELIMS)[0] === v
+}
+
+/** M2i-05d①の続き: location/findSite（所在地・出土地）は「〜境内」のような広い場所の表記と、
+ *  その中にある具体的な建物名（「〜法華堂」等）が別表記になるため、上の区切り文字ベースの
+ *  包含判定では拾えない（実データ回帰: tenpyo「東大寺境内」と「東大寺法華堂」「東大寺戒壇堂」。
+ *  文字列としては「東大寺」という寺院名の部分だけが共通する）。実データを網羅的に確認した限り、
+ *  この事業のコンテンツで無関係な場所同士が3文字以上の共通接頭辞を持つ例は無かった
+ *  （寺院名は「東大寺」「興福寺」等おおむね3文字以上）ため、conditionValue 同士の共通接頭辞が
+ *  3文字以上なら同じ場所（＝境内・敷地内の別の建物）とみなす。新しいコンテンツを追加した際、
+ *  無関係な場所が3文字以上の接頭辞を共有するようになったら、この閾値の妥当性を再確認すること。 */
+const LOCATION_SHARED_PREFIX_MIN = 3
+
+function shareLocationPrefix(a: string, b: string): boolean {
+  let i = 0
+  while (i < a.length && i < b.length && a[i] === b[i]) i++
+  return i >= LOCATION_SHARED_PREFIX_MIN
+}
+
+/** work の slot 値が、target の条件文の上での値（V = conditionValue(targetValue)）と意味的に
+ *  異なるか。値が無い（null）作品は「条件に合わない」として常に異なる扱いにする（従来どおり）。 */
 function slotValueDiffers(work: Work, slot: Q9Slot, targetValue: string): boolean {
   const raw = slotValue(work, slot)
   if (!raw) return true
-  return conditionValue(slot, raw) !== conditionValue(slot, targetValue)
+  const v = conditionValue(slot, targetValue)
+  const choiceValue = conditionValue(slot, raw)
+  if (choiceValue === v) return false
+  if (choiceRawSharesConditionValue(raw, v)) return false
+  if ((slot === 'location' || slot === 'findSite') && shareLocationPrefix(choiceValue, v)) return false
+  return true
 }
 
 /**
@@ -385,11 +446,16 @@ function generateReversed(
     // raw値が違っても条件文の上では同じ値（例: 「仏教」「仏教（法相宗）」）になる作品を
     // 別グループのまま扱うと、target と条件文の上で同じ値を共有するグループを「合わない」
     // 誤答として選んでしまう（4択全部が条件文の上では正解になるバグと同根）。
+    // M2i-05d①: グループの除外判定は「target が実は group の値も持っている」ことを検査する
+    // 必要があるため、slotValueDiffers を target と v（候補の値）を入れ替えて呼ぶ（target を
+    // 「choice」役に見立て、v を「V（検査対象の値）」に見立てる）。例えば group の値が「木造」で
+    // target の raw が「木造・書院造」なら、target は実は「木造」でもある（raw が V を含む）ため、
+    // このグループを「target が持たない値」として使ってはいけない。
     const groups = new Map<string, Work[]>()
     for (const w of near) {
       const v = slotValue(w, slot)
       if (!v) continue
-      if (targetValue && conditionValue(slot, v) === conditionValue(slot, targetValue)) continue
+      if (targetValue && !slotValueDiffers(target, slot, v)) continue
       const key = conditionValue(slot, v)
       const list = groups.get(key) ?? []
       list.push(w)
